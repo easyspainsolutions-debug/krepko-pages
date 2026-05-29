@@ -1,0 +1,156 @@
+/* ============================================================
+   About page — founder photo, milestone cards.
+   Differentiated от generic trust-strip (avoids visual duplication on home + about).
+   ============================================================ */
+
+/* Founder head — photo + name + role */
+.about-founder__head {
+  display: flex;
+  align-items: center;
+  gap: var(--space-5);
+  margin-bottom: var(--space-5);
+}
+
+.about-founder__photo {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center 35%;
+  border: 2px solid rgba(196, 149, 42, 0.55);
+  box-shadow: 0 0 18px rgba(196, 149, 42, 0.22);
+  flex-shrink: 0;
+  background: var(--surface);
+}
+
+.about-founder__id {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  min-width: 0;
+}
+
+.about-founder__name {
+  font-size: var(--ts-h2);
+  font-weight: 800;
+  color: var(--text);
+  margin: 0;
+  line-height: 1.15;
+  letter-spacing: -0.6px;
+}
+
+.about-founder__role {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: var(--ts-meta);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin: 0;
+}
+
+/* Milestone cards — 3 cards horizontal on desktop, stacked on mobile */
+.about-milestones {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-3);
+  margin-top: var(--space-5);
+}
+
+@media (min-width: 720px) {
+  .about-milestones {
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-4);
+  }
+}
+
+.about-milestone {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-top: 2px solid rgba(196, 149, 42, 0.55);
+  border-radius: var(--r-5);
+  padding: var(--space-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.about-milestone__metric {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: var(--ts-h2);
+  font-weight: 700;
+  color: var(--gold);
+  letter-spacing: -0.8px;
+  line-height: 1;
+}
+
+.about-milestone__label {
+  font-family: 'Manrope', sans-serif;
+  font-size: var(--ts-body-sm);
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: -0.1px;
+}
+
+.about-milestone__desc {
+  font-size: var(--ts-meta);
+  color: var(--text-sub);
+  line-height: 1.55;
+  margin: 0;
+}
+
+/* Mobile — head компактнее */
+@media (max-width: 540px) {
+  .about-founder__head {
+    gap: var(--space-4);
+    margin-bottom: var(--space-4);
+  }
+  .about-founder__photo {
+    width: 88px;
+    height: 88px;
+  }
+  .about-founder__name {
+    font-size: var(--ts-h3);
+  }
+}
+
+/* ============================================================
+   Home — coverage grid (2026-05-27 home enhance).
+   6 канонических городов побережья. 2-col mobile (375+), 3-col desktop.
+   Reuses .card / .card--city tokens из module-card.css.
+   ============================================================ */
+.home-coverage__dek {
+  font-size: var(--ts-body);
+  color: var(--text-sub);
+  line-height: 1.55;
+  margin: 0 0 var(--space-5);
+  max-width: 560px;
+}
+
+.home-coverage__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-3);
+}
+@media (min-width: 375px) and (max-width: 719px) {
+  .home-coverage__grid {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-2);
+  }
+}
+@media (min-width: 720px) {
+  .home-coverage__grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-3);
+  }
+}
+
+/* Compact card на mobile для consistency с .card-grid */
+@media (max-width: 599px) {
+  .home-coverage__grid .card--city {
+    padding: var(--space-4);
+    min-height: 96px;
+  }
+  .home-coverage__grid .card--city .card__title {
+    font-size: var(--ts-body);
+  }
+}

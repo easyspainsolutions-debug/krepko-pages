@@ -1,0 +1,410 @@
+/* ============================================================
+   Krepko — Site Nav
+   Sticky top, brand left + WhatsApp CTA + Menu button right.
+   Menu button открывает <dialog id="site-menu-dialog"> overlay.
+   Spec: visual-system-design-2026-05-25.md §4.2 (Layout & Chrome)
+   ============================================================ */
+
+body:has(> header.site-nav) {
+  padding-top: 0 !important;
+}
+
+.site-nav {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: var(--surface-sunk);
+  border-bottom: 1px solid var(--border);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.site-nav__inner {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: var(--space-3) var(--space-4);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+}
+
+/* ── Brand ── */
+.site-nav__brand {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  text-decoration: none;
+  color: var(--gold);
+  flex-shrink: 0;
+}
+.site-nav__brand-mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  flex-shrink: 0;
+}
+.site-nav__brand-mark svg { width: 100%; height: 100%; display: block; }
+.site-nav__brand-text {
+  font-family: 'Manrope', sans-serif;
+  /* 2026-05-28: увеличен бренд в хедере — было 18px, стало 22px (desktop). */
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  line-height: 1;
+  color: var(--gold);
+}
+
+/* ── Actions row (right side) ── */
+.site-nav__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+/* WhatsApp CTA — pill */
+.site-nav__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--r-3);
+  font-family: 'Manrope', sans-serif;
+  font-size: var(--ts-body-sm);
+  font-weight: 700;
+  text-decoration: none;
+  background: rgba(78, 216, 138, 0.14);
+  border: 1px solid rgba(78, 216, 138, 0.32);
+  color: var(--wa);
+  transition: background var(--t-2), border-color var(--t-1), transform var(--t-2);
+}
+@media (hover: hover) {
+  .site-nav__cta:hover {
+    background: rgba(78, 216, 138, 0.22);
+    border-color: rgba(78, 216, 138, 0.45);
+    transform: translateY(-1px);
+  }
+}
+.site-nav__cta svg {
+  width: 16px;
+  height: 16px;
+}
+
+/* Menu button */
+.site-nav__menu-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-3);
+  min-height: 44px; /* WCAG 2.5.5 AAA — minimum target size for touch */
+  border-radius: var(--r-3);
+  font-family: 'Manrope', sans-serif;
+  font-size: var(--ts-body-sm);
+  font-weight: 700;
+  letter-spacing: -0.1px;
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text);
+  cursor: pointer;
+  transition: background var(--t-1), border-color var(--t-1), color var(--t-1);
+}
+/* Visual audit 2026-05-28: hover только для устройств с реальным hover (мышь).
+   На iOS Safari после тапа без этого ограничения hover «прилипает» — кнопка
+   «Меню» оставалась жёлтой пока пользователь не тапнет где-то ещё. */
+@media (hover: hover) {
+  .site-nav__menu-btn:hover {
+    background: var(--surface-2);
+    border-color: var(--gold);
+    color: var(--gold);
+  }
+}
+.site-nav__menu-btn svg {
+  width: 18px;
+  height: 18px;
+}
+.site-nav__menu-btn:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 2px;
+}
+
+/* ── Mobile (<540px) — скрыть WhatsApp text, показать только icon ── */
+@media (max-width: 540px) {
+  .site-nav__inner {
+    padding: var(--space-3);
+  }
+  .site-nav__brand-text {
+    /* 2026-05-28: на mobile тоже крупнее — было 16px, стало 20px. */
+    font-size: 20px;
+  }
+  .site-nav__cta-text {
+    display: none;
+  }
+  .site-nav__cta {
+    padding: var(--space-2);
+  }
+  .site-nav__cta svg {
+    width: 18px;
+    height: 18px;
+  }
+}
+
+/* ============================================================
+   Site Menu Overlay — <dialog id="site-menu-dialog">
+   Открывается через .site-nav__menu-btn click.
+   ============================================================ */
+
+.site-menu {
+  border: none;
+  padding: 0;
+  background: transparent;
+  max-width: none;
+  max-height: none;
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  inset: 0;
+  overflow: hidden;
+}
+
+.site-menu::backdrop {
+  background: rgba(15, 17, 23, 0.78);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.site-menu[open] {
+  animation: site-menu-fade 200ms ease-out;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+@keyframes site-menu-fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* ── Card ── */
+.site-menu__card {
+  background: var(--surface-sunk);
+  border: 1px solid var(--border);
+  border-radius: var(--r-5);
+  padding: var(--space-5) var(--space-5) var(--space-6);
+  width: 100%;
+  max-width: 480px;
+  margin: var(--space-6) var(--space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+  position: relative;
+  animation: site-menu-slide 220ms ease-out;
+}
+
+@keyframes site-menu-slide {
+  from { transform: translateY(-12px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+/* Sprint 5 a11y: respect prefers-reduced-motion (WCAG 2.3.3). */
+@media (prefers-reduced-motion: reduce) {
+  .site-menu__card { animation: none; }
+}
+
+/* ── Head: brand + close ── */
+.site-menu__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  padding-bottom: var(--space-3);
+  border-bottom: 1px solid var(--border-faint);
+}
+.site-menu__brand {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  text-decoration: none;
+  color: var(--gold);
+}
+/* Visual audit 2026-05-28: при открытии <dialog> autofocus поставлен на close-button,
+   но мышиный click на logo не должен оставлять «золотой ореол». :focus-visible
+   сохраняем для клавиатурной навигации (a11y). */
+.site-menu__brand:focus {
+  outline: none;
+}
+.site-menu__brand:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 4px;
+  border-radius: var(--r-2);
+}
+.site-menu__brand-mark {
+  width: 24px;
+  height: 24px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.site-menu__brand-mark svg { width: 100%; height: 100%; display: block; }
+.site-menu__brand-text {
+  font-family: 'Manrope', sans-serif;
+  font-size: 18px;
+  font-weight: 800;
+  letter-spacing: -0.4px;
+  line-height: 1;
+  color: var(--gold);
+}
+.site-menu__close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text-sub);
+  cursor: pointer;
+  transition: background var(--t-1), border-color var(--t-1), color var(--t-1);
+}
+.site-menu__close:hover {
+  background: var(--surface-2);
+  border-color: var(--gold);
+  color: var(--gold);
+}
+.site-menu__close svg { width: 16px; height: 16px; }
+
+/* ── Nav links ── */
+.site-menu__nav {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+.site-menu__link {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  text-decoration: none;
+  color: var(--text);
+  font-family: 'Manrope', sans-serif;
+  font-size: var(--ts-h4);
+  font-weight: 700;
+  border-radius: var(--r-3);
+  background: transparent;
+  border: 1px solid transparent;
+  transition: background var(--t-1), border-color var(--t-1), color var(--t-1);
+}
+.site-menu__link:hover {
+  background: var(--surface-2);
+  border-color: var(--border);
+  color: var(--gold);
+  text-decoration: none;
+}
+.site-menu__link.active {
+  background: var(--surface-2);
+  border-color: rgba(196, 149, 42, 0.45);
+  color: var(--gold);
+}
+.site-menu__link-text { grid-column: 1; }
+.site-menu__link-meta {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: var(--ts-meta);
+  font-weight: 500;
+  color: var(--text-label);
+  letter-spacing: 0.04em;
+  grid-column: 2;
+}
+.site-menu__link-arrow {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: var(--ts-body);
+  color: var(--text-label);
+  grid-column: 3;
+  transition: color var(--t-1), transform var(--t-2);
+}
+.site-menu__link:hover .site-menu__link-arrow {
+  color: var(--gold);
+  transform: translateX(2px);
+}
+
+/* ── Contacts ── */
+.site-menu__contacts {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--border-faint);
+}
+.site-menu__contacts-label {
+  font-family: 'Manrope', sans-serif;
+  font-size: var(--ts-label);
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-label);
+  margin-bottom: var(--space-1);
+}
+.site-menu__contacts-label::before {
+  content: '●  ';
+  color: var(--gold);
+  letter-spacing: 0;
+}
+
+.site-menu__channel {
+  display: grid;
+  grid-template-columns: 22px 1fr auto;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--r-3);
+  text-decoration: none;
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text);
+  font-family: 'Manrope', sans-serif;
+  font-size: var(--ts-body-sm);
+  font-weight: 700;
+  transition: background var(--t-1), border-color var(--t-1), color var(--t-1), transform var(--t-2);
+}
+.site-menu__channel:hover {
+  background: var(--surface-2);
+  transform: translateY(-1px);
+  text-decoration: none;
+}
+.site-menu__channel svg { width: 18px; height: 18px; }
+.site-menu__channel-meta {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: var(--ts-meta);
+  font-weight: 500;
+  color: var(--text-label);
+  letter-spacing: 0.04em;
+}
+.site-menu__channel--wa { color: var(--wa); }
+.site-menu__channel--wa:hover { border-color: rgba(78, 216, 138, 0.45); color: var(--wa); }
+.site-menu__channel--tg { color: var(--tg); }
+.site-menu__channel--tg:hover { border-color: rgba(91, 184, 224, 0.45); color: var(--tg); }
+
+/* ── Mobile adjustments ── */
+@media (max-width: 540px) {
+  .site-menu__card {
+    margin: var(--space-3) var(--space-3) var(--space-5);
+    padding: var(--space-4) var(--space-4) var(--space-5);
+    border-radius: var(--r-4);
+  }
+  .site-menu__link {
+    font-size: var(--ts-body);
+    padding: var(--space-3);
+  }
+  .site-menu__link-meta {
+    display: none;
+  }
+  .site-menu__channel {
+    padding: var(--space-3);
+  }
+  .site-menu__channel-meta {
+    display: none;
+  }
+}

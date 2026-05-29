@@ -1,0 +1,70 @@
+/* ============================================================
+   Krepko — Chip-bar Гарантий.
+   Заменяет большие блоки hero-card / krepko-guarantee / krepko-guarantee-mini
+   на компактную плашку с 4 чипами.
+   ============================================================ */
+
+.krepko-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin: calc(var(--space-4) + 2px) 0 var(--space-5) - 2px;
+  padding: 0;
+  list-style: none;
+  font-family: 'Manrope', -apple-system, sans-serif;
+}
+.krepko-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: calc(var(--space-1) + 2px);
+  padding: var(--space-2) var(--space-3);
+  background: rgba(31, 38, 56, 0.55);
+  border: 1px solid rgba(196, 149, 42, 0.40);
+  border-radius: 999px;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--text);
+  letter-spacing: -0.2px;
+  line-height: 1;
+  white-space: nowrap;
+}
+.krepko-chip svg {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+  fill: none;
+  stroke: var(--gold);
+  stroke-width: 2.2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* На мобилке — chips wrap в несколько строк (visual audit 2026-05-27 H1:
+   nowrap + overflow-x скрывал часть чипов без явного индикатора. Wrap делает
+   все чипы видимыми естественно). */
+@media (max-width: 480px) {
+  .krepko-chips {
+    flex-wrap: wrap;
+    gap: calc(var(--space-1) + 2px);
+  }
+  .krepko-chip {
+    padding: calc(var(--space-1) + 2px) calc(var(--space-2) + 2px);
+    font-size: 12px;
+  }
+  .krepko-chip svg { width: 13px; height: 13px; }
+}
+
+/* На очень узких экранах ещё компактнее */
+@media (max-width: 360px) {
+  .krepko-chips { gap: 5px; }
+  .krepko-chip { padding: var(--space-1) var(--space-2); font-size: 11px; }
+}
+
+/* Десктоп — чуть крупнее, всё в одной строке */
+@media (min-width: 900px) {
+  .krepko-chip {
+    padding: 9px calc(var(--space-3) + 2px);
+    font-size: 13px;
+  }
+  .krepko-chip svg { width: 15px; height: 15px; }
+}

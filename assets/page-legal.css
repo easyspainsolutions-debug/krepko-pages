@@ -1,0 +1,166 @@
+/* ============================================================
+   page-legal.css — Legal page layout and components.
+   Used by: aviso-legal, privacidad, terminos, cookies.
+   Reads tokens from tokens.css. No hardcoded hex values.
+   ============================================================ */
+
+/* === LAYOUT WRAPPER === */
+
+.wrap {
+  width: 100%;
+  max-width: var(--w-read);
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  padding: 0 0 var(--space-8);
+}
+
+/* === BREADCRUMBS === */
+
+.breadcrumbs {
+  font-size: var(--ts-meta);
+  color: var(--text-dim);
+  margin: var(--rh-2) 0 var(--space-2);
+  line-height: 1.5;
+}
+
+.breadcrumbs a {
+  color: var(--text-nav);
+  text-decoration: none;
+  border-bottom: none;
+}
+
+.breadcrumbs a:hover {
+  color: var(--gold);
+  text-decoration: none;
+}
+
+.breadcrumbs .current {
+  color: var(--text-muted);
+}
+
+/* === META LINE (date/validity) === */
+
+.meta {
+  font-size: var(--ts-meta);
+  color: var(--text-dim);
+  margin-bottom: var(--space-6);
+  padding-bottom: var(--rh-1);
+  border-bottom: 1px solid var(--border);
+}
+
+/* === INFO BOX (neutral highlight) === */
+
+.info-box {
+  background: var(--surface-card);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--gold);
+  border-radius: var(--r-3);
+  padding: var(--rh-1) var(--space-4);
+  margin: var(--rh-2) 0;
+  font-size: var(--ts-body-sm);
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+.info-box strong {
+  color: var(--text);
+}
+
+/* === WARN BOX (alert / warning) === */
+
+.warn-box {
+  background: var(--surface-card);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--danger);
+  border-radius: var(--r-3);
+  padding: var(--rh-1) var(--space-4);
+  margin: var(--rh-2) 0;
+  font-size: var(--ts-body-sm);
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+.warn-box strong {
+  color: var(--text);
+}
+
+/* === TABLES === */
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: var(--space-4) 0;
+  font-size: var(--ts-body-sm);
+}
+
+th,
+td {
+  padding: var(--space-3) var(--space-3);
+  text-align: left;
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  vertical-align: top;
+}
+
+th {
+  background: var(--surface-card);
+  color: var(--text);
+  font-weight: 600;
+}
+
+td strong {
+  color: var(--text);
+}
+
+/* === LANG SWITCH === */
+
+.lang-switch {
+  padding: var(--rh-1) 0;
+  font-size: var(--ts-body-sm);
+  color: var(--text-dim);
+}
+
+.lang-switch a {
+  color: var(--text-nav);
+  border-bottom: none;
+  margin: 0 var(--space-1);
+}
+
+.lang-switch a.active {
+  color: var(--gold);
+}
+
+/* === WRAP LINK OVERRIDES === */
+
+.wrap a {
+  color: var(--gold);
+  text-decoration: none;
+  border-bottom: 1px dotted rgba(196, 149, 42, 0.4);
+}
+
+.wrap a:hover {
+  border-bottom-color: var(--gold);
+}
+
+.wrap .breadcrumbs a {
+  border-bottom: none;
+}
+
+/* === H3 ACCENT COLOR ON LEGAL PAGES === */
+
+.wrap h3 {
+  color: var(--gold);
+}
+
+/* === MOBILE OVERRIDES === */
+
+@media (max-width: 719px) {
+  .meta {
+    padding-bottom: var(--rh-1);
+  }
+
+  .info-box {
+    padding: var(--space-3) var(--rh-1);
+  }
+}

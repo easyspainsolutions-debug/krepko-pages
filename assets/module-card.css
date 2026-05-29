@@ -1,0 +1,237 @@
+/* ============================================================
+   Module: Cards — 4 variants (service, document, article, city).
+   Spec: visual-system-design-2026-05-25.md §4.3
+   Common: surface bg, border, 10px radius, gold border + lift on hover.
+   ============================================================ */
+
+/* === Base card === */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-5);
+  padding: var(--space-5) var(--space-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  text-decoration: none;
+  color: var(--text);
+  position: relative;
+  transition: border-color var(--t-1), background var(--t-1),
+              transform var(--t-2), box-shadow var(--t-2);
+}
+
+/* Add accent strip ::before */
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(to right,
+    rgba(196, 149, 42, 0) 0%,
+    rgba(196, 149, 42, 0.5) 30%,
+    rgba(196, 149, 42, 0.5) 70%,
+    rgba(196, 149, 42, 0) 100%);
+  opacity: 0;
+  transition: opacity var(--t-2);
+}
+
+/* Visual audit 2026-05-28: hover только для устройств с мышью. На iOS Safari
+   после тапа hover «прилипал» к карточке — карточка оставалась с золотой обводкой. */
+@media (hover: hover) {
+  .card:hover {
+    border-color: rgba(196, 149, 42, 0.55);
+    background: var(--surface-2);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+    text-decoration: none;
+  }
+  .card:hover::before {
+    opacity: 1;
+  }
+}
+
+/* === Card grid layouts === */
+/* Sprint 5 mobile UX (2026-05-27): 2-col на phones 375px+ для меньшей vertical fatigue.
+   iPhone SE (320px) остаётся 1-col — 2-col при 320px даёт 145px/card, теряет читаемость. */
+.card-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-3);
+}
+@media (min-width: 375px) and (max-width: 599px) {
+  .card-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-2);
+  }
+}
+@media (min-width: 600px) {
+  .card-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* === Compact card on mobile (< 600px) === */
+@media (max-width: 599px) {
+  .card {
+    padding: var(--space-4) var(--space-4);
+    gap: var(--space-2);
+  }
+}
+
+/* === ServiceCard === */
+/* min-height обеспечивает consistent высоту между cards с/без meta_line
+   (на mobile 1-col некоторые services не имеют doc_count → высота прыгает).
+   На desktop CSS Grid align-items:stretch уже выравнивает по строкам. */
+.card--service {
+  min-height: 132px;
+}
+@media (max-width: 599px) {
+  .card--service {
+    min-height: 104px;
+  }
+  .card--service .card__icon {
+    width: 18px;
+    height: 18px;
+  }
+  .card--service .card__title {
+    font-size: var(--ts-body-sm);
+    line-height: 1.25;
+  }
+  .card--service .card__meta {
+    font-size: 10px;
+    letter-spacing: 0.04em;
+  }
+}
+.card--service .card__top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+.card--service .card__icon {
+  color: var(--gold);
+  width: 20px;
+  height: 20px;
+}
+.card--service .card__arrow {
+  color: var(--text-label);
+  font-family: 'IBM Plex Mono', monospace;
+}
+.card--service .card__title {
+  font-size: var(--ts-body);
+  font-weight: 700;
+  color: var(--text);
+  margin: 0;
+}
+.card--service .card__meta {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: var(--ts-meta);
+  color: var(--text-label);
+  letter-spacing: 0.06em;
+  margin-top: var(--space-1);
+}
+
+/* === DocumentCard === */
+.card--document .card__title-ru {
+  font-size: var(--ts-body);
+  font-weight: 700;
+  color: var(--text);
+  margin: 0;
+}
+.card--document .card__title-es {
+  font-style: italic;
+  font-size: var(--ts-meta);
+  color: var(--text-label);
+  margin: var(--space-1) 0 var(--space-2);
+}
+.card--document .card__bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding-top: var(--space-2);
+  border-top: 1px dashed var(--border-faint);
+  margin-top: auto;
+}
+.card--document .card__price {
+  /* Visual audit 2026-05-27 L7: унифицировано на Manrope с tabular-nums —
+     раньше mix Plex Mono (price) + Manrope (title). */
+  font-family: 'Manrope', sans-serif;
+  font-variant-numeric: tabular-nums;
+  color: var(--gold);
+  font-size: var(--ts-h4);
+  font-weight: 700;
+  letter-spacing: -0.2px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.card--document .card__price-note {
+  font-family: 'Manrope', sans-serif;
+  font-size: var(--ts-body-xs);
+  font-weight: 400;
+  color: var(--text-muted);
+  letter-spacing: 0;
+}
+.card--document .card__meta {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: var(--ts-meta);
+  color: var(--text-label);
+  letter-spacing: 0.06em;
+}
+
+/* === ArticleCard === */
+.card--article .card__label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: var(--ts-label);
+  color: var(--gold);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: var(--space-1);
+}
+.card--article .card__title {
+  font-size: var(--ts-body);
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.3;
+}
+.card--article .card__dek {
+  font-size: var(--ts-meta);
+  color: var(--text-sub);
+  line-height: 1.5;
+  margin-top: var(--space-1);
+}
+.card--article .card__readtime {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 9px;
+  color: var(--text-label);
+  letter-spacing: 0.08em;
+  margin-top: var(--space-2);
+}
+
+/* === CityCard === */
+.card--city .card__title {
+  font-size: var(--ts-h3);
+  font-weight: 800;
+  color: var(--text);
+}
+.card--city .card__meta {
+  /* Visual audit 2026-05-28: IBM Plex Mono + letter-spacing давали слишком широкие
+     названия районов («Mercado Central», «La Albufereta»), на 2 колонки они
+     разрывались поперёк слов и выглядели как «съехавшие». Manrope без extra
+     letter-spacing + nowrap-токены. */
+  font-family: 'Manrope', sans-serif;
+  font-size: var(--ts-body-sm);
+  color: var(--text-muted);
+  letter-spacing: 0;
+  margin-top: var(--space-2);
+  line-height: 1.5;
+}
+.card--city .card__meta--districts .nowrap {
+  white-space: nowrap;
+}
+.card--city .card__meta--districts .sep {
+  color: var(--text-label);
+  opacity: 0.7;
+  margin: 0 2px;
+}

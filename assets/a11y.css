@@ -1,0 +1,62 @@
+/* Krepko — Accessibility baseline.
+   Загружается на каждой странице через <link rel="stylesheet" href="/assets/a11y.css">.
+   Не влияет на дизайн в обычном состоянии — добавляет только focus-visible и reduced-motion. */
+
+/* Visible focus indicator для keyboard navigation (WCAG 2.4.7).
+   Применяется ТОЛЬКО при tab-навигации, не при кликах мыши.
+
+   ВАЖНО: используем box-shadow вместо outline.
+   Safari/iOS после tap держит :focus на ссылках и рендерит outline+offset
+   как «пунктир» под элементом. box-shadow это поведение обходит.
+   focus-visible работает только для keyboard-навигации, поэтому
+   при кликах/тапах никаких артефактов не будет. */
+a:focus-visible,
+button:focus-visible,
+summary:focus-visible,
+[role="button"]:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible,
+details:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--gold);
+  border-radius: var(--space-1);
+}
+
+/* На всякий случай: убираем любой default :focus outline (mouse/touch).
+   Tab-навигация всё ещё подсвечивается через :focus-visible выше. */
+a:focus:not(:focus-visible),
+button:focus:not(:focus-visible),
+summary:focus:not(:focus-visible),
+[role="button"]:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* Глобальный reduce-motion для пользователей с вестибулярными нарушениями (WCAG 2.3.3).
+   Не отключает важные индикаторы, но убирает декоративные анимации. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Skip link для screen readers (если когда-то добавим главу #main). */
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 9999;
+  padding: var(--space-2) var(--space-4);
+  background: var(--gold);
+  color: var(--gold-on);
+  text-decoration: none;
+  border-radius: 0 0 var(--space-2) 0;
+}
+.skip-link:focus {
+  left: 0;
+}

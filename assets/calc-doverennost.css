@@ -1,0 +1,550 @@
+/* ============================================================
+   Module: KREPKO_АВАНС калькулятор для услуги «Доверенность на родном языке».
+   Формула — docs/services/acta-207.md §2.
+   JS — assets/calc-doverennost.js.
+   Используется только на странице /notario/doverennost-na-rodnom-yazyke/.
+   ============================================================ */
+
+.krepko-calc {
+  display: grid;
+  gap: var(--space-5);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-5);
+  padding: var(--space-5);
+  margin: 0;
+  color: var(--text);
+}
+/* Visual audit 2026-05-27 M5: на desktop ≥900px опции калькулятора в 2 колонки —
+   уменьшает вертикальную длину почти вдвое. */
+@media (min-width: 900px) {
+  .krepko-calc {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-5) var(--space-6);
+  }
+}
+
+.krepko-calc__field {
+  display: grid;
+  gap: var(--space-2);
+  /* Visual audit 2026-05-27 M1: убираем native fieldset border — раньше создавал
+     визуальный «контейнер в контейнере» поверх .krepko-calc обёртки. */
+  border: 0;
+  margin: 0;
+  padding: 0;
+  min-width: 0;
+}
+
+.krepko-calc__legend {
+  font-size: var(--ts-label);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-label);
+  margin: 0;
+  padding: 0;
+}
+
+.krepko-calc__options {
+  display: grid;
+  gap: var(--space-2);
+}
+
+.krepko-calc__option {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  background: var(--surface-2);
+  border: 1px solid var(--border-faint);
+  border-radius: var(--r-3);
+  cursor: pointer;
+  transition: border-color var(--t-1), background var(--t-1);
+  font-size: var(--ts-body);
+  line-height: 1.4;
+}
+
+.krepko-calc__option:hover {
+  border-color: rgba(196, 149, 42, 0.4);
+}
+
+.krepko-calc__option input {
+  margin: 0;
+  accent-color: var(--gold);
+  flex-shrink: 0;
+}
+
+/* Visual audit 2026-05-27 L3: усиливаем визуальное состояние active radio —
+   раньше тонкий gold border (контраст ~3.5:1). Теперь 2px border + outline. */
+.krepko-calc__option:has(input:checked) {
+  border-color: var(--gold);
+  border-width: 2px;
+  padding: calc(var(--space-3) - 1px) calc(var(--space-4) - 1px);
+  background: var(--gold-tint);
+  box-shadow: 0 0 0 1px var(--gold-tint);
+}
+
+.krepko-calc__select {
+  width: 100%;
+  padding: var(--space-3) var(--space-4);
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--r-3);
+  color: var(--text);
+  font-size: var(--ts-body);
+  font-family: Manrope, sans-serif;
+}
+
+.krepko-calc__select:focus,
+.krepko-calc__option input:focus-visible + span,
+.krepko-calc__option:focus-within {
+  outline: 2px solid var(--gold);
+  outline-offset: 2px;
+}
+
+.krepko-calc__hint {
+  display: block;
+  margin-top: var(--space-1);
+  font-size: var(--ts-body-xs);
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+
+/* === Result card === */
+.krepko-calc__result {
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--r-5);
+  padding: var(--space-5);
+  display: grid;
+  gap: var(--space-4);
+  margin-top: var(--space-5);
+  position: relative;
+}
+
+.krepko-calc__result::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(to right,
+    rgba(196, 149, 42, 0) 0%,
+    rgba(196, 149, 42, 0.6) 30%,
+    rgba(196, 149, 42, 0.6) 70%,
+    rgba(196, 149, 42, 0) 100%);
+}
+
+.krepko-calc__total {
+  display: grid;
+  gap: var(--space-2);
+}
+
+.krepko-calc__total-eyebrow {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: var(--ts-mono);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+.krepko-calc__total-row {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+}
+
+.krepko-calc__total-label {
+  font-size: var(--ts-h4);
+  color: var(--text-sub);
+  letter-spacing: 0.02em;
+}
+
+.krepko-calc__total-value {
+  font-size: var(--ts-h1);
+  font-weight: 800;
+  color: var(--gold);
+  line-height: 1;
+}
+
+/* Под ключ — second-tier подзаголовок. Главный акцент — «Наша работа». */
+.krepko-calc__total-sub {
+  font-size: var(--ts-body-sm);
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+
+.krepko-calc__warning {
+  margin: 0;
+  padding: var(--space-3) var(--space-4);
+  background: var(--gold-tint);
+  border: 1px solid rgba(196, 149, 42, 0.45);
+  border-radius: var(--r-3);
+  color: var(--text);
+  font-size: var(--ts-body-sm);
+  line-height: 1.45;
+}
+
+.krepko-calc__payments {
+  background: var(--surface-sunk);
+  border: 1px solid var(--border-faint);
+  border-radius: var(--r-3);
+  padding: var(--space-4);
+  display: grid;
+  gap: var(--space-2);
+}
+
+.krepko-calc__payments-title {
+  margin: 0;
+  font-size: var(--ts-h4);
+  color: var(--text);
+}
+
+.krepko-calc__payments-title strong {
+  color: var(--gold);
+}
+
+.krepko-calc__payments-note {
+  margin: 0;
+  font-size: var(--ts-body-sm);
+  color: var(--text-sub);
+  line-height: 1.5;
+}
+
+.krepko-calc__payments-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--space-1);
+  font-size: var(--ts-body-sm);
+  color: var(--text-sub);
+}
+
+.krepko-calc__payments-list li::before {
+  content: '·';
+  margin-right: var(--space-2);
+  color: var(--text-muted);
+}
+
+.krepko-calc__disclaimer {
+  margin: 0;
+  font-size: var(--ts-body-sm);
+  color: var(--text-muted);
+  line-height: 1.5;
+  padding: var(--space-3) 0 0;
+  border-top: 1px solid var(--border-faint);
+}
+
+.krepko-calc__rule {
+  border: 0;
+  height: 1px;
+  background: var(--border-faint);
+  margin: 0;
+}
+
+.krepko-calc__breakdown {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--space-2);
+}
+
+.krepko-calc__breakdown li {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: var(--space-3);
+  font-size: var(--ts-body);
+  color: var(--text-sub);
+}
+
+.krepko-calc__row-label::before {
+  content: '·';
+  margin-right: var(--space-2);
+  color: var(--text-muted);
+}
+
+.krepko-calc__row-value {
+  font-weight: 600;
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+}
+
+.krepko-calc__row-value em {
+  font-style: normal;
+  color: var(--text-muted);
+  font-weight: 400;
+}
+
+.krepko-calc__assurance {
+  list-style: none;
+  margin: 0;
+  padding: var(--space-4);
+  background: var(--surface-sunk);
+  border-radius: var(--r-3);
+  display: grid;
+  gap: var(--space-2);
+  font-size: var(--ts-body-sm);
+  color: var(--text-sub);
+  line-height: 1.45;
+}
+
+.krepko-calc__assurance li {
+  padding-left: var(--space-5);
+  position: relative;
+}
+
+.krepko-calc__assurance li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: var(--wa);
+  font-weight: 700;
+}
+
+.krepko-calc__assurance strong {
+  color: var(--text);
+}
+
+/* === CTA === */
+.krepko-calc__cta {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  padding: var(--space-4) var(--space-5);
+  border-radius: var(--r-3);
+  font-weight: 700;
+  font-size: var(--ts-body);
+  text-decoration: none;
+  transition: background var(--t-1), transform var(--t-1);
+}
+
+.krepko-calc__cta--wa {
+  background: var(--wa);
+  color: var(--gold-on);
+  box-shadow: var(--glow-wa);
+}
+
+.krepko-calc__cta--wa:hover {
+  transform: translateY(-1px);
+  text-decoration: none;
+}
+
+/* === Oversize (N≥4) === */
+.krepko-calc__oversize {
+  display: grid;
+  gap: var(--space-3);
+}
+
+.krepko-calc__oversize-title {
+  font-size: var(--ts-h3);
+  color: var(--text);
+  margin: 0;
+  font-weight: 700;
+}
+
+.krepko-calc__oversize p {
+  margin: 0;
+  color: var(--text-sub);
+}
+
+/* === Why us block (companion module on the same page) === */
+.why-us-acta207__list {
+  list-style: none;
+  margin: var(--space-4) 0 0;
+  padding: 0;
+  display: grid;
+  gap: var(--space-3);
+}
+
+.why-us-acta207__list li {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-4);
+  padding: var(--space-4) var(--space-5);
+  color: var(--text-sub);
+  font-size: var(--ts-body);
+  line-height: 1.5;
+  display: grid;
+  gap: var(--space-1);
+}
+
+.why-us-acta207__list strong {
+  color: var(--text);
+  font-size: var(--ts-h4);
+  font-weight: 700;
+}
+
+/* === Type-page content blocks (ACTA-207 v4) === */
+.document-purpose p {
+  font-size: var(--ts-lead);
+  color: var(--text-sub);
+  line-height: 1.6;
+  margin: 0;
+  max-width: var(--w-read);
+}
+
+/* Visual audit 2026-05-27 M2: use-cases остались carded (там 5 пунктов, читается ОК),
+   а required-docs переходит в compact-list без border — это часто 6-8 пунктов,
+   карточки занимали слишком много вертикального места. */
+.use-cases__list {
+  list-style: none;
+  margin: var(--space-4) 0 0;
+  padding: 0;
+  display: grid;
+  gap: var(--space-2);
+}
+
+.use-cases__list li {
+  padding: var(--space-3) var(--space-4) var(--space-3) var(--space-6);
+  background: var(--surface);
+  border: 1px solid var(--border-faint);
+  border-radius: var(--r-3);
+  position: relative;
+  font-size: var(--ts-body);
+  color: var(--text-sub);
+  line-height: 1.5;
+}
+
+.use-cases__list li::before {
+  content: '→';
+  position: absolute;
+  left: var(--space-3);
+  top: var(--space-3);
+  color: var(--gold);
+  font-weight: 700;
+}
+
+.required-docs__list {
+  list-style: none;
+  margin: var(--space-4) 0 0;
+  padding: 0;
+  display: grid;
+  gap: var(--space-2);
+}
+
+.required-docs__list li {
+  padding: var(--space-2) 0 var(--space-2) var(--space-5);
+  position: relative;
+  font-size: var(--ts-body);
+  color: var(--text-sub);
+  line-height: 1.5;
+  border-bottom: 1px dashed var(--border-faint);
+}
+
+.required-docs__list li:last-child {
+  border-bottom: 0;
+}
+
+.required-docs__list li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  top: var(--space-2);
+  color: var(--gold);
+  font-weight: 700;
+  font-size: 0.95em;
+}
+
+.what-we-do-specific {
+  margin-top: var(--space-5);
+  padding: var(--space-4);
+  background: var(--surface-sunk);
+  border-radius: var(--r-3);
+}
+
+.what-we-do-specific h3 {
+  margin: 0 0 var(--space-3);
+  font-size: var(--ts-h4);
+  color: var(--text);
+}
+
+.what-we-do-specific ul {
+  margin: 0;
+  padding-left: var(--space-5);
+  display: grid;
+  gap: var(--space-2);
+  color: var(--text-sub);
+  font-size: var(--ts-body-sm);
+  line-height: 1.5;
+}
+
+/* Visual audit 2026-05-27 M3: sticky bottom-bar для type pages с калькулятором.
+   Появляется на mobile/tablet (≤899px), на desktop скрыт. */
+.sticky-jump {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 50;
+  display: flex;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-4) calc(var(--space-3) + env(safe-area-inset-bottom, 0));
+  background: rgba(23, 28, 40, 0.92);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-top: 1px solid var(--border);
+}
+
+.sticky-jump__btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--r-3);
+  font-family: 'Manrope', sans-serif;
+  font-weight: 700;
+  font-size: var(--ts-body-sm);
+  text-decoration: none;
+  min-height: 44px;
+  transition: background var(--t-1), transform var(--t-1);
+}
+
+.sticky-jump__btn--calc {
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  color: var(--text);
+}
+
+.sticky-jump__btn--wa {
+  background: var(--wa);
+  color: var(--gold-on);
+}
+
+.sticky-jump__btn:hover {
+  transform: translateY(-1px);
+  text-decoration: none;
+}
+
+@media (min-width: 900px) {
+  .sticky-jump { display: none; }
+}
+
+/* Чтобы sticky-jump не прятал последнюю секцию контента, добавим body padding. */
+@media (max-width: 899px) {
+  body:has(aside.sticky-jump) {
+    padding-bottom: 80px;
+  }
+}
+
+/* === Mobile compress === */
+@media (max-width: 720px) {
+  .krepko-calc,
+  .krepko-calc__result {
+    padding: var(--space-4);
+  }
+  .krepko-calc__total-value {
+    font-size: var(--ts-h2);
+  }
+  .why-us-acta207__list li {
+    padding: var(--space-3) var(--space-4);
+  }
+  .use-cases__list li {
+    padding: var(--space-3) var(--space-3) var(--space-3) var(--space-5);
+  }
+}

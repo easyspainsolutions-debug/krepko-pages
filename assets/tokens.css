@@ -1,0 +1,117 @@
+/* ============================================================
+   Krepko Design Tokens — single source of truth
+   Spec: 30 Проекты/Сайт/visual-system-design-2026-05-25.md §3
+   DO NOT use hex/px values in other CSS files — only var(--token).
+   ============================================================ */
+
+:root {
+  /* === SURFACES === */
+  --bg: #171C28;
+  --surface: #1F2840;
+  --surface-2: #1C2438;
+  --surface-sunk: #161B26;
+  --surface-card: #1F2638;  /* legal pages: info-box / table header background */
+
+  /* === BORDERS === */
+  --border-faint: #202840;
+  --border: #2A3450;
+
+  /* === TEXT === */
+  --text: #EDF1F8;
+  --text-sub: #A8B5CC;
+  --text-muted: #8896B0;
+  --text-label: #6B7A96;
+  --text-dim: #4A5570;    /* legal pages: meta dates, breadcrumb base */
+  --text-nav: #7B8BA8;    /* legal pages: breadcrumb links, lang-switch */
+
+  /* === GOLD === */
+  --gold: #C4952A;
+  --gold-2: #B6862A;
+  --gold-tint: rgba(196, 149, 42, 0.14);
+  --gold-on: #0F1117;
+
+  /* === CHANNEL === */
+  --wa: #4ED88A;
+  --tg: #5BB8E0;
+  --ig: #E1306C;
+
+  /* === STATUS === */
+  --danger: #B85450;  /* legal pages: warn-box border */
+
+  /* === GLOW === */
+  --glow-gold: 0 4px 14px rgba(196, 149, 42, 0.25);
+  --glow-wa: 0 0 12px rgba(78, 216, 138, 0.18);
+
+  /* === TYPE SCALE (desktop) === */
+  --ts-display: 48px;
+  --ts-h1: 38px;
+  --ts-h2: 30px;
+  --ts-h3: 22px;
+  --ts-h4: 17px;
+  --ts-lead: 17px;
+  --ts-body: 15px;
+  --ts-body-sm: 13px;
+  --ts-body-xs: 12px;
+  --ts-meta: 12px;
+  --ts-label: 11px;
+  --ts-mono: 11px;
+
+  /* === SPACING (4px base) === */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 64px;
+  --space-9: 96px;
+  --space-10: 128px;
+
+  /* === RHYTHM (semantic spacing aliases) === */
+  --rh-1: var(--space-4);   /* within block */
+  --rh-2: var(--space-5);   /* group related */
+  --rh-3: var(--space-7);   /* topic shift */
+  --rh-4: 72px;   /* page section break — bumped from 64px */
+  --rh-5: 112px;   /* major shift — bumped from 96px for breathing */
+
+  /* === RADII === */
+  --r-0: 0;
+  --r-1: 4px;
+  --r-2: 6px;
+  --r-3: 8px;
+  --r-4: 10px;
+  --r-5: 12px;
+
+  /* === MOTION === */
+  --t-1: 120ms ease;
+  --t-2: 200ms cubic-bezier(0.4, 0, 0.2, 1);
+  --t-3: 220ms ease-out;
+
+  /* === GRID / MAX-WIDTHS === */
+  --w-read: 720px;
+  --w-wide: 880px;
+  --w-catalog: 1080px;
+}
+
+/* === MOBILE OVERRIDES (compressed -25-30%) === */
+@media (max-width: 720px) {
+  :root {
+    /* type scale -1 stop */
+    --ts-display: 38px;
+    --ts-h1: 30px;
+    --ts-h2: 24px;
+    --ts-h3: 18px;
+    --ts-lead: 15px;
+    --ts-body: 14px;
+    --ts-label: 10px;
+    /* body-sm, meta, mono — unchanged */
+
+    /* rhythm compressed */
+    --rh-5: var(--space-8);   /* 96 → 64 */
+    --rh-4: var(--space-7);   /* 64 → 48 */
+    --rh-3: var(--space-6);   /* 48 → 32 */
+    --rh-2: 20px;             /* 24 → 20 */
+    --rh-1: 14px;             /* 16 → 14 */
+  }
+}

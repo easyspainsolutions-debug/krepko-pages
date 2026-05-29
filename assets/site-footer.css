@@ -1,0 +1,404 @@
+/* ============================================================
+   Krepko — Site Footer (ETQ-style adapted)
+   Structure (mobile vertical / desktop grid):
+     [USP row — 3 trust cards]
+     [Main grid: brand-col (static) | columns-col (3 accordions)]
+       Услуги / География / Связь — <details> accordions, closed by default
+     [Social row — Подписывайся + 4 icons]
+     [Bottom — legal links + copyright]
+   Spec: visual-system-design-2026-05-25.md §4.7 + ETQ-pattern
+   ============================================================ */
+
+body:has(> footer.site-footer) {
+  padding-bottom: 0 !important;
+}
+
+.site-footer {
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+  margin-right: calc(-50vw + 50%);
+  margin-top: var(--rh-4);
+  margin-bottom: 0;
+  background: var(--surface-sunk);
+  border-top: 1px solid var(--border);
+  color: var(--text-sub);
+  font-family: 'Manrope', -apple-system, sans-serif;
+  font-size: var(--ts-body-sm);
+  line-height: 1.5;
+}
+
+.site-footer__inner {
+  width: 100%;
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: var(--rh-3) var(--space-5) var(--space-5);
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0;
+  text-align: left;
+}
+
+/* ════════════════════════════════════════════════════
+   1. USP ROW
+   ════════════════════════════════════════════════════ */
+.site-footer__usp {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-2);
+  padding-bottom: var(--space-5);
+  border-bottom: 1px solid var(--border-faint);
+}
+.site-footer__usp-cell {
+  display: flex;
+  gap: var(--space-3);
+  align-items: flex-start;
+  padding: var(--space-3) var(--space-4);
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--r-4);
+}
+.site-footer__usp-icon {
+  flex-shrink: 0;
+  width: 22px;
+  height: 22px;
+  color: var(--gold);
+  margin-top: 2px;
+}
+.site-footer__usp-icon svg { width: 100%; height: 100%; }
+.site-footer__usp-title {
+  font-size: var(--ts-body-sm);
+  font-weight: 700;
+  color: var(--text);
+  margin: 0 0 var(--space-1);
+}
+.site-footer__usp-desc {
+  font-size: var(--ts-meta);
+  color: var(--text-muted);
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* ════════════════════════════════════════════════════
+   2. MAIN GRID — brand-col (static) + columns-col (accordions)
+   ════════════════════════════════════════════════════ */
+.site-footer__grid {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+  padding: var(--space-5) 0;
+  border-bottom: 1px solid var(--border-faint);
+}
+
+/* ── Brand column (static) ── */
+.site-footer__brand-col {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+.site-footer__brand {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  text-decoration: none;
+  color: var(--gold);
+}
+.site-footer__brand-mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  flex-shrink: 0;
+}
+.site-footer__brand-mark svg { width: 100%; height: 100%; display: block; }
+.site-footer__brand-text {
+  font-family: 'Manrope', sans-serif;
+  /* 2026-05-28 v4: уменьшен с 20px до 18px — конкурировал с brand в шапке.
+     Footer brand — служебная роль, не первый акцент. */
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: -0.3px;
+  line-height: 1;
+  color: var(--gold);
+}
+.site-footer__tagline {
+  font-size: var(--ts-body-sm);
+  color: var(--text-muted);
+  line-height: 1.55;
+  margin: 0;
+  max-width: 520px;
+}
+.site-footer__brand-link {
+  align-self: flex-start;
+  color: var(--gold);
+  text-decoration: none;
+  font-size: var(--ts-body-sm);
+  font-weight: 500;
+  /* 2026-05-28 v4: убран жёсткий underline — выглядел как «only-click» CTA,
+     слишком агрессивный для тихого footer. */
+  transition: color var(--t-1);
+}
+@media (hover: hover) {
+  .site-footer__brand-link:hover {
+    color: var(--gold-2);
+  }
+}
+
+/* ── Columns: 4 секции — accordion на mobile, плоский ряд на desktop ──
+   2026-05-28 v2: вернули <details> для mobile (раскрытие 4 списков подряд
+   делало футер «жопой»). На ≥720px force-открыты через CSS, см. media-query ниже. */
+.site-footer__columns {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  border-top: 1px solid var(--border-faint);
+}
+.site-footer__col {
+  border-bottom: 1px solid var(--border-faint);
+  padding: var(--space-3) 0;
+}
+.site-footer__col:last-child { border-bottom: 0; }
+
+/* 2026-05-28 v4: label-color возвращён в text-label (приглушённый mono-стиль) —
+   белый+gold вместе с цветными иконками + большим Krepko + underlined ссылкой
+   создавали ощущение пёстрости. Footer должен быть тихим. */
+.site-footer__col-title {
+  font-family: 'Manrope', sans-serif;
+  font-size: var(--ts-label);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-label);
+  margin: 0;
+  padding: var(--space-2) 0;
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: var(--space-2);
+  transition: color var(--t-1);
+}
+.site-footer__col-title::-webkit-details-marker { display: none; }
+.site-footer__col-title::after {
+  content: '+';
+  font-family: 'IBM Plex Mono', monospace;
+  color: var(--gold);
+  font-size: var(--ts-h4);
+  font-weight: 400;
+  line-height: 1;
+  transition: transform var(--t-3);
+}
+.site-footer__col[open] .site-footer__col-title::after {
+  content: '−';
+}
+@media (hover: hover) {
+  .site-footer__col-title:hover {
+    color: var(--text-sub);
+  }
+}
+
+.site-footer__col-list {
+  list-style: none;
+  padding: 0;
+  margin: var(--space-3) 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+.site-footer__col-list li { margin: 0; }
+.site-footer__col-list a {
+  color: var(--text-sub);
+  text-decoration: none;
+  font-size: var(--ts-body-sm);
+  transition: color var(--t-1);
+}
+.site-footer__col-list a:hover { color: var(--gold); }
+
+/* ════════════════════════════════════════════════════
+   3. SOCIAL ROW — Подписывайся + icons
+   ════════════════════════════════════════════════════ */
+.site-footer__social-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-5) 0;
+  border-bottom: 1px solid var(--border-faint);
+  flex-wrap: wrap;
+}
+.site-footer__social-label {
+  font-family: 'Manrope', sans-serif;
+  font-size: var(--ts-label);
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-label);
+}
+.site-footer__socials {
+  display: flex;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+}
+/* 2026-05-28 v3: иконки одной приглушённой палитры. Brand-цвет появляется только
+   на hover/active — раньше 4 разных цвета подряд (green/blue/blue/pink) выглядели
+   слишком пёстро в спокойном тёмном футере. */
+.footer-social {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: background var(--t-2), border-color var(--t-1), color var(--t-1), transform var(--t-2);
+}
+.footer-social svg {
+  width: 18px;
+  height: 18px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+@media (hover: hover) {
+  .footer-social:hover {
+    transform: translateY(-1px);
+  }
+  .footer-social--wa:hover  { color: var(--wa); border-color: rgba(78, 216, 138, 0.45); }
+  .footer-social--tg:hover,
+  .footer-social--bot:hover { color: var(--tg); border-color: rgba(91, 184, 224, 0.45); }
+  .footer-social--ig:hover  { color: var(--ig); border-color: rgba(225, 48, 108, 0.45); }
+}
+/* На touch — лёгкая подсветка при тапе через :active, тоже без sticky-hover. */
+.footer-social--wa:active  { color: var(--wa); }
+.footer-social--tg:active,
+.footer-social--bot:active { color: var(--tg); }
+.footer-social--ig:active  { color: var(--ig); }
+
+/* ════════════════════════════════════════════════════
+   4. BOTTOM — Legal + Copyright
+   ════════════════════════════════════════════════════ */
+/* 2026-05-28 v5: на mobile legal-row и copyright центрируются, на desktop —
+   разнесены по краям (legal слева, copyright справа). */
+.site-footer__bottom {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: var(--space-5) 0 0;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  text-align: center;
+}
+.site-footer__legal {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: var(--space-1) var(--space-2);
+  font-size: var(--ts-meta);
+  color: var(--text-label);
+}
+.site-footer__legal a {
+  color: var(--text-label);
+  text-decoration: none;
+  padding: var(--space-1) var(--space-2);
+  border-radius: var(--r-1);
+  transition: color var(--t-1), background var(--t-1);
+}
+.site-footer__legal a:hover {
+  color: var(--gold);
+  background: rgba(196, 149, 42, 0.08);
+}
+.site-footer__legal .sep { color: var(--border); }
+
+.site-footer__meta {
+  font-family: 'IBM Plex Mono', monospace;
+  color: var(--text-label);
+  font-size: var(--ts-meta);
+  letter-spacing: 0.04em;
+}
+
+/* ── Focus visible (a11y) ── */
+.site-footer__legal a:focus-visible,
+.footer-social:focus-visible,
+.site-footer__brand:focus-visible,
+.site-footer__brand-link:focus-visible,
+.site-footer__col-list a:focus-visible,
+.site-footer__col-title:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 2px;
+}
+
+/* ════════════════════════════════════════════════════
+   Desktop ≥720px — wider grid, USP horizontal
+   ════════════════════════════════════════════════════ */
+@media (min-width: 720px) {
+  .site-footer__inner {
+    padding: var(--rh-4) var(--space-6) var(--space-6);
+  }
+  .site-footer__usp {
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-3);
+    padding-bottom: var(--space-6);
+  }
+  .site-footer__usp-cell {
+    padding: var(--space-4) var(--space-5);
+  }
+  .site-footer__usp-icon { width: 24px; height: 24px; }
+
+  .site-footer__grid {
+    flex-direction: row;
+    gap: var(--space-8);
+    padding: var(--space-6) 0;
+    align-items: flex-start;
+  }
+  .site-footer__brand-col {
+    flex: 1.4;
+  }
+  .site-footer__columns {
+    flex: 2.4;
+    flex-direction: row;
+    gap: var(--space-7);
+    border-top: 0;
+    padding-top: 0;
+  }
+  .site-footer__col {
+    flex: 1;
+    border-bottom: 0;
+    padding: 0;
+  }
+  /* На desktop accordion force-open — список всегда виден, индикатор `+/−` скрыт,
+     summary не интерактивен. Native <details> hides ul, override через display: flex. */
+  .site-footer__col-list {
+    display: flex !important;
+    margin-top: var(--space-3);
+  }
+  .site-footer__col-title {
+    cursor: default;
+    pointer-events: none;
+  }
+  .site-footer__col-title::after {
+    display: none;
+  }
+  /* На desktop возвращаем legal-row слева, copyright справа. */
+  .site-footer__bottom {
+    justify-content: space-between;
+    text-align: left;
+  }
+  .site-footer__legal {
+    justify-content: flex-start;
+  }
+}
+
+/* ── Safe area for iPhone home bar ── */
+@supports (padding: env(safe-area-inset-bottom)) {
+  .site-footer__inner {
+    padding-bottom: calc(var(--space-5) + env(safe-area-inset-bottom));
+  }
+}

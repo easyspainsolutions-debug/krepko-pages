@@ -1,0 +1,118 @@
+/* ============================================================
+   Module: Section primitives
+   Spec: visual-system-design-2026-05-25.md §4.1
+   5 atomic primitives + section rhythm utilities.
+   ============================================================ */
+
+/* === SectionLabel === */
+.p-label {
+  font-family: 'Manrope', sans-serif;
+  font-size: var(--ts-label);
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-label);
+  display: inline-block;
+}
+.p-label::before {
+  content: '●  ';
+  color: var(--gold);
+  letter-spacing: 0;
+}
+
+/* === SectionRule === */
+.p-rule {
+  height: 1px;
+  width: var(--space-8);  /* 64px */
+  background: linear-gradient(to right, var(--gold) 0%, transparent 100%);
+  border: 0;
+}
+
+/* === MetaRow === */
+.p-meta {
+  display: inline-flex;
+  gap: var(--space-5);
+  align-items: baseline;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: var(--ts-mono);
+  color: var(--text-label);
+  letter-spacing: 0.06em;
+}
+.p-meta b {
+  color: var(--text);
+  font-weight: 500;
+}
+.p-meta--block {
+  display: grid;
+  gap: var(--space-3);
+}
+
+/* === Pill === */
+.p-pill {
+  display: inline-block;
+  padding: var(--space-1) var(--space-3);
+  background: var(--gold-tint);
+  color: var(--gold);
+  font-family: 'Manrope', sans-serif;
+  font-size: var(--ts-label);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border-radius: var(--r-2);
+}
+.p-pill--wa {
+  background: rgba(78, 216, 138, 0.12);
+  color: var(--wa);
+}
+.p-pill--tg {
+  background: rgba(91, 184, 224, 0.12);
+  color: var(--tg);
+}
+
+/* === ValueLine === */
+.p-valueline {
+  display: grid;
+  grid-template-columns: 110px 1fr;
+  gap: var(--space-3);
+  padding: var(--space-1) 0;
+  border-bottom: 1px dashed var(--border-faint);
+}
+.p-valueline:last-child { border-bottom: 0; }
+.p-valueline__k {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: var(--ts-mono);
+  color: var(--text-label);
+  letter-spacing: 0.06em;
+}
+.p-valueline__v {
+  font-family: 'Manrope', sans-serif;
+  font-size: var(--ts-body-sm);
+  color: var(--text);
+  font-weight: 500;
+}
+
+/* === Section rhythm utilities === */
+.rh-section-break {
+  margin-top: var(--rh-4);
+  padding-top: var(--space-6);
+  border-top: 1px solid var(--border-faint);
+}
+/* Reset native <hr> default border/padding when using .rh-section-break
+   utility on <hr> element — keeps it as a single clean top-rule. */
+hr.rh-section-break {
+  border: 0;
+  height: 1px;
+  background: linear-gradient(to right,
+    transparent 0%,
+    var(--border) 20%,
+    var(--border) 80%,
+    transparent 100%);
+  padding: 0;
+  margin: var(--rh-4) 0 var(--rh-2);
+  width: 100%;
+}
+.rh-major-shift {
+  margin-top: var(--rh-5);
+  padding-top: var(--space-6);
+  border-top: 1px solid var(--border);
+}

@@ -1,0 +1,143 @@
+/* ============================================================
+   Krepko — Cookie Consent Banner
+   GDPR / LOPDGDD compliance: gate Google Analytics behind explicit consent.
+   Pattern: fixed bottom card, 2 actions (Принять все / Только необходимые),
+            link to /cookies/ policy, hides after any choice.
+   Depends on tokens.css — ensure loaded на каждой странице где включён banner.
+   ============================================================ */
+
+.cookie-consent {
+  position: fixed;
+  bottom: var(--space-4);
+  left: var(--space-4);
+  right: var(--space-4);
+  top: auto;
+  z-index: 60;
+  max-width: 720px;
+  margin: 0 auto;
+  background: var(--surface-sunk);
+  border: 1px solid var(--border);
+  border-top: 2px solid var(--gold);
+  border-radius: var(--r-5);
+  padding: var(--space-4) var(--space-5);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.55);
+  font-family: 'Manrope', -apple-system, sans-serif;
+  animation: cookie-consent-slide-up 280ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes cookie-consent-slide-up {
+  from { transform: translateY(100%); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.cookie-consent[hidden] { display: none !important; }
+
+.cookie-consent__inner {
+  display: flex;
+  gap: var(--space-4);
+  align-items: center;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.cookie-consent__text {
+  flex: 1;
+  min-width: 240px;
+}
+
+.cookie-consent__title {
+  font-size: var(--ts-body-sm);
+  font-weight: 700;
+  color: var(--text);
+  margin: 0 0 var(--space-1);
+  letter-spacing: -0.2px;
+  line-height: 1.3;
+}
+
+.cookie-consent__desc {
+  font-size: var(--ts-meta);
+  color: var(--text-sub);
+  line-height: 1.5;
+  margin: 0;
+}
+
+.cookie-consent__desc a {
+  color: var(--gold);
+  border-bottom: 1px solid rgba(196, 149, 42, 0.4);
+  text-decoration: none;
+  transition: border-color var(--t-1);
+}
+.cookie-consent__desc a:hover { border-bottom-color: var(--gold); }
+
+.cookie-consent__actions {
+  display: flex;
+  gap: var(--space-2);
+  flex-shrink: 0;
+}
+
+.cookie-consent__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--r-3);
+  font-family: 'Manrope', sans-serif;
+  font-size: var(--ts-body-sm);
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background var(--t-2), border-color var(--t-1),
+              color var(--t-1), box-shadow var(--t-2),
+              transform var(--t-2);
+}
+
+.cookie-consent__btn--essential {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text-sub);
+}
+.cookie-consent__btn--essential:hover {
+  border-color: var(--text-sub);
+  color: var(--text);
+  background: rgba(237, 241, 248, 0.04);
+}
+
+.cookie-consent__btn--accept {
+  background: linear-gradient(135deg, var(--gold) 0%, var(--gold-2) 100%);
+  border: 1px solid var(--gold);
+  color: var(--gold-on);
+  box-shadow: var(--glow-gold);
+}
+.cookie-consent__btn--accept:hover {
+  box-shadow: 0 6px 18px rgba(196, 149, 42, 0.40);
+  transform: translateY(-1px);
+}
+
+.cookie-consent__btn:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 2px;
+}
+
+/* Mobile — stack actions to full-width pair */
+@media (max-width: 540px) {
+  .cookie-consent {
+    bottom: var(--space-2);
+    left: var(--space-2);
+    right: var(--space-2);
+    padding: var(--space-3) var(--space-4);
+  }
+  .cookie-consent__inner { gap: var(--space-3); }
+  .cookie-consent__actions {
+    width: 100%;
+    justify-content: stretch;
+  }
+  .cookie-consent__btn {
+    flex: 1;
+    padding: var(--space-3);
+  }
+}
+
+/* Reduce motion — skip slide animation */
+@media (prefers-reduced-motion: reduce) {
+  .cookie-consent { animation: none; }
+}

@@ -1,0 +1,368 @@
+/* ============================================================
+   Krepko — Desktop adaptation (≥900px).
+   Mobile-first design сохраняется как есть. Все правила здесь
+   применяются ТОЛЬКО на экранах ≥900px и не влияют на мобайл.
+   ============================================================ */
+
+@media (min-width: 900px) {
+
+  /* Общий type-scale и spacing на десктопе */
+  :root {
+    --section-gap: calc(var(--space-1) + 2px);
+    --inner-gap: calc(var(--space-4) + 2px);
+  }
+
+  /* Visual audit 2026-05-27 H5: контент сайта раньше был ужат в 720px и выглядел
+     «полузаполнено» на широких экранах. Расширяем main до 960px для лучшего
+     use-of-space. */
+  main {
+    max-width: 960px;
+  }
+
+  /* ============================================================
+     1. ГЛАВНАЯ (index.html) — `.page` контейнер с `.nav` `.hero`
+     ============================================================ */
+
+  body:has(> .page > .hero) {
+    align-items: center;
+  }
+
+  .page {
+    max-width: 1140px !important;
+    padding: 0 var(--space-6) var(--space-8) !important;
+  }
+
+  /* Расширяем sticky nav на всю ширину окна и центрируем его контент */
+  .page > .nav {
+    margin: 0 calc(-1 * var(--space-6));
+    padding: calc(var(--space-4) + 2px) var(--space-6);
+  }
+  .page > .nav .brand { font-size: 22px; }
+  .page > .nav .nav-links { gap: calc(var(--space-1) + 2px); }
+  .page > .nav .nav-link { padding: var(--space-2) var(--space-4); font-size: 14px; }
+  .page > .nav .nav-wa { padding: var(--space-2) var(--space-4); font-size: 14px; }
+
+  /* Hero: огромный заголовок, два столбца — текст + декорация */
+  .page .hero {
+    padding: 80px 0 calc(var(--space-1) + 2px);
+  }
+  .page .hero h1 {
+    font-size: 56px;
+    letter-spacing: -1.2px;
+    line-height: 1.1;
+    margin-bottom: var(--space-5);
+    max-width: 900px;
+  }
+  .page .hero-sub {
+    font-size: 18px;
+    line-height: 1.55;
+    max-width: 720px;
+  }
+  .page .hero-geo {
+    margin-top: var(--space-4);
+    font-size: 13px;
+  }
+
+  /* Products + partners — гриды по 2 колонки */
+  .page .products,
+  .page .partners {
+    padding: 0;
+    margin-bottom: var(--section-gap);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--inner-gap);
+  }
+  .page .products { margin-top: var(--space-3); }
+  .page .products .section-label,
+  .page .partners .section-label {
+    grid-column: 1 / -1;
+    font-size: 12px;
+    margin-bottom: var(--space-1);
+  }
+  .page .partners-note {
+    grid-column: 1 / -1;
+    font-size: 13px;
+    line-height: 1.55;
+    margin-top: var(--space-2);
+  }
+
+  /* Карточки услуг побольше */
+  .page .product-card {
+    padding: calc(var(--space-5) - 2px) calc(var(--space-5) - 2px);
+    border-radius: var(--space-4);
+  }
+  .page .product-icon { font-size: 26px; }
+  .page .product-title { font-size: 17px; line-height: 1.3; margin-bottom: var(--space-1); }
+  .page .product-sub  { font-size: 13px; line-height: 1.5; }
+  .page .product-price { font-size: 22px; }
+
+  /* Mini blog — две колонки ссылок */
+  .page .mini-blog {
+    padding: 0;
+    margin-bottom: var(--section-gap);
+  }
+  .page .mini-blog-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 var(--space-6);
+  }
+  .page .mini-blog-link {
+    font-size: 15px;
+    padding: var(--space-3) var(--space-1);
+  }
+  .page .mini-blog .see-all { font-size: 14px !important; }
+
+  /* CTA блок — центрированная пилюля, не во всю ширину */
+  .page .cta-wrap {
+    padding: var(--space-2) 0 0;
+    display: flex;
+    justify-content: center;
+  }
+  .page .btn-cta {
+    width: auto !important;
+    min-width: 380px;
+    padding: calc(var(--space-4) + 2px) var(--space-6);
+    border-radius: calc(var(--space-3) + 2px);
+  }
+  .page .cta-title { font-size: 16px; }
+  .page .cta-sub   { font-size: 13px; }
+
+  /* Footer — горизонтальная композиция */
+  .page > .footer {
+    margin-top: var(--section-gap);
+    padding: calc(3 * (var(--space-1) + 2px)) 0 var(--space-5);
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: calc(var(--space-4) + 2px);
+    text-align: left;
+  }
+  .page > .footer .footer-meta { align-items: flex-start; }
+  .page > .footer .footer-cities { margin-top: 0; }
+
+  /* ============================================================
+     2. CITY PAGES (madrid/barcelona/valencia/alicante/malaga)
+     Разпознаём через `.card` + наличие `.sub-geo`
+     ============================================================ */
+
+  body:has(> .card > .sub-geo) {
+    padding: 0 var(--space-6) calc(var(--space-1) + 2px) !important;
+    align-items: center;
+    justify-content: flex-start !important;
+  }
+
+  body:has(> nav) > nav:first-of-type {
+    /* breadcrumb nav на десктопе расширяем */
+    max-width: 1100px !important;
+    width: 100% !important;
+    padding: var(--space-3) var(--space-1) var(--space-2) !important;
+    margin-bottom: var(--space-4) !important;
+  }
+
+  body:has(> .card > .sub-geo) > .card {
+    max-width: 1100px !important;
+    display: grid !important;
+    grid-template-columns: 280px 1fr;
+    grid-template-areas:
+      "head    intro"
+      "head    cta"
+      "section section";
+    column-gap: var(--space-6);
+    row-gap: calc(var(--space-3) + 2px);
+    align-items: start;
+  }
+
+  /* Шапка города (back-link, avatar, name, sub) — закрепляем слева sticky */
+  body:has(> .card > .sub-geo) > .card > .back-link,
+  body:has(> .card > .sub-geo) > .card > .avatar,
+  body:has(> .card > .sub-geo) > .card > .name,
+  body:has(> .card > .sub-geo) > .card > .sub,
+  body:has(> .card > .sub-geo) > .card > .sub-geo {
+    grid-column: 1;
+  }
+  body:has(> .card > .sub-geo) > .card > .avatar {
+    width: 110px;
+    height: 110px;
+    font-size: 32px;
+  }
+  body:has(> .card > .sub-geo) > .card > .name { font-size: 24px; }
+  body:has(> .card > .sub-geo) > .card > .sub { font-size: 13px; }
+
+  /* Intro и первая CTA-кнопка — справа */
+  body:has(> .card > .sub-geo) > .card > .city-intro {
+    grid-column: 2;
+    font-size: 15px;
+    line-height: 1.7;
+    padding: calc(var(--space-5) - 2px) calc(2 * (var(--space-1) + 2px));
+    border-radius: calc(var(--space-3) + 2px);
+  }
+  body:has(> .card > .sub-geo) > .card > .btn-cta {
+    grid-column: 2;
+    margin-top: var(--space-1);
+  }
+
+  /* Все остальные элементы (.section-label, .btn, .divider, .footer)
+     раскладываем в две колонки сетки начиная с области "section" */
+  body:has(> .card > .sub-geo) > .card > .divider:first-of-type,
+  body:has(> .card > .sub-geo) > .card > .section-label,
+  body:has(> .card > .sub-geo) > .card > .btn,
+  body:has(> .card > .sub-geo) > .card > .footer {
+    grid-column: 1 / -1;
+  }
+
+  /* Кнопки услуг — двухколоночная сетка через CSS Grid внутри псевдо-обёртки.
+     Так как они sibling-ами в .card, используем grid-auto-flow + nth-child */
+  body:has(> .card > .sub-geo) > .card {
+    /* Переопределяем grid-template-columns для второго ряда */
+  }
+  body:has(> .card > .sub-geo) > .card > .section-label {
+    margin-top: var(--space-4);
+    font-size: 11px;
+    padding: var(--space-1) var(--space-1);
+  }
+  body:has(> .card > .sub-geo) > .card > .btn {
+    padding: var(--space-4) calc(var(--space-4) + 2px);
+    border-radius: var(--space-3);
+    font-size: 14px;
+  }
+  body:has(> .card > .sub-geo) > .card > .btn .btn-title { font-size: 15px; }
+  body:has(> .card > .sub-geo) > .card > .btn .btn-sub   { font-size: 13px; }
+
+  /* ============================================================
+     3. BLOG INDEX (blog/index.html) — `.card` + `.filter-bar`
+     ============================================================ */
+
+  body:has(> .card > .filter-bar) {
+    padding: 0 var(--space-6) calc(var(--space-1) + 2px) !important;
+    align-items: center;
+    justify-content: flex-start !important;
+  }
+
+  body:has(> .card > .filter-bar) > .card {
+    max-width: 1140px !important;
+    display: grid !important;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: calc(var(--space-4) + 2px);
+    align-items: stretch;
+  }
+
+  /* Заголовок блога и шапка — на всю ширину */
+  body:has(> .card > .filter-bar) > .card > .avatar,
+  body:has(> .card > .filter-bar) > .card > .name,
+  body:has(> .card > .filter-bar) > .card > .sub,
+  body:has(> .card > .filter-bar) > .card > .blog-heading,
+  body:has(> .card > .filter-bar) > .card > .blog-sub,
+  body:has(> .card > .filter-bar) > .card > .filter-bar,
+  body:has(> .card > .filter-bar) > .card > .divider,
+  body:has(> .card > .filter-bar) > .card > .cta-block,
+  body:has(> .card > .filter-bar) > .card > .footer {
+    grid-column: 1 / -1;
+  }
+
+  body:has(> .card > .filter-bar) > .card > .blog-heading {
+    font-size: 36px;
+    margin-top: var(--space-4);
+  }
+  body:has(> .card > .filter-bar) > .card > .blog-sub {
+    font-size: 15px;
+    max-width: 720px;
+  }
+  body:has(> .card > .filter-bar) > .card > .filter-bar {
+    gap: var(--space-2);
+    margin: var(--space-2) 0;
+  }
+  body:has(> .card > .filter-bar) > .card > .filter-bar .filter-btn {
+    padding: var(--space-2) var(--space-4);
+    font-size: 13px;
+  }
+
+  /* Карточки статей — 3 в ряд */
+  body:has(> .card > .filter-bar) > .card > .article-card {
+    padding: calc(var(--space-5) - 2px) calc(var(--space-5) - 2px);
+    border-radius: calc(var(--space-3) + 2px);
+    transition: transform 0.18s, background 0.15s, border-color 0.15s;
+  }
+  body:has(> .card > .filter-bar) > .card > .article-card:hover {
+    transform: translateY(-3px);
+    border-color: var(--gold);
+  }
+  body:has(> .card > .filter-bar) > .card > .article-card .article-title {
+    font-size: 16px;
+    line-height: 1.4;
+  }
+  body:has(> .card > .filter-bar) > .card > .article-card .article-desc {
+    font-size: 13px;
+    line-height: 1.55;
+  }
+
+  body:has(> .card > .filter-bar) > .card > .cta-block {
+    padding: var(--space-5) var(--space-6);
+    margin-top: var(--space-6);
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: calc(var(--space-4) + 2px) var(--space-5) - var(--space-1);
+  }
+  body:has(> .card > .filter-bar) > .card > .cta-block .cta-block-title { font-size: 18px; }
+  body:has(> .card > .filter-bar) > .card > .cta-block .cta-block-sub { flex: 1 1 280px; }
+  body:has(> .card > .filter-bar) > .card > .cta-block .btn { width: auto; padding: var(--space-3) calc(var(--space-5) + 2px); }
+
+  /* ============================================================
+     4. BLOG ARTICLES — `.wrap` контейнер
+     ============================================================ */
+
+  body:has(> .wrap) {
+    padding: 0 var(--space-6) var(--space-8) !important;
+  }
+
+  body:has(> .wrap) > .wrap {
+    max-width: 760px !important;
+  }
+
+  body:has(> .wrap) > .wrap h1 {
+    font-size: 42px !important;
+    line-height: 1.15 !important;
+    margin-bottom: var(--space-4) !important;
+  }
+  body:has(> .wrap) > .wrap h2 {
+    font-size: 26px !important;
+    margin: calc(4 * var(--space-1)) 0 calc(var(--space-3) + 2px) !important;
+    line-height: 1.3;
+  }
+  body:has(> .wrap) > .wrap h3 {
+    font-size: 18px !important;
+    margin: var(--space-5) 0 calc(var(--space-2) + 2px) !important;
+  }
+  body:has(> .wrap) > .wrap p,
+  body:has(> .wrap) > .wrap li {
+    font-size: 16px !important;
+    line-height: 1.8 !important;
+  }
+  body:has(> .wrap) > .wrap .article-intro {
+    font-size: 18px !important;
+    line-height: 1.7 !important;
+    margin-bottom: var(--space-6) !important;
+    padding-bottom: var(--space-5) !important;
+  }
+  body:has(> .wrap) > .wrap .info-box {
+    padding: calc(var(--space-4) + 2px) calc(var(--space-5) - 2px) !important;
+    font-size: 15px !important;
+    margin: calc(2 * (var(--space-1) + 2px)) 0 !important;
+  }
+  body:has(> .wrap) > .wrap .cta-block {
+    padding: var(--space-6) !important;
+    margin-top: var(--space-5) !important;
+  }
+  body:has(> .wrap) > .wrap .cta-title { font-size: 20px !important; }
+  body:has(> .wrap) > .wrap .cta-sub { font-size: 15px !important; }
+
+  /* Breadcrumb nav в блог-статьях расширяем */
+  body:has(> .wrap) > nav:first-of-type {
+    max-width: 760px !important;
+    width: 100% !important;
+    margin: 0 auto var(--space-5) !important;
+    padding: var(--space-2) 0 !important;
+  }
+
+}

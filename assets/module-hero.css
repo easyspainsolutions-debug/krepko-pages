@@ -1,0 +1,195 @@
+/* ============================================================
+   Module: Hero variants — 5 types per Page Type.
+   Spec: visual-system-design-2026-05-25.md §4.2
+   ============================================================ */
+
+/* === Base hero === */
+.hero {
+  padding: var(--rh-4) 0 var(--rh-4);
+  position: relative;
+}
+.hero__eyebrow {
+  /* uses .p-label from module-section.css */
+  margin-bottom: var(--space-3);
+  display: inline-block;
+}
+.hero__h1 {
+  font-size: var(--ts-h1);
+  line-height: 1.08;
+  font-weight: 800;
+  letter-spacing: -1.2px;
+  color: var(--text);
+  margin: 0 0 var(--space-4);
+}
+
+@media (max-width: 720px) {
+  .hero__h1 {
+    letter-spacing: -0.7px;
+    line-height: 1.12;
+  }
+}
+
+/* Extra-narrow viewports (iPhone SE 1st gen ~320px, ультра-узкие Android).
+   Token --ts-h1 mobile=30px → 6 строк на 320px viewport для длинных hero h1.
+   Дополнительно сжимаем до 24px на <380px чтобы h1 укладывался в 3-4 строки max. */
+@media (max-width: 380px) {
+  .hero__h1 {
+    font-size: 24px;
+    letter-spacing: -0.4px;
+    line-height: 1.15;
+  }
+}
+.hero__h1 .dim {
+  color: var(--text-sub);
+}
+.hero__dek {
+  font-size: var(--ts-lead);
+  color: var(--text-sub);
+  line-height: 1.55;
+  margin: 0 0 var(--space-5);
+  max-width: 480px;
+}
+
+/* === HomeHero === */
+.hero--home .hero__cta-row {
+  margin-bottom: var(--space-3);
+}
+
+/* Secondary CTA как text-link под primary — сохраняет visual rank
+   primary (single gold button), даёт explore-path без визуального шума.
+   2026-05-26 refactor — см. ADR. */
+.hero__link-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-family: 'Manrope', sans-serif;
+  font-size: var(--ts-body-sm);
+  font-weight: 500;
+  color: var(--text-sub);
+  text-decoration: none;
+  padding: var(--space-2) 0;
+  margin-bottom: var(--rh-3);
+  border-bottom: 1px solid transparent;
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+.hero__link-secondary:hover {
+  color: var(--gold);
+  border-bottom-color: var(--gold);
+}
+
+/* Hero на mobile — сжать вертикальный воздух между блоками */
+@media (max-width: 720px) {
+  .hero {
+    padding: var(--rh-3) 0 var(--space-5);
+  }
+  .hero--home .hero__cta-row {
+    margin-bottom: var(--space-2);
+  }
+  .hero__link-secondary {
+    margin-bottom: var(--space-5);
+  }
+  /* Home body начинается компактнее после hero (без огромного gap до H2) */
+  .home-body {
+    margin-top: 0;
+  }
+  .home-body > :first-child {
+    margin-top: var(--space-4);
+  }
+}
+
+/* === ServiceHero === */
+/* hero__meta-row — shared by hero--service and hero--home (2026-05-27 home enhance). */
+.hero--service .hero__meta-row,
+.hero--home .hero__meta-row {
+  display: flex;
+  gap: var(--space-5);
+  margin-top: var(--space-4);
+  padding-top: var(--space-3);
+  border-top: 1px solid var(--border);
+  flex-wrap: wrap;
+}
+.hero__meta-item small {
+  display: block;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: var(--ts-meta);
+  color: var(--text-label);
+  letter-spacing: 0.06em;
+  margin-bottom: 2px;
+}
+.hero__meta-item b {
+  font-family: 'Manrope', sans-serif;
+  font-size: var(--ts-body-sm);
+  color: var(--text);
+  font-weight: 700;
+}
+
+/* === DocumentHero === */
+.hero--document .hero__title-es {
+  font-style: italic;
+  font-size: var(--ts-meta);
+  color: var(--text-label);
+  margin: 0 0 var(--space-3);
+}
+.hero--document .hero__price {
+  /* Visual audit 2026-05-27 L7: унифицировано на Manrope с tabular-nums. */
+  font-family: 'Manrope', sans-serif;
+  font-variant-numeric: tabular-nums;
+  font-size: var(--ts-h3);
+  color: var(--gold);
+  font-weight: 800;
+  letter-spacing: -0.4px;
+  margin: 0 0 var(--space-4);
+}
+.hero--document .hero__price small {
+  color: var(--text-label);
+  font-weight: 400;
+  font-size: var(--ts-meta);
+  margin-left: var(--space-2);
+}
+/* Visual audit 2026-05-27 M4: подпись под ценой выводится на новую строку
+   и не теряется как просто inline-небольшая подпись. */
+.hero--document .hero__price small.hero__price-note {
+  display: block;
+  margin: var(--space-1) 0 0;
+  font-family: 'Manrope', sans-serif;
+  letter-spacing: 0;
+  font-size: var(--ts-body-sm);
+  color: var(--text-muted);
+}
+
+/* === CityHero === */
+.hero--city .hero__status-bar {
+  margin-top: var(--space-4);
+  padding: var(--space-2) var(--space-4);
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--r-3);
+  display: flex;
+  gap: var(--space-3);
+  align-items: center;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: var(--ts-mono);
+  color: var(--text-label);
+  flex-wrap: wrap;
+}
+.hero--city .hero__status-dot {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--wa);
+  box-shadow: 0 0 8px rgba(78, 216, 138, 0.5);
+  margin-right: var(--space-2);
+}
+
+/* === GuideHero === */
+.hero--guide .hero__h1 {
+  font-size: var(--ts-h2);
+  max-width: 680px;
+}
+.hero--guide .hero__dek {
+  max-width: 580px;
+}
+.hero--guide .hero__reading-meta {
+  margin-top: var(--space-2);
+}

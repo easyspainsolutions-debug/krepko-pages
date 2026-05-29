@@ -1,0 +1,85 @@
+/* ============================================================
+   Module: Trust Strip — persistent operational trust
+   Spec: [[40 Журнал/Решения]] 2026-05-26 — Variant A2 (slim card):
+         - одна узкая коробка вместо 2×2 grid с пустотами
+         - key+val inline (key — мелкий mono uppercase, val — bold Manrope)
+         - 4 ячейки в одну строку через flex-wrap (на узком mobile переносятся естественно)
+         - sub-line ВНУТРИ коробки через тонкий border-top (визуально часть блока)
+   ============================================================ */
+
+.trust-strip {
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--r-4);
+  padding: var(--space-3) var(--space-4);
+  margin: var(--rh-3) 0 0;
+}
+
+.trust-strip__row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: var(--space-3);
+  flex-wrap: nowrap;
+}
+
+.trust-strip__cell {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-1);
+  /* override любых legacy padding/border от grid-version */
+  padding: 0;
+  border: 0;
+}
+
+/* Mini-scale labels (9-10px) — intentionally below token scale (lowest token = ts-label/ts-mono 11px).
+   Trust-strip uses ultra-compact mono uppercase eyebrows that need to read as «label» not «text».
+   If adding to token system, would be --ts-mini-label-xxs/9px + --ts-mini-label-xs/10px. */
+.trust-strip__key {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  color: var(--text-label);
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.trust-strip__val {
+  font-family: 'Manrope', sans-serif;
+  /* Visual audit 2026-05-27 L2: подняли min/max — раньше 11px на mobile,
+     цифры/коды городов считывались с натягом. */
+  font-size: clamp(13px, 2.8vw, 16px);
+  font-weight: 700;
+  color: var(--text);
+  white-space: nowrap;
+}
+
+/* Sub-line внутри коробки — gold mono, отделён тонким border-top */
+.trust-strip__detail {
+  border-top: 1px solid var(--border-faint);
+  margin-top: var(--space-2);
+  padding-top: var(--space-2);
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  color: var(--gold);
+  text-align: center;
+}
+
+/* Narrow mobile — компактнее padding/labels */
+@media (max-width: 420px) {
+  .trust-strip {
+    padding: var(--space-2) var(--space-3);
+  }
+  .trust-strip__row {
+    gap: var(--space-2);
+  }
+  .trust-strip__key {
+    font-size: 8.5px;
+    letter-spacing: 0.1em;
+  }
+  .trust-strip__detail {
+    font-size: 9px;
+    letter-spacing: 0.04em;
+  }
+}

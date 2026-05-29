@@ -1,0 +1,106 @@
+/* ============================================================
+   Module: CTA — button matrix + inline links.
+   Spec: visual-system-design-2026-05-25.md §4.5
+   5 types: gold, wa, outline, tg, inline.
+   ============================================================ */
+
+/* === Base button === */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-5);
+  border-radius: var(--r-3);
+  font-family: 'Manrope', sans-serif;
+  font-weight: 700;
+  font-size: var(--ts-body-sm);
+  text-decoration: none;
+  border: 1px solid transparent;
+  transition: background var(--t-2), box-shadow var(--t-2),
+              transform var(--t-2), border-color var(--t-1);
+  cursor: pointer;
+}
+.btn:hover { text-decoration: none; transform: translateY(-1px); }
+
+/* === Primary: Gold === */
+.btn--gold {
+  background: linear-gradient(135deg, var(--gold) 0%, var(--gold-2) 100%);
+  border-color: var(--gold);
+  color: var(--gold-on);
+  box-shadow: var(--glow-gold);
+}
+.btn--gold:hover {
+  box-shadow: 0 6px 18px rgba(196, 149, 42, 0.40);
+}
+
+/* === Primary: WhatsApp === */
+.btn--wa {
+  background: rgba(78, 216, 138, 0.14);
+  border-color: rgba(78, 216, 138, 0.32);
+  color: var(--wa);
+  box-shadow: var(--glow-wa);
+}
+.btn--wa:hover {
+  background: rgba(78, 216, 138, 0.22);
+  box-shadow: 0 0 14px rgba(78, 216, 138, 0.32);
+}
+
+/* === Secondary: outline === */
+.btn--outline {
+  background: transparent;
+  border-color: var(--text-label);
+  color: var(--text);
+}
+.btn--outline:hover {
+  border-color: var(--text-sub);
+  background: rgba(237, 241, 248, 0.04);
+}
+
+/* === Tertiary: Telegram === */
+.btn--tg {
+  background: rgba(91, 184, 224, 0.12);
+  border-color: rgba(91, 184, 224, 0.30);
+  color: var(--tg);
+}
+.btn--tg:hover {
+  background: rgba(91, 184, 224, 0.22);
+}
+
+/* === Inline link === */
+.link--inline {
+  color: var(--gold);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(196, 149, 42, 0.42);
+  padding-bottom: 1px;
+  font-weight: 500;
+  transition: border-color var(--t-1), color var(--t-1);
+}
+.link--inline:hover {
+  color: var(--gold);
+  border-bottom-color: var(--gold);
+}
+
+/* === CTA row layout === */
+.cta-row {
+  display: flex;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+}
+@media (max-width: 720px) {
+  .cta-row {
+    flex-direction: column;
+  }
+  .cta-row .btn {
+    width: 100%;
+  }
+}
+/* Visual audit 2026-05-27 L6: на desktop primary CTA увеличены — раньше
+   выглядели маленькими относительно h1 hero. */
+@media (min-width: 900px) {
+  .hero .cta-row .btn,
+  .hero--document .cta-row .btn {
+    padding: calc(var(--space-3) + 4px) calc(var(--space-6) + 4px);
+    font-size: var(--ts-body);
+  }
+}

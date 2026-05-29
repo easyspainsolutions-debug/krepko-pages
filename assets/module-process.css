@@ -1,0 +1,240 @@
+/* ============================================================
+   Module: ProcessSteps + FAQ + FinalCTA
+   Spec: visual-system-design-2026-05-25.md §4.7, §6.5
+   ============================================================ */
+
+/* === ProcessSteps === */
+.process-steps {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  margin: var(--rh-3) 0;
+}
+
+.process-steps h2 {
+  font-size: var(--ts-h3);
+  font-weight: 800;
+  margin: 0 0 var(--space-4);
+  color: var(--text);
+}
+
+.process-steps__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.process-step {
+  display: grid;
+  grid-template-columns: 28px 1fr;
+  align-items: flex-start;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--r-3);
+}
+
+.process-step__n {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: var(--ts-label);
+  font-weight: 700;
+  color: var(--gold);
+  border: 1px solid rgba(196, 149, 42, 0.45);
+  border-radius: var(--r-1);
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.process-step__content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.process-step__title {
+  color: var(--text);
+  font-family: 'Manrope', sans-serif;
+  font-size: var(--ts-body-sm);
+  font-weight: 700;
+  margin: 0;
+  padding: 0;
+  line-height: 1.4;
+}
+
+.process-step__text {
+  color: var(--text-sub);
+  font-family: 'Manrope', sans-serif;
+  font-size: var(--ts-body-xs);
+  margin: 0;
+  padding: 0;
+  line-height: 1.5;
+}
+
+/* === FAQ === */
+.faq {
+  margin: var(--rh-3) 0;
+}
+
+.faq h2 {
+  font-size: var(--ts-h3);
+  font-weight: 800;
+  margin: 0 0 var(--space-4);
+  color: var(--text);
+}
+
+.faq__list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  margin: 0;
+  padding: 0;
+}
+
+/* Sprint 5: native <details>/<summary> pattern (a11y migration). */
+.faq__item {
+  /* Reset default <details> marker — we use ::after pseudo for toggle. */
+}
+
+.faq__item > summary.faq__q {
+  list-style: none;  /* Hide native marker (Firefox) */
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--r-3);
+  padding: var(--space-3) var(--space-4);
+  cursor: pointer;
+  font-weight: 700;
+  color: var(--text);
+  font-size: var(--ts-body-sm);
+  margin: 0;
+  display: block;
+  user-select: none;
+  position: relative;
+}
+
+.faq__item > summary.faq__q::-webkit-details-marker {
+  display: none;  /* Hide native marker (Safari/Chrome) */
+}
+
+.faq__q::after {
+  content: '+';
+  position: absolute;
+  right: var(--space-4);
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: 'IBM Plex Mono', monospace;
+  color: var(--gold);
+  font-weight: 700;
+  transition: transform var(--t-3);
+}
+
+.faq__a {
+  margin: 0;
+  padding: 0;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-top: 1px dashed var(--border-faint);
+  border-radius: 0 0 var(--r-3) var(--r-3);
+  padding: var(--space-3) var(--space-4);
+  color: var(--text-sub);
+  font-size: var(--ts-body-sm);
+  line-height: 1.65;
+}
+
+/* Open state — toggle icon (details[open] is native). */
+.faq__item[open] > summary.faq__q {
+  border-radius: var(--r-3) var(--r-3) 0 0;
+  border-bottom: none;
+}
+
+.faq__item[open] > summary.faq__q::after {
+  content: '−';
+}
+
+/* === FinalCTA === */
+/* Visual audit 2026-05-27 H4: уменьшен margin-bottom — раньше final-cta давал
+   --rh-3 (48px), сверху ещё site-footer margin-top --rh-4 (72px), накопленный
+   gap до footer выглядел как «оборванная страница». Теперь между final-cta и
+   footer только site-footer margin-top. */
+.final-cta {
+  margin: var(--rh-5) 0 0;
+  padding: var(--space-6) var(--space-5);
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--r-5);
+  text-align: center;
+}
+
+.final-cta h2 {
+  font-size: var(--ts-h3);
+  font-weight: 800;
+  margin: 0 0 var(--space-2);
+  color: var(--text);
+}
+
+.final-cta p {
+  font-size: var(--ts-body-sm);
+  color: var(--text-sub);
+  margin: 0 0 var(--space-4);
+  padding: 0;
+  line-height: 1.5;
+}
+
+.final-cta .btn {
+  display: inline-block;
+}
+
+/* Mobile — ensure good spacing on small screens */
+@media (max-width: 640px) {
+  .process-steps {
+    gap: var(--space-2);
+    margin: var(--rh-2) 0;
+  }
+
+  .process-step {
+    padding: var(--space-2) var(--space-3);
+    gap: var(--space-2);
+  }
+
+  .process-step__title {
+    font-size: var(--ts-body-xs);
+  }
+
+  /* Sprint 5 a11y: 44px min touch target (WCAG 2.5.5 AAA) */
+  .faq__q {
+    padding: var(--space-3) var(--space-3);
+    font-size: var(--ts-body-xs);
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+  }
+
+  .faq__a {
+    padding: var(--space-3) var(--space-3);
+    font-size: var(--ts-body-xs);
+  }
+
+  .faq__q::after {
+    right: var(--space-3);
+  }
+
+  .final-cta {
+    padding: var(--space-4) var(--space-3);
+    margin: var(--rh-3) 0 var(--rh-2);
+  }
+
+  .final-cta h2 {
+    font-size: var(--ts-h4);
+  }
+
+  .final-cta p {
+    font-size: var(--ts-body-xs);
+  }
+}
