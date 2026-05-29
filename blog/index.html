@@ -1,0 +1,908 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" type="image/png" sizes="48x48" href="/icon-48.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/icon-96.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/icon-32.png">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico" sizes="48x48 32x32 16x16">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <meta name="theme-color" content="#171C28">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/assets/tokens.css?v=20260526h2">
+  <link rel="stylesheet" href="/assets/module-section.css?v=20260526h2">
+  <link rel="stylesheet" href="/assets/module-cta.css?v=20260526h2">
+  <link rel="stylesheet" href="/assets/module-card.css?v=20260528">
+  <link rel="stylesheet" href="/assets/module-hero.css?v=20260528">
+  <link rel="stylesheet" href="/assets/module-trust.css?v=20260526h2">
+  <link rel="stylesheet" href="/assets/module-process.css?v=20260526h2">
+  <link rel="stylesheet" href="/assets/site-nav.css?v=20260528">
+  <link rel="stylesheet" href="/assets/krepko-chips.css?v=20260528">
+  <link rel="stylesheet" href="/assets/site-footer.css?v=20260528">
+  <link rel="stylesheet" href="/assets/a11y.css">
+  <link rel="stylesheet" href="/assets/krepko-base.css?v=1">
+  <link rel="stylesheet" href="/assets/cookie-consent.css?v=20260526a">
+  <script src="/assets/cookie-consent.js?v=20260526a" defer></script>
+
+  <link rel="stylesheet" href="/assets/site-nav.css?v=20260528">
+  <link rel="stylesheet" href="/assets/site-footer.css?v=20260528">
+  <link rel="stylesheet" href="/assets/a11y.css">
+  <script defer src="/assets/ga-events.js"></script>
+  <link rel="stylesheet" href="/assets/desktop.css">
+  <title>Жизнь в Испании на русском — 34 гайда | Krepko</title>
+  <meta name="description" content="34 практических гайда: ВНЖ, банк, autónomo, апостиль, доверенности, налоги, жильё, школа. Для украинцев и русскоязычных — конкретно, без воды.">
+  <meta name="keywords" content="блог Испания, ВНЖ Испания, arraigo social, банк нерезидент Испания, autónomo Испания, апостиль Испания, доверенность Испания, украинцы Испания, налоги IRPF, NIE TIE">
+  <meta name="robots" content="index, follow">
+  <meta name="language" content="Russian">
+  <link rel="canonical" href="https://krepko.es/blog/">
+
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://krepko.es/blog/">
+  <meta property="og:title" content="Блог Krepko — ВНЖ, банк, документы в Испании">
+  <meta property="og:description" content="Полезные статьи для украинцев и русскоязычных в Испании. ВНЖ, банк, autónomo, апостиль, временная защита.">
+  <meta property="og:locale" content="ru_RU">
+    <meta property="og:image" content="https://krepko.es/og-image.png">
+  <meta property="og:site_name" content="Krepko">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Blog",
+    "name": "Блог Krepko",
+    "description": "Полезные статьи о жизни и документах в Испании для украинцев и русскоязычных",
+    "url": "https://krepko.es/blog/",
+    "publisher": {
+      "@type": "Organization",
+      "name": "Krepko",
+      "url": "https://krepko.es/"
+    },
+    "inLanguage": "ru"
+  }
+  </script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: #171C28;
+      color: #EDF1F8;
+      font-family: -apple-system, 'Inter', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      overflow-x: hidden;
+      padding: 0  20px 0;
+    }
+
+    .card {
+      width: 100%;
+      max-width: 480px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .back-link {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: #7B8BA8;
+      text-decoration: none;
+      font-size: 13px;
+      margin-bottom: 4px;
+      transition: color 0.15s;
+    }
+    .back-link:hover { color: #C4952A; }
+
+    .avatar {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      background: #202637;
+      border: 2px solid #C4952A;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      font-weight: 900;
+      color: #C4952A;
+      letter-spacing: -1px;
+      margin-bottom: 2px;
+    }
+
+    .name {
+      font-size: 18px;
+      font-weight: 700;
+      color: #EDF1F8;
+      text-align: center;
+    }
+
+    .sub {
+      font-size: 12px;
+      color: #8896B0;
+      text-align: center;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .blog-eyebrow {
+      width: 100%;
+      display: block;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.18em;
+      color: #C4952A;
+      text-transform: uppercase;
+      margin: 8px 0 8px;
+    }
+    .blog-heading {
+      width: 100%;
+      font-size: 26px;
+      font-weight: 800;
+      color: #EDF1F8;
+      text-align: left;
+      padding: 0 0 2px;
+      letter-spacing: -0.4px;
+      line-height: 1.2;
+    }
+    .blog-heading .accent { color: #C4952A; }
+
+    .blog-sub {
+      width: 100%;
+      font-size: 14px;
+      color: #8896B0;
+      text-align: left;
+      margin-bottom: 6px;
+      line-height: 1.55;
+    }
+    .blog-sub strong { color: #EDF1F8; }
+
+    .article-card {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      width: 100%;
+      padding: 16px 18px;
+      border-radius: 11px;
+      text-decoration: none;
+      border: 1px solid #2D3650;
+      background: rgba(31, 38, 56, 0.65);
+      color: #EDF1F8;
+      transition: background 0.15s, border-color 0.15s, transform 0.12s, box-shadow 0.15s;
+    }
+    .article-card:hover {
+      background: rgba(31, 38, 56, 0.95);
+      border-color: rgba(196, 149, 42, 0.45);
+      box-shadow: 0 0 14px rgba(196, 149, 42, 0.12);
+      transform: translateX(3px);
+    }
+
+    .article-tag {
+      font-size: 10px;
+      font-weight: 700;
+      color: #C4952A;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .article-tag .tag-icon { width: 13px; height: 13px; flex-shrink: 0; }
+
+    .article-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: #EDF1F8;
+      line-height: 1.35;
+    }
+
+    .article-desc {
+      font-size: 13px;
+      color: #7B8BA8;
+      line-height: 1.5;
+    }
+
+    .article-meta {
+      font-size: 11px;
+      color: #4A5570;
+      margin-top: 2px;
+    }
+
+    .filter-bar {
+      width: 100%;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 4px;
+    }
+    .filter-btn {
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      border: 1px solid #2D3650;
+      background: #1F2638;
+      color: #7B8BA8;
+      transition: background 0.15s, color 0.15s, border-color 0.15s;
+    }
+    .filter-btn:hover { color: #C4952A; border-color: #C4952A; }
+    .filter-btn.active { background: #C4952A; border-color: #C4952A; color: #0F1117; }
+    .filter-btn .cnt { font-size: 10px; opacity: 0.7; margin-left: 2px; }
+
+    .article-card.hidden { display: none; }
+
+    .divider {
+      width: 100%;
+      height: 1px;
+      background: #252E45;
+      margin: 2px 0;
+    }
+
+    .cta-block {
+      width: 100%;
+      background: #1F2638;
+      border: 1px solid #2D3650;
+      border-radius: 11px;
+      padding: 16px 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 4px;
+    }
+
+    .cta-block-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: #EDF1F8;
+    }
+
+    .cta-block-sub {
+      font-size: 13px;
+      color: #7B8BA8;
+      line-height: 1.5;
+      margin-top: -4px;
+    }
+
+    /* Featured-card — выделенный pillar/landing-материал поверх ленты. */
+    .article-card--featured {
+      background: linear-gradient(180deg, rgba(196, 149, 42, 0.10) 0%, rgba(31, 38, 56, 0.85) 60%);
+      border: 1px solid rgba(196, 149, 42, 0.40);
+      border-top: 2px solid rgba(196, 149, 42, 0.65);
+      box-shadow: 0 0 18px rgba(196, 149, 42, 0.10);
+    }
+    .article-card--featured:hover {
+      border-color: #C4952A;
+      box-shadow: 0 0 22px rgba(196, 149, 42, 0.20);
+    }
+    .article-card--featured .article-tag {
+      color: #C4952A;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+    }
+    .article-card--featured .article-meta {
+      color: #C4952A;
+      font-weight: 700;
+    }
+
+    /* Карточка «предложить тему» — встроена в ленту статей, всегда последняя.
+       Текст обновляется JS под текущий фильтр (см. <script> внизу). */
+    .article-card--suggest {
+      background: rgba(196, 149, 42, 0.06);
+      border: 1px dashed rgba(196, 149, 42, 0.45);
+    }
+    .article-card--suggest:hover {
+      background: rgba(196, 149, 42, 0.12);
+      border-color: #C4952A;
+    }
+    .article-card--suggest .article-tag {
+      color: #C4952A;
+      font-weight: 700;
+    }
+    .article-card--suggest .article-title {
+      color: #EDF1F8;
+    }
+
+    .btn {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      width: 100%;
+      padding: 13px 16px;
+      border-radius: 11px;
+      text-decoration: none;
+      transition: background 0.15s, transform 0.12s;
+      border: 1px solid #2D3650;
+      background: #C4952A;
+      color: #0F1117;
+    }
+    .btn:hover { background: #D4A535; transform: translateX(3px); }
+
+    .btn-icon { font-size: 18px; flex-shrink: 0; }
+    .btn-icon svg { width: 20px; height: 20px; display: block; }
+    .btn-title { font-size: 14px; font-weight: 700; }
+
+    /* ─── Mobile compact ─── */
+    @media (max-width: 719px) {
+      body { padding: 0 16px 0; }
+      .blog-heading { font-size: 22px; letter-spacing: -0.3px; line-height: 1.2; margin-bottom: 6px; }
+      .blog-sub { font-size: 13px; line-height: 1.5; margin-bottom: 14px; }
+      .article-card { padding: 13px 14px; gap: 5px; border-radius: 10px; }
+      .article-title { font-size: 14px; line-height: 1.3; }
+      .article-desc { font-size: 12.5px; line-height: 1.45; }
+      .article-meta { font-size: 11px; gap: 6px; }
+      .article-tag { font-size: 9.5px; padding: 2px 7px; }
+      .filter-btn { padding: 5px 10px; font-size: 11.5px; }
+      .article-card--featured { padding: 14px 14px; }
+      .article-card--suggest { padding: 12px 13px; }
+      .cta-block { padding: 14px 14px; gap: 8px; }
+      .cta-block-title { font-size: 16px; }
+      .cta-block-sub { font-size: 12.5px; line-height: 1.45; }
+      .btn { padding: 11px 14px; gap: 8px; }
+      .btn-title { font-size: 13px; }
+      .btn-icon svg { width: 18px; height: 18px; }
+    }
+  </style>
+  <script src="/assets/analytics.js" defer></script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Manrope:wght@700;800&display=swap" rel="stylesheet"></head>
+<body>
+<header class="site-nav" role="banner">
+  <div class="site-nav__inner">
+    <a class="site-nav__brand" href="/" aria-label="Krepko — на главную">
+      <span class="site-nav__brand-text">Krepko</span>
+    </a>
+
+    <div class="site-nav__actions">
+      <a class="site-nav__cta" href="https://wa.me/34641048296" rel="noopener noreferrer" aria-label="WhatsApp" target="_blank">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9 8.5 8.5 0 0 1 8.5 8.5z"/></svg>
+        <span class="site-nav__cta-text">WhatsApp</span>
+      </a>
+      <button class="site-nav__menu-btn" type="button" aria-label="Открыть меню" aria-haspopup="dialog" aria-controls="site-menu-dialog" onclick="document.getElementById('site-menu-dialog').showModal()">
+        <span class="site-nav__menu-text">Меню</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<dialog id="site-menu-dialog" class="site-menu" aria-label="Меню сайта" aria-modal="true">
+  <div class="site-menu__card">
+
+    <header class="site-menu__head">
+      <a class="site-menu__brand" href="/" aria-label="Krepko — на главную">
+        <span class="site-menu__brand-text">Krepko</span>
+      </a>
+      <button class="site-menu__close" type="button" aria-label="Закрыть меню" onclick="this.closest('dialog').close()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg>
+      </button>
+    </header>
+
+    <nav class="site-menu__nav" aria-label="Основное меню">
+      <a href="/" data-page="home" class="site-menu__link">
+        <span class="site-menu__link-text">Главная</span>
+        <span class="site-menu__link-arrow" aria-hidden="true">→</span>
+      </a>
+      <a href="/services/" data-page="services" class="site-menu__link">
+        <span class="site-menu__link-text">Каталог услуг</span>
+        <span class="site-menu__link-meta">8 направлений</span>
+        <span class="site-menu__link-arrow" aria-hidden="true">→</span>
+      </a>
+      <a href="/about/" data-page="about" class="site-menu__link">
+        <span class="site-menu__link-text">О Krepko</span>
+        <span class="site-menu__link-arrow" aria-hidden="true">→</span>
+      </a>
+      <a href="/blog/" data-page="blog" class="site-menu__link">
+        <span class="site-menu__link-text">Блог</span>
+        <span class="site-menu__link-arrow" aria-hidden="true">→</span>
+      </a>
+    </nav>
+
+    <div class="site-menu__contacts">
+      <span class="site-menu__contacts-label">Связаться</span>
+      <a class="site-menu__channel site-menu__channel--wa" href="https://wa.me/34641048296" rel="noopener noreferrer" target="_blank">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9 8.5 8.5 0 0 1 8.5 8.5z"/></svg>
+        <span>WhatsApp</span>
+        <span class="site-menu__channel-meta">+34 641 048 296</span>
+      </a>
+      <a class="site-menu__channel site-menu__channel--tg" href="https://t.me/krepko_es" rel="noopener noreferrer" target="_blank">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="5" cy="19" r="2"/><path d="M3 13a8 8 0 0 1 8 8M3 7a14 14 0 0 1 14 14"/></svg>
+        <span>Telegram канал</span>
+        <span class="site-menu__channel-meta">@krepko_es</span>
+      </a>
+      <a class="site-menu__channel site-menu__channel--tg" href="https://t.me/krepko_es_admin_bot" rel="noopener noreferrer" target="_blank">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="7" width="16" height="13" rx="2"/><circle cx="9" cy="13" r="1.2" fill="currentColor"/><circle cx="15" cy="13" r="1.2" fill="currentColor"/><path d="M12 7V4M10 4h4"/></svg>
+        <span>Telegram бот</span>
+        <span class="site-menu__channel-meta">для заявок</span>
+      </a>
+    </div>
+
+  </div>
+</dialog>
+
+<script>(function(){
+  // Active page marker
+  var p=location.pathname;
+  var k=(p==='/'||p==='/index.html')?'home':p.indexOf('/services')===0||p.indexOf('/notario')===0||p.indexOf('/ukraina')===0?'services':p.indexOf('/about')===0?'about':'';
+  if(k){var l=document.querySelector('.site-menu__link[data-page="'+k+'"]');if(l)l.classList.add('active');}
+  // Dialog a11y wiring (Sprint 5):
+  // - backdrop click closes
+  // - Esc closes (explicit, not just native)
+  // - focus returns to trigger on close
+  var d=document.getElementById('site-menu-dialog');
+  var trigger=document.querySelector('.site-nav__menu-btn');
+  if(d){
+    d.addEventListener('click',function(e){if(e.target===d)d.close();});
+    d.addEventListener('keydown',function(e){if(e.key==='Escape'){e.preventDefault();d.close();}});
+    d.addEventListener('close',function(){if(trigger){try{trigger.focus();}catch(_){}}});
+  }
+})();</script>
+<main id="main">
+<nav class="breadcrumb" aria-label="Хлебные крошки">
+  <a href="/">Главная</a> / <span>Блог</span>
+</nav>
+<div class="card">
+    <span class="blog-eyebrow">Блог Krepko · 2026</span>
+    <h1 class="blog-heading">Жизнь в Испании на родном языке — <span class="accent">статьи и гайды</span></h1>
+    <div class="blog-sub"><strong>34 практических гайда</strong> для украинцев и русскоязычных в Испании: ВНЖ, документы, банки, налоги, жильё. Только практика, без воды.</div>
+
+
+    <div class="filter-bar" id="filter-bar">
+      <button class="filter-btn active" data-filter="all">Все <span class="cnt" id="cnt-all"></span></button>
+      <button class="filter-btn" data-filter="vnzh">ВНЖ <span class="cnt" id="cnt-vnzh"></span></button>
+      <button class="filter-btn" data-filter="docs">Документы <span class="cnt" id="cnt-docs"></span></button>
+      <button class="filter-btn" data-filter="finance">Финансы <span class="cnt" id="cnt-finance"></span></button>
+      <button class="filter-btn" data-filter="work">Работа <span class="cnt" id="cnt-work"></span></button>
+      <button class="filter-btn" data-filter="life">Жильё <span class="cnt" id="cnt-life"></span></button>
+      <button class="filter-btn" data-filter="social">Семья <span class="cnt" id="cnt-social"></span></button>
+    </div>
+
+    <div class="divider"></div>
+
+    <a class="article-card article-card--featured" data-cat="vnzh" href="/regularizacion-2026/">
+      <span class="article-tag">📘 LANDING · ВНЖ · ARRAIGO 2026</span>
+      <span class="article-title">Регуляризация в Испании 2026 — 4 пути через arraigo</span>
+      <span class="article-desc">Полный обзор путей arraigo (social, laboral, familiar, por formación): требования, документы, сроки, частые ошибки. Krepko координирует работу с миграционным юристом на русском/украинском.</span>
+      <span class="article-meta">→ Подробная landing-страница</span>
+    </a>
+
+    <a class="article-card article-card--featured" data-cat="docs" href="/notario/gid/">
+      <span class="article-tag">📘 GUIDE · НОТАРИУС В ИСПАНИИ</span>
+      <span class="article-title">Нотариус в Испании 2026 — полный гайд: документы, цена, сроки, апостиль</span>
+      <span class="article-desc">Всё о нотариальных услугах: 10 типичных сценариев, 5 шагов как сделать, цена €75 за кейс, сроки 1-3 дня, апостиль. Без пост-перевода с испанского. 5 городов.</span>
+      <span class="article-meta">→ Pillar-гайд, ~10 мин чтения</span>
+    </a>
+
+    <a class="article-card" data-cat="docs" href="https://krepko.es/blog/doverennost-na-russkom/">
+      <span class="article-tag">Документы · Нотариус</span>
+      <span class="article-title">Доверенность в Испании на русском за 30 минут</span>
+      <span class="article-desc">Нотариальная доверенность на родном языке (РУС/УКР/ENG) — за 30 минут вместо нескольких визитов с переводчиком. Когда нужна, как делается, апостиль для Украины/РФ.</span>
+      <span class="article-meta">~6 мин чтения</span>
+    </a>
+
+    <a class="article-card" data-cat="docs" href="https://krepko.es/blog/carta-de-invitacion-ispaniya/">
+      <span class="article-tag">Документы · Нотариус</span>
+      <span class="article-title">Carta de invitación через нотариуса — день в день вместо 2 месяцев в полиции</span>
+      <span class="article-desc">Cita в migración сейчас 1-3 месяца. Альтернатива — нотариальное приглашение день в день. Принимается консульством для шенгенской визы.</span>
+      <span class="article-meta">~6 мин чтения</span>
+    </a>
+
+    <a class="article-card" data-cat="docs" href="https://krepko.es/blog/matrimonio-ispaniya-inostrancev/">
+      <span class="article-tag">Документы · Нотариус · Семья</span>
+      <span class="article-title">Свадьба в Испании для иностранцев: брак в нотариусе или в ЗАГСе</span>
+      <span class="article-desc">Гражданский брак (matrimonio civil) для иностранцев: пути через Registro Civil или нотариуса, документы, апостили, церемония на родном языке.</span>
+      <span class="article-meta">~6 мин чтения</span>
+    </a>
+
+    <a class="article-card" data-cat="docs" href="https://krepko.es/blog/separacion-de-bienes-ispaniya/">
+      <span class="article-tag">Документы · Нотариус · Семья</span>
+      <span class="article-title">Брачный контракт (separación de bienes) в Испании: как защитить активы</span>
+      <span class="article-desc">Раздельное владение имуществом у нотариуса. Когда нужен, как оформить, документы, признание в Украине/РФ.</span>
+      <span class="article-meta">~5 мин чтения</span>
+    </a>
+
+    <a class="article-card" data-cat="docs" href="https://krepko.es/blog/razvod-ispaniya-notarius/">
+      <span class="article-tag">Документы · Нотариус · Семья</span>
+      <span class="article-title">Развод в Испании через нотариуса: быстрее и дешевле, чем суд</span>
+      <span class="article-desc">Развод по согласию у нотариуса за 2-3 недели вместо 6-12 месяцев в суде. Условия, convenio regulador, документы, признание за рубежом.</span>
+      <span class="article-meta">~5 мин чтения</span>
+    </a>
+
+    <a class="article-card" data-cat="vnzh" href="https://krepko.es/blog/vnzh-ispaniya/">
+      <span class="article-tag">ВНЖ · Статус</span>
+      <span class="article-title">Как получить ВНЖ в Испании: полный гид для украинцев и русскоязычных</span>
+      <span class="article-desc">Все типы ВНЖ: временная защита, arraigo social, arraigo laboral, arraigo familiar. Документы, сроки, частые ошибки.</span>
+      <span class="article-meta">~7 мин чтения</span>
+    </a>
+
+    <a class="article-card" data-cat="finance" href="https://krepko.es/blog/bank-nerezident/">
+      <span class="article-tag">Банк · Финансы</span>
+      <span class="article-title">Как открыть счёт в испанском банке нерезиденту: пошаговый гайд</span>
+      <span class="article-desc">Какие банки работают с нерезидентами, какие документы нужны, советы по CaixaBank, Sabadell и другим.</span>
+      <span class="article-meta">~6 мин чтения</span>
+    </a>
+
+    <a class="article-card" data-cat="work" href="https://krepko.es/blog/autonomo-ispaniya/">
+      <span class="article-tag">Autónomo · Налоги</span>
+      <span class="article-title">Регистрация autónomo в Испании: налоги, взносы, как работать легально</span>
+      <span class="article-desc">Пошаговая регистрация, tarifa plana, квартальные декларации IRPF и IVA, реальные расходы самозанятого.</span>
+      <span class="article-meta">~8 мин чтения</span>
+    </a>
+
+    <a class="article-card" data-cat="docs" href="https://krepko.es/blog/apostil-perevod/">
+      <span class="article-tag">Документы · Нотариус</span>
+      <span class="article-title">Апостиль и присяжный перевод в Испании: что это и зачем нужно</span>
+      <span class="article-desc">В чём разница между апостилем и присяжным переводом, где получить, сколько стоит и сколько ждать.</span>
+      <span class="article-meta">~6 мин чтения</span>
+    </a>
+
+    <a class="article-card" data-cat="vnzh" href="https://krepko.es/blog/temporalnaya-zashita/">
+      <span class="article-tag">Временная защита · 2025</span>
+      <span class="article-title">Временная защита в Испании 2026: продление, права, что делать украинцам</span>
+      <span class="article-desc">Актуальный статус ВЗ, какие права она даёт, как продлить и когда переходить на обычный ВНЖ.</span>
+      <span class="article-meta">~7 мин чтения</span>
+    </a>
+
+    <a class="article-card" data-cat="docs" href="https://krepko.es/blog/nie-tie-ispaniya/">
+      <span class="article-tag">Документы · Статус</span>
+      <span class="article-title">NIE и TIE в Испании: в чём разница и как получить</span>
+      <span class="article-desc">NIE — номер иностранца, TIE — карточка резидента. Как получить каждый, сколько стоит, типичные ошибки при записи и оплате тасы.</span>
+      <span class="article-meta">~7 мин чтения</span>
+    </a>
+
+    <a class="article-card" data-cat="docs" href="https://krepko.es/blog/padron-municipal/">
+      <span class="article-tag">Документы · Регистрация</span>
+      <span class="article-title">Прописка в Испании (padrón municipal): зачем нужна и как оформить</span>
+      <span class="article-desc">Почему падрон — ключевой документ для медицины, школы и ВНЖ. Как записаться, что принести и можно ли без официального договора аренды.</span>
+      <span class="article-meta">~7 мин чтения</span>
+    </a>
+
+    <a class="article-card" data-cat="life" href="https://krepko.es/blog/meditsinskaya-strahovka-ispaniya/">
+      <span class="article-tag">Страховка · Медицина</span>
+      <span class="article-title">Медицинская страховка в Испании: государственная и частная</span>
+      <span class="article-desc">Tarjeta sanitaria — кто имеет право бесплатно, Sanitas, Adeslas, Asisa — цены и плюсы частной страховки, требования для визы.</span>
+      <span class="article-meta">~8 мин чтения</span>
+    </a>
+
+    <a class="article-card" data-cat="life" href="https://krepko.es/blog/pokupka-nedvizhimosti-ispaniya/">
+      <span class="article-tag">Недвижимость · Инвестиции</span>
+      <span class="article-title">Покупка недвижимости в Испании: пошаговый гид для иностранцев</span>
+      <span class="article-desc">NIE, нотариус, реестр, налоги IVA и ITP, ипотека для нерезидентов 60–70% LTV, типичные ловушки при покупке.</span>
+      <span class="article-meta">~9 мин чтения</span>
+    </a>
+
+    <a class="article-card" data-cat="finance" href="https://krepko.es/blog/perevod-deneg-ispaniya/">
+      <span class="article-tag">Финансы · Переводы</span>
+      <span class="article-title">Как перевести деньги в Испанию: Wise, SWIFT, наличные</span>
+      <span class="article-desc">Сравниваем Wise, SWIFT, Revolut, Western Union и ввоз наличных. Комиссии, лимиты, правила декларирования и что делать, если банк заморозил перевод.</span>
+      <span class="article-meta">~8 мин чтения</span>
+    </a>
+
+    <a class="article-card" data-cat="finance" href="https://krepko.es/blog/neobanki-ispaniya/">
+      <span class="article-tag">Финансы · Необанки</span>
+      <span class="article-title">Необанки в Испании 2026: Wise, Revolut, N26 для нерезидентов и украинцев</span>
+      <span class="article-desc">Сравниваем Wise, Revolut, N26 и Bunq: комиссии, лимиты, карты, IBAN и что подойдёт без NIE. Реальный опыт.</span>
+      <span class="article-meta">~7 мин чтения</span>
+    </a>
+
+    <a class="article-card" data-cat="life" href="https://krepko.es/blog/arenda-zhilya-ispaniya/">
+      <span class="article-tag">Жильё · Аренда</span>
+      <span class="article-title">Как снять квартиру в Испании: полный гайд для украинцев и русскоязычных</span>
+      <span class="article-desc">Idealista, Fotocasa, contrato de arrendamiento — как найти жильё, что проверить, как не попасть на мошенников и что делать без NIE.</span>
+      <span class="article-meta">~8 мин чтения</span>
+    </a>
+
+    <a class="article-card" data-cat="work" href="https://krepko.es/blog/irpf-nalogi-ispaniya/">
+      <span class="article-tag">Налоги · IRPF</span>
+      <span class="article-title">IRPF и налоги в Испании 2026: кто платит, сколько и когда</span>
+      <span class="article-desc">Ставки IRPF, декларация Renta, резиденты и нерезиденты, дедакции и как не попасть на штраф. Понятно для тех, кто не бухгалтер.</span>
+      <span class="article-meta">~9 мин чтения</span>
+    </a>
+
+    <a class="article-card" data-cat="work" href="https://krepko.es/blog/otkryt-sl-biznes-ispaniya/">
+      <span class="article-tag">Бизнес · SL</span>
+      <span class="article-title">Как открыть SL (ООО) в Испании: пошаговый гайд 2026</span>
+      <span class="article-desc">Sociedad Limitada vs autónomo, минимальный капитал €3000, нотариус, registro mercantil, счёт и типичные ошибки при регистрации.</span>
+      <span class="article-meta">~9 мин чтения</span>
+    </a>
+
+    <a class="article-card" data-cat="vnzh" href="https://krepko.es/blog/viza-tsifrovogo-nomada-ispaniya/">
+      <span class="article-tag">Виза · Цифровой номад</span>
+      <span class="article-title">Виза цифрового номада в Испании 2026: требования, документы, подводные камни</span>
+      <span class="article-desc">Ley Startups, минимальный доход, список документов, сроки, разница с autónomo и как подать заявку без ошибок.</span>
+      <span class="article-meta">~8 мин чтения</span>
+    </a>
+
+    <a class="article-card" data-cat="vnzh" href="https://krepko.es/blog/vossoedineniye-semi-ispaniya/">
+      <span class="article-tag">ВНЖ · Семья</span>
+      <span class="article-title">Воссоединение семьи в Испании: кто может и как</span>
+      <span class="article-desc">Reagrupación familiar: кто имеет право, какие документы нужны, сроки и что делать, если отказали. Для резидентов с ВНЖ.</span>
+      <span class="article-meta">~7 мин чтения</span>
+    </a>
+
+    <a class="article-card" data-cat="social" href="https://krepko.es/blog/socialnye-posobiya-ispaniya/">
+      <span class="article-tag">Пособия · Социалка</span>
+      <span class="article-title">Социальные пособия в Испании для украинцев 2026: IMV, RMI, льготы</span>
+      <span class="article-desc">Ingreso Mínimo Vital, Renta Mínima, пособие по безработице, льготы по ВЗ — кто имеет право и как подать заявку.</span>
+      <span class="article-meta">~8 мин чтения</span>
+    </a>
+
+    <a class="article-card" data-cat="docs" href="https://krepko.es/blog/zamena-prav-ispaniya/">
+      <span class="article-tag">Документы · Права</span>
+      <span class="article-title">Замена украинских водительских прав на испанские 2026</span>
+      <span class="article-desc">Пошаговый гайд: DGT, tasa, экзамен или без него, сроки и типичные отказы при замене украинского удостоверения.</span>
+      <span class="article-meta">~7 мин чтения</span>
+    </a>
+
+    <a class="article-card" data-cat="life" href="https://krepko.es/blog/tarjeta-sanitaria-ispaniya/">
+      <span class="article-tag">Медицина · Карта здоровья</span>
+      <span class="article-title">Tarjeta Sanitaria в Испании: как получить медицинскую карту</span>
+      <span class="article-desc">Кто имеет право на бесплатную карту здоровья, как записаться в centro de salud, документы и что делать до получения карты.</span>
+      <span class="article-meta">~6 мин чтения</span>
+    </a>
+
+    <a class="article-card" data-cat="social" href="https://krepko.es/blog/shkola-deti-ispaniya/">
+      <span class="article-tag">Дети · Образование</span>
+      <span class="article-title">Как записать ребёнка в школу в Испании: гайд для украинских родителей</span>
+      <span class="article-desc">Matriculación, зоны, документы, языковые классы адаптации и как помочь ребёнку влиться в испанскую школу.</span>
+      <span class="article-meta">~7 мин чтения</span>
+    </a>
+
+    <a class="article-card" data-cat="vnzh" href="https://krepko.es/blog/arraigo-social-ispaniya/">
+      <span class="article-tag">ВНЖ</span>
+      <span class="article-title">Arraigo social — ВНЖ через 3 года жизни в Испании</span>
+      <span class="article-desc">Кто подходит, какие документы собирать, как доказать интеграцию и что делать после получения ВНЖ.</span>
+      <span class="article-meta">~7 мин чтения</span>
+    </a>
+
+    <a class="article-card" data-cat="vnzh" href="https://krepko.es/blog/arraigo-laboral-ispaniya/">
+      <span class="article-tag">ВНЖ</span>
+      <span class="article-title">Arraigo laboral — ВНЖ через 2 года работы в Испании</span>
+      <span class="article-desc">Кто проходит, как подтвердить трудовой стаж, отличия от arraigo social и пошаговый порядок подачи.</span>
+      <span class="article-meta">~7 мин чтения</span>
+    </a>
+
+    <a class="article-card" data-cat="docs" href="https://krepko.es/blog/zamena-pasporta-ukraina-ispaniya/">
+      <span class="article-tag">Документы</span>
+      <span class="article-title">Замена украинского паспорта в Испании 2026</span>
+      <span class="article-desc">Где можно поменять паспорт без выезда в Украину, документы, сроки и стоимость в посольстве и ГП «Документ».</span>
+      <span class="article-meta">~5 мин чтения</span>
+    </a>
+
+    <a class="article-card" data-cat="docs" href="https://krepko.es/blog/certificado-empadronamiento/">
+      <span class="article-tag">Документы</span>
+      <span class="article-title">Certificado de empadronamiento: как получить выписку из падрона</span>
+      <span class="article-desc">Зачем нужна справка, как заказать онлайн или в ayuntamiento, сколько стоит и сколько действует.</span>
+      <span class="article-meta">~6 мин чтения</span>
+    </a>
+
+    <a class="article-card" data-cat="docs" href="https://krepko.es/blog/modelo-030/">
+      <span class="article-tag">Документы · Налоговая</span>
+      <span class="article-title">Modelo 030: регистрация и изменение данных в налоговой Испании</span>
+      <span class="article-desc">Когда подавать modelo 030, как заполнить онлайн с certificado digital и без него, типичные ошибки.</span>
+      <span class="article-meta">~6 мин чтения</span>
+    </a>
+
+    <a class="article-card" data-cat="docs" href="https://krepko.es/blog/certificado-digital/">
+      <span class="article-tag">Документы · Электронная подпись</span>
+      <span class="article-title">Certificado digital: электронная подпись в Испании 2026</span>
+      <span class="article-desc">Зачем нужна, как получить через FNMT, что делать на Mac, и какие сервисы откроются после установки.</span>
+      <span class="article-meta">~7 мин чтения</span>
+    </a>
+
+    <a class="article-card" data-cat="life" href="https://krepko.es/blog/seguro-hogar-ispaniya/">
+      <span class="article-tag">Жильё · Страховка</span>
+      <span class="article-title">Страховка жилья в Испании: как выбрать seguro de hogar</span>
+      <span class="article-desc">Что покрывает базовая страховка, разница continente vs contenido, обязательно ли при ипотеке и где сравнивать.</span>
+      <span class="article-meta">~6 мин чтения</span>
+    </a>
+
+    <!-- Контекстная карточка: всегда последняя, текст и href меняются от фильтра -->
+    <a class="article-card article-card--suggest" id="suggestCard"
+       href="https://t.me/krepko_es_admin_bot?start=suggest"
+       target="_blank" rel="noopener noreferrer">
+      <span class="article-tag" id="suggestTag"><svg class="tag-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6"/><path d="M10 21h4"/><path d="M12 3a6 6 0 0 0-4 10c.7.8 1 1.6 1 2.5V17h6v-1.5c0-.9.3-1.7 1-2.5a6 6 0 0 0-4-10z"/></svg> Своя идея</span>
+      <span class="article-title" id="suggestTitle">Не нашли тему — предложите свою</span>
+      <span class="article-desc" id="suggestDesc">Опишите вопрос или ситуацию, которой нет в блоге Krepko. Если тема актуальна — станет статьёй или постом в @krepko_es.</span>
+      <span class="article-meta">~1 минута заполнить</span>
+    </a>
+
+    <div class="divider"></div>
+
+    <div class="cta-block">
+      <div class="cta-block-title">Krepko ведёт под ключ — документами?</div>
+      <div class="cta-block-sub">Krepko работает в Барселоне, Мадриде, Аликанте, Валенсии и Малаге. Бесплатная консультация.</div>
+      <a class="btn" href="https://wa.me/34641048296?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%2C%20%D0%BD%D1%83%D0%B6%D0%BD%D0%B0%20%D0%BA%D0%BE%D0%BD%D1%81%D1%83%D0%BB%D1%8C%D1%82%D0%B0%D1%86%D0%B8%D1%8F" rel="noopener noreferrer" target="_blank">
+        <span class="btn-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9 8.5 8.5 0 0 1 8.5 8.5z"/></svg></span>
+        <span class="btn-title">Написать в WhatsApp</span>
+      </a>
+      <a class="btn" href="https://t.me/krepko_es_admin_bot" target="_blank" rel="noopener noreferrer" style="background:#1F2638;border-color:#2D3650;color:#EDF1F8;">
+        <span class="btn-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="7" width="16" height="13" rx="2"/><circle cx="9" cy="13" r="1.2" fill="currentColor"/><circle cx="15" cy="13" r="1.2" fill="currentColor"/><path d="M12 7V4M10 4h4"/></svg></span>
+        <span class="btn-title">Telegram-бот</span>
+      </a>
+    </div>
+</div>
+
+
+  <script>
+  (function(){
+    var btns = document.querySelectorAll('.filter-btn');
+    var cards = document.querySelectorAll('.article-card[data-cat]');
+
+    // Count per category
+    var counts = {all: cards.length};
+    cards.forEach(function(c){ var k = c.dataset.cat; counts[k] = (counts[k]||0)+1; });
+
+    // Fill all count badges
+    ['all','vnzh','docs','finance','work','life','social'].forEach(function(cat){
+      var el = document.getElementById('cnt-' + cat);
+      if(el && counts[cat]) el.textContent = counts[cat];
+    });
+
+    // Контекстный suggest-card в зависимости от выбранного фильтра.
+    var SUGGEST_CONTEXT = {
+      all:     { tag: '<svg class="tag-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6"/><path d="M10 21h4"/><path d="M12 3a6 6 0 0 0-4 10c.7.8 1 1.6 1 2.5V17h6v-1.5c0-.9.3-1.7 1-2.5a6 6 0 0 0-4-10z"/></svg> Своя идея',          title: 'Не нашли тему — предложите свою',                        desc: 'Опишите вопрос или ситуацию, которой нет в блоге Krepko. Если тема актуальна — станет статьёй или постом в @krepko_es.', payload: 'suggest' },
+      vnzh:    { tag: '<svg class="tag-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6"/><path d="M10 21h4"/><path d="M12 3a6 6 0 0 0-4 10c.7.8 1 1.6 1 2.5V17h6v-1.5c0-.9.3-1.7 1-2.5a6 6 0 0 0-4-10z"/></svg> Своя тема по ВНЖ',     title: 'Не нашли вашу ситуацию по ВНЖ — расскажите',           desc: 'Какой вид ВНЖ, какая страна, какой документ? Опишите — разберём в новой статье.', payload: 'suggest_vnzh' },
+      docs:    { tag: '<svg class="tag-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6"/><path d="M10 21h4"/><path d="M12 3a6 6 0 0 0-4 10c.7.8 1 1.6 1 2.5V17h6v-1.5c0-.9.3-1.7 1-2.5a6 6 0 0 0-4-10z"/></svg> Своя тема по документам', title: 'Какого документа нет в блоге?',                       desc: 'Что нужно оформить? С какой страной? Расскажите ситуацию — превратим в гайд.', payload: 'suggest_docs' },
+      finance: { tag: '<svg class="tag-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6"/><path d="M10 21h4"/><path d="M12 3a6 6 0 0 0-4 10c.7.8 1 1.6 1 2.5V17h6v-1.5c0-.9.3-1.7 1-2.5a6 6 0 0 0-4-10z"/></svg> Своя тема по банкам',  title: 'Какой финансовый вопрос остался без ответа?',           desc: 'Банки, переводы, ипотека, инвестиции в Испании — опишите свой кейс.', payload: 'suggest_finance' },
+      work:    { tag: '<svg class="tag-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6"/><path d="M10 21h4"/><path d="M12 3a6 6 0 0 0-4 10c.7.8 1 1.6 1 2.5V17h6v-1.5c0-.9.3-1.7 1-2.5a6 6 0 0 0-4-10z"/></svg> Своя тема по работе',  title: 'Какой вопрос по работе или autónomo не закрыт?',         desc: 'Регистрация, налоги, контракты, поиск работы — расскажите ситуацию.', payload: 'suggest_work' },
+      life:    { tag: '<svg class="tag-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6"/><path d="M10 21h4"/><path d="M12 3a6 6 0 0 0-4 10c.7.8 1 1.6 1 2.5V17h6v-1.5c0-.9.3-1.7 1-2.5a6 6 0 0 0-4-10z"/></svg> Своя тема по жизни',   title: 'Какой бытовой вопрос интересует?',                       desc: 'Жильё, страховки, медицина, транспорт, дети — опишите, чем поделиться.', payload: 'suggest_life' },
+      social:  { tag: '<svg class="tag-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6"/><path d="M10 21h4"/><path d="M12 3a6 6 0 0 0-4 10c.7.8 1 1.6 1 2.5V17h6v-1.5c0-.9.3-1.7 1-2.5a6 6 0 0 0-4-10z"/></svg> Своя тема по соц. помощи', title: 'Какое пособие или помощь интересует?',              desc: 'IMV, ayudas, Cruz Roja, Cáritas — расскажите свою ситуацию, разберём в посте.', payload: 'suggest_social' },
+    };
+    var suggestCard  = document.getElementById('suggestCard');
+    var suggestTag   = document.getElementById('suggestTag');
+    var suggestTitle = document.getElementById('suggestTitle');
+    var suggestDesc  = document.getElementById('suggestDesc');
+
+    function applyFilter(f) {
+      btns.forEach(function(b){ b.classList.toggle('active', b.dataset.filter === f); });
+      cards.forEach(function(c){
+        c.classList.toggle('hidden', f !== 'all' && c.dataset.cat !== f);
+      });
+      // Обновляем suggest-карточку под текущую категорию
+      var ctx = SUGGEST_CONTEXT[f] || SUGGEST_CONTEXT.all;
+      if (suggestCard)  suggestCard.href      = 'https://t.me/krepko_es_admin_bot?start=' + ctx.payload;
+      if (suggestTag)   suggestTag.innerHTML      = ctx.tag;
+      if (suggestTitle) suggestTitle.textContent = ctx.title;
+      if (suggestDesc)  suggestDesc.textContent  = ctx.desc;
+    }
+
+    // Read filter from URL on load
+    var urlCat = (new URLSearchParams(location.search)).get('cat') || 'all';
+    applyFilter(urlCat);
+
+    btns.forEach(function(btn){
+      btn.addEventListener('click', function(){
+        var f = btn.dataset.filter;
+        applyFilter(f);
+        // Update URL without reload
+        var url = f === 'all' ? location.pathname : location.pathname + '?cat=' + f;
+        history.pushState({cat: f}, '', url);
+      });
+    });
+
+    // Handle browser back/forward
+    window.addEventListener('popstate', function(e){
+      var f = (e.state && e.state.cat) || 'all';
+      applyFilter(f);
+    });
+  })();
+  </script>
+</main>
+<footer class="site-footer">
+  <div class="site-footer__inner">
+
+    <div class="site-footer__usp">
+      <div class="site-footer__usp-cell">
+        <span class="site-footer__usp-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12h18M3 6h18M3 18h12"/></svg>
+        </span>
+        <div>
+          <p class="site-footer__usp-title">Аванс только за свою работу</p>
+          <p class="site-footer__usp-desc">Krepko берёт за свою часть. Нотариус, переводчик и апостиль — на месте напрямую, по их тарифам.</p>
+        </div>
+      </div>
+      <div class="site-footer__usp-cell">
+        <span class="site-footer__usp-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+        </span>
+        <div>
+          <p class="site-footer__usp-title">Концепция за 15 минут</p>
+          <p class="site-footer__usp-desc">Опишите кейс в WhatsApp — Krepko вернётся с планом и стоимостью за 15 минут.</p>
+        </div>
+      </div>
+      <div class="site-footer__usp-cell">
+        <span class="site-footer__usp-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2L4 7v6c0 5 3.5 8.5 8 10 4.5-1.5 8-5 8-10V7l-8-5z"/></svg>
+        </span>
+        <div>
+          <p class="site-footer__usp-title">С 2022 в Испании</p>
+          <p class="site-footer__usp-desc">Команда сопровождения в 6 городах побережья.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="site-footer__grid">
+
+      <div class="site-footer__brand-col">
+        <a class="site-footer__brand" href="/" aria-label="Krepko — на главную">
+          <span class="site-footer__brand-text">Krepko</span>
+        </a>
+        <p class="site-footer__tagline">Команда сопровождения для русско- и украиноязычных в&nbsp;Испании.</p>
+        <a href="/about/" class="site-footer__brand-link">О Krepko →</a>
+      </div>
+
+      <div class="site-footer__columns">
+        <details class="site-footer__col">
+          <summary class="site-footer__col-title">Услуги</summary>
+          <ul class="site-footer__col-list">            <li><a href="/notario/">Нотариус</a></li>            <li><a href="/ukraina/">Из Украины</a></li>            <li><a href="/legalizacion/">Легализация</a></li>            <li><a href="/banca/">Банк</a></li>            <li><a href="/traduccion/">Перевод</a></li>            <li><a href="/migracion/">Миграция</a></li>            <li><a href="/fiscalidad/">Налоги</a></li>            <li><a href="/juridico/">Юридическое</a></li>          </ul>
+        </details>
+
+        <details class="site-footer__col">
+          <summary class="site-footer__col-title">География</summary>
+          <ul class="site-footer__col-list">            <li><a href="/alicante/">Аликанте</a></li>            <li><a href="/valencia/">Валенсия</a></li>            <li><a href="/murcia/">Мурсия</a></li>            <li><a href="/madrid/">Мадрид</a></li>            <li><a href="/barcelona/">Барселона</a></li>            <li><a href="/malaga/">Малага</a></li>          </ul>
+        </details>
+
+        <details class="site-footer__col">
+          <summary class="site-footer__col-title">Знание</summary>
+          <ul class="site-footer__col-list">
+            <li><a href="/blog/">Блог — статьи о бюрократии</a></li>
+            <li><a href="/about/">О Krepko</a></li>
+            <li><a href="/services/">Каталог услуг</a></li>
+          </ul>
+        </details>
+
+        <details class="site-footer__col">
+          <summary class="site-footer__col-title">Связь</summary>
+          <ul class="site-footer__col-list">
+            <li><a href="https://wa.me/34641048296" rel="noopener noreferrer" target="_blank">WhatsApp +34 641 048 296</a></li>
+            <li><a href="https://t.me/krepko_es" rel="noopener noreferrer" target="_blank">Telegram канал @krepko_es</a></li>
+            <li><a href="https://t.me/krepko_es_admin_bot" rel="noopener noreferrer" target="_blank">Telegram бот для заявок</a></li>
+            <li><a href="https://instagram.com/krepko.es" rel="noopener noreferrer" target="_blank">Instagram @krepko.es</a></li>
+          </ul>
+        </details>
+      </div>
+
+    </div>
+
+    <div class="site-footer__social-row">
+      <span class="site-footer__social-label">Каналы</span>
+      <div class="site-footer__socials" aria-label="Каналы Krepko">
+        <a class="footer-social footer-social--wa" href="https://wa.me/34641048296" rel="noopener noreferrer" target="_blank" aria-label="WhatsApp">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9 8.5 8.5 0 0 1 8.5 8.5z"/></svg>
+        </a>
+        <a class="footer-social footer-social--tg" href="https://t.me/krepko_es" rel="noopener noreferrer" target="_blank" aria-label="Telegram канал">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="5" cy="19" r="2"/><path d="M3 13a8 8 0 0 1 8 8M3 7a14 14 0 0 1 14 14"/></svg>
+        </a>
+        <a class="footer-social footer-social--bot" href="https://t.me/krepko_es_admin_bot" rel="noopener noreferrer" target="_blank" aria-label="Telegram бот">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="7" width="16" height="13" rx="2"/><circle cx="9" cy="13" r="1.2" fill="currentColor"/><circle cx="15" cy="13" r="1.2" fill="currentColor"/><path d="M12 7V4M10 4h4"/></svg>
+        </a>
+        <a class="footer-social footer-social--ig" href="https://instagram.com/krepko.es" rel="noopener noreferrer" target="_blank" aria-label="Instagram">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <div class="site-footer__bottom">
+      <nav class="site-footer__legal" aria-label="Юридическая информация">
+        <a href="/aviso-legal/">Aviso legal</a>
+        <span class="sep">·</span>
+        <a href="/privacidad/">Privacidad</a>
+        <span class="sep">·</span>
+        <a href="/terminos/">Términos</a>
+        <span class="sep">·</span>
+        <a href="/cookies/">Cookies</a>
+      </nav>
+      <div class="site-footer__meta">© 2026 Krepko</div>
+    </div>
+
+  </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,28 @@
+<svg width="1200" height="630" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="630" fill="#171C28"/>
+  <rect width="1200" height="4" y="0" fill="#C4952A"/>
+  <rect width="1200" height="4" y="626" fill="#C4952A"/>
+
+  <!-- Logo: K in thin gold ring (Variant 2 — Circle frame) -->
+  <circle cx="600" cy="220" r="78" fill="none" stroke="#C4952A" stroke-width="2.5" opacity="0.85"/>
+  <g fill="none" stroke="#C4952A" stroke-width="11" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Vertical bar -->
+    <line x1="575" y1="183" x2="575" y2="257"/>
+    <!-- Upper diagonal -->
+    <line x1="575" y1="220" x2="630" y2="183"/>
+    <!-- Lower diagonal -->
+    <line x1="575" y1="220" x2="630" y2="257"/>
+  </g>
+
+  <!-- Main title -->
+  <text x="600" y="370" font-family="Arial, sans-serif" font-size="60" font-weight="700" fill="#EDF1F8" text-anchor="middle" letter-spacing="2">KREPKO</text>
+
+  <!-- Subtitle -->
+  <text x="600" y="425" font-family="Arial, sans-serif" font-size="26" fill="#8896B0" text-anchor="middle">Испания под ключ · банк · нотариус · ВНЖ</text>
+
+  <!-- Cities -->
+  <text x="600" y="475" font-family="Arial, sans-serif" font-size="20" fill="#5A6A84" text-anchor="middle">Барселона · Мадрид · Аликанте · Валенсия · Малага</text>
+
+  <!-- URL -->
+  <text x="600" y="555" font-family="Arial, sans-serif" font-size="24" font-weight="600" fill="#C4952A" text-anchor="middle">krepko.es</text>
+</svg>

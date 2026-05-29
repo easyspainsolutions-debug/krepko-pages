@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" type="image/png" sizes="48x48" href="/icon-48.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/icon-96.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/icon-32.png">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico" sizes="48x48 32x32 16x16">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <meta name="theme-color" content="#171C28">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>404 — Страница не найдена | Krepko</title>
+  <meta name="robots" content="noindex, follow">
+  <meta name="description" content="Страница не найдена. Вернитесь на главную.">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="404 — Страница не найдена | Krepko">
+  <meta property="og:description" content="Страница не найдена. Вернитесь на главную.">
+  <meta property="og:image" content="https://krepko.es/og-image.png">
+  <meta property="og:locale" content="ru_RU">
+  <meta property="og:site_name" content="Krepko">
+
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: #171C28;
+      color: #EDF1F8;
+      font-family: -apple-system, 'Inter', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      overflow-x: hidden;
+      padding: 24px 20px 40px;
+    }
+
+    .card {
+      width: 100%;
+      max-width: 420px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .code-404 {
+      font-size: 140px;
+      font-weight: 900;
+      color: #C4952A;
+      letter-spacing: -6px;
+      line-height: 1;
+      text-align: center;
+      margin: 12px 0 4px;
+      font-family: -apple-system, 'Inter', sans-serif;
+    }
+
+    .name {
+      font-size: 22px;
+      font-weight: 700;
+      color: #EDF1F8;
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    .lead {
+      width: 100%;
+      font-size: 14px;
+      color: #8896B0;
+      line-height: 1.6;
+      text-align: center;
+      padding: 0 4px;
+      margin-bottom: 18px;
+    }
+
+    /* Home pill button with animated glow */
+    .home-wrap {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      padding: 8px 0 22px;
+    }
+    .home-btn {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 32px;
+      border-radius: 999px;
+      background: #C4952A;
+      color: #0F1117;
+      font-size: 15px;
+      font-weight: 700;
+      text-decoration: none;
+      letter-spacing: 0.01em;
+      box-shadow: 0 0 24px rgba(196,149,42,0.45);
+      transition: transform 0.15s, background 0.15s;
+      z-index: 1;
+    }
+    .home-btn:hover  { background: #D4A535; transform: translateY(-1px); }
+    .home-btn:active { transform: scale(0.98); }
+
+    .home-btn::before,
+    .home-btn::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      border: 2px solid #C4952A;
+      pointer-events: none;
+      z-index: -1;
+      animation: ripple 2.4s ease-out infinite;
+    }
+    .home-btn::after { animation-delay: 1.2s; }
+
+    @keyframes ripple {
+      0%   { transform: scale(1);    opacity: 0.65; }
+      100% { transform: scale(1.55); opacity: 0;    }
+    }
+
+    @keyframes pulse {
+      0%, 100% { box-shadow: 0 0 18px rgba(196,149,42,0.35); }
+      50%      { box-shadow: 0 0 36px rgba(196,149,42,0.65); }
+    }
+    .home-btn { animation: pulse 2.4s ease-in-out infinite; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .home-btn,
+      .home-btn::before,
+      .home-btn::after { animation: none; }
+    }
+  </style>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Manrope:wght@700;800&display=swap" rel="stylesheet"></head>
+<body>
+  <div class="card">
+
+    <!-- Big 404 -->
+    <div class="code-404">404</div>
+
+    <!-- Title -->
+    <div class="name">Страница не найдена</div>
+
+    <!-- Lead text -->
+    <div class="lead">
+      Возможно, страница переехала — как и вы в Испанию. Ссылка устарела или адрес ошибочный. Загляните в основные разделы — там всё, что вам нужно.
+    </div>
+
+    <!-- Main CTA: pill button with animated glow -->
+    <div class="home-wrap">
+      <a class="home-btn" href="/">&#8592; На главную</a>
+    </div>
+
+  </div>
+</body>
+</html>
