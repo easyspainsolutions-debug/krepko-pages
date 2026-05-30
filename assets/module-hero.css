@@ -100,7 +100,8 @@
 /* === ServiceHero === */
 /* hero__meta-row — shared by hero--service and hero--home (2026-05-27 home enhance). */
 .hero--service .hero__meta-row,
-.hero--home .hero__meta-row {
+.hero--home .hero__meta-row,
+.hero--document .hero__meta-row {
   display: flex;
   gap: var(--space-5);
   margin-top: var(--space-4);
@@ -140,23 +141,6 @@
   letter-spacing: -0.4px;
   margin: 0 0 var(--space-4);
 }
-.hero--document .hero__price small {
-  color: var(--text-label);
-  font-weight: 400;
-  font-size: var(--ts-meta);
-  margin-left: var(--space-2);
-}
-/* Visual audit 2026-05-27 M4: подпись под ценой выводится на новую строку
-   и не теряется как просто inline-небольшая подпись. */
-.hero--document .hero__price small.hero__price-note {
-  display: block;
-  margin: var(--space-1) 0 0;
-  font-family: 'Manrope', sans-serif;
-  letter-spacing: 0;
-  font-size: var(--ts-body-sm);
-  color: var(--text-muted);
-}
-
 /* === CityHero === */
 .hero--city .hero__status-bar {
   margin-top: var(--space-4);

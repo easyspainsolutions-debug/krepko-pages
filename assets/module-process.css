@@ -29,28 +29,40 @@
 
 .process-step {
   display: grid;
-  grid-template-columns: 28px 1fr;
+  grid-template-columns: 32px 1fr;
   align-items: flex-start;
-  gap: var(--space-3);
-  padding: var(--space-3) var(--space-4);
-  background: var(--surface-2);
-  border: 1px solid var(--border);
-  border-radius: var(--r-3);
+  gap: var(--space-4);
+  padding: 0 0 var(--space-5) 0;
+  position: relative;
+}
+
+/* Вертикальная линия-связка между кружками (таймлайн).
+   Геометрия завязана на кружок Ø32px: left = центр 16px − половина 2px-линии; top = диаметр кружка. */
+.process-step:not(:last-child)::before {
+  content: '';
+  position: absolute;
+  left: 15px;
+  top: 32px;
+  bottom: 0;
+  width: 2px;
+  background: rgba(196, 149, 42, 0.3);
 }
 
 .process-step__n {
   font-family: 'IBM Plex Mono', monospace;
   font-size: var(--ts-label);
   font-weight: 700;
-  color: var(--gold);
-  border: 1px solid rgba(196, 149, 42, 0.45);
-  border-radius: var(--r-1);
-  width: 28px;
-  height: 28px;
+  color: var(--gold-on);
+  background: var(--gold);
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
+  position: relative;
+  z-index: 1;
 }
 
 .process-step__content {
@@ -199,8 +211,8 @@
   }
 
   .process-step {
-    padding: var(--space-2) var(--space-3);
-    gap: var(--space-2);
+    padding: 0 0 var(--space-4) 0;
+    gap: var(--space-3);
   }
 
   .process-step__title {

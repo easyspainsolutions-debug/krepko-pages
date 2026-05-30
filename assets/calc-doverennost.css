@@ -363,7 +363,7 @@
 
 .why-us-acta207__list li {
   background: var(--surface);
-  border: 1px solid var(--border);
+  border: 1px solid rgba(196, 149, 42, 0.18);
   border-radius: var(--r-4);
   padding: var(--space-4) var(--space-5);
   color: var(--text-sub);
@@ -388,9 +388,8 @@
   max-width: var(--w-read);
 }
 
-/* Visual audit 2026-05-27 M2: use-cases остались carded (там 5 пунктов, читается ОК),
-   а required-docs переходит в compact-list без border — это часто 6-8 пунктов,
-   карточки занимали слишком много вертикального места. */
+/* 2026-05-29 redesign: обе плашки (use-cases #1, required-docs #2) — плоские списки
+   на tint-band: use-cases с gold-галкой, required-docs с чекбокс-глифом. */
 .use-cases__list {
   list-style: none;
   margin: var(--space-4) 0 0;
@@ -400,10 +399,7 @@
 }
 
 .use-cases__list li {
-  padding: var(--space-3) var(--space-4) var(--space-3) var(--space-6);
-  background: var(--surface);
-  border: 1px solid var(--border-faint);
-  border-radius: var(--r-3);
+  padding: var(--space-2) 0 var(--space-2) var(--space-6);
   position: relative;
   font-size: var(--ts-body);
   color: var(--text-sub);
@@ -411,10 +407,10 @@
 }
 
 .use-cases__list li::before {
-  content: '→';
+  content: '✓';
   position: absolute;
-  left: var(--space-3);
-  top: var(--space-3);
+  left: 0;
+  top: var(--space-2);
   color: var(--gold);
   font-weight: 700;
 }
@@ -428,26 +424,40 @@
 }
 
 .required-docs__list li {
-  padding: var(--space-2) 0 var(--space-2) var(--space-5);
+  padding: var(--space-2) 0 var(--space-2) var(--space-6);
   position: relative;
   font-size: var(--ts-body);
   color: var(--text-sub);
   line-height: 1.5;
-  border-bottom: 1px dashed var(--border-faint);
+  border-bottom: 1px dashed rgba(196, 149, 42, 0.25);
 }
 
 .required-docs__list li:last-child {
   border-bottom: 0;
 }
 
+/* Чекбокс-глиф: пустой квадрат с галочкой — «чеклист». */
 .required-docs__list li::before {
-  content: '✓';
+  content: '';
   position: absolute;
   left: 0;
+  top: calc(var(--space-2) + 2px);
+  width: 16px;
+  height: 16px;
+  border: 1.5px solid var(--gold);
+  border-radius: var(--r-1);
+  box-sizing: border-box;
+}
+
+.required-docs__list li::after {
+  content: '✓';
+  position: absolute;
+  left: 3px;
   top: var(--space-2);
   color: var(--gold);
   font-weight: 700;
-  font-size: 0.95em;
+  font-size: 0.8em;
+  line-height: 1.4;
 }
 
 .what-we-do-specific {
@@ -544,7 +554,107 @@
   .why-us-acta207__list li {
     padding: var(--space-3) var(--space-4);
   }
-  .use-cases__list li {
-    padding: var(--space-3) var(--space-3) var(--space-3) var(--space-5);
-  }
 }
+
+/* ============================================================
+   Calculator modal shell (2026-05-29 redesign).
+   Форма-калькулятор всплывает карточкой по центру поверх затемнения.
+   Шапка/подвал прибиты, тело скроллится, подвал хостит живой результат.
+   ============================================================ */
+.calc-modal[hidden] { display: none; }
+
+.calc-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-4);
+}
+
+.calc-modal__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(7, 9, 14, 0.66);
+  -webkit-backdrop-filter: blur(2px);
+  backdrop-filter: blur(2px);
+}
+
+.calc-modal__card {
+  position: relative;
+  width: 100%;
+  max-width: 460px;
+  max-height: calc(100dvh - var(--space-8));
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-5);
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.6);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.calc-modal__header {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-3);
+  padding: var(--space-4) var(--space-5);
+  border-bottom: 1px solid var(--border-faint);
+}
+
+.calc-modal__title {
+  margin: var(--space-1) 0 0;
+  font-size: var(--ts-h4);
+  font-weight: 800;
+  color: var(--text);
+}
+
+.calc-modal__close {
+  flex: 0 0 auto;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 0;
+}
+
+.calc-modal__close:hover { border-color: var(--gold); }
+
+.calc-modal__body {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: var(--space-5);
+  position: relative;
+}
+
+/* Внутри модалки форма теряет собственную «карточную» обёртку (нет контейнера в контейнере)
+   и всегда одноколоночная (карточка узкая). */
+.calc-modal__body .krepko-calc {
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  padding: 0;
+  gap: var(--space-4);
+}
+@media (min-width: 900px) {
+  .calc-modal__body .krepko-calc { grid-template-columns: 1fr; }
+}
+
+/* Живой результат идёт под формой в том же скролл-теле — отдельной карточкой
+   (рамка + золотая полоска ::before из базового .krepko-calc__result). */
+.calc-modal__body .krepko-calc__result {
+  margin-top: var(--space-5);
+}
+
+body.calc-modal-open { overflow: hidden; }

@@ -237,9 +237,61 @@
     recalc();
   }
 
+  // === Modal control (2026-05-29 redesign) ===
+  // Триггеры открытия: любой [data-calc-open]. Закрытие: [data-calc-close],
+  // бэкдроп, Esc. Расчёт/CTA уже рисует init() выше — здесь только show/hide.
+  // Фон намеренно без inert/aria-hidden: лёгкий vanilla-сайт, ловушка фокуса
+  // ловит только физический Tab (см. onKeydown) — для этого кейса достаточно.
+  function initModal() {
+    var modal = document.getElementById('krepko-calc-modal');
+    if (!modal) return;
+    var card = modal.querySelector('.calc-modal__card');
+    var lastFocus = null;
+
+    function focusables() {
+      return card.querySelectorAll(
+        'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
+      );
+    }
+    function onKeydown(e) {
+      if (e.key === 'Escape') { closeModal(); return; }
+      if (e.key !== 'Tab') return;
+      var f = focusables();
+      if (!f.length) return;
+      var first = f[0];
+      var last = f[f.length - 1];
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+    }
+    function openModal() {
+      if (!modal.hidden) return;
+      lastFocus = document.activeElement;
+      modal.hidden = false;
+      document.body.classList.add('calc-modal-open');
+      var f = focusables();
+      if (f.length) f[0].focus();
+      document.addEventListener('keydown', onKeydown);
+    }
+    function closeModal() {
+      modal.hidden = true;
+      document.body.classList.remove('calc-modal-open');
+      document.removeEventListener('keydown', onKeydown);
+      if (lastFocus && typeof lastFocus.focus === 'function') lastFocus.focus();
+    }
+
+    Array.prototype.forEach.call(document.querySelectorAll('[data-calc-open]'), function (btn) {
+      btn.addEventListener('click', function (e) { e.preventDefault(); openModal(); });
+    });
+    Array.prototype.forEach.call(modal.querySelectorAll('[data-calc-close]'), function (btn) {
+      btn.addEventListener('click', function (e) { e.preventDefault(); closeModal(); });
+    });
+  }
+
+  function boot() { init(); initModal(); }
+
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init);
+    document.addEventListener('DOMContentLoaded', boot);
   } else {
-    init();
+    boot();
   }
 })();

@@ -1,0 +1,117 @@
+/* ============================================================
+   Module: PricingBlock — «Стоимость».
+   2026-05-29 redesign: факт-панель + кнопка калькулятора-модалки.
+   Базовые .pricing-block / __list стили (раньше отсутствовали в активном CSS).
+   ============================================================ */
+
+.pricing-block {
+  margin: var(--rh-3) 0 0;
+}
+
+.pricing-block__title {
+  font-size: var(--ts-h3);
+  font-weight: 800;
+  margin: 0 0 var(--space-4);
+  color: var(--text);
+}
+
+/* Generic list (ua-inbound + default branches) */
+.pricing-block__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--space-3);
+}
+
+.pricing-block__list li {
+  padding: var(--space-2) 0 var(--space-2) var(--space-5);
+  position: relative;
+  font-size: var(--ts-body);
+  color: var(--text-sub);
+  line-height: 1.5;
+  border-bottom: 1px dashed var(--border-faint);
+}
+
+.pricing-block__list li:last-child {
+  border-bottom: 0;
+}
+
+.pricing-block__list li::before {
+  content: '·';
+  position: absolute;
+  left: var(--space-2);
+  top: var(--space-2);
+  color: var(--gold);
+  font-weight: 700;
+}
+
+.pricing-block__list strong {
+  color: var(--text);
+}
+
+/* === Fact panel (has_calculator branch) === */
+.pricing-block__panel {
+  background: var(--surface);
+  border: 1px solid rgba(196, 149, 42, 0.25);
+  border-radius: var(--r-5);
+  padding: var(--space-5);
+  display: grid;
+  gap: var(--space-4);
+}
+
+.pricing-block__headline {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+}
+
+.pricing-block__amount {
+  font-family: 'Manrope', sans-serif;
+  font-variant-numeric: tabular-nums;
+  font-size: var(--ts-h1);
+  font-weight: 800;
+  color: var(--gold);
+  letter-spacing: -0.5px;
+  line-height: 1;
+}
+
+.pricing-block__amount-note {
+  font-size: var(--ts-body-sm);
+  color: var(--text-muted);
+}
+
+.pricing-block__explain {
+  margin: 0;
+  font-size: var(--ts-body-sm);
+  color: var(--text-sub);
+  line-height: 1.55;
+}
+
+.pricing-block__calc-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  width: 100%;
+  padding: var(--space-4) var(--space-5);
+  background: var(--gold);
+  color: var(--gold-on);
+  border: 0;
+  border-radius: var(--r-3);
+  font-family: 'Manrope', sans-serif;
+  font-size: var(--ts-body);
+  font-weight: 800;
+  cursor: pointer;
+  min-height: 44px;
+  transition: transform var(--t-1);
+}
+
+.pricing-block__calc-btn:hover {
+  transform: translateY(-1px);
+}
+
+.pricing-block__calc-icon {
+  flex: 0 0 auto;
+}

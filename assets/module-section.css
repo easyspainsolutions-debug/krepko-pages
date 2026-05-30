@@ -116,3 +116,28 @@ hr.rh-section-break {
   padding-top: var(--space-6);
   border-top: 1px solid var(--border);
 }
+
+/* === Tint band (2026-05-29 redesign) ===
+   Воздух из spacing, не из рамок: МАКСИМУМ 2 тонированные плашки на странице
+   (use_cases = #1, required_docs = #2). Остальные секции «дышат» на чистом navy. */
+.tint-band {
+  background: var(--gold-tint);
+  border: 1px solid rgba(196, 149, 42, 0.2);
+  border-radius: var(--r-5);
+  padding: var(--space-5);
+  margin-top: var(--rh-3);
+}
+.tint-band > .p-label {
+  margin-bottom: var(--space-2);
+}
+.tint-band > h2 {
+  margin: 0 0 var(--space-2);
+  font-size: var(--ts-h3);
+  font-weight: 800;
+  color: var(--text);
+}
+@media (max-width: 640px) {
+  .tint-band {
+    padding: var(--space-4);
+  }
+}

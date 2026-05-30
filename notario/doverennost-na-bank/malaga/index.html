@@ -35,6 +35,7 @@
   <link rel="stylesheet" href="/assets/module-hero.css?v=20260528">
   <link rel="stylesheet" href="/assets/module-trust.css?v=20260526h2">
   <link rel="stylesheet" href="/assets/module-process.css?v=20260526h2">
+  <link rel="stylesheet" href="/assets/module-pricing.css?v=20260529">
   <link rel="stylesheet" href="/assets/site-nav.css?v=20260528">
   <link rel="stylesheet" href="/assets/krepko-chips.css?v=20260528">
   <link rel="stylesheet" href="/assets/site-footer.css?v=20260528">
@@ -148,10 +149,7 @@
 <section class="hero hero--document">
 <span class="direction-badge direction-badge--es-internal">В Испании</span>  <h1 class="hero__h1">Доверенность на банковский счёт</h1>
   <p class="hero__title-es" lang="es">Poder bancario</p>
-  <p class="hero__price">
-    от €75
-      <small class="hero__price-note">аванс за свою работу</small>
-  </p>
+  <p class="hero__dek">Поручите банковские дела представителю в Испании — счёт, платежи, закрытие вклада.</p>
   <div class="cta-row">
     <a class="btn btn--wa" href="https://wa.me/34641048296?text=%D0%94%D0%BE%D0%B2%D0%B5%D1%80%D0%B5%D0%BD%D0%BD%D0%BE%D1%81%D1%82%D1%8C%20%D0%BD%D0%B0%20%D0%B1%D0%B0%D0%BD%D0%BA%D0%BE%D0%B2%D1%81%D0%BA%D0%B8%D0%B9%20%D1%81%D1%87%D1%91%D1%82">Описать кейс</a>
     <a class="btn btn--tg" href="https://t.me/krepko_es_admin_bot?start=doc_doverennost-na-bank">Telegram бот</a>
@@ -164,118 +162,136 @@
   </section>
 <section class="pricing-block">
   <h2 class="pricing-block__title">Стоимость</h2>
-    <ul class="pricing-block__list">
-      <li><strong>Аванс Krepko (своя работа):</strong> от €75, рассчитывается под кейс ниже</li>
-      <li><strong>Нотариус, переводчик, апостиль</strong> — оплачиваются на месте напрямую, по их тарифам</li>
-      <li>По нотариусу действует гарантия: расхождение до €30 от согласованной оценки Krepko покрывает</li>
-    </ul>
-    <a href="#calc" class="pricing-block__calc-link">Рассчитать под ваш кейс →</a>
-<span class="payment-badge badge--success">Аванс за свою работу + платежи на месте</span></section><section class="krepko-calc-section rh-section-break" id="calc">
-  <span class="p-label">Калькулятор</span>
-  <h2>Расчёт под ваш кейс</h2>
-  <p class="krepko-calc__lede">Подберите параметры — увидите аванс Krepko и оценку «под ключ» с нотариусом и переводчиком.</p>
-
-  <form id="krepko-calc-doverennost" class="krepko-calc" novalidate
-        data-default-pages="1"
-        data-document-type="doverennost-na-bank"
-        data-document-title="Доверенность на банковский счёт">
-
-    <fieldset class="krepko-calc__field">
-      <legend class="krepko-calc__legend">1. Черновик доверенности</legend>
-      <div class="krepko-calc__options">
-        <label class="krepko-calc__option">
-          <input type="radio" name="hasDraft" value="yes" checked>
-          <span>Есть готовый текст — Krepko проверит и согласует с нотариусом</span>
-        </label>
-        <label class="krepko-calc__option">
-          <input type="radio" name="hasDraft" value="no">
-          <span>Нет — Krepko составит с нуля</span>
-        </label>
+    <div class="pricing-block__panel">
+      <div class="pricing-block__headline">
+        <span class="pricing-block__amount">от €75</span>
+        <span class="pricing-block__amount-note">
+аванс за работу Krepko        </span>
       </div>
-    </fieldset>
+      <p class="pricing-block__explain">Нотариуса и апостиль оплачиваете на месте напрямую — это не входит в аванс. По нотариусу действует гарантия: расхождение до €30 от оценки Krepko покрывает.</p>
+      <button type="button" class="pricing-block__calc-btn" data-calc-open>
+        <svg class="pricing-block__calc-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="8" y1="18" x2="16" y2="18"/></svg>
+        Рассчитать под свой кейс
+      </button>
+    </div>
+<span class="payment-badge badge--success">Аванс за свою работу + платежи на месте</span></section><div class="calc-modal" id="krepko-calc-modal" hidden>
+  <div class="calc-modal__backdrop" data-calc-close></div>
+  <div class="calc-modal__card" role="dialog" aria-modal="true" aria-labelledby="calc-modal-title">
 
-    <label class="krepko-calc__field">
-      <span class="krepko-calc__legend">2. Объём перевода</span>
-      <select name="pages" class="krepko-calc__select">
-        <option value="1">1 страница</option>
-        <option value="2">2 страницы</option>
-        <option value="3">3 страницы</option>
-        <option value="more">Больше — нестандартный кейс</option>
-      </select>
-    </label>
-
-    <label class="krepko-calc__field">
-      <span class="krepko-calc__legend">3. Город подписания</span>
-      <select name="city" class="krepko-calc__select">
-        <option value="" disabled selected>— выберите город —</option>
-          <option value="alicante">Аликанте</option>
-          <option value="valencia">Валенсия</option>
-          <option value="murcia">Мурсия</option>
-          <option value="madrid">Мадрид</option>
-          <option value="barcelona">Барселона</option>
-          <option value="malaga">Малага</option>
-      </select>
-      <small class="krepko-calc__hint">Город нужен для подбора переводчика и нотариуса. На цену не влияет.</small>
-    </label>
-
-    <fieldset class="krepko-calc__field">
-      <legend class="krepko-calc__legend">4. Срочность перевода</legend>
-      <div class="krepko-calc__options">
-        <label class="krepko-calc__option">
-          <input type="radio" name="urgencyT" value="standard" checked>
-          <span>Стандарт — больше 5 дней</span>
-        </label>
-        <label class="krepko-calc__option">
-          <input type="radio" name="urgencyT" value="rush_25">
-          <span>2–5 дней (+25%)</span>
-        </label>
-        <label class="krepko-calc__option">
-          <input type="radio" name="urgencyT" value="rush_50">
-          <span>Меньше 48 часов (+50%)</span>
-        </label>
+    <header class="calc-modal__header">
+      <div>
+        <span class="p-label">Калькулятор</span>
+        <h2 class="calc-modal__title" id="calc-modal-title">Расчёт под ваш кейс</h2>
       </div>
-    </fieldset>
+      <button type="button" class="calc-modal__close" data-calc-close aria-label="Закрыть калькулятор">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><line x1="5" y1="5" x2="19" y2="19"/><line x1="19" y1="5" x2="5" y2="19"/></svg>
+      </button>
+    </header>
 
-    <fieldset class="krepko-calc__field">
-      <legend class="krepko-calc__legend">5. Срочность подписания</legend>
-      <div class="krepko-calc__options">
-        <label class="krepko-calc__option">
-          <input type="radio" name="urgencyS" value="standard" checked>
-          <span>Больше 5 рабочих дней</span>
-        </label>
-        <label class="krepko-calc__option">
-          <input type="radio" name="urgencyS" value="rush_30">
-          <span>5 рабочих дней и быстрее (+€30)</span>
-        </label>
-      </div>
-    </fieldset>
+    <div class="calc-modal__body">
+      <form id="krepko-calc-doverennost" class="krepko-calc" novalidate
+            data-default-pages="1"
+            data-document-type="doverennost-na-bank"
+            data-document-title="Доверенность на банковский счёт">
 
-    <fieldset class="krepko-calc__field">
-      <legend class="krepko-calc__legend">6. Апостиль</legend>
-      <div class="krepko-calc__options">
-        <label class="krepko-calc__option">
-          <input type="radio" name="apostille" value="none" checked>
-          <span>Не нужен</span>
-        </label>
-        <label class="krepko-calc__option">
-          <input type="radio" name="apostille" value="normal">
-          <span>Обычный через Krepko — €22</span>
-        </label>
-        <label class="krepko-calc__option">
-          <input type="radio" name="apostille" value="urgent">
-          <span>Срочный через Krepko — €32</span>
-        </label>
-        <label class="krepko-calc__option">
-          <input type="radio" name="apostille" value="self">
-          <span>Клиент оформит сам</span>
-        </label>
-      </div>
-    </fieldset>
+        <fieldset class="krepko-calc__field">
+          <legend class="krepko-calc__legend">1. Черновик доверенности</legend>
+          <div class="krepko-calc__options">
+            <label class="krepko-calc__option">
+              <input type="radio" name="hasDraft" value="yes" checked>
+              <span>Есть готовый текст — Krepko проверит и согласует с нотариусом</span>
+            </label>
+            <label class="krepko-calc__option">
+              <input type="radio" name="hasDraft" value="no">
+              <span>Нет — Krepko составит с нуля</span>
+            </label>
+          </div>
+        </fieldset>
 
-  </form>
+        <label class="krepko-calc__field">
+          <span class="krepko-calc__legend">2. Объём перевода</span>
+          <select name="pages" class="krepko-calc__select">
+            <option value="1">1 страница</option>
+            <option value="2">2 страницы</option>
+            <option value="3">3 страницы</option>
+            <option value="more">Больше — нестандартный кейс</option>
+          </select>
+        </label>
 
-  <div class="krepko-calc__result" id="krepko-calc-result" aria-live="polite"></div>
-</section><section class="why-us-acta207 rh-section-break">
+        <label class="krepko-calc__field">
+          <span class="krepko-calc__legend">3. Город подписания</span>
+          <select name="city" class="krepko-calc__select">
+            <option value="" disabled selected>— выберите город —</option>
+              <option value="alicante">Аликанте</option>
+              <option value="valencia">Валенсия</option>
+              <option value="murcia">Мурсия</option>
+              <option value="madrid">Мадрид</option>
+              <option value="barcelona">Барселона</option>
+              <option value="malaga">Малага</option>
+          </select>
+          <small class="krepko-calc__hint">Город нужен для подбора переводчика и нотариуса. На цену не влияет.</small>
+        </label>
+
+        <fieldset class="krepko-calc__field">
+          <legend class="krepko-calc__legend">4. Срочность перевода</legend>
+          <div class="krepko-calc__options">
+            <label class="krepko-calc__option">
+              <input type="radio" name="urgencyT" value="standard" checked>
+              <span>Стандарт — больше 5 дней</span>
+            </label>
+            <label class="krepko-calc__option">
+              <input type="radio" name="urgencyT" value="rush_25">
+              <span>2–5 дней (+25%)</span>
+            </label>
+            <label class="krepko-calc__option">
+              <input type="radio" name="urgencyT" value="rush_50">
+              <span>Меньше 48 часов (+50%)</span>
+            </label>
+          </div>
+        </fieldset>
+
+        <fieldset class="krepko-calc__field">
+          <legend class="krepko-calc__legend">5. Срочность подписания</legend>
+          <div class="krepko-calc__options">
+            <label class="krepko-calc__option">
+              <input type="radio" name="urgencyS" value="standard" checked>
+              <span>Больше 5 рабочих дней</span>
+            </label>
+            <label class="krepko-calc__option">
+              <input type="radio" name="urgencyS" value="rush_30">
+              <span>5 рабочих дней и быстрее (+€30)</span>
+            </label>
+          </div>
+        </fieldset>
+
+        <fieldset class="krepko-calc__field">
+          <legend class="krepko-calc__legend">6. Апостиль</legend>
+          <div class="krepko-calc__options">
+            <label class="krepko-calc__option">
+              <input type="radio" name="apostille" value="none" checked>
+              <span>Не нужен</span>
+            </label>
+            <label class="krepko-calc__option">
+              <input type="radio" name="apostille" value="normal">
+              <span>Обычный через Krepko — €22</span>
+            </label>
+            <label class="krepko-calc__option">
+              <input type="radio" name="apostille" value="urgent">
+              <span>Срочный через Krepko — €32</span>
+            </label>
+            <label class="krepko-calc__option">
+              <input type="radio" name="apostille" value="self">
+              <span>Клиент оформит сам</span>
+            </label>
+          </div>
+        </fieldset>
+
+      </form>
+      <div class="krepko-calc__result" id="krepko-calc-result" aria-live="polite"></div>
+    </div>
+
+  </div>
+</div><section class="why-us-acta207 rh-section-break">
   <span class="p-label">Почему Krepko</span>
   <h2>Что вы получаете от Krepko</h2>
   <ul class="why-us-acta207__list">
@@ -316,7 +332,7 @@
   <p>Представитель Krepko в Малаге сопровождает у нотариуса. Опишите задачу в WhatsApp — план и стоимость за 15 минут.</p>
     <a class="btn btn--gold" href="https://wa.me/34641048296">Написать в WhatsApp</a>
 </section>  <aside class="sticky-jump" aria-label="Быстрый доступ к расчёту">
-    <a class="sticky-jump__btn sticky-jump__btn--calc" href="#calc">Расчёт</a>
+    <button type="button" class="sticky-jump__btn sticky-jump__btn--calc" data-calc-open>Расчёт</button>
     <a class="sticky-jump__btn sticky-jump__btn--wa" href="https://wa.me/34641048296?text=%D0%94%D0%BE%D0%B2%D0%B5%D1%80%D0%B5%D0%BD%D0%BD%D0%BE%D1%81%D1%82%D1%8C%20%D0%BD%D0%B0%20%D0%B1%D0%B0%D0%BD%D0%BA%D0%BE%D0%B2%D1%81%D0%BA%D0%B8%D0%B9%20%D1%81%D1%87%D1%91%D1%82%20%D0%B2%20%D0%9C%D0%B0%D0%BB%D0%B0%D0%B3%D0%B5" rel="noopener noreferrer" target="_blank">WhatsApp →</a>
   </aside>
   </main>
