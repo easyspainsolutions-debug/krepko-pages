@@ -703,13 +703,49 @@
     <changefreq>yearly</changefreq>
   </url>
   <url>
+    <loc>https://krepko.es/tramites/barcelona/</loc>
+    <lastmod>2026-06-01</lastmod>
+    <priority>0.7</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://krepko.es/tramites/valencia/</loc>
+    <lastmod>2026-06-01</lastmod>
+    <priority>0.7</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
     <loc>https://krepko.es/tramites/firma-digital/</loc>
     <lastmod>2026-06-01</lastmod>
     <priority>0.7</priority>
     <changefreq>monthly</changefreq>
   </url>
   <url>
+    <loc>https://krepko.es/tramites/madrid/</loc>
+    <lastmod>2026-06-01</lastmod>
+    <priority>0.7</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://krepko.es/tramites/alicante/</loc>
+    <lastmod>2026-06-01</lastmod>
+    <priority>0.7</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
     <loc>https://krepko.es/tramites/canje-permiso/</loc>
+    <lastmod>2026-06-01</lastmod>
+    <priority>0.7</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://krepko.es/tramites/murcia/</loc>
+    <lastmod>2026-06-01</lastmod>
+    <priority>0.7</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://krepko.es/tramites/malaga/</loc>
     <lastmod>2026-06-01</lastmod>
     <priority>0.7</priority>
     <changefreq>monthly</changefreq>
