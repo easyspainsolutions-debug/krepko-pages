@@ -12,6 +12,36 @@
     if (typeof window.gtag === 'function') {
       try { window.gtag('event', name, params || {}); } catch (e) { /* no-op */ }
     }
+    sendToBot(name, params);
+  }
+
+  // Дублирование событий в наш Railway-бот. Endpoint берётся из
+  // <meta name="krepko-track-endpoint"> — если meta нет, тихо ничего не шлём.
+  // sendBeacon выбран, потому что переживает уход на новую вкладку (WA/TG/mailto).
+  function sendToBot(name, params) {
+    var meta = document.querySelector('meta[name="krepko-track-endpoint"]');
+    var endpoint = meta && (meta.getAttribute('content') || '').trim();
+    if (!endpoint) return;
+    var p = params || {};
+    var payload = JSON.stringify({
+      cta_id:   name,
+      cta_page: p.page || window.location.pathname,
+      cta_text: (p.location || p.service || p.question || '') + ''
+    });
+    try {
+      if (navigator.sendBeacon) {
+        navigator.sendBeacon(endpoint, new Blob([payload], { type: 'text/plain;charset=UTF-8' }));
+        return;
+      }
+    } catch (e) { /* fall through */ }
+    try {
+      fetch(endpoint, {
+        method: 'POST',
+        body: payload,
+        headers: { 'Content-Type': 'text/plain;charset=UTF-8' },
+        keepalive: true, mode: 'cors', credentials: 'omit'
+      }).catch(function () {});
+    } catch (e) { /* no-op */ }
   }
 
   function getUTM() {
