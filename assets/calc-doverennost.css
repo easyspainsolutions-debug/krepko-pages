@@ -137,7 +137,7 @@
 
 .krepko-calc__total {
   display: grid;
-  gap: var(--space-2);
+  gap: var(--space-3);
 }
 
 .krepko-calc__total-eyebrow {
@@ -148,27 +148,61 @@
   color: var(--gold);
 }
 
-.krepko-calc__total-row {
+/* Две корзины оплаты: предоплата за подготовку (hero) + остаток к оплате.
+   Спек: docs/superpowers/specs/2026-06-01-calc-predoplata-ostatok-design.md */
+.krepko-calc__bucket {
+  display: grid;
+  gap: var(--space-1);
+}
+
+.krepko-calc__bucket-row {
   display: flex;
   align-items: baseline;
-  gap: var(--space-3);
+  gap: var(--space-2);
   flex-wrap: wrap;
 }
 
-.krepko-calc__total-label {
+.krepko-calc__bucket-label {
   font-size: var(--ts-h4);
-  color: var(--text-sub);
   letter-spacing: 0.02em;
 }
 
-.krepko-calc__total-value {
-  font-size: var(--ts-h1);
+.krepko-calc__bucket-value {
   font-weight: 800;
-  color: var(--gold);
   line-height: 1;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
 }
 
-/* Под ключ — second-tier подзаголовок. Главный акцент — «Наша работа». */
+.krepko-calc__bucket-note {
+  font-size: var(--ts-body-sm);
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+
+/* Предоплата — главный акцент: золотая крупная сумма (фиксируется при подтверждении). */
+.krepko-calc__bucket--predoplata .krepko-calc__bucket-label {
+  color: var(--text);
+}
+.krepko-calc__bucket--predoplata .krepko-calc__bucket-value {
+  font-size: var(--ts-h1);
+  color: var(--gold);
+}
+
+/* Остаток — вторичный: сумма меньше, нейтральный цвет, отделён тонкой линией. */
+.krepko-calc__bucket--ostatok {
+  padding-top: var(--space-3);
+  border-top: 1px solid var(--border-faint);
+}
+.krepko-calc__bucket--ostatok .krepko-calc__bucket-label {
+  color: var(--text-sub);
+}
+.krepko-calc__bucket--ostatok .krepko-calc__bucket-value {
+  font-size: var(--ts-h3);
+  color: var(--text);
+}
+
+/* Под ключ — second-tier подзаголовок под обеими корзинами. */
 .krepko-calc__total-sub {
   font-size: var(--ts-body-sm);
   color: var(--text-muted);
@@ -184,48 +218,6 @@
   color: var(--text);
   font-size: var(--ts-body-sm);
   line-height: 1.45;
-}
-
-.krepko-calc__payments {
-  background: var(--surface-sunk);
-  border: 1px solid var(--border-faint);
-  border-radius: var(--r-3);
-  padding: var(--space-4);
-  display: grid;
-  gap: var(--space-2);
-}
-
-.krepko-calc__payments-title {
-  margin: 0;
-  font-size: var(--ts-h4);
-  color: var(--text);
-}
-
-.krepko-calc__payments-title strong {
-  color: var(--gold);
-}
-
-.krepko-calc__payments-note {
-  margin: 0;
-  font-size: var(--ts-body-sm);
-  color: var(--text-sub);
-  line-height: 1.5;
-}
-
-.krepko-calc__payments-list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: grid;
-  gap: var(--space-1);
-  font-size: var(--ts-body-sm);
-  color: var(--text-sub);
-}
-
-.krepko-calc__payments-list li::before {
-  content: '·';
-  margin-right: var(--space-2);
-  color: var(--text-muted);
 }
 
 .krepko-calc__disclaimer {
@@ -244,39 +236,56 @@
   margin: 0;
 }
 
-.krepko-calc__breakdown {
+/* Разбивка остатка «из чего складывается» — нативный <details>, раскрывается по клику. */
+.krepko-calc__breakdown-details {
+  margin-top: var(--space-1);
+}
+
+.krepko-calc__breakdown-summary {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-1) 0;
+  font-size: var(--ts-body-sm);
+  color: var(--gold);
+  cursor: pointer;
+  user-select: none;
   list-style: none;
-  margin: 0;
-  padding: 0;
+}
+.krepko-calc__breakdown-summary::-webkit-details-marker { display: none; }
+.krepko-calc__breakdown-summary::before {
+  content: '▸';
+  font-size: 0.9em;
+  transition: transform var(--t-1);
+}
+.krepko-calc__breakdown-details[open] .krepko-calc__breakdown-summary::before {
+  transform: rotate(90deg);
+}
+
+.krepko-calc__breakdown-list {
+  list-style: none;
+  margin: var(--space-2) 0 0;
+  padding: var(--space-3) var(--space-4);
+  background: var(--surface-sunk);
+  border-radius: var(--r-3);
   display: grid;
   gap: var(--space-2);
 }
 
-.krepko-calc__breakdown li {
+.krepko-calc__breakdown-list li {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
   gap: var(--space-3);
-  font-size: var(--ts-body);
+  font-size: var(--ts-body-sm);
   color: var(--text-sub);
 }
 
-.krepko-calc__row-label::before {
-  content: '·';
-  margin-right: var(--space-2);
-  color: var(--text-muted);
-}
-
-.krepko-calc__row-value {
+.krepko-calc__breakdown-value {
   font-weight: 600;
   color: var(--text);
   font-variant-numeric: tabular-nums;
-}
-
-.krepko-calc__row-value em {
-  font-style: normal;
-  color: var(--text-muted);
-  font-weight: 400;
+  white-space: nowrap;
 }
 
 .krepko-calc__assurance {
@@ -548,8 +557,11 @@
   .krepko-calc__result {
     padding: var(--space-4);
   }
-  .krepko-calc__total-value {
+  .krepko-calc__bucket--predoplata .krepko-calc__bucket-value {
     font-size: var(--ts-h2);
+  }
+  .krepko-calc__bucket--ostatok .krepko-calc__bucket-value {
+    font-size: var(--ts-h4);
   }
   .why-us-acta207__list li {
     padding: var(--space-3) var(--space-4);

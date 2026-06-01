@@ -48,14 +48,14 @@
     var N = parseInt(state.pages, 10) || 1;
     var apostilleViaUs = (state.apostille === 'normal' || state.apostille === 'urgent');
 
-    // KREPKO_АВАНС
+    // Предоплата за подготовку (krepkoAvans — имя константы не меняем, см. acta-207 §4)
     var base = state.hasDraft ? BASE_WITH_DRAFT : (BASE_NO_DRAFT_FIX + BASE_NO_DRAFT_PER_PAGE * N);
     var translation = TRANSLATION_PER_PAGE * N * (URGENCY_T_MULT[state.urgencyT] || 1);
     var urgencySigning = URGENCY_S_ADD[state.urgencyS] || 0;
     var apostilleCoord = apostilleViaUs ? APOSTILLE_COORD : 0;
     var krepkoAvans = base + translation + urgencySigning + apostilleCoord;
 
-    // Платежи на месте
+    // Остаток к оплате (по факту подписания и регистрации)
     var notary = NOTARY_FIRST_PAGE + NOTARY_NEXT_PAGE * (N - 1);
     var translatorOnsite = TRANSLATOR_FLAT;
     var apostilleSelfCost = APOSTILLE_SELFCOST[state.apostille] || 0;
@@ -98,8 +98,10 @@
     lines.push('• Апостиль: ' + apostilleLabel(state.apostille));
 
     if (!calc.oversize) {
+      var ostatok = calc.notary + calc.translatorOnsite + calc.apostilleSelfCost;
       lines.push('');
-      lines.push('Аванс Krepko (наша работа): ' + eur(calc.krepkoAvans));
+      lines.push('Предоплата за подготовку (составление, согласование, резерв даты): ' + eur(calc.krepkoAvans));
+      lines.push('Остаток к оплате по факту подписания: ~' + eur(ostatok));
       lines.push('Под ключ (оценка): ~' + eur(calc.underKey));
       lines.push('');
       lines.push('Готов прислать документ или описание для точного расчёта.');
@@ -146,58 +148,59 @@
       ? '<p class="krepko-calc__warning">⚠ Срочное составление с нуля — уточним выполнимость в WhatsApp.</p>'
       : '';
 
-    var rows = [];
-    rows.push(row('Наша работа (аванс):', eur(calc.krepkoAvans)));
-    rows.push(row('Нотариус (оценка):', eur(calc.notary)));
-    rows.push(row('Переводчик:', eur(calc.translatorOnsite)));
+    // Остаток к оплате = нотариус + переводчик на подписании + апостиль (себестоимость).
+    var ostatok = calc.notary + calc.translatorOnsite + calc.apostilleSelfCost;
+
+    var breakdownRows = [];
+    breakdownRows.push(breakdownRow('Нотариус', '~' + eur(calc.notary)));
+    breakdownRows.push(breakdownRow('Переводчик на подписании', eur(calc.translatorOnsite)));
     if (calc.apostilleSelfCost > 0) {
-      rows.push(row('Апостиль (передаётся переводчику):', eur(calc.apostilleSelfCost)));
-    } else {
-      rows.push(row('Апостиль:', '<em>не входит</em>'));
+      breakdownRows.push(breakdownRow('Апостиль', eur(calc.apostilleSelfCost)));
     }
 
-    // Главный акцент — на «Наша работа», под ключ — second-tier.
-    var headlineHtml =
+    // Две корзины: предоплата за подготовку (фикс, hero) + остаток к оплате (по факту).
+    // Под ключ — second-tier. Спек: docs/superpowers/specs/2026-06-01-calc-predoplata-ostatok-design.md
+    var totalHtml =
       '<div class="krepko-calc__total">' +
-        '<span class="krepko-calc__total-eyebrow">≈ Предварительная оценка · аванс за нашу работу</span>' +
-        '<span class="krepko-calc__total-row">' +
-          '<span class="krepko-calc__total-label">Наша работа:</span> ' +
-          '<span class="krepko-calc__total-value">' + eur(calc.krepkoAvans) + '</span>' +
-        '</span>' +
-        '<span class="krepko-calc__total-sub">' +
-          'Под ключ ~' + eur(calc.underKey) +
-          ' (с нотариусом, переводчиком, апостилем — оценка на месте)' +
-        '</span>' +
-      '</div>';
-
-    var paymentsHtml =
-      '<div class="krepko-calc__payments">' +
-        '<p class="krepko-calc__payments-title">Аванс при подтверждении: <strong>' + eur(calc.krepkoAvans) + '</strong></p>' +
-        '<p class="krepko-calc__payments-note">После подтверждения заявки пришлём точную сумму и ссылку на оплату — это наша работа. Остальное оплачивается на месте напрямую:</p>' +
-        '<ul class="krepko-calc__payments-list">' +
-          '<li>Нотариусу: ~' + eur(calc.notary) + '</li>' +
-          '<li>Переводчику: ' + eur(calc.translatorOnsite) + (calc.apostilleSelfCost > 0 ? ' + апостиль ' + eur(calc.apostilleSelfCost) + ' (передаёте переводчику)' : '') + '</li>' +
-        '</ul>' +
+        '<span class="krepko-calc__total-eyebrow">≈ Предварительная оценка</span>' +
+        '<div class="krepko-calc__bucket krepko-calc__bucket--predoplata">' +
+          '<span class="krepko-calc__bucket-row">' +
+            '<span class="krepko-calc__bucket-label">Предоплата за подготовку:</span> ' +
+            '<span class="krepko-calc__bucket-value">' + eur(calc.krepkoAvans) + '</span>' +
+          '</span>' +
+          '<span class="krepko-calc__bucket-note">составление, согласование с нотариусом и резерв даты подписания</span>' +
+        '</div>' +
+        '<div class="krepko-calc__bucket krepko-calc__bucket--ostatok">' +
+          '<span class="krepko-calc__bucket-row">' +
+            '<span class="krepko-calc__bucket-label">Остаток к оплате:</span> ' +
+            '<span class="krepko-calc__bucket-value">~' + eur(ostatok) + '</span>' +
+          '</span>' +
+          '<span class="krepko-calc__bucket-note">в день подписания и регистрации</span>' +
+          '<details class="krepko-calc__breakdown-details">' +
+            '<summary class="krepko-calc__breakdown-summary">из чего складывается</summary>' +
+            '<ul class="krepko-calc__breakdown-list">' + breakdownRows.join('') + '</ul>' +
+          '</details>' +
+        '</div>' +
+        '<span class="krepko-calc__total-sub">Под ключ ~' + eur(calc.underKey) + '</span>' +
       '</div>';
 
     var disclaimerHtml =
       '<p class="krepko-calc__disclaimer">' +
-        'Это ориентировочный расчёт. Точную стоимость подтвердим после получения вашего документа — обычно в течение рабочего дня. ' +
-        'После подтверждения цена нашей работы фиксируется. По нотариусу действует гарантия: расхождение до €30 от согласованной оценки покрываем мы.' +
+        'Это ориентировочный расчёт. Точную стоимость подтвердим после получения вашего документа — ' +
+        'обычно в течение рабочего дня, тогда же пришлём ссылку на предоплату. ' +
+        'По нотариальной части — гарантия: расхождение до €30 от согласованной оценки покрываем мы.' +
       '</p>';
 
     resultEl.innerHTML =
-      headlineHtml +
+      totalHtml +
       warningHtml +
       '<hr class="krepko-calc__rule">' +
-      '<ul class="krepko-calc__breakdown">' + rows.join('') + '</ul>' +
-      paymentsHtml +
       disclaimerHtml +
       ctaButton(state, calc, cityNamesBySlug, docMeta);
   }
 
-  function row(label, value) {
-    return '<li><span class="krepko-calc__row-label">' + label + '</span> <span class="krepko-calc__row-value">' + value + '</span></li>';
+  function breakdownRow(label, value) {
+    return '<li><span class="krepko-calc__breakdown-label">' + label + '</span> <span class="krepko-calc__breakdown-value">' + value + '</span></li>';
   }
 
   function ctaButton(state, calc, cityNamesBySlug, docMeta) {
