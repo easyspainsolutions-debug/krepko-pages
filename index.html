@@ -32,10 +32,10 @@
   <link rel="stylesheet" href="/assets/tokens.css?v=20260526h2">
   <link rel="stylesheet" href="/assets/module-section.css?v=20260526h2">
   <link rel="stylesheet" href="/assets/module-cta.css?v=20260526h2">
-  <link rel="stylesheet" href="/assets/module-card.css?v=20260528">
-  <link rel="stylesheet" href="/assets/module-hero.css?v=20260528">
-  <link rel="stylesheet" href="/assets/module-trust.css?v=20260526h2">
-  <link rel="stylesheet" href="/assets/module-process.css?v=20260526h2">
+  <link rel="stylesheet" href="/assets/module-card.css?v=20260602">
+  <link rel="stylesheet" href="/assets/module-hero.css?v=20260602">
+  <link rel="stylesheet" href="/assets/module-trust.css?v=20260602">
+  <link rel="stylesheet" href="/assets/module-process.css?v=20260602">
   <link rel="stylesheet" href="/assets/module-pricing.css?v=20260529">
   <link rel="stylesheet" href="/assets/site-nav.css?v=20260528">
   <link rel="stylesheet" href="/assets/krepko-chips.css?v=20260528">
@@ -43,7 +43,7 @@
   <link rel="stylesheet" href="/assets/a11y.css">
   <link rel="stylesheet" href="/assets/krepko-base.css?v=1">
   <link rel="stylesheet" href="/assets/desktop.css">
-  <link rel="stylesheet" href="/assets/page-about.css?v=20260526a">
+  <link rel="stylesheet" href="/assets/page-about.css?v=20260602b">
   <link rel="stylesheet" href="/assets/cookie-consent.css?v=20260526a">
   <script src="/assets/cookie-consent.js?v=20260526a" defer></script>
   <!-- Consent-safe event layer (no-op until window.gtag exists, i.e. after "Accept all"):
@@ -153,7 +153,7 @@
   <div class="hero__cta-row cta-row">
     <a class="btn btn--gold" href="https://wa.me/34641048296">Написать в WhatsApp</a>
   </div>
-  <a class="hero__link-secondary" href="/services/">Все услуги →</a>
+<p class="hero__cta-value">Опишите задачу — план и стоимость за 15 минут</p>  <a class="hero__link-secondary" href="https://t.me/krepko_es_admin_bot">Открыть Telegram-бот →</a>
   <div class="hero__meta-row">
     <div class="hero__meta-item">
       <small>с</small>
@@ -169,9 +169,49 @@
     </div>
   </div>
 </section>
+<section class="guarantees rh-section-break" aria-label="Гарантии Krepko">
+  <div class="guarantees__grid">
+    <div class="guarantee">
+      <span class="guarantee__icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+      </span>
+      <div class="guarantee__body">
+        <h3 class="guarantee__title">Цена известна заранее</h3>
+        <p class="guarantee__text">Krepko фиксирует стоимость до начала, и не меняет её. Без доплат в процессе.</p>
+      </div>
+    </div>
+    <div class="guarantee">
+      <span class="guarantee__icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+      </span>
+      <div class="guarantee__body">
+        <h3 class="guarantee__title">Бумаги — на Krepko</h3>
+        <p class="guarantee__text">Очереди, записи, переводы, подачи Krepko берёт на себя. От вас — пара сообщений и минимум участия.</p>
+      </div>
+    </div>
+    <div class="guarantee">
+      <span class="guarantee__icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+      </span>
+      <div class="guarantee__body">
+        <h3 class="guarantee__title">На вашем языке</h3>
+        <p class="guarantee__text">Krepko ведёт дело по-русски и по-украински. У нотариуса вы понимаете каждую строчку, а не подписываете вслепую.</p>
+      </div>
+    </div>
+    <div class="guarantee">
+      <span class="guarantee__icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+      </span>
+      <div class="guarantee__body">
+        <h3 class="guarantee__title">Сначала план, потом решение</h3>
+        <p class="guarantee__text">Опишите задачу в WhatsApp — Krepko оценит и предложит план.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
   <section class="home-services-grid rh-section-break">
     <span class="p-label">Направления</span>
-    <h2>Все направления</h2>
     <div class="card-grid">
 <a href="/notario/" class="card card--service">
   <div class="card__top">
@@ -179,55 +219,59 @@
     <span class="card__arrow" aria-hidden="true">→</span>
   </div>
   <h3 class="card__title">Нотариус</h3>
-<span class="card__meta">9 УСЛУГ</span></a><a href="/ukraina/" class="card card--service">
+<span class="card__meta ">9 УСЛУГ</span></a><a href="/ukraina/" class="card card--service">
   <div class="card__top">
       <span class="card__icon"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 8l9 6 9-6"/></svg></span>
     <span class="card__arrow" aria-hidden="true">→</span>
   </div>
   <h3 class="card__title">Из Украины</h3>
-<span class="card__meta">8 УСЛУГ</span></a><a href="/legalizacion/" class="card card--service">
+<span class="card__meta ">8 УСЛУГ</span></a><a href="/legalizacion/" class="card card--service">
   <div class="card__top">
       <span class="card__icon"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="6" width="16" height="13" rx="2"/><circle cx="12" cy="12.5" r="2.5"/><line x1="12" y1="3" x2="12" y2="6"/></svg></span>
     <span class="card__arrow" aria-hidden="true">→</span>
   </div>
   <h3 class="card__title">Легализация</h3>
-<span class="card__meta">3 УСЛУГИ</span></a><a href="/banca/" class="card card--service">
-  <div class="card__top">
-      <span class="card__icon"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21h18"/><path d="M3 10h18l-9-7-9 7z"/><line x1="6" y1="10" x2="6" y2="18"/><line x1="10" y1="10" x2="10" y2="18"/><line x1="14" y1="10" x2="14" y2="18"/><line x1="18" y1="10" x2="18" y2="18"/></svg></span>
-    <span class="card__arrow" aria-hidden="true">→</span>
-  </div>
-  <h3 class="card__title">Банк</h3>
-<span class="card__meta">ПО ЗАПРОСУ</span></a><a href="/traduccion/" class="card card--service">
-  <div class="card__top">
-      <span class="card__icon"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><line x1="3" y1="12" x2="21" y2="12"/><path d="M12 3c2.5 2.5 4 5.5 4 9s-1.5 6.5-4 9c-2.5-2.5-4-5.5-4-9s1.5-6.5 4-9z"/></svg></span>
-    <span class="card__arrow" aria-hidden="true">→</span>
-  </div>
-  <h3 class="card__title">Перевод</h3>
-<span class="card__meta">ПО ЗАПРОСУ</span></a><a href="/migracion/" class="card card--service">
-  <div class="card__top">
-      <span class="card__icon"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="3" width="14" height="18" rx="1"/><circle cx="12" cy="10" r="2.2"/><line x1="9" y1="15" x2="15" y2="15"/><line x1="9" y1="17.5" x2="15" y2="17.5"/></svg></span>
-    <span class="card__arrow" aria-hidden="true">→</span>
-  </div>
-  <h3 class="card__title">Миграция</h3>
-<span class="card__meta">ПО ЗАПРОСУ</span></a><a href="/tramites/" class="card card--service">
+<span class="card__meta ">3 УСЛУГИ</span></a><a href="/tramites/" class="card card--service">
   <div class="card__top">
       <span class="card__icon"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4h6v2H9z"/><path d="M8.5 12.5l2 2 4.5-4.5"/></svg></span>
     <span class="card__arrow" aria-hidden="true">→</span>
   </div>
   <h3 class="card__title">Административные процедуры</h3>
-<span class="card__meta">4 УСЛУГИ</span></a><a href="/fiscalidad/" class="card card--service">
+<span class="card__meta ">4 УСЛУГИ</span></a>    </div>
+
+    <h2 class="home-services-grid__h2-sub">Другие направления</h2>
+    <div class="card-grid">
+<a href="/banca/" class="card card--service">
+  <div class="card__top">
+      <span class="card__icon"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21h18"/><path d="M3 10h18l-9-7-9 7z"/><line x1="6" y1="10" x2="6" y2="18"/><line x1="10" y1="10" x2="10" y2="18"/><line x1="14" y1="10" x2="14" y2="18"/><line x1="18" y1="10" x2="18" y2="18"/></svg></span>
+    <span class="card__arrow" aria-hidden="true">→</span>
+  </div>
+  <h3 class="card__title">Банк</h3>
+<span class="card__meta card__meta--desc">Счёт нерезиденту, необанки</span></a><a href="/traduccion/" class="card card--service">
+  <div class="card__top">
+      <span class="card__icon"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><line x1="3" y1="12" x2="21" y2="12"/><path d="M12 3c2.5 2.5 4 5.5 4 9s-1.5 6.5-4 9c-2.5-2.5-4-5.5-4-9s1.5-6.5 4-9z"/></svg></span>
+    <span class="card__arrow" aria-hidden="true">→</span>
+  </div>
+  <h3 class="card__title">Перевод</h3>
+<span class="card__meta card__meta--desc">Присяжный перевод документов</span></a><a href="/migracion/" class="card card--service">
+  <div class="card__top">
+      <span class="card__icon"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="3" width="14" height="18" rx="1"/><circle cx="12" cy="10" r="2.2"/><line x1="9" y1="15" x2="15" y2="15"/><line x1="9" y1="17.5" x2="15" y2="17.5"/></svg></span>
+    <span class="card__arrow" aria-hidden="true">→</span>
+  </div>
+  <h3 class="card__title">Миграция</h3>
+<span class="card__meta card__meta--desc">ВНЖ, продление, воссоединение</span></a><a href="/fiscalidad/" class="card card--service">
   <div class="card__top">
       <span class="card__icon"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3v18l3-2 3 2 3-2 3 2V3l-3 2-3-2-3 2-3-2z"/><line x1="9" y1="9" x2="15" y2="9"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="13" y2="17"/></svg></span>
     <span class="card__arrow" aria-hidden="true">→</span>
   </div>
   <h3 class="card__title">Налоги</h3>
-<span class="card__meta">ПО ЗАПРОСУ</span></a><a href="/juridico/" class="card card--service">
+<span class="card__meta card__meta--desc">IRPF, autónomo, modelo</span></a><a href="/juridico/" class="card card--service">
   <div class="card__top">
       <span class="card__icon"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="3" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="4" y1="6" x2="20" y2="6"/><path d="M4 6l-3 6h6z"/><path d="M20 6l-3 6h6z"/></svg></span>
     <span class="card__arrow" aria-hidden="true">→</span>
   </div>
   <h3 class="card__title">Юридическое</h3>
-<span class="card__meta">ПО ЗАПРОСУ</span></a>    </div>
+<span class="card__meta card__meta--desc">Сделки, споры, недвижимость</span></a>    </div>
   </section>
 
     <div class="home-body">
@@ -239,15 +283,8 @@
 <p><hr class="rh-section-break"></p>
 <p><span class="p-label">Принципы</span></p>
 <h2>Как работает Krepko</h2>
-<p><strong>Сначала — предоплата за работу Krepko.</strong> Krepko смотрит задачу, считает время, присылает смету. Без этого Krepko не начинает. Остальные расходы — госпошлины, нотариус, переводчик, доставка — оплачиваются по их тарифам отдельно. Документы из Украины — отдельная модель: 100% при подтверждении.</p>
-<p>Никакой почасовой. Смету видите до брони, и сумма не плавает. Точную цифру под ваш случай Krepko просчитает в WhatsApp за один разговор.</p>
-<p><strong>15 + 30 минут вашего времени.</strong> Переписка по делу — около 15. Личная встреча, когда она нужна, — около 30. Подготовку документов, согласования и доставку Krepko ведёт дистанционно.</p>
-<p>В WhatsApp Krepko отвечает быстро. План и сумма приходят в течение 15 минут после описания задачи.</p>
-<p><hr class="rh-section-break"></p>
-<p><span class="p-label">Ресурсы</span></p>
-<h2>Открытый блог — чтобы разобраться самому</h2>
-<p>Не каждая задача требует специалиста. Krepko ведёт блог с практическими гайдами по нотариусу, документам, банкам, ВНЖ и налогам. Без воды и канцелярита.</p>
-<p>Всё бесплатно и без подписок. Если останется вопрос — вы знаете, куда написать.</p>
+<p>Krepko смотрит задачу, считает время и присылает смету — без этого не начинает. Документы из Украины — отдельная модель: 100% предоплата при подтверждении.</p>
+<p>В WhatsApp Krepko отвечает быстро — план и стоимость приходят в тот же разговор.</p>
 </div>
     </div>
 
@@ -258,6 +295,40 @@
   <div class="trustindex-widget" data-widget-id="59556b972710972c1a568364b5b"></div>
   <script defer async src="https://cdn.trustindex.io/loader.js?59556b972710972c1a568364b5b"></script>
 </section>
+<section class="home-guides rh-section-break">
+  <span class="p-label">Гайды</span>
+  <h2>Разобраться самому</h2>
+  <p class="home-guides__dek">Krepko ведёт открытый блог — практические гайды без воды. Если задача простая, решите сами.</p>
+  <div class="card-grid">
+    <a href="/blog/vnzh-ispaniya/" class="card card--article">
+      <span class="card__label">ВНЖ</span>
+      <h3 class="card__title">Как получить ВНЖ в Испании</h3>
+      <span class="card__readtime">7 мин</span>
+    </a>
+    <a href="/blog/nie-tie-ispaniya/" class="card card--article">
+      <span class="card__label">Документы</span>
+      <h3 class="card__title">NIE и TIE: в чём разница</h3>
+      <span class="card__readtime">7 мин</span>
+    </a>
+    <a href="/blog/doverennost-na-russkom/" class="card card--article">
+      <span class="card__label">Нотариус</span>
+      <h3 class="card__title">Доверенность на русском за 30 минут</h3>
+      <span class="card__readtime">6 мин</span>
+    </a>
+    <a href="/blog/bank-nerezident/" class="card card--article">
+      <span class="card__label">Банк</span>
+      <h3 class="card__title">Счёт в банке нерезиденту</h3>
+      <span class="card__readtime">6 мин</span>
+    </a>
+    <a href="/blog/irpf-nalogi-ispaniya/" class="card card--article">
+      <span class="card__label">Налоги</span>
+      <h3 class="card__title">IRPF и налоги 2026</h3>
+      <span class="card__readtime">9 мин</span>
+    </a>
+  </div>
+  <a class="home-guides__all" href="/blog/">Все гайды →</a>
+</section>
+
 
   <section class="rh-section-break home-coverage">
     <span class="p-label">География</span>
@@ -291,8 +362,7 @@
     </div>
   </section>
 
-  <section class="rh-section-break">
-    <span class="p-label">Частые вопросы</span>
+  <section class="rh-section-break home-faq">
 <div class="faq">
   <h2>Частые вопросы</h2>
   <div class="faq__list">
@@ -323,10 +393,16 @@
   </div>
 </div>  </section>
 
+  <section class="home-founder-bridge rh-section-break">
+    <p>За Krepko — команда, которая прошла испанскую систему сама. <a href="/about/">Кто стоит за Krepko →</a></p>
+  </section>
+
 <section class="final-cta">
   <h2>Один контакт — все задачи по Испании</h2>
   <p>Нотариус, ВНЖ, банк, документы из Украины. Опишите задачу в WhatsApp — план и стоимость за 15 минут.</p>
-    <a class="btn btn--gold" href="https://wa.me/34641048296">Написать в WhatsApp</a>
+  <div class="final-cta__actions cta-row">
+<a class="btn btn--gold" href="https://wa.me/34641048296">Написать в WhatsApp</a>    <a class="btn btn--tg" href="https://t.me/krepko_es_admin_bot">Открыть Telegram-бот</a>
+  </div>
 </section>  </main>
 <footer class="site-footer">
   <div class="site-footer__inner">

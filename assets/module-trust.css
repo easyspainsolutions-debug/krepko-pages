@@ -83,3 +83,55 @@
     letter-spacing: 0.04em;
   }
 }
+
+/* ============================================================
+   Guarantees — home-v3 (2026-06-02). 4 канонические гарантии (§2.1).
+   Спокойный trust-актив сразу после hero: симметричная 2×2 сетка,
+   без glow, без hover-lift (это не ссылка). Иконка — gold-галочка
+   в тонкой плашке gold-tint (не эмодзи, stroke-width 1.8 per Дизайн §4).
+   ============================================================ */
+.guarantees__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-4);
+}
+@media (min-width: 600px) {
+  .guarantees__grid {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-5) var(--space-6);
+  }
+}
+.guarantee {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+}
+.guarantee__icon {
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--r-2);
+  background: var(--gold-tint);
+  color: var(--gold);
+  margin-top: 1px;
+}
+.guarantee__body {
+  min-width: 0;
+}
+.guarantee__title {
+  font-family: 'Manrope', sans-serif;
+  font-size: var(--ts-body);
+  font-weight: 700;
+  color: var(--text);
+  margin: 0 0 var(--space-1);
+  line-height: 1.25;
+}
+.guarantee__text {
+  font-size: var(--ts-body-sm);
+  color: var(--text-sub);
+  line-height: 1.5;
+  margin: 0;
+}

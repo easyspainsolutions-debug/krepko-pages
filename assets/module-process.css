@@ -203,6 +203,14 @@
   display: inline-block;
 }
 
+/* home-v3 (2026-06-02): двухканальный финальный CTA (WhatsApp + Telegram-бот).
+   .cta-row даёт flex+gap и колонку на mobile; здесь только центрируем под
+   text-align:center секции. Рендерится лишь когда страница передаёт
+   final_cta_secondary (главная) — остальные ~85 страниц не затронуты. */
+.final-cta__actions {
+  justify-content: center;
+}
+
 /* Mobile — ensure good spacing on small screens */
 @media (max-width: 640px) {
   .process-steps {

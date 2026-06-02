@@ -77,6 +77,16 @@
   border-bottom-color: var(--gold);
 }
 
+/* home-v3 (2026-06-02): value-строка под primary CTA («зачем писать»).
+   Спокойный muted-текст, прижат к кнопке, не конкурирует с primary. */
+.hero__cta-value {
+  font-size: var(--ts-body-sm);
+  color: var(--text-muted);
+  line-height: 1.45;
+  margin: 0 0 var(--space-4);
+  max-width: 360px;
+}
+
 /* Hero на mobile — сжать вертикальный воздух между блоками */
 @media (max-width: 720px) {
   .hero {

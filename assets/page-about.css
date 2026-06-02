@@ -154,3 +154,106 @@
     font-size: var(--ts-body);
   }
 }
+
+/* ============================================================
+   Home — services split + guides + founder bridge (home-v3 2026-06-02).
+   Все home-секции собраны здесь рядом с home-coverage.
+   ============================================================ */
+
+/* Подзаголовок «Другие направления» — визуально subordinate к главному
+   h2 «Krepko ведёт под ключ»: меньше, мягче, с воздухом сверху. */
+.home-services-grid__h2-sub {
+  font-size: var(--ts-h4);
+  font-weight: 700;
+  color: var(--text-sub);
+  margin: var(--rh-3) 0 var(--space-4);
+}
+
+/* HomeGuides — блок гайдов (show-not-tell). Переиспользует .card--article. */
+.home-guides__dek {
+  font-size: var(--ts-body);
+  color: var(--text-sub);
+  line-height: 1.55;
+  margin: 0 0 var(--space-5);
+  max-width: 560px;
+}
+.home-guides__all {
+  display: inline-block;
+  margin-top: var(--space-5);
+  font-family: 'Manrope', sans-serif;
+  font-size: var(--ts-body-sm);
+  font-weight: 500;
+  color: var(--gold);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(196, 149, 42, 0.42);
+  padding-bottom: 1px;
+  transition: border-color var(--t-1), color var(--t-1);
+}
+.home-guides__all:hover {
+  border-bottom-color: var(--gold);
+}
+
+/* Founder-мостик к /about/ (§6.1 company-first → personal). Тихая строка. */
+.home-founder-bridge p {
+  font-size: var(--ts-body);
+  color: var(--text-sub);
+  line-height: 1.6;
+  margin: 0;
+  max-width: 620px;
+}
+.home-founder-bridge a {
+  color: var(--gold);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(196, 149, 42, 0.42);
+  padding-bottom: 1px;
+  transition: border-color var(--t-1);
+  white-space: nowrap;
+}
+.home-founder-bridge a:hover {
+  border-bottom-color: var(--gold);
+}
+
+/* ============================================================
+   Home — SectionLabel «belongs below» rhythm (Daniil 2026-06-02).
+   Маркеры-эйбрференты («Направления», «География», «Почему»…) должны
+   визуально принадлежать блоку ПОД собой, а не над. Большой зазор
+   остаётся СВЕРХУ (граница секции + padding), зазор СНИЗУ сжимается
+   до space-3 → маркер прилипает к своему заголовку.
+   Скоуп — только home-классы; service/city/document не трогаем.
+   ============================================================ */
+.home-services-grid > .p-label,
+.home-reviews > .p-label,
+.home-guides > .p-label,
+.home-coverage > .p-label {
+  margin-bottom: var(--space-3);
+}
+.home-services-grid > .p-label + h2,
+.home-services-grid > .p-label + .card-grid,
+.home-reviews > .p-label + h2,
+.home-guides > .p-label + h2,
+.home-coverage > .p-label + h2 {
+  margin-top: 0;
+}
+
+/* Home-body маркеры (Почему / Принципы) — те же правила. Лейблы обёрнуты
+   в <p> (markdown), поэтому целимся в обёртку через :has(). На desktop
+   возвращаем воздух НАД блоком прозы, который раньше давал margin-top h2
+   (mobile уже сжат в module-hero.css @media max-width:720px). */
+@media (min-width: 721px) {
+  .home-body { margin-top: var(--space-6); }
+}
+.home-body .pillar-body p:has(> .p-label) {
+  margin-bottom: var(--space-3);
+}
+.home-body .pillar-body p:has(> .p-label) + h2,
+.home-body .pillar-body p:has(> .p-label) + h3 {
+  margin-top: 0;
+}
+
+/* Home FAQ — эйбрфет «Частые вопросы» убран из шаблона (дублировал
+   собственный h2 модуля faq.html). Секция-брейк даёт верхний воздух,
+   поэтому снимаем margin-top у .faq в этом контексте. Site-wide дубль
+   FAQ-маркера (service/city/document) — отдельная задача. */
+.home-faq > .faq {
+  margin-top: 0;
+}

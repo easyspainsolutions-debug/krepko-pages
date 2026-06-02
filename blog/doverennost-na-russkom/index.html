@@ -384,6 +384,14 @@
       .article-card .article-desc{font-size:12.5px;line-height:1.5}
     }
 
+  
+    /* 2026-06-01 header-fix: legacy body{display:flex;align-items:center} collapsed the
+       shared full-width .site-nav into a narrow centered column. Restore block flow so
+       header/footer render edge-to-edge (как на остальных страницах); keep article column
+       centered via .wrap. Longhand padding не конфликтует с существующим shorthand. */
+    body{display:block;padding:0}
+    .wrap{margin-left:auto;margin-right:auto;padding-left:20px;padding-right:20px}
+    @media (max-width:719px){.wrap{padding-left:16px;padding-right:16px}}
   </style>
   <script src="/assets/analytics.js" defer></script>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Manrope:wght@700;800&display=swap" rel="stylesheet">
