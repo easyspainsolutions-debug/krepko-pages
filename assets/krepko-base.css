@@ -73,6 +73,23 @@ a {
   transition: color var(--t-1);
 }
 a:hover { text-decoration: underline; }
+/* «Нарядные» ссылки несут свой золотой border-bottom как подчёркивание. Гасим у них
+   глобальное a:hover-подчёркивание (выше), чтобы при наведении был ОДИН значок, а не два.
+   ВАЖНО: сюда попадают только селекторы, которые ВЕЗДЕ означают «нарядную» ссылку:
+     • уникальные классы (.cookie-consent__desc — баннер; .info-card/.footer-related —
+       только regularizacion) — мимо них прозаичные ссылки не проходят;
+     • a[style*="border-bottom"] — inline-ссылки блога («Подробнее →»): матчит ровно те <a>,
+       у кого свой border-bottom прописан инлайном.
+   НЕ-глобальные кейсы чинятся в своих файлах, чтобы не задеть прозаичные ссылки:
+     • главная (.home-*) — page-about.css;
+     • .wrap a — page-legal.css (класс .wrap переиспользуется и в блоге, где ссылки —
+       обычный текст без border-bottom; глобальный сброс убил бы им ховер-подчёркивание).
+   Обычные текстовые ссылки (.lang-switch, прозаичные <a>) сюда НЕ входят — для них
+   подчёркивание при наведении остаётся единственным ховер-сигналом. */
+.cookie-consent__desc a:hover,
+.info-card a:hover,
+.footer-related a:hover,
+a[style*="border-bottom"]:hover { text-decoration: none; }
 
 ul, ol {
   padding-left: var(--space-5);

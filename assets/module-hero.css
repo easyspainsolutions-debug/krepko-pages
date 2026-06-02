@@ -75,6 +75,11 @@
 .hero__link-secondary:hover {
   color: var(--gold);
   border-bottom-color: var(--gold);
+  /* Гасим глобальное a:hover{text-decoration:underline} (krepko-base.css) — у ссылки
+     свой золотой border-bottom как подчёркивание, второе лишнее (был «двойной» баг).
+     Правило живёт ИМЕННО здесь: .hero__link-secondary ВСЕГДА несёт border-bottom
+     (designed-ссылка), рендерится только на главной (home_hero.html). */
+  text-decoration: none;
 }
 
 /* home-v3 (2026-06-02): value-строка под primary CTA («зачем писать»).

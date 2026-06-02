@@ -33,7 +33,7 @@
   <link rel="stylesheet" href="/assets/module-section.css?v=20260526h2">
   <link rel="stylesheet" href="/assets/module-cta.css?v=20260526h2">
   <link rel="stylesheet" href="/assets/module-card.css?v=20260602">
-  <link rel="stylesheet" href="/assets/module-hero.css?v=20260602">
+  <link rel="stylesheet" href="/assets/module-hero.css?v=20260602b">
   <link rel="stylesheet" href="/assets/module-trust.css?v=20260602">
   <link rel="stylesheet" href="/assets/module-process.css?v=20260602">
   <link rel="stylesheet" href="/assets/module-pricing.css?v=20260529">
@@ -41,15 +41,16 @@
   <link rel="stylesheet" href="/assets/krepko-chips.css?v=20260528">
   <link rel="stylesheet" href="/assets/site-footer.css?v=20260528">
   <link rel="stylesheet" href="/assets/a11y.css">
-  <link rel="stylesheet" href="/assets/krepko-base.css?v=1">
+  <link rel="stylesheet" href="/assets/krepko-base.css?v=2">
   <link rel="stylesheet" href="/assets/desktop.css">
-  <link rel="stylesheet" href="/assets/page-about.css?v=20260602b">
+  <link rel="stylesheet" href="/assets/page-about.css?v=20260602g">
   <link rel="stylesheet" href="/assets/cookie-consent.css?v=20260526a">
   <script src="/assets/cookie-consent.js?v=20260526a" defer></script>
   <!-- Consent-safe event layer (no-op until window.gtag exists, i.e. after "Accept all"):
        WhatsApp UTM-attribution + custom events cta_click_*, pricing_view, blog_finish_read.
        Documented Phase-1 requirement (Аналитика-стратегия §IV/§VII/§XII). -->
   <script src="/assets/analytics.js?v=20260601" defer></script>
+  <script src="/assets/reviews-carousel.js?v=20260602f" defer></script>
   <link rel="stylesheet" href="/assets/calc-doverennost.css?v=20260601">
   <script src="/assets/calc-doverennost.js?v=20260601" defer></script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Service", "areaServed": [{"@type": "City", "name": "\u041c\u0430\u0434\u0440\u0438\u0434"}], "name": "\u0414\u043e\u0432\u0435\u0440\u0435\u043d\u043d\u043e\u0441\u0442\u044c \u043d\u0430 \u043d\u0430\u0441\u043b\u0435\u0434\u0441\u0442\u0432\u043e", "offers": {"@type": "Offer", "price": 75, "priceCurrency": "EUR"}, "provider": {"@type": "Organization", "name": "Krepko", "url": "https://krepko.es/"}, "serviceType": "\u0423\u0441\u043b\u0443\u0433\u0438 \u043d\u043e\u0442\u0430\u0440\u0438\u0430\u043b\u044c\u043d\u043e\u0433\u043e \u0441\u043e\u043f\u0440\u043e\u0432\u043e\u0436\u0434\u0435\u043d\u0438\u044f", "url": "https://krepko.es/notario/doverennost-na-nasledstvo/madrid/"}</script>
@@ -338,9 +339,44 @@
 <section class="rh-section-break home-reviews">
   <span class="p-label">Отзывы</span>
   <h2>Что говорят клиенты</h2>
-  <p class="home-reviews__dek">Реальные истории клиентов Krepko на Google Reviews.</p>
-  <div class="trustindex-widget" data-widget-id="59556b972710972c1a568364b5b"></div>
-  <script defer async src="https://cdn.trustindex.io/loader.js?59556b972710972c1a568364b5b"></script>
+  <ul class="home-reviews__carousel" role="list" tabindex="0" aria-label="Отзывы клиентов — листайте">
+    <li class="review-card">
+      <span class="review-card__stars" aria-label="5 из 5"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg></span>
+      <p class="review-card__text">Очень компетентный и ответственный специалист. Помогает с банковскими вопросами, открытием счетов, переводами, сопровождением в больнице и оформлением документов любой сложности.</p>
+      <div class="review-card__author">
+        <span class="review-card__avatar" aria-hidden="true">S</span>
+        <span class="review-card__meta">
+          <span class="review-card__name">Social AutosCar Kiro</span>
+          <span class="review-card__src"><svg class="review-card__glogo" viewBox="0 0 24 24" aria-hidden="true" width="13" height="13"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg> Google</span>
+        </span>
+      </div>
+    </li>
+    <li class="review-card">
+      <span class="review-card__stars" aria-label="5 из 5"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg></span>
+      <p class="review-card__text">Очень внимательный сервис… через 3 дня получил весь пакет документов! Настоятельно рекомендую.</p>
+      <div class="review-card__author">
+        <span class="review-card__avatar" aria-hidden="true">A</span>
+        <span class="review-card__meta">
+          <span class="review-card__name">Aliaksandr B.</span>
+          <span class="review-card__src"><svg class="review-card__glogo" viewBox="0 0 24 24" aria-hidden="true" width="13" height="13"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg> Google</span>
+        </span>
+      </div>
+    </li>
+    <li class="review-card">
+      <span class="review-card__stars" aria-label="5 из 5"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg></span>
+      <p class="review-card__text">Обратился. Реально помогли. Благодарю.</p>
+      <div class="review-card__author">
+        <span class="review-card__avatar" aria-hidden="true">А</span>
+        <span class="review-card__meta">
+          <span class="review-card__name">Алексей Прохоров</span>
+          <span class="review-card__src"><svg class="review-card__glogo" viewBox="0 0 24 24" aria-hidden="true" width="13" height="13"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg> Google</span>
+        </span>
+      </div>
+    </li>
+  </ul>
+  <div class="home-reviews__footer">
+    <a class="home-reviews__all" href="https://share.google/crEbX59eFpUVJipgr" target="_blank" rel="noopener nofollow">Все отзывы&nbsp;→</a>
+  </div>
 </section>
 <section class="final-cta">
   <h2>Доверенность на наследство в Мадриде — Krepko под ключ</h2>

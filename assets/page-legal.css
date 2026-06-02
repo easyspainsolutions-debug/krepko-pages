@@ -141,6 +141,12 @@ td strong {
 
 .wrap a:hover {
   border-bottom-color: var(--gold);
+  /* Гасим глобальное a:hover{text-decoration:underline} (krepko-base.css) — у .wrap a
+     свой золотой border-bottom, второе подчёркивание лишнее. Правило живёт ИМЕННО здесь
+     (page-legal.css грузится только на юр-страницах), а не в krepko-base: класс .wrap
+     переиспользуется в блоге, где ссылки — обычный текст без border-bottom, и глобальный
+     сброс убил бы им единственный ховер-сигнал. */
+  text-decoration: none;
 }
 
 .wrap .breadcrumbs a {
