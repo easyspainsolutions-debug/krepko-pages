@@ -2,7 +2,7 @@
 var ARTICLES = [
   // ВНЖ / Статус
   { slug: 'vnzh-ispaniya',              title: 'Как получить ВНЖ в Испании: полный гид для украинцев',          tag: 'ВНЖ · Статус',            cat: 'vnzh',    time: 7 },
-  { slug: 'arraigo-social-ispaniya',    title: 'Arraigo social — ВНЖ через 3 года жизни в Испании',             tag: 'ВНЖ',                     cat: 'vnzh',    time: 7 },
+  { slug: 'arraigo-social-ispaniya',    title: 'Arraigo social — ВНЖ через 2 года жизни в Испании',             tag: 'ВНЖ',                     cat: 'vnzh',    time: 7 },
   { slug: 'temporalnaya-zashita',       title: 'Временная защита в Испании 2026: продление и права',             tag: 'Временная защита · 2026', cat: 'vnzh',    time: 7 },
   { slug: 'vossoedineniye-semi-ispaniya', title: 'Воссоединение семьи в Испании: кто может и как',              tag: 'ВНЖ · Семья',             cat: 'vnzh',    time: 7 },
   { slug: 'viza-tsifrovogo-nomada-ispaniya', title: 'Виза цифрового номада в Испании 2026',                     tag: 'Виза · Цифровой номад',   cat: 'vnzh',    time: 8 },
