@@ -90,6 +90,17 @@
    без glow, без hover-lift (это не ссылка). Иконка — gold-галочка
    в тонкой плашке gold-tint (не эмодзи, stroke-width 1.8 per Дизайн §4).
    ============================================================ */
+/* 2026-06-08 (#3): нотариальный volume-proof лид под H2. Наследует выравнивание
+   секции (как H2), число — gold. Показывается только в notario-контексте (HTML-гейт). */
+.guarantees__lead {
+  margin: 0 0 var(--space-5);
+  font-size: 0.95rem;
+  color: var(--text-muted);
+}
+.guarantees__lead b {
+  color: var(--gold);
+  font-weight: 600;
+}
 .guarantees__grid {
   display: grid;
   grid-template-columns: 1fr;
