@@ -404,6 +404,20 @@ body:has(> footer.site-footer) {
 }
 
 
+/* Палитра редизайна для футера — по той же причине, что у шапки:
+   переменные темы живут в home-redesign.css, который есть только на главной. */
+.site-footer {
+  --bg: #FFFBF7;
+  --surface: #F5F0EB;
+  --surface-sunk: #EFE7DA;
+  --border-faint: #E8DFD1;
+  --text: #2D2D2D;
+  --text-sub: #4A4A4A;
+  --text-muted: #6B6B6B;
+  --gold: #C75B39;
+  --gold-2: #B04E2F;
+}
+
 /* ═══ Terracotta-редизайн футера (2026-08-03) ═══
    Карта сайта по образцу Attio: логотип слева, тематические колонки,
    внизу мессенджеры и правовые ссылки. Правила живут здесь, а не в
@@ -583,3 +597,15 @@ body:has(> footer.site-footer) {
   .footer-map__title, .rv__name {
     line-height: 1.6 !important;
   }
+
+/* ═══ Адаптив футера из редизайна (2026-08-03) ═══ */
+@media (min-width: 720px) {
+    .footer-map__cols { grid-template-columns: repeat(4, minmax(0, 1fr)); }}
+@media (min-width: 1000px) {
+    .footer-map { grid-template-columns: 2.6fr 8fr; gap: 40px; padding-bottom: 32px; }}
+@media (min-width: 1000px) {
+    .site-footer .site-footer__brand-text { font-size: 36px !important; }}
+@media (min-width: 900px) {
+    .site-footer__inner { padding-top: 72px !important; padding-bottom: 40px !important; }}
+@media (min-width: 1000px) {
+    .site-footer__inner { padding-top: clamp(40px, calc(1.33vw + 26.6px), 59px) !important; }}

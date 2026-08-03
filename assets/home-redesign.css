@@ -169,24 +169,7 @@
   /* Subtle CTA hover lift (micro-interaction) */
   .btn { transition: transform .18s ease, box-shadow .18s ease, filter .18s ease; }
   .btn:hover { transform: translateY(-2px); filter: brightness(1.03); }
-  @media (min-width: 1000px) {
-    .site-nav__links {
-      display: flex;
-      align-items: center;
-      gap: 28px;
-    }
-    .site-nav__link {
-      font-family: 'Manrope', sans-serif;
-      font-size: 14px;
-      font-weight: 600;
-      color: var(--text-sub);
-      text-decoration: none;
-      transition: color .15s ease;
-      white-space: nowrap;
-    }
-    .site-nav__link:hover { color: var(--gold); }
-    .site-nav__menu-btn { display: none; }
-  }
+  
 
   /* ============ Round 3: service card hover, timeline, city photo-cards ============ */
 
@@ -294,21 +277,10 @@
   @media (prefers-reduced-motion: reduce) {
     .timeline-item { opacity: 1; transform: none; }
   }
-  @media (max-width: 899px) {
-    .topbar__inner { padding: 8px 16px; justify-content: center; }
-    .topbar__contacts { gap: 14px; justify-content: center; width: 100%; }
-    .topbar__item { font-size: 11px; }
-    .topbar__socials { display: none; }
-  }
-  @media (min-width: 720px) {
-    .footer-map__cols { grid-template-columns: repeat(4, minmax(0, 1fr)); }
-  }
-  @media (min-width: 1000px) {
-    .footer-map { grid-template-columns: 2.6fr 8fr; gap: 40px; padding-bottom: 32px; }
-  }
-  @media (min-width: 1000px) {
-    .site-footer .site-footer__brand-text { font-size: 36px !important; }
-  }
+  
+  
+  
+  
   /* боевые стили задают svg { fill: none }
 
   /* ============ Round 4: wider desktop + bigger header/footer + consultation CTA ============ */
@@ -324,16 +296,9 @@
     .home-founder__card { max-width: 860px; }
     .coverage-map { max-width: 860px; }
   }
-  @media (min-width: 1000px) {
-    .site-nav__brand-text { font-size: 28px !important; }
-    .site-nav__links { gap: 36px; }
-    .site-nav__link { font-size: 15px; }
-    .site-nav__actions { gap: 16px; }
-  }
-  @media (min-width: 1000px) { .site-nav__consult { display: inline-flex; } }
-  @media (min-width: 900px) {
-    .site-footer__inner { padding-top: 72px !important; padding-bottom: 40px !important; }
-  }
+  
+  
+  
 
   /* ============ Round 5: LegalFlow-like proportions across the whole page ============ */
   @media (min-width: 1000px) {
@@ -440,7 +405,7 @@
     .final-cta__actions { justify-content: center; gap: 20px; margin-top: 36px; }
     .final-cta .btn { padding: 20px 44px; font-size: 15px; }
   }
-  @media (min-width: 1000px) { .site-nav__consult { padding: 20px 32px; font-size: 14px; } }
+  
 
   @media (min-width: 1000px) {
     .hero--home .hero__cta-value { text-align: center; width: 100%; }
@@ -448,7 +413,6 @@
 
   .hero__accent { color: var(--gold); }
   @media (min-width: 1000px) {
-    .site-nav__inner { padding-top: 24px !important; padding-bottom: 24px !important; }
     /* hero/content follows the same wide gutters */
     main {
       max-width: 1760px;
@@ -459,20 +423,14 @@
   }
 
   /* Round 6b: larger brand + nav type (was too small) */
-  @media (min-width: 1000px) {
-    .site-nav__brand-text { font-size: 36px !important; }
-    .site-nav__links { gap: 44px; }
-    .site-nav__link { font-size: 18px; letter-spacing: 0.02em; }
-    .site-nav__consult { font-size: 15px; padding: 22px 38px; }
-    .topbar__item { font-size: 15px; }
-  }
+  
 
   /* hero ornament — restrained divider instead of the illustrative art */
   @media (min-width: 1000px) {
     .hero__visual { opacity: 1; margin-bottom: 28px; }
     .hero__visual svg { width: 240px; height: 24px; }
   }
-  @media (prefers-reduced-motion: reduce) { .site-nav { transition: none; } }
+  
 
   /* фото основателя — в одном ключе с карточками */
   .home-founder__photo { border-radius: 4px !important; }
@@ -1280,7 +1238,7 @@
     margin-top: 8px;
     text-align: left;
   }
-  @media (min-width: 720px)  { .rv-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (min-width: 720px) { .rv-grid { grid-template-columns: repeat(2, 1fr); } }
   @media (min-width: 1000px) {
     /* masonry: карточки разной высоты кладутся в 3 колонки без «лесенки» */
     .rv-grid {
@@ -1571,13 +1529,7 @@
   /* ============ Фикс горизонтального скролла на мобильном ============
      Кнопка консультации + бургер с подписью «Меню» не помещались в 375px
      и растягивали документ до 424px. Ужимаем шапку, у бургера оставляем иконку. */
-  @media (max-width: 560px) {
-    .site-nav__inner { gap: 8px !important; padding-left: 16px !important; padding-right: 16px !important; }
-    .site-nav__consult { padding: 10px 12px; font-size: 10px; letter-spacing: 0.3px; }
-    .site-nav__menu-text { display: none; }
-    .site-nav__menu-btn { padding: 10px; }
-    .site-nav__brand-text { font-size: 22px !important; }
-  }
+  
   /* тикер: 100vw включает ширину скроллбара — на мобильном это давало лишние пиксели */
   .ticker { width: 100% !important; max-width: 100% !important; margin-left: 0 !important; margin-right: 0 !important; }
   @media (min-width: 1000px) {
@@ -1707,13 +1659,11 @@
     .srow__action { margin-top: 10px; font-size: 12px; }
     @media (hover: hover) { .srow:hover { padding-left: 18px; } }
   }
-  @media (prefers-reduced-motion: reduce) { .mega-overlay { transition: none; } }
-  @media (prefers-reduced-motion: reduce) {
-    .mega { transition: none; }
-  }
-  @media (max-width: 1100px) { .mega__inner { grid-template-columns: repeat(2, 1fr); gap: 32px; } }
+  
+  
+  
 
-  @media (max-width: 999px) { .mega { display: none !important; } }
+  
 
   /* строка «Смотреть все услуги» — визуально отделена как переход в каталог */
   .srow--all {
@@ -2481,7 +2431,7 @@
     margin-top: 40px;
     text-align: left;
   }
-  @media (min-width: 760px)  { .home-guides .gcards { grid-template-columns: repeat(2, 1fr); } }
+  @media (min-width: 760px) { .home-guides .gcards { grid-template-columns: repeat(2, 1fr); } }
   @media (min-width: 1060px) { .home-guides .gcards { grid-template-columns: repeat(3, 1fr); gap: 28px; } }
 
   .home-guides .gcard {
@@ -3528,17 +3478,6 @@
     .hero__dek {
       font-size: clamp(14px, calc(0.14vw + 12.8px), 16px) !important;
     }
-    .site-nav__brand-text,
-    .site-footer .site-footer__brand-text {
-      font-size: clamp(19px, calc(0.57vw + 17.1px), 28.5px) !important;
-    }
-    .site-nav__link {
-      font-size: clamp(12.5px, calc(0.19vw + 11.4px), 15.2px) !important;
-    }
-    .site-nav__consult {
-      font-size: clamp(10.5px, calc(0.14vw + 10.5px), 13.3px) !important;
-      padding: clamp(14px, 1.1vw, 22px) clamp(22px, 1.9vw, 38px) !important;
-    }
     .home-services-grid__h2-sub {
       font-size: clamp(19px, calc(0.57vw + 13.3px), 26.6px) !important;
     }
@@ -3592,7 +3531,6 @@
       padding-bottom: clamp(28px, calc(1.71vw + 11.4px), 49px) !important;
     }
     .intro__top { gap: clamp(27px, calc(1.71vw + 9.5px), 49px) !important; }
-    .site-footer__inner { padding-top: clamp(40px, calc(1.33vw + 26.6px), 59px) !important; }
     .home-services-grid__h2-sub { margin-top: clamp(27px, calc(1.33vw + 13.3px), 46px) !important; }
   }
 
@@ -3604,12 +3542,7 @@
   @media (min-width: 760px) { .hero__br { display: inline; } }
   .ticker__item { font-weight: 500 !important; }
   .ticker { padding: clamp(7px, 0.6vw, 11px) 0 !important; }
-  @media (min-width: 1000px) {
-    /* кнопка задаёт высоту шапки — её поля тоже ужимаем */
-    .site-nav__consult {
-      padding: clamp(10px, 0.75vw, 14px) clamp(18px, 1.6vw, 32px) !important;
-    }
-  }
+  
 
 
   /* ═══════════════ Round 52: типографическая система ═══════════════

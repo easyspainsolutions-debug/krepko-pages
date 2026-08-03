@@ -37,7 +37,7 @@
   <link rel="stylesheet" href="/assets/module-trust.css?v=20260602">
   <link rel="stylesheet" href="/assets/module-process.css?v=20260602">
   <link rel="stylesheet" href="/assets/module-pricing.css?v=20260529">
-  <link rel="stylesheet" href="/assets/site-nav.css?v=20260803">
+  <link rel="stylesheet" href="/assets/site-nav.css?v=20260803b">
   <link rel="stylesheet" href="/assets/krepko-chips.css?v=20260608">
   <link rel="stylesheet" href="/assets/site-footer.css?v=20260803">
   <link rel="stylesheet" href="/assets/a11y.css">
@@ -45,12 +45,18 @@
   <link rel="stylesheet" href="/assets/desktop.css">
   <link rel="stylesheet" href="/assets/page-about.css?v=20260602g">
   <link rel="stylesheet" href="/assets/cookie-consent.css?v=20260526a">
+  <link rel="stylesheet" href="/assets/cursor.css?v=20260803">
+  <script src="/assets/cursor.js?v=20260803" defer></script>
   <script src="/assets/cookie-consent.js?v=20260526a" defer></script>
   <!-- Consent-safe event layer (no-op until window.gtag exists, i.e. after "Accept all"):
        WhatsApp UTM-attribution + custom events cta_click_*, pricing_view, blog_finish_read.
        Documented Phase-1 requirement (Аналитика-стратегия §IV/§VII/§XII). -->
   <script src="/assets/analytics.js?v=20260601" defer></script>
   <script src="/assets/reviews-carousel.js?v=20260602f" defer></script>
+  <link rel="stylesheet" href="/assets/home-redesign.css?v=20260803">
+  <script src="/assets/home-redesign.js?v=20260803" defer></script>
+  <link rel="stylesheet" href="/assets/about-story.css?v=20260803">
+  <script src="/assets/about-story.js?v=20260803" defer></script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "item": "https://krepko.es/", "name": "\u0413\u043b\u0430\u0432\u043d\u0430\u044f", "position": 1}, {"@type": "ListItem", "name": "\u041e Krepko", "position": 2}]}</script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "ProfessionalService", "address": {"@type": "PostalAddress", "addressCountry": "ES"}, "alternateName": "Krepko ES", "areaServed": [{"@type": "City", "name": "\u0410\u043b\u0438\u043a\u0430\u043d\u0442\u0435"}, {"@type": "City", "name": "\u0412\u0430\u043b\u0435\u043d\u0441\u0438\u044f"}, {"@type": "City", "name": "\u041c\u0443\u0440\u0441\u0438\u044f"}, {"@type": "City", "name": "\u041c\u0430\u0434\u0440\u0438\u0434"}, {"@type": "City", "name": "\u0411\u0430\u0440\u0441\u0435\u043b\u043e\u043d\u0430"}, {"@type": "City", "name": "\u041c\u0430\u043b\u0430\u0433\u0430"}], "availableLanguage": ["ru", "uk", "es", "en"], "description": "\u041a\u043e\u043c\u0430\u043d\u0434\u0430 \u0441\u043e\u043f\u0440\u043e\u0432\u043e\u0436\u0434\u0435\u043d\u0438\u044f \u0432 \u0418\u0441\u043f\u0430\u043d\u0438\u0438 \u0434\u043b\u044f \u0440\u0443\u0441\u0441\u043a\u043e- \u0438 \u0443\u043a\u0440\u0430\u0438\u043d\u043e\u044f\u0437\u044b\u0447\u043d\u044b\u0445: \u043d\u043e\u0442\u0430\u0440\u0438\u0443\u0441, \u0431\u0430\u043d\u043a, \u0412\u041d\u0416, \u0434\u043e\u043a\u0443\u043c\u0435\u043d\u0442\u044b \u0438\u0437 \u0423\u043a\u0440\u0430\u0438\u043d\u044b. \u041e\u0434\u0438\u043d \u043a\u043e\u043d\u0442\u0430\u043a\u0442 \u043f\u043e\u0434 \u043a\u043b\u044e\u0447.", "email": "hello@krepko.es", "foundingDate": "2022", "image": "https://krepko.es/og-image.png", "logo": "https://krepko.es/og-image.png", "name": "Krepko", "priceRange": "\u20ac15\u2013\u20ac400", "sameAs": ["https://t.me/krepko_es", "https://wa.me/34641048296", "https://instagram.com/krepko.es", "https://share.google/crEbX59eFpUVJipgr"], "telephone": "+34641048296", "url": "https://krepko.es/"}</script>
 </head>
@@ -231,74 +237,522 @@
     d.addEventListener('close',function(){if(trigger){try{trigger.focus();}catch(_){}}});
   }
 })();</script><nav class="breadcrumb" aria-label="Хлебные крошки">      <a href="/">Главная</a> /      <span>О Krepko</span></nav>  <main id="main">
-<section class="hero hero--home">
-<span class="p-label">О Krepko</span>  <h1 class="hero__h1">Кто стоит за Krepko</h1>
-  <p class="hero__dek">Команда сопровождения для русско- и украиноязычных в Испании. Появилась из личного опыта прохождения испанской системы.</p>
-  <div class="hero__cta-row cta-row">
-    <a class="btn btn--gold" href="https://wa.me/34641048296">Написать в WhatsApp</a>
+<div class="tw">
+
+<section class="tw-open">
+  <h1 class="tw-open__h1">
+    <span class="mask"><span>Сначала это была</span></span>
+    <span class="mask"><span>моя проблема</span></span>
+  </h1>
+</section>
+
+<!-- ══ Две хроники: личное слева, компания справа ══ -->
+<section class="tw-chron" id="sec-chron">
+  <nav class="tw-years" aria-label="Годы">
+    <p class="tw-years__k">Хронология</p>
+    <ul>
+      <li><button type="button" data-go="2020" class="is-live"><span>2020</span><em>Приехал</em></button></li>
+      <li><button type="button" data-go="2021"><span>2021</span><em>Пошли знакомые</em></button></li>
+      <li><button type="button" data-go="2022"><span>2022</span><em>Krepko основан</em></button></li>
+      <li><button type="button" data-go="2024"><span>2024</span><em>Города и UA</em></button></li>
+      <li><button type="button" data-go="2026"><span>2026</span><em>Сегодня</em></button></li>
+    </ul>
+  </nav>
+
+  <div class="tw-rows">
+    <span class="tw-axis" aria-hidden="true"><i></i><b></b></span>
+    <div class="tw-row" data-year="2020">
+      <div class="tw-me">
+        <h2>Приехал и ничего не понял</h2>
+        <p>Украина осталась позади, впереди — язык, которого не знаю, и окна, которые закрываются в 14:00. Первую прописку делал три месяца вместо двух недель.</p>
+      </div>
+      <span class="tw-link" aria-hidden="true"></span>
+      <div class="tw-co tw-co--empty"><p>Компании ещё нет. И спросить негде.</p>
+        <button class="tw-more" type="button" aria-expanded="false"><span class="tw-more__t">Что именно оказалось сложным</span><span class="tw-more__i" aria-hidden="true"></span></button>
+        <div class="tw-detail" hidden><p>Empadronamiento требовал договор аренды, аренда — счёт в банке, банк — прописку, а прописка — пакет документов, которого не было. Круг замкнулся, и разорвать его удалось только через правильных знакомых, они подсказали неочевидный порядок.</p></div>
+      </div>
+    </div>
+
+    <div class="tw-row" data-year="2021">
+      <div class="tw-me">
+        <h2>Разобрался и помогал людям</h2>
+        <p>Сначала помог одному знакомому, потом его брату, потом незнакомым из чата. Понял, что все спотыкаются об одно и то же.</p>
+      </div>
+      <span class="tw-link" aria-hidden="true"></span>
+      <div class="tw-co"><p>Появился маршрут: последовательность шагов, которая работает. Пока — в голове и в переписке.</p>
+        <button class="tw-more" type="button" aria-expanded="false"><span class="tw-more__t">С чего начинались просьбы</span><span class="tw-more__i" aria-hidden="true"></span></button>
+        <div class="tw-detail" hidden><p>Первым был сосед по дому: не мог сделать доверенность для Украины. Дальше — его друг, потом люди из групп. К концу года я ходил по ведомствам чаще, чем по своим делам.</p><p>После февраля 2022-го счёт пошёл на другой масштаб: приехали люди, которые не планировали переезд и не знали ни языка, ни порядка. Я помогал каждый день, быстро набирал опыт — и понял, что одному этот поток не закрыть. Тогда и начала собираться команда.</p></div>
+      </div>
+    </div>
+
+    <div class="tw-row" data-year="2022">
+      <div class="tw-me">
+        <h2>Перестал делать это бесплатно</h2>
+        <p>Когда просьб стало больше, чем свободных дней, выбор был простой: отказывать или делать это работой. Выбрал второе.</p>
+      </div>
+      <span class="tw-link" aria-hidden="true"></span>
+      <div class="tw-co"><p><strong>Krepko основан.</strong> Первые платящие клиенты, первая фиксированная цена, первое обещание: сумма известна до начала.</p>
+        <button class="tw-more" type="button" aria-expanded="false"><span class="tw-more__t">Первое правило компании</span><span class="tw-more__i" aria-hidden="true"></span></button>
+        <div class="tw-detail" hidden><p>Цена, названная до начала работы, и она не растёт. Это правило появилось из личного опыта: мне самому дважды выставляли счёт больше обещанного, и оба раза объясняли это «сложностью случая».</p></div>
+      </div>
+    </div>
+
+    <div class="tw-row" data-year="2024">
+      <div class="tw-me">
+        <h2>Понял, что один город — мало</h2>
+        <p>Писали из Валенсии, Мурсии, Мадрида. Ехать самому через полстраны — не сервис, а героизм за ваш счёт.</p>
+      </div>
+      <span class="tw-link" aria-hidden="true"></span>
+      <div class="tw-co"><p>Появились представители на местах — люди, которые сами прошли систему в своём городе. Плюс команда в Украине для документов оттуда.</p>
+        <button class="tw-more" type="button" aria-expanded="false"><span class="tw-more__t">Как выбираем представителей</span><span class="tw-more__i" aria-hidden="true"></span></button>
+        <div class="tw-detail" hidden><p>Только те, кто прошёл систему сам и живёт в городе постоянно. Приезжающий на день специалист не знает, какое окно работает после обеда и в каком отделении принимают без записи.</p></div>
+      </div>
+    </div>
+
+    <div class="tw-row" data-year="2026">
+      <div class="tw-me">
+        <h2>Занимаюсь тем же, но не один</h2>
+        <p>Иногда я по-прежнему хожу к нотариусу с клиентами. Но теперь это компания.</p>
+      </div>
+      <span class="tw-link" aria-hidden="true"></span>
+      <div class="tw-co">
+        <p>Шесть городов Испании, офис в Украине, четыре языка.</p>
+        <dl class="tw-nums">
+          <div><dt>Клиентов</dt><dd data-to="1049">1049</dd></div>
+          <div><dt>Городов</dt><dd data-to="6">6</dd></div>
+          <div><dt>Языка</dt><dd data-to="4">4</dd></div>
+        </dl>
+        <button class="tw-more" type="button" aria-expanded="false"><span class="tw-more__t">Что дальше</span><span class="tw-more__i" aria-hidden="true"></span></button>
+        <div class="tw-detail" hidden><p>Задача Krepko — стереть границу между человеком и государством. Не ту, что на карте, а ту, что возникает у окна, когда не понимаешь ни языка, ни порядка.</p><p>Отсюда и рост: не вширь по стране, а туда, где пойти почти не к кому. Сегодня это шесть городов Испании и офис в Украине, завтра — следующий город, где человек остаётся один на один с бумагами.</p></div>
+      </div>
+    </div>
   </div>
-  <a class="hero__link-secondary" href="/services/">Все услуги →</a>
-<div class="trust-strip">
-  <div class="trust-strip__row">
-    <div class="trust-strip__cell">
-      <span class="trust-strip__key">С</span>
-      <span class="trust-strip__val">2022</span>
-    </div>
-    <div class="trust-strip__cell">
-      <span class="trust-strip__key">ГОРОДОВ</span>
-      <span class="trust-strip__val">6</span>
-    </div>
-    <div class="trust-strip__cell">
-      <span class="trust-strip__key">КОМАНДЫ</span>
-      <span class="trust-strip__val">ES + UA + RU</span>
-    </div>
+</section>
+
+<!-- ══ Портрет и прямая речь ══ -->
+<section class="tw-voice" id="sec-voice">
+  <div class="tw-voice__in">
+    <figure class="tw-voice__media">
+      <span class="tw-voice__frame"><img src="/assets/daniil.jpg" alt="Daniil Pavlovskyi — основатель Krepko" decoding="async"></span>
+      <figcaption><span class="k">Daniil Pavlovskyi</span><span class="v">Основатель Krepko</span></figcaption>
+    </figure>
+    <blockquote class="tw-voice__quote">
+      <span class="tw-voice__mark" aria-hidden="true">&laquo;</span>
+      <p data-words>Я до сих пор помню ощущение, когда стоял у окошка и не понимал ни слова, а очередь за спиной росла. Тогда я решил основать Krepko, и сейчас с ностальгией вспоминаю те времена, когда не знал, с чего начать.</p>
+    </blockquote>
   </div>
-<div class="trust-strip__detail">ALC · VAL · MUR · MAD · BCN · MAL</div></div></section>
-  <section class="rh-section-break about-founder">
-    <span class="p-label">Кто</span>
-    <div class="about-founder__head">
-      <img class="about-founder__photo" src="/assets/daniil.jpg" alt="Daniil Pavlovskyi — основатель Krepko" width="120" height="120" loading="lazy">
-      <div class="about-founder__id">
-        <h2 class="about-founder__name">Daniil Pavlovskyi</h2>
-<p class="about-founder__role">Основатель</p>      </div>
+</section>
+
+<!-- ══ Что осталось неизменным ══ -->
+<section class="tw-keep" id="sec-keep">
+  <div class="tw-keep__head">
+    <h2 class="tw-keep__h"><span class="mask"><span>Четыре правила,</span></span><span class="mask"><span>которые мы</span></span><span class="mask"><span>не меняли</span></span></h2>
+    <p class="tw-keep__sub">Всё остальное в компании менялось не раз: города, команда, услуги. Эти четыре пункта — нет.</p>
+  </div>
+  <ol class="tw-keep__list">
+    <li class="tw-keep__i">
+      <span class="tw-keep__n">01</span>
+      <div class="tw-keep__b">
+        <h3>Цена известна до начала</h3>
+        <p>Разбираем задачу, называем сумму — и она не растёт по ходу дела.</p>
+      </div>
+    </li>
+    <li class="tw-keep__i">
+      <span class="tw-keep__n">02</span>
+      <div class="tw-keep__b">
+        <h3>Рядом человек, а не чат</h3>
+        <p>К нотариусу, в банк, в ведомство приходит живой представитель.</p>
+      </div>
+    </li>
+    <li class="tw-keep__i">
+      <span class="tw-keep__n">03</span>
+      <div class="tw-keep__b">
+        <h3>Мы пишем первыми</h3>
+        <p>Приняли, подали, готово. Напоминать о себе и спрашивать «ну как там» не нужно.</p>
+      </div>
+    </li>
+    <li class="tw-keep__i">
+      <span class="tw-keep__n">04</span>
+      <div class="tw-keep__b">
+        <h3>Наша ошибка — наш опыт</h3>
+        <p>Не приняли документ по нашей вине — переделываем бесплатно.</p>
+      </div>
+    </li>
+  </ol>
+</section>
+
+<!-- ══ География ══ -->
+<section class="tw-geo" id="sec-geo">
+  <div class="tw-geo__head">
+    <h2>Где мы физически есть</h2>
+    <p>Мы не колл-центр. В каждом городе есть свои люди, которые выйдут с вами на связь.</p>
+  </div>
+  <div class="tw-geo__map"><div class="map-wrap">
+    <div class="map-stage">
+      <svg class="map" viewBox="0 25 1000 775" role="img" aria-label="Карта Испании с городами Krepko">
+        <defs>
+          <linearGradient id="mapFill" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#F7F1E9"/>
+            <stop offset="100%" stop-color="#EFE2D2"/>
+          </linearGradient>
+          <linearGradient id="ray-alicante-valencia" gradientUnits="userSpaceOnUse" x1="694" y1="551" x2="702" y2="442">
+            <stop class="ray-tail" offset="0" stop-color="#C75B39" stop-opacity="0.14"/>
+            <stop class="ray-core" offset="0" stop-color="#C75B39" stop-opacity="1"/>
+            <stop class="ray-head" offset="0" stop-color="#C75B39" stop-opacity="0.14"/>
+          </linearGradient>
+          <linearGradient id="ray-alicante-murcia" gradientUnits="userSpaceOnUse" x1="694" y1="551" x2="644" y2="586">
+            <stop class="ray-tail" offset="0" stop-color="#C75B39" stop-opacity="0.14"/>
+            <stop class="ray-core" offset="0" stop-color="#C75B39" stop-opacity="1"/>
+            <stop class="ray-head" offset="0" stop-color="#C75B39" stop-opacity="0.14"/>
+          </linearGradient>
+          <linearGradient id="ray-alicante-madrid" gradientUnits="userSpaceOnUse" x1="694" y1="551" x2="446" y2="349">
+            <stop class="ray-tail" offset="0" stop-color="#C75B39" stop-opacity="0.14"/>
+            <stop class="ray-core" offset="0" stop-color="#C75B39" stop-opacity="1"/>
+            <stop class="ray-head" offset="0" stop-color="#C75B39" stop-opacity="0.14"/>
+          </linearGradient>
+          <linearGradient id="ray-alicante-barcelona" gradientUnits="userSpaceOnUse" x1="694" y1="551" x2="898" y2="255">
+            <stop class="ray-tail" offset="0" stop-color="#C75B39" stop-opacity="0.14"/>
+            <stop class="ray-core" offset="0" stop-color="#C75B39" stop-opacity="1"/>
+            <stop class="ray-head" offset="0" stop-color="#C75B39" stop-opacity="0.14"/>
+          </linearGradient>
+          <linearGradient id="ray-alicante-malaga" gradientUnits="userSpaceOnUse" x1="694" y1="551" x2="391" y2="710">
+            <stop class="ray-tail" offset="0" stop-color="#C75B39" stop-opacity="0.14"/>
+            <stop class="ray-core" offset="0" stop-color="#C75B39" stop-opacity="1"/>
+            <stop class="ray-head" offset="0" stop-color="#C75B39" stop-opacity="0.14"/>
+          </linearGradient>
+          <linearGradient id="ray-valencia-alicante" gradientUnits="userSpaceOnUse" x1="702" y1="442" x2="694" y2="551">
+            <stop class="ray-tail" offset="0" stop-color="#C75B39" stop-opacity="0.14"/>
+            <stop class="ray-core" offset="0" stop-color="#C75B39" stop-opacity="1"/>
+            <stop class="ray-head" offset="0" stop-color="#C75B39" stop-opacity="0.14"/>
+          </linearGradient>
+          <linearGradient id="ray-valencia-murcia" gradientUnits="userSpaceOnUse" x1="702" y1="442" x2="644" y2="586">
+            <stop class="ray-tail" offset="0" stop-color="#C75B39" stop-opacity="0.14"/>
+            <stop class="ray-core" offset="0" stop-color="#C75B39" stop-opacity="1"/>
+            <stop class="ray-head" offset="0" stop-color="#C75B39" stop-opacity="0.14"/>
+          </linearGradient>
+          <linearGradient id="ray-valencia-madrid" gradientUnits="userSpaceOnUse" x1="702" y1="442" x2="446" y2="349">
+            <stop class="ray-tail" offset="0" stop-color="#C75B39" stop-opacity="0.14"/>
+            <stop class="ray-core" offset="0" stop-color="#C75B39" stop-opacity="1"/>
+            <stop class="ray-head" offset="0" stop-color="#C75B39" stop-opacity="0.14"/>
+          </linearGradient>
+          <linearGradient id="ray-valencia-barcelona" gradientUnits="userSpaceOnUse" x1="702" y1="442" x2="898" y2="255">
+            <stop class="ray-tail" offset="0" stop-color="#C75B39" stop-opacity="0.14"/>
+            <stop class="ray-core" offset="0" stop-color="#C75B39" stop-opacity="1"/>
+            <stop class="ray-head" offset="0" stop-color="#C75B39" stop-opacity="0.14"/>
+          </linearGradient>
+          <linearGradient id="ray-valencia-malaga" gradientUnits="userSpaceOnUse" x1="702" y1="442" x2="391" y2="710">
+            <stop class="ray-tail" offset="0" stop-color="#C75B39" stop-opacity="0.14"/>
+            <stop class="ray-core" offset="0" stop-color="#C75B39" stop-opacity="1"/>
+            <stop class="ray-head" offset="0" stop-color="#C75B39" stop-opacity="0.14"/>
+          </linearGradient>
+          <linearGradient id="ray-murcia-alicante" gradientUnits="userSpaceOnUse" x1="644" y1="586" x2="694" y2="551">
+            <stop class="ray-tail" offset="0" stop-color="#C75B39" stop-opacity="0.14"/>
+            <stop class="ray-core" offset="0" stop-color="#C75B39" stop-opacity="1"/>
+            <stop class="ray-head" offset="0" stop-color="#C75B39" stop-opacity="0.14"/>
+          </linearGradient>
+          <linearGradient id="ray-murcia-valencia" gradientUnits="userSpaceOnUse" x1="644" y1="586" x2="702" y2="442">
+            <stop class="ray-tail" offset="0" stop-color="#C75B39" stop-opacity="0.14"/>
+            <stop class="ray-core" offset="0" stop-color="#C75B39" stop-opacity="1"/>
+            <stop class="ray-head" offset="0" stop-color="#C75B39" stop-opacity="0.14"/>
+          </linearGradient>
+          <linearGradient id="ray-murcia-madrid" gradientUnits="userSpaceOnUse" x1="644" y1="586" x2="446" y2="349">
+            <stop class="ray-tail" offset="0" stop-color="#C75B39" stop-opacity="0.14"/>
+            <stop class="ray-core" offset="0" stop-color="#C75B39" stop-opacity="1"/>
+            <stop class="ray-head" offset="0" stop-color="#C75B39" stop-opacity="0.14"/>
+          </linearGradient>
+          <linearGradient id="ray-murcia-barcelona" gradientUnits="userSpaceOnUse" x1="644" y1="586" x2="898" y2="255">
+            <stop class="ray-tail" offset="0" stop-color="#C75B39" stop-opacity="0.14"/>
+            <stop class="ray-core" offset="0" stop-color="#C75B39" stop-opacity="1"/>
+            <stop class="ray-head" offset="0" stop-color="#C75B39" stop-opacity="0.14"/>
+          </linearGradient>
+          <linearGradient id="ray-murcia-malaga" gradientUnits="userSpaceOnUse" x1="644" y1="586" x2="391" y2="710">
+            <stop class="ray-tail" offset="0" stop-color="#C75B39" stop-opacity="0.14"/>
+            <stop class="ray-core" offset="0" stop-color="#C75B39" stop-opacity="1"/>
+            <stop class="ray-head" offset="0" stop-color="#C75B39" stop-opacity="0.14"/>
+          </linearGradient>
+          <linearGradient id="ray-madrid-alicante" gradientUnits="userSpaceOnUse" x1="446" y1="349" x2="694" y2="551">
+            <stop class="ray-tail" offset="0" stop-color="#C75B39" stop-opacity="0.14"/>
+            <stop class="ray-core" offset="0" stop-color="#C75B39" stop-opacity="1"/>
+            <stop class="ray-head" offset="0" stop-color="#C75B39" stop-opacity="0.14"/>
+          </linearGradient>
+          <linearGradient id="ray-madrid-valencia" gradientUnits="userSpaceOnUse" x1="446" y1="349" x2="702" y2="442">
+            <stop class="ray-tail" offset="0" stop-color="#C75B39" stop-opacity="0.14"/>
+            <stop class="ray-core" offset="0" stop-color="#C75B39" stop-opacity="1"/>
+            <stop class="ray-head" offset="0" stop-color="#C75B39" stop-opacity="0.14"/>
+          </linearGradient>
+          <linearGradient id="ray-madrid-murcia" gradientUnits="userSpaceOnUse" x1="446" y1="349" x2="644" y2="586">
+            <stop class="ray-tail" offset="0" stop-color="#C75B39" stop-opacity="0.14"/>
+            <stop class="ray-core" offset="0" stop-color="#C75B39" stop-opacity="1"/>
+            <stop class="ray-head" offset="0" stop-color="#C75B39" stop-opacity="0.14"/>
+          </linearGradient>
+          <linearGradient id="ray-madrid-barcelona" gradientUnits="userSpaceOnUse" x1="446" y1="349" x2="898" y2="255">
+            <stop class="ray-tail" offset="0" stop-color="#C75B39" stop-opacity="0.14"/>
+            <stop class="ray-core" offset="0" stop-color="#C75B39" stop-opacity="1"/>
+            <stop class="ray-head" offset="0" stop-color="#C75B39" stop-opacity="0.14"/>
+          </linearGradient>
+          <linearGradient id="ray-madrid-malaga" gradientUnits="userSpaceOnUse" x1="446" y1="349" x2="391" y2="710">
+            <stop class="ray-tail" offset="0" stop-color="#C75B39" stop-opacity="0.14"/>
+            <stop class="ray-core" offset="0" stop-color="#C75B39" stop-opacity="1"/>
+            <stop class="ray-head" offset="0" stop-color="#C75B39" stop-opacity="0.14"/>
+          </linearGradient>
+          <linearGradient id="ray-barcelona-alicante" gradientUnits="userSpaceOnUse" x1="898" y1="255" x2="694" y2="551">
+            <stop class="ray-tail" offset="0" stop-color="#C75B39" stop-opacity="0.14"/>
+            <stop class="ray-core" offset="0" stop-color="#C75B39" stop-opacity="1"/>
+            <stop class="ray-head" offset="0" stop-color="#C75B39" stop-opacity="0.14"/>
+          </linearGradient>
+          <linearGradient id="ray-barcelona-valencia" gradientUnits="userSpaceOnUse" x1="898" y1="255" x2="702" y2="442">
+            <stop class="ray-tail" offset="0" stop-color="#C75B39" stop-opacity="0.14"/>
+            <stop class="ray-core" offset="0" stop-color="#C75B39" stop-opacity="1"/>
+            <stop class="ray-head" offset="0" stop-color="#C75B39" stop-opacity="0.14"/>
+          </linearGradient>
+          <linearGradient id="ray-barcelona-murcia" gradientUnits="userSpaceOnUse" x1="898" y1="255" x2="644" y2="586">
+            <stop class="ray-tail" offset="0" stop-color="#C75B39" stop-opacity="0.14"/>
+            <stop class="ray-core" offset="0" stop-color="#C75B39" stop-opacity="1"/>
+            <stop class="ray-head" offset="0" stop-color="#C75B39" stop-opacity="0.14"/>
+          </linearGradient>
+          <linearGradient id="ray-barcelona-madrid" gradientUnits="userSpaceOnUse" x1="898" y1="255" x2="446" y2="349">
+            <stop class="ray-tail" offset="0" stop-color="#C75B39" stop-opacity="0.14"/>
+            <stop class="ray-core" offset="0" stop-color="#C75B39" stop-opacity="1"/>
+            <stop class="ray-head" offset="0" stop-color="#C75B39" stop-opacity="0.14"/>
+          </linearGradient>
+          <linearGradient id="ray-barcelona-malaga" gradientUnits="userSpaceOnUse" x1="898" y1="255" x2="391" y2="710">
+            <stop class="ray-tail" offset="0" stop-color="#C75B39" stop-opacity="0.14"/>
+            <stop class="ray-core" offset="0" stop-color="#C75B39" stop-opacity="1"/>
+            <stop class="ray-head" offset="0" stop-color="#C75B39" stop-opacity="0.14"/>
+          </linearGradient>
+          <linearGradient id="ray-malaga-alicante" gradientUnits="userSpaceOnUse" x1="391" y1="710" x2="694" y2="551">
+            <stop class="ray-tail" offset="0" stop-color="#C75B39" stop-opacity="0.14"/>
+            <stop class="ray-core" offset="0" stop-color="#C75B39" stop-opacity="1"/>
+            <stop class="ray-head" offset="0" stop-color="#C75B39" stop-opacity="0.14"/>
+          </linearGradient>
+          <linearGradient id="ray-malaga-valencia" gradientUnits="userSpaceOnUse" x1="391" y1="710" x2="702" y2="442">
+            <stop class="ray-tail" offset="0" stop-color="#C75B39" stop-opacity="0.14"/>
+            <stop class="ray-core" offset="0" stop-color="#C75B39" stop-opacity="1"/>
+            <stop class="ray-head" offset="0" stop-color="#C75B39" stop-opacity="0.14"/>
+          </linearGradient>
+          <linearGradient id="ray-malaga-murcia" gradientUnits="userSpaceOnUse" x1="391" y1="710" x2="644" y2="586">
+            <stop class="ray-tail" offset="0" stop-color="#C75B39" stop-opacity="0.14"/>
+            <stop class="ray-core" offset="0" stop-color="#C75B39" stop-opacity="1"/>
+            <stop class="ray-head" offset="0" stop-color="#C75B39" stop-opacity="0.14"/>
+          </linearGradient>
+          <linearGradient id="ray-malaga-madrid" gradientUnits="userSpaceOnUse" x1="391" y1="710" x2="446" y2="349">
+            <stop class="ray-tail" offset="0" stop-color="#C75B39" stop-opacity="0.14"/>
+            <stop class="ray-core" offset="0" stop-color="#C75B39" stop-opacity="1"/>
+            <stop class="ray-head" offset="0" stop-color="#C75B39" stop-opacity="0.14"/>
+          </linearGradient>
+          <linearGradient id="ray-malaga-barcelona" gradientUnits="userSpaceOnUse" x1="391" y1="710" x2="898" y2="255">
+            <stop class="ray-tail" offset="0" stop-color="#C75B39" stop-opacity="0.14"/>
+            <stop class="ray-core" offset="0" stop-color="#C75B39" stop-opacity="1"/>
+            <stop class="ray-head" offset="0" stop-color="#C75B39" stop-opacity="0.14"/>
+          </linearGradient>
+        </defs>
+        <path id="es-land" class="map__land" d="M 15 107 C 23 94, 56 70, 85 59 C 114 48, 158 46, 192 44 C 226 42, 260 46, 292 49 C 324 52, 361 59, 385 59 C 409 59, 418 48, 438 49 C 458 50, 482 60, 508 63 C 534 66, 564 59, 592 66 C 620 73, 645 97, 677 107 C 709 117, 750 120, 785 127 C 820 134, 853 140, 885 146 C 917 152, 974 148, 977 166 C 980 184, 928 234, 900 254 C 872 274, 827 272, 808 283 C 789 294, 795 306, 785 322 C 775 338, 759 360, 746 380 C 733 400, 713 418, 708 439 C 703 460, 718 488, 715 507 C 712 526, 700 541, 692 556 C 684 571, 675 584, 669 595 C 663 606, 667 613, 654 624 C 641 635, 611 650, 592 663 C 573 676, 560 694, 538 702 C 516 710, 486 710, 462 712 C 438 714, 414 706, 392 712 C 370 718, 346 740, 331 751 C 316 762, 314 783, 300 780 C 286 777, 263 752, 246 732 C 229 712, 214 674, 200 663 C 186 652, 167 676, 162 663 C 157 650, 164 614, 169 585 C 174 556, 187 520, 192 488 C 197 456, 197 422, 200 390 C 203 358, 209 324, 208 293 C 207 262, 210 221, 192 205 C 174 189, 122 200, 100 195 C 78 190, 72 186, 62 176 C 52 166, 46 148, 38 137 C 30 126, 7 120, 15 107 Z"/>
+        <!-- Балеары: на побережной карте их отсутствие заметнее их самих -->
+        <g class="map__isles" aria-hidden="true">
+          <path class="map__isle" d="M 856 404 C 868 396, 890 396, 902 402 C 914 408, 916 420, 908 428 C 900 436, 878 438, 866 432 C 854 426, 844 412, 856 404 Z"/>
+          <path class="map__isle" d="M 928 380 C 936 374, 950 375, 955 381 C 960 387, 956 394, 948 396 C 940 398, 930 394, 926 389 C 922 384, 924 383, 928 380 Z"/>
+          <path class="map__isle" d="M 812 466 C 820 460, 832 461, 837 467 C 842 473, 838 482, 830 485 C 822 488, 812 484, 809 478 C 806 472, 808 469, 812 466 Z"/>
+        </g>
+
+        <!-- Города-спутники: проступают только внутри выбранной провинции,
+             поэтому плотность появляется там, где смотрит глаз, а не по всей карте -->
+        <g class="map__sats" aria-hidden="true">
+          <g class="map__sat" data-prov="alicante"><circle r="3.5" cx="708" cy="524"/></g>
+          <g class="map__sat" data-prov="alicante"><circle r="3.5" cx="676" cy="576"/></g>
+          <g class="map__sat" data-prov="alicante"><circle r="3.5" cx="668" cy="551"/></g>
+          <g class="map__sat" data-prov="valencia"><circle r="3.5" cx="691" cy="415"/></g>
+          <g class="map__sat" data-prov="valencia"><circle r="3.5" cx="706" cy="481"/></g>
+          <g class="map__sat" data-prov="murcia"><circle r="3.5" cx="666" cy="612"/></g>
+          <g class="map__sat" data-prov="murcia"><circle r="3.5" cx="600" cy="606"/></g>
+          <g class="map__sat" data-prov="madrid"><circle r="3.5" cx="470" cy="337"/></g>
+          <g class="map__sat" data-prov="madrid"><circle r="3.5" cx="441" cy="372"/></g>
+          <g class="map__sat" data-prov="barcelona"><circle r="3.5" cx="874" cy="237"/></g>
+          <g class="map__sat" data-prov="barcelona"><circle r="3.5" cx="869" cy="277"/></g>
+          <g class="map__sat" data-prov="malaga"><circle r="3.5" cx="351" cy="725"/></g>
+          <g class="map__sat" data-prov="malaga"><circle r="3.5" cx="377" cy="717"/></g>
+        </g>
+
+        <g class="map__provs" aria-hidden="true">
+          <path class="map__prov" data-prov="alicante" d="M 655 512 C 661 505, 671 505, 683 505 C 695 505, 714 506, 723 512 C 732 518, 736 524, 731 535 C 726 546, 707 561, 698 570 C 689 579, 688 577, 682 582 C 676 587, 670 600, 665 599 C 660 598, 655 586, 652 576 C 649 566, 647 556, 648 544 C 649 532, 649 519, 655 512 Z"/>
+          <path class="map__prov" data-prov="valencia" d="M 631 385 C 642 377, 660 378, 675 379 C 690 380, 703 385, 715 392 C 727 399, 738 408, 738 418 C 738 428, 720 435, 715 447 C 710 459, 714 473, 708 483 C 702 493, 692 498, 681 502 C 670 506, 660 513, 650 507 C 640 501, 633 484, 627 468 C 621 452, 614 435, 615 420 C 616 405, 620 393, 631 385 Z"/>
+          <path class="map__prov" data-prov="murcia" d="M 550 515 C 558 504, 580 516, 596 519 C 612 522, 627 525, 638 532 C 649 539, 648 544, 655 556 C 662 568, 677 587, 675 600 C 673 613, 659 621, 646 629 C 633 637, 620 646, 606 646 C 592 646, 579 641, 569 629 C 559 617, 555 601, 552 580 C 549 559, 542 526, 550 515 Z"/>
+          <path class="map__prov" data-prov="madrid" d="M 412 283 C 426 278, 450 270, 465 277 C 480 284, 492 303, 496 320 C 500 337, 492 357, 485 371 C 478 385, 472 396, 458 398 C 444 400, 422 391, 408 380 C 394 369, 384 351, 381 337 C 378 323, 385 312, 391 302 C 397 292, 398 288, 412 283 Z"/>
+          <path class="map__prov" data-prov="barcelona" d="M 838 190 C 848 180, 865 165, 881 164 C 897 163, 915 174, 927 185 C 939 196, 949 208, 945 222 C 941 236, 919 252, 904 261 C 889 270, 877 273, 865 271 C 853 269, 847 259, 840 249 C 833 239, 829 228, 829 217 C 829 206, 828 200, 838 190 Z"/>
+          <path class="map__prov" data-prov="malaga" d="M 304 688 C 309 676, 327 661, 342 656 C 357 651, 371 659, 388 661 C 405 663, 425 660, 435 668 C 445 676, 451 695, 445 707 C 439 719, 417 728, 400 734 C 383 740, 366 742, 350 740 C 334 738, 322 732, 314 722 C 306 712, 299 700, 304 688 Z"/>
+        </g>
+        <g class="map__fore">
+        <g class="map__rays" aria-hidden="true">
+          <line class="map__ray" stroke="url(#ray-alicante-valencia)" data-grad="ray-alicante-valencia" data-from="alicante" data-to="valencia" x1="694" y1="551" x2="702" y2="442"/>
+          <line class="map__ray" stroke="url(#ray-alicante-murcia)" data-grad="ray-alicante-murcia" data-from="alicante" data-to="murcia" x1="694" y1="551" x2="644" y2="586"/>
+          <line class="map__ray" stroke="url(#ray-alicante-madrid)" data-grad="ray-alicante-madrid" data-from="alicante" data-to="madrid" x1="694" y1="551" x2="446" y2="349"/>
+          <line class="map__ray" stroke="url(#ray-alicante-barcelona)" data-grad="ray-alicante-barcelona" data-from="alicante" data-to="barcelona" x1="694" y1="551" x2="898" y2="255"/>
+          <line class="map__ray" stroke="url(#ray-alicante-malaga)" data-grad="ray-alicante-malaga" data-from="alicante" data-to="malaga" x1="694" y1="551" x2="391" y2="710"/>
+          <line class="map__ray" stroke="url(#ray-valencia-alicante)" data-grad="ray-valencia-alicante" data-from="valencia" data-to="alicante" x1="702" y1="442" x2="694" y2="551"/>
+          <line class="map__ray" stroke="url(#ray-valencia-murcia)" data-grad="ray-valencia-murcia" data-from="valencia" data-to="murcia" x1="702" y1="442" x2="644" y2="586"/>
+          <line class="map__ray" stroke="url(#ray-valencia-madrid)" data-grad="ray-valencia-madrid" data-from="valencia" data-to="madrid" x1="702" y1="442" x2="446" y2="349"/>
+          <line class="map__ray" stroke="url(#ray-valencia-barcelona)" data-grad="ray-valencia-barcelona" data-from="valencia" data-to="barcelona" x1="702" y1="442" x2="898" y2="255"/>
+          <line class="map__ray" stroke="url(#ray-valencia-malaga)" data-grad="ray-valencia-malaga" data-from="valencia" data-to="malaga" x1="702" y1="442" x2="391" y2="710"/>
+          <line class="map__ray" stroke="url(#ray-murcia-alicante)" data-grad="ray-murcia-alicante" data-from="murcia" data-to="alicante" x1="644" y1="586" x2="694" y2="551"/>
+          <line class="map__ray" stroke="url(#ray-murcia-valencia)" data-grad="ray-murcia-valencia" data-from="murcia" data-to="valencia" x1="644" y1="586" x2="702" y2="442"/>
+          <line class="map__ray" stroke="url(#ray-murcia-madrid)" data-grad="ray-murcia-madrid" data-from="murcia" data-to="madrid" x1="644" y1="586" x2="446" y2="349"/>
+          <line class="map__ray" stroke="url(#ray-murcia-barcelona)" data-grad="ray-murcia-barcelona" data-from="murcia" data-to="barcelona" x1="644" y1="586" x2="898" y2="255"/>
+          <line class="map__ray" stroke="url(#ray-murcia-malaga)" data-grad="ray-murcia-malaga" data-from="murcia" data-to="malaga" x1="644" y1="586" x2="391" y2="710"/>
+          <line class="map__ray" stroke="url(#ray-madrid-alicante)" data-grad="ray-madrid-alicante" data-from="madrid" data-to="alicante" x1="446" y1="349" x2="694" y2="551"/>
+          <line class="map__ray" stroke="url(#ray-madrid-valencia)" data-grad="ray-madrid-valencia" data-from="madrid" data-to="valencia" x1="446" y1="349" x2="702" y2="442"/>
+          <line class="map__ray" stroke="url(#ray-madrid-murcia)" data-grad="ray-madrid-murcia" data-from="madrid" data-to="murcia" x1="446" y1="349" x2="644" y2="586"/>
+          <line class="map__ray" stroke="url(#ray-madrid-barcelona)" data-grad="ray-madrid-barcelona" data-from="madrid" data-to="barcelona" x1="446" y1="349" x2="898" y2="255"/>
+          <line class="map__ray" stroke="url(#ray-madrid-malaga)" data-grad="ray-madrid-malaga" data-from="madrid" data-to="malaga" x1="446" y1="349" x2="391" y2="710"/>
+          <line class="map__ray" stroke="url(#ray-barcelona-alicante)" data-grad="ray-barcelona-alicante" data-from="barcelona" data-to="alicante" x1="898" y1="255" x2="694" y2="551"/>
+          <line class="map__ray" stroke="url(#ray-barcelona-valencia)" data-grad="ray-barcelona-valencia" data-from="barcelona" data-to="valencia" x1="898" y1="255" x2="702" y2="442"/>
+          <line class="map__ray" stroke="url(#ray-barcelona-murcia)" data-grad="ray-barcelona-murcia" data-from="barcelona" data-to="murcia" x1="898" y1="255" x2="644" y2="586"/>
+          <line class="map__ray" stroke="url(#ray-barcelona-madrid)" data-grad="ray-barcelona-madrid" data-from="barcelona" data-to="madrid" x1="898" y1="255" x2="446" y2="349"/>
+          <line class="map__ray" stroke="url(#ray-barcelona-malaga)" data-grad="ray-barcelona-malaga" data-from="barcelona" data-to="malaga" x1="898" y1="255" x2="391" y2="710"/>
+          <line class="map__ray" stroke="url(#ray-malaga-alicante)" data-grad="ray-malaga-alicante" data-from="malaga" data-to="alicante" x1="391" y1="710" x2="694" y2="551"/>
+          <line class="map__ray" stroke="url(#ray-malaga-valencia)" data-grad="ray-malaga-valencia" data-from="malaga" data-to="valencia" x1="391" y1="710" x2="702" y2="442"/>
+          <line class="map__ray" stroke="url(#ray-malaga-murcia)" data-grad="ray-malaga-murcia" data-from="malaga" data-to="murcia" x1="391" y1="710" x2="644" y2="586"/>
+          <line class="map__ray" stroke="url(#ray-malaga-madrid)" data-grad="ray-malaga-madrid" data-from="malaga" data-to="madrid" x1="391" y1="710" x2="446" y2="349"/>
+          <line class="map__ray" stroke="url(#ray-malaga-barcelona)" data-grad="ray-malaga-barcelona" data-from="malaga" data-to="barcelona" x1="391" y1="710" x2="898" y2="255"/>
+        </g>
+        <!-- Расстояния: объясняют, что лучи — это реальные выезды, а не декор.
+             Проступают вслед за импульсом и только у выбранного города. -->
+        <g class="map__dists" aria-hidden="true">
+          <text class="map__dist" data-from="alicante" data-to="valencia" x="685" y="496">166 км</text>
+          <text class="map__dist" data-from="alicante" data-to="murcia" x="662" y="558">81 км</text>
+          <text class="map__dist" data-from="alicante" data-to="madrid" x="578" y="440">420 км</text>
+          <text class="map__dist" data-from="alicante" data-to="barcelona" x="785" y="396">530 км</text>
+          <text class="map__dist" data-from="alicante" data-to="malaga" x="536" y="619">480 км</text>
+          <text class="map__dist" data-from="valencia" data-to="alicante" x="685" y="496">166 км</text>
+          <text class="map__dist" data-from="valencia" data-to="murcia" x="661" y="509">240 км</text>
+          <text class="map__dist" data-from="valencia" data-to="madrid" x="578" y="383">355 км</text>
+          <text class="map__dist" data-from="valencia" data-to="barcelona" x="791" y="339">350 км</text>
+          <text class="map__dist" data-from="valencia" data-to="malaga" x="538" y="566">630 км</text>
+          <text class="map__dist" data-from="murcia" data-to="alicante" x="662" y="558">81 км</text>
+          <text class="map__dist" data-from="murcia" data-to="valencia" x="661" y="509">240 км</text>
+          <text class="map__dist" data-from="murcia" data-to="madrid" x="555" y="459">400 км</text>
+          <text class="map__dist" data-from="murcia" data-to="barcelona" x="761" y="413">590 км</text>
+          <text class="map__dist" data-from="murcia" data-to="malaga" x="512" y="636">420 км</text>
+          <text class="map__dist" data-from="madrid" data-to="alicante" x="578" y="440">420 км</text>
+          <text class="map__dist" data-from="madrid" data-to="valencia" x="578" y="383">355 км</text>
+          <text class="map__dist" data-from="madrid" data-to="murcia" x="555" y="459">400 км</text>
+          <text class="map__dist" data-from="madrid" data-to="barcelona" x="669" y="289">620 км</text>
+          <text class="map__dist" data-from="madrid" data-to="malaga" x="406" y="528">530 км</text>
+          <text class="map__dist" data-from="barcelona" data-to="alicante" x="785" y="396">530 км</text>
+          <text class="map__dist" data-from="barcelona" data-to="valencia" x="791" y="339">350 км</text>
+          <text class="map__dist" data-from="barcelona" data-to="murcia" x="761" y="413">590 км</text>
+          <text class="map__dist" data-from="barcelona" data-to="madrid" x="669" y="289">620 км</text>
+          <text class="map__dist" data-from="barcelona" data-to="malaga" x="636" y="473">1000 км</text>
+          <text class="map__dist" data-from="malaga" data-to="alicante" x="536" y="619">480 км</text>
+          <text class="map__dist" data-from="malaga" data-to="valencia" x="538" y="566">630 км</text>
+          <text class="map__dist" data-from="malaga" data-to="murcia" x="512" y="636">420 км</text>
+          <text class="map__dist" data-from="malaga" data-to="madrid" x="406" y="528">530 км</text>
+          <text class="map__dist" data-from="malaga" data-to="barcelona" x="636" y="473">1000 км</text>
+        </g>
+        <g class="map__pin" data-city="alicante" transform="translate(694,551)" tabindex="0" role="button" aria-label="Аликанте — база Krepko">
+          <circle class="map__halo" r="26"/>
+          <circle class="map__base" r="16"/>
+          <circle class="map__pulse" r="10"/>
+          <circle class="map__dot" r="7"/>
+          <text class="map__label" x="0" y="-22">Аликанте</text>
+        </g>
+        <g class="map__pin" data-city="valencia" transform="translate(702,442)" tabindex="0" role="button" aria-label="Валенсия">
+          <circle class="map__halo" r="26"/>
+          <circle class="map__pulse" r="10"/>
+          <circle class="map__dot" r="7"/>
+          <text class="map__label" x="0" y="-22">Валенсия</text>
+        </g>
+        <g class="map__pin" data-city="murcia" transform="translate(644,586)" tabindex="0" role="button" aria-label="Мурсия">
+          <circle class="map__halo" r="26"/>
+          <circle class="map__pulse" r="10"/>
+          <circle class="map__dot" r="7"/>
+          <text class="map__label" x="0" y="-22">Мурсия</text>
+        </g>
+        <g class="map__pin" data-city="madrid" transform="translate(446,349)" tabindex="0" role="button" aria-label="Мадрид">
+          <circle class="map__halo" r="26"/>
+          <circle class="map__pulse" r="10"/>
+          <circle class="map__dot" r="7"/>
+          <text class="map__label" x="0" y="-22">Мадрид</text>
+        </g>
+        <g class="map__pin" data-city="barcelona" transform="translate(898,255)" tabindex="0" role="button" aria-label="Барселона">
+          <circle class="map__halo" r="26"/>
+          <circle class="map__pulse" r="10"/>
+          <circle class="map__dot" r="7"/>
+          <text class="map__label" x="0" y="-22">Барселона</text>
+        </g>
+        <g class="map__pin" data-city="malaga" transform="translate(391,710)" tabindex="0" role="button" aria-label="Малага">
+          <circle class="map__halo" r="26"/>
+          <circle class="map__pulse" r="10"/>
+          <circle class="map__dot" r="7"/>
+          <text class="map__label" x="0" y="-22">Малага</text>
+        </g>
+        </g>
+      </svg>
     </div>
-    <div class="about-milestones">
-      <div class="about-milestone">
-        <div class="about-milestone__metric">2020</div>
-        <div class="about-milestone__label">Daniil в Испании</div>
-        <p class="about-milestone__desc">Переехал из Украины. Прошёл систему сам — первые документы, первый счёт в банке, госорганы без понятного языка.</p>
-      </div>
-      <div class="about-milestone">
-        <div class="about-milestone__metric">2022</div>
-        <div class="about-milestone__label">Krepko основан</div>
-        <p class="about-milestone__desc">Из личного опыта собран отлаженный маршрут. Krepko стартовал как сервис сопровождения — язык, нотариус, банк, ВНЖ.</p>
-      </div>
-      <div class="about-milestone">
-        <div class="about-milestone__metric">6 + 1</div>
-        <div class="about-milestone__label">Городов и UA-офис</div>
-        <p class="about-milestone__desc">Сегодня сеть охватывает 6 городов побережья Испании плюс отдельную команду в Украине для документов оттуда.</p>
+    <div class="map-intro">
+<div class="city">
+    <div class="city__body">
+      <div class="city__track" id="city-track">
+      <article class="city__card" data-card="alicante">
+        <h3 class="city__name">Аликанте — родина Krepko</h3>
+        <p class="city__lead">Здесь всё началось, и стало основным хабом оказания услуг по 6 провинциям Испании</p>
+        <a class="city__link" href="/alicante/" aria-label="Подробнее про Аликанте">Подробнее&nbsp;→</a>
+      </article>
+      <article class="city__card" data-card="valencia">
+        <h3 class="city__name">Валенсия</h3>
+        <p class="city__lead">Второй город по числу обращений после Аликанте: доверенности, банк и сделки с жильём.</p>
+        <a class="city__link" href="/valencia/" aria-label="Подробнее про Валенсию">Подробнее&nbsp;→</a>
+      </article>
+      <article class="city__card" data-card="murcia">
+        <h3 class="city__name">Мурсия</h3>
+        <p class="city__lead">Здесь живут тысячи русскоговорящих, а помочь им почти некому — русскоязычных компаний в Мурсии единицы. Мы работаем здесь так же, как в других городах, и покрываем весь нужный комплекс процедур.</p>
+        <a class="city__link" href="/murcia/" aria-label="Подробнее про Мурсию">Подробнее&nbsp;→</a>
+      </article>
+      <article class="city__card" data-card="madrid">
+        <h3 class="city__name">Мадрид</h3>
+        <p class="city__lead">Столица — это консульства, руководства и центральные ведомства. Сюда приезжают за тем, что не сделать на побережье. Но зачем ехать, если это можем сделать мы?</p>
+        <a class="city__link" href="/madrid/" aria-label="Подробнее про Мадрид">Подробнее&nbsp;→</a>
+      </article>
+      <article class="city__card" data-card="barcelona">
+        <h3 class="city__name">Барселона</h3>
+        <p class="city__lead">Каталония живёт по своим правилам: часть процедур оформляется иначе, чем в остальной Испании. Мы знаем местный порядок и общаемся с ним на одном языке.</p>
+        <a class="city__link" href="/barcelona/" aria-label="Подробнее про Барселону">Подробнее&nbsp;→</a>
+      </article>
+      <article class="city__card" data-card="malaga">
+        <h3 class="city__name">Малага</h3>
+        <p class="city__lead">Коста-дель-Соль — регион про отдых и размеренную жизнь. Поручите нам всё, что заставляет беспокоиться, и мы возьмём это под бережный контроль.</p>
+        <a class="city__link" href="/malaga/" aria-label="Подробнее про Малагу">Подробнее&nbsp;→</a>
+      </article>
       </div>
     </div>
-  </section>
+    <button class="city__btn" type="button" id="city-prev" aria-label="Предыдущий город"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></button>
+    <button class="city__btn" type="button" id="city-next" aria-label="Следующий город"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></button>
+    </div>
+    </div>
+  </div></div>
+  <div class="tw-ua">
+    <div class="tw-ua__head">
+      <h3 class="tw-ua__h">Украина</h3>
+      <p class="tw-ua__t">Документ остался там, а вы здесь — это не повод лететь за ним самому и искать, кому его доверить. Мы легализуем и доставим в руки.</p>
+    </div>
+    <ol class="tw-ua__steps">
+      <li><span class="n">01</span><b>Заказываем оригинал</b><i>ЗАГС, вуз, МВД, суд — обращаемся туда, где документ хранится.</i></li>
+      <li><span class="n">02</span><b>Ставим апостиль</b><i>Легализация в профильном министерстве — без вашего присутствия.</i></li>
+      <li><span class="n">03</span><b>Передаём в Европу</b><i>Переводим, и документ готов к использованию в любой стране мира.</i></li>
+    </ol>
+  </div>
+</section>
 
-  <section class="rh-section-break about-bio">
-    <span class="p-label">История</span>
-    <p>Krepko вырос из личного опыта Daniil — пути через испанскую систему, который многие проходят вслепую. Этот путь превращён в процесс: язык, нотариус, банк, ВНЖ, документы из Украины — один контакт вместо десятков специалистов.</p>
-    <p>Krepko ведёт блог с практическими гайдами — для тех, кто решил пройти часть пути самостоятельно. Когда нужно сопровождение — Krepko рядом, на родном языке.</p>
+<div class="tw-endwrap">
+  <section class="final-cta reveal">
+    <h2>Напишите нам</h2>
+    <p class="final-cta__bonus">Разберём <em>бесплатно</em> и скажем, что делать. Ответит живой человек из команды, не бот и не AI.</p>
+    <div class="final-cta__actions cta-row">
+      <a class="btn btn--gold" href="https://wa.me/34641048296?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%21%20%D0%A5%D0%BE%D1%87%D1%83%20%D1%83%D0%B7%D0%BD%D0%B0%D1%82%D1%8C%20%D0%BF%D0%BE%20%D0%B7%D0%B0%D0%B4%D0%B0%D1%87%D0%B5%3A" target="_blank" rel="noopener noreferrer">Написать в WhatsApp</a>
+    </div>
   </section>
+</div>
 
-  <section class="rh-section-break about-why">
-    <span class="p-label">Почему</span>
-    <h2>Один контакт вместо десятка специалистов</h2>
-    <p>Переезд в Испанию накрывает сразу: язык, нотариус, документы, банк, ВНЖ, налоги, сроки. Обычно ищут пять разных специалистов и каждому объясняют ситуацию заново.</p>
-    <p>Krepko работает иначе — один контакт понимает всю картину целиком. С 2020 года, на русском и украинском. Все люди в Krepko прошли систему сами — поэтому Krepko знает, к кому идти и что говорить.</p>
-  </section>
-
-<section class="final-cta">
-  <h2>Готовы начать?</h2>
-  <p>Напишите Krepko — план и стоимость придут в WhatsApp в течение 15 минут.</p>
-    <a class="btn btn--gold" href="https://wa.me/34641048296">Написать в WhatsApp</a>
-</section>  </main>
+</div>
+  </main>
 <footer id="sec-footer" class="site-footer">
   <div class="site-footer__inner">
 

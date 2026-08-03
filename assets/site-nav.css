@@ -727,3 +727,136 @@ body:has(> header.site-nav) {
   .btn, .site-nav__consult, .srows__foot .btn, .gcards__foot .btn {
     font-size: var(--fs-btn) !important;
   }
+
+/* ═══ Палитра редизайна для шапки и крошек (2026-08-03) ═══
+   Переменные терракотовой темы объявлены в home-redesign.css, а он подключён
+   только к главной. На остальных страницах шапка брала старые токены: тёмный
+   фон #161B26, золотая кнопка, голубоватые пункты меню. Переопределяем их
+   локально — на самих блоках, — чтобы шапка везде выглядела одинаково,
+   а контент страниц остался нетронутым. */
+.topbar, .site-nav, .mega, .site-menu, .breadcrumb {
+  --bg: #FFFBF7;
+  --surface: #F5F0EB;
+  --surface-2: #F0E8DD;
+  --surface-sunk: #EFE7DA;
+  --surface-card: #F5F0EB;
+  --border-faint: #E8DFD1;
+  --border: #DCCFB9;
+  --text: #2D2D2D;
+  --text-sub: #4A4A4A;
+  --text-muted: #6B6B6B;
+  --text-label: #6B6B6B;
+  --text-nav: #6B6B6B;
+  --gold: #C75B39;
+  --gold-2: #B04E2F;
+  --gold-tint: rgba(199, 91, 57, 0.14);
+  --gold-on: #FFFBF7;
+}
+
+/* ═══ Хлебные крошки (2026-08-03) ═══
+   У .breadcrumb не было ни одного правила: ссылки выводились браузерным
+   синим и прижимались к краю окна, потому что блок лежит вне main.
+   Здесь — те же поля и та же шкала, что у контента. */
+/* !important здесь вынужденный: desktop.css правилом
+   `body:has(> nav) > nav:first-of-type` зажимает крошки в 1100px и поля 12/4/8px,
+   тоже через !important — без этого строка висит по центру, оторванная и от
+   шапки, и от колонки текста. */
+body:has(> nav) > nav.breadcrumb:first-of-type,
+nav.breadcrumb {
+  max-width: 1760px !important;
+  width: auto !important;
+  margin: 0 auto !important;
+  padding: clamp(20px, 2vw, 32px) clamp(24px, 4.5vw, 88px) clamp(14px, 1.4vw, 22px) !important;
+  font-family: 'Manrope', sans-serif;
+  font-size: var(--fs-micro, 11px);
+  font-weight: 600;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+.breadcrumb a {
+  color: var(--text-muted);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: color .2s ease, border-color .2s ease;
+}
+.breadcrumb a:hover,
+.breadcrumb a:focus-visible {
+  color: var(--gold-2);
+  border-bottom-color: var(--gold-2);
+  text-decoration: none;
+}
+/* текущая страница — тем же кеглем, но темнее: это не ссылка */
+.breadcrumb > span:last-child { color: var(--text); }
+
+
+/* ═══ Адаптив шапки из редизайна (2026-08-03) ═══
+   Эти медиазапросы жили в home-redesign.css, который подключён только
+   к главной. На остальных страницах горизонтальное меню оставалось
+   скрытым, а бургер — видимым. */
+@media (min-width: 1000px) {
+    .site-nav__links {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+    }
+    .site-nav__link {
+      font-family: 'Manrope', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-sub);
+      text-decoration: none;
+      transition: color .15s ease;
+      white-space: nowrap;
+    }
+    .site-nav__link:hover { color: var(--gold); }
+    .site-nav__menu-btn { display: none; }}
+@media (max-width: 899px) {
+    .topbar__inner { padding: 8px 16px; justify-content: center; }
+    .topbar__contacts { gap: 14px; justify-content: center; width: 100%; }
+    .topbar__item { font-size: 11px; }
+    .topbar__socials { display: none; }}
+@media (min-width: 1000px) {
+    .site-nav__brand-text { font-size: 28px !important; }
+    .site-nav__links { gap: 36px; }
+    .site-nav__link { font-size: 15px; }
+    .site-nav__actions { gap: 16px; }}
+@media (min-width: 1000px) { .site-nav__consult { display: inline-flex; }}
+@media (min-width: 1000px) { .site-nav__consult { padding: 20px 32px; font-size: 14px; }}
+@media (min-width: 1000px) {
+    .site-nav__inner { padding-top: 24px !important; padding-bottom: 24px !important; }}
+@media (min-width: 1000px) {
+    .site-nav__brand-text { font-size: 36px !important; }
+    .site-nav__links { gap: 44px; }
+    .site-nav__link { font-size: 18px; letter-spacing: 0.02em; }
+    .site-nav__consult { font-size: 15px; padding: 22px 38px; }
+    .topbar__item { font-size: 15px; }}
+@media (prefers-reduced-motion: reduce) { .site-nav { transition: none; }}
+@media (max-width: 560px) {
+    .site-nav__inner { gap: 8px !important; padding-left: 16px !important; padding-right: 16px !important; }
+    .site-nav__consult { padding: 10px 12px; font-size: 10px; letter-spacing: 0.3px; }
+    .site-nav__menu-text { display: none; }
+    .site-nav__menu-btn { padding: 10px; }
+    .site-nav__brand-text { font-size: 22px !important; }}
+@media (prefers-reduced-motion: reduce) { .mega-overlay { transition: none; }}
+@media (prefers-reduced-motion: reduce) {
+    .mega { transition: none; }}
+@media (max-width: 1100px) { .mega__inner { grid-template-columns: repeat(2, 1fr); gap: 32px; }}
+@media (max-width: 999px) { .mega { display: none !important; }}
+@media (min-width: 1000px) {
+    .site-nav__brand-text,
+    .site-footer .site-footer__brand-text {
+      font-size: clamp(19px, calc(0.57vw + 17.1px), 28.5px) !important;
+    }
+    .site-nav__link {
+      font-size: clamp(12.5px, calc(0.19vw + 11.4px), 15.2px) !important;
+    }
+    .site-nav__consult {
+      font-size: clamp(10.5px, calc(0.14vw + 10.5px), 13.3px) !important;
+      padding: clamp(14px, 1.1vw, 22px) clamp(22px, 1.9vw, 38px) !important;
+    }}
+@media (min-width: 1000px) {
+    /* кнопка задаёт высоту шапки — её поля тоже ужимаем */
+    .site-nav__consult {
+      padding: clamp(10px, 0.75vw, 14px) clamp(18px, 1.6vw, 32px) !important;
+    }}

@@ -1,0 +1,51 @@
+/* ═══════════════════════════════════════════════════════════════════════
+   Курсор-точка — общий слой для всех страниц.
+
+   Системный курсор не подменяем: точка идёт поверх него и догоняет с
+   запаздыванием. Так указатель остаётся привычным (важно для форм и
+   ссылок), а движение получает мягкий шлейф.
+
+   Терракота задана здесь напрямую: на страницах без home-redesign.css
+   переменная --gold из tokens.css всё ещё старое золото, и курсор
+   выпадал бы из палитры редизайна.
+   ═══════════════════════════════════════════════════════════════════════ */
+:root { --cursor-ink: #C75B39; }
+
+.krepko-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9998;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--cursor-ink);
+  pointer-events: none;
+  opacity: 0;
+  /* центрируем в точке курсора через translate: margin ушёл бы в spacing-линт */
+  transform: translate3d(var(--cx, 0px), var(--cy, 0px), 0) translate(-50%, -50%) scale(var(--cs, 1));
+  transition: opacity .35s ease, width .3s ease, height .3s ease, background .3s ease;
+  mix-blend-mode: multiply;
+  will-change: transform;
+}
+.krepko-cursor.is-live { opacity: .5; }
+
+/* над ссылками и кнопками точка раскрывается в мягкое пятно */
+.krepko-cursor.is-over {
+  width: 44px;
+  height: 44px;
+  background: rgba(199, 91, 57, .2);
+}
+
+/* на тёмных поверхностях умножение съедает точку — там осветляем */
+.krepko-cursor.is-dark { mix-blend-mode: screen; background: rgba(199, 91, 57, .55); }
+.krepko-cursor.is-dark.is-over { background: rgba(199, 91, 57, .28); }
+
+/* Тач и «уменьшить движение» — точки нет вовсе: она осмысленна только
+   при наличии мыши. */
+@media (hover: none), (pointer: coarse) {
+  .krepko-cursor { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .krepko-cursor { display: none; }
+}
