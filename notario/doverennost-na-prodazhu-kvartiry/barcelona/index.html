@@ -28,7 +28,7 @@
   <link rel="manifest" href="/site.webmanifest">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/assets/tokens.css?v=20260526h2">
   <link rel="stylesheet" href="/assets/module-section.css?v=20260526h2">
   <link rel="stylesheet" href="/assets/module-cta.css?v=20260526h2">
@@ -39,7 +39,7 @@
   <link rel="stylesheet" href="/assets/module-pricing.css?v=20260529">
   <link rel="stylesheet" href="/assets/site-nav.css?v=20260528">
   <link rel="stylesheet" href="/assets/krepko-chips.css?v=20260608">
-  <link rel="stylesheet" href="/assets/site-footer.css?v=20260528">
+  <link rel="stylesheet" href="/assets/site-footer.css?v=20260803">
   <link rel="stylesheet" href="/assets/a11y.css">
   <link rel="stylesheet" href="/assets/krepko-base.css?v=2">
   <link rel="stylesheet" href="/assets/desktop.css">
@@ -399,111 +399,78 @@
     <a class="sticky-jump__btn sticky-jump__btn--wa" href="https://wa.me/34641048296?text=%D0%94%D0%BE%D0%B2%D0%B5%D1%80%D0%B5%D0%BD%D0%BD%D0%BE%D1%81%D1%82%D1%8C%20%D0%BD%D0%B0%20%D0%BF%D1%80%D0%BE%D0%B4%D0%B0%D0%B6%D1%83%20%D0%BA%D0%B2%D0%B0%D1%80%D1%82%D0%B8%D1%80%D1%8B%20%D0%B2%20%D0%91%D0%B0%D1%80%D1%81%D0%B5%D0%BB%D0%BE%D0%BD%D0%B5" rel="noopener noreferrer" target="_blank">WhatsApp →</a>
   </aside>
   </main>
-<footer class="site-footer">
+<footer id="sec-footer" class="site-footer">
   <div class="site-footer__inner">
 
-    <div class="site-footer__usp">
-      <div class="site-footer__usp-cell">
-        <span class="site-footer__usp-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12h18M3 6h18M3 18h12"/></svg>
-        </span>
-        <div>
-          <p class="site-footer__usp-title">Предоплата за подготовку</p>
-          <p class="site-footer__usp-desc">Krepko берёт за подготовку и согласование. Остаток к оплате по факту подписания.</p>
-        </div>
-      </div>
-      <div class="site-footer__usp-cell">
-        <span class="site-footer__usp-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
-        </span>
-        <div>
-          <p class="site-footer__usp-title">Концепция за 15 минут</p>
-          <p class="site-footer__usp-desc">Опишите кейс в WhatsApp — Krepko вернётся с планом и стоимостью за 15 минут.</p>
-        </div>
-      </div>
-      <div class="site-footer__usp-cell">
-        <span class="site-footer__usp-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2L4 7v6c0 5 3.5 8.5 8 10 4.5-1.5 8-5 8-10V7l-8-5z"/></svg>
-        </span>
-        <div>
-          <p class="site-footer__usp-title">С 2022 в Испании</p>
-          <p class="site-footer__usp-desc">Команда сопровождения в 6 городах побережья.</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="site-footer__grid">
-
-      <div class="site-footer__brand-col">
+    <!-- Карта сайта по образцу Attio: логотип слева, дальше тематические
+         колонки. Раньше под «Направлениями» лежали вперемешку услуги, города
+         и каталог, а юридические ссылки дублировались в «Полезном» и внизу. -->
+    <div class="footer-map">
+      <div class="footer-map__brand">
         <a class="site-footer__brand" href="/" aria-label="Krepko — на главную">
           <span class="site-footer__brand-text">Krepko</span>
         </a>
-        <p class="site-footer__tagline">Команда сопровождения для русско- и украиноязычных в&nbsp;Испании.</p>
-        <a href="/about/" class="site-footer__brand-link">О Krepko →</a>
       </div>
 
-      <div class="site-footer__columns">
-        <details class="site-footer__col">
-          <summary class="site-footer__col-title">Услуги</summary>
-          <ul class="site-footer__col-list">            <li><a href="/notario/">Нотариус</a></li>            <li><a href="/ukraina/">Из Украины</a></li>            <li><a href="/legalizacion/">Легализация</a></li>            <li><a href="/banca/">Банк</a></li>            <li><a href="/traduccion/">Перевод</a></li>            <li><a href="/migracion/">Миграция</a></li>            <li><a href="/tramites/">Административные процедуры</a></li>            <li><a href="/fiscalidad/">Налоги</a></li>            <li><a href="/juridico/">Юридическое</a></li>          </ul>
-        </details>
-
-        <details class="site-footer__col">
-          <summary class="site-footer__col-title">География</summary>
-          <ul class="site-footer__col-list">            <li><a href="/alicante/">Аликанте</a></li>            <li><a href="/valencia/">Валенсия</a></li>            <li><a href="/murcia/">Мурсия</a></li>            <li><a href="/madrid/">Мадрид</a></li>            <li><a href="/barcelona/">Барселона</a></li>            <li><a href="/malaga/">Малага</a></li>          </ul>
-        </details>
-
-        <details class="site-footer__col">
-          <summary class="site-footer__col-title">Знание</summary>
-          <ul class="site-footer__col-list">
-            <li><a href="/blog/">Блог — статьи о бюрократии</a></li>
-            <li><a href="/about/">О Krepko</a></li>
-            <li><a href="/services/">Каталог услуг</a></li>
-          </ul>
-        </details>
-
-        <details class="site-footer__col">
-          <summary class="site-footer__col-title">Связь</summary>
-          <ul class="site-footer__col-list">
-            <li><a href="https://wa.me/34641048296" rel="noopener noreferrer" target="_blank">WhatsApp +34 641 048 296</a></li>
-            <li><a href="https://t.me/krepko_es" rel="noopener noreferrer" target="_blank">Telegram канал @krepko_es</a></li>
-            <li><a href="https://t.me/krepko_es_admin_bot" rel="noopener noreferrer" target="_blank">Telegram бот для заявок</a></li>
-            <li><a href="https://instagram.com/krepko.es" rel="noopener noreferrer" target="_blank">Instagram @krepko.es</a></li>
-          </ul>
-        </details>
+      <div class="footer-map__cols">
+      <div class="footer-map__col">
+        <p class="footer-map__title">Услуги</p>
+        <a class="footer-map__link" href="/notario/">Нотариус</a>
+        <a class="footer-map__link" href="/ukraina/">Из Украины</a>
+        <a class="footer-map__link" href="/legalizacion/">Легализация</a>
+        <a class="footer-map__link" href="/tramites/">Административные</a>
+        <a class="footer-map__link" href="/banca/">Банк</a>
+        <a class="footer-map__link" href="/traduccion/">Перевод</a>
+        <a class="footer-map__link" href="/migracion/">Миграция</a>
+        <a class="footer-map__link" href="/fiscalidad/">Налоги</a>
+        <a class="footer-map__link" href="/juridico/">Юридическое</a>
+        <a class="footer-map__link" href="/services/">Каталог услуг</a>
       </div>
 
-    </div>
+      <div class="footer-map__col">
+        <p class="footer-map__title">Города</p>
+        <a class="footer-map__link" href="/alicante/">Аликанте</a>
+        <a class="footer-map__link" href="/valencia/">Валенсия</a>
+        <a class="footer-map__link" href="/murcia/">Мурсия</a>
+        <a class="footer-map__link" href="/madrid/">Мадрид</a>
+        <a class="footer-map__link" href="/barcelona/">Барселона</a>
+        <a class="footer-map__link" href="/malaga/">Малага</a>
+      </div>
 
-    <div class="site-footer__social-row">
-      <span class="site-footer__social-label">Каналы</span>
-      <div class="site-footer__socials" aria-label="Каналы Krepko">
-        <a class="footer-social footer-social--wa" href="https://wa.me/34641048296" rel="noopener noreferrer" target="_blank" aria-label="WhatsApp">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9 8.5 8.5 0 0 1 8.5 8.5z"/></svg>
-        </a>
-        <a class="footer-social footer-social--tg" href="https://t.me/krepko_es" rel="noopener noreferrer" target="_blank" aria-label="Telegram канал">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="5" cy="19" r="2"/><path d="M3 13a8 8 0 0 1 8 8M3 7a14 14 0 0 1 14 14"/></svg>
-        </a>
-        <a class="footer-social footer-social--bot" href="https://t.me/krepko_es_admin_bot" rel="noopener noreferrer" target="_blank" aria-label="Telegram бот">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="7" width="16" height="13" rx="2"/><circle cx="9" cy="13" r="1.2" fill="currentColor"/><circle cx="15" cy="13" r="1.2" fill="currentColor"/><path d="M12 7V4M10 4h4"/></svg>
-        </a>
-        <a class="footer-social footer-social--ig" href="https://instagram.com/krepko.es" rel="noopener noreferrer" target="_blank" aria-label="Instagram">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor"/></svg>
-        </a>
+      <div class="footer-map__col">
+        <p class="footer-map__title">Компания</p>
+        <a class="footer-map__link" href="/about/">О Krepko</a>
+        <a class="footer-map__link" href="/review/">Отзывы</a>
+        <a class="footer-map__link" href="/blog/">Блог</a>
+      </div>
+
+      <div class="footer-map__col">
+        <p class="footer-map__title">Связаться</p>
+        <a class="footer-map__link" href="tel:+34641048296">+34 641 048 296</a>
+        <a class="footer-map__link" href="mailto:hello@krepko.es">hello@krepko.es</a>
+        <a class="footer-map__link" href="https://wa.me/34641048296" target="_blank" rel="noopener noreferrer">Написать в WhatsApp</a>
+      </div>
       </div>
     </div>
 
     <div class="site-footer__bottom">
-      <nav class="site-footer__legal" aria-label="Юридическая информация">
-        <a href="/aviso-legal/">Aviso legal</a>
-        <span class="sep">·</span>
-        <a href="/privacidad/">Privacidad</a>
-        <span class="sep">·</span>
-        <a href="/terminos/">Términos</a>
-        <span class="sep">·</span>
-        <a href="/cookies/">Cookies</a>
-      </nav>
-      <div class="site-footer__meta">© 2026 Krepko</div>
+      <div class="footer-chat" aria-label="Мессенджеры">
+        <a class="footer-chat__link" href="https://wa.me/34641048296" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M12.04 2c-5.46 0-9.9 4.44-9.9 9.9 0 1.75.46 3.45 1.32 4.95L2 22l5.3-1.39a9.9 9.9 0 0 0 4.74 1.2h.01c5.46 0 9.9-4.44 9.9-9.9S17.5 2 12.04 2Zm0 18.06h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.11.82.83-3.04-.2-.31a8.19 8.19 0 0 1-1.26-4.4c0-4.53 3.69-8.22 8.24-8.22a8.22 8.22 0 0 1 0 16.44Zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.24-.64.8-.78.97-.15.16-.29.18-.53.06-.25-.13-1.05-.39-1.99-1.23-.74-.65-1.23-1.46-1.38-1.71-.14-.24-.01-.37.11-.5.11-.11.25-.29.37-.44.13-.15.17-.25.25-.41.09-.17.04-.31-.02-.44-.06-.12-.56-1.34-.76-1.84-.2-.48-.4-.42-.56-.42l-.47-.01c-.16 0-.43.06-.65.3-.23.25-.86.85-.86 2.06 0 1.21.88 2.39 1 2.55.13.17 1.74 2.66 4.22 3.73.59.25 1.05.4 1.4.52.59.19 1.13.16 1.55.1.48-.07 1.47-.6 1.67-1.18.21-.58.21-1.07.15-1.18-.06-.1-.22-.16-.47-.28Z"/></svg>
+        </a>
+        <a class="footer-chat__link" href="https://t.me/krepko_es" target="_blank" rel="noopener noreferrer" aria-label="Telegram">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M21.94 4.3 18.9 19.1c-.23 1.02-.84 1.27-1.7.79l-4.7-3.46-2.27 2.18c-.25.25-.46.46-.94.46l.33-4.78 8.7-7.86c.38-.34-.08-.53-.59-.19L6.98 13.02l-4.63-1.45c-1.01-.31-1.03-1 .21-1.48l18.12-6.98c.84-.31 1.57.19 1.26 1.19Z"/></svg>
+        </a>
+      </div>
+      <div class="site-footer__legalmeta">
+        <div class="site-footer__meta">© 2026 Krepko</div>
+        <nav class="site-footer__legal" aria-label="Юридическая информация">
+          <a href="/aviso-legal/">Aviso legal</a>
+          <a href="/privacidad/">Privacidad</a>
+          <a href="/terminos/">Términos</a>
+          <a href="/cookies/">Cookies</a>
+        </nav>
+      </div>
     </div>
 
   </div>

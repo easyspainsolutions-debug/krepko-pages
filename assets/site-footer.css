@@ -402,3 +402,184 @@ body:has(> footer.site-footer) {
     padding-bottom: calc(var(--space-5) + env(safe-area-inset-bottom));
   }
 }
+
+
+/* ═══ Terracotta-редизайн футера (2026-08-03) ═══
+   Карта сайта по образцу Attio: логотип слева, тематические колонки,
+   внизу мессенджеры и правовые ссылки. Правила живут здесь, а не в
+   home-redesign.css, потому что футер общий для всех страниц. */
+
+
+  h1, h2,
+  .hero__h1,
+  .final-cta h2,
+  .home-founder__name,
+  .site-nav__brand-text,
+  .site-footer__brand-text {
+    font-family: 'Playfair Display', Georgia, serif !important;
+    color: #1A2B3C;
+  }
+
+  .site-footer, footer.site-footer {
+    background: #1A2B3C !important;
+  }
+  .site-footer .site-footer__brand-text { color: #FFFBF7; }
+
+  /* ============ Карта сайта в футере (по образцу Attio) ============
+     Логотип узкой колонкой слева, ссылки прижаты вправо и разложены на четыре
+     колонки — между ними намеренная пустота. Заголовки групп не капсом, а
+     мелкой приглушённой строкой: они подписывают список, а не спорят с ним. */
+  .footer-map {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 40px;
+    padding-bottom: 8px;
+  }
+  .footer-map__cols {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 36px 28px;
+  }
+  .footer-map__title {
+    font-family: 'Manrope', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    color: rgba(255, 251, 247, .45);
+    margin: 0 0 12px;
+  }
+  .footer-map__link {
+    display: block;
+    width: fit-content;
+    color: rgba(255, 251, 247, .82);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 2.1;
+    transition: color .15s ease;
+  }
+  /* в референсе ссылка подчёркивается, а не меняет цвет целиком */
+  .footer-map__link:hover { color: #FFFBF7; text-decoration: underline; text-underline-offset: 3px; }
+
+  /* нижняя полоса: мессенджеры слева, копирайт с правовым — справа */
+  .site-footer .site-footer__bottom {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px 32px;
+    padding-top: 28px;
+    border-top: 1px solid rgba(255, 251, 247, .12);
+  }
+  /* Логотип в футере — тем же кеглем, что в шапке: базово 22px, на десктопе 36px */
+  .site-footer .site-footer__brand-text {
+    font-size: 22px !important;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    line-height: 1;
+  }
+
+  .footer-chat { display: flex; align-items: center; gap: 4px; }
+  .footer-chat__link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 auto;
+    width: 32px; height: 32px;
+    color: rgba(255, 251, 247, .55);
+    transition: color .15s ease;
+  }
+  .footer-chat__link:hover { color: #FFFBF7; } для контурных иконок, и атрибут
+     fill на разметке им проигрывает — эти иконки заливные, ставим явно */
+  .footer-chat__link svg { fill: currentColor; stroke: none; display: block; }
+  .site-footer__legalmeta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px 24px;
+  }
+  .site-footer .site-footer__legal {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 24px;
+  }
+  .site-footer .site-footer__legal a,
+  .site-footer .site-footer__meta {
+    font-size: 14px;
+    color: rgba(255, 251, 247, .45);
+    text-decoration: none;
+  }
+  .site-footer .site-footer__legal a:hover { color: #FFFBF7; text-decoration: underline; text-underline-offset: 3px; }
+
+  /* Footer — taller, wider */
+  .site-footer__inner { max-width: 1500px !important; padding-left: 40px !important; padding-right: 40px !important; }
+
+  /* ============ Round 6: full-bleed top chrome (LegalFlow container width) ============ */
+  .topbar__inner,
+  .site-nav__inner,
+  .site-footer__inner {
+    max-width: 1760px !important;
+    padding-left: clamp(24px, 4.5vw, 88px) !important;
+    padding-right: clamp(24px, 4.5vw, 88px) !important;
+  }
+
+  /* — карточки и поверхности: почти прямые углы — */
+  .card,
+  .review-card,
+  .faq__item,
+  .home-founder__card,
+  .site-footer__usp-cell,
+  .cookie-consent__inner,
+  .site-menu__card,
+  .card--city-visual {
+    border-radius: 4px !important;
+  }
+
+  /* — 2. поверхности — */
+  .stat, .rv, .srows, .srow--all, .faq__item,
+  .home-founder__card, .site-footer__usp-cell, .site-menu__card,
+  .cookie-consent__inner, .final-cta, .portrait__frame, .card {
+    border-radius: 4px !important;
+  }
+
+  /* Футер добавлял свой margin-top (--rh-4) поверх нижнего отступа CTA —
+     снизу получалось вдвое больше, чем сверху. Отступ даёт секция. */
+  .site-footer { margin-top: 0 !important; }
+
+
+  /* Шапка и бегущая строка были набраны на верхних весах: логотип 800,
+     тикер и меню 600. На крупном Playfair 800 читается как жирный штамп,
+     а капс тикера при 600 спорит с заголовками. Снимаем по ступени. */
+  .site-nav__brand-text,
+  .site-footer .site-footer__brand-text {
+    font-weight: 600 !important;
+    letter-spacing: -0.2px !important;
+  }
+
+  /* — 4. основной текст — */
+  .home-faq .faq__a,
+  .value__text,
+  .home-guides .gcard__dek,
+  .footer-map__link,
+  .step__text {
+    font-size: var(--fs-body) !important;
+    line-height: var(--lh-body) !important;
+  }
+
+  /* — 5. вторичный текст — */
+  .step__note,
+  .final-cta__bonus,
+  .home-faq .faq__more,
+  .city__link,
+  .site-footer .site-footer__meta,
+  .site-footer .site-footer__legal a,
+  .footer-map__title,
+  .rv__name {
+    font-size: var(--fs-small) !important;
+  }
+
+  /* интерлиньяж вторичного текста: было 1.5 / 1.6 / 1.65 в одной роли */
+  .step__note, .final-cta__bonus, .home-faq .faq__more, .city__link,
+  .site-footer .site-footer__meta, .site-footer .site-footer__legal a,
+  .footer-map__title, .rv__name {
+    line-height: 1.6 !important;
+  }
