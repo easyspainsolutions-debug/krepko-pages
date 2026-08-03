@@ -37,7 +37,7 @@
   <link rel="stylesheet" href="/assets/module-trust.css?v=20260602">
   <link rel="stylesheet" href="/assets/module-process.css?v=20260602">
   <link rel="stylesheet" href="/assets/module-pricing.css?v=20260529">
-  <link rel="stylesheet" href="/assets/site-nav.css?v=20260528">
+  <link rel="stylesheet" href="/assets/site-nav.css?v=20260803">
   <link rel="stylesheet" href="/assets/krepko-chips.css?v=20260608">
   <link rel="stylesheet" href="/assets/site-footer.css?v=20260803">
   <link rel="stylesheet" href="/assets/a11y.css">
@@ -56,23 +56,107 @@
 </head>
 <body>
   <a href="#main" class="skip-link">Перейти к содержимому</a>
+<div class="topbar">
+  <div class="topbar__inner">
+    <div class="topbar__contacts">
+      <a class="topbar__item" href="mailto:hello@krepko.es">
+        <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
+        hello@krepko.es
+      </a>
+      <a class="topbar__item" href="tel:+34641048296">
+        <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.2a2 2 0 0 1 2.1-.5c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>
+        +34 641 048 296
+      </a>
+    </div>
+    <div class="topbar__socials">
+      <a class="topbar__social" href="https://wa.me/34641048296" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+        <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9 8.5 8.5 0 0 1 8.5 8.5z"/></svg>
+      </a>
+      <a class="topbar__social" href="https://t.me/krepko_es" target="_blank" rel="noopener noreferrer" aria-label="Telegram">
+        <svg viewBox="0 0 24 24" width="17" height="17" fill="currentColor" aria-hidden="true"><path d="M21.9 4.3 18.9 19c-.2 1-.8 1.3-1.7.8l-4.6-3.4-2.2 2.1c-.3.3-.5.5-1 .5l.3-4.8 8.7-7.9c.4-.3-.1-.5-.6-.2L6.9 12.8 2.4 11.4c-1-.3-1-1 .2-1.4l18-7c.8-.3 1.5.2 1.3 1.3z"/></svg>
+      </a>
+      <a class="topbar__social" href="https://instagram.com/krepko.es" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+        <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor"/></svg>
+      </a>
+    </div>
+  </div>
+</div>
+
 <header class="site-nav" role="banner">
   <div class="site-nav__inner">
     <a class="site-nav__brand" href="/" aria-label="Krepko — на главную">
       <span class="site-nav__brand-text">Krepko</span>
     </a>
 
+    <nav class="site-nav__links" aria-label="Основное меню">
+      <a class="site-nav__link" href="/">Главная</a>
+      <a class="site-nav__link" href="/about/">Кто мы</a>
+      <button class="site-nav__link site-nav__link--mega" type="button" aria-expanded="false" aria-controls="mega-menu" id="mega-trigger">Каталог услуг<svg class="site-nav__chev" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg></button>
+      <a class="site-nav__link" href="/blog/">Блог</a>
+    </nav>
+
     <div class="site-nav__actions">
-      <a class="site-nav__cta" href="https://wa.me/34641048296" rel="noopener noreferrer" aria-label="WhatsApp" target="_blank">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9 8.5 8.5 0 0 1 8.5 8.5z"/></svg>
-        <span class="site-nav__cta-text">WhatsApp</span>
-      </a>
+      <a class="site-nav__consult" href="https://wa.me/34641048296?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%21%20%D0%A5%D0%BE%D1%87%D1%83%20%D0%B1%D0%B5%D1%81%D0%BF%D0%BB%D0%B0%D1%82%D0%BD%D1%83%D1%8E%20%D0%BA%D0%BE%D0%BD%D1%81%D1%83%D0%BB%D1%8C%D1%82%D0%B0%D1%86%D0%B8%D1%8E" target="_blank" rel="noopener noreferrer">Бесплатная консультация</a>
       <button class="site-nav__menu-btn" type="button" aria-label="Открыть меню" aria-haspopup="dialog" aria-controls="site-menu-dialog" onclick="document.getElementById('site-menu-dialog').showModal()">
         <span class="site-nav__menu-text">Меню</span>
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg>
       </button>
     </div>
   </div>
+<div class="mega" id="mega-menu" hidden>
+  <div class="mega__inner">
+      <div class="mega__col">
+        <a class="mega__head" href="/notario/">Нотариус и документы</a>
+        <span class="mega__count">12 услуг</span>
+            <a class="mega__doc" href="/notario/doverennost-na-prodazhu-kvartiry/">Доверенность на продажу квартиры</a>
+            <a class="mega__doc" href="/notario/doverennost-na-bank/">Доверенность на банковский счёт</a>
+            <a class="mega__doc" href="/notario/doverennost-na-avtomobil/">Доверенность на автомобиль</a>
+            <a class="mega__doc" href="/notario/doverennost-na-nasledstvo/">Доверенность на наследство</a>
+            <a class="mega__doc" href="/notario/doverennost-na-razvod/">Доверенность на развод</a>
+            <a class="mega__doc" href="/notario/soglasie-supruga/">Согласие супруга</a>
+            <a class="mega__doc" href="/legalizacion/apostil-ispania/">Апостиль на испанский документ</a>
+            <a class="mega__doc" href="/legalizacion/zaverenie-kopii-ispanskogo/">Заверение копии испанского документа</a>
+            <a class="mega__doc" href="/legalizacion/zaverenie-podpisi-na-dokumente/">Заверение подписи на документе</a>
+        <a class="mega__more" href="/notario/">Все нотариальные →</a>
+      </div>
+
+      <div class="mega__col">
+        <a class="mega__head" href="/ukraina/">Документы из-за рубежа</a>
+        <span class="mega__count">8 услуг</span>
+            <a class="mega__doc" href="/ukraina/spravka-o-nesudimosti/">Справка о несудимости из Украины</a>
+            <a class="mega__doc" href="/ukraina/svidetelstvo-rozhdenii-dubli/">Дубликат свидетельства о рождении</a>
+            <a class="mega__doc" href="/ukraina/svidetelstvo-brake-dublikat/">Дубликат свидетельства о браке</a>
+            <a class="mega__doc" href="/ukraina/diplom-apostil/">Диплом с апостилем и нострификацией</a>
+            <a class="mega__doc" href="/ukraina/doverennost-ukraina/">Доверенность из Украины</a>
+            <a class="mega__doc" href="/ukraina/perevod-prisyazhnyy/">Нотариальный перевод с двойным апостилем</a>
+        <a class="mega__more" href="/ukraina/">Все из Украины →</a>
+      </div>
+
+      <div class="mega__col">
+        <a class="mega__head" href="/tramites/">Жизнь в Испании</a>
+        <span class="mega__count">Процедуры и сервисы</span>
+            <a class="mega__doc" href="/tramites/empadronamiento/">Прописка в Испании (empadronamiento)</a>
+            <a class="mega__doc" href="/tramites/firma-digital/">Цифровая подпись (firma digital)</a>
+            <a class="mega__doc" href="/tramites/canje-permiso/">Замена прав на испанские</a>
+            <a class="mega__doc" href="/tramites/homologacion-bachillerato/">Омологация аттестата (bachillerato)</a>
+        <a class="mega__doc" href="/banca/">Банковский счёт</a>
+        <a class="mega__doc" href="/migracion/">ВНЖ и миграция</a>
+        <a class="mega__doc" href="/fiscalidad/">Налоги</a>
+      </div>
+
+      <div class="mega__col">
+        <a class="mega__head" href="/juridico/">Юридическое и перевод</a>
+        <span class="mega__count">Сопровождение</span>
+        <a class="mega__doc" href="/juridico/">Сделки и споры</a>
+        <a class="mega__doc" href="/juridico/">Недвижимость</a>
+        <a class="mega__doc" href="/traduccion/">Присяжный перевод</a>
+        <a class="mega__doc" href="/legalizacion/">Апостиль</a>
+      </div>
+  </div>
+  <div class="mega__footer">
+    <a class="mega__all" href="/services/">Смотреть весь каталог услуг&nbsp;→</a>
+  </div>
+</div>
 </header>
 
 <dialog id="site-menu-dialog" class="site-menu" aria-label="Меню сайта" aria-modal="true">
