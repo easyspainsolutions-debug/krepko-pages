@@ -516,7 +516,8 @@ body:has(.tw) { overflow-x: visible; }
      чип переключается со скроллом (JS уже синхронизирует), тап скроллит
      к году. Подложка и нижняя линия отделяют её от проезжающего текста. */
   .tw-years {
-    position: sticky; top: 0; z-index: 5;
+    /* шапка сайта тоже липкая (65px) — лента встаёт сразу под ней */
+    position: sticky; top: 64px; z-index: 5;
     margin: 0 calc(var(--pad) * -1); padding: 10px var(--pad) 8px;
     background: color-mix(in srgb, var(--bg) 92%, transparent);
     -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
