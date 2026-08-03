@@ -542,6 +542,14 @@ body:has(.tw) { overflow-x: visible; }
   .tw-years button.is-live span { font-size: 19px; letter-spacing: 0; }
   .tw-years button.is-live::after { display: none; }
   .tw-years button em { margin-top: 0; font-size: 10px; letter-spacing: .08em; }
+  /* Правый обрез ленты обрывал чип без намёка, что дальше есть ещё годы —
+     растушёвка поверх набегающих чипов подсказывает: тут можно листать.
+     Сидит на самой .tw-years (не на ul), поэтому не едет вместе со скроллом. */
+  .tw-years::after {
+    content: ''; position: absolute; top: 0; right: 0; bottom: 0; width: 44px;
+    background: linear-gradient(to right, transparent, color-mix(in srgb, var(--bg) 94%, transparent) 60%);
+    pointer-events: none;
+  }
 
   /* Строки хроники: приглушение .34 на десктопе работает, потому что
      рядом всегда есть активная строка. На мобилке в кадре одна строка —
