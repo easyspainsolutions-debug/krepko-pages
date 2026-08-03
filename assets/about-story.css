@@ -324,7 +324,7 @@ body:has(.tw) { overflow-x: visible; }
   .tw-voice__quote .w { color: var(--ink) !important; }
   .tw-keep__head { position: static; }
   .tw-row { opacity: 1; }
-  .tw-years { position: static; }
+  @media (min-width: 940px) { .tw-years { position: static; } }
   .tw-years button::before, .tw-years button.is-live::after { transition: none; animation: none; }
   .tw-years button span { transition: none; }
   .tw-link::after { transform: scaleX(1); }
@@ -512,17 +512,27 @@ body:has(.tw) { overflow-x: visible; }
   /* лента чипов с отрицательными полями распирала grid-колонку:
      у grid-элементов min-width: auto, и вся хроника уезжала за экран */
   .tw-chron > * { min-width: 0; max-width: 100%; }
-  .tw-years__k { margin-bottom: 10px; }
+  /* Лента годов прилипает под шапкой и ведёт по всей хронике: активный
+     чип переключается со скроллом (JS уже синхронизирует), тап скроллит
+     к году. Подложка и нижняя линия отделяют её от проезжающего текста. */
+  .tw-years {
+    position: sticky; top: 0; z-index: 5;
+    margin: 0 calc(var(--pad) * -1); padding: 10px var(--pad) 8px;
+    background: color-mix(in srgb, var(--bg) 92%, transparent);
+    -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--hair);
+  }
+  .tw-years__k { display: none; }
   .tw-years ul {
     display: flex; gap: 6px;
     overflow-x: auto; -ms-overflow-style: none; scrollbar-width: none;
-    margin: 0 calc(var(--pad) * -1); padding: 0 var(--pad) 6px;
+    margin: 0 calc(var(--pad) * -1); padding: 0 var(--pad) 4px;
   }
   .tw-years ul::-webkit-scrollbar { display: none; }
   .tw-years li { flex: 0 0 auto; }
   .tw-years button {
     border-left: 0; border: 1px solid var(--hair);
-    padding: 10px 14px; border-radius: 999px;
+    padding: 12px 15px; border-radius: 999px;   /* тап-зона ≥44px */
     display: inline-flex; align-items: baseline; gap: 7px;
   }
   .tw-years button::before { border-radius: 999px; }

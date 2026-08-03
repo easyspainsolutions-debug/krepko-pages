@@ -3727,3 +3727,81 @@
   .home-guides .gcard__dek { margin-bottom: 22px; }
   .home-guides .gcard__more { margin-top: 0; }
 }
+
+
+/* ═══════════ Мобильная адаптация, полный проход (2026-08-04) ═══════════
+   Правки собраны по секциям сверху вниз. Общий принцип: на 375px каждая
+   секция должна помещаться в 1–1.5 экрана и сохранять терракотовые
+   акценты, а не превращаться в серый столбец текста. */
+@media (max-width: 719px) {
+
+  /* ── Знакомство: портрет первым, факты — сеткой 2×3 ──
+     Было: 6 карточек и портрет столбцом на 2.5 экрана. Порядок держит
+     flex-order, сами колонки распускаем. */
+  .portrait { display: flex; flex-direction: column; }
+  .portrait__figure { order: 1; margin: 0 auto; max-width: 300px; }
+  .portrait__col--left  { order: 2; }
+  .portrait__col--right { order: 3; }
+  .portrait__col {
+    display: grid !important; grid-template-columns: 1fr 1fr;
+    gap: 12px; margin-top: 12px;
+  }
+  .portrait__col--left .stat:nth-child(3),      /* «четыре языка» шире прочих */
+  .portrait__col--right .stat:nth-child(3) {    /* «27 минут» тоже */
+    grid-column: 1 / -1;
+  }
+  .stat { padding: 16px 16px 14px; margin: 0 !important; }
+  .stat__label { font-size: 10px; letter-spacing: .14em; }
+  .stat__value { font-size: clamp(26px, 8vw, 34px); }
+  .stat__value--langs { font-size: clamp(20px, 6vw, 26px); }
+
+  /* ── Философия: иконка и заголовок в одну строку, текст под ними ──
+     Крупные иконки-плашки съедали ширину и рвали выравнивание. */
+  .value {
+    display: grid !important; grid-template-columns: 40px minmax(0, 1fr);
+    column-gap: 14px; align-items: center; text-align: left;
+    min-height: 0 !important; padding: 18px 0 !important;
+  }
+  .value__icon { width: 40px; height: 40px; margin: 0; }
+  .value__icon svg { width: 16px; height: 16px; }
+  .value__body { text-align: left; }
+  .value__title { margin: 0 0 6px; }
+  .value__text { margin: 0; }
+
+  /* ── Шаги: базовый grid 56px/1fr оставляем, но заголовок и пояснение
+     держим в одной текстовой колонке, а от круга к кругу тянем нить —
+     маршрут читается сверху вниз ── */
+  .step { position: relative; grid-template-columns: 48px minmax(0, 1fr); column-gap: 16px; row-gap: 6px; }
+  .step__dot { width: 48px; height: 48px; grid-row: 1 / 3; }
+  .step__text { grid-column: 2; align-self: center; text-align: left; }
+  .step__note { grid-column: 2; margin: 0; text-align: left; }
+  .step:not(:last-child)::before {
+    content: ''; position: absolute; left: 23.5px; top: 54px; bottom: -30px;
+    width: 1px; background: linear-gradient(180deg, var(--gold), var(--border));
+    opacity: .5;
+  }
+
+  /* ── Финальный CTA: кнопка не шире экрана ── */
+  .final-cta .btn { max-width: 100%; white-space: normal; }
+}
+
+/* ── Отзывы: свайп с «подглядыванием» следующего + точки ──
+   На десктопе три колонки; до 999px лента снапа уже была, но карточка
+   занимала 100% — о следующих отзывах ничто не говорило, а стрелки
+   скрыты. Теперь из-за края выглядывает кусок следующего отзыва,
+   под лентой — точки (рисует home-redesign.js). */
+@media (max-width: 999px) {
+  #sec-reviews .rv { flex: 0 0 88%; min-width: 88%; scroll-snap-align: start; }
+  #sec-reviews .rv:last-child { flex-basis: 100%; min-width: 100%; }
+  .rv-dots { display: flex; justify-content: center; gap: 10px; margin-top: 18px; }
+  .rv-dots button {
+    appearance: none; border: 0; cursor: pointer; padding: 8px;
+    background: none; line-height: 0;
+  }
+  .rv-dots button::before {
+    content: ''; display: block; width: 7px; height: 7px; border-radius: 50%;
+    background: var(--border); transition: background .3s ease, transform .3s ease;
+  }
+  .rv-dots button.is-on::before { background: var(--gold); transform: scale(1.35); }
+}
+@media (min-width: 1000px) { .rv-dots { display: none; } }

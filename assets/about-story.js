@@ -43,9 +43,19 @@
       if (y === current) return;
       current = y;
       /* список слева ведёт по хронике — активный год подсвечивается здесь */
+      var liveBtn = null;
       Array.prototype.forEach.call(document.querySelectorAll('.tw-years button'), function (b) {
-        b.classList.toggle('is-live', b.getAttribute('data-go') === y);
+        var on = b.getAttribute('data-go') === y;
+        b.classList.toggle('is-live', on);
+        if (on) liveBtn = b;
       });
+      /* на мобилке годы — горизонтальная лента: активный чип подъезжает
+         в кадр сам, прокручиваем ленту, не трогая страницу */
+      var strip = liveBtn && liveBtn.closest('ul');
+      if (strip && strip.scrollWidth > strip.clientWidth + 4) {
+        var target = liveBtn.offsetLeft - (strip.clientWidth - liveBtn.offsetWidth) / 2;
+        strip.scrollTo({ left: Math.max(0, target), behavior: 'smooth' });
+      }
     }
     function queue() { if (!queued) { queued = true; requestAnimationFrame(tick); } }
     window.addEventListener('scroll', queue, { passive: true });
