@@ -72,7 +72,7 @@ a {
   text-decoration: none;
   transition: color var(--t-1);
 }
-a:hover { text-decoration: underline; }
+a:hover { text-decoration: none; }   /* подчёркиваний на сайте нет — см. no-underline.css */
 /* «Нарядные» ссылки несут свой золотой border-bottom как подчёркивание. Гасим у них
    глобальное a:hover-подчёркивание (выше), чтобы при наведении был ОДИН значок, а не два.
    ВАЖНО: сюда попадают только селекторы, которые ВЕЗДЕ означают «нарядную» ссылку:

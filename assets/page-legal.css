@@ -136,11 +136,10 @@ td strong {
 .wrap a {
   color: var(--gold);
   text-decoration: none;
-  border-bottom: 1px dotted rgba(196, 149, 42, 0.4);
+  border-bottom: none;   /* подчёркиваний на сайте нет — решение 2026-08-03 */
 }
 
 .wrap a:hover {
-  border-bottom-color: var(--gold);
   /* Гасим глобальное a:hover{text-decoration:underline} (krepko-base.css) — у .wrap a
      свой золотой border-bottom, второе подчёркивание лишнее. Правило живёт ИМЕННО здесь
      (page-legal.css грузится только на юр-страницах), а не в krepko-base: класс .wrap

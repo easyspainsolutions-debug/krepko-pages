@@ -1,0 +1,53 @@
+/* ═══════════════════════════════════════════════════════════════════════
+   Ссылки без подчёркиваний — по всему сайту (решение Daniil 2026-08-03).
+
+   Подключается последним из глобальных модулей, поэтому перебивает их
+   по порядку. Страничные наборы (home-redesign.css, about-story.css)
+   идут после — свои подчёркивания они уже не ставят, правки внесены
+   в самих файлах.
+
+   Что здесь НЕ делается: border-bottom не снимается у всех <a> подряд.
+   Часть ссылок — кнопки с полной рамкой (.btn), и общее правило срезало
+   бы им нижнюю грань. Поэтому гасятся только те классы, где нижняя
+   граница работала именно подчёркиванием.
+   ═══════════════════════════════════════════════════════════════════════ */
+
+a,
+a:hover,
+a:focus,
+a:active,
+a:visited { text-decoration: none; }
+
+/* «Нарядные» ссылки: подчёркивание было нарисовано границей, а не
+   text-decoration. Активность остаётся за цветом. */
+.cookie-consent__desc a,
+.cookie-consent__desc a:hover,
+.hero__link-secondary,
+.hero__link-secondary:hover,
+.home-founder-bridge a,
+.home-founder-bridge a:hover,
+.home-founder__link,
+.home-founder__link:hover,
+.home-guides__all,
+.home-guides__all:hover,
+.home-reviews__all,
+.home-reviews__all:hover,
+.footer-map__link:hover,
+.site-footer .site-footer__legal a:hover,
+.mega__more:hover,
+.mega__all:hover,
+.srows__all:hover,
+.loc__link:hover { border-bottom-color: transparent; text-decoration: none; }
+
+/* Юридические страницы: ссылки внутри текста несли пунктирную границу. */
+.wrap a,
+.wrap a:hover { border-bottom-color: transparent; }
+
+/* Блог проставляет подчёркивание инлайном — снять его можно только так.
+   Селектор бьёт ровно по тем <a>, у которых border-bottom в style. */
+a[style*="border-bottom"],
+a[style*="border-bottom"]:hover { border-bottom-color: transparent !important; }
+
+/* Клавиатурная навигация: без подчёркивания фокус остаётся единственным
+   признаком «я здесь», поэтому обводку делаем заметной. */
+a:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; border-radius: 2px; }

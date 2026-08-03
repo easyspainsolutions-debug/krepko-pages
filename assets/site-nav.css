@@ -616,7 +616,7 @@ body:has(> header.site-nav) {
     color: var(--gold);
     text-decoration: none;
   }
-  .mega__more:hover { text-decoration: underline; }
+  .mega__more:hover { text-decoration: none; }
 
   .mega__footer {
     border-top: 1px solid var(--border-faint);
@@ -635,7 +635,7 @@ body:has(> header.site-nav) {
     color: var(--gold);
     text-decoration: none;
   }
-  .mega__all:hover { text-decoration: underline; }
+  .mega__all:hover { text-decoration: none; }
 
   /* ============ Round 21: единая система форм ============
      Три правила, без исключений:

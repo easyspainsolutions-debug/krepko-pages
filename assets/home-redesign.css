@@ -1646,7 +1646,7 @@
     color: var(--gold);
     text-decoration: none;
   }
-  .srows__all:hover { text-decoration: underline; }
+  .srows__all:hover { text-decoration: none; }
 
   @media (max-width: 640px) {
     .srow {
@@ -1920,7 +1920,7 @@
     color: var(--gold);
     text-decoration: none;
   }
-  .loc__link:hover { text-decoration: underline; }
+  .loc__link:hover { text-decoration: none; }
 
   /* ============ Round 26: шаги во всю ширину, без заголовка ============ */
   .intro__how {
@@ -3689,3 +3689,41 @@
 .step:nth-of-type(4) { transition-delay: 330ms; }
 .value:nth-of-type(3) { transition-delay: 130ms; }
 .value:nth-of-type(4) { transition-delay: 130ms; }
+
+
+/* ═══════════ Мобильная полировка (2026-08-04) ═══════════
+   Диагноз с замера на 375px: .map-wrap — grid, а у grid-элементов
+   min-width: auto — контент карты и лента городов раскладывались в 663px
+   и уезжали за экран (подписи и текст городов обрезались). */
+@media (max-width: 999px) {
+  .map-wrap > * { min-width: 0; }
+  .map-stage, .map, .city, .city__body, .city__track { max-width: 100%; }
+  .city__card { min-width: 100%; width: 100%; }
+}
+
+@media (max-width: 599px) {
+  /* Сдвиг карты за курсором и параллакс не нужны на таче */
+  .map, .map-stage { transform: none !important; }
+
+  /* Стрелки городов встали столбиком (position: static из базового
+     правила): кнопки — прямые дети .city без обёртки, поэтому в ряд их
+     ставит строчный поток — блочный контейнер и inline-flex кнопки */
+  .city { display: block; }
+  .city__btn {
+    position: static; transform: none;
+    display: inline-flex; margin: 14px 10px 0 0;
+  }
+
+  /* Подписи карты: SVG сжат втрое против десктопа, 21px виртуальных
+     превращались в ~8px экранных. Кегль в координатах viewBox. */
+  .map__label { font-size: 34px; }
+  .map__pin.is-active .map__label { font-size: 38px; }
+  .map__dot { r: 9; }
+  .map__pin.is-active .map__dot { r: 15; }
+
+  /* Гайды: на десктопе карточки одного роста в сетке, на мобилке колонка —
+     фиксированный рост оставлял дыру между текстом и «Читать» */
+  .home-guides .gcard { min-height: 0; }
+  .home-guides .gcard__dek { margin-bottom: 22px; }
+  .home-guides .gcard__more { margin-top: 0; }
+}

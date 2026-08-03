@@ -472,7 +472,7 @@ body:has(> footer.site-footer) {
     transition: color .15s ease;
   }
   /* в референсе ссылка подчёркивается, а не меняет цвет целиком */
-  .footer-map__link:hover { color: #FFFBF7; text-decoration: underline; text-underline-offset: 3px; }
+  .footer-map__link:hover { color: #FFFBF7; }
 
   /* нижняя полоса: мессенджеры слева, копирайт с правовым — справа */
   .site-footer .site-footer__bottom {
@@ -522,7 +522,7 @@ body:has(> footer.site-footer) {
     color: rgba(255, 251, 247, .45);
     text-decoration: none;
   }
-  .site-footer .site-footer__legal a:hover { color: #FFFBF7; text-decoration: underline; text-underline-offset: 3px; }
+  .site-footer .site-footer__legal a:hover { color: #FFFBF7; }
 
   /* Footer — taller, wider */
   .site-footer__inner { max-width: 1500px !important; padding-left: 40px !important; padding-right: 40px !important; }

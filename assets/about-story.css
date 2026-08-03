@@ -498,3 +498,48 @@ body:has(.tw) { overflow-x: visible; }
 /* «бесплатно» — единственное слово в финале, которое стоит акцентировать:
    курсив здесь не нужен, работает цвет */
 .tw-endwrap .final-cta__bonus em { font-style: normal; font-weight: 600; color: var(--gold); }
+
+
+/* ═══════════ Мобильная полировка (2026-08-04) ═══════════ */
+@media (max-width: 939px) {
+  /* Титул: на 375px кегль из общей шкалы ломал «Сначала это была»
+     вторым переносом внутри маски — строки рвались посреди фразы */
+  .tw-open__h1 { font-size: clamp(30px, 9vw, 44px); max-width: none; }
+
+  /* Хронология-навигация занимала целый экран перед контентом.
+     На мобилке это горизонтальная лента чипов — тот же приём, что
+     и лента городов: листается пальцем, активный год подсвечен. */
+  /* лента чипов с отрицательными полями распирала grid-колонку:
+     у grid-элементов min-width: auto, и вся хроника уезжала за экран */
+  .tw-chron > * { min-width: 0; max-width: 100%; }
+  .tw-years__k { margin-bottom: 10px; }
+  .tw-years ul {
+    display: flex; gap: 6px;
+    overflow-x: auto; -ms-overflow-style: none; scrollbar-width: none;
+    margin: 0 calc(var(--pad) * -1); padding: 0 var(--pad) 6px;
+  }
+  .tw-years ul::-webkit-scrollbar { display: none; }
+  .tw-years li { flex: 0 0 auto; }
+  .tw-years button {
+    border-left: 0; border: 1px solid var(--hair);
+    padding: 10px 14px; border-radius: 999px;
+    display: inline-flex; align-items: baseline; gap: 7px;
+  }
+  .tw-years button::before { border-radius: 999px; }
+  .tw-years button span { font-size: 19px; }
+  .tw-years button.is-live { border-color: var(--gold); }
+  .tw-years button.is-live span { font-size: 19px; letter-spacing: 0; }
+  .tw-years button.is-live::after { display: none; }
+  .tw-years button em { margin-top: 0; font-size: 10px; letter-spacing: .08em; }
+
+  /* Строки хроники: приглушение .34 на десктопе работает, потому что
+     рядом всегда есть активная строка. На мобилке в кадре одна строка —
+     бледный текст читался как «неработающая» страница. */
+  .tw-row { opacity: .55; }
+  .tw-row.is-live { opacity: 1; }
+  /* и вертикальный ритм короче — пустоты между годами были в полэкрана */
+  .tw { --row-pad: clamp(28px, 4.5vh, 48px); }
+
+  /* Цитата: кавычка над текстом упиралась в портрет */
+  .tw-voice__mark { left: -.05em; top: -.5em; opacity: .14; }
+}
