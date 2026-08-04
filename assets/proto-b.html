@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Прототип B — «Штамп-путь»</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=Manrope:wght@500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #FFFBF7; --sunk: #EFE7DA; --surface: #F5F0EB; --manila: #F2E2C4;
+    --ink: #1A2B3C; --sub: #4A4A4A; --muted: #6B6B6B;
+    --gold: #C75B39; --gold2: #B04E2F;
+  }
+  * { box-sizing: border-box; margin: 0; }
+  body { background: var(--bg); color: var(--ink); font-family: 'Manrope', sans-serif; overflow-x: clip; }
+
+  .bar { display: flex; justify-content: space-between; align-items: center; padding: 16px 24px; background: var(--sunk); }
+  .bar b { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 600; }
+  .bar span { font-size: 10px; letter-spacing: .2em; color: var(--gold2); font-weight: 700; }
+
+  /* ═══ HERO: чек-лист дел, который штампуется на глазах ═══ */
+  .hero { padding: 52px 24px 46px; min-height: 78vh; display: flex; flex-direction: column; }
+  .hero h1 {
+    font-family: 'Playfair Display', serif; font-weight: 600;
+    font-size: clamp(28px, 8.2vw, 36px); line-height: 1.16; letter-spacing: -.01em;
+  }
+  .hero h1 em { font-style: normal; color: var(--gold); }
+  .hero .dek { margin-top: 16px; color: var(--sub); font-size: 16px; line-height: 1.7; max-width: 32ch; }
+
+  /* дела: строки-документы; штамп «СДЕЛАНО» шлёпается по очереди */
+  .todo { margin-top: 34px; display: flex; flex-direction: column; gap: 10px; }
+  .doc {
+    position: relative; display: flex; align-items: center; justify-content: space-between;
+    background: var(--surface); border: 1px solid #E8DFD1; border-radius: 8px;
+    padding: 15px 16px; font-size: 15px; font-weight: 600; color: var(--sub);
+    overflow: visible;
+  }
+  .doc .num { font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: var(--muted); margin-right: 12px; }
+  .doc .t { flex: 1; }
+  .stamp {
+    position: absolute; right: 10px; top: 50%;
+    font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; font-weight: 600; letter-spacing: .14em;
+    color: var(--gold2); border: 1.5px solid var(--gold2); border-radius: 4px;
+    padding: 4px 8px; background: rgba(255, 251, 247, .8);
+    transform: translateY(-50%) rotate(-8deg) scale(2.4); opacity: 0;
+    transition: transform .28s cubic-bezier(.34, 1.2, .64, 1), opacity .2s ease;
+  }
+  .doc.done { color: var(--muted); }
+  .doc.done .t { text-decoration: line-through; text-decoration-color: rgba(199, 91, 57, .5); text-decoration-thickness: 1.5px; }
+  .doc.done .stamp { transform: translateY(-50%) rotate(-8deg) scale(1); opacity: 1; }
+  /* дрожь листа от удара штампа */
+  .doc.hit { animation: thud .3s ease; }
+  @keyframes thud { 0% { transform: none; } 35% { transform: translateY(2px) rotate(.4deg); } 100% { transform: none; } }
+
+  .hero .sum { margin-top: 26px; font-size: 15px; color: var(--sub); }
+  .hero .sum b { color: var(--gold2); }
+
+  .cta {
+    margin-top: 18px; align-self: flex-start;
+    display: inline-flex; align-items: center; gap: 10px;
+    background: var(--gold); color: #FFFBF7; text-decoration: none;
+    padding: 17px 28px; border-radius: 8px;
+    font-weight: 700; font-size: 15px; letter-spacing: .02em;
+    box-shadow: 0 10px 26px rgba(199, 91, 57, .3);
+  }
+  .cta:active { transform: scale(.96); }
+
+  /* ═══ ЗНАКОМСТВО: «дело №1» — фото выдвигается из папки по скроллу ═══ */
+  .meet { padding: 58px 24px 76px; background: var(--sunk); }
+  .meet .lbl { font-size: 10.5px; font-weight: 700; letter-spacing: .24em; text-transform: uppercase; color: var(--gold2); }
+  .meet h2 { font-family: 'Playfair Display', serif; font-weight: 500; font-size: 28px; line-height: 1.2; margin: 12px 0 8px; }
+  .meet .dek2 { color: var(--sub); font-size: 15.5px; line-height: 1.7; margin-bottom: 34px; }
+
+  .folder { position: relative; width: min(320px, 84vw); margin: 0 auto; }
+  /* фото выезжает из папки: двигает --lift (0..1) по скроллу */
+  .folder .photo {
+    position: relative; z-index: 1;
+    width: 86%; margin: 0 auto; border-radius: 6px 6px 0 0; overflow: hidden;
+    transform: translateY(calc(56% - var(--lift, 0) * 50%));
+    box-shadow: 0 -8px 30px rgba(26, 43, 60, .14);
+  }
+  .folder .photo img { display: block; width: 100%; aspect-ratio: 1 / 1.15; object-fit: cover; object-position: center 58%; }
+  .folder .photo .who {
+    position: absolute; left: 14px; bottom: 12px; color: #FFFBF7;
+    text-shadow: 0 1px 10px rgba(0, 0, 0, .45);
+  }
+  .folder .photo .who b { display: block; font-family: 'Playfair Display', serif; font-size: 19px; font-weight: 500; }
+  .folder .photo .who span { font-size: 10px; letter-spacing: .16em; text-transform: uppercase; opacity: .85; }
+  .folder .photo .grad { position: absolute; inset: 0; background: linear-gradient(180deg, transparent 55%, rgba(20, 22, 20, .55) 92%); }
+
+  /* сама папка-манила: перед фото, прикрывает его низ */
+  .folder .front {
+    position: relative; z-index: 2; height: 150px;
+    background: linear-gradient(180deg, var(--manila), #EBD8B4);
+    border: 1px solid #DCC391; border-radius: 10px;
+    box-shadow: 0 18px 40px rgba(26, 43, 60, .16);
+  }
+  /* вкладка папки */
+  .folder .front::before {
+    content: 'ДЕЛО № 1 · ОСНОВАТЕЛЬ'; position: absolute; top: -26px; left: 14px;
+    font-family: 'IBM Plex Mono', monospace; font-size: 10px; font-weight: 600; letter-spacing: .12em;
+    color: #8A6D3B; background: var(--manila);
+    border: 1px solid #DCC391; border-bottom: 0; border-radius: 8px 8px 0 0;
+    padding: 6px 12px;
+  }
+  .folder .front .row { display: flex; justify-content: space-between; align-items: center; padding: 18px 16px 0; }
+  .folder .front .st {
+    font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: .12em;
+    color: var(--gold2); border: 1.5px solid var(--gold2); border-radius: 4px; padding: 4px 8px;
+    transform: rotate(-5deg);
+  }
+  .folder .front .clip { width: 44px; height: 10px; border-radius: 5px; background: #D9C08F; }
+  .folder .front p { padding: 12px 16px 0; font-size: 13.5px; line-height: 1.6; color: #6B5A38; }
+
+  .meet .after { margin-top: 30px; font-size: 15.5px; line-height: 1.7; color: var(--sub); }
+  .meet .facts { display: flex; gap: 20px; margin-top: 18px; }
+  .meet .facts div b { display: block; font-family: 'Playfair Display', serif; font-size: 26px; font-weight: 600; color: var(--gold); }
+  .meet .facts div span { font-size: 9.5px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+
+  @media (prefers-reduced-motion: reduce) {
+    .stamp { transition: none; } .doc.hit { animation: none; }
+    .folder .photo { transform: translateY(6%); }
+  }
+</style>
+</head>
+<body>
+  <div class="bar"><b>Krepko</b><span>Прототип B · «Штамп-путь»</span></div>
+
+  <section class="hero">
+    <h1>Испанская бюрократия — <em>наша работа</em>, не ваша.</h1>
+    <p class="dek">Мы знаем систему изнутри, и быстро найдём решение.</p>
+
+    <div class="todo" id="todo">
+      <div class="doc"><span class="num">01</span><span class="t">NIE и прописка</span><span class="stamp">KREPKO ✓</span></div>
+      <div class="doc"><span class="num">02</span><span class="t">Счёт в банке</span><span class="stamp">KREPKO ✓</span></div>
+      <div class="doc"><span class="num">03</span><span class="t">Доверенность у нотариуса</span><span class="stamp">KREPKO ✓</span></div>
+      <div class="doc"><span class="num">04</span><span class="t">Документы из Украины</span><span class="stamp">KREPKO ✓</span></div>
+      <div class="doc"><span class="num">05</span><span class="t">ВНЖ и продление</span><span class="stamp">KREPKO ✓</span></div>
+    </div>
+
+    <p class="sum">Ваше участие — <b>пара сообщений</b>. Остальное штампуем мы.</p>
+    <a class="cta" href="https://wa.me/34641048296">Отдать дела Krepko</a>
+  </section>
+
+  <section class="meet">
+    <p class="lbl">Один контакт вместо десятка</p>
+    <h2>Кто ведёт ваше дело</h2>
+    <p class="dek2">За Krepko — человек, который сам прошёл испанскую систему: от языка, до сиесты и бюрократии.</p>
+
+    <div class="folder" id="folder">
+      <div class="photo" id="photo">
+        <img src="daniil.jpg" alt="Daniil Pavlovskyi — основатель Krepko">
+        <div class="grad"></div>
+        <div class="who"><b>Daniil Pavlovskyi</b><span>Основатель</span></div>
+      </div>
+      <div class="front">
+        <div class="row"><span class="st">В РАБОТЕ С 2020</span><span class="clip"></span></div>
+        <p>1049 закрытых дел · 6 городов Испании · 4 языка. Теперь это процесс, а не путь вслепую.</p>
+      </div>
+    </div>
+
+    <p class="after">Каждое дело — в одних руках от первого сообщения до готового документа.</p>
+  </section>
+
+<script>
+(function () {
+  var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* штампы шлёпаются по очереди при появлении списка */
+  var docs = document.querySelectorAll('.doc');
+  function stampAll() {
+    docs.forEach(function (d, i) {
+      setTimeout(function () {
+        d.classList.add('done', 'hit');
+        setTimeout(function () { d.classList.remove('hit'); }, 320);
+        if (navigator.vibrate) navigator.vibrate(8);   /* лёгкий тактильный «удар» */
+      }, 500 + i * 420);
+    });
+  }
+  if (reduce) { docs.forEach(function (d) { d.classList.add('done'); }); }
+  else if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { if (e.isIntersecting) { stampAll(); io.disconnect(); } });
+    }, { threshold: 0.4 });
+    io.observe(document.getElementById('todo'));
+  } else { stampAll(); }
+
+  /* фото выдвигается из папки по мере скролла */
+  var photo = document.getElementById('photo'), folder = document.getElementById('folder');
+  if (!reduce) {
+    var q = false;
+    function tick() {
+      q = false;
+      var vh = innerHeight, b = folder.getBoundingClientRect();
+      if (b.bottom < -80 || b.top > vh + 80) return;
+      var p = (vh * 0.92 - b.top) / (vh * 0.5);
+      p = Math.max(0, Math.min(1, p));
+      photo.style.setProperty('--lift', p.toFixed(3));
+    }
+    function onS() { if (!q) { q = true; requestAnimationFrame(tick); } }
+    addEventListener('scroll', onS, { passive: true });
+    addEventListener('resize', onS, { passive: true });
+    tick();
+  }
+})();
+</script>
+</body>
+</html>
