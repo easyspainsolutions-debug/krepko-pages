@@ -3765,14 +3765,14 @@
     transform: none !important;
   }
   .portrait__frame {
-    aspect-ratio: 1 / 1.06 !important; border-radius: 3px !important;
+    aspect-ratio: 1 / 1.16 !important; border-radius: 3px !important;
     min-height: 0 !important;
     box-shadow: 0 14px 34px rgba(26, 43, 60, .16);
   }
   .portrait__frame .portrait__img {
     -webkit-mask-image: none !important; mask-image: none !important;
     /* воздух над макушкой: кадр опущен, голова не липнет к краю */
-    object-position: center 42% !important;
+    object-position: center 62% !important;
   }
 
   /* подложки-карточки: песочная и терракотовая, веер по прогрессу */
