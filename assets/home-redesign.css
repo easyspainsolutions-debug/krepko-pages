@@ -3910,3 +3910,38 @@
     margin-bottom: -12px;
   }
 }
+
+
+/* ═══════════ Мобильный hero — правки Daniil (2026-08-04) ═══════════ */
+@media (max-width: 719px) {
+  /* 1. Заголовок в две строки: «Krepko — единственный» / «нужный контакт».
+     Кегль подобран так, чтобы первая половина влезала в строку на 360–500px,
+     balance не даёт болтаться одинокому слову. */
+  /* !important здесь вынужденный: Round 52 ставит на .hero__h1
+     font-size: var(--fs-display) !important — обычное правило проигрывает
+     независимо от специфичности и позиции */
+  /* Кегль выведен из замера Playfair 600: «Krepko — единственный» = 399px
+     при 36px. Формула держит эту строку на 12–13px уже экрана по всей
+     сетке 360–500px, поэтому заголовок ложится ровно в две строки:
+     «Krepko — единственный» / «нужный контакт». */
+  .hero--home .hero__h1 {
+    font-size: clamp(25px, calc(8.9vw - 5px), 34px) !important;
+    line-height: 1.16 !important;
+  }
+
+  /* 2. Воздух между заголовком, подводкой и кнопкой */
+  .hero--home .hero__h1 { margin-bottom: clamp(18px, 5vw, 26px) !important; }
+  .hero--home .hero__lead { margin-top: 0; }
+  .hero--home .hero__free { margin-top: 14px; }
+  .hero--home .hero__cta-row { margin-top: clamp(22px, 6vw, 32px) !important; }
+  .hero--home { padding-bottom: 44px; }
+
+  /* 3. Бегущая строка во всю ширину экрана. Расчёт от центра контейнера:
+     каким бы ни был родительский паддинг, лента доезжает до краёв окна. */
+  .ticker {
+    width: 100vw !important;
+    max-width: none !important;      /* чей-то max-width резал 100vw до контент-бокса */
+    margin-left: calc(50% - 50vw) !important;
+    margin-right: calc(50% - 50vw) !important;
+  }
+}
