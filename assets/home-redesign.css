@@ -4300,13 +4300,6 @@
     overflow: clip;
     display: flex; align-items: center; justify-content: center;
   }
-  .stack__k {
-    position: absolute; top: calc(64px + 18px); left: 0; right: 0; z-index: 1;
-    margin: 0; text-align: center;
-    font-family: 'Manrope', sans-serif; font-size: 11px; font-weight: 700;
-    letter-spacing: .22em; text-transform: uppercase; color: var(--text-muted);
-  }
-  .stack__k span { display: block; line-height: 1.9; }
 
   /* база сцены — та самая hero-карточка с фото: в пине она встаёт по
      центру, стопка складывается прямо на неё */
