@@ -1540,13 +1540,13 @@
       margin-right: calc(50% - 50vw) !important;
     }
   }
-  /* overflow-x: hidden делает html/body скролл-контейнером и убивает
-     position: sticky у шапки. clip подрезает так же, но контейнер не создаёт;
-     hidden оставлен фолбэком для браузеров без поддержки clip. */
-  html, body { overflow-x: hidden; }
-  @supports (overflow-x: clip) {
-    html, body { overflow-x: clip; }
-  }
+  /* Клип живёт на main, а не на html/body. Причина: overflow с html —
+     и с body, если у html visible, — распространяется на viewport
+     (CSS overflow propagation). В iOS Safari это делает страницу
+     скролл-контейнером: адресная строка перестаёт сворачиваться, а
+     внизу появляется граница «дна». На main propagation не работает,
+     клип обычный. Именно clip, не hidden: hidden убил бы sticky. */
+  main { overflow-x: clip; }
 
   /* скидка в финальном CTA — спокойной строкой, без плашки */
   .final-cta__bonus {
