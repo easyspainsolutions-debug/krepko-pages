@@ -946,3 +946,51 @@
   window.addEventListener('resize', queue, { passive: true });
   tick();
 })();
+
+
+/* ═══ Hero-ротатор услуг (референс rockfi.fr) ═══
+   Список листается на строку каждые 2.2s; для бесшовного цикла список
+   дублируется, и при заходе на копию каретка мгновенно сбрасывается. */
+(function () {
+  var box = document.getElementById('hero-roll');
+  if (!box) return;
+  var mq = window.matchMedia('(max-width: 719px)');
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var ul = box.querySelector('ul');
+  var LINE = 44, CENTER = 0;   /* padding-top списка уже ставит строку idx в центр окна */
+  var base = Array.prototype.slice.call(ul.children);
+  var n = base.length;
+  /* копия для бесшовности */
+  base.forEach(function (li) { ul.appendChild(li.cloneNode(true)); });
+  var items = ul.children;
+
+  var idx = 0;
+  function paint() {
+    for (var k = 0; k < items.length; k++) {
+      items[k].classList.remove('is-c', 'is-n');
+      var d = k - (idx + CENTER);
+      if (d === 0) items[k].classList.add('is-c');
+      else if (d === -1 || d === 1) items[k].classList.add('is-n');
+    }
+  }
+  function go(instant) {
+    if (instant) ul.style.transition = 'none';
+    ul.style.transform = 'translateY(' + (-idx * LINE) + 'px)';
+    if (instant) { void ul.offsetHeight; ul.style.transition = ''; }
+    paint();
+  }
+  if (reduce) { idx = 0; paint(); return; }
+
+  setInterval(function () {
+    if (!mq.matches) return;
+    idx++;
+    if (idx > n) {           /* каретка на копии — мгновенно вернуться на оригинал */
+      idx = 1; go(true); idx = 1;
+      /* и тут же шагнуть, чтобы движение не замирало */
+      requestAnimationFrame(function () { go(false); });
+      return;
+    }
+    go(false);
+  }, 2200);
+  go(true);
+})();
