@@ -958,7 +958,7 @@
   var mq = window.matchMedia('(max-width: 719px)');
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var ul = box.querySelector('ul');
-  var LINE = 34;
+  var LINE = 32;
   var base = Array.prototype.slice.call(ul.children);
   var n = base.length;
   /* копии: перед и после оригинала */
