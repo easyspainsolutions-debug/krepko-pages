@@ -1052,7 +1052,6 @@
   if (reduce) return;
   var pin = stack.querySelector('.stack__pin');
   var photo = stack.querySelector('.hcard');
-  var end = stack.querySelector('.stack__end');
   var cards = Array.prototype.slice.call(stack.querySelectorAll('.stack__card'));
   var N = cards.length;
 
@@ -1087,7 +1086,6 @@
       c.style.setProperty('--sc', (1 + (1 - ec) * 0.05).toFixed(3));
     });
     if (photo) photo.style.setProperty('--sp', Math.min(1, p * 1.5).toFixed(3));
-    if (end) end.style.setProperty('--endp', Math.max(0, (p - 0.82) / 0.18).toFixed(3));
   }
   function onS() { if (!q) { q = true; requestAnimationFrame(tick); } }
   addEventListener('scroll', onS, { passive: true });

@@ -4356,18 +4356,9 @@
   }
   .stack__go:active { transform: scale(.96); }
 
-  .stack__end {
-    position: absolute; bottom: 22px; left: 0; right: 0; z-index: 1;
-    margin: 0; text-align: center;
-    font-family: 'Manrope', sans-serif; font-size: 11px; font-weight: 700;
-    letter-spacing: .22em; text-transform: uppercase; color: var(--text-muted);
-    opacity: var(--endp, 0);
-  }
-  .stack__end span { display: block; line-height: 1.9; }
 }
 @media (prefers-reduced-motion: reduce) and (max-width: 719px) {
   .stack { height: auto; padding: 48px 0; }
   .stack__pin { position: static; height: auto; flex-direction: column; gap: 16px; padding: 72px 0 56px; }
   .stack__card { position: static; transform: none; margin: 12px auto 0; }
-  .stack__end { position: static; opacity: 1; margin-top: 20px; }
 }
