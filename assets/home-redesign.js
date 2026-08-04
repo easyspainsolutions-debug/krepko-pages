@@ -959,7 +959,7 @@
   var mq = window.matchMedia('(max-width: 719px)');
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var ul = box.querySelector('ul');
-  var LINE = 32, PAUSE_MS = 1900, RIDE_MS = 520;
+  var LINE = 32, PAUSE_MS = 1900, RIDE_MS = 680;
   var base = Array.prototype.slice.call(ul.children);
   var n = base.length;
   base.slice().reverse().forEach(function (li) { ul.insertBefore(li.cloneNode(true), ul.firstChild); });
@@ -998,11 +998,12 @@
     function frame(ts) {
       if (t0 === null) t0 = ts;
       var p = Math.min((ts - t0) / RIDE_MS, 1);
-      var e = 1 - Math.pow(1 - p, 3);           /* easeOutCubic */
+      /* easeInOutCubic: лента трогается и тормозит мягко */
+      var e = p < 0.5 ? 4 * p * p * p : 1 - Math.pow(-2 * p + 2, 3) / 2;
       setY(from + (to - from) * e);
       /* подсветка стартует на 55% пути: выезд вправо идёт внахлёст
          с доездом ленты — одно слитное движение, а не два рывка */
-      if (!lit && p >= 0.55) { lit = true; paint(false); }
+      if (!lit && p >= 0.45) { lit = true; paint(false); }
       if (p < 1) { requestAnimationFrame(frame); }
       else { animating = false; }
     }
