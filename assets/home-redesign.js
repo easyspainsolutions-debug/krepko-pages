@@ -1006,8 +1006,10 @@
       /* easeInOutCubic: лента трогается и тормозит мягко */
       var e = p < 0.5 ? 4 * p * p * p : 1 - Math.pow(-2 * p + 2, 3) / 2;
       setY(from + (to - from) * e);
-      /* точка проявляется внахлёст с доездом — к остановке уже на месте */
-      if (!dot && p >= 0.55) { dot = true; box.classList.add('dot-on'); }
+      /* точка возвращается на 22% пути (~150ms) — ровно когда её
+         гашение закончилось, а лента набрала ход; к 430ms она в полном
+         размере, задолго до финиша строк */
+      if (!dot && p >= 0.22) { dot = true; box.classList.add('dot-on'); }
       if (p < 1) { requestAnimationFrame(frame); }
       else { animating = false; }
     }
