@@ -1051,7 +1051,7 @@
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (reduce) return;
   var pin = stack.querySelector('.stack__pin');
-  var photo = stack.querySelector('.stack__photo');
+  var photo = stack.querySelector('.hcard');
   var end = stack.querySelector('.stack__end');
   var cards = Array.prototype.slice.call(stack.querySelectorAll('.stack__card'));
   var N = cards.length;
