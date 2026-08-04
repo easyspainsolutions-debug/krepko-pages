@@ -4036,10 +4036,12 @@
   .hero__roll li {
     height: 40px; display: flex; align-items: center;
     position: relative; padding-left: 24px;
-    font-family: 'Manrope', sans-serif; font-size: 17.5px; font-weight: 500;
+    /* та же антиква, что и заголовок: ротатор — продолжение фразы hero,
+       а не чужеродный список */
+    font-family: 'Playfair Display', Georgia, serif; font-size: 19px; font-weight: 500;
     color: var(--text-muted); opacity: .34;
     white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-    transition: color .45s ease, opacity .45s ease, font-size .45s ease, font-weight .2s ease;
+    transition: color .45s ease, opacity .45s ease, font-size .45s ease;
     text-align: left; justify-content: flex-start;
   }
   .hero__roll li::before {
@@ -4049,7 +4051,7 @@
     transition: opacity .35s ease, transform .45s cubic-bezier(.34, 1.3, .64, 1);
   }
   /* активная — крупнее и жирнее: оптический якорь центра, как у референса */
-  .hero__roll li.is-c { color: var(--text); opacity: 1; font-size: 21px; font-weight: 600; }
+  .hero__roll li.is-c { color: var(--text); opacity: 1; font-size: 23px; }
   .hero__roll li.is-c::before { opacity: 1; transform: scale(1); }
   .hero__roll li.is-n { opacity: .55; }
 
