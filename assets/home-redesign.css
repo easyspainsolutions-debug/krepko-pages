@@ -3945,3 +3945,45 @@
     margin-right: calc(50% - 50vw) !important;
   }
 }
+
+
+/* ═══════════ Мобильный портрет-«полароид» (2026-08-04, выбор Daniil) ═══
+   Не корпоративный портрет, а карточка из жизни: белая рамка с широким
+   нижним полем, лёгкий поворот, подпись на самой рамке. Тень мягкая,
+   поворот у тени компенсируется сам собой. */
+@media (max-width: 719px) {
+  .portrait__figure {
+    width: min(292px, 78vw) !important;
+    background: #FFFFFF !important;
+    padding: 12px 12px 0;
+    border-radius: 2px;
+    box-shadow: 0 10px 28px rgba(26, 43, 60, .14), 0 2px 6px rgba(26, 43, 60, .08);
+    margin: 10px auto 26px !important;
+    overflow: visible !important;
+  }
+  .portrait__frame {
+    border-radius: 1px;
+    /* растворение краёв тут ни к чему — у полароида края жёсткие */
+    min-height: 0 !important;
+    aspect-ratio: 4 / 5;
+  }
+  .portrait__frame .portrait__img {
+    -webkit-mask-image: none !important;
+    mask-image: none !important;
+  }
+  /* подпись на нижнем поле рамки */
+  .portrait__caption {
+    padding: 12px 4px 14px !important;
+    text-align: center;
+  }
+  .portrait__caption .portrait__name { font-size: 17px; }
+  .portrait__caption .portrait__role { font-size: 10px; letter-spacing: .18em; }
+
+  /* Поворот живёт вместе с анимацией появления: .anim--up рулит transform,
+     и голый rotate затирался в момент is-visible. Прописываем оба состояния. */
+  .portrait__figure.anim--up { transform: translate3d(0, 26px, 0) rotate(-2deg) !important; }
+  .portrait__figure.anim--up.is-visible { transform: translate3d(0, 0, 0) rotate(-2deg) !important; }
+  @media (prefers-reduced-motion: reduce) {
+    .portrait__figure.anim--up, .portrait__figure.anim--up.is-visible { transform: rotate(-2deg) !important; }
+  }
+}
