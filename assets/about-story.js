@@ -37,20 +37,30 @@
         var d = Math.abs(b.top + Math.min(b.height, vh) / 2 - focus);
         if (d < bestD) { bestD = d; best = r; }
       });
-      Array.prototype.forEach.call(rows, function (r) { r.classList.toggle('is-live', r === best); });
+      if (!pinnedYear) {
+        Array.prototype.forEach.call(rows, function (r) { r.classList.toggle('is-live', r === best); });
+      }
       if (!best) return;
       var y = best.getAttribute('data-year');
+      /* пока идёт прокрутка по клику — год держит goTo(), не перебиваем */
+      if (pinnedYear) return;
       if (y === current) return;
       current = y;
-      /* список слева ведёт по хронике — активный год подсвечивается здесь */
+      mark(y);
+    }
+
+    /* подсветка года в списке/ленте + подтягивание чипа в кадр на мобилке */
+    function mark(y) {
+      current = y;
       var liveBtn = null;
       Array.prototype.forEach.call(document.querySelectorAll('.tw-years button'), function (b) {
         var on = b.getAttribute('data-go') === y;
         b.classList.toggle('is-live', on);
         if (on) liveBtn = b;
       });
-      /* на мобилке годы — горизонтальная лента: активный чип подъезжает
-         в кадр сам, прокручиваем ленту, не трогая страницу */
+      Array.prototype.forEach.call(rows, function (r) {
+        r.classList.toggle('is-live', r.getAttribute('data-year') === y);
+      });
       var strip = liveBtn && liveBtn.closest('ul');
       if (strip && strip.scrollWidth > strip.clientWidth + 4) {
         var target = liveBtn.offsetLeft - (strip.clientWidth - liveBtn.offsetWidth) / 2;
@@ -64,6 +74,11 @@
 
     /* ── Переход по годам: клик и стрелки клавиатуры ── */
     var jump = document.querySelectorAll('[data-go]');
+    /* Клик по году ставит строку к верху экрана (~130px), а tick() ищет
+       активную по точке vh*0.46 — после прыжка ближе к ней оказывается
+       уже следующая строка, и подсвечивался не тот год. На время
+       программной прокрутки фиксируем выбранный. */
+    var pinnedYear = null, pinTimer = null;
     function goTo(year) {
       var row = document.querySelector('.tw-row[data-year="' + year + '"]');
       if (!row) return;
@@ -71,6 +86,10 @@
       var nav = document.querySelector('.site-nav');
       var off = (nav ? nav.getBoundingClientRect().height : 0) + 40;
       var y = window.pageYOffset + row.getBoundingClientRect().top - off;
+      pinnedYear = String(year);
+      mark(pinnedYear);
+      if (pinTimer) clearTimeout(pinTimer);
+      pinTimer = setTimeout(function () { pinnedYear = null; pinTimer = null; }, 900);
       window.scrollTo({ top: y, behavior: 'smooth' });
     }
     Array.prototype.forEach.call(jump, function (b) {
