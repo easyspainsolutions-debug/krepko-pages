@@ -3738,30 +3738,49 @@
   /* ── Знакомство: портрет первым, факты — сеткой 2×3 ──
      Было: 6 карточек и портрет столбцом на 2.5 экрана. Порядок держит
      flex-order, сами колонки распускаем. */
-  /* Сплит «фото слева — текст справа» (выбор Daniil 2026-08-04).
-     bridge-sub и фото — дети разных родителей, поэтому .portrait
-     распускается через display: contents, а сеткой рулит сама секция:
-       строка 1: заголовок на всю ширину
-       строка 2: полароид слева · текст справа
-       строки 3-4: карточки фактов на всю ширину */
-  #sec-intro.intro {
-    display: grid;
-    grid-template-columns: minmax(0, 44%) minmax(0, 1fr);
-    column-gap: 18px;
-    align-items: center;
-  }
-  #sec-intro.intro > * { grid-column: 1 / -1; }
+  /* «Обложка» (выбор Daniil 2026-08-04): фото во всю ширину, имя и роль
+     на градиенте прямо на снимке, текст выезжает из-под фото по мере
+     прокрутки (двигает home-redesign.js через --slide). Порядок элементов
+     собирает flex: bridge-sub в DOM стоит до .portrait, а визуально идёт
+     после фото. */
+  #sec-intro.intro { display: flex !important; flex-direction: column; }
   .portrait { display: contents; }
-  /* селекторы с id: правило «всё на всю ширину» выше тоже с id,
-     и назначения колонок без него проигрывали */
-  #sec-intro.intro .portrait__figure { grid-column: 1; grid-row: 2; }
-  #sec-intro.intro > .intro__bridge-sub {
-    grid-column: 2; grid-row: 2;
-    text-align: left;
-    margin: 0;
+  .intro__bridge { order: 1; }
+  #sec-intro.intro .portrait__figure { order: 2; }
+  #sec-intro.intro > .intro__bridge-sub { order: 3; }
+  #sec-intro.intro .portrait__col--left  { order: 4; }
+  #sec-intro.intro .portrait__col--right { order: 5; }
+
+  #sec-intro.intro .portrait__figure {
+    width: 100vw !important; max-width: none !important;
+    margin: 8px calc(50% - 50vw) 0 !important;
+    padding: 0 !important; background: none !important;
+    box-shadow: none !important; border-radius: 0 !important;
+    position: relative; z-index: 2;           /* фото прикрывает выезжающий текст */
+    overflow: hidden !important;
+    transform: none !important;               /* полароидный поворот не нужен */
   }
-  #sec-intro.intro .portrait__col--left  { grid-column: 1 / -1; grid-row: 3; }
-  #sec-intro.intro .portrait__col--right { grid-column: 1 / -1; grid-row: 4; }
+  .portrait__frame { aspect-ratio: 1 / 1.06 !important; border-radius: 0 !important; min-height: 0 !important; }
+  .portrait__frame .portrait__img { -webkit-mask-image: none !important; mask-image: none !important; }
+  .portrait__caption {
+    position: absolute !important; left: 0; right: 0; bottom: 0;
+    padding: 72px 24px 16px !important; text-align: left !important;
+    background: linear-gradient(180deg, transparent, rgba(20, 22, 20, .62) 72%) !important;
+  }
+  .portrait__caption .portrait__name { color: #FFFBF7 !important; font-size: 20px !important; }
+  .portrait__caption .portrait__role { color: rgba(255, 251, 247, .78) !important; font-size: 10px !important; letter-spacing: .18em; }
+
+  /* Текст: в потоке стоит на своём месте, transform прячет его верх под
+     фото; --slide отдаёт JS (0 → спрятан, 1 → выехал). Прямое связывание
+     со скроллом — без transition, иначе дёргается на пальце. */
+  #sec-intro.intro > .intro__bridge-sub {
+    grid-column: auto;
+    text-align: left; margin: 22px 0 0;
+    position: relative; z-index: 1;
+    transform: translateY(calc((1 - var(--slide, 1)) * -128px));
+    opacity: var(--slide, 1);
+  }
+
   .portrait__col {
     display: grid !important; grid-template-columns: 1fr 1fr;
     gap: 12px; margin-top: 12px;
@@ -3967,43 +3986,4 @@
 }
 
 
-/* ═══════════ Мобильный портрет-«полароид» (2026-08-04, выбор Daniil) ═══
-   Не корпоративный портрет, а карточка из жизни: белая рамка с широким
-   нижним полем, лёгкий поворот, подпись на самой рамке. Тень мягкая,
-   поворот у тени компенсируется сам собой. */
-@media (max-width: 719px) {
-  .portrait__figure {
-    width: 100% !important;              /* колонку задаёт сетка секции */
-    background: #FFFFFF !important;
-    padding: 8px 8px 0;
-    border-radius: 2px;
-    box-shadow: 0 10px 28px rgba(26, 43, 60, .14), 0 2px 6px rgba(26, 43, 60, .08);
-    margin: 6px 0 10px !important;
-    overflow: visible !important;
-  }
-  .portrait__frame {
-    border-radius: 1px;
-    /* растворение краёв тут ни к чему — у полароида края жёсткие */
-    min-height: 0 !important;
-    aspect-ratio: 4 / 5;
-  }
-  .portrait__frame .portrait__img {
-    -webkit-mask-image: none !important;
-    mask-image: none !important;
-  }
-  /* подпись на нижнем поле рамки */
-  .portrait__caption {
-    padding: 9px 2px 11px !important;
-    text-align: center;
-  }
-  .portrait__caption .portrait__name { font-size: 13px; }
-  .portrait__caption .portrait__role { font-size: 8.5px; letter-spacing: .14em; }
 
-  /* Поворот живёт вместе с анимацией появления: .anim--up рулит transform,
-     и голый rotate затирался в момент is-visible. Прописываем оба состояния. */
-  .portrait__figure.anim--up { transform: translate3d(0, 26px, 0) rotate(-2deg) !important; }
-  .portrait__figure.anim--up.is-visible { transform: translate3d(0, 0, 0) rotate(-2deg) !important; }
-  @media (prefers-reduced-motion: reduce) {
-    .portrait__figure.anim--up, .portrait__figure.anim--up.is-visible { transform: rotate(-2deg) !important; }
-  }
-}

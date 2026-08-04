@@ -917,3 +917,32 @@
     })(items[i]);
   }
 })();
+
+
+/* ═══ Мобильная «обложка» знакомства: текст выезжает из-под фото ═══
+   Прогресс привязан к положению низа фото: пока фото в нижней трети
+   экрана — текст спрятан под ним, к подъёму фото к 55% экрана текст
+   полностью выезжает. Прямое связывание со скроллом, без transition. */
+(function () {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var mq = window.matchMedia('(max-width: 719px)');
+  var fig = document.querySelector('#sec-intro .portrait__figure');
+  var sub = document.querySelector('#sec-intro .intro__bridge-sub');
+  if (!fig || !sub) return;
+
+  var queued = false;
+  function tick() {
+    queued = false;
+    if (!mq.matches) { sub.style.removeProperty('--slide'); return; }
+    var vh = window.innerHeight || document.documentElement.clientHeight;
+    var b = fig.getBoundingClientRect();
+    if (b.bottom < -100 || b.top > vh + 100) return;   /* вне экрана — не считаем */
+    var p = (vh * 0.92 - b.bottom) / (vh * 0.37);
+    p = Math.max(0, Math.min(1, p));
+    sub.style.setProperty('--slide', p.toFixed(3));
+  }
+  function queue() { if (!queued) { queued = true; requestAnimationFrame(tick); } }
+  window.addEventListener('scroll', queue, { passive: true });
+  window.addEventListener('resize', queue, { passive: true });
+  tick();
+})();
