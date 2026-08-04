@@ -949,24 +949,26 @@
 
 
 /* ═══ Hero-ротатор услуг (референс rockfi.fr) ═══
-   Барабан из трёх копий списка: в центре окна всегда активная строка,
-   над и под ней — по две живые полупрозрачные. При заходе на третью
-   копию каретка тихо сбрасывается на среднюю (кадры идентичны). */
+   Барабан из трёх копий. Хореография шага, как у референса:
+   1) у текущей строки гаснет точка и цвет — она уезжает вверх серой;
+   2) лента едет; подсветка НЕ переназначается на старте;
+   3) по прибытии (конец транзиции) центральная строка чернеет,
+      выезжает вправо и получает точку.
+   Нормализация каретки — перед каждым шагом, дрейф в фоне невозможен. */
 (function () {
   var box = document.getElementById('hero-roll');
   if (!box) return;
   var mq = window.matchMedia('(max-width: 719px)');
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var ul = box.querySelector('ul');
-  var LINE = 32;
+  var LINE = 32, STEP_MS = 2400, RIDE_MS = 560;
   var base = Array.prototype.slice.call(ul.children);
   var n = base.length;
-  /* копии: перед и после оригинала */
   base.slice().reverse().forEach(function (li) { ul.insertBefore(li.cloneNode(true), ul.firstChild); });
   base.forEach(function (li) { ul.appendChild(li.cloneNode(true)); });
   var items = ul.children;
 
-  var idx = n;                       /* центр — первая строка среднего блока */
+  var idx = n;
   function paint() {
     for (var k2 = 0; k2 < items.length; k2++) {
       items[k2].classList.remove('is-c', 'is-n');
@@ -975,32 +977,36 @@
       else if (d === -1 || d === 1) items[k2].classList.add('is-n');
     }
   }
-  function go(instant) {
+  function ride(instant) {
     if (instant) ul.style.transition = 'none';
-    /* строка idx встаёт в центр окна из 5 строк */
     ul.style.transform = 'translateY(' + (-(idx - 2) * LINE) + 'px)';
     if (instant) { void ul.offsetHeight; ul.style.transition = ''; }
-    paint();
   }
-  if (reduce) { go(true); return; }
+  function stripC() {
+    for (var k2 = 0; k2 < items.length; k2++) items[k2].classList.remove('is-c');
+  }
 
-  /* Один самопланирующий цикл вместо пары interval+timeout: в фоне таймеры
-     стреляют пачкой, сбросы не успевали, и каретка улетала за конец списка.
-     Нормализация ПЕРЕД шагом держит idx в [n, 2n) при любом троттлинге. */
+  if (reduce) { ride(true); paint(); return; }
+
+  var gen = 0;
   function step() {
-    if (mq.matches) {
-      if (idx >= 2 * n) { idx -= n; go(true); }
+    if (mq.matches && !document.hidden) {
+      if (idx >= 2 * n) { idx -= n; ride(true); paint(); }
+      stripC();                 /* точка и чернота гаснут у уходящей */
       idx++;
-      go(false);
+      ride(false);              /* лента едет серой */
+      var my = ++gen;
+      setTimeout(function () {  /* прибытие: подсветка догоняет центр */
+        if (my === gen) paint();
+      }, RIDE_MS);
     }
-    setTimeout(step, 2400);
+    setTimeout(step, STEP_MS);
   }
   document.addEventListener('visibilitychange', function () {
-    /* вернулись на вкладку — мгновенно привести барабан в согласованный кадр */
-    if (!document.hidden) { while (idx >= 2 * n) idx -= n; go(true); }
+    if (!document.hidden) { gen++; while (idx >= 2 * n) idx -= n; ride(true); paint(); }
   });
-  go(true);
-  setTimeout(step, 2400);
+  ride(true); paint();
+  setTimeout(step, STEP_MS);
 })();
 
 /* Метрика «промессы»: счёт при появлении (мобилка) */
