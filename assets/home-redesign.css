@@ -4295,8 +4295,13 @@
   #sec-intro.intro { padding-top: 0 !important; padding-bottom: 0 !important; }
 
   /* пробег короче: следующая секция приходит вскоре после того,
-     как стопка сложилась */
-  .stack { display: block; position: relative; height: 215vh; }
+     как стопка сложилась. Отрицательное поле убирает пустоту, которую
+     даёт вертикальное центрирование фото в пине (~252px) — фото
+     поднимается ближе к hero, но в кадре по-прежнему встаёт в центр. */
+  .stack {
+    display: block; position: relative; height: 215vh;
+    margin-top: calc(-1 * clamp(120px, 17.5vh, 200px));
+  }
   .stack__pin {
     position: sticky; top: 0; height: 100vh; height: 100svh;
     /* на всю ширину экрана: раньше пин был ровно по краям карточек
