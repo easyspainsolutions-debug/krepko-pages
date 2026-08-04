@@ -992,18 +992,18 @@
     if (!mq.matches || document.hidden || animating) return;
     animating = true;
     if (idx >= 2 * n) { idx -= n; setY((idx - 2) * LINE); }
-    paint(true);                  /* точка и чернота гаснут — лента едет серой */
+    /* всё параллельно с первого кадра: старая теряет подсветку и уезжает
+       влево, новая уже наливается и выезжает вправо, лента крутится —
+       CSS-транзиции строк растягивают преображение на время езды */
     idx++;
-    var from = y, to = (idx - 2) * LINE, t0 = null, lit = false;
+    paint(false);
+    var from = y, to = (idx - 2) * LINE, t0 = null;
     function frame(ts) {
       if (t0 === null) t0 = ts;
       var p = Math.min((ts - t0) / RIDE_MS, 1);
       /* easeInOutCubic: лента трогается и тормозит мягко */
       var e = p < 0.5 ? 4 * p * p * p : 1 - Math.pow(-2 * p + 2, 3) / 2;
       setY(from + (to - from) * e);
-      /* подсветка стартует на 55% пути: выезд вправо идёт внахлёст
-         с доездом ленты — одно слитное движение, а не два рывка */
-      if (!lit && p >= 0.45) { lit = true; paint(false); }
       if (p < 1) { requestAnimationFrame(frame); }
       else { animating = false; }
     }
