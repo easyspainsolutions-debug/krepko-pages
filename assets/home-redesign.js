@@ -999,15 +999,17 @@
     idx++;
     paint(false);
     box.classList.remove('dot-on');   /* точка гаснет на месте */
-    var from = y, to = (idx - 2) * LINE, t0 = null;
+    var from = y, to = (idx - 2) * LINE, t0 = null, dot = false;
     function frame(ts) {
       if (t0 === null) t0 = ts;
       var p = Math.min((ts - t0) / RIDE_MS, 1);
       /* easeInOutCubic: лента трогается и тормозит мягко */
       var e = p < 0.5 ? 4 * p * p * p : 1 - Math.pow(-2 * p + 2, 3) / 2;
       setY(from + (to - from) * e);
+      /* точка проявляется внахлёст с доездом — к остановке уже на месте */
+      if (!dot && p >= 0.55) { dot = true; box.classList.add('dot-on'); }
       if (p < 1) { requestAnimationFrame(frame); }
-      else { box.classList.add('dot-on'); animating = false; }  /* и проявляется на месте */
+      else { animating = false; }
     }
     requestAnimationFrame(frame);
   }
