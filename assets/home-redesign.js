@@ -994,3 +994,27 @@
   }, 2200);
   go(true);
 })();
+
+
+/* Метрика «промессы»: счёт при появлении (мобилка) */
+(function () {
+  var el = document.querySelector('.promise__metric b[data-count]');
+  if (!el || !('IntersectionObserver' in window)) return;
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var io = new IntersectionObserver(function (es) {
+    es.forEach(function (e) {
+      if (!e.isIntersecting) return;
+      io.disconnect();
+      var to = parseInt(el.getAttribute('data-count'), 10), t0 = null;
+      function step(ts) {
+        if (t0 === null) t0 = ts;
+        var p = Math.min((ts - t0) / 1400, 1);
+        el.textContent = Math.round(to * (1 - Math.pow(1 - p, 4)));
+        if (p < 1) requestAnimationFrame(step);
+      }
+      el.textContent = '0';
+      requestAnimationFrame(step);
+    });
+  }, { threshold: 0.5 });
+  io.observe(el);
+})();
