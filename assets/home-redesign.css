@@ -4317,29 +4317,33 @@
     pointer-events: none;
   }
 
-  /* карточки: те же габариты и скругление, что у фото — слои одного
-     формата, как в референсе. Парковка отсчитывается от верха фото. */
-  .stack__card {
+  /* «колодец» строго формата фото: стопка живёт внутри него, и всё, что
+     при повороте выходит за края фото, срезается — никаких выступающих
+     уголков на светлом фоне («белые полосы» слева и справа) */
+  .stack__rail {
     position: absolute; left: 50%; top: 82px; z-index: 3;
-    width: min(382px, calc(100vw - 48px)); box-sizing: border-box;
+    width: min(382px, calc(100vw - 48px));
+    height: calc(100svh - 82px);
+    transform: translateX(-50%);
+    border-radius: 14px;
+    overflow: hidden;
+    pointer-events: none;           /* кликается только контент карточек */
+  }
+  .stack__card {
+    position: absolute; left: 0; top: 0;
+    width: 100%; box-sizing: border-box;
     min-height: 230px;
     display: flex; flex-direction: column; justify-content: flex-end;
     padding: 22px 22px 24px;
     background: #F2E4CE; border-radius: 14px;
-    /* рамка в цвет фона гасит белёсую кромку антиалиасинга у повёрнутого
-       слоя на iOS («белые рельсы» по краям) */
-    border: 1px solid #F2E4CE;
-    background-clip: padding-box;
     backface-visibility: hidden; -webkit-backface-visibility: hidden;
-    box-shadow: 0 24px 48px rgba(26, 43, 60, .28), 0 4px 12px rgba(26, 43, 60, .12);
-    /* позицию и поворот считает JS через --y/--r/--dx/--sc */
-    transform: translateX(-50%)
-               translate(calc(var(--dx, 0) * 1px), calc(var(--y, 120) * 1vh))
-               rotate(calc(var(--r, 0) * 1deg))
-               scale(var(--sc, 1));
+    box-shadow: 0 14px 30px rgba(26, 43, 60, .22);
+    pointer-events: auto;
+    /* позицию и поворот считает JS через --y/--r/--dx */
+    transform: translate(calc(var(--dx, 0) * 1px), calc(var(--y, 120) * 1vh))
+               rotate(calc(var(--r, 0) * 1deg));
     will-change: transform;
   }
-  .stack__card--cta { border-color: var(--gold); }
   .stack__lbl {
     display: block; margin-bottom: 10px;
     font-family: 'Manrope', sans-serif; font-size: 10px; font-weight: 700;

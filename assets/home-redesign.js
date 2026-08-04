@@ -1076,8 +1076,8 @@
       var eb = easeOutBack(pi);
       var ec = easeOutCubic(pi);
       /* парковка лесенкой вниз от верха фото */
-      var park = 9 + i * 4.2;                        /* vh */
-      var y = park + (1 - eb) * 112;
+      var park = 2.5 + i * 4.2;                      /* vh, от верха колодца */
+      var y = park + (1 - eb) * 108;
       c.style.setProperty('--y', y.toFixed(2));
       c.style.setProperty('--r', ((+c.dataset.r) * ec).toFixed(2));
       c.style.setProperty('--dx', ((+c.dataset.dx) * ec).toFixed(1));
@@ -1088,7 +1088,7 @@
   function loop() {
     if (target < 0) { raf = null; return; }         /* сцена вне экрана — спим */
     if (cur < 0) cur = target;
-    cur += (target - cur) * 0.14;                   /* инерция: стопка плывёт */
+    cur += (target - cur) * 0.085;                   /* инерция: стопка плывёт */
     if (Math.abs(target - cur) < 0.0004) cur = target;
     apply(cur);
     raf = requestAnimationFrame(function () { measure(); loop(); });
