@@ -994,14 +994,17 @@
     if (idx >= 2 * n) { idx -= n; setY((idx - 2) * LINE); }
     paint(true);                  /* точка и чернота гаснут — лента едет серой */
     idx++;
-    var from = y, to = (idx - 2) * LINE, t0 = null;
+    var from = y, to = (idx - 2) * LINE, t0 = null, lit = false;
     function frame(ts) {
       if (t0 === null) t0 = ts;
       var p = Math.min((ts - t0) / RIDE_MS, 1);
       var e = 1 - Math.pow(1 - p, 3);           /* easeOutCubic */
       setY(from + (to - from) * e);
+      /* подсветка стартует на 55% пути: выезд вправо идёт внахлёст
+         с доездом ленты — одно слитное движение, а не два рывка */
+      if (!lit && p >= 0.55) { lit = true; paint(false); }
       if (p < 1) { requestAnimationFrame(frame); }
-      else { paint(false); animating = false; } /* прибыли — подсветка на месте */
+      else { animating = false; }
     }
     requestAnimationFrame(frame);
   }
