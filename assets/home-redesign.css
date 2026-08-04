@@ -4114,10 +4114,11 @@
   .hcard__go {
     position: absolute; right: 12px; bottom: 14px;
     display: inline-flex; align-items: center;
-    background: rgba(255, 251, 247, .92); color: var(--text);
+    /* полупрозрачная тёмная плашка, как у референса */
+    background: rgba(30, 32, 30, .45); color: #FFFBF7;
     padding: 12px 16px; border-radius: 999px; text-decoration: none;
-    font-family: 'Manrope', sans-serif; font-size: 13px; font-weight: 700;
-    -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);
+    font-family: 'Manrope', sans-serif; font-size: 13px; font-weight: 600;
+    -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
   }
   .hcard__go:active { transform: scale(.96); }
 
@@ -4244,4 +4245,14 @@
 
   /* заголовок выше: hero стартует плотнее к шапке */
   .hero--home { padding-top: 18px !important; }
+}
+
+
+/* «Первая консультация бесплатно» — справа от кнопки, в одну строку с ней */
+@media (max-width: 719px) {
+  .hero--home .hero__cta-row {
+    flex-direction: row !important; align-items: center !important;
+    flex-wrap: wrap; gap: 14px;
+  }
+  .hero__free-m { margin: 0; max-width: 150px; line-height: 1.5; }
 }
