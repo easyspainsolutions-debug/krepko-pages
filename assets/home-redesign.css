@@ -4294,7 +4294,9 @@
   #sec-intro .promise { display: none !important; }
   #sec-intro.intro { padding-top: 0 !important; padding-bottom: 0 !important; }
 
-  .stack { display: block; position: relative; height: 300vh; }
+  /* пробег короче: следующая секция приходит вскоре после того,
+     как стопка сложилась */
+  .stack { display: block; position: relative; height: 215vh; }
   .stack__pin {
     position: sticky; top: 0; height: 100vh; height: 100svh;
     /* на всю ширину экрана: раньше пин был ровно по краям карточек
@@ -4302,9 +4304,9 @@
        это и читалось как «рамка» поверх стопки */
     width: 100vw; margin-left: calc(50% - 50vw);
     overflow: clip;
-    display: flex; align-items: flex-start; justify-content: center;
-    /* фото сразу под шапкой — зазор от hero-кнопки минимальный */
-    padding-top: 82px;
+    /* фото стоит в центре экрана — карточки начинают наезжать на него
+       там же, а не под самой шапкой */
+    display: flex; align-items: center; justify-content: center;
   }
 
   /* база сцены — та самая hero-карточка с фото: в пине она встаёт по
@@ -4329,7 +4331,7 @@
      Первая ложится в кадр идеально, остальные — криво поверх неё.
      Ничто их не режет: они самый верхний слой сцены. */
   .stack__card {
-    position: absolute; left: 50%; top: 82px; z-index: 4;
+    position: absolute; left: 50%; top: 50%; z-index: 4;
     width: min(382px, calc(100vw - 48px));
     aspect-ratio: 1 / 1.12;      /* строго аспект фото — размеры совпадают */
     box-sizing: border-box;
@@ -4349,7 +4351,7 @@
     overflow: hidden;
     backface-visibility: hidden; -webkit-backface-visibility: hidden;
     /* позицию и поворот считает JS через --y/--r/--dx */
-    transform: translateX(-50%)
+    transform: translate(-50%, -50%)
                translate(calc(var(--dx, 0) * 1px), calc(var(--y, 120) * 1vh))
                rotate(calc(var(--r, 0) * 1deg));
     will-change: transform;
