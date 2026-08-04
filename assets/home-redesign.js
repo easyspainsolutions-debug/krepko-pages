@@ -959,7 +959,7 @@
   var mq = window.matchMedia('(max-width: 719px)');
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var ul = box.querySelector('ul');
-  var LINE = 32, PAUSE_MS = 1900, RIDE_MS = 640;
+  var LINE = 28, PAUSE_MS = 1900, RIDE_MS = 640;
   var base = Array.prototype.slice.call(ul.children);
   var n = base.length;
   base.slice().reverse().forEach(function (li) { ul.insertBefore(li.cloneNode(true), ul.firstChild); });
