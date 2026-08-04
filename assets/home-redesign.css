@@ -4281,3 +4281,101 @@
   }
   .hero__free-m { margin: 0; max-width: 150px; line-height: 1.5; }
 }
+
+
+/* ═══════════ Сцена-стек «Кто мы» по референсу onewhale.io (2026-08-05) ═══
+   Sticky-фото, карточки фактов наезжают снизу по скроллу и складываются
+   стопкой с индивидуальными поворотами. «Вес»: back-изинг — карточка
+   проскакивает финальную точку и осаживается. Двигает home-redesign.js. */
+.stack { display: none; }
+@media (max-width: 719px) {
+  /* манифест и промесса на мобилке уступают место сцене */
+  .manif { display: none !important; }
+  #sec-intro .promise { display: none !important; }
+  #sec-intro.intro { padding-top: 0 !important; padding-bottom: 0 !important; }
+
+  .stack { display: block; position: relative; height: 300vh; }
+  .stack__pin {
+    position: sticky; top: 0; height: 100vh; height: 100svh;
+    overflow: clip;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .stack__k {
+    position: absolute; top: calc(64px + 18px); left: 0; right: 0; z-index: 1;
+    margin: 0; text-align: center;
+    font-family: 'Manrope', sans-serif; font-size: 11px; font-weight: 700;
+    letter-spacing: .22em; text-transform: uppercase; color: var(--text-muted);
+  }
+  .stack__k span { display: block; line-height: 1.9; }
+
+  /* фото — карточка в центре сцены */
+  .stack__photo {
+    position: relative; width: min(320px, 78vw);
+    border-radius: 14px; overflow: hidden;
+    box-shadow: 0 18px 44px rgba(26, 43, 60, .18);
+  }
+  .stack__photo img { display: block; width: 100%; aspect-ratio: 1 / 1.18; object-fit: cover; object-position: center 62%; }
+  .stack__grad { position: absolute; inset: 0; background: linear-gradient(180deg, transparent 48%, rgba(20, 22, 20, .6) 88%); }
+  /* стопка «придавливает» фото — оно темнеет по прогрессу */
+  .stack__photo::after {
+    content: ''; position: absolute; inset: 0;
+    background: rgba(20, 22, 20, 1); opacity: calc(var(--sp, 0) * .38);
+    pointer-events: none;
+  }
+  .stack__who { position: absolute; left: 16px; bottom: 14px; color: #FFFBF7; z-index: 1; }
+  .stack__who b { display: block; font-family: 'Playfair Display', serif; font-size: 19px; font-weight: 500; }
+  .stack__who i { font-style: normal; font-size: 10px; letter-spacing: .18em; text-transform: uppercase; opacity: .8; }
+
+  /* карточки: паркуются лесенкой поверх фото */
+  .stack__card {
+    position: absolute; left: 50%; top: 50%; z-index: 3;
+    width: min(330px, 82vw); box-sizing: border-box;
+    padding: 20px 22px 22px;
+    background: #F2E4CE; border-radius: 16px;
+    box-shadow: 0 24px 48px rgba(26, 43, 60, .28), 0 4px 12px rgba(26, 43, 60, .12);
+    /* позицию и поворот считает JS через --y/--r/--dx/--sc */
+    transform: translate(-50%, -50%)
+               translate(calc(var(--dx, 0) * 1px), calc(var(--y, 120) * 1vh))
+               rotate(calc(var(--r, 0) * 1deg))
+               scale(var(--sc, 1));
+    will-change: transform;
+  }
+  .stack__lbl {
+    display: block; margin-bottom: 10px;
+    font-family: 'Manrope', sans-serif; font-size: 10px; font-weight: 700;
+    letter-spacing: .2em; text-transform: uppercase; color: rgba(26, 43, 60, .55);
+  }
+  .stack__big {
+    display: block; margin: 0 0 8px;
+    font-family: 'Playfair Display', Georgia, serif; font-weight: 600;
+    font-size: clamp(30px, 8.6vw, 38px); line-height: 1.04; color: var(--ink, #1A2B3C);
+  }
+  .stack__card p { margin: 0; font-family: 'Manrope', sans-serif; font-size: 14px; line-height: 1.6; color: rgba(26, 43, 60, .78); }
+
+  .stack__card--cta { background: var(--gold); }
+  .stack__card--cta .stack__lbl { color: rgba(255, 251, 247, .7); }
+  .stack__card--cta .stack__big { color: #FFFBF7; }
+  .stack__card--cta p { color: rgba(255, 251, 247, .85); }
+  .stack__go {
+    display: inline-flex; margin-top: 16px;
+    background: #FFFBF7; color: var(--gold-2); text-decoration: none;
+    padding: 13px 26px; border-radius: 8px;
+    font-family: 'Manrope', sans-serif; font-size: 14px; font-weight: 700;
+  }
+  .stack__go:active { transform: scale(.96); }
+
+  .stack__end {
+    position: absolute; bottom: 22px; left: 0; right: 0; z-index: 1;
+    margin: 0; text-align: center;
+    font-family: 'Manrope', sans-serif; font-size: 11px; font-weight: 700;
+    letter-spacing: .22em; text-transform: uppercase; color: var(--text-muted);
+    opacity: var(--endp, 0);
+  }
+  .stack__end span { display: block; line-height: 1.9; }
+}
+@media (prefers-reduced-motion: reduce) and (max-width: 719px) {
+  .stack { height: auto; padding: 48px 0; }
+  .stack__pin { position: static; height: auto; flex-direction: column; gap: 16px; padding: 72px 0 56px; }
+  .stack__card { position: static; transform: none; margin: 12px auto 0; }
+  .stack__end { position: static; opacity: 1; margin-top: 20px; }
+}

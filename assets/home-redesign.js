@@ -1038,3 +1038,59 @@
   }, { threshold: 0.5 });
   io.observe(el);
 })();
+
+
+/* ═══ Сцена-стек «Кто мы» (референс onewhale.io) ═══
+   Прогресс сцены = положение sticky-пробега. Каждая карточка получает
+   свой под-прогресс и едет снизу в стопку. Back-изинг даёт «вес»:
+   карточка проскакивает точку парковки и осаживается. */
+(function () {
+  var stack = document.getElementById('stack');
+  if (!stack) return;
+  var mq = window.matchMedia('(max-width: 719px)');
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduce) return;
+  var pin = stack.querySelector('.stack__pin');
+  var photo = stack.querySelector('.stack__photo');
+  var end = stack.querySelector('.stack__end');
+  var cards = Array.prototype.slice.call(stack.querySelectorAll('.stack__card'));
+  var N = cards.length;
+
+  function easeOutBack(x) {
+    var c1 = 1.4, c3 = c1 + 1;
+    return 1 + c3 * Math.pow(x - 1, 3) + c1 * Math.pow(x - 1, 2);
+  }
+  function easeOutCubic(x) { return 1 - Math.pow(1 - x, 3); }
+
+  var q = false;
+  function tick() {
+    q = false;
+    if (!mq.matches) return;
+    var vh = window.innerHeight;
+    var r = stack.getBoundingClientRect();
+    if (r.bottom < -60 || r.top > vh + 60) return;
+    var run = r.height - vh;
+    var p = Math.max(0, Math.min(1, -r.top / Math.max(1, run)));
+
+    cards.forEach(function (c, i) {
+      /* карточки идут внахлёст: каждая занимает свой отрезок прогресса */
+      var pi = Math.max(0, Math.min(1, p * (N + 0.55) - i * 1.0));
+      var eb = easeOutBack(pi);
+      var ec = easeOutCubic(pi);
+      /* парковка лесенкой: каждая следующая чуть ниже — стопка читается */
+      var park = -4 + i * 4.6;                       /* vh */
+      var y = park + (1 - eb) * 118;                 /* из-за нижнего края */
+      c.style.setProperty('--y', y.toFixed(2));
+      c.style.setProperty('--r', ((+c.dataset.r) * ec).toFixed(2));
+      c.style.setProperty('--dx', ((+c.dataset.dx) * ec).toFixed(1));
+      /* лёгкий пере-масштаб на подлёте: ощущение массы */
+      c.style.setProperty('--sc', (1 + (1 - ec) * 0.05).toFixed(3));
+    });
+    if (photo) photo.style.setProperty('--sp', Math.min(1, p * 1.5).toFixed(3));
+    if (end) end.style.setProperty('--endp', Math.max(0, (p - 0.82) / 0.18).toFixed(3));
+  }
+  function onS() { if (!q) { q = true; requestAnimationFrame(tick); } }
+  addEventListener('scroll', onS, { passive: true });
+  addEventListener('resize', onS, { passive: true });
+  tick();
+})();
