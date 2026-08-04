@@ -1041,54 +1041,63 @@
 
 
 /* ═══ Сцена-стек «Кто мы» (референс onewhale.io) ═══
-   Прогресс сцены = положение sticky-пробега. Каждая карточка получает
-   свой под-прогресс и едет снизу в стопку. Back-изинг даёт «вес»:
-   карточка проскакивает точку парковки и осаживается. */
+   Прогресс сцены сглажен инерцией: целевое значение приходит со скролла,
+   фактическое догоняет его lerp-ом в rAF-цикле. Палец дёргается —
+   стопка плывёт. Back-изинг даёт осадку без пере-масштаба. */
 (function () {
   var stack = document.getElementById('stack');
   if (!stack) return;
   var mq = window.matchMedia('(max-width: 719px)');
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (reduce) return;
-  var pin = stack.querySelector('.stack__pin');
   var photo = stack.querySelector('.hcard');
   var cards = Array.prototype.slice.call(stack.querySelectorAll('.stack__card'));
   var N = cards.length;
 
   function easeOutBack(x) {
-    var c1 = 1.4, c3 = c1 + 1;
+    var c1 = 1.15, c3 = c1 + 1;
     return 1 + c3 * Math.pow(x - 1, 3) + c1 * Math.pow(x - 1, 2);
   }
   function easeOutCubic(x) { return 1 - Math.pow(1 - x, 3); }
 
-  var q = false;
-  function tick() {
-    q = false;
-    if (!mq.matches) return;
+  var target = 0, cur = -1, raf = null;
+
+  function measure() {
     var vh = window.innerHeight;
     var r = stack.getBoundingClientRect();
-    if (r.bottom < -60 || r.top > vh + 60) return;
+    if (r.bottom < -80 || r.top > vh + 80) { target = -1; return; }
     var run = r.height - vh;
-    var p = Math.max(0, Math.min(1, -r.top / Math.max(1, run)));
+    target = Math.max(0, Math.min(1, -r.top / Math.max(1, run)));
+  }
 
+  function apply(p) {
     cards.forEach(function (c, i) {
-      /* карточки идут внахлёст: каждая занимает свой отрезок прогресса */
       var pi = Math.max(0, Math.min(1, p * (N + 0.55) - i * 1.0));
       var eb = easeOutBack(pi);
       var ec = easeOutCubic(pi);
-      /* парковка лесенкой: каждая следующая чуть ниже — стопка читается */
-      var park = -4 + i * 4.6;                       /* vh */
-      var y = park + (1 - eb) * 118;                 /* из-за нижнего края */
+      /* парковка лесенкой вниз от верха фото */
+      var park = 9 + i * 4.2;                        /* vh */
+      var y = park + (1 - eb) * 112;
       c.style.setProperty('--y', y.toFixed(2));
       c.style.setProperty('--r', ((+c.dataset.r) * ec).toFixed(2));
       c.style.setProperty('--dx', ((+c.dataset.dx) * ec).toFixed(1));
-      /* лёгкий пере-масштаб на подлёте: ощущение массы */
-      c.style.setProperty('--sc', (1 + (1 - ec) * 0.05).toFixed(3));
     });
     if (photo) photo.style.setProperty('--sp', Math.min(1, p * 1.5).toFixed(3));
   }
-  function onS() { if (!q) { q = true; requestAnimationFrame(tick); } }
-  addEventListener('scroll', onS, { passive: true });
-  addEventListener('resize', onS, { passive: true });
-  tick();
+
+  function loop() {
+    if (target < 0) { raf = null; return; }         /* сцена вне экрана — спим */
+    if (cur < 0) cur = target;
+    cur += (target - cur) * 0.14;                   /* инерция: стопка плывёт */
+    if (Math.abs(target - cur) < 0.0004) cur = target;
+    apply(cur);
+    raf = requestAnimationFrame(function () { measure(); loop(); });
+  }
+  function wake() {
+    measure();
+    if (target >= 0 && raf === null) { raf = requestAnimationFrame(loop); }
+  }
+  addEventListener('scroll', wake, { passive: true });
+  addEventListener('resize', wake, { passive: true });
+  wake();
 })();

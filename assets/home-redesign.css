@@ -4298,7 +4298,9 @@
   .stack__pin {
     position: sticky; top: 0; height: 100vh; height: 100svh;
     overflow: clip;
-    display: flex; align-items: center; justify-content: center;
+    display: flex; align-items: flex-start; justify-content: center;
+    /* фото сразу под шапкой — зазор от hero-кнопки минимальный */
+    padding-top: 82px;
   }
 
   /* база сцены — та самая hero-карточка с фото: в пине она встаёт по
@@ -4316,22 +4318,28 @@
   }
 
   /* карточки: те же габариты и скругление, что у фото — слои одного
-     формата, как в референсе */
+     формата, как в референсе. Парковка отсчитывается от верха фото. */
   .stack__card {
-    position: absolute; left: 50%; top: 50%; z-index: 3;
+    position: absolute; left: 50%; top: 82px; z-index: 3;
     width: min(382px, calc(100vw - 48px)); box-sizing: border-box;
     min-height: 230px;
     display: flex; flex-direction: column; justify-content: flex-end;
     padding: 22px 22px 24px;
     background: #F2E4CE; border-radius: 14px;
+    /* рамка в цвет фона гасит белёсую кромку антиалиасинга у повёрнутого
+       слоя на iOS («белые рельсы» по краям) */
+    border: 1px solid #F2E4CE;
+    background-clip: padding-box;
+    backface-visibility: hidden; -webkit-backface-visibility: hidden;
     box-shadow: 0 24px 48px rgba(26, 43, 60, .28), 0 4px 12px rgba(26, 43, 60, .12);
     /* позицию и поворот считает JS через --y/--r/--dx/--sc */
-    transform: translate(-50%, -50%)
+    transform: translateX(-50%)
                translate(calc(var(--dx, 0) * 1px), calc(var(--y, 120) * 1vh))
                rotate(calc(var(--r, 0) * 1deg))
                scale(var(--sc, 1));
     will-change: transform;
   }
+  .stack__card--cta { border-color: var(--gold); }
   .stack__lbl {
     display: block; margin-bottom: 10px;
     font-family: 'Manrope', sans-serif; font-size: 10px; font-weight: 700;
