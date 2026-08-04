@@ -4030,7 +4030,6 @@
   }
   .hero__roll ul {
     list-style: none; margin: 0; padding: 0;
-    padding-top: calc(2 * 40px);   /* первая строка стартует в центре окна */
     transition: transform .6s cubic-bezier(.25, 1, .35, 1);
   }
   .hero__roll li {
@@ -4235,4 +4234,14 @@
   /* защитный максимум ширины у имени в hcard, чтобы на самых узких
      экранах (<360px) оно гарантированно не подходило к пилюле ближе 12px */
   .hcard__who { max-width: calc(100% - 130px); }
+}
+
+
+/* ═══ Правки Daniil 2026-08-04 (вечер) ═══ */
+@media (max-width: 719px) {
+  /* CTA — прямые углы вместо пилюли */
+  .hero--home .hero__cta-row .btn { border-radius: 6px !important; }
+
+  /* заголовок выше: hero стартует плотнее к шапке */
+  .hero--home { padding-top: 18px !important; }
 }

@@ -105,10 +105,10 @@ body:has(> header.site-nav) {
   font-weight: 700;
   letter-spacing: -0.1px;
   background: transparent;
-  border: 1px solid var(--border);
+  border: 0;   /* без обводки — решение Daniil 2026-08-04 */
   color: var(--text);
   cursor: pointer;
-  transition: background var(--t-1), border-color var(--t-1), color var(--t-1);
+  transition: background var(--t-1), color var(--t-1);
 }
 /* Visual audit 2026-05-28: hover только для устройств с реальным hover (мышь).
    На iOS Safari после тапа без этого ограничения hover «прилипает» — кнопка
@@ -116,7 +116,6 @@ body:has(> header.site-nav) {
 @media (hover: hover) {
   .site-nav__menu-btn:hover {
     background: var(--surface-2);
-    border-color: var(--gold);
     color: var(--gold);
   }
 }

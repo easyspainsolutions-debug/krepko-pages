@@ -949,52 +949,52 @@
 
 
 /* ═══ Hero-ротатор услуг (референс rockfi.fr) ═══
-   Список листается на строку каждые 2.2s; для бесшовного цикла список
-   дублируется, и при заходе на копию каретка мгновенно сбрасывается. */
+   Барабан из трёх копий списка: в центре окна всегда активная строка,
+   над и под ней — по две живые полупрозрачные. При заходе на третью
+   копию каретка тихо сбрасывается на среднюю (кадры идентичны). */
 (function () {
   var box = document.getElementById('hero-roll');
   if (!box) return;
   var mq = window.matchMedia('(max-width: 719px)');
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var ul = box.querySelector('ul');
-  var LINE = 40, CENTER = 0;   /* padding-top списка уже ставит строку idx в центр окна */
+  var LINE = 40;
   var base = Array.prototype.slice.call(ul.children);
   var n = base.length;
-  /* копия для бесшовности */
+  /* копии: перед и после оригинала */
+  base.slice().reverse().forEach(function (li) { ul.insertBefore(li.cloneNode(true), ul.firstChild); });
   base.forEach(function (li) { ul.appendChild(li.cloneNode(true)); });
   var items = ul.children;
 
-  var idx = 0;
+  var idx = n;                       /* центр — первая строка среднего блока */
   function paint() {
-    for (var k = 0; k < items.length; k++) {
-      items[k].classList.remove('is-c', 'is-n');
-      var d = k - (idx + CENTER);
-      if (d === 0) items[k].classList.add('is-c');
-      else if (d === -1 || d === 1) items[k].classList.add('is-n');
+    for (var k2 = 0; k2 < items.length; k2++) {
+      items[k2].classList.remove('is-c', 'is-n');
+      var d = k2 - idx;
+      if (d === 0) items[k2].classList.add('is-c');
+      else if (d === -1 || d === 1) items[k2].classList.add('is-n');
     }
   }
   function go(instant) {
     if (instant) ul.style.transition = 'none';
-    ul.style.transform = 'translateY(' + (-idx * LINE) + 'px)';
+    /* строка idx встаёт в центр окна из 5 строк */
+    ul.style.transform = 'translateY(' + (-(idx - 2) * LINE) + 'px)';
     if (instant) { void ul.offsetHeight; ul.style.transition = ''; }
     paint();
   }
-  if (reduce) { idx = 0; paint(); return; }
+  if (reduce) { go(true); return; }
 
   setInterval(function () {
     if (!mq.matches) return;
     idx++;
-    if (idx > n) {           /* каретка на копии — мгновенно вернуться на оригинал */
-      idx = 1; go(true); idx = 1;
-      /* и тут же шагнуть, чтобы движение не замирало */
-      requestAnimationFrame(function () { go(false); });
-      return;
-    }
     go(false);
+    if (idx >= 2 * n) {
+      /* после завершения анимации — невидимый сброс на среднюю копию */
+      setTimeout(function () { idx -= n; go(true); }, 650);
+    }
   }, 2400);
   go(true);
 })();
-
 
 /* Метрика «промессы»: счёт при появлении (мобилка) */
 (function () {
