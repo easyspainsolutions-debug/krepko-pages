@@ -4335,9 +4335,19 @@
     box-sizing: border-box;
     display: flex; flex-direction: column; justify-content: flex-end;
     padding: 24px 24px 26px;
-    background: #F2E4CE; border-radius: 14px;
+    /* бумага: тёплый градиент + мягкий блик от верхнего края */
+    background:
+      radial-gradient(120% 80% at 50% -10%, rgba(255, 255, 255, .55), transparent 62%),
+      linear-gradient(168deg, #F7EBD8 0%, #F1E2C9 52%, #EAD8BC 100%);
+    border-radius: 14px;
+    /* тиснёный кант: светлая грань сверху, тень снизу — карточка «толстая» */
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, .75),
+      inset 0 -1px 0 rgba(120, 92, 54, .16),
+      0 2px 4px rgba(26, 43, 60, .10),
+      0 18px 38px rgba(26, 43, 60, .26);
+    overflow: hidden;
     backface-visibility: hidden; -webkit-backface-visibility: hidden;
-    box-shadow: 0 16px 34px rgba(26, 43, 60, .24);
     /* позицию и поворот считает JS через --y/--r/--dx */
     transform: translateX(-50%)
                translate(calc(var(--dx, 0) * 1px), calc(var(--y, 120) * 1vh))
@@ -4373,4 +4383,83 @@
   .stack { height: auto; padding: 48px 0; }
   .stack__pin { position: static; height: auto; flex-direction: column; gap: 16px; padding: 72px 0 56px; }
   .stack__card { position: static; transform: none; margin: 12px auto 0; aspect-ratio: auto; min-height: 200px; width: min(382px, calc(100vw - 48px)); }
+}
+
+
+/* ═══════════ Детализация карточек сцены-стека (2026-08-05) ═══════════
+   Фактура премиального бланка: зерно бумаги, тиснёный водяной знак,
+   индекс слоя в углу, волосяные линейки, служебный хвост внизу. */
+@media (max-width: 719px) {
+  /* зерно бумаги — очень слабый шум поверх заливки */
+  .stack__card::before {
+    content: ''; position: absolute; inset: 0; z-index: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='.34'/%3E%3C/svg%3E");
+    mix-blend-mode: multiply; opacity: .12; pointer-events: none;
+  }
+  .stack__card > * { position: relative; z-index: 1; }
+
+  /* тиснёный водяной знак — инициал Krepko, вдавлен в бумагу */
+  .stack__mark {
+    position: absolute; right: -.12em; top: -.22em; z-index: 0;
+    font-family: 'Playfair Display', Georgia, serif; font-weight: 600;
+    font-size: 210px; line-height: 1; color: transparent;
+    -webkit-text-stroke: 1px rgba(120, 92, 54, .13);
+    text-shadow: 0 1px 0 rgba(255, 255, 255, .5);
+    pointer-events: none; user-select: none;
+  }
+
+  /* индекс слоя: моноширинно, у верхнего края, на волосяной линейке */
+  .stack__no {
+    position: absolute; left: 24px; right: 24px; top: 22px; z-index: 1;
+    padding-bottom: 12px; border-bottom: 1px solid rgba(120, 92, 54, .18);
+    font-family: 'IBM Plex Mono', monospace; font-size: 11px; font-weight: 600;
+    letter-spacing: .18em; color: rgba(120, 92, 54, .62);
+  }
+  /* терракотовая метка справа от индекса */
+  .stack__no::after {
+    content: ''; position: absolute; right: 0; top: 3px;
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--gold); opacity: .75;
+  }
+
+  .stack__lbl { color: rgba(120, 92, 54, .72); }
+  .stack__big { letter-spacing: -.015em; text-shadow: 0 1px 0 rgba(255, 255, 255, .6); }
+  .stack__card p { color: rgba(58, 46, 30, .82); }
+
+  /* служебный хвост: два поля на волосяной линейке, как в бланке */
+  .stack__foot {
+    display: flex; justify-content: space-between; gap: 16px;
+    margin-top: 16px; padding-top: 12px;
+    border-top: 1px solid rgba(120, 92, 54, .18);
+    font-family: 'IBM Plex Mono', monospace; font-size: 10px;
+    letter-spacing: .14em; text-transform: uppercase; color: rgba(120, 92, 54, .58);
+  }
+  .stack__foot i { font-style: normal; }
+
+  /* ── финальная карточка: терракота с фольгой ── */
+  .stack__card--cta {
+    background:
+      radial-gradient(120% 80% at 50% -10%, rgba(255, 255, 255, .22), transparent 60%),
+      linear-gradient(168deg, #CE6642 0%, #C75B39 54%, #B04E2F 100%);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, .28),
+      inset 0 -1px 0 rgba(90, 34, 16, .3),
+      0 2px 4px rgba(26, 43, 60, .12),
+      0 20px 42px rgba(176, 78, 47, .34);
+  }
+  .stack__card--cta::before { opacity: .1; }
+  .stack__card--cta .stack__no {
+    color: rgba(255, 251, 247, .72); border-bottom-color: rgba(255, 251, 247, .26);
+  }
+  .stack__card--cta .stack__no::after { background: #FFFBF7; opacity: .9; }
+  .stack__card--cta .stack__mark {
+    -webkit-text-stroke: 1px rgba(255, 251, 247, .17);
+    text-shadow: 0 1px 0 rgba(90, 34, 16, .2);
+  }
+  .stack__card--cta .stack__lbl { color: rgba(255, 251, 247, .72); }
+  .stack__card--cta .stack__big { color: #FFFBF7; text-shadow: 0 1px 0 rgba(90, 34, 16, .25); }
+  .stack__card--cta p { color: rgba(255, 251, 247, .88); }
+  .stack__go {
+    box-shadow: 0 6px 16px rgba(90, 34, 16, .22), inset 0 1px 0 rgba(255, 255, 255, .9);
+  }
 }
