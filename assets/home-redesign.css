@@ -4030,10 +4030,15 @@
   }
   .hero__roll ul {
     list-style: none; margin: 0; padding: 0;
-    transition: transform .6s cubic-bezier(.25, 1, .35, 1);
+    /* движение ведёт JS покадрово — CSS-транзиция на iOS иногда
+       глоталась, и лента расходилась с подсветкой */
+    will-change: transform;
   }
   .hero__roll li {
     height: 32px; display: flex; align-items: center;
+    /* старый глобальный стиль даёт li { margin-bottom: 4px } — шаг ленты
+       становился 36px при формуле 32, и подсветка уползала на +4px за такт */
+    margin: 0 !important;
     position: relative; padding-left: 0;
     /* по референсу: неактивные у левого края; активную выделяют цвет,
        вес, буллет и сдвиг вправо с лёгким ростом */

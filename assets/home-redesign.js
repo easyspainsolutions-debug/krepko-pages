@@ -949,64 +949,67 @@
 
 
 /* ═══ Hero-ротатор услуг (референс rockfi.fr) ═══
-   Барабан из трёх копий. Хореография шага, как у референса:
-   1) у текущей строки гаснет точка и цвет — она уезжает вверх серой;
-   2) лента едет; подсветка НЕ переназначается на старте;
-   3) по прибытии (конец транзиции) центральная строка чернеет,
-      выезжает вправо и получает точку.
-   Нормализация каретки — перед каждым шагом, дрейф в фоне невозможен. */
+   Единственный источник истины — JS: позиция ленты анимируется покадрово
+   (rAF), подсветка назначается ТОЛЬКО когда лента фактически доехала.
+   CSS-транзиция не используется — она на iOS иногда глоталась, и лента
+   расходилась с подсветкой (активная «уползала вниз»). */
 (function () {
   var box = document.getElementById('hero-roll');
   if (!box) return;
   var mq = window.matchMedia('(max-width: 719px)');
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var ul = box.querySelector('ul');
-  var LINE = 32, STEP_MS = 2400, RIDE_MS = 560;
+  var LINE = 32, PAUSE_MS = 1900, RIDE_MS = 520;
   var base = Array.prototype.slice.call(ul.children);
   var n = base.length;
   base.slice().reverse().forEach(function (li) { ul.insertBefore(li.cloneNode(true), ul.firstChild); });
   base.forEach(function (li) { ul.appendChild(li.cloneNode(true)); });
   var items = ul.children;
 
-  var idx = n;
-  function paint() {
+  var idx = n;                    /* строка в центре окна */
+  var y = (idx - 2) * LINE;       /* фактическая позиция ленты (px) */
+
+  function setY(v) { y = v; ul.style.transform = 'translateY(' + (-v) + 'px)'; }
+  function paint(clearOnly) {
     for (var k2 = 0; k2 < items.length; k2++) {
       items[k2].classList.remove('is-c', 'is-n');
+      if (clearOnly) continue;
       var d = k2 - idx;
       if (d === 0) items[k2].classList.add('is-c');
       else if (d === -1 || d === 1) items[k2].classList.add('is-n');
     }
   }
-  function ride(instant) {
-    if (instant) ul.style.transition = 'none';
-    ul.style.transform = 'translateY(' + (-(idx - 2) * LINE) + 'px)';
-    if (instant) { void ul.offsetHeight; ul.style.transition = ''; }
-  }
-  function stripC() {
-    for (var k2 = 0; k2 < items.length; k2++) items[k2].classList.remove('is-c');
+  function snap() {               /* мгновенно привести всё в согласованный кадр */
+    while (idx >= 2 * n) idx -= n;
+    setY((idx - 2) * LINE);
+    paint(false);
   }
 
-  if (reduce) { ride(true); paint(); return; }
+  if (reduce) { snap(); return; }
 
-  var gen = 0;
-  function step() {
-    if (mq.matches && !document.hidden) {
-      if (idx >= 2 * n) { idx -= n; ride(true); paint(); }
-      stripC();                 /* точка и чернота гаснут у уходящей */
-      idx++;
-      ride(false);              /* лента едет серой */
-      var my = ++gen;
-      setTimeout(function () {  /* прибытие: подсветка догоняет центр */
-        if (my === gen) paint();
-      }, RIDE_MS);
+  var animating = false;
+  function stepOnce() {
+    if (!mq.matches || document.hidden || animating) return;
+    animating = true;
+    if (idx >= 2 * n) { idx -= n; setY((idx - 2) * LINE); }
+    paint(true);                  /* точка и чернота гаснут — лента едет серой */
+    idx++;
+    var from = y, to = (idx - 2) * LINE, t0 = null;
+    function frame(ts) {
+      if (t0 === null) t0 = ts;
+      var p = Math.min((ts - t0) / RIDE_MS, 1);
+      var e = 1 - Math.pow(1 - p, 3);           /* easeOutCubic */
+      setY(from + (to - from) * e);
+      if (p < 1) { requestAnimationFrame(frame); }
+      else { paint(false); animating = false; } /* прибыли — подсветка на месте */
     }
-    setTimeout(step, STEP_MS);
+    requestAnimationFrame(frame);
   }
+  setInterval(stepOnce, PAUSE_MS + RIDE_MS);
   document.addEventListener('visibilitychange', function () {
-    if (!document.hidden) { gen++; while (idx >= 2 * n) idx -= n; ride(true); paint(); }
+    if (!document.hidden) { animating = false; snap(); }
   });
-  ride(true); paint();
-  setTimeout(step, STEP_MS);
+  snap();
 })();
 
 /* Метрика «промессы»: счёт при появлении (мобилка) */
