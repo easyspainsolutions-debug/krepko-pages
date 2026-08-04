@@ -4320,25 +4320,20 @@
   /* «колодец» строго формата фото: стопка живёт внутри него, и всё, что
      при повороте выходит за края фото, срезается — никаких выступающих
      уголков на светлом фоне («белые полосы» слева и справа) */
-  /* Клипа нет: край колодца срезал повёрнутые карточки ровной вертикалью
-     и читался как белая рамка поверх стопки. Карточки чуть уже фото —
-     их углы при повороте ложатся внутрь кадра сами. */
-  .stack__rail {
-    position: absolute; left: 50%; top: 82px; z-index: 3;
-    width: min(382px, calc(100vw - 48px));
-    transform: translateX(-50%);
-    pointer-events: none;           /* кликается только контент карточек */
-  }
+  /* Карточки — прямые дети сцены, никакой обёртки. Размер строго равен
+     фото: та же ширина и та же высота (aspect-ratio кадра 1/1.18).
+     Первая ложится в кадр идеально, остальные — криво поверх неё.
+     Ничто их не режет: они самый верхний слой сцены. */
   .stack__card {
-    position: absolute; left: 50%; top: 0;
-    width: 93%; box-sizing: border-box;
-    min-height: 230px;
+    position: absolute; left: 50%; top: 82px; z-index: 4;
+    width: min(382px, calc(100vw - 48px));
+    aspect-ratio: 1 / 1.12;      /* строго аспект фото — размеры совпадают */
+    box-sizing: border-box;
     display: flex; flex-direction: column; justify-content: flex-end;
-    padding: 22px 22px 24px;
+    padding: 24px 24px 26px;
     background: #F2E4CE; border-radius: 14px;
     backface-visibility: hidden; -webkit-backface-visibility: hidden;
-    box-shadow: 0 14px 30px rgba(26, 43, 60, .22);
-    pointer-events: auto;
+    box-shadow: 0 16px 34px rgba(26, 43, 60, .24);
     /* позицию и поворот считает JS через --y/--r/--dx */
     transform: translateX(-50%)
                translate(calc(var(--dx, 0) * 1px), calc(var(--y, 120) * 1vh))
@@ -4373,5 +4368,5 @@
 @media (prefers-reduced-motion: reduce) and (max-width: 719px) {
   .stack { height: auto; padding: 48px 0; }
   .stack__pin { position: static; height: auto; flex-direction: column; gap: 16px; padding: 72px 0 56px; }
-  .stack__card { position: static; transform: none; margin: 12px auto 0; }
+  .stack__card { position: static; transform: none; margin: 12px auto 0; aspect-ratio: auto; min-height: 200px; width: min(382px, calc(100vw - 48px)); }
 }
