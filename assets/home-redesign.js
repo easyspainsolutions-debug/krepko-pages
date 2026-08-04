@@ -1079,12 +1079,10 @@
       var park = 2.5 + i * 4.2;                      /* vh, от верха колодца */
       var y = park + (1 - eb) * 108;
       c.style.setProperty('--y', y.toFixed(2));
-      /* поворот и снос живут только в полёте: карточка летит под углом,
-         а к парковке выравнивается по краям фото. Иначе углы нижних
-         слоёв торчат из-под верхнего и читаются как светлые полосы. */
-      var fly = 1 - ec;
-      c.style.setProperty('--r', ((+c.dataset.r) * fly).toFixed(2));
-      c.style.setProperty('--dx', ((+c.dataset.dx) * fly).toFixed(1));
+      /* стопка ложится неаккуратно: у каждого слоя свой угол и снос.
+         Карточки уже фото, поэтому углы остаются внутри кадра. */
+      c.style.setProperty('--r', ((+c.dataset.r) * ec).toFixed(2));
+      c.style.setProperty('--dx', ((+c.dataset.dx) * ec).toFixed(1));
     });
     if (photo) photo.style.setProperty('--sp', Math.min(1, p * 1.5).toFixed(3));
   }

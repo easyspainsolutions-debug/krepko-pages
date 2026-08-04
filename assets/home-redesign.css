@@ -4320,22 +4320,18 @@
   /* «колодец» строго формата фото: стопка живёт внутри него, и всё, что
      при повороте выходит за края фото, срезается — никаких выступающих
      уголков на светлом фоне («белые полосы» слева и справа) */
+  /* Клипа нет: край колодца срезал повёрнутые карточки ровной вертикалью
+     и читался как белая рамка поверх стопки. Карточки чуть уже фото —
+     их углы при повороте ложатся внутрь кадра сами. */
   .stack__rail {
     position: absolute; left: 50%; top: 82px; z-index: 3;
     width: min(382px, calc(100vw - 48px));
-    height: calc(100svh - 82px);
     transform: translateX(-50%);
-    border-radius: 14px;
-    overflow: hidden;
-    /* WebKit не обрезает overflow'ом потомков с will-change/transform —
-       маска включает честный клип на iOS */
-    -webkit-mask-image: -webkit-radial-gradient(#000, #000);
-    mask-image: radial-gradient(#000, #000);
     pointer-events: none;           /* кликается только контент карточек */
   }
   .stack__card {
-    position: absolute; left: 0; top: 0;
-    width: 100%; box-sizing: border-box;
+    position: absolute; left: 50%; top: 0;
+    width: 93%; box-sizing: border-box;
     min-height: 230px;
     display: flex; flex-direction: column; justify-content: flex-end;
     padding: 22px 22px 24px;
@@ -4344,7 +4340,8 @@
     box-shadow: 0 14px 30px rgba(26, 43, 60, .22);
     pointer-events: auto;
     /* позицию и поворот считает JS через --y/--r/--dx */
-    transform: translate(calc(var(--dx, 0) * 1px), calc(var(--y, 120) * 1vh))
+    transform: translateX(-50%)
+               translate(calc(var(--dx, 0) * 1px), calc(var(--y, 120) * 1vh))
                rotate(calc(var(--r, 0) * 1deg));
     will-change: transform;
   }
