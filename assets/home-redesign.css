@@ -4470,3 +4470,10 @@
     box-shadow: 0 6px 16px rgba(90, 34, 16, .22), inset 0 1px 0 rgba(255, 255, 255, .9);
   }
 }
+
+
+/* ═══ Safe-area на iOS: контент заходит под панель Safari, но последний
+   экран не прячет свои элементы под неё (viewport-fit=cover в base.html) ═══ */
+@supports (padding: env(safe-area-inset-bottom)) {
+  .site-footer { padding-bottom: calc(var(--sec-pad, 40px) + env(safe-area-inset-bottom)); }
+}
