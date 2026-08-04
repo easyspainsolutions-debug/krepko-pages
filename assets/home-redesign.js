@@ -983,6 +983,7 @@
     while (idx >= 2 * n) idx -= n;
     setY((idx - 2) * LINE);
     paint(false);
+    box.classList.add('dot-on');
   }
 
   if (reduce) { snap(); return; }
@@ -997,6 +998,7 @@
        CSS-транзиции строк растягивают преображение на время езды */
     idx++;
     paint(false);
+    box.classList.remove('dot-on');   /* точка гаснет на месте */
     var from = y, to = (idx - 2) * LINE, t0 = null;
     function frame(ts) {
       if (t0 === null) t0 = ts;
@@ -1005,7 +1007,7 @@
       var e = p < 0.5 ? 4 * p * p * p : 1 - Math.pow(-2 * p + 2, 3) / 2;
       setY(from + (to - from) * e);
       if (p < 1) { requestAnimationFrame(frame); }
-      else { animating = false; }
+      else { box.classList.add('dot-on'); animating = false; }  /* и проявляется на месте */
     }
     requestAnimationFrame(frame);
   }
