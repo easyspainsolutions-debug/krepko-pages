@@ -3738,10 +3738,30 @@
   /* ── Знакомство: портрет первым, факты — сеткой 2×3 ──
      Было: 6 карточек и портрет столбцом на 2.5 экрана. Порядок держит
      flex-order, сами колонки распускаем. */
-  .portrait { display: flex; flex-direction: column; }
-  .portrait__figure { order: 1; margin: 0 auto; max-width: 300px; }
-  .portrait__col--left  { order: 2; }
-  .portrait__col--right { order: 3; }
+  /* Сплит «фото слева — текст справа» (выбор Daniil 2026-08-04).
+     bridge-sub и фото — дети разных родителей, поэтому .portrait
+     распускается через display: contents, а сеткой рулит сама секция:
+       строка 1: заголовок на всю ширину
+       строка 2: полароид слева · текст справа
+       строки 3-4: карточки фактов на всю ширину */
+  #sec-intro.intro {
+    display: grid;
+    grid-template-columns: minmax(0, 44%) minmax(0, 1fr);
+    column-gap: 18px;
+    align-items: center;
+  }
+  #sec-intro.intro > * { grid-column: 1 / -1; }
+  .portrait { display: contents; }
+  /* селекторы с id: правило «всё на всю ширину» выше тоже с id,
+     и назначения колонок без него проигрывали */
+  #sec-intro.intro .portrait__figure { grid-column: 1; grid-row: 2; }
+  #sec-intro.intro > .intro__bridge-sub {
+    grid-column: 2; grid-row: 2;
+    text-align: left;
+    margin: 0;
+  }
+  #sec-intro.intro .portrait__col--left  { grid-column: 1 / -1; grid-row: 3; }
+  #sec-intro.intro .portrait__col--right { grid-column: 1 / -1; grid-row: 4; }
   .portrait__col {
     display: grid !important; grid-template-columns: 1fr 1fr;
     gap: 12px; margin-top: 12px;
@@ -3953,12 +3973,12 @@
    поворот у тени компенсируется сам собой. */
 @media (max-width: 719px) {
   .portrait__figure {
-    width: min(292px, 78vw) !important;
+    width: 100% !important;              /* колонку задаёт сетка секции */
     background: #FFFFFF !important;
-    padding: 12px 12px 0;
+    padding: 8px 8px 0;
     border-radius: 2px;
     box-shadow: 0 10px 28px rgba(26, 43, 60, .14), 0 2px 6px rgba(26, 43, 60, .08);
-    margin: 10px auto 26px !important;
+    margin: 6px 0 10px !important;
     overflow: visible !important;
   }
   .portrait__frame {
@@ -3973,11 +3993,11 @@
   }
   /* подпись на нижнем поле рамки */
   .portrait__caption {
-    padding: 12px 4px 14px !important;
+    padding: 9px 2px 11px !important;
     text-align: center;
   }
-  .portrait__caption .portrait__name { font-size: 17px; }
-  .portrait__caption .portrait__role { font-size: 10px; letter-spacing: .18em; }
+  .portrait__caption .portrait__name { font-size: 13px; }
+  .portrait__caption .portrait__role { font-size: 8.5px; letter-spacing: .14em; }
 
   /* Поворот живёт вместе с анимацией появления: .anim--up рулит transform,
      и голый rotate затирался в момент is-visible. Прописываем оба состояния. */
