@@ -4327,6 +4327,10 @@
     transform: translateX(-50%);
     border-radius: 14px;
     overflow: hidden;
+    /* WebKit не обрезает overflow'ом потомков с will-change/transform —
+       маска включает честный клип на iOS */
+    -webkit-mask-image: -webkit-radial-gradient(#000, #000);
+    mask-image: radial-gradient(#000, #000);
     pointer-events: none;           /* кликается только контент карточек */
   }
   .stack__card {
