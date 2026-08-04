@@ -957,7 +957,7 @@
   var mq = window.matchMedia('(max-width: 719px)');
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var ul = box.querySelector('ul');
-  var LINE = 44, CENTER = 0;   /* padding-top списка уже ставит строку idx в центр окна */
+  var LINE = 40, CENTER = 0;   /* padding-top списка уже ставит строку idx в центр окна */
   var base = Array.prototype.slice.call(ul.children);
   var n = base.length;
   /* копия для бесшовности */
@@ -991,7 +991,7 @@
       return;
     }
     go(false);
-  }, 2200);
+  }, 2400);
   go(true);
 })();
 

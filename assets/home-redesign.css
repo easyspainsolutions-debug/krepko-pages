@@ -4022,34 +4022,36 @@
 
   .hero__roll {
     display: block; position: relative;
-    height: calc(5 * 44px); overflow: hidden;
-    margin-top: clamp(20px, 5vw, 30px);
-    /* края списка растворяются, как у референса */
-    -webkit-mask-image: linear-gradient(180deg, transparent, #000 22%, #000 78%, transparent);
-    mask-image: linear-gradient(180deg, transparent, #000 22%, #000 78%, transparent);
+    height: calc(5 * 40px); overflow: hidden;
+    margin-top: clamp(26px, 6.5vw, 34px);
+    /* хвосты почти гаснут — оптический центр держит активная строка */
+    -webkit-mask-image: linear-gradient(180deg, transparent, rgba(0,0,0,.35) 16%, #000 34%, #000 66%, rgba(0,0,0,.35) 84%, transparent);
+    mask-image: linear-gradient(180deg, transparent, rgba(0,0,0,.35) 16%, #000 34%, #000 66%, rgba(0,0,0,.35) 84%, transparent);
   }
   .hero__roll ul {
     list-style: none; margin: 0; padding: 0;
-    padding-top: calc(2 * 44px);   /* первая строка стартует в центре окна */
-    transition: transform .75s cubic-bezier(.22, 1, .36, 1);
+    padding-top: calc(2 * 40px);   /* первая строка стартует в центре окна */
+    transition: transform .6s cubic-bezier(.25, 1, .35, 1);
   }
   .hero__roll li {
-    height: 44px; display: flex; align-items: center;
-    position: relative; padding-left: 22px;
-    font-family: 'Manrope', sans-serif; font-size: 19px; font-weight: 600;
-    color: var(--text-muted); opacity: .38;
-    transition: color .5s ease, opacity .5s ease, transform .5s ease;
+    height: 40px; display: flex; align-items: center;
+    position: relative; padding-left: 24px;
+    font-family: 'Manrope', sans-serif; font-size: 17.5px; font-weight: 500;
+    color: var(--text-muted); opacity: .34;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    transition: color .45s ease, opacity .45s ease, font-size .45s ease, font-weight .2s ease;
     text-align: left; justify-content: flex-start;
   }
   .hero__roll li::before {
     content: ''; position: absolute; left: 2px; top: 50%;
-    width: 7px; height: 7px; margin-top: -3.5px; border-radius: 50%;
+    width: 8px; height: 8px; margin-top: -4px; border-radius: 50%;
     background: var(--gold); opacity: 0; transform: scale(0);
-    transition: opacity .4s ease, transform .5s cubic-bezier(.34, 1.3, .64, 1);
+    transition: opacity .35s ease, transform .45s cubic-bezier(.34, 1.3, .64, 1);
   }
-  .hero__roll li.is-c { color: var(--text); opacity: 1; }
+  /* активная — крупнее и жирнее: оптический якорь центра, как у референса */
+  .hero__roll li.is-c { color: var(--text); opacity: 1; font-size: 21px; font-weight: 600; }
   .hero__roll li.is-c::before { opacity: 1; transform: scale(1); }
-  .hero__roll li.is-n { opacity: .6; }
+  .hero__roll li.is-n { opacity: .55; }
 
   /* CTA — пилюля по контенту, как у референса; старые мобильные правила
      растягивали кнопку на всю ширину */
