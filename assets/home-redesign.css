@@ -4297,6 +4297,10 @@
   .stack { display: block; position: relative; height: 300vh; }
   .stack__pin {
     position: sticky; top: 0; height: 100vh; height: 100svh;
+    /* на всю ширину экрана: раньше пин был ровно по краям карточек
+       (24..406) и его overflow срезал их углы прямой вертикалью —
+       это и читалось как «рамка» поверх стопки */
+    width: 100vw; margin-left: calc(50% - 50vw);
     overflow: clip;
     display: flex; align-items: flex-start; justify-content: center;
     /* фото сразу под шапкой — зазор от hero-кнопки минимальный */
