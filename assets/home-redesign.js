@@ -984,16 +984,23 @@
   }
   if (reduce) { go(true); return; }
 
-  setInterval(function () {
-    if (!mq.matches) return;
-    idx++;
-    go(false);
-    if (idx >= 2 * n) {
-      /* после завершения анимации — невидимый сброс на среднюю копию */
-      setTimeout(function () { idx -= n; go(true); }, 650);
+  /* Один самопланирующий цикл вместо пары interval+timeout: в фоне таймеры
+     стреляют пачкой, сбросы не успевали, и каретка улетала за конец списка.
+     Нормализация ПЕРЕД шагом держит idx в [n, 2n) при любом троттлинге. */
+  function step() {
+    if (mq.matches) {
+      if (idx >= 2 * n) { idx -= n; go(true); }
+      idx++;
+      go(false);
     }
-  }, 2400);
+    setTimeout(step, 2400);
+  }
+  document.addEventListener('visibilitychange', function () {
+    /* вернулись на вкладку — мгновенно привести барабан в согласованный кадр */
+    if (!document.hidden) { while (idx >= 2 * n) idx -= n; go(true); }
+  });
   go(true);
+  setTimeout(step, 2400);
 })();
 
 /* Метрика «промессы»: счёт при появлении (мобилка) */
