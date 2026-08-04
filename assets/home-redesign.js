@@ -959,7 +959,7 @@
   var mq = window.matchMedia('(max-width: 719px)');
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var ul = box.querySelector('ul');
-  var LINE = 32, PAUSE_MS = 1900, RIDE_MS = 680;
+  var LINE = 32, PAUSE_MS = 1900, RIDE_MS = 640;
   var base = Array.prototype.slice.call(ul.children);
   var n = base.length;
   base.slice().reverse().forEach(function (li) { ul.insertBefore(li.cloneNode(true), ul.firstChild); });
@@ -983,7 +983,6 @@
     while (idx >= 2 * n) idx -= n;
     setY((idx - 2) * LINE);
     paint(false);
-    box.classList.add('dot-on');
   }
 
   if (reduce) { snap(); return; }
@@ -998,18 +997,13 @@
        CSS-транзиции строк растягивают преображение на время езды */
     idx++;
     paint(false);
-    box.classList.remove('dot-on');   /* точка гаснет на месте */
-    var from = y, to = (idx - 2) * LINE, t0 = null, dot = false;
+    var from = y, to = (idx - 2) * LINE, t0 = null;
     function frame(ts) {
       if (t0 === null) t0 = ts;
       var p = Math.min((ts - t0) / RIDE_MS, 1);
       /* easeInOutCubic: лента трогается и тормозит мягко */
       var e = p < 0.5 ? 4 * p * p * p : 1 - Math.pow(-2 * p + 2, 3) / 2;
       setY(from + (to - from) * e);
-      /* точка возвращается на 22% пути (~150ms) — ровно когда её
-         гашение закончилось, а лента набрала ход; к 430ms она в полном
-         размере, задолго до финиша строк */
-      if (!dot && p >= 0.22) { dot = true; box.classList.add('dot-on'); }
       if (p < 1) { requestAnimationFrame(frame); }
       else { animating = false; }
     }
