@@ -13,17 +13,10 @@
   els.forEach(function(e){ io.observe(e); });
 })();
 
-(function(){
-  var nav = document.querySelector('.site-nav');
-  if (!nav) return;
-  var stuck = null;
-  function update(){
-    var next = window.scrollY > 8;
-    if (next !== stuck) { stuck = next; nav.classList.toggle('is-stuck', next); }
-  }
-  window.addEventListener('scroll', update, {passive: true});
-  update();
-})();
+/* Липкая шапка и мега-меню переехали в assets/site-nav.js —
+   они нужны на всех страницах, а этот файл грузится только
+   на главной и /about/. */
+
 
 
 (function(){
@@ -141,49 +134,7 @@
   });
 })();
 
-(function(){
-  var trigger = document.getElementById('mega-trigger');
-  var panel = document.getElementById('mega-menu');
-  var overlay = document.getElementById('mega-overlay');
-  if (!trigger || !panel) return;
-  var open = false;
 
-  var hideTimer = null;
-  var REVEAL = 360;   /* синхронно с transition у .mega */
-
-  function setOpen(v){
-    open = v;
-    trigger.setAttribute('aria-expanded', v ? 'true' : 'false');
-    if (overlay) overlay.classList.toggle('is-on', v);
-
-    if (hideTimer) { clearTimeout(hideTimer); hideTimer = null; }
-
-    if (v) {
-      panel.hidden = false;
-      /* принудительный reflow: без него браузер объединит снятие hidden
-         и добавление класса в один кадр, и шторка не «поедет» */
-      void panel.offsetWidth;
-      panel.classList.add('is-open');
-    } else {
-      panel.classList.remove('is-open');
-      /* прячем только после того, как шторка свернулась */
-      hideTimer = setTimeout(function(){
-        if (!open) panel.hidden = true;
-        hideTimer = null;
-      }, REVEAL);
-    }
-  }
-  trigger.addEventListener('click', function(e){ e.stopPropagation(); setOpen(!open); });
-
-  // закрытие: клик вне панели, Esc, уход мышью
-  document.addEventListener('click', function(e){
-    if (open && !panel.contains(e.target) && e.target !== trigger) setOpen(false);
-  });
-  document.addEventListener('keydown', function(e){
-    if (e.key === 'Escape' && open) { setOpen(false); trigger.focus(); }
-  });
-  panel.addEventListener('mouseleave', function(){ if (open) setOpen(false); });
-})();
 
 /* Round 27: дорожка шагов — терракотовая заливка по мере скролла.
    Считаем прогресс прохождения блока через вьюпорт и пишем в --p;
@@ -409,6 +360,9 @@
   var reduceMo = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   var waves = [], rafId = null;
+  /* карта вне экрана — цикл лучей спит: раньше он крутился 60 fps до конца
+     жизни страницы, переписывая 15 SVG-градиентов на каждом кадре */
+  var mapSeen = true;
   function stopEls(id){
     var g = document.getElementById(id);
     return g ? {
@@ -418,6 +372,20 @@
     } : null;
   }
   function clampOff(v){ return v < 0 ? 0 : (v > 1 ? 1 : v); }
+
+  /* IntersectionObserver будим/усыпляем цикл: за экраном он не нужен */
+  (function () {
+    var svg = document.querySelector('.map');
+    if (!svg || !('IntersectionObserver' in window)) return;
+    new IntersectionObserver(function (es) {
+      es.forEach(function (e) {
+        mapSeen = e.isIntersecting;
+        if (mapSeen && rafId === null && waves.length && window.requestAnimationFrame) {
+          rafId = requestAnimationFrame(frame);
+        }
+      });
+    }, { rootMargin: '120px' }).observe(svg);
+  })();
 
   function frame(now){
     var alive = 0;
@@ -444,10 +412,10 @@
         if (w.dist) w.dist.classList.add('is-on');   /* расстояние проступает с импульсом */
       }
     }
-    rafId = alive ? requestAnimationFrame(frame) : null;
+    rafId = (alive && mapSeen) ? requestAnimationFrame(frame) : null;
   }
   function pump(){
-    if (rafId === null && waves.length && window.requestAnimationFrame) rafId = requestAnimationFrame(frame);
+    if (rafId === null && waves.length && mapSeen && window.requestAnimationFrame) rafId = requestAnimationFrame(frame);
   }
   function clearWaves(){
     for (var i = 0; i < waves.length; i++) {
@@ -1016,28 +984,7 @@
   snap();
 })();
 
-/* Метрика «промессы»: счёт при появлении (мобилка) */
-(function () {
-  var el = document.querySelector('.promise__metric b[data-count]');
-  if (!el || !('IntersectionObserver' in window)) return;
-  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  var io = new IntersectionObserver(function (es) {
-    es.forEach(function (e) {
-      if (!e.isIntersecting) return;
-      io.disconnect();
-      var to = parseInt(el.getAttribute('data-count'), 10), t0 = null;
-      function step(ts) {
-        if (t0 === null) t0 = ts;
-        var p = Math.min((ts - t0) / 1400, 1);
-        el.textContent = Math.round(to * (1 - Math.pow(1 - p, 4)));
-        if (p < 1) requestAnimationFrame(step);
-      }
-      el.textContent = '0';
-      requestAnimationFrame(step);
-    });
-  }, { threshold: 0.5 });
-  io.observe(el);
-})();
+
 
 
 /* ═══ Сцена-стек «Кто мы» (референс onewhale.io) ═══
@@ -1099,7 +1046,9 @@
     if (target < 0) { raf = null; return; }         /* сцена вне экрана — спим */
     if (cur < 0) cur = target;
     cur += (target - cur) * 0.085;                   /* инерция: стопка плывёт */
-    if (Math.abs(target - cur) < 0.0004) cur = target;
+    /* доехали до цели — гасим цикл: следующий скролл разбудит через wake().
+       Раньше rAF крутился всё время, пока сцена в кадре. */
+    if (Math.abs(target - cur) < 0.0004) { cur = target; apply(cur); raf = null; return; }
     apply(cur);
     raf = requestAnimationFrame(function () { measure(); loop(); });
   }

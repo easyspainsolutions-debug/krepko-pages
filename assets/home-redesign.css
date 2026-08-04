@@ -4110,7 +4110,7 @@
    Поток: hero (заголовок → ротатор → CTA → фото-карточка) → манифест →
    «промесса» с одной большой метрикой. Прежние элементы знакомства
    на мобилке скрыты; десктоп не тронут. */
-.hero__free-m, .hcard, .manif, .promise { display: none; }
+.hero__free-m, .hcard { display: none; }
 
 @media (max-width: 719px) {
   /* hero: подводка не нужна — у rockfi после ротатора сразу CTA */
@@ -4147,25 +4147,6 @@
   }
   .hcard__go:active { transform: scale(.96); }
 
-  /* манифест: крупная фраза с дот-иконкой и повтором CTA */
-  .manif {
-    display: block; padding: 56px 24px 60px; text-align: left;
-  }
-  .manif__dots { display: inline-grid; grid-template-columns: repeat(3, 7px); gap: 4px; margin-bottom: 18px; }
-  .manif__dots i { width: 7px; height: 7px; border-radius: 50%; background: var(--gold); opacity: .85; }
-  .manif__dots i:nth-child(2n) { opacity: .4; }
-  .manif__t {
-    margin: 0; font-family: 'Playfair Display', serif; font-weight: 500;
-    font-size: clamp(23px, 6.6vw, 30px); line-height: 1.32; color: var(--text);
-    max-width: 21ch;
-  }
-  .manif__cta {
-    display: inline-flex; margin-top: 24px;
-    background: var(--text); color: #FFFBF7; text-decoration: none;
-    padding: 16px 28px; border-radius: 999px;
-    font-family: 'Manrope', sans-serif; font-size: 14px; font-weight: 600;
-  }
-  .manif__cta:active { transform: scale(.97); }
 
   /* «промесса»: на мобилке прежнее знакомство уходит целиком */
   #sec-intro .intro__bridge,
@@ -4173,43 +4154,13 @@
   #sec-intro .portrait { display: none !important; }
   #sec-intro.intro { display: block !important; }
 
-  .promise { display: block; text-align: left; }
-  .promise__k {
-    margin: 0 0 14px;
-    font-family: 'Manrope', sans-serif; font-size: 11px; font-weight: 700;
-    letter-spacing: .22em; text-transform: uppercase; color: var(--gold-2);
-  }
-  .promise__h {
-    margin: 0; font-family: 'Playfair Display', serif; font-weight: 500;
-    font-size: clamp(24px, 7vw, 32px); line-height: 1.22; color: var(--text);
-  }
-  .promise__t { margin: 16px 0 0; font-size: 15.5px; line-height: 1.7; color: var(--text-sub); max-width: 36ch; }
-  .promise__metric { margin-top: 30px; padding-top: 22px; border-top: 1px solid var(--border-faint); }
-  .promise__metric b {
-    display: block; font-family: 'Playfair Display', serif; font-weight: 600;
-    font-size: clamp(56px, 17vw, 76px); line-height: 1; color: var(--gold);
-    font-variant-numeric: tabular-nums;
-  }
-  .promise__metric span {
-    display: block; margin-top: 8px;
-    font-family: 'Manrope', sans-serif; font-size: 12px; font-weight: 600;
-    letter-spacing: .14em; text-transform: uppercase; color: var(--text-muted);
-  }
-  .promise__row {
-    display: flex; flex-wrap: wrap; gap: 8px 18px; margin: 20px 0 0;
-    font-size: 13px; font-weight: 600; color: var(--text-sub);
-  }
-  .promise__row span { position: relative; }
-  .promise__row span:not(:first-child)::before {
-    content: '·'; position: absolute; left: -12px; color: var(--gold);
-  }
 }
 
 
 /* ═══════════ Полировка верха мобильной главной по rockfi.fr (2026-08-04, round 2) ═══════════
    Точечные правки поверх «Hero-ротатора» и «Верха мобильной главной»:
    1) больше воздуха между ротатором и CTA (было ~23px — «прилипало»);
-   2) единый левый край с hero. У .manif и #sec-intro был двойной инсет:
+   2) единый левый край с hero. У прежних мобильных блоков и #sec-intro был двойной инсет:
       main даёт 24px паддинга, а сами блоки добавляли ещё 24px сверху —
       итого 48px против 24px у заголовка/ротатора/фото-карточки выше.
       Отсюда и не совпадал левый край, и фраза манифеста не влезала
@@ -4233,29 +4184,8 @@
     text-overflow: ellipsis;
   }
 
-  /* 2. Левый край манифеста и «промессы» — вровень с hero (main уже
-     даёт 24px, второй раз добавлять не нужно). Вертикальные паддинги
-     .manif и padding-top/bottom #sec-intro не трогаем — только горизонталь. */
-  .manif { padding-left: 0 !important; padding-right: 0 !important; }
   #sec-intro { padding-left: 0 !important; padding-right: 0 !important; }
 
-  /* 4. Дот-иконка манифеста: угловая метка вместо плотного грид-блока —
-     горизонтальный и вертикальный «усик» расходятся из одной точки,
-     плюс диагональный акцент на сгибе. */
-  .manif__dots {
-    grid-template-columns: repeat(3, 6px);
-    grid-template-rows: repeat(3, 6px);
-    gap: 4px;
-  }
-  .manif__dots i:nth-child(1) { grid-column: 1; grid-row: 1; opacity: 1; }
-  .manif__dots i:nth-child(2) { grid-column: 2; grid-row: 1; opacity: .55; }
-  .manif__dots i:nth-child(3) { grid-column: 3; grid-row: 1; opacity: .28; }
-  .manif__dots i:nth-child(4) { grid-column: 1; grid-row: 2; opacity: .55; }
-  .manif__dots i:nth-child(5) { grid-column: 1; grid-row: 3; opacity: .28; }
-  .manif__dots i:nth-child(6) {
-    grid-column: 2; grid-row: 2; opacity: .18;
-    width: 5px; height: 5px;
-  }
 
   /* защитный максимум ширины у имени в hcard, чтобы на самых узких
      экранах (<360px) оно гарантированно не подходило к пилюле ближе 12px */
@@ -4289,9 +4219,6 @@
    проскакивает финальную точку и осаживается. Двигает home-redesign.js. */
 .stack { display: none; }
 @media (max-width: 719px) {
-  /* манифест и промесса на мобилке уступают место сцене */
-  .manif { display: none !important; }
-  #sec-intro .promise { display: none !important; }
   #sec-intro.intro { padding-top: 0 !important; padding-bottom: 0 !important; }
 
   /* пробег короче: следующая секция приходит вскоре после того,
