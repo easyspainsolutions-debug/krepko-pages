@@ -1,0 +1,291 @@
+/* ═══════════════════════════════════════════════════════════════════════
+   Страница направления, двухколонный макет (2026-08-05).
+
+   Референс — suitsupply.com/es-es/returns-refunds.html: наверху название
+   направления с линией, слева перечень услуг этого направления с активным
+   пунктом, справа текст. Тот же каркас стоит и на страницах конкретных
+   услуг, поэтому меню не меняется при переходе — меняется только правая
+   колонка и выделенный пункт.
+
+   Палитра берётся из светлой шкалы terracotta (см. home-redesign.css).
+   Здесь она объявлена локально: страницы направлений не подключают
+   home-redesign.css.
+   ═══════════════════════════════════════════════════════════════════════ */
+
+/* Страница целиком светлая: tokens.css всё ещё держит тёмную шкалу, а
+   шапка с подвалом уже переехали на terracotta. Файл подключается только
+   на страницах этого макета, поэтому правило безопасно. */
+html, body { background: #FFFBF7; }
+body { color: #2D2D2D; }
+
+.pillar-split {
+  --ps-bg: #FFFBF7;
+  --ps-surface: #F5F0EB;
+  --ps-border: #E8DFD1;
+  --ps-text: #2D2D2D;
+  --ps-text-sub: #4A4A4A;
+  --ps-text-muted: #6B6B6B;
+  --ps-gold: #C75B39;
+  --ps-gold-2: #B04E2F;
+  --ps-navy: #1A2B3C;
+
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 clamp(24px, 4.5vw, 88px);
+  font-family: 'Manrope', sans-serif;
+  color: var(--ps-text);
+}
+
+/* ── шапка направления ── */
+.pillar-split__head { padding: 34px 0 0; }
+.pillar-split__head h1 {
+  margin: 0;
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(28px, 3.2vw, 40px);
+  font-weight: 500;
+  line-height: 1.15;
+  letter-spacing: -.01em;
+  color: var(--ps-navy);
+}
+.pillar-split__head::after {
+  content: '';
+  display: block;
+  height: 1px;
+  margin-top: 26px;
+  background: var(--ps-border);
+}
+
+/* ── две колонки ── */
+.pillar-split__cols {
+  display: grid;
+  grid-template-columns: minmax(230px, 300px) minmax(0, 1fr);
+  gap: clamp(32px, 6vw, 96px);
+  padding-top: 46px;
+  align-items: start;
+}
+.pillar-split__cols > * { min-width: 0; }
+
+/* ── левая колонка: перечень услуг направления ── */
+.pillar-nav { position: sticky; top: 28px; }
+.pillar-nav ul { list-style: none; margin: 0; padding: 0; }
+.pillar-nav li { margin: 0; }
+.pillar-nav a,
+.pillar-nav__current {
+  position: relative;
+  display: block;
+  padding: 13px 0 13px 18px;
+  font-size: 15.5px;
+  line-height: 1.45;
+  color: var(--ps-text-sub);
+  text-decoration: none;
+  transition: color .25s ease, padding-left .45s cubic-bezier(.17, .84, .44, 1);
+}
+/* метка активного пункта — точка выезжает из-за левого края, та же
+   механика, что у ротатора услуг на главной */
+.pillar-nav a::before,
+.pillar-nav__current::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--ps-gold);
+  transform: translate(-14px, -50%);
+  opacity: 0;
+  transition: opacity .3s ease, transform .45s cubic-bezier(.17, .84, .44, 1);
+}
+@media (hover: hover) {
+  .pillar-nav a:hover { color: var(--ps-navy); }
+}
+.pillar-nav__current {
+  color: var(--ps-navy);
+  font-weight: 700;
+  padding-left: 22px;
+}
+.pillar-nav__current::before { opacity: 1; transform: translate(0, -50%); }
+
+.pillar-nav__div { height: 1px; margin: 18px 0; background: var(--ps-border); }
+.pillar-nav__cities {
+  padding-left: 18px;
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.7;
+  color: var(--ps-text-muted);
+}
+/* display: inline — иначе ссылки городов наследуют блочный показ пунктов
+   меню и встают столбиком, а запятые повисают отдельными строками */
+.pillar-nav__cities a {
+  display: inline;
+  padding: 0;
+  font-size: 13px;
+  color: var(--ps-gold);
+  text-decoration: none;
+}
+@media (hover: hover) {
+  .pillar-nav__cities a:hover { color: var(--ps-gold-2); }
+}
+
+/* ── правая колонка: текст ── */
+.pillar-doc { max-width: 720px; }
+.pillar-doc h2 {
+  margin: 0 0 18px;
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(24px, 2.4vw, 32px);
+  font-weight: 500;
+  line-height: 1.2;
+  color: var(--ps-navy);
+}
+.pillar-doc h3 {
+  margin: 34px 0 12px;
+  font-family: 'Manrope', sans-serif;
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 1.35;
+  color: var(--ps-navy);
+}
+.pillar-doc p,
+.pillar-doc li {
+  font-size: 16.5px;
+  line-height: 1.72;
+  color: var(--ps-text-sub);
+}
+.pillar-doc p { margin: 0 0 16px; }
+.pillar-doc ul, .pillar-doc ol { margin: 0 0 18px; padding-left: 20px; }
+.pillar-doc li { margin-bottom: 8px; }
+.pillar-doc b, .pillar-doc strong { color: var(--ps-navy); font-weight: 700; }
+.pillar-doc a { color: var(--ps-gold); text-decoration: none; }
+@media (hover: hover) {
+  .pillar-doc a:hover { color: var(--ps-gold-2); }
+}
+/* первый абзац после заголовка — крупнее, как подводка. Тело pillar-а
+   генератор оборачивает в .pillar-body, поэтому селектор без > */
+.pillar-doc h2 + p { font-size: 18px; color: var(--ps-text); }
+
+/* лента фактов под заголовком (цена / срок / охват) */
+.pillar-facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 26px;
+  margin: 0 0 26px;
+}
+.pillar-facts span {
+  display: block;
+  font-size: 10.5px;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--ps-text-muted);
+}
+.pillar-facts b {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 22px;
+  font-weight: 500;
+  color: var(--ps-gold);
+}
+
+/* кнопка-раскрытие меню — только на узком экране */
+.pillar-nav__toggle { display: none; }
+
+/* ── мобильная раскладка ──
+   Перечень из десяти пунктов занимал первый экран целиком, и текст уезжал
+   под него. Сворачиваем меню за кнопку с названием текущей страницы: сразу
+   видно, где ты, и текст начинается высоко. */
+@media (max-width: 899px) {
+  .pillar-split__cols {
+    grid-template-columns: 1fr;
+    gap: 22px;
+    padding-top: 22px;
+  }
+  .pillar-nav { position: static; }
+
+  .pillar-nav__toggle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    width: 100%;
+    padding: 15px 16px;
+    background: var(--ps-surface);
+    border: 1px solid var(--ps-border);
+    border-radius: 8px;
+    color: var(--ps-navy);
+    font-family: 'Manrope', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    text-align: left;
+    cursor: pointer;
+  }
+  .pillar-nav__toggle svg {
+    flex: 0 0 auto;
+    transition: transform .3s cubic-bezier(.17, .84, .44, 1);
+  }
+  .pillar-nav__toggle[aria-expanded="true"] svg { transform: rotate(180deg); }
+
+  /* grid-строка 0fr→1fr анимирует высоту без магических чисел.
+     minmax(0, …) обязателен: у fr-трека автоматический минимум равен
+     min-content, и без него закрытая панель оставалась в полный рост. */
+  .pillar-nav__panel {
+    display: grid;
+    grid-template-rows: minmax(0, 0fr);
+    transition: grid-template-rows .38s cubic-bezier(.17, .84, .44, 1);
+  }
+  .pillar-nav__panel > .pillar-nav__inner { overflow: hidden; }
+  .pillar-nav.is-open .pillar-nav__panel { grid-template-rows: minmax(0, 1fr); }
+  .pillar-nav__inner > ul { padding-top: 6px; }
+
+  .pillar-nav__div { margin: 14px 0; }
+}
+
+/* ── финальный CTA ──
+   modules/final_cta.html красится из tokens.css, то есть по тёмной шкале:
+   на светлой странице выходил тёмный блок с navy-заголовком поверх. Здесь
+   он повторяет вид CTA на главной. */
+.pillar-split ~ .final-cta,
+body:has(.pillar-split) .final-cta {
+  background: #F5F0EB !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  padding: clamp(52px, 6vw, 88px) clamp(24px, 4.5vw, 88px) !important;
+  text-align: center;
+}
+body:has(.pillar-split) .final-cta h2 {
+  margin: 0 0 12px;
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(24px, 2.6vw, 34px);
+  font-weight: 500;
+  color: #1A2B3C;
+}
+body:has(.pillar-split) .final-cta p {
+  margin: 0 auto 26px;
+  max-width: 640px;
+  font-size: 16.5px;
+  line-height: 1.7;
+  color: #4A4A4A;
+}
+body:has(.pillar-split) .final-cta .btn--gold {
+  display: inline-block;
+  padding: 17px 34px;
+  background: #C75B39;
+  border: 0;
+  border-radius: 0;
+  color: #FFFBF7;
+  font-family: 'Manrope', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+@media (hover: hover) {
+  body:has(.pillar-split) .final-cta .btn--gold:hover { background: #B04E2F; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pillar-nav a,
+  .pillar-nav__current,
+  .pillar-nav a::before,
+  .pillar-nav__current::before,
+  .pillar-nav__panel,
+  .pillar-nav__toggle svg { transition: none; }
+}
