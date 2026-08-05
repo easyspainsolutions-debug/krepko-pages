@@ -116,6 +116,123 @@ body:has(.pillar-split) main {
 }
 .pillar-nav__current::before { opacity: 1; transform: translate(0, -50%); }
 
+/* ── поиск по каталогу ── */
+.pillar-nav__search {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 14px;
+  padding: 10px 12px;
+  background: var(--ps-surface);
+  border: 1px solid var(--ps-border);
+  border-radius: 8px;
+  color: var(--ps-text-muted);
+}
+.pillar-nav__search input {
+  flex: 1;
+  min-width: 0;
+  border: 0;
+  background: none;
+  color: var(--ps-text);
+  font-family: 'Manrope', sans-serif;
+  font-size: 14.5px;
+  outline: none;
+}
+.pillar-nav__search input::placeholder { color: var(--ps-text-muted); }
+.pillar-nav__empty {
+  margin: 0 0 14px;
+  padding-left: 18px;
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: var(--ps-text-muted);
+}
+
+/* ── ссылка «все услуги направления» ── */
+.pillar-nav__all { margin: 0 0 6px; }
+.pillar-nav__all a,
+.pillar-nav__all .pillar-nav__current { padding-top: 8px; padding-bottom: 8px; }
+
+/* ── категория-аккордеон ── */
+.pillar-cat + .pillar-cat { border-top: 1px solid var(--ps-border); }
+.pillar-cat__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
+  padding: 14px 0;
+  background: none;
+  border: 0;
+  color: var(--ps-navy);
+  font-family: 'Manrope', sans-serif;
+  font-size: 14.5px;
+  font-weight: 600;
+  line-height: 1.35;
+  text-align: left;
+  cursor: pointer;
+}
+.pillar-cat__head svg {
+  flex: 0 0 auto;
+  color: var(--ps-text-muted);
+  transition: transform .3s cubic-bezier(.17, .84, .44, 1);
+}
+.pillar-cat.is-open .pillar-cat__head svg { transform: rotate(180deg); }
+@media (hover: hover) {
+  .pillar-cat__head:hover { color: var(--ps-gold); }
+}
+/* список внутри категории — та же grid-механика, что у мобильного меню.
+   Схлопывается обёртка, а не сам <ul>: у грида 0fr задаёт высоту только
+   первой строке, поэтому список из <li> сжимался бы лишь на один пункт. */
+.pillar-cat__panel {
+  display: grid;
+  grid-template-rows: minmax(0, 0fr);
+  transition: grid-template-rows .34s cubic-bezier(.17, .84, .44, 1);
+}
+.pillar-cat.is-open > .pillar-cat__panel { grid-template-rows: minmax(0, 1fr); }
+.pillar-cat__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+.pillar-cat__list > li:first-child { padding-top: 2px; }
+.pillar-cat__list > li:last-child { padding-bottom: 10px; }
+.pillar-cat__list a,
+.pillar-cat__list .pillar-nav__current {
+  padding-top: 9px;
+  padding-bottom: 9px;
+  font-size: 14.5px;
+}
+
+/* ── «Индивидуальные документы» ── */
+.pillar-nav__custom {
+  display: block;
+  margin-top: 18px;
+  padding: 16px;
+  background: var(--ps-surface);
+  border: 1px solid var(--ps-border);
+  border-radius: 8px;
+  text-decoration: none;
+}
+.pillar-nav__custom b {
+  display: block;
+  margin-bottom: 6px;
+  color: var(--ps-navy);
+  font-size: 14.5px;
+  font-weight: 700;
+}
+.pillar-nav__custom span {
+  display: block;
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--ps-text-muted);
+}
+@media (hover: hover) {
+  .pillar-nav__custom:hover { border-color: var(--ps-gold); }
+  .pillar-nav__custom:hover b { color: var(--ps-gold); }
+}
+
 .pillar-nav__div { height: 1px; margin: 18px 0; background: var(--ps-border); }
 .pillar-nav__cities {
   padding-left: 18px;
@@ -174,6 +291,88 @@ body:has(.pillar-split) main {
 /* первый абзац после заголовка — крупнее, как подводка. Тело pillar-а
    генератор оборачивает в .pillar-body, поэтому селектор без > */
 .pillar-doc h2 + p { font-size: 18px; color: var(--ps-text); }
+
+/* ── шаги процедуры ── */
+.pillar-steps {
+  counter-reset: step;
+  list-style: none;
+  margin: 0 0 26px;
+  padding: 0;
+}
+.pillar-steps > li {
+  counter-increment: step;
+  position: relative;
+  padding: 0 0 22px 46px;
+}
+.pillar-steps > li::before {
+  content: counter(step);
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--ps-border);
+  border-radius: 50%;
+  background: var(--ps-surface);
+  color: var(--ps-gold);
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 15px;
+}
+/* нить между шагами — как на главной у «Как мы работаем» */
+.pillar-steps > li::after {
+  content: '';
+  position: absolute;
+  left: 15px;
+  top: 34px;
+  bottom: 8px;
+  width: 1px;
+  background: var(--ps-border);
+}
+.pillar-steps > li:last-child { padding-bottom: 0; }
+.pillar-steps > li:last-child::after { display: none; }
+.pillar-step__title {
+  display: block;
+  margin-bottom: 5px;
+  color: var(--ps-navy);
+  font-size: 16px;
+  font-weight: 700;
+}
+.pillar-step__text {
+  display: block;
+  font-size: 16px;
+  line-height: 1.65;
+  color: var(--ps-text-sub);
+}
+
+/* ── цитата-акцент ── */
+.pillar-quote {
+  margin: 30px 0;
+  padding: 4px 0 4px 22px;
+  border-left: 2px solid var(--ps-gold);
+}
+.pillar-quote p {
+  margin: 0;
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(19px, 1.6vw, 23px);
+  font-weight: 500;
+  line-height: 1.4;
+  color: var(--ps-navy);
+}
+
+/* ── выделенный блок: условия, оговорки ── */
+.pillar-note {
+  margin: 26px 0;
+  padding: 18px 20px;
+  background: var(--ps-surface);
+  border: 1px solid var(--ps-border);
+  border-radius: 8px;
+  font-size: 15.5px !important;
+  line-height: 1.65;
+  color: var(--ps-text-sub);
+}
 
 /* лента фактов под заголовком (цена / срок / охват) */
 .pillar-facts {
