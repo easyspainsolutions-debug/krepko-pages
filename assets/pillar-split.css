@@ -555,3 +555,107 @@ body:has(.pillar-split) .final-cta .btn--gold {
   .pillar-nav__panel,
   .pillar-nav__toggle svg { transition: none; }
 }
+
+/* ═══ Страницы конкретных услуг (2026-08-05) ═══
+   Тот же каркас, что у страницы направления; ниже — блоки, которые
+   появляются только в тексте услуги: список с галочками, FAQ-аккордеон
+   и карточки смежных услуг. */
+
+/* ── список «что вы получаете» ── */
+.pillar-doc .pillar-checks {
+  list-style: none;
+  margin: 0 0 22px;
+  padding-left: 0;
+}
+.pillar-doc .pillar-checks li {
+  position: relative;
+  padding-left: 30px;
+  margin-bottom: 9px;
+}
+.pillar-checks li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: var(--ps-gold);
+  font-weight: 700;
+}
+
+/* ── FAQ-аккордеон ──
+   Нативный <details>: клавиатура и aria бесплатно, без скрипта.
+   Типографика в ритме левого каталога — строка с чертой снизу,
+   плюс превращается в крест при раскрытии. */
+.pillar-doc details.pillar-faq { border-bottom: 1px solid var(--ps-border); }
+.pillar-doc details.pillar-faq:first-of-type { border-top: 1px solid var(--ps-border); }
+.pillar-faq summary {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 16px 0;
+  list-style: none;
+  cursor: pointer;
+  color: var(--ps-navy);
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.45;
+}
+.pillar-faq summary::-webkit-details-marker { display: none; }
+.pillar-faq summary::after {
+  content: '+';
+  flex: 0 0 auto;
+  color: var(--ps-gold);
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1;
+  transition: transform .3s cubic-bezier(.17, .84, .44, 1);
+}
+.pillar-faq[open] summary::after { transform: rotate(45deg); }
+@media (hover: hover) {
+  .pillar-faq summary:hover { color: var(--ps-gold); }
+}
+.pillar-faq__a { padding: 0 0 18px; }
+.pillar-faq__a p { margin: 0; font-size: 15.5px; }
+
+/* ── карточки смежных услуг ──
+   Перелинковка внутри направления: под текстом услуги стоят 2–3 соседние
+   доверенности, чтобы посетитель ушёл на смежную задачу, а не с сайта. */
+.pillar-cards-block { margin-top: 40px; }
+.pillar-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 14px;
+}
+.pillar-cards a {
+  display: block;
+  padding: 20px 18px;
+  background: var(--ps-surface);
+  border: 1px solid var(--ps-border);
+  border-radius: 8px;
+  text-decoration: none;
+  transition: border-color .25s ease;
+}
+.pillar-cards b {
+  display: block;
+  margin-bottom: 7px;
+  color: var(--ps-navy);
+  font-size: 15.5px;
+  font-weight: 700;
+  line-height: 1.35;
+  transition: color .25s ease;
+}
+.pillar-cards span {
+  display: block;
+  font-size: 13.5px;
+  line-height: 1.55;
+  color: var(--ps-text-muted);
+}
+@media (hover: hover) {
+  .pillar-cards a:hover { border-color: var(--ps-gold); }
+  .pillar-cards a:hover b { color: var(--ps-gold); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pillar-faq summary::after,
+  .pillar-cards a,
+  .pillar-cards b { transition: none; }
+}

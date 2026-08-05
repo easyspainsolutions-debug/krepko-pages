@@ -163,6 +163,12 @@
     <changefreq>monthly</changefreq>
   </url>
   <url>
+    <loc>https://krepko.es/notario/otozvat-doverennost/</loc>
+    <lastmod>2026-08-05</lastmod>
+    <priority>0.7</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
     <loc>https://krepko.es/notario/valencia/</loc>
     <lastmod>2026-08-05</lastmod>
     <priority>0.7</priority>
@@ -175,7 +181,19 @@
     <changefreq>monthly</changefreq>
   </url>
   <url>
+    <loc>https://krepko.es/notario/doverennost-na-poluchenie-dokumentov/</loc>
+    <lastmod>2026-08-05</lastmod>
+    <priority>0.7</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
     <loc>https://krepko.es/notario/doverennost-na-razvod/</loc>
+    <lastmod>2026-08-05</lastmod>
+    <priority>0.7</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://krepko.es/notario/doverennost-na-predstavlenie-interesov/</loc>
     <lastmod>2026-08-05</lastmod>
     <priority>0.7</priority>
     <changefreq>monthly</changefreq>
@@ -223,7 +241,19 @@
     <changefreq>monthly</changefreq>
   </url>
   <url>
+    <loc>https://krepko.es/notario/doverennost-dlya-yuridicheskih-lits/</loc>
+    <lastmod>2026-08-05</lastmod>
+    <priority>0.7</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
     <loc>https://krepko.es/notario/carta-de-invitacion/</loc>
+    <lastmod>2026-08-05</lastmod>
+    <priority>0.7</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://krepko.es/notario/doverennost-na-pokupku-nedvizhimosti/</loc>
     <lastmod>2026-08-05</lastmod>
     <priority>0.7</priority>
     <changefreq>monthly</changefreq>
