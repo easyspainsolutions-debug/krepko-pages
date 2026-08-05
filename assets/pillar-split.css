@@ -116,18 +116,25 @@ body:has(.pillar-split) main {
 }
 .pillar-nav__current::before { opacity: 1; transform: translate(0, -50%); }
 
-/* ── поиск по каталогу ── */
+/* ── поиск по каталогу ──
+   Серый бокс с рамкой выбивался из колонки (Daniil 2026-08-05). Теперь это
+   строка в типографике каталога: иконка, текст и линия снизу, которая на
+   фокусе становится терракотовой. Выглядит как первый пункт списка, а не
+   как чужой виджет. */
 .pillar-nav__search {
   position: relative;
   display: flex;
   align-items: center;
-  gap: 8px;
-  margin-bottom: 14px;
-  padding: 10px 12px;
-  background: var(--ps-surface);
-  border: 1px solid var(--ps-border);
-  border-radius: 8px;
+  gap: 10px;
+  margin-bottom: 16px;
+  padding: 0 0 12px;
+  border-bottom: 1px solid var(--ps-border);
   color: var(--ps-text-muted);
+  transition: border-color .25s ease, color .25s ease;
+}
+.pillar-nav__search:focus-within {
+  border-bottom-color: var(--ps-gold);
+  color: var(--ps-gold);
 }
 .pillar-nav__search input {
   flex: 1;
@@ -136,7 +143,7 @@ body:has(.pillar-split) main {
   background: none;
   color: var(--ps-text);
   font-family: 'Manrope', sans-serif;
-  font-size: 14.5px;
+  font-size: 15px;
   outline: none;
 }
 .pillar-nav__search input::placeholder { color: var(--ps-text-muted); }
@@ -349,7 +356,9 @@ body:has(.pillar-split) main {
   position: absolute;
   left: 15px;
   top: 34px;
-  bottom: 8px;
+  /* до самой границы пункта: ниже неё сразу начинается кружок следующего
+     шага, поэтому нить стыкуется с ним без разрыва */
+  bottom: 0;
   width: 1px;
   background:
     linear-gradient(var(--ps-gold) 0 0) no-repeat top / 100% calc(var(--seg, 0) * 100%),
