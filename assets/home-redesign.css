@@ -2027,6 +2027,7 @@
   .home-guides > h2::after,
   #sec-coverage h2::after,
   .home-faq h2::after,
+  .intro__how > h2::after,
   .final-cta > h2::after {
     content: '';
     display: block;
@@ -2035,8 +2036,10 @@
     margin: 18px 0 0;
     background: var(--gold);
   }
-  /* заголовок философии центрирован всегда, остальные — с десктопа */
-  .values__h::after { margin-left: auto; margin-right: auto; }
+  /* заголовок философии и «Как мы работаем» центрированы всегда (их секции
+     центрированы на любой ширине), остальные — с десктопа */
+  .values__h::after,
+  .intro__how > h2::after { margin-left: auto; margin-right: auto; }
   @media (min-width: 1000px) {
     #sec-services > h2::after,
     #sec-reviews > h2::after,
@@ -3075,6 +3078,9 @@
      его в контейнер без правки разметки нельзя. !important — ниже по файлу
      общее правило .sec-dek задаёт max-width 680px и обрезало бы полосу. */
   .sec-dek--values {
+    /* полоса во всю ширину, но текст внутри идёт по центру — как заголовок
+       «Философия работы» над ней */
+    text-align: center;
     width: 100vw !important;
     max-width: none !important;
     margin: 0 calc(50% - 50vw) !important;
@@ -4442,4 +4448,76 @@
      не расширяется. */
   .anim--left, .anim--right { transform: translate3d(0, 48px, 0); }
 
+}
+
+/* ═══ Мобильные шапки секций по центру (2026-08-05) ═══
+   На десктопе (≥1000px) секции центрирует правило Round «Centered section
+   headers», на мобильном заголовки, подводки и черты-акценты оставались
+   слева — вёрстка читалась как две разные. Списки услуг и шаги остаются
+   левыми: они читаются как перечни. */
+@media (max-width: 999px) {
+  #sec-services > h2,
+  #sec-services > .sec-dek,
+  #sec-reviews > h2 {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  #sec-services > h2::after,
+  #sec-reviews > h2::after,
+  #sec-coverage h2::after { margin-left: auto; margin-right: auto; }
+}
+
+/* ═══ Отзывы и города на мобильном (2026-08-05) ═══ */
+@media (max-width: 999px) {
+  /* Отзыв занимал 88% ленты — соседний «подглядывал» справа, но сам текст
+     из-за этого сидел не по центру экрана. Полная ширина: центр карточки
+     совпадает с центром экрана. */
+  #sec-reviews .rv { flex: 0 0 100%; min-width: 100%; }
+  /* маска по краям ленты гасила «мусор» от соседней карточки при 88%.
+     На полной ширине соседа не видно, зато маска съедала края самого
+     текста — первые и последние буквы строк уходили в прозрачность. */
+  #sec-reviews .rv-track {
+    -webkit-mask-image: none;
+            mask-image: none;
+  }
+
+  /* Ленты листаются по горизонтали, но overflow-y: auto (значение по
+     умолчанию при заданном overflow-x) делал их ещё и вертикально
+     прокручиваемыми: у ленты городов scrollHeight был на 12px больше
+     видимой высоты, и палец таскал содержимое во все стороны. */
+  #sec-reviews .rv-track,
+  .city__track {
+    overflow-y: hidden;
+    overscroll-behavior-x: contain;
+  }
+}
+
+/* Карточка города: текст по центру, стрелки — по бокам от него.
+   До этого на узком экране кнопки уезжали под текст в строчный поток. */
+@media (max-width: 599px) {
+  .city {
+    position: relative;
+    display: block;
+    padding: 0 48px;
+  }
+  .city__card {
+    align-items: center;
+    text-align: center;
+    /* карточки одного роста — по самому длинному описанию (Мурсия), иначе
+       лента прыгает на свайпе. У коротких городов резерв уходил в низ, и
+       стрелки вставали ниже текста. Центрируем — стрелки оказываются
+       ровно по бокам от него. */
+    justify-content: center;
+  }
+  .city__btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    margin: 0;
+    width: 40px;
+    height: 40px;
+  }
+  #city-prev { left: 0; }
+  #city-next { right: 0; }
 }
