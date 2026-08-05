@@ -18,6 +18,14 @@
 html, body { background: #FFFBF7; }
 body { color: #2D2D2D; }
 
+/* main ужат до 960px (desktop.css) — на этих страницах контент идёт во всю
+   ширину окна, поля задаёт сам .pillar-split */
+body:has(.pillar-split) main {
+  max-width: none;
+  padding-left: 0;
+  padding-right: 0;
+}
+
 .pillar-split {
   --ps-bg: #FFFBF7;
   --ps-surface: #F5F0EB;
@@ -29,9 +37,11 @@ body { color: #2D2D2D; }
   --ps-gold-2: #B04E2F;
   --ps-navy: #1A2B3C;
 
-  max-width: 1180px;
-  margin: 0 auto;
-  padding: 0 clamp(24px, 4.5vw, 88px);
+  /* во всю ширину окна, как у референса: колонки разъезжаются к краям,
+     контент держат только боковые поля страницы */
+  max-width: none;
+  margin: 0;
+  padding: 0 clamp(24px, 3vw, 56px);
   font-family: 'Manrope', sans-serif;
   color: var(--ps-text);
 }
@@ -58,8 +68,8 @@ body { color: #2D2D2D; }
 /* ── две колонки ── */
 .pillar-split__cols {
   display: grid;
-  grid-template-columns: minmax(230px, 300px) minmax(0, 1fr);
-  gap: clamp(32px, 6vw, 96px);
+  grid-template-columns: minmax(230px, 30%) minmax(0, 1fr);
+  gap: clamp(32px, 4vw, 72px);
   padding-top: 46px;
   align-items: start;
 }
@@ -128,7 +138,9 @@ body { color: #2D2D2D; }
 }
 
 /* ── правая колонка: текст ── */
-.pillar-doc { max-width: 720px; }
+/* строка держится читаемой длины, но колонка тянется — как у референса,
+   где текст занимает середину экрана, а справа остаётся воздух */
+.pillar-doc { max-width: 900px; }
 .pillar-doc h2 {
   margin: 0 0 18px;
   font-family: 'Playfair Display', Georgia, serif;
