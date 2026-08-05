@@ -29,11 +29,12 @@
 
   /* ── deep-link на категорию ──
      Мегаменю ведёт на /notario/#{slug категории}: раскрываем её, на узком
-     экране открываем и саму панель каталога, затем скроллим к категории.
-     Выполняется до инициализации поиска, чтобы его снимок раскрытых
-     категорий (opened) включал и эту — сброс поиска не схлопнет её. */
-  (function () {
-    var slug = (location.hash || '').slice(1);
+     экране открываем и саму панель каталога, скроллим и зажигаем
+     терракотовую вспышку — сразу видно, куда смотреть и что нажимать.
+     На загрузке выполняется до инициализации поиска, чтобы его снимок
+     раскрытых категорий (opened) включал и эту; hashchange покрывает клик
+     по мегаменю, когда посетитель уже стоит на странице направления. */
+  function goToCat(slug) {
     if (!/^[a-z-]+$/.test(slug)) return;
     var cat = nav.querySelector('.pillar-cat[data-cat="' + slug + '"]');
     if (!cat) return;
@@ -42,12 +43,24 @@
     if (head) head.setAttribute('aria-expanded', 'true');
     nav.classList.add('is-open');
     if (toggle) toggle.setAttribute('aria-expanded', 'true');
-    /* после раскрытия — высота панели уже посчитана, скроллим к категории */
     var noAnim = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    /* после раскрытия высота панели уже посчитана — скроллим, по прибытии
+       вспыхиваем. Снятие класса по таймеру, не по animationend: при
+       reduce-motion анимации нет, а подсветка гаснуть всё равно должна. */
     setTimeout(function () {
       cat.scrollIntoView({ block: 'start', behavior: noAnim ? 'auto' : 'smooth' });
+      setTimeout(function () {
+        cat.classList.remove('is-hilite');
+        void cat.offsetWidth;   /* перезапуск анимации при повторном переходе */
+        cat.classList.add('is-hilite');
+        setTimeout(function () { cat.classList.remove('is-hilite'); }, 2100);
+      }, noAnim ? 60 : 480);
     }, 80);
-  })();
+  }
+  goToCat((location.hash || '').slice(1));
+  window.addEventListener('hashchange', function () {
+    goToCat((location.hash || '').slice(1));
+  });
 
   /* ── дорожка шагов ──
      Вертикальный вариант анимации с главной («Как мы работаем»): линия между
