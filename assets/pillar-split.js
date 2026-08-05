@@ -27,6 +27,62 @@
     });
   });
 
+  /* ── дорожка шагов ──
+     Вертикальный вариант анимации с главной («Как мы работаем»): линия между
+     кружками заливается терракотой по мере прокрутки, кружок загорается,
+     когда заливка до него дошла. */
+  (function () {
+    var steps = document.querySelector('.pillar-steps');
+    if (!steps) return;
+    var items = [].slice.call(steps.querySelectorAll('li'));
+    if (!items.length) return;
+
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduce) {
+      items.forEach(function (li) {
+        li.style.setProperty('--seg', 1);
+        li.classList.add('is-on');
+      });
+      return;
+    }
+
+    var segs = Math.max(items.length - 1, 1);
+    var queued = false;
+
+    function update() {
+      queued = false;
+      var r = steps.getBoundingClientRect();
+      var vh = window.innerHeight || document.documentElement.clientHeight;
+      if (!vh) return;
+      var start = vh * 0.86;          /* блок вошёл снизу — прогресс 0 */
+      var end = vh * 0.32;            /* дошёл до верхней трети — прогресс 1 */
+      var p = (start - r.top) / (start - end);
+      p = p < 0 ? 0 : (p > 1 ? 1 : p);
+
+      items.forEach(function (li, i) {
+        if (i < segs) {
+          var s = p * segs - i;
+          s = s < 0 ? 0 : (s > 1 ? 1 : s);
+          li.style.setProperty('--seg', s.toFixed(3));
+        }
+        /* первый кружок загорается сразу, остальные — когда линия дошла */
+        var on = i === 0 ? p > 0.01 : p >= i / segs;
+        li.classList[on ? 'add' : 'remove']('is-on');
+      });
+    }
+
+    function schedule() {
+      if (queued) return;
+      queued = true;
+      if (window.requestAnimationFrame) window.requestAnimationFrame(update);
+      else setTimeout(update, 16);
+    }
+
+    window.addEventListener('scroll', schedule, { passive: true });
+    window.addEventListener('resize', schedule, { passive: true });
+    update();
+  })();
+
   /* ── поиск ──
      Шестьдесят с лишним услуг листать неудобно: набор двух букв прячет всё
      несовпадающее и раскрывает категории, где что-то нашлось. Пустой запрос

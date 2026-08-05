@@ -148,10 +148,30 @@ body:has(.pillar-split) main {
   color: var(--ps-text-muted);
 }
 
-/* ── ссылка «все услуги направления» ── */
-.pillar-nav__all { margin: 0 0 6px; }
+/* ── «Все услуги направления» ──
+   Это не пункт каталога, а возврат к обзору направления, поэтому без точки
+   и без отступа под неё: строка стоит по левому краю колонки, отделена от
+   категорий чертой. */
+.pillar-nav__all {
+  margin: 0 0 4px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--ps-border);
+}
 .pillar-nav__all a,
-.pillar-nav__all .pillar-nav__current { padding-top: 8px; padding-bottom: 8px; }
+.pillar-nav__all .pillar-nav__current {
+  padding: 0;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--ps-text-muted);
+}
+.pillar-nav__all a::before,
+.pillar-nav__all .pillar-nav__current::before { content: none; }
+.pillar-nav__all .pillar-nav__current { color: var(--ps-navy); }
+@media (hover: hover) {
+  .pillar-nav__all a:hover { color: var(--ps-gold); }
+}
 
 /* ── категория-аккордеон ── */
 .pillar-cat + .pillar-cat { border-top: 1px solid var(--ps-border); }
@@ -321,7 +341,9 @@ body:has(.pillar-split) main {
   font-family: 'Playfair Display', Georgia, serif;
   font-size: 15px;
 }
-/* нить между шагами — как на главной у «Как мы работаем» */
+/* Нить между шагами — вертикальный вариант дорожки с главной: серая линия
+   и терракотовая заливка поверх, растущая сверху вниз по мере скролла
+   (--seg 0…1 пишет pillar-split.js). */
 .pillar-steps > li::after {
   content: '';
   position: absolute;
@@ -329,10 +351,34 @@ body:has(.pillar-split) main {
   top: 34px;
   bottom: 8px;
   width: 1px;
-  background: var(--ps-border);
+  background:
+    linear-gradient(var(--ps-gold) 0 0) no-repeat top / 100% calc(var(--seg, 0) * 100%),
+    var(--ps-border);
 }
 .pillar-steps > li:last-child { padding-bottom: 0; }
 .pillar-steps > li:last-child::after { display: none; }
+/* кружок загорается, когда дорожка до него дошла */
+.pillar-steps > li::before {
+  transition: background .35s ease, border-color .35s ease, color .35s ease;
+}
+.pillar-steps > li.is-on::before {
+  background: var(--ps-gold);
+  border-color: var(--ps-gold);
+  color: #FFFBF7;
+  /* «бульк» — тот же упругий скачок, что у шагов на главной */
+  animation: pillarStepPop .55s cubic-bezier(.34, 1.56, .64, 1);
+}
+@keyframes pillarStepPop {
+  0%   { transform: scale(1); }
+  40%  { transform: scale(1.24); }
+  70%  { transform: scale(.95); }
+  100% { transform: scale(1); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pillar-steps > li::before { transition: none; }
+  .pillar-steps > li.is-on::before { animation: none; }
+}
+
 .pillar-step__title {
   display: block;
   margin-bottom: 5px;
