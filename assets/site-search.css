@@ -1,15 +1,23 @@
 /* ═══════════════════════════════════════════════════════════════════════
    Глобальный поиск. Десктоп — по мотивам Spotlight (Daniil, 2026-08-06):
-   затемнённый размытый фон, плавающая капсула-строка со «стеклом» и мягкой
-   тенью, под ней выпадает карточка результатов.
+   затемнённый размытый фон и одна плавающая стеклянная поверхность.
+
+   Ключевая идея раскладки (2026-08-06, вторая итерация). Строка и результаты —
+   НЕ две карточки, а один элемент .site-search__panel. Пока не введён запрос,
+   его высота равна высоте строки (66px + 1px рамки сверху и снизу = 68px), а
+   радиус — ровно половина этой высоты, то есть геометрически идеальный овал.
+   Как только появляются результаты, панель растёт вниз и тот же радиус
+   читается как скруглённый прямоугольник. Поэтому «строка» и «выпадашка»
+   выглядят цельными без единой стыковочной хитрости — это одна и та же
+   поверхность, изменившая высоту.
 
    Чем отличается от буквального Spotlight — чтобы сайт не стал справочником:
-   палитра терракотовая, а не системная синева; в пустом состоянии не список
-   приложений, а частые задачи клиента; строка спрашивает «Что нужно
+   палитра терракотовая, а не системная синева; строка спрашивает «Что нужно
    оформить?», а не «Search». Стекло и скругления работают на премиальность,
    заявленную остальным сайтом.
 
-   Мобильный оставлен полноэкранным — там капсула по центру неудобна.
+   Мобильный оставлен полноэкранным и НЕ участвует в раскрытии — там капсула
+   по центру неудобна. Всё поведение схлопывания живёт внутри @media 720px.
    Файл в SCALE-списке визуального линта: объявляет свою шкалу.
    ═══════════════════════════════════════════════════════════════════════ */
 
@@ -46,17 +54,28 @@
   overflow: hidden;
 }
 /* Затемнение с размытием — фон уходит на второй план, как в Spotlight.
-   Появляется плавно вместе с окном. */
+   Появляется плавно вместе с окном.
+
+   ⚠️ Появление сделано ПЕРЕХОДОМ, а не keyframes-анимацией, и это принципиально.
+   Анимация с fill-mode оставляет элемент в первом кадре (opacity: 0), пока не
+   проиграет, — и если движок её не проигрывает, поиск невидим навсегда. Такой
+   движок не гипотетический: панель предпросмотра ведёт себя ровно так, и на
+   ней вся строка поиска пропала. Переход же деградирует правильно: не смог
+   анимировать — просто показал конечное состояние.
+   Класс is-shown вешает site-search.js сразу после showModal(). */
 .site-search::backdrop {
   background: rgba(26, 43, 60, 0.34);
   -webkit-backdrop-filter: blur(3px);
   backdrop-filter: blur(3px);
-  animation: sspot-veil .28s ease-out both;
+  opacity: 0;
+  transition: opacity .28s ease-out;
 }
-@keyframes sspot-veil {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
+.site-search.is-shown::backdrop { opacity: 1; }
+
+/* Сцена нужна только десктопу (капсула + кружок в ряд). На мобильном она
+   растворяется, и .site-search__panel остаётся прямым потомком диалога —
+   мобильная раскладка не знает, что сцена вообще появилась. */
+.site-search__stage { display: contents; }
 
 .site-search__panel {
   display: flex;
@@ -89,6 +108,17 @@
 }
 .site-search__input::placeholder { color: #8A8A8A; }
 .site-search__input::-webkit-search-cancel-button { display: none; }
+/* Глобальный focus-ring из a11y.css (input:focus-visible → терракотовая
+   рамка) здесь лишний и вреден: поле получает фокус автоматически при
+   открытии, и рамка загоралась всегда, обводя строку рыжим прямоугольником.
+   Гасим точечно — доступность не страдает: диалог модальный, поле в нём
+   одно, местоположение фокуса и без рамки очевидно. Селектор с классом
+   тяжелее голого input:focus-visible, !important не нужен. */
+.site-search__input:focus,
+.site-search__input:focus-visible {
+  outline: none;
+  box-shadow: none;
+}
 .site-search__hint { display: none; }
 .site-search__close {
   flex: 0 0 auto;
@@ -107,6 +137,10 @@
   .site-search__close:hover { color: #C75B39; }
 }
 .site-search__close svg { width: 15px; height: 15px; }
+
+/* Кружок-переключатель — только десктопная история. На мобильном ту же
+   развилку держат табы внутри панели. */
+.site-search__toggle { display: none; }
 
 /* ── табы ── */
 .site-search__tabs {
@@ -132,7 +166,7 @@
   color: #FFFBF7;
 }
 
-/* ── частые запросы (пустое состояние) ── */
+/* ── частые запросы ── */
 .site-search__suggest { padding: 16px clamp(16px, 4vw, 22px) 4px; }
 .site-search__label {
   display: block;
@@ -216,7 +250,7 @@
 .site-search__empty a { color: #C75B39; text-decoration: none; }
 
 /* ═══════════════════════════════════════════════════════════════════════
-   ДЕСКТОП: капсула Spotlight
+   ДЕСКТОП: одна стеклянная поверхность + кружок-переключатель
    ═══════════════════════════════════════════════════════════════════════ */
 @media (min-width: 720px) {
   /* [open] обязателен: голый display снимает браузерное скрытие закрытого
@@ -233,21 +267,25 @@
     backdrop-filter: blur(7px) saturate(1.1);
   }
 
-  .site-search__panel {
-    width: min(680px, 92vw);
-    height: auto;
-    background: none;
-    overflow: visible;
+  .site-search__stage {
+    display: flex;
+    align-items: flex-start;   /* кружок держится строки, панель растёт вниз */
     gap: 10px;
+    width: min(680px, 92vw);
   }
 
-  /* Капсула: «стекло» — полупрозрачный фон с размытием подложки,
-     светлый внутренний блик сверху и мягкая дальняя тень. */
-  .site-search__bar {
-    padding: 0 10px 0 22px;
-    height: 66px;
+  /* Та самая единая поверхность. radius 33px = половина высоты строки,
+     поэтому в собранном виде это ровный овал, а в раскрытом — скруглённый
+     прямоугольник. overflow:hidden обрезает содержимое по этим углам. */
+  .site-search__panel {
+    flex: 1;
+    min-width: 0;
+    height: auto;
     border: 1px solid rgba(232, 223, 209, .9);
-    border-radius: 999px;
+    /* 34px = ровно половина полной высоты собранной панели (66px строки +
+       1px рамки сверху и снизу). Отсюда идеальный овал: возьми 33px — и по
+       бокам останется миллиметровая прямая вставка. */
+    border-radius: 34px;
     background: rgba(255, 251, 247, .82);
     -webkit-backdrop-filter: blur(26px) saturate(180%);
     backdrop-filter: blur(26px) saturate(180%);
@@ -255,7 +293,25 @@
       0 24px 70px rgba(26, 43, 60, .26),
       0 2px 8px rgba(26, 43, 60, .08),
       inset 0 1px 0 rgba(255, 255, 255, .9);
-    animation: sspot-in .34s cubic-bezier(.2, .9, .32, 1.06) both;
+    overflow: hidden;
+    /* появление: окно «подлетает» и слегка увеличивается (см. комментарий
+       к ::backdrop — почему переход, а не keyframes) */
+    opacity: 0;
+    transform: translateY(-14px) scale(.965);
+    transition:
+      opacity .3s ease-out,
+      transform .34s cubic-bezier(.2, .9, .32, 1.06);
+  }
+  .site-search.is-shown .site-search__panel {
+    opacity: 1;
+    transform: none;
+  }
+
+  .site-search__bar {
+    flex: 0 0 auto;
+    height: 66px;
+    padding: 0 10px 0 22px;
+    border-bottom: 0;   /* разделитель рисует уже раскрытая нижняя часть */
   }
   .site-search__glass { width: 22px; height: 22px; }
   .site-search__input { font-size: 20px; font-weight: 500; }
@@ -275,38 +331,38 @@
     letter-spacing: .04em;
   }
   .site-search__close { display: none; }
+  /* Табы на десктопе заменены кружком-тумблером справа от строки */
+  .site-search__tabs { display: none; }
 
-  /* Карточка результатов — тем же стеклом, чуть ниже капсулы.
-     Пока запроса нет, показывает частые задачи. */
+  /* ── раскрытие ──
+     Высоту в --drop-h кладёт JS по фактическому содержимому: панель растёт
+     ровно настолько, сколько нужно результатам, и плавно переобмеряется на
+     каждой букве. Фиксированное значение здесь дало бы рывок — анимация
+     доезжала бы до конца уже после того, как контент упёрся в свою высоту.
+     Разделитель — inset-тень, а не border: при нулевой высоте бордер всё
+     равно нарисовал бы полоску поперёк собранного овала. */
   .site-search__drop {
-    border: 1px solid rgba(232, 223, 209, .9);
-    border-radius: 18px;
-    background: rgba(255, 251, 247, .9);
-    -webkit-backdrop-filter: blur(26px) saturate(180%);
-    backdrop-filter: blur(26px) saturate(180%);
-    box-shadow: 0 22px 60px rgba(26, 43, 60, .22);
+    max-height: 0;
+    opacity: 0;
     overflow: hidden;
-    animation: sspot-drop .3s cubic-bezier(.2, .9, .32, 1) .05s both;
+    box-shadow: inset 0 1px 0 rgba(232, 223, 209, .85);
+    transition:
+      max-height .42s cubic-bezier(.32, .72, 0, 1),
+      opacity .2s ease;
   }
-  .site-search__tabs { padding: 14px 16px 0; }
+  .site-search__panel.is-open .site-search__drop {
+    max-height: var(--drop-h, 420px);
+    opacity: 1;
+  }
+
   .site-search__results {
     /* flex: 1 нужен мобильной раскладке (список тянется до низа экрана),
-       здесь он растягивал карточку пустотой под парой результатов */
+       здесь он растягивал бы панель пустотой под парой результатов */
     flex: none;
-    max-height: min(46vh, 420px);
+    max-height: min(46vh, 400px);
     padding: 8px 8px 12px;
   }
-  .site-search__suggest { padding: 16px 16px 6px; }
-
-  /* появление: окно «подлетает» и слегка увеличивается */
-  @keyframes sspot-in {
-    from { opacity: 0; transform: translateY(-14px) scale(.965); }
-    to   { opacity: 1; transform: translateY(0) scale(1); }
-  }
-  @keyframes sspot-drop {
-    from { opacity: 0; transform: translateY(-10px) scale(.985); }
-    to   { opacity: 1; transform: translateY(0) scale(1); }
-  }
+  .site-search__suggest { padding: 4px 16px 14px; }
 
   /* Строки проявляются каскадом — задержку ставит JS через --i, поэтому
      список не «выпрыгивает» целиком.
@@ -322,13 +378,105 @@
     from { transform: translateY(6px); }
     to   { transform: translateY(0); }
   }
+
+  /* ── кружок-тумблер «Услуги ↔ Блог» ── */
+  .site-search__toggle {
+    position: relative;
+    flex: 0 0 auto;
+    display: block;
+    /* 68px, а не 66: кружок должен совпасть с полной высотой панели вместе
+       с её рамкой, иначе он на два пикселя ниже и ряд выглядит кривым */
+    width: 68px;
+    height: 68px;
+    padding: 0;
+    border: 1px solid rgba(232, 223, 209, .9);
+    border-radius: 50%;
+    background: rgba(255, 251, 247, .82);
+    -webkit-backdrop-filter: blur(26px) saturate(180%);
+    backdrop-filter: blur(26px) saturate(180%);
+    box-shadow:
+      0 24px 70px rgba(26, 43, 60, .26),
+      0 2px 8px rgba(26, 43, 60, .08),
+      inset 0 1px 0 rgba(255, 255, 255, .9);
+    color: #1A2B3C;
+    cursor: pointer;
+    opacity: 0;
+    transform: translateY(-14px) scale(.965);
+    transition:
+      opacity .3s ease-out,
+      transform .34s cubic-bezier(.2, .9, .32, 1.06),
+      background .26s ease, border-color .26s ease, color .26s ease;
+  }
+  .site-search.is-shown .site-search__toggle {
+    opacity: 1;
+    transform: none;
+  }
+  .site-search__toggle.is-blog {
+    background: #C75B39;
+    border-color: #C75B39;
+    color: #FFFBF7;
+  }
+  @media (hover: hover) {
+    .site-search__toggle:hover { border-color: #C75B39; }
+  }
+
+  /* Иконки лежат друг на друге; неактивная отъезжает поворотом и масштабом —
+     переключение читается как поворот тумблера, а не как подмена картинки. */
+  .site-search__ico {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 23px;
+    height: 23px;
+    margin: -11.5px 0 0 -11.5px;
+    transition: opacity .24s ease, transform .34s cubic-bezier(.32, .72, 0, 1);
+  }
+  .site-search__ico--blog { opacity: 0; transform: rotate(-40deg) scale(.55); }
+  .site-search__toggle.is-blog .site-search__ico--services {
+    opacity: 0;
+    transform: rotate(40deg) scale(.55);
+  }
+  .site-search__toggle.is-blog .site-search__ico--blog {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* Подпись под кружком: без неё голая иконка — ребус. Появляется по
+     наведению и по фокусу с клавиатуры. */
+  .site-search__toggle::after {
+    content: attr(data-tip);
+    position: absolute;
+    top: calc(100% + 10px);
+    left: 50%;
+    padding: 6px 11px;
+    border-radius: 9px;
+    background: rgba(26, 43, 60, .88);
+    color: #FFFBF7;
+    font-family: 'Manrope', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    white-space: nowrap;
+    opacity: 0;
+    transform: translate(-50%, -4px);
+    pointer-events: none;
+    transition: opacity .18s ease, transform .18s ease;
+  }
+  .site-search__toggle:hover::after,
+  .site-search__toggle:focus-visible::after {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .site-search::backdrop,
-  .site-search__bar,
-  .site-search__drop,
   .site-search__results li { animation: none; }
+  /* transition: none гасит движение, но конечное состояние применяется
+     мгновенно — поиск остаётся видимым, просто без подлёта */
+  .site-search::backdrop,
+  .site-search__panel,
+  .site-search__toggle,
+  .site-search__drop,
+  .site-search__ico,
   .site-search__tab,
   .site-search__chips button,
   .site-nav__search-btn { transition: none; }
