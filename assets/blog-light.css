@@ -1,0 +1,32 @@
+/* ═══ Блог: светлый override тёмных модульных стилей (2026-08-06).
+
+   Сгенерирован tools/gen_blog_light.py по правилам module-card / module-cta /
+
+   desktop.css для классов, используемых в разметке блога. Подключается
+
+   ПОСЛЕДНИМ в head статей — выигрывает каскадом при равной специфичности.
+
+   При правке тёмных модулей перегенерировать. ═══ */
+
+
+
+/* from module-card.css */
+.card::before {
+  background: linear-gradient(to right,
+    rgba(199, 91, 57, 0) 0%,
+    rgba(199, 91, 57, 0.5) 30%,
+    rgba(199, 91, 57, 0.5) 70%,
+    rgba(199, 91, 57, 0) 100%);
+}
+
+/* from module-card.css */
+@media (hover: hover) {
+.card:hover {
+  border-color: rgba(199, 91, 57, 0.55);
+}
+}
+
+/* from module-cta.css */
+.btn--gold:hover {
+  box-shadow: 0 6px 18px rgba(199, 91, 57, 0.40);
+}
