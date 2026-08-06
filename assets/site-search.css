@@ -1,7 +1,16 @@
 /* ═══════════════════════════════════════════════════════════════════════
-   Глобальный поиск: лупа в шапке → оверлей с табами «Услуги | Блог».
-   Светлая терракотовая шкала (сайт светлый на всех страницах); значения
-   локальные, файл в SCALE-списке визуального линта. 2026-08-06.
+   Глобальный поиск. Десктоп — по мотивам Spotlight (Daniil, 2026-08-06):
+   затемнённый размытый фон, плавающая капсула-строка со «стеклом» и мягкой
+   тенью, под ней выпадает карточка результатов.
+
+   Чем отличается от буквального Spotlight — чтобы сайт не стал справочником:
+   палитра терракотовая, а не системная синева; в пустом состоянии не список
+   приложений, а частые задачи клиента; строка спрашивает «Что нужно
+   оформить?», а не «Search». Стекло и скругления работают на премиальность,
+   заявленную остальным сайтом.
+
+   Мобильный оставлен полноэкранным — там капсула по центру неудобна.
+   Файл в SCALE-списке визуального линта: объявляет свою шкалу.
    ═══════════════════════════════════════════════════════════════════════ */
 
 /* ── кнопка-лупа в шапке ── */
@@ -17,9 +26,10 @@
   background: none;
   color: #1A2B3C;
   cursor: pointer;
+  transition: color .2s ease, background .2s ease;
 }
 @media (hover: hover) {
-  .site-nav__search-btn:hover { color: #C75B39; }
+  .site-nav__search-btn:hover { color: #C75B39; background: rgba(199, 91, 57, .08); }
 }
 .site-nav__search-btn svg { width: 19px; height: 19px; }
 
@@ -35,10 +45,17 @@
   background: transparent;
   overflow: hidden;
 }
+/* Затемнение с размытием — фон уходит на второй план, как в Spotlight.
+   Появляется плавно вместе с окном. */
 .site-search::backdrop {
-  background: rgba(26, 43, 60, 0.45);
-  -webkit-backdrop-filter: blur(4px);
-  backdrop-filter: blur(4px);
+  background: rgba(26, 43, 60, 0.34);
+  -webkit-backdrop-filter: blur(3px);
+  backdrop-filter: blur(3px);
+  animation: sspot-veil .28s ease-out both;
+}
+@keyframes sspot-veil {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
 .site-search__panel {
@@ -50,26 +67,6 @@
   height: 100%;
   overflow: hidden;
 }
-/* десктоп: панель, а не весь экран.
-   ⚠️ Только [open]: закрытый <dialog> прячется браузерным display:none,
-   и голый `display:flex` его перебивает — оверлей висит на странице
-   постоянно. Ровно это и случилось 2026-08-06. */
-@media (min-width: 720px) {
-  .site-search[open] {
-    display: flex;
-    align-items: flex-start;
-    justify-content: center;
-    padding-top: 9vh;
-  }
-  .site-search__panel {
-    width: min(640px, 92vw);
-    height: auto;
-    max-height: 72vh;
-    border: 1px solid #E8DFD1;
-    border-radius: 12px;
-    box-shadow: 0 24px 80px rgba(26, 43, 60, 0.25);
-  }
-}
 
 /* ── строка ввода ── */
 .site-search__bar {
@@ -79,7 +76,7 @@
   padding: 14px clamp(16px, 4vw, 22px);
   border-bottom: 1px solid #E8DFD1;
 }
-.site-search__bar svg { flex: 0 0 auto; color: #C75B39; width: 18px; height: 18px; }
+.site-search__glass { flex: 0 0 auto; color: #C75B39; width: 20px; height: 20px; }
 .site-search__input {
   flex: 1;
   min-width: 0;
@@ -90,7 +87,9 @@
   font-size: 17px;
   outline: none;
 }
-.site-search__input::placeholder { color: #6B6B6B; }
+.site-search__input::placeholder { color: #8A8A8A; }
+.site-search__input::-webkit-search-cancel-button { display: none; }
+.site-search__hint { display: none; }
 .site-search__close {
   flex: 0 0 auto;
   display: inline-flex;
@@ -125,11 +124,43 @@
   font-size: 13.5px;
   font-weight: 600;
   cursor: pointer;
+  transition: background .18s ease, border-color .18s ease, color .18s ease;
 }
 .site-search__tab.is-on {
   background: #C75B39;
   border-color: #C75B39;
   color: #FFFBF7;
+}
+
+/* ── частые запросы (пустое состояние) ── */
+.site-search__suggest { padding: 16px clamp(16px, 4vw, 22px) 4px; }
+.site-search__label {
+  display: block;
+  margin-bottom: 10px;
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: #8A8A8A;
+}
+.site-search__chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.site-search__chips button {
+  padding: 9px 15px;
+  border: 1px solid #E8DFD1;
+  border-radius: 999px;
+  background: #FFFBF7;
+  color: #2D2D2D;
+  font-family: 'Manrope', sans-serif;
+  font-size: 14px;
+  cursor: pointer;
+  transition: border-color .18s ease, color .18s ease, transform .18s ease;
+}
+@media (hover: hover) {
+  .site-search__chips button:hover {
+    border-color: #C75B39;
+    color: #C75B39;
+    transform: translateY(-1px);
+  }
 }
 
 /* ── результаты ── */
@@ -142,26 +173,38 @@
   flex: 1;
 }
 .site-search__results a {
-  display: block;
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
   padding: 12px 12px;
-  border-radius: 8px;
+  border-radius: 10px;
   text-decoration: none;
 }
-@media (hover: hover) {
-  .site-search__results a:hover { background: #F5F0EB; }
-}
 .site-search__results b {
-  display: block;
   color: #1A2B3C;
   font-size: 15.5px;
   font-weight: 600;
   line-height: 1.4;
 }
+/* подсветка совпадения — цветом, без заливки: строка остаётся спокойной */
+.site-search__results mark {
+  background: none;
+  color: #C75B39;
+  font-weight: 700;
+}
 .site-search__results span {
-  display: block;
-  margin-top: 2px;
-  color: #6B6B6B;
-  font-size: 12.5px;
+  margin-left: auto;
+  flex: 0 0 auto;
+  color: #8A8A8A;
+  font-size: 12px;
+}
+@media (hover: hover) {
+  .site-search__results a:hover { background: #F5F0EB; }
+}
+/* строка под кареткой клавиатуры */
+.site-search__results li.is-active a {
+  background: rgba(199, 91, 57, .09);
+  box-shadow: inset 2px 0 0 #C75B39;
 }
 .site-search__empty {
   margin: 0;
@@ -172,6 +215,121 @@
 }
 .site-search__empty a { color: #C75B39; text-decoration: none; }
 
+/* ═══════════════════════════════════════════════════════════════════════
+   ДЕСКТОП: капсула Spotlight
+   ═══════════════════════════════════════════════════════════════════════ */
+@media (min-width: 720px) {
+  /* [open] обязателен: голый display снимает браузерное скрытие закрытого
+     <dialog> — так 2026-08-06 оверлей висел поверх страницы постоянно */
+  .site-search[open] {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding-top: 16vh;
+  }
+  .site-search::backdrop {
+    background: rgba(26, 43, 60, 0.42);
+    -webkit-backdrop-filter: blur(7px) saturate(1.1);
+    backdrop-filter: blur(7px) saturate(1.1);
+  }
+
+  .site-search__panel {
+    width: min(680px, 92vw);
+    height: auto;
+    background: none;
+    overflow: visible;
+    gap: 10px;
+  }
+
+  /* Капсула: «стекло» — полупрозрачный фон с размытием подложки,
+     светлый внутренний блик сверху и мягкая дальняя тень. */
+  .site-search__bar {
+    padding: 0 10px 0 22px;
+    height: 66px;
+    border: 1px solid rgba(232, 223, 209, .9);
+    border-radius: 999px;
+    background: rgba(255, 251, 247, .82);
+    -webkit-backdrop-filter: blur(26px) saturate(180%);
+    backdrop-filter: blur(26px) saturate(180%);
+    box-shadow:
+      0 24px 70px rgba(26, 43, 60, .26),
+      0 2px 8px rgba(26, 43, 60, .08),
+      inset 0 1px 0 rgba(255, 255, 255, .9);
+    animation: sspot-in .34s cubic-bezier(.2, .9, .32, 1.06) both;
+  }
+  .site-search__glass { width: 22px; height: 22px; }
+  .site-search__input { font-size: 20px; font-weight: 500; }
+
+  /* подсказка про Esc вместо крестика — как в системном поиске */
+  .site-search__hint {
+    display: inline-block;
+    flex: 0 0 auto;
+    padding: 4px 9px;
+    border: 1px solid #E8DFD1;
+    border-radius: 6px;
+    background: rgba(255, 251, 247, .6);
+    color: #8A8A8A;
+    font-family: 'Manrope', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: .04em;
+  }
+  .site-search__close { display: none; }
+
+  /* Карточка результатов — тем же стеклом, чуть ниже капсулы.
+     Пока запроса нет, показывает частые задачи. */
+  .site-search__drop {
+    border: 1px solid rgba(232, 223, 209, .9);
+    border-radius: 18px;
+    background: rgba(255, 251, 247, .9);
+    -webkit-backdrop-filter: blur(26px) saturate(180%);
+    backdrop-filter: blur(26px) saturate(180%);
+    box-shadow: 0 22px 60px rgba(26, 43, 60, .22);
+    overflow: hidden;
+    animation: sspot-drop .3s cubic-bezier(.2, .9, .32, 1) .05s both;
+  }
+  .site-search__tabs { padding: 14px 16px 0; }
+  .site-search__results {
+    /* flex: 1 нужен мобильной раскладке (список тянется до низа экрана),
+       здесь он растягивал карточку пустотой под парой результатов */
+    flex: none;
+    max-height: min(46vh, 420px);
+    padding: 8px 8px 12px;
+  }
+  .site-search__suggest { padding: 16px 16px 6px; }
+
+  /* появление: окно «подлетает» и слегка увеличивается */
+  @keyframes sspot-in {
+    from { opacity: 0; transform: translateY(-14px) scale(.965); }
+    to   { opacity: 1; transform: translateY(0) scale(1); }
+  }
+  @keyframes sspot-drop {
+    from { opacity: 0; transform: translateY(-10px) scale(.985); }
+    to   { opacity: 1; transform: translateY(0) scale(1); }
+  }
+
+  /* Строки проявляются каскадом — задержку ставит JS через --i, поэтому
+     список не «выпрыгивает» целиком.
+     ⚠️ Анимируется ТОЛЬКО transform, прозрачность не трогаем. Если движок
+     не проиграет анимацию (а такое бывает — панель предпросмотра, экзотика,
+     расширения), строка останется видимой, просто сдвинутой на 6px. Завязывать
+     видимость контента на opacity в анимации — способ потерять его целиком. */
+  .site-search__results li {
+    animation: sspot-row .26s ease-out backwards;
+    animation-delay: calc(var(--i, 0) * 26ms);
+  }
+  @keyframes sspot-row {
+    from { transform: translateY(6px); }
+    to   { transform: translateY(0); }
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .site-search__panel { animation: none; }
+  .site-search::backdrop,
+  .site-search__bar,
+  .site-search__drop,
+  .site-search__results li { animation: none; }
+  .site-search__tab,
+  .site-search__chips button,
+  .site-nav__search-btn { transition: none; }
 }

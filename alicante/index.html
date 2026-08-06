@@ -39,8 +39,8 @@
   <link rel="stylesheet" href="/assets/module-pricing.css?v=20260529">
   <link rel="stylesheet" href="/assets/site-nav.css?v=20260806b">
   <script src="/assets/site-nav.js?v=20260805" defer></script>
-  <link rel="stylesheet" href="/assets/site-search.css?v=20260806b">
-  <script src="/assets/site-search.js?v=20260806b" defer></script>
+  <link rel="stylesheet" href="/assets/site-search.css?v=20260806c">
+  <script src="/assets/site-search.js?v=20260806c" defer></script>
   <link rel="stylesheet" href="/assets/krepko-chips.css?v=20260608">
   <link rel="stylesheet" href="/assets/site-footer.css?v=20260803">
   <link rel="stylesheet" href="/assets/a11y.css">
@@ -225,21 +225,40 @@
   </div>
 </dialog>
 
-<dialog id="site-search-dialog" class="site-search" aria-label="Поиск по сайту" aria-modal="true">
+<dialog id="site-search-dialog" class="site-search" aria-label="Поиск по сайту">
   <div class="site-search__panel" role="search">
+
     <div class="site-search__bar">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
-      <input class="site-search__input" type="search" placeholder="Доверенность, наследство, счёт в банке…" aria-label="Поиск по услугам и статьям" autocomplete="off">
+      <svg class="site-search__glass" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      <input class="site-search__input" type="search" placeholder="Что нужно оформить?" aria-label="Поиск по услугам и статьям" autocomplete="off" spellcheck="false">
+      <kbd class="site-search__hint" aria-hidden="true">esc</kbd>
       <button class="site-search__close" type="button" aria-label="Закрыть поиск">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg>
       </button>
     </div>
-    <div class="site-search__tabs" role="tablist" aria-label="Область поиска">
-      <button class="site-search__tab is-on" type="button" role="tab" data-mode="services" aria-selected="true">Услуги</button>
-      <button class="site-search__tab" type="button" role="tab" data-mode="blog" aria-selected="false">Блог</button>
+
+    <div class="site-search__drop">
+      <div class="site-search__tabs" role="tablist" aria-label="Область поиска">
+        <button class="site-search__tab is-on" type="button" role="tab" data-mode="services" aria-selected="true">Услуги</button>
+        <button class="site-search__tab" type="button" role="tab" data-mode="blog" aria-selected="false">Блог</button>
+      </div>
+
+      <div class="site-search__suggest">
+        <span class="site-search__label">Частые запросы</span>
+        <div class="site-search__chips">
+          <button type="button" data-q="доверенность">Доверенность</button>
+          <button type="button" data-q="апостиль">Апостиль</button>
+          <button type="button" data-q="наследство">Наследство</button>
+          <button type="button" data-q="банк">Счёт в банке</button>
+          <button type="button" data-q="недвижимость">Недвижимость</button>
+          <button type="button" data-q="брак">Брак</button>
+        </div>
+      </div>
+
+      <ul class="site-search__results" role="listbox" aria-label="Результаты поиска"></ul>
+      <p class="site-search__empty" hidden>Ничего не нашлось. Опишите задачу в <a href="https://wa.me/34641048296" rel="noopener noreferrer" target="_blank">WhatsApp</a> — подберём решение.</p>
     </div>
-    <ul class="site-search__results"></ul>
-    <p class="site-search__empty" hidden>Ничего не нашлось. Опишите задачу в <a href="https://wa.me/34641048296" rel="noopener noreferrer" target="_blank">WhatsApp</a> — подберём решение.</p>
+
   </div>
 </dialog>
 
