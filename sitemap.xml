@@ -205,6 +205,12 @@
     <changefreq>monthly</changefreq>
   </url>
   <url>
+    <loc>https://krepko.es/notario/ustanovlenie-rodstvennyh-svyazej/</loc>
+    <lastmod>2026-08-06</lastmod>
+    <priority>0.7</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
     <loc>https://krepko.es/notario/predstavlenie-interesov-naslednikov/</loc>
     <lastmod>2026-08-06</lastmod>
     <priority>0.7</priority>
@@ -247,6 +253,12 @@
     <changefreq>monthly</changefreq>
   </url>
   <url>
+    <loc>https://krepko.es/notario/pareja-de-hecho/</loc>
+    <lastmod>2026-08-06</lastmod>
+    <priority>0.7</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
     <loc>https://krepko.es/notario/affidevit/</loc>
     <lastmod>2026-08-06</lastmod>
     <priority>0.7</priority>
@@ -254,6 +266,18 @@
   </url>
   <url>
     <loc>https://krepko.es/notario/soglasie-na-vyezd-rebenka/</loc>
+    <lastmod>2026-08-06</lastmod>
+    <priority>0.7</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://krepko.es/notario/opeka-i-popechitelstvo/</loc>
+    <lastmod>2026-08-06</lastmod>
+    <priority>0.7</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://krepko.es/notario/dokumenty-dlya-investicij/</loc>
     <lastmod>2026-08-06</lastmod>
     <priority>0.7</priority>
     <changefreq>monthly</changefreq>
@@ -272,6 +296,12 @@
   </url>
   <url>
     <loc>https://krepko.es/notario/razreshenie-na-prozhivanie-rebenka/</loc>
+    <lastmod>2026-08-06</lastmod>
+    <priority>0.7</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://krepko.es/notario/zayavleniya-dlya-nalogovyh/</loc>
     <lastmod>2026-08-06</lastmod>
     <priority>0.7</priority>
     <changefreq>monthly</changefreq>
@@ -301,6 +331,12 @@
     <changefreq>monthly</changefreq>
   </url>
   <url>
+    <loc>https://krepko.es/notario/brachnyj-dogovor/</loc>
+    <lastmod>2026-08-06</lastmod>
+    <priority>0.7</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
     <loc>https://krepko.es/notario/contrato-de-arras/</loc>
     <lastmod>2026-08-06</lastmod>
     <priority>0.7</priority>
@@ -319,13 +355,37 @@
     <changefreq>monthly</changefreq>
   </url>
   <url>
+    <loc>https://krepko.es/notario/raspiska/</loc>
+    <lastmod>2026-08-06</lastmod>
+    <priority>0.7</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
     <loc>https://krepko.es/notario/doverennost-generalnaya/</loc>
     <lastmod>2026-08-06</lastmod>
     <priority>0.7</priority>
     <changefreq>monthly</changefreq>
   </url>
   <url>
+    <loc>https://krepko.es/notario/dokumenty-dlya-bankovskih-operacij/</loc>
+    <lastmod>2026-08-06</lastmod>
+    <priority>0.7</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://krepko.es/notario/dolgovoe-obyazatelstvo/</loc>
+    <lastmod>2026-08-06</lastmod>
+    <priority>0.7</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
     <loc>https://krepko.es/notario/prinyatie-nasledstva/</loc>
+    <lastmod>2026-08-06</lastmod>
+    <priority>0.7</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://krepko.es/notario/dokumenty-dlya-otkrytiya-scheta/</loc>
     <lastmod>2026-08-06</lastmod>
     <priority>0.7</priority>
     <changefreq>monthly</changefreq>
@@ -343,7 +403,19 @@
     <changefreq>monthly</changefreq>
   </url>
   <url>
+    <loc>https://krepko.es/notario/dogovor-zajma/</loc>
+    <lastmod>2026-08-06</lastmod>
+    <priority>0.7</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
     <loc>https://krepko.es/notario/doverennost-na-prodazhu-kvartiry/</loc>
+    <lastmod>2026-08-06</lastmod>
+    <priority>0.7</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://krepko.es/notario/podtverzhdenie-proishozhdeniya-sredstv/</loc>
     <lastmod>2026-08-06</lastmod>
     <priority>0.7</priority>
     <changefreq>monthly</changefreq>
@@ -392,6 +464,24 @@
   </url>
   <url>
     <loc>https://krepko.es/notario/deklaraciya/</loc>
+    <lastmod>2026-08-06</lastmod>
+    <priority>0.7</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://krepko.es/notario/dokumenty-dlya-ipoteki/</loc>
+    <lastmod>2026-08-06</lastmod>
+    <priority>0.7</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://krepko.es/notario/razdel-imushchestva/</loc>
+    <lastmod>2026-08-06</lastmod>
+    <priority>0.7</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://krepko.es/notario/zaklyuchenie-braka/</loc>
     <lastmod>2026-08-06</lastmod>
     <priority>0.7</priority>
     <changefreq>monthly</changefreq>

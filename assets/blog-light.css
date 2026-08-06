@@ -1,32 +1,47 @@
-/* ═══ Блог: светлый override тёмных модульных стилей (2026-08-06).
+/* ═══════════════════════════════════════════════════════════════════════
+   Блог: светлая терракотовая шкала поверх тёмных токенов (2026-08-06).
 
-   Сгенерирован tools/gen_blog_light.py по правилам module-card / module-cta /
+   Статьи блога — рукописные HTML на тёмной системе (tokens.css + module-*).
+   Их собственные <style> перекрашены миграцией (tools/migrate_blog_light.py),
+   а этот файл закрывает второй слой: значения var(--token) из tokens.css
+   и модульные классы, которые берут из них фон и цвет.
 
-   desktop.css для классов, используемых в разметке блога. Подключается
+   Подключается ПОСЛЕДНИМ в head только на страницах блога — поэтому
+   переопределение :root безопасно. ═══ */
 
-   ПОСЛЕДНИМ в head статей — выигрывает каскадом при равной специфичности.
+:root {
+  --bg: #FFFBF7;
+  --surface: #F5F0EB;
+  --surface-2: #F5F0EB;
+  --surface-sunk: #EFE7DA;
+  --surface-card: #F5F0EB;
 
-   При правке тёмных модулей перегенерировать. ═══ */
+  --border-faint: #E8DFD1;
+  --border: #E8DFD1;
 
+  --text: #2D2D2D;
+  --text-sub: #4A4A4A;
+  --text-muted: #6B6B6B;
+  --text-label: #6B6B6B;
+  --text-dim: #6B6B6B;
+  --text-nav: #4A4A4A;
 
+  --gold: #C75B39;
+  --gold-2: #B04E2F;
+  --gold-tint: rgba(199, 91, 57, 0.12);
+  --gold-on: #FFFBF7;
 
-/* from module-card.css */
-.card::before {
-  background: linear-gradient(to right,
-    rgba(199, 91, 57, 0) 0%,
-    rgba(199, 91, 57, 0.5) 30%,
-    rgba(199, 91, 57, 0.5) 70%,
-    rgba(199, 91, 57, 0) 100%);
+  --danger: #B91C1C;
+
+  --glow-gold: 0 4px 14px rgba(199, 91, 57, 0.25);
 }
 
-/* from module-card.css */
-@media (hover: hover) {
-.card:hover {
-  border-color: rgba(199, 91, 57, 0.55);
+/* Карточки и кнопки модульной системы, попадающие в разметку блога */
+.card {
+  background: #F5F0EB;
+  border-color: #E8DFD1;
 }
-}
+.btn--gold { color: #FFFBF7; }
 
-/* from module-cta.css */
-.btn--gold:hover {
-  box-shadow: 0 6px 18px rgba(199, 91, 57, 0.40);
-}
+/* Плавающая WhatsApp-кнопка и тёмные вставки статей, если остались */
+body { background: #FFFBF7; }
