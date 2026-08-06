@@ -175,6 +175,12 @@
     <changefreq>monthly</changefreq>
   </url>
   <url>
+    <loc>https://krepko.es/notario/sponsorskoe-pismo/</loc>
+    <lastmod>2026-08-06</lastmod>
+    <priority>0.7</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
     <loc>https://krepko.es/notario/doverennost-na-bank/</loc>
     <lastmod>2026-08-06</lastmod>
     <priority>0.7</priority>
@@ -199,6 +205,24 @@
     <changefreq>monthly</changefreq>
   </url>
   <url>
+    <loc>https://krepko.es/notario/notarialnoe-soglasie/</loc>
+    <lastmod>2026-08-06</lastmod>
+    <priority>0.7</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://krepko.es/notario/affidevit/</loc>
+    <lastmod>2026-08-06</lastmod>
+    <priority>0.7</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://krepko.es/notario/soglasie-na-vyezd-rebenka/</loc>
+    <lastmod>2026-08-06</lastmod>
+    <priority>0.7</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
     <loc>https://krepko.es/notario/soglasie-supruga/</loc>
     <lastmod>2026-08-06</lastmod>
     <priority>0.7</priority>
@@ -211,13 +235,31 @@
     <changefreq>monthly</changefreq>
   </url>
   <url>
+    <loc>https://krepko.es/notario/razreshenie-na-prozhivanie-rebenka/</loc>
+    <lastmod>2026-08-06</lastmod>
+    <priority>0.7</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
     <loc>https://krepko.es/notario/madrid/</loc>
     <lastmod>2026-08-06</lastmod>
     <priority>0.7</priority>
     <changefreq>monthly</changefreq>
   </url>
   <url>
+    <loc>https://krepko.es/notario/finansovye-garantii/</loc>
+    <lastmod>2026-08-06</lastmod>
+    <priority>0.7</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
     <loc>https://krepko.es/notario/alicante/</loc>
+    <lastmod>2026-08-06</lastmod>
+    <priority>0.7</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://krepko.es/notario/lichnoe-zayavlenie/</loc>
     <lastmod>2026-08-06</lastmod>
     <priority>0.7</priority>
     <changefreq>monthly</changefreq>
@@ -266,6 +308,12 @@
   </url>
   <url>
     <loc>https://krepko.es/notario/malaga/</loc>
+    <lastmod>2026-08-06</lastmod>
+    <priority>0.7</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>https://krepko.es/notario/deklaraciya/</loc>
     <lastmod>2026-08-06</lastmod>
     <priority>0.7</priority>
     <changefreq>monthly</changefreq>
