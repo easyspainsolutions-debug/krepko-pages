@@ -43,5 +43,131 @@
 }
 .btn--gold { color: #FFFBF7; }
 
-/* Плавающая WhatsApp-кнопка и тёмные вставки статей, если остались */
-body { background: #FFFBF7; }
+/* Фон страницы: html тоже, иначе при overscroll и на коротких страницах
+   из-под body проглядывает дефолтный фон браузера */
+html, body { background: #FFFBF7; }
+
+/* ═══ Десктопная раскладка блога (2026-08-06) ═══
+   Блог свёрстан mobile-first: body — флекс-колонка с center-выравниванием,
+   контент ужат до 480px (индекс) и 720px (статья). На широком экране это
+   давало узкую колонку по центру, и вместе с ней сжималась шапка — она
+   тоже флекс-элемент body и тянулась по своему контенту.
+
+   Почему старый десктопный слой перестал работать: в desktop.css секция
+   «BLOG INDEX» написана на `body:has(> .card > .filter-bar) > .card`, то
+   есть требует, чтобы лента была ПРЯМЫМ ребёнком body. Когда индекс
+   обернули в <main id="main"> (skip-link для доступности), селекторы
+   перестали совпадать — и десктопная раскладка молча отвалилась.
+   Здесь она восстановлена без привязки к прямому родству; секция
+   «BLOG ARTICLES» того же файла по-прежнему работает (у статей .wrap —
+   прямой ребёнок body), поэтому кегли статей не дублируются.
+
+   Схема та же, что у /services/ и /notario/: body — обычный поток
+   (шапка и подвал во всю ширину), контент центрируется своими полями,
+   лента статей раскладывается в сетку. */
+
+@media (min-width: 900px) {
+  /* поток вместо флекса: шапка/подвал перестают сжиматься по контенту */
+  body:has(.blog-heading),
+  body:has(.article-intro) {
+    display: block;
+    padding: 0;
+  }
+
+  /* Шапка и подвал — во всю ширину окна */
+  body:has(.blog-heading) > .site-nav,
+  body:has(.article-intro) > .site-nav,
+  body:has(.blog-heading) > .site-footer,
+  body:has(.article-intro) > .site-footer { width: 100%; }
+
+  /* main ужат до 960px в desktop.css — ленте блога нужна полная ширина,
+     свои поля она задаёт сама (как на /services/ и /notario/) */
+  body:has(.blog-heading) main,
+  body:has(.article-intro) main {
+    max-width: none;
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  /* Хлебные крошки — по левому краю контентной колонки */
+  body:has(.blog-heading) > .breadcrumb,
+  body:has(.article-intro) > .breadcrumb,
+  body:has(.blog-heading) main > .breadcrumb,
+  body:has(.article-intro) main > .breadcrumb {
+    max-width: 1280px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: clamp(24px, 3vw, 56px);
+    padding-right: clamp(24px, 3vw, 56px);
+  }
+
+  /* ── индекс блога: контентная колонка во всю ширину ── */
+  .card {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 clamp(24px, 3vw, 56px) 64px;
+    align-items: flex-start;
+    background: none;
+    border: 0;
+  }
+
+  /* заголовок — акцидентная антиква, как на остальных страницах */
+  .blog-heading {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-weight: 500;
+    font-size: clamp(30px, 3.2vw, 40px);
+    letter-spacing: -0.01em;
+    line-height: 1.15;
+    max-width: 900px;
+  }
+  .blog-sub { font-size: 16.5px; line-height: 1.7; max-width: 680px; }
+  .blog-eyebrow { font-size: 11px; }
+
+  /* фильтры — крупнее, с воздухом под лентой */
+  .filter-bar { gap: 8px; margin-bottom: 22px; }
+  .filter-btn { padding: 8px 15px; font-size: 13px; }
+
+  /* ── лента статей в сетку ──
+     .card — флекс-колонка, поэтому раскладку даёт не он, а обёртка ленты.
+     Карточки статей идут прямыми детьми .card, между ними — служебные
+     элементы (заголовки, фильтры), поэтому сетку строим на самих карточках
+     через display:grid у контейнера и span для «широких» блоков. */
+  .card {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
+    gap: 16px;
+    align-content: start;
+  }
+  .card > .blog-eyebrow,
+  .card > .blog-heading,
+  .card > .blog-sub,
+  .card > .filter-bar,
+  .card > .sep,
+  .card > .cta-block,
+  .card > .divider,
+  .card > h2,
+  .card > p { grid-column: 1 / -1; }
+
+  .article-card {
+    padding: 20px 22px;
+    border-radius: 10px;
+    gap: 8px;
+  }
+  .article-card--featured { grid-column: 1 / -1; }
+  .article-title { font-size: 17px; line-height: 1.3; }
+  .article-desc { font-size: 14px; line-height: 1.55; }
+  .article-tag { font-size: 10.5px; }
+  /* На широком экране карточка едет вправо — сдвиг соседей в сетке заметен */
+  .article-card:hover { transform: none; }
+
+  /* ── страница статьи ──
+     Кегли и ширину колонки задаёт desktop.css (секция «BLOG ARTICLES»):
+     там `.wrap` — прямой ребёнок body, селекторы совпадают и работают.
+     Здесь только центрирование: body переведён в обычный поток, и без
+     margin: auto колонка прижалась бы к левому краю. */
+  .wrap { margin-left: auto; margin-right: auto; }
+}
+
+@media (min-width: 900px) and (prefers-reduced-motion: reduce) {
+  .article-card { transition: none; }
+}
