@@ -1,0 +1,278 @@
+/* ═══════════════════════════════════════════════════════════════════════
+   Каталог услуг /services/ — светлый терракотовый макет (2026-08-06).
+
+   Палитра повторяет шкалу pillar-split.css (страницы направления):
+   каталог — та же «библиотека услуг», уровнем выше. Файл объявляет
+   собственную копию переменных: страница не подключает pillar-split.css,
+   кроме блока FAQ, чьи классы (.pillar-faq) стилизуются здесь заново.
+   ═══════════════════════════════════════════════════════════════════════ */
+
+html, body { background: #FFFBF7; }
+body { color: #2D2D2D; }
+
+/* main ужат до 960px (desktop.css) — каталогу нужна полная ширина */
+body:has(.services-catalog) main {
+  max-width: none;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.services-catalog {
+  --sc-bg: #FFFBF7;
+  --sc-surface: #F5F0EB;
+  --sc-border: #E8DFD1;
+  --sc-text: #2D2D2D;
+  --sc-text-sub: #4A4A4A;
+  --sc-text-muted: #6B6B6B;
+  --sc-gold: #C75B39;
+  --sc-gold-2: #B04E2F;
+  --sc-navy: #1A2B3C;
+
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 clamp(24px, 3vw, 56px) clamp(48px, 6vw, 80px);
+  font-family: 'Manrope', sans-serif;
+  color: var(--sc-text);
+}
+
+/* ── шапка каталога ── */
+.svc-head { padding: 34px 0 0; }
+.svc-head h1 {
+  margin: 0 0 14px;
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(28px, 3.2vw, 40px);
+  font-weight: 500;
+  line-height: 1.15;
+  letter-spacing: -.01em;
+  color: var(--sc-navy);
+}
+.svc-head p {
+  margin: 0;
+  max-width: 620px;
+  font-size: 16.5px;
+  line-height: 1.7;
+  color: var(--sc-text-sub);
+}
+.svc-head::after {
+  content: '';
+  display: block;
+  height: 1px;
+  margin-top: 26px;
+  background: var(--sc-border);
+}
+
+/* ── поиск ── строка в типографике каталога, как на /notario/ */
+.svc-search {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  max-width: 420px;
+  margin: 26px 0 6px;
+  padding: 0 0 12px;
+  border-bottom: 1px solid var(--sc-border);
+  color: var(--sc-text-muted);
+  transition: border-color .25s ease, color .25s ease;
+}
+.svc-search:focus-within {
+  border-bottom-color: var(--sc-gold);
+  color: var(--sc-gold);
+}
+.svc-search input {
+  flex: 1;
+  min-width: 0;
+  border: 0;
+  background: none;
+  color: var(--sc-text);
+  font-family: 'Manrope', sans-serif;
+  font-size: 15px;
+  outline: none;
+}
+.svc-search input::placeholder { color: var(--sc-text-muted); }
+.svc-empty {
+  margin: 10px 0 0;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--sc-text-muted);
+}
+
+/* ── сетка направлений ── */
+.svc-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+  gap: 18px;
+  padding-top: 26px;
+  align-items: start;
+}
+.svc-card {
+  display: flex;
+  flex-direction: column;
+  padding: 24px 22px 20px;
+  background: var(--sc-surface);
+  border: 1px solid var(--sc-border);
+  border-radius: 10px;
+  transition: border-color .25s ease;
+}
+@media (hover: hover) {
+  .svc-card:hover { border-color: var(--sc-gold); }
+}
+.svc-card__top {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+.svc-card__title {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 21px;
+  font-weight: 500;
+  line-height: 1.25;
+  color: var(--sc-navy);
+  text-decoration: none;
+  transition: color .25s ease;
+}
+@media (hover: hover) {
+  .svc-card__title:hover { color: var(--sc-gold); }
+}
+.svc-card__count {
+  flex: 0 0 auto;
+  font-size: 10.5px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--sc-text-muted);
+  white-space: nowrap;
+}
+.svc-card__desc {
+  margin: 0 0 14px;
+  font-size: 14.5px;
+  line-height: 1.6;
+  color: var(--sc-text-sub);
+}
+.svc-card__links {
+  list-style: none;
+  margin: 0 0 14px;
+  padding: 0;
+  border-top: 1px solid var(--sc-border);
+}
+.svc-card__links li { border-bottom: 1px solid var(--sc-border); }
+.svc-card__links a {
+  display: block;
+  padding: 10px 0;
+  font-size: 14.5px;
+  line-height: 1.45;
+  color: var(--sc-text-sub);
+  text-decoration: none;
+  transition: color .2s ease, padding-left .3s cubic-bezier(.17, .84, .44, 1);
+}
+@media (hover: hover) {
+  .svc-card__links a:hover { color: var(--sc-gold); padding-left: 6px; }
+}
+.svc-card__more {
+  margin-top: auto;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: .04em;
+  color: var(--sc-gold);
+  text-decoration: none;
+}
+@media (hover: hover) {
+  .svc-card__more:hover { color: var(--sc-gold-2); }
+}
+
+/* ── FAQ «Стоимость и условия» ── свои стили для .pillar-faq:
+   страница не подключает pillar-split.css */
+.svc-faq { max-width: 760px; margin-top: clamp(48px, 6vw, 72px); }
+.svc-faq h2 {
+  margin: 0 0 14px;
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(22px, 2.2vw, 28px);
+  font-weight: 500;
+  color: var(--sc-navy);
+}
+.svc-faq details.pillar-faq { border-bottom: 1px solid var(--sc-border); }
+.svc-faq details.pillar-faq:first-of-type { border-top: 1px solid var(--sc-border); }
+.svc-faq .pillar-faq summary {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 16px 0;
+  list-style: none;
+  cursor: pointer;
+  color: var(--sc-navy);
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.45;
+}
+.svc-faq .pillar-faq summary::-webkit-details-marker { display: none; }
+.svc-faq .pillar-faq summary::after {
+  content: '+';
+  flex: 0 0 auto;
+  color: var(--sc-gold);
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1;
+  transition: transform .3s cubic-bezier(.17, .84, .44, 1);
+}
+.svc-faq .pillar-faq[open] summary::after { transform: rotate(45deg); }
+@media (hover: hover) {
+  .svc-faq .pillar-faq summary:hover { color: var(--sc-gold); }
+}
+.svc-faq .pillar-faq__a { padding: 0 0 18px; }
+.svc-faq .pillar-faq__a p {
+  margin: 0;
+  font-size: 15.5px;
+  line-height: 1.7;
+  color: var(--sc-text-sub);
+}
+
+/* ── финальный CTA: светлый вариант, как на страницах направления ── */
+body:has(.services-catalog) .final-cta {
+  background: #F5F0EB !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  padding: clamp(52px, 6vw, 88px) clamp(24px, 4.5vw, 88px) !important;
+  text-align: center;
+}
+body:has(.services-catalog) .final-cta h2 {
+  margin: 0 0 12px;
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(24px, 2.6vw, 34px);
+  font-weight: 500;
+  color: #1A2B3C;
+}
+body:has(.services-catalog) .final-cta p {
+  margin: 0 auto 26px;
+  max-width: 640px;
+  font-size: 16.5px;
+  line-height: 1.7;
+  color: #4A4A4A;
+}
+body:has(.services-catalog) .final-cta .btn--gold {
+  display: inline-block;
+  padding: 17px 34px;
+  background: #C75B39;
+  border: 0;
+  border-radius: 0;
+  color: #FFFBF7;
+  font-family: 'Manrope', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+@media (hover: hover) {
+  body:has(.services-catalog) .final-cta .btn--gold:hover { background: #B04E2F; }
+}
+
+@media (max-width: 640px) {
+  .svc-grid { grid-template-columns: 1fr; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .svc-card,
+  .svc-card__title,
+  .svc-card__links a,
+  .svc-search,
+  .svc-faq .pillar-faq summary::after { transition: none; }
+}
