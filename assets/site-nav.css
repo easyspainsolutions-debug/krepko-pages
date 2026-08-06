@@ -154,260 +154,200 @@ body:has(> header.site-nav) {
    Открывается через .site-nav__menu-btn click.
    ============================================================ */
 
+/* ── Мобильное меню: полноэкранная светлая панель (2026-08-06) ──
+   Раньше это была плавающая тёмная карточка 480px по центру — на светлом
+   сайте выглядела чужеродно, а с ростом каталога переставала вмещать
+   навигацию. Теперь полноэкранная шторка в терракотовой шкале:
+   поиск сверху, крупные пункты, направления сеткой (данные из
+   services_catalog.yaml — растут сами), контакты прижаты к низу. */
 .site-menu {
   border: none;
   padding: 0;
+  margin: 0;
   background: transparent;
   max-width: none;
   max-height: none;
   width: 100vw;
-  height: 100vh;
-  margin: 0;
+  height: 100dvh;
   inset: 0;
   overflow: hidden;
 }
+.site-menu::backdrop { background: rgba(26, 43, 60, 0.4); }
+.site-menu[open] { animation: site-menu-fade 200ms ease-out; }
+@keyframes site-menu-fade { from { opacity: 0; } to { opacity: 1; } }
 
-.site-menu::backdrop {
-  background: rgba(15, 17, 23, 0.78);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-}
-
-.site-menu[open] {
-  animation: site-menu-fade 200ms ease-out;
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-}
-
-@keyframes site-menu-fade {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-/* ── Card ── */
-.site-menu__card {
-  background: var(--surface-sunk);
-  border: 1px solid var(--border);
-  border-radius: var(--r-5);
-  padding: var(--space-5) var(--space-5) var(--space-6);
-  width: 100%;
-  max-width: 480px;
-  margin: var(--space-6) var(--space-4);
+.site-menu__sheet {
   display: flex;
   flex-direction: column;
-  gap: var(--space-5);
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
-  position: relative;
-  animation: site-menu-slide 220ms ease-out;
+  height: 100%;
+  background: #FFFBF7;
+  color: #2D2D2D;
+  animation: site-menu-slide 240ms ease-out;
+  /* нижний отступ под home-индикатор iOS */
+  padding-bottom: env(safe-area-inset-bottom, 0);
 }
-
 @keyframes site-menu-slide {
-  from { transform: translateY(-12px); opacity: 0; }
+  from { transform: translateY(24px); opacity: 0; }
   to { transform: translateY(0); opacity: 1; }
 }
-
-/* Sprint 5 a11y: respect prefers-reduced-motion (WCAG 2.3.3). */
 @media (prefers-reduced-motion: reduce) {
-  .site-menu__card { animation: none; }
+  .site-menu[open], .site-menu__sheet { animation: none; }
+}
+/* десктоп (меню доступно и там): панель справа, не весь экран */
+@media (min-width: 720px) {
+  .site-menu { display: flex; justify-content: flex-end; }
+  .site-menu__sheet {
+    width: min(420px, 92vw);
+    border-left: 1px solid #E8DFD1;
+    box-shadow: -24px 0 80px rgba(26, 43, 60, 0.2);
+    animation-name: site-menu-slide-x;
+  }
+  @keyframes site-menu-slide-x {
+    from { transform: translateX(32px); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+  }
 }
 
-/* ── Head: brand + close ── */
 .site-menu__head {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: var(--space-3);
-  padding-bottom: var(--space-3);
-  border-bottom: 1px solid var(--border-faint);
+  padding: 14px clamp(20px, 5vw, 28px);
+  border-bottom: 1px solid #E8DFD1;
 }
-.site-menu__brand {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--space-2);
-  text-decoration: none;
-  color: var(--gold);
-}
-/* Visual audit 2026-05-28: при открытии <dialog> autofocus поставлен на close-button,
-   но мышиный click на logo не должен оставлять «золотой ореол». :focus-visible
-   сохраняем для клавиатурной навигации (a11y). */
-.site-menu__brand:focus {
-  outline: none;
-}
-.site-menu__brand:focus-visible {
-  outline: 2px solid var(--gold);
-  outline-offset: 4px;
-  border-radius: var(--r-2);
-}
-.site-menu__brand-mark {
-  width: 24px;
-  height: 24px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-}
-.site-menu__brand-mark svg { width: 100%; height: 100%; display: block; }
+.site-menu__brand { text-decoration: none; }
 .site-menu__brand-text {
-  font-family: 'Manrope', sans-serif;
-  font-size: 18px;
-  font-weight: 800;
-  letter-spacing: -0.4px;
-  line-height: 1;
-  color: var(--gold);
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 26px;
+  font-weight: 600;
+  color: #1A2B3C;
 }
 .site-menu__close {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 36px;
-  height: 36px;
+  width: 44px;
+  height: 44px;
+  border: 1px solid #E8DFD1;
   border-radius: 50%;
-  background: transparent;
-  border: 1px solid var(--border);
-  color: var(--text-sub);
+  background: none;
+  color: #1A2B3C;
   cursor: pointer;
-  transition: background var(--t-1), border-color var(--t-1), color var(--t-1);
-}
-.site-menu__close:hover {
-  background: var(--surface-2);
-  border-color: var(--gold);
-  color: var(--gold);
 }
 .site-menu__close svg { width: 16px; height: 16px; }
 
-/* ── Nav links ── */
+.site-menu__scroll {
+  flex: 1;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: 18px clamp(20px, 5vw, 28px) 20px;
+}
+
+.site-menu__search {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 13px 16px;
+  border: 1px solid #E8DFD1;
+  border-radius: 10px;
+  background: #F5F0EB;
+  color: #6B6B6B;
+  font-family: 'Manrope', sans-serif;
+  font-size: 15px;
+  text-align: left;
+  cursor: pointer;
+}
+.site-menu__search svg { flex: 0 0 auto; width: 17px; height: 17px; color: #C75B39; }
+
 .site-menu__nav {
   display: flex;
   flex-direction: column;
-  gap: var(--space-1);
+  margin-top: 10px;
 }
 .site-menu__link {
-  display: grid;
-  grid-template-columns: 1fr auto auto;
-  align-items: center;
-  gap: var(--space-3);
-  padding: var(--space-3) var(--space-4);
-  text-decoration: none;
-  color: var(--text);
-  font-family: 'Manrope', sans-serif;
-  font-size: var(--ts-h4);
-  font-weight: 700;
-  border-radius: var(--r-3);
-  background: transparent;
-  border: 1px solid transparent;
-  transition: background var(--t-1), border-color var(--t-1), color var(--t-1);
-}
-.site-menu__link:hover {
-  background: var(--surface-2);
-  border-color: var(--border);
-  color: var(--gold);
-  text-decoration: none;
-}
-.site-menu__link.active {
-  background: var(--surface-2);
-  border-color: rgba(196, 149, 42, 0.45);
-  color: var(--gold);
-}
-.site-menu__link-text { grid-column: 1; }
-.site-menu__link-meta {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: var(--ts-meta);
+  display: block;
+  padding: 14px 2px;
+  border-bottom: 1px solid #EFE7DA;
+  color: #1A2B3C;
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 24px;
   font-weight: 500;
-  color: var(--text-label);
-  letter-spacing: 0.04em;
-  grid-column: 2;
+  text-decoration: none;
 }
-.site-menu__link-arrow {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: var(--ts-body);
-  color: var(--text-label);
-  grid-column: 3;
-  transition: color var(--t-1), transform var(--t-2);
-}
-.site-menu__link:hover .site-menu__link-arrow {
-  color: var(--gold);
-  transform: translateX(2px);
-}
+.site-menu__link.active { color: #C75B39; }
 
-/* ── Contacts ── */
-.site-menu__contacts {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-2);
-  padding-top: var(--space-4);
-  border-top: 1px solid var(--border-faint);
-}
-.site-menu__contacts-label {
-  font-family: 'Manrope', sans-serif;
-  font-size: var(--ts-label);
+.site-menu__dirs { margin-top: 22px; }
+.site-menu__label {
+  display: block;
+  margin-bottom: 10px;
+  font-size: 11px;
   font-weight: 700;
-  letter-spacing: 0.14em;
+  letter-spacing: .14em;
   text-transform: uppercase;
-  color: var(--text-label);
-  margin-bottom: var(--space-1);
+  color: #6B6B6B;
 }
-.site-menu__contacts-label::before {
-  content: '●  ';
-  color: var(--gold);
-  letter-spacing: 0;
-}
-
-.site-menu__channel {
+.site-menu__dirs-grid {
   display: grid;
-  grid-template-columns: 22px 1fr auto;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+.site-menu__dirs-grid a {
+  display: flex;
   align-items: center;
-  gap: var(--space-3);
-  padding: var(--space-3) var(--space-4);
-  border-radius: var(--r-3);
+  min-height: 44px;
+  padding: 10px 12px;
+  border: 1px solid #E8DFD1;
+  border-radius: 8px;
+  color: #2D2D2D;
+  font-size: 13.5px;
+  font-weight: 600;
+  line-height: 1.3;
   text-decoration: none;
-  background: transparent;
-  border: 1px solid var(--border);
-  color: var(--text);
+}
+@media (hover: hover) {
+  .site-menu__dirs-grid a:hover { border-color: #C75B39; color: #C75B39; }
+  .site-menu__link:hover { color: #C75B39; }
+  .site-menu__close:hover { color: #C75B39; border-color: #C75B39; }
+  .site-menu__search:hover { border-color: #C75B39; }
+}
+
+.site-menu__contacts {
+  padding: 14px clamp(20px, 5vw, 28px) 18px;
+  border-top: 1px solid #E8DFD1;
+  background: #FFFBF7;
+}
+.site-menu__cta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  padding: 15px;
+  background: #C75B39;
+  border-radius: 10px;
+  color: #FFFBF7;
   font-family: 'Manrope', sans-serif;
-  font-size: var(--ts-body-sm);
+  font-size: 15px;
   font-weight: 700;
-  transition: background var(--t-1), border-color var(--t-1), color var(--t-1), transform var(--t-2);
-}
-.site-menu__channel:hover {
-  background: var(--surface-2);
-  transform: translateY(-1px);
   text-decoration: none;
 }
-.site-menu__channel svg { width: 18px; height: 18px; }
-.site-menu__channel-meta {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: var(--ts-meta);
-  font-weight: 500;
-  color: var(--text-label);
-  letter-spacing: 0.04em;
+.site-menu__cta svg { width: 18px; height: 18px; }
+.site-menu__links-row {
+  display: flex;
+  justify-content: center;
+  gap: 22px;
+  margin-top: 12px;
 }
-.site-menu__channel--wa { color: var(--wa); }
-.site-menu__channel--wa:hover { border-color: rgba(78, 216, 138, 0.45); color: var(--wa); }
-.site-menu__channel--tg { color: var(--tg); }
-.site-menu__channel--tg:hover { border-color: rgba(91, 184, 224, 0.45); color: var(--tg); }
-
-/* ── Mobile adjustments ── */
-@media (max-width: 540px) {
-  .site-menu__card {
-    margin: var(--space-3) var(--space-3) var(--space-5);
-    padding: var(--space-4) var(--space-4) var(--space-5);
-    border-radius: var(--r-4);
-  }
-  .site-menu__link {
-    font-size: var(--ts-body);
-    padding: var(--space-3);
-  }
-  .site-menu__link-meta {
-    display: none;
-  }
-  .site-menu__channel {
-    padding: var(--space-3);
-  }
-  .site-menu__channel-meta {
-    display: none;
-  }
+.site-menu__links-row a {
+  color: #4A4A4A;
+  font-size: 13.5px;
+  text-decoration: none;
 }
-
+@media (hover: hover) {
+  .site-menu__links-row a:hover { color: #C75B39; }
+  .site-menu__cta:hover { background: #B04E2F; }
+}
 
 /* ═══ Terracotta-редизайн шапки (2026-08-03) ═══
    Топбар с контактами, горизонтальное меню, мегаменю каталога и кнопка

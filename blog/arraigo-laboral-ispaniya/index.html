@@ -18,7 +18,7 @@
   <link rel="stylesheet" href="/assets/module-hero.css?v=20260528">
   <link rel="stylesheet" href="/assets/module-trust.css?v=20260526h2">
   <link rel="stylesheet" href="/assets/module-process.css?v=20260526h2">
-  <link rel="stylesheet" href="/assets/site-nav.css?v=20260804">
+  <link rel="stylesheet" href="/assets/site-nav.css?v=20260806a">
 <script src="/assets/site-nav.js?v=20260805" defer></script>
   <link rel="stylesheet" href="/assets/krepko-chips.css?v=20260528">
   <link rel="stylesheet" href="/assets/site-footer.css?v=20260803">
@@ -27,7 +27,7 @@
   <link rel="stylesheet" href="/assets/cookie-consent.css?v=20260526a">
   <script src="/assets/cookie-consent.js?v=20260526a" defer></script>
 
-  <link rel="stylesheet" href="/assets/site-nav.css?v=20260804">
+  <link rel="stylesheet" href="/assets/site-nav.css?v=20260806a">
   <link rel="stylesheet" href="/assets/site-footer.css?v=20260803">
   <link rel="stylesheet" href="/assets/a11y.css">
   <link rel="stylesheet" href="/assets/desktop.css">
@@ -226,6 +226,8 @@
   <meta name="twitter:image" content="https://krepko.es/og-image.png">
 <link rel="stylesheet" href="/assets/no-underline.css?v=20260804">
 <link rel="stylesheet" href="/assets/blog-light.css?v=20260806b">
+<link rel="stylesheet" href="/assets/site-search.css?v=20260806a">
+<script src="/assets/site-search.js?v=20260806b" defer></script>
 </head>
 <body>
 <header class="site-nav" role="banner">
@@ -242,6 +244,9 @@
     </nav>
 
     <div class="site-nav__actions">
+      <a class="site-nav__search-btn" href="/services/" data-open-search aria-label="Поиск по сайту" aria-haspopup="dialog" aria-controls="site-search-dialog">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      </a>
       <a class="site-nav__consult" href="https://wa.me/34641048296?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%21%20%D0%A5%D0%BE%D1%87%D1%83%20%D0%B1%D0%B5%D1%81%D0%BF%D0%BB%D0%B0%D1%82%D0%BD%D1%83%D1%8E%20%D0%BA%D0%BE%D0%BD%D1%81%D1%83%D0%BB%D1%8C%D1%82%D0%B0%D1%86%D0%B8%D1%8E" target="_blank" rel="noopener noreferrer">Бесплатная консультация</a>
       <button class="site-nav__menu-btn" type="button" aria-label="Открыть меню" aria-haspopup="dialog" aria-controls="site-menu-dialog" onclick="document.getElementById('site-menu-dialog').showModal()">
         <span class="site-nav__menu-text">Меню</span>
@@ -307,7 +312,7 @@
 <div class="mega-overlay" id="mega-overlay" aria-hidden="true"></div>
 
 <dialog id="site-menu-dialog" class="site-menu" aria-label="Меню сайта" aria-modal="true">
-  <div class="site-menu__card">
+  <div class="site-menu__sheet">
 
     <header class="site-menu__head">
       <a class="site-menu__brand" href="/" aria-label="Krepko — на главную">
@@ -318,44 +323,44 @@
       </button>
     </header>
 
-    <nav class="site-menu__nav" aria-label="Основное меню">
-      <a href="/" data-page="home" class="site-menu__link">
-        <span class="site-menu__link-text">Главная</span>
-        <span class="site-menu__link-arrow" aria-hidden="true">→</span>
-      </a>
-      <a href="/services/" data-page="services" class="site-menu__link">
-        <span class="site-menu__link-text">Каталог услуг</span>
-        <span class="site-menu__link-meta">9 направлений</span>
-        <span class="site-menu__link-arrow" aria-hidden="true">→</span>
-      </a>
-      <a href="/about/" data-page="about" class="site-menu__link">
-        <span class="site-menu__link-text">О Krepko</span>
-        <span class="site-menu__link-arrow" aria-hidden="true">→</span>
-      </a>
-      <a href="/blog/" data-page="blog" class="site-menu__link">
-        <span class="site-menu__link-text">Блог</span>
-        <span class="site-menu__link-meta">статьи о бюрократии Испании</span>
-        <span class="site-menu__link-arrow" aria-hidden="true">→</span>
-      </a>
-    </nav>
+    <div class="site-menu__scroll">
+      <button class="site-menu__search" type="button" data-open-search>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        <span>Найти услугу или статью</span>
+      </button>
+
+      <nav class="site-menu__nav" aria-label="Основное меню">
+        <a href="/" data-page="home" class="site-menu__link">Главная</a>
+        <a href="/services/" data-page="services" class="site-menu__link">Каталог услуг</a>
+        <a href="/about/" data-page="about" class="site-menu__link">О Krepko</a>
+        <a href="/blog/" data-page="blog" class="site-menu__link">Блог</a>
+      </nav>
+
+      <div class="site-menu__dirs">
+        <span class="site-menu__label">Направления</span>
+        <nav class="site-menu__dirs-grid" aria-label="Направления услуг">
+          <a href="/notario/">Нотариус и документы</a>
+          <a href="/ukraina/">Документы из Украины</a>
+          <a href="/legalizacion/">Легализация и апостиль</a>
+          <a href="/tramites/">Административные процедуры</a>
+          <a href="/traduccion/">Присяжный перевод</a>
+          <a href="/banca/">Банковский счёт</a>
+          <a href="/migracion/">ВНЖ и миграция</a>
+          <a href="/fiscalidad/">Налоги</a>
+          <a href="/juridico/">Юридическое сопровождение</a>
+        </nav>
+      </div>
+    </div>
 
     <div class="site-menu__contacts">
-      <span class="site-menu__contacts-label">Связаться</span>
-      <a class="site-menu__channel site-menu__channel--wa" href="https://wa.me/34641048296" rel="noopener noreferrer" target="_blank">
+      <a class="site-menu__cta" href="https://wa.me/34641048296" rel="noopener noreferrer" target="_blank">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9 8.5 8.5 0 0 1 8.5 8.5z"/></svg>
-        <span>WhatsApp</span>
-        <span class="site-menu__channel-meta">+34 641 048 296</span>
+        Написать в WhatsApp
       </a>
-      <a class="site-menu__channel site-menu__channel--tg" href="https://t.me/krepko_es" rel="noopener noreferrer" target="_blank">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="5" cy="19" r="2"/><path d="M3 13a8 8 0 0 1 8 8M3 7a14 14 0 0 1 14 14"/></svg>
-        <span>Telegram канал</span>
-        <span class="site-menu__channel-meta">@krepko_es</span>
-      </a>
-      <a class="site-menu__channel site-menu__channel--tg" href="https://t.me/krepko_es_admin_bot" rel="noopener noreferrer" target="_blank">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="7" width="16" height="13" rx="2"/><circle cx="9" cy="13" r="1.2" fill="currentColor"/><circle cx="15" cy="13" r="1.2" fill="currentColor"/><path d="M12 7V4M10 4h4"/></svg>
-        <span>Telegram бот</span>
-        <span class="site-menu__channel-meta">для заявок</span>
-      </a>
+      <div class="site-menu__links-row">
+        <a href="https://t.me/krepko_es" rel="noopener noreferrer" target="_blank">Telegram канал</a>
+        <a href="https://t.me/krepko_es_admin_bot" rel="noopener noreferrer" target="_blank">Telegram бот</a>
+      </div>
     </div>
 
   </div>
