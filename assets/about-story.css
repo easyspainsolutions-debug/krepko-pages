@@ -518,7 +518,17 @@ body:has(.tw) { overflow-x: visible; }
   .tw-years {
     /* шапка сайта тоже липкая (65px) — лента встаёт сразу под ней */
     position: sticky; top: 64px; z-index: 5;
-    margin: 0 calc(var(--pad) * -1); padding: 10px var(--pad) 8px;
+    /* Во всю ширину экрана. Отрицательных полей в --pad здесь мало: лента
+       лежит в grid-элементе, у которого сверху стоит max-width: 100%
+       (страховка от вылета хроники), и её обрезало до колонки — правый
+       чип упирался в пустое поле, а растушёвка «листай дальше» вставала
+       посреди экрана. Full-bleed через 50% − 50vw не зависит ни от полей
+       предков, ни от ширины колонки. */
+    max-width: none;
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+    padding: 10px var(--pad) 8px;
     background: color-mix(in srgb, var(--bg) 92%, transparent);
     -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
     border-bottom: 1px solid var(--hair);
@@ -527,7 +537,9 @@ body:has(.tw) { overflow-x: visible; }
   .tw-years ul {
     display: flex; gap: 6px;
     overflow-x: auto; -ms-overflow-style: none; scrollbar-width: none;
-    margin: 0 calc(var(--pad) * -1); padding: 0 var(--pad) 4px;
+    /* поля теперь держит сама лента (full-bleed выше) — здесь только
+       нижний отступ под тень чипов */
+    margin: 0; padding: 0 0 4px;
   }
   .tw-years ul::-webkit-scrollbar { display: none; }
   .tw-years li { flex: 0 0 auto; }

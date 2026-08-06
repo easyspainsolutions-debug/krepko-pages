@@ -234,15 +234,18 @@ body:has(.pillar-split) main {
 @media (hover: hover) {
   .pillar-cat__head:hover { color: var(--ps-gold); }
 }
-/* список внутри категории — та же grid-механика, что у мобильного меню.
-   Схлопывается обёртка, а не сам <ul>: у грида 0fr задаёт высоту только
-   первой строке, поэтому список из <li> сжимался бы лишь на один пункт. */
+/* Список внутри категории.
+   Раньше высота анимировалась через grid-template-rows: 0fr → 1fr. Приём
+   опирается на интерполяцию fr-треков; там, где её нет, трек остаётся
+   нулевым и категория не раскрывается. max-height анимируется везде,
+   а высота здесь предсказуема: самая длинная категория — 11 пунктов
+   (≈450px), запас 1200px даёт двойной зазор. */
 .pillar-cat__panel {
-  display: grid;
-  grid-template-rows: minmax(0, 0fr);
-  transition: grid-template-rows .34s cubic-bezier(.17, .84, .44, 1);
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height .34s cubic-bezier(.17, .84, .44, 1);
 }
-.pillar-cat.is-open > .pillar-cat__panel { grid-template-rows: minmax(0, 1fr); }
+.pillar-cat.is-open > .pillar-cat__panel { max-height: 1200px; }
 .pillar-cat__list {
   list-style: none;
   margin: 0;
@@ -514,16 +517,26 @@ body:has(.pillar-split) main {
   }
   .pillar-nav__toggle[aria-expanded="true"] svg { transform: rotate(180deg); }
 
-  /* grid-строка 0fr→1fr анимирует высоту без магических чисел.
-     minmax(0, …) обязателен: у fr-трека автоматический минимум равен
-     min-content, и без него закрытая панель оставалась в полный рост. */
+  /* Раскрытие панели каталога.
+     Раньше высота анимировалась через grid-template-rows: 0fr → 1fr.
+     Приём опирается на интерполяцию fr-треков — она есть в актуальных
+     браузерах, но это самое хрупкое место всей навигации: если движок её
+     не поддерживает, трек остаётся нулевым и каталог из 64 услуг просто
+     не открывается. max-height анимируется везде.
+     Запас в 400vh (на телефоне ≈ 3200px) перекрывает даже состояние, где
+     раскрыты все категории; overflow-y на внутренней обёртке — страховка
+     на случай, если контент когда-нибудь перерастёт и это значение. */
   .pillar-nav__panel {
-    display: grid;
-    grid-template-rows: minmax(0, 0fr);
-    transition: grid-template-rows .38s cubic-bezier(.17, .84, .44, 1);
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height .38s cubic-bezier(.17, .84, .44, 1);
   }
-  .pillar-nav__panel > .pillar-nav__inner { overflow: hidden; }
-  .pillar-nav.is-open .pillar-nav__panel { grid-template-rows: minmax(0, 1fr); }
+  .pillar-nav.is-open .pillar-nav__panel { max-height: 400vh; }
+  .pillar-nav__panel > .pillar-nav__inner {
+    max-height: 400vh;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
   .pillar-nav__inner > ul { padding-top: 6px; }
 
   .pillar-nav__div { margin: 14px 0; }
