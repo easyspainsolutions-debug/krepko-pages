@@ -643,6 +643,32 @@ body:has(.pillar-split) .final-cta .btn--gold {
 .pillar-faq__a { padding: 0 0 18px; }
 .pillar-faq__a p { margin: 0; font-size: 15.5px; }
 
+/* ── «Статьи по теме» ──
+   Обратная перелинковка с блогом: услуга продаёт, статья объясняет. */
+.pillar-guides { margin-top: 34px; }
+.pillar-guides ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid var(--ps-border);
+}
+.pillar-guides li { border-bottom: 1px solid var(--ps-border); margin: 0; }
+.pillar-guides a {
+  display: block;
+  padding: 12px 0;
+  font-size: 15.5px;
+  line-height: 1.45;
+  color: var(--ps-text-sub);
+  text-decoration: none;
+  transition: color .2s ease, padding-left .3s cubic-bezier(.17, .84, .44, 1);
+}
+@media (hover: hover) {
+  .pillar-guides a:hover { color: var(--ps-gold); padding-left: 6px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pillar-guides a { transition: none; }
+}
+
 /* ── карточки смежных услуг ──
    Перелинковка внутри направления: под текстом услуги стоят 2–3 соседние
    доверенности, чтобы посетитель ушёл на смежную задачу, а не с сайта. */
