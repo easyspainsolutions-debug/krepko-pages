@@ -50,9 +50,12 @@
   height: 100%;
   overflow: hidden;
 }
-/* десктоп: панель, а не весь экран */
+/* десктоп: панель, а не весь экран.
+   ⚠️ Только [open]: закрытый <dialog> прячется браузерным display:none,
+   и голый `display:flex` его перебивает — оверлей висит на странице
+   постоянно. Ровно это и случилось 2026-08-06. */
 @media (min-width: 720px) {
-  .site-search {
+  .site-search[open] {
     display: flex;
     align-items: flex-start;
     justify-content: center;

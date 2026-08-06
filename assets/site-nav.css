@@ -154,6 +154,12 @@ body:has(> header.site-nav) {
    Открывается через .site-nav__menu-btn click.
    ============================================================ */
 
+/* Страховка на все диалоги сайта: закрытый <dialog> не показывается ни при
+   каких обстоятельствах. Браузер прячет его сам, но любое правило вида
+   `.some-dialog { display: … }` вне [open] эту защиту снимает — так 2026-08-06
+   меню и поиск оказались раскрытыми поверх страницы на всех экранах. */
+dialog:not([open]) { display: none !important; }
+
 /* ── Мобильное меню: полноэкранная светлая панель (2026-08-06) ──
    Раньше это была плавающая тёмная карточка 480px по центру — на светлом
    сайте выглядела чужеродно, а с ростом каталога переставала вмещать
@@ -193,9 +199,11 @@ body:has(> header.site-nav) {
 @media (prefers-reduced-motion: reduce) {
   .site-menu[open], .site-menu__sheet { animation: none; }
 }
-/* десктоп (меню доступно и там): панель справа, не весь экран */
+/* десктоп (меню доступно и там): панель справа, не весь экран.
+   ⚠️ Только [open]: без этого правило перебивает браузерное display:none
+   у закрытого <dialog>, и шторка висит поверх страницы всегда. */
 @media (min-width: 720px) {
-  .site-menu { display: flex; justify-content: flex-end; }
+  .site-menu[open] { display: flex; justify-content: flex-end; }
   .site-menu__sheet {
     width: min(420px, 92vw);
     border-left: 1px solid #E8DFD1;
