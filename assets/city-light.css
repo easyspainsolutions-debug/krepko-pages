@@ -1,0 +1,77 @@
+/* ═══════════════════════════════════════════════════════════════════════
+   Городские страницы — светлая терракотовая шкала (2026-08-07).
+
+   Шесть городов остались на тёмных токенах из tokens.css, пока остальной
+   сайт переехал в терракоту. Выглядело это не «иначе», а сломанно:
+   заголовок «Krepko в Аликанте» — тёмно-синий #1A2B3C на тёмном фоне
+   #171C28, почти нечитаемый; кнопка «Написать» зелёная из прежней палитры;
+   светлая шапка сверху обрывалась тёмным полотном.
+
+   Приём тот же, что у блога (blog-light.css): переопределяем сами токены,
+   а не десятки правил. Подключается ПОСЛЕДНИМ в city_pillar.html —
+   поэтому переопределение :root безопасно и не течёт на другие типы
+   страниц. ═══ */
+
+:root {
+  --bg: #FFFBF7;
+  --surface: #F5F0EB;
+  --surface-2: #F5F0EB;
+  --surface-sunk: #EFE7DA;
+  --surface-card: #F5F0EB;
+
+  --border-faint: #E8DFD1;
+  --border: #E8DFD1;
+
+  --text: #2D2D2D;
+  --text-sub: #4A4A4A;
+  --text-muted: #6B6B6B;
+  --text-label: #6B6B6B;
+  --text-dim: #6B6B6B;
+  --text-nav: #4A4A4A;
+
+  --gold: #C75B39;
+  --gold-2: #B04E2F;
+  --gold-tint: rgba(199, 91, 57, 0.12);
+  --gold-on: #FFFBF7;
+
+  --danger: #B91C1C;
+
+  --glow-gold: 0 4px 14px rgba(199, 91, 57, 0.25);
+}
+
+/* Модульные карточки и поверхности, попадающие в разметку города */
+.card,
+.city-service-hubs .card,
+.doc-card {
+  background: #F5F0EB;
+  border-color: #E8DFD1;
+}
+
+/* Заголовок города: на тёмной теме он брал --text-dim и сливался с фоном */
+.hero--city h1,
+.hero--city .hero__title {
+  color: #1A2B3C;
+}
+.hero--city .hero__dek {
+  color: #4A4A4A;
+}
+
+/* Строка статуса под кнопками: тёмная плашка на светлом фоне читалась
+   как чужеродный блок */
+.hero--city .hero__status-bar {
+  background: #F5F0EB;
+  border-color: #E8DFD1;
+  color: #6B6B6B;
+}
+
+/* Основная кнопка была зелёной из старой палитры */
+.hero--city .btn--wa,
+.hero--city .btn--gold {
+  background: #C75B39;
+  border-color: #C75B39;
+  color: #FFFBF7;
+}
+.hero--city .btn--ghost {
+  border-color: #DCCFB9;
+  color: #1A2B3C;
+}
