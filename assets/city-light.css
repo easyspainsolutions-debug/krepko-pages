@@ -41,7 +41,6 @@
 
 /* Модульные карточки и поверхности, попадающие в разметку города */
 .card,
-.city-service-hubs .card,
 .doc-card {
   background: #F5F0EB;
   border-color: #E8DFD1;

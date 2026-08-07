@@ -1,0 +1,820 @@
+/* ═══════════════════════════════════════════════════════════════════════
+   Блоки городской страницы: «Популярное» и «Как проходит работа».
+
+   2026-08-07: городские страницы перестроены под роль «вход из поиска».
+   Вместо девяти карточек направлений (копия главного меню) и трёх списков
+   документов — три ходовые услуги и пять шагов процесса. Разметка взята с
+   главной без изменений, поэтому нужны её стили.
+
+   Тащить весь home-redesign.css (187 KB) нельзя: он переопределяет main,
+   .final-cta и .faq__item и ломает вёрстку. Здесь только правила двух
+   блоков, извлечённые по селекторам .srow*, .steps/.step*, .sec-dek.
+
+   Файл СГЕНЕРИРОВАН из home-redesign.css. Правки вносить в исходник и
+   пересобирать, иначе главная и города разъедутся.
+
+   Шкалу токенов объявляет city-light.css — он подключается раньше и уже
+   переопределил --bg/--surface/--gold на светлые. Здесь только те
+   переменные типографики, которых в общих токенах нет. ═══ */
+
+.city-blocks {
+  --fs-lead: clamp(15.5px, calc(0.1875vw + 15.25px), 19px);
+  --fs-subtitle: clamp(18px, calc(0.44vw + 15.25px), 24px);
+  --fs-title: clamp(24px, calc(0.875vw + 22.5px), 40px);
+  --lh-lead: 1.6;
+  --lh-subtitle: 1.28;
+  --lh-title: 1.15;
+  --g: clamp(28px, 3.5vw, 56px);
+  --gap-head-content: clamp(26px, 2.2vw, 44px);
+  --gap-title-dek: clamp(8px, 0.7vw, 14px);
+  --sec-pad: clamp(52px, 6vw, 92px);
+}
+
+@media (min-width: 1000px) {
+  #sec-services .card-grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  #sec-services .card-grid:nth-of-type(2) {
+      grid-template-columns: repeat(5, 1fr);
+    }
+}
+
+/* ============ Round 3: service card hover, timeline, city photo-cards ============ */
+
+  /* 5. Service cards — left accent bar grows on hover + lift */
+  #sec-services .card--service {
+    position: relative;
+    overflow: hidden;
+    transition: transform .3s ease, box-shadow .3s ease;
+  }
+
+#sec-services .card--service::after {
+    content: '';
+    position: absolute;
+    left: 0; top: 0;
+    width: 4px; height: 0;
+    background: var(--gold);
+    transition: height .3s ease;
+  }
+
+#sec-services .card--service:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 24px 48px rgba(26, 43, 60, 0.16);
+  }
+
+#sec-services .card--service:hover::after { height: 100%; }
+
+#sec-services .card__arrow {
+    transition: opacity .25s ease, transform .25s ease;
+  }
+
+@media (hover: hover) {
+  #sec-services .card__arrow { opacity: 0; transform: translateX(-4px); }
+  #sec-services .card--service:hover .card__arrow { opacity: 1; transform: translateX(0); }
+}
+
+/* --- процесс --- */
+  .intro__how { max-width: 780px; margin: 0 auto; text-align: center; }
+
+.intro__how .p-label { display: inline-block; margin-bottom: 14px; }
+
+.intro__how h2 { font-size: 36px; line-height: 1.18; margin: 0 0 32px; }
+
+@media (min-width: 1000px) {
+  .intro__how h2 { font-size: 42px; }
+}
+
+.intro__how .timeline { text-align: left; max-width: 560px; margin: 0 auto; }
+
+.intro__how .timeline-item::before { background: var(--surface); }
+
+/* ============ Round 19: услуги строчным списком (по мотивам Koch Ecommerce,
+     палитра наша: sand-полотно, терракотовые иконки, тонкие разделители) ============ */
+  .srows {
+    background: var(--surface);
+    border: 1px solid var(--border-faint);
+    border-radius: 4px;
+    padding: 8px 0;
+    margin-top: 8px;
+    text-align: left;
+  }
+
+.srow {
+    display: grid;
+    grid-template-columns: 44px minmax(0, 1fr) auto;
+    grid-template-areas: "icon title action" "icon meta action";
+    align-items: center;
+    column-gap: 18px;
+    padding: 20px 26px;
+    border-bottom: 1px solid var(--border-faint);
+    text-decoration: none;
+    color: inherit;
+    transition: background .18s ease, padding-left .18s ease;
+  }
+
+.srow:last-child { border-bottom: 0; }
+
+@media (hover: hover) {
+  .srow:hover { background: var(--bg); padding-left: 32px; }
+  .srow:hover .srow__action { color: var(--gold); }
+  .srow:hover .srow__action svg { transform: translateX(4px); }
+}
+
+.srow:focus-visible { outline: 2px solid var(--gold); outline-offset: -2px; }
+
+.srow__icon { grid-area: icon; display: inline-flex; color: var(--gold); }
+
+.srow__icon svg { width: 26px; height: 26px; }
+
+.srow__title {
+    grid-area: title;
+    font-family: 'Playfair Display', serif;
+    font-weight: 500;
+    font-size: clamp(20px, 2.2vw, 26px);
+    line-height: 1.25;
+    color: #1A2B3C;
+  }
+
+.srow__meta {
+    grid-area: meta;
+    font-family: 'Manrope', sans-serif;
+    font-size: 13px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-top: 4px;
+  }
+
+.srow__action {
+    grid-area: action;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'Manrope', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    white-space: nowrap;
+    transition: color .18s ease;
+  }
+
+.srow__action svg { transition: transform .18s ease; }
+
+.srows__footer { margin-top: 28px; }
+
+.srows__all {
+    font-family: 'Manrope', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--gold);
+    text-decoration: none;
+  }
+
+.srows__all:hover { text-decoration: none; }
+
+@media (max-width: 640px) {
+  .srow {
+      grid-template-columns: 36px minmax(0, 1fr);
+      grid-template-areas: "icon title" "icon meta" "action action";
+      padding: 18px 18px;
+      row-gap: 2px;
+    }
+  .srow__icon svg { width: 22px; height: 22px; }
+  .srow__action { margin-top: 10px; font-size: 12px; }
+}
+
+/* строка «Смотреть все услуги» — визуально отделена как переход в каталог */
+  .srow--all {
+    background: var(--bg);
+    border-top: 1px solid var(--border);
+  }
+
+.srow--all .srow__title { font-size: clamp(18px, 2vw, 22px); }
+
+.srow--all .srow__action { color: var(--gold); }
+
+/* ============ Round 22: процесс — горизонтальная дорожка ============ */
+  .steps {
+    list-style: none;
+    margin: 32px 0 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 26px;
+    position: relative;
+    text-align: left;
+  }
+
+.step { display: grid; grid-template-columns: 56px 1fr; align-items: start; gap: 16px; }
+
+.step__dot {
+    width: 56px; height: 56px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    position: relative;
+    z-index: 1;
+    flex-shrink: 0;
+  }
+
+.step__num {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 500;
+    color: var(--gold);
+    line-height: 1;
+  }
+
+.step__text {
+    margin: 0;
+    font-size: 16px;
+    line-height: 1.55;
+    color: var(--text-sub);
+    align-self: center;
+  }
+
+@media (min-width: 900px) {
+  .steps {
+      grid-template-columns: repeat(4, 1fr);
+      gap: 28px;
+      margin-top: 44px;
+    }
+  /* Линия набрана отдельными сегментами между соседними кружками, а не
+       одной сплошной: сплошная проходила сквозь кружки и наползала на них. */
+    .step {
+      grid-template-columns: 1fr;
+      justify-items: center;
+      text-align: center;
+      gap: 18px;
+    }
+  .step__text { font-size: 15px; max-width: 240px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .step { opacity: 1; transform: none; }
+}
+
+/* ============ Round 26: шаги во всю ширину, без заголовка ============ */
+  .intro__how {
+    max-width: none !important;
+    width: 100vw;
+    margin: 0 calc(50% - 50vw) !important;
+    padding: clamp(48px, 6vw, 88px) clamp(20px, 5vw, 88px);
+  }
+
+/* заголовок снят — верхний отступ дорожки теперь лишний */
+  .intro__how .steps {
+    margin-top: 0 !important;
+    max-width: 1320px;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+
+@media (min-width: 900px) {
+  .intro__how .steps { --g: clamp(28px, 3.5vw, 56px); gap: var(--g); }
+  .intro__how .step { position: relative; }
+  /* Сегмент живёт в промежутке между двумя кружками и не заходит на них:
+       от правого края своего (50% + 28px) до левого края следующего
+       (100% + gap + 50% − 28px) ⇒ ширина = 100% + gap − 56px. */
+    .intro__how .step::before,
+    .intro__how .step::after {
+      content: '';
+      position: absolute;
+      top: 27px;
+      left: calc(50% + 28px);
+      width: calc(100% + var(--g) - 56px);
+      height: 2px;
+      z-index: 0;
+    }
+  .intro__how .step::before { background: var(--border-faint); }
+  /* заливка сегмента — свой прогресс 0…1, растёт слева направо */
+    /* без transition: значение и так обновляется каждый кадр скролла,
+       а переход в .25s заставлял линию догонять курсор и дёргаться */
+    .intro__how .step::after {
+      background: var(--gold);
+      transform: scaleX(var(--seg, 0));
+      transform-origin: left center;
+      will-change: transform;
+    }
+  /* у последнего кружка сегмента нет */
+    .intro__how .step:last-child::before,
+    .intro__how .step:last-child::after { display: none; }
+  .intro__how .step__text { max-width: 260px; }
+}
+
+/* кружки загораются по мере прохождения дорожки */
+  .step__dot {
+    transition: background .35s ease, border-color .35s ease;
+  }
+
+.step__num { transition: color .35s ease; }
+
+.step.is-on .step__dot {
+    background: var(--gold);
+    border-color: var(--gold);
+    /* «бульк» — упругий скачок в момент активации, возврат в исходный размер */
+    animation: stepPop .55s cubic-bezier(.34, 1.56, .64, 1);
+  }
+
+.step.is-on .step__num { color: #fff; }
+
+@media (prefers-reduced-motion: reduce) {
+  .step__dot, .step__num, .intro__how .step::after { transition: none; }
+  .step.is-on .step__dot { animation: none; }
+}
+
+/* Единая черта-акцент под всеми заголовками секций главной. */
+  .values__h::after,
+  #sec-services > h2::after,
+  #sec-reviews > h2::after,
+  .home-guides > h2::after,
+  #sec-coverage h2::after,
+  .home-faq h2::after,
+  .intro__how > h2::after,
+  .final-cta > h2::after {
+    content: '';
+    display: block;
+    width: 56px;
+    height: 2px;
+    margin: 18px 0 0;
+    background: var(--gold);
+  }
+
+/* заголовок философии и «Как мы работаем» центрированы всегда (их секции
+     центрированы на любой ширине), остальные — с десктопа */
+  .values__h::after,
+  .intro__how > h2::after { margin-left: auto; margin-right: auto; }
+
+@media (min-width: 1000px) {
+  #sec-services > h2::after,
+    #sec-reviews > h2::after,
+    .home-guides > h2::after,
+    #sec-coverage h2::after,
+    .home-faq h2::after,
+    .final-cta > h2::after { margin-left: auto; margin-right: auto; }
+}
+
+/* — полосы: цвет хедера (--surface-sunk #EFE7DA), одна механика full-bleed.
+       Карточки внутри остаются на --surface #F5F0EB и потому всплывают. — */
+  #sec-services,
+  #sec-coverage,
+  #sec-reviews {
+    background: var(--surface-sunk);
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+    padding-left: clamp(24px, 4.5vw, 88px);
+    padding-right: clamp(24px, 4.5vw, 88px);
+  }
+
+/* — единый вертикальный ритм у всех секций — */
+  #sec-intro,
+  #sec-services,
+  #sec-reviews,
+  .home-guides,
+  #sec-coverage,
+  .home-faq,
+  .final-cta {
+    padding-top: var(--sec-pad) !important;
+    padding-bottom: var(--sec-pad) !important;
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+  }
+
+.intro__how { padding-top: var(--sec-pad); padding-bottom: var(--sec-pad); }
+
+/* ============ Round 30: зебра по смысловым блокам ============
+     Правило: заголовок ВСЕГДА лежит внутри своей полосы, а не над ней.
+     Раньше «Философия работы» висела на cream, а её карточки были на sunk —
+     отсюда ощущение, что часть заголовков «без фона».
+
+       hero cream · лента SUNK · знакомство cream · Популярное SUNK ·
+       Философия cream · Как мы работаем SUNK · Отзывы cream ·
+       Гайды SUNK · Города cream · Вопросы SUNK · CTA cream            */
+
+  /* — полосы цвета хедера — */
+  .marquee, .ticker,
+  #sec-services,
+  .intro__how,
+  .home-guides,
+  .home-faq {
+    background: var(--surface-sunk) !important;
+  }
+
+/* ============ Round 31: строка услуги всплывает при наведении ============
+     Было: сдвиг padding-left — строка «прыгала» и ломала сетку.
+     Стало: подъём + лёгкое увеличение на мягкой пружине, строка отрывается
+     от списка тенью и скруглением, соседние строки не двигаются. */
+  .srow {
+    position: relative;
+    z-index: 0;
+    border-radius: 6px;
+    transition: transform .32s cubic-bezier(.22, 1, .36, 1),
+                box-shadow .32s cubic-bezier(.22, 1, .36, 1),
+                background-color .25s ease,
+                border-color .25s ease;
+  }
+
+.srow__icon { transition: transform .32s cubic-bezier(.22, 1, .36, 1); }
+
+@media (hover: hover) {
+  .srow:hover {
+      padding-left: 26px;                 /* гасим прежний сдвиг влево */
+      transform: translateY(-4px) scale(1.015);
+      background: var(--bg);
+      box-shadow: 0 22px 44px -20px rgba(45, 45, 45, .30),
+                  0 3px 10px rgba(45, 45, 45, .06);
+      border-bottom-color: transparent;   /* линия резала бы поднятую строку */
+      z-index: 3;
+    }
+  .srow:hover .srow__icon { transform: scale(1.12); }
+  /* глобальный a:hover подчёркивает весь текст строки — гасим */
+    .srow:hover .srow__title,
+    .srow:hover .srow__meta,
+    .srow:hover .srow__action { text-decoration: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .srow, .srow__icon { transition: none; }
+  .srow:hover { transform: none; }
+}
+
+/* ============ Round 45: шаги — заголовок и содержание ============
+     Секция была единственной без заголовка, а четыре коротких фразы плавали
+     в пустой полосе. Возвращаем связку «заголовок + подзаголовок», как у
+     остальных, и даём каждому шагу вторую строку с конкретикой. */
+  .intro__how h2 { margin: 0; }
+
+.intro__how .sec-dek { margin: 20px auto 0; }
+
+.intro__how .steps { margin-top: clamp(40px, 4.5vw, 64px) !important; }
+
+.intro__how .step__text {
+    margin: 0;
+    font-family: 'Playfair Display', serif;
+    font-weight: 500;
+    font-size: clamp(18px, 1.5vw, 21px);
+    line-height: 1.25;
+    color: #1A2B3C;
+    max-width: 260px;
+  }
+
+.intro__how .step__note {
+    margin: 10px 0 0;
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--text-sub);
+    max-width: 260px;
+  }
+
+@media (max-width: 899px) {
+  .intro__how .step__text,
+    .intro__how .step__note { max-width: none; }
+  .intro__how .step__note { grid-column: 2; }
+}
+
+/* ============ Round 42: единый вертикальный ритм ============
+     Правило: у КАЖДОЙ полосы верхний отступ равен нижнему и равен --sec-pad.
+     Нарушители, найденные аудитом:
+       • .intro задавал 56px сверху / 64px снизу;
+       • между карточками принципов и шагами висел лишний margin 64px,
+         хотя полосы уже разделены сменой фона;
+       • .final-cta нёс padding 88/64 из module-process.css. */
+
+  #sec-intro,
+  #sec-services,
+  #sec-reviews,
+  .home-guides,
+  #sec-coverage,
+  .home-faq,
+  .final-cta,
+  .intro,
+  .intro__how {
+    padding-top: var(--sec-pad) !important;
+    padding-bottom: var(--sec-pad) !important;
+  }
+
+/* ============ Round 46: зебра пересобрана под новый порядок ============
+     Города переехали выше (сразу после «Популярного»), гайды — ниже отзывов.
+     Фоны привязаны к селекторам, а не к позиции, поэтому чередование сбилось:
+     города и философия оказались двумя cream подряд, гайды и вопросы — двумя
+     песочными. Переназначаем по новой последовательности:
+
+       hero cream · лента SUNK · знакомство cream · Популярное SUNK ·
+       Города cream · Философия SUNK · Как работаем cream · Отзывы SUNK ·
+       Гайды cream · Вопросы SUNK · CTA cream                              */
+
+  .values__h, .sec-dek--values, .values,
+  #sec-reviews {
+    background: var(--surface-sunk) !important;
+  }
+
+.intro__how,
+  .home-guides {
+    background: var(--bg) !important;
+  }
+
+/* заголовок философии теперь часть песочной полосы — растягиваем его,
+     иначе фон лёг бы только под текстом шириной 780px */
+  .values__h, .sec-dek--values {
+    width: 100vw;
+    max-width: none;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+    padding-left: clamp(24px, 4.5vw, 88px);
+    padding-right: clamp(24px, 4.5vw, 88px);
+  }
+
+/* Подзаголовок — часть песочной полосы. Тянем фон во всю ширину, а текст
+     держим узкой колонкой боковыми паддингами: сам <p> текстовый, обернуть
+     его в контейнер без правки разметки нельзя. !important — ниже по файлу
+     общее правило .sec-dek задаёт max-width 680px и обрезало бы полосу. */
+  .sec-dek--values {
+    /* полоса во всю ширину, но текст внутри идёт по центру — как заголовок
+       «Философия работы» над ней */
+    text-align: center;
+    width: 100vw !important;
+    max-width: none !important;
+    margin: 0 calc(50% - 50vw) !important;
+    padding-top: 0 !important;
+    padding-bottom: clamp(28px, 3.4vw, 44px) !important;
+    padding-left: max(clamp(24px, 4.5vw, 88px), calc((100vw - 680px) / 2)) !important;
+    padding-right: max(clamp(24px, 4.5vw, 88px), calc((100vw - 680px) / 2)) !important;
+  }
+
+/* ============ Round 40: кнопки секций — по принципу «Читать» ============
+     Обе были сплошной терракотовой заливкой и перетягивали внимание с
+     контента. Приводим к outline-виду карточной кнопки: обводка + терракотовый
+     текст, заливка приходит только при наведении. Заливка у .btn--gold идёт
+     через background-image (градиент), поэтому гасим именно его. */
+  .srows__foot .btn,
+  .gcards__foot .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 16px 34px !important;
+    background: none !important;
+    background-image: none !important;
+    border: 1px solid var(--gold) !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    font-family: 'Manrope', sans-serif;
+    font-size: 12px !important;
+    font-weight: 600;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--gold) !important;
+    transition: background-color .25s ease, color .25s ease;
+  }
+
+@media (hover: hover) {
+  .srows__foot .btn:hover,
+    .gcards__foot .btn:hover {
+      background: var(--gold) !important;
+      background-image: none !important;
+      color: #FFFBF7 !important;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .srows__foot .btn, .gcards__foot .btn { transition: none; }
+}
+
+/* ============ Round 39: «Популярное» — прайс-лист вместо таблицы ============
+     Было: общая рамка-коробка вокруг трёх строк (читалась как таблица),
+     900px пустоты между названием и «Подробнее», кнопка висела отдельно.
+     Стало: коробки нет — только волосяные разделители; слева крупный номер
+     для ритма; справа срок, который раньше прятался в серой мете. */
+
+  #sec-services .srows {
+    background: none !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    padding: 0 !important;
+    max-width: 1320px;
+    margin: 44px auto 0;
+  }
+
+#sec-services .srow {
+    display: grid;
+    grid-template-columns: 74px minmax(0, 1fr) auto 30px;
+    align-items: center;
+    column-gap: clamp(16px, 2vw, 32px);
+    padding: clamp(24px, 2.6vw, 34px) 8px;
+    border-bottom: 1px solid var(--border-faint) !important;
+    border-radius: 0 !important;
+    background: none !important;
+    box-shadow: none !important;
+    transform: none !important;
+    text-decoration: none;
+    color: inherit;
+    transition: padding-left .3s cubic-bezier(.22, 1, .36, 1),
+                border-color .3s ease;
+  }
+
+#sec-services .srow:first-child { border-top: 1px solid var(--border-faint) !important; }
+
+#sec-services .srow__num {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(28px, 2.6vw, 38px);
+    line-height: 1;
+    color: var(--gold);
+    opacity: .38;
+    transition: opacity .3s ease;
+  }
+
+#sec-services .srow__body { display: flex; flex-direction: column; gap: 7px; min-width: 0; }
+
+#sec-services .srow__title {
+    font-family: 'Playfair Display', serif;
+    font-weight: 500;
+    font-size: clamp(21px, 2vw, 28px);
+    line-height: 1.22;
+    color: #1A2B3C;
+  }
+
+#sec-services .srow__cat {
+    font-family: 'Manrope', sans-serif;
+    font-size: 12px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+
+/* срок — то, ради чего заполняли правую часть */
+  #sec-services .srow__term { display: flex; flex-direction: column; align-items: flex-end; gap: 4px; }
+
+#sec-services .srow__term-val {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(18px, 1.5vw, 22px);
+    line-height: 1;
+    color: #1A2B3C;
+    white-space: nowrap;
+  }
+
+#sec-services .srow__term-sub {
+    font-family: 'Manrope', sans-serif;
+    font-size: 11px;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+
+#sec-services .srow__go {
+    display: inline-flex;
+    justify-content: flex-end;
+    color: var(--gold);
+    transition: transform .3s cubic-bezier(.22, 1, .36, 1);
+  }
+
+@media (hover: hover) {
+  #sec-services .srow:hover {
+      padding-left: 20px;
+      border-color: var(--gold) !important;
+      background: none !important;
+    }
+  #sec-services .srow:hover .srow__num { opacity: 1; }
+  #sec-services .srow:hover .srow__go { transform: translateX(6px); }
+}
+
+@media (max-width: 720px) {
+  #sec-services .srow { grid-template-columns: 46px minmax(0, 1fr) auto; column-gap: 14px; }
+  #sec-services .srow__go { display: none; }
+  #sec-services .srow__num { font-size: 24px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #sec-services .srow, #sec-services .srow__go, #sec-services .srow__num { transition: none; }
+}
+
+/* кнопка перестаёт «висеть»: шире и ближе к списку */
+  #sec-services .srows__foot { margin-top: 40px; }
+
+/* переход в каталог кнопкой под списком, как «Читать больше» у гайдов */
+  .srows__foot { text-align: center; }
+
+/* подзаголовок секции — по образцу .home-guides__dek */
+  .sec-dek {
+    max-width: 680px;
+    margin: 20px auto 0;
+    font-size: 18px;
+    line-height: 1.6;
+    color: var(--text-sub);
+  }
+
+/* ============ Round 50: типографическая ревизия ============
+     Заголовки секций собирались в разное время и разошлись: на мобильном они
+     были 17 / 18 / 24 / 36px, на десктопе 42 / 44 / 48px, веса 500 и 800, а у
+     «Вопросы? Ответы» отличался ещё и цвет. Здесь одна шкала на все секции. */
+  #sec-services h2,
+  #sec-reviews h2,
+  #sec-coverage .map-head h2,
+  .home-guides h2,
+  .home-faq .faq__aside h2,
+  .final-cta h2,
+  .intro__how h2,
+  .values__h {
+    font-family: 'Playfair Display', Georgia, serif !important;
+    font-size: clamp(30px, 4vw, 48px) !important;
+    font-weight: 500 !important;
+    line-height: 1.15 !important;
+    color: #1A2B3C !important;
+    letter-spacing: -0.01em;
+  }
+
+/* Подзаголовки секций тоже разъехались: 14 / 15 / 18px при одинаковой роли. */
+  .sec-dek,
+  #sec-coverage .home-coverage__dek,
+  .home-guides__dek,
+  .home-faq .faq__dek {
+    font-size: clamp(16px, 1.3vw, 18px) !important;
+    line-height: 1.6 !important;
+    color: var(--text-sub) !important;
+  }
+
+/* Те же правки для шкал, заданных вне медиазапроса: максимум набирался
+     уже к 1200–1400px, дальше заголовки стояли на месте. */
+  #sec-services h2,
+  #sec-reviews h2,
+  #sec-coverage .map-head h2,
+  .home-guides h2,
+  .home-faq .faq__aside h2,
+  .final-cta h2,
+  .intro__how h2,
+  .values__h {
+    font-size: clamp(25px, calc(0.95vw + 21px), 40px) !important;
+  }
+
+.sec-dek,
+  #sec-coverage .home-coverage__dek,
+  .home-guides__dek,
+  .home-faq .faq__dek {
+    font-size: clamp(14px, calc(0.14vw + 12.8px), 16px) !important;
+  }
+
+#sec-services h2, #sec-reviews h2, #sec-coverage .map-head h2,
+  .home-guides h2, .home-faq .faq__aside h2, .final-cta h2,
+  .intro__how h2, .values__h {
+    font-size: var(--fs-title) !important;
+    line-height: var(--lh-title) !important;
+  }
+
+/* — 2. заголовки карточек, вопросы, имена городов — одна ступень — */
+  .city__name,
+  .home-guides .gcard__title,
+  #sec-services .srow__title,
+  .value__title,
+  .home-faq .faq__item > summary.faq__q,
+  .intro__bridge,
+  .portrait__name {
+    font-size: var(--fs-subtitle) !important;
+    line-height: var(--lh-subtitle) !important;
+    font-weight: 500 !important;
+  }
+
+/* — 3. подводки и крупные абзацы — */
+  .hero--home .hero__dek, .hero__dek,
+  .sec-dek, #sec-coverage .home-coverage__dek, .home-guides__dek,
+  .home-faq .faq__dek,
+  .city__lead,
+  .intro__bridge-sub {
+    font-size: var(--fs-lead) !important;
+    line-height: var(--lh-lead) !important;
+  }
+
+/* — 8. декоративные цифры: своя роль, но интерлиньяж без люфта — */
+  .stat__value, #sec-services .srow__num, .step__num,
+  .rv__quote, .rv__avatar, .city__num {
+    line-height: 1 !important;
+  }
+
+#sec-services h2, #sec-reviews h2, #sec-coverage .map-head h2,
+  .home-guides h2, .final-cta h2, .intro__how h2, .values__h {
+    margin-top: 0 !important;
+    margin-bottom: var(--gap-title-dek) !important;
+  }
+
+.sec-dek,
+  #sec-coverage .home-coverage__dek,
+  .home-guides__dek {
+    margin-top: 0 !important;
+    margin-bottom: var(--gap-head-content) !important;
+  }
+
+.sec-dek--values { margin-bottom: 0 !important; }
+
+.srow:nth-of-type(2) { transition-delay: 70ms; }
+
+.srow:nth-of-type(3) { transition-delay: 140ms; }
+
+.step:nth-of-type(2) { transition-delay: 110ms; }
+
+.step:nth-of-type(3) { transition-delay: 220ms; }
+
+.step:nth-of-type(4) { transition-delay: 330ms; }
