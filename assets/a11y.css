@@ -19,7 +19,11 @@ textarea:focus-visible,
 select:focus-visible,
 details:focus-visible {
   outline: none;
-  box-shadow: 0 0 0 2px var(--gold);
+  /* --focus-ring задан глобально в site-nav.css. Раньше здесь стоял
+     var(--gold): на светлых страницах он берётся из тёмной шкалы
+     (#C4952A) и рисовал чужое горчичное кольцо поверх терракотового
+     оформления — три обводки на одном поле поиска. */
+  box-shadow: 0 0 0 2px var(--focus-ring, var(--gold));
   border-radius: var(--space-1);
 }
 

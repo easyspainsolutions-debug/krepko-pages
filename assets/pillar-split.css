@@ -544,7 +544,32 @@ body:has(.pillar-split) main {
   .pillar-nav__toggle { display: none; }
   .pillar-split--doc .pillar-nav__search,
   .pillar-split--doc .pillar-nav__empty { display: none; }
-  .pillar-split--hub .pillar-nav__search { background: var(--ps-bg); margin-bottom: 14px; }
+  /* Поиск: строка, а не коробка.
+     Было три обводки разом — рамка поля, тень фокуса и горчичный
+     box-shadow из a11y.css (там --gold берётся из тёмной палитры и на
+     светлой странице читается как чужой жёлтый). Оставляем одну линию
+     снизу: в покое она цвета остальных линий каталога, в фокусе —
+     терракотовая. Этого достаточно и глазу, и клавиатурной навигации. */
+  .pillar-split--hub .pillar-nav__search {
+    margin: 0 0 6px;
+    padding: 12px 2px;
+    background: none;
+    border: 0;
+    border-bottom: 1px solid var(--ps-border);
+    border-radius: 0;
+    box-shadow: none;
+  }
+  .pillar-split--hub .pillar-nav__search:focus-within {
+    border-bottom-color: var(--ps-gold);
+    box-shadow: none;
+  }
+  .pillar-split--hub .pillar-nav__search input { font-size: 16px; }
+  /* 16px — ниже этого размера Safari на iPhone зумит страницу при фокусе */
+  .pillar-nav__search input:focus,
+  .pillar-nav__search input:focus-visible {
+    outline: none;
+    box-shadow: none;
+  }
 
   /* заголовок блока — виден только на телефоне, на десктопе колонка
      говорит сама за себя */
@@ -622,6 +647,30 @@ body:has(.pillar-split) main {
     font-size: 15px;
   }
   .pillar-cat__list > li:last-child { padding-bottom: 0; }
+
+  /* «Индивидуальные документы»: на телефоне серая карточка с рамкой
+     весила больше, чем весь список над ней. Оставляем строку — заголовок
+     ссылкой и одна поясняющая фраза. */
+  .pillar-nav__custom {
+    margin-top: 20px;
+    padding: 16px 0 0;
+    background: none;
+    border: 0;
+    border-top: 1px solid var(--ps-border);
+    border-radius: 0;
+  }
+  .pillar-nav__custom b {
+    margin-bottom: 4px;
+    color: var(--ps-gold);
+    font-size: 15px;
+  }
+  .pillar-nav__custom span { font-size: 13.5px; line-height: 1.5; }
+
+  /* Города дублируются в подвале — в каталоге они только пестрят
+     терракотовой строкой. Прячем визуально, ссылки остаются в разметке
+     ради перелинковки. */
+  .pillar-nav__div,
+  .pillar-nav__cities { display: none; }
 
   /* ссылка на обзор направления уходит вниз, к городам */
   .pillar-split--doc .pillar-nav__all {
