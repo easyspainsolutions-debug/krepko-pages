@@ -1,0 +1,238 @@
+/* ═══════════════════════════════════════════════════════════════════════
+   Хвост страницы услуги: вопросы → отзывы → карта → призыв (2026-08-07).
+
+   Модули FAQ, отзывов и карты пришли с главной, а их оформление живёт в
+   home-redesign.css — 187 KB стилей, которые на странице услуги ломают
+   собственную вёрстку (.final-cta, main, .faq__item). Без него блоки
+   отрисовывались в тёмно-синей палитре, прижатыми к левому краю: на
+   светлой странице услуги это выглядело чужеродно.
+
+   Здесь — светлый вариант тех же блоков, ограниченный обёрткой
+   .service-tail, чтобы правила не протекали на другие страницы.
+   Палитра совпадает с pillar-split.css: песочные поверхности,
+   терракотовый акцент, тёмно-синий текст. ═══ */
+
+.service-tail {
+  --st-bg: #FFFBF7;
+  --st-surface: #F5F0EB;
+  --st-border: #E8DFD1;
+  --st-text: #2D2D2D;
+  --st-navy: #1A2B3C;
+  --st-muted: #6B6B6B;
+  --st-brand: #C75B39;
+  --st-pad: clamp(24px, 3vw, 56px);
+}
+
+/* Общая колонка: те же поля, что у контента страницы услуги */
+.service-tail > section {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding-left: var(--st-pad);
+  padding-right: var(--st-pad);
+}
+
+/* ── вопросы ───────────────────────────────────────────────────────── */
+.service-tail .service-faq {
+  padding-top: clamp(40px, 5vw, 72px);
+  border-top: 1px solid var(--st-border);
+}
+.service-tail .faq h2 {
+  margin: 0 0 clamp(18px, 2vw, 26px);
+  color: var(--st-navy);
+  font-family: 'Playfair Display', Georgia, serif;
+  font-weight: 500;
+  font-size: clamp(24px, 2.6vw, 32px);
+  letter-spacing: -0.01em;
+}
+.service-tail .faq__list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+/* module-process.css красит аккордеон тёмно-синим селектором
+   .faq__item > summary.faq__q — вес (0,2,1). Наши правила ниже повторяют
+   ту же структуру, иначе тёмная плашка остаётся поверх светлой страницы. */
+.service-tail .faq__item {
+  background: none;
+  border: 0;
+  border-bottom: 1px solid var(--st-border);
+  border-radius: 0;
+}
+.service-tail .faq__item > summary.faq__q {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  padding: clamp(16px, 2vw, 22px) 0;
+  /* тёмную плашку из module-process.css гасим явно: без background тот
+     фон остаётся и вопрос читается тёмно-серым по тёмно-синему */
+  background: none;
+  border: 0;
+  border-radius: 0;
+  color: var(--st-navy);
+  font-family: 'Manrope', sans-serif;
+  font-size: clamp(15px, 1.5vw, 17px);
+  font-weight: 600;
+  line-height: 1.45;
+  cursor: pointer;
+  list-style: none;
+}
+.service-tail .faq__item > summary.faq__q::-webkit-details-marker { display: none; }
+/* плюс/минус справа — рисуем сами, чтобы не зависеть от палитры главной */
+.service-tail .faq__item > summary.faq__q::after {
+  content: '+';
+  flex: 0 0 auto;
+  color: var(--st-brand);
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1;
+}
+.service-tail .faq__item[open] > summary.faq__q::after { content: '−'; }
+.service-tail .faq__a {
+  padding: 0 0 clamp(18px, 2vw, 24px);
+  max-width: 74ch;
+  color: var(--st-text);
+  font-size: clamp(14.5px, 1.4vw, 16px);
+  line-height: 1.7;
+}
+
+/* ── отзывы ────────────────────────────────────────────────────────── */
+.service-tail .home-reviews {
+  padding-top: clamp(44px, 5vw, 76px);
+}
+.service-tail .p-label {
+  display: block;
+  margin-bottom: 10px;
+  color: var(--st-brand);
+  font-family: 'Manrope', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+.service-tail .home-reviews h2 {
+  margin: 0 0 clamp(18px, 2vw, 26px);
+  color: var(--st-navy);
+  font-family: 'Playfair Display', Georgia, serif;
+  font-weight: 500;
+  font-size: clamp(24px, 2.6vw, 32px);
+}
+.service-tail .home-reviews__carousel {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 16px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  overflow: visible;
+}
+.service-tail .review-card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: clamp(18px, 2vw, 24px);
+  background: var(--st-surface);
+  border: 1px solid var(--st-border);
+  border-radius: 4px;
+  color: var(--st-text);
+}
+.service-tail .review-card__stars svg {
+  width: 14px;
+  height: 14px;
+  fill: var(--st-brand);
+}
+/* цвет задаём явно: krepko-base.css красит любой <p> в var(--text-sub)
+   из тёмной шкалы, и текст отзыва становился белым на песочном */
+.service-tail .review-card__text {
+  margin: 0;
+  color: var(--st-text);
+  font-size: 15px;
+  line-height: 1.6;
+}
+.service-tail .review-card__author {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: auto;
+}
+.service-tail .review-card__avatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--st-navy);
+  color: #FFFBF7;
+  font-size: 13px;
+  font-weight: 700;
+}
+.service-tail .review-card__meta { display: flex; flex-direction: column; }
+.service-tail .review-card__name { color: var(--st-navy); font-size: 14px; font-weight: 700; }
+.service-tail .review-card__src {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: var(--st-muted);
+  font-size: 12px;
+}
+.service-tail .home-reviews__footer { margin-top: 18px; }
+.service-tail .home-reviews__all {
+  color: var(--st-brand);
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+/* ── карта ─────────────────────────────────────────────────────────── */
+.service-tail .cmap {
+  padding-top: clamp(44px, 5vw, 76px);
+  padding-bottom: clamp(20px, 3vw, 40px);
+}
+.service-tail .cmap__head { text-align: center; }
+.service-tail .cmap__head h2 {
+  margin: 0 0 10px;
+  color: var(--st-navy);
+  font-family: 'Playfair Display', Georgia, serif;
+  font-weight: 500;
+  font-size: clamp(24px, 2.6vw, 32px);
+}
+.service-tail .cmap__dek {
+  max-width: 62ch;
+  margin: 0 auto clamp(20px, 3vw, 32px);
+  color: var(--st-muted);
+  font-size: clamp(14.5px, 1.4vw, 16px);
+  line-height: 1.6;
+}
+.service-tail .cmap__svg {
+  display: block;
+  width: 100%;
+  max-width: 720px;
+  height: auto;
+  margin: 0 auto;
+}
+.service-tail .map__land {
+  fill: var(--st-surface);
+  stroke: #D9CEBC;
+  stroke-width: 2.5;
+}
+.service-tail .map__isle {
+  fill: var(--st-surface);
+  stroke: #D9CEBC;
+  stroke-width: 2;
+}
+.service-tail .cmap__dot {
+  fill: var(--st-brand);
+  transition: r .18s ease;
+}
+.service-tail .cmap__label {
+  fill: var(--st-navy);
+  font-family: 'Manrope', sans-serif;
+  font-size: 26px;
+  font-weight: 600;
+}
+.service-tail .cmap__city { cursor: pointer; }
+@media (hover: hover) {
+  .service-tail .cmap__city:hover .cmap__dot { r: 10; }
+  .service-tail .cmap__city:hover .cmap__label { fill: var(--st-brand); }
+}

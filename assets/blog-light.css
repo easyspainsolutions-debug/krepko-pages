@@ -55,6 +55,68 @@ main {
   background: #F5F0EB;
   border-color: #E8DFD1;
 }
+
+/* ═══ Фильтр тем: вкладки вместо пилюль (2026-08-07, Daniil) ═══
+   Было восемь овалов с рамками, активный — залитый терракотой; вместе с
+   карточками статей ниже экран рябил. Теперь строка вкладок: текст без
+   рамок, активная тема подчёркнута терракотовой линией, счётчик — мелким
+   верхним индексом. Правила стоят здесь, потому что blog-light.css
+   подключён ПОСЛЕ инлайнового <style> страницы и перебивает его без
+   !important. */
+.filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 clamp(16px, 3vw, 26px);
+  border-bottom: 1px solid #EFE7DC;
+}
+.filter-btn {
+  position: relative;
+  padding: 0 0 11px;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  color: #6B6B6B;
+  font-family: 'Manrope', sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  transition: color .18s ease;
+}
+.filter-btn:hover { color: #C75B39; border-color: transparent; }
+.filter-btn.active {
+  background: none;
+  border-color: transparent;
+  color: #1A2B3C;
+}
+/* линия под активной темой — на 1px ниже, чтобы лечь поверх границы бара */
+.filter-btn.active::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 2px;
+  background: #C75B39;
+}
+.filter-btn .cnt {
+  margin-left: 3px;
+  font-size: 11px;
+  vertical-align: super;
+  opacity: .45;
+}
+
+/* Контейнер индекса блога — не карточка (2026-08-07, Daniil: «весь блог
+   выбирается как карточка»). Класс .card здесь достался от старой вёрстки
+   и означал просто «колонка контента», но вместе с ним приезжали фон,
+   рамка и скругление — весь список статей оказывался обведён рамкой,
+   внутри которой лежали ещё карточки статей. На десктопе это уже
+   снималось внутри @media 900, теперь снято на всех ширинах.
+   Опознаём контейнер по панели фильтров внутри — она есть только на
+   индексе, у статей своя разметка. */
+.card:has(> .filter-bar) {
+  background: none;
+  border: 0;
+  border-radius: 0;
+}
 .btn--gold { color: #FFFBF7; }
 
 /* Фон страницы: html тоже, иначе при overscroll и на коротких страницах
@@ -138,8 +200,7 @@ html, body { background: #FFFBF7; }
   .blog-eyebrow { font-size: 11px; }
 
   /* фильтры — крупнее, с воздухом под лентой */
-  .filter-bar { gap: 8px; margin-bottom: 22px; }
-  .filter-btn { padding: 8px 15px; font-size: 13px; }
+  .filter-bar { margin-bottom: 22px; }
 
   /* ── лента статей в сетку ──
      .card — флекс-колонка, поэтому раскладку даёт не он, а обёртка ленты.

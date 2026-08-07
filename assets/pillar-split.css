@@ -138,10 +138,12 @@ body:has(.pillar-split) main {
   color: var(--ps-text-muted);
   transition: border-color .25s ease, color .25s ease, box-shadow .25s ease;
 }
+/* При наборе поле лишь слегка темнеет рамкой (2026-08-07, Daniil: «слева
+   стрёмная терракотовая обводка»). Раньше вокруг поля загоралась рамка
+   цвета бренда с ореолом — на светлой колонке каталога она выглядела
+   ошибкой ввода, а не фокусом. Курсор в поле и так виден. */
 .pillar-nav__search:focus-within {
-  border-color: var(--ps-gold);
-  color: var(--ps-gold);
-  box-shadow: 0 0 0 3px rgba(199, 91, 57, .08);
+  border-color: var(--ps-border-strong, #D9CEBC);
 }
 .pillar-nav__search input {
   flex: 1;
