@@ -879,8 +879,23 @@ nav.breadcrumb {
 }
 
 @media (max-width: 720px) {
-  /* На телефоне полный путь только мешает: кнопка возврата уже сказала,
-     куда ведёт шаг назад, а третья крошка всё равно обрезается. */
-  .crumb-back + .breadcrumb { display: none; }
-  .crumb-back { margin-bottom: 0; font-size: 14.5px; }
+  /* Крошки на телефоне не прячем.
+     Сначала стояло display: none — путь и правда мешал, переносясь на две
+     строки. Но Google индексирует мобильную версию и требует, чтобы
+     BreadcrumbList соответствовал видимому на странице пути; скрытые
+     крошки при живой разметке — серая зона, которой незачем рисковать.
+     Вместо этого путь идёт одной строкой: не переносится, при нехватке
+     места прокручивается вбок. Одна тонкая строка шума не создаёт. */
+  .crumb-back + .breadcrumb {
+    display: block;
+    white-space: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    font-size: 10px;
+    letter-spacing: .1em;
+    opacity: .6;
+  }
+  .crumb-back + .breadcrumb::-webkit-scrollbar { display: none; }
+  .crumb-back { font-size: 14.5px; }
 }
