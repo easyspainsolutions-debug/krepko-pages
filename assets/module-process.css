@@ -209,6 +209,11 @@
    final_cta_secondary (главная) — остальные ~85 страниц не затронуты. */
 .final-cta__actions {
   justify-content: center;
+  /* Отступ от текста над кнопкой. Раньше он стоял только с 1000px, и на
+     мобиле кнопка прилипала к строке «Разберём бесплатно…» вплотную —
+     зазор был ровно 0. С 1000px правило в home-redesign.css поднимает
+     его до 36px. */
+  margin-top: var(--rh-2);
 }
 
 /* Mobile — ensure good spacing on small screens */
