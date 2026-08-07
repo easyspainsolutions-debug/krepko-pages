@@ -1,30 +1,22 @@
 /* ═══════════════════════════════════════════════════════════════════════
    Лента отзывов — стили, вынесенные из home-redesign.css (2026-08-07).
 
-   Блок переехал в modules/reviews_carousel.html и включается и на
-   главной, и на страницах услуг. Подключать ради него весь
-   home-redesign.css нельзя: он переопределяет main, .final-cta и
-   .faq__item, ломая вёрстку страницы услуги.
+   Блок живёт в modules/reviews_carousel.html и включается на главной и на
+   страницах услуг. Подключать ради него весь home-redesign.css нельзя: он
+   переопределяет main, .final-cta и .faq__item, ломая вёрстку страницы
+   услуги.
 
-   Файл СГЕНЕРИРОВАН из home-redesign.css по селекторам .rv*, .home-reviews,
-   .reviews-cta. Правки вносить в исходник и пересобирать, иначе главная и
-   страницы услуг разъедутся. ═══ */
+   ⚠️ Раскладка карусели написана через id секции — `#sec-reviews .rv-track`.
+   Селекторы сохранены как есть, поэтому модуль ОБЯЗАН отдавать
+   id="sec-reviews". Без него блок разваливается в столбик карточек во всю
+   ширину: так и произошло, когда id потерялся при выносе (2026-08-07).
 
-/* Кнопка блока: типографика с главной (капс, разрядка, мелкий кегль) —
-   в home-redesign.css это правило .btn, которого на странице услуги нет. */
-.home-reviews .reviews-cta .btn {
-  font-family: 'Manrope', sans-serif;
-  font-weight: 600;
-  font-size: 12.65px !important;
-  letter-spacing: 0.5px;
-  text-transform: uppercase;
-}
+   Файл СГЕНЕРИРОВАН из home-redesign.css. Правки вносить в исходник и
+   пересобирать, иначе главная и страницы услуг разъедутся. ═══ */
 
-/* Светлая шкала блока. Правила ниже ссылаются на общие токены (--surface,
-   --text, --gold), а те на главной переопределены редизайном, на странице
-   услуги же остаются тёмными из tokens.css — блок уезжал в тёмно-синий и
-   мелкий кегль. Объявляем значения прямо на секции: одинаковый вид
-   независимо от того, какая тема действует на странице. */
+/* Светлая шкала блока: правила ниже ссылаются на общие токены (--surface,
+   --text, --gold), а вне главной они остаются тёмными из tokens.css —
+   блок уезжал в тёмно-синий и мелкий кегль. */
 .home-reviews {
   --bg: #FFFBF7;
   --surface: #F5F0EB;
@@ -34,12 +26,20 @@
   --text: #2D2D2D;
   --text-muted: #6B6B6B;
   --gold: #C75B39;
-  /* кнопка «Обсудить мою задачу» красится градиентом --gold → --gold-2 и
-     берёт цвет текста из --gold-on; вне главной это старая горчичная пара */
   --gold-2: #B04E2F;
   --gold-on: #FFFBF7;
   --glow-gold: 0 4px 14px rgba(199, 91, 57, .25);
   --fs-subtitle: clamp(18px, calc(0.44vw + 15.25px), 24px);
+}
+
+/* Кнопка блока: типографика с главной (капс, разрядка, мелкий кегль) —
+   в home-redesign.css это правило .btn, которого на странице услуги нет. */
+.home-reviews .reviews-cta .btn {
+  font-family: 'Manrope', sans-serif;
+  font-weight: 600;
+  font-size: 12.65px !important;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
 }
 
 @media (min-width: 1000px) {
@@ -155,6 +155,44 @@
     border-radius: 50% !important;
   }
 
+/* Единая черта-акцент под всеми заголовками секций главной. */
+  .values__h::after,
+  #sec-services > h2::after,
+  #sec-reviews > h2::after,
+  .home-guides > h2::after,
+  #sec-coverage h2::after,
+  .home-faq h2::after,
+  .intro__how > h2::after,
+  .final-cta > h2::after {
+    content: '';
+    display: block;
+    width: 56px;
+    height: 2px;
+    margin: 18px 0 0;
+    background: var(--gold);
+  }
+
+@media (min-width: 1000px) {
+  #sec-services > h2::after,
+    #sec-reviews > h2::after,
+    .home-guides > h2::after,
+    #sec-coverage h2::after,
+    .home-faq h2::after,
+    .final-cta > h2::after { margin-left: auto; margin-right: auto; }
+}
+
+/* 2. отзывы — песочная подложка во всю ширину, чтобы разбить череду cream */
+  #sec-reviews {
+    background: var(--surface-sunk);
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+    padding-left: clamp(24px, 4.5vw, 88px);
+    padding-right: clamp(24px, 4.5vw, 88px);
+    border-top: 1px solid var(--border-faint);
+    border-bottom: 1px solid var(--border-faint);
+  }
+
 /* карточки на песочном фоне поднимаем до cream — иначе сливаются */
   #sec-reviews .rv { background: var(--bg); }
 
@@ -162,6 +200,51 @@
 
 /* надзаголовки секций */
   .rv__avatar { color: var(--gold); }
+
+/* — полосы: цвет хедера (--surface-sunk #EFE7DA), одна механика full-bleed.
+       Карточки внутри остаются на --surface #F5F0EB и потому всплывают. — */
+  #sec-services,
+  #sec-coverage,
+  #sec-reviews {
+    background: var(--surface-sunk);
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+    padding-left: clamp(24px, 4.5vw, 88px);
+    padding-right: clamp(24px, 4.5vw, 88px);
+  }
+
+/* — границы больше не нужны: разделяет сам фон — */
+  #sec-reviews,
+  .final-cta,
+  .marquee,
+  .intro,
+  .values {
+    border-top: 0 !important;
+    border-bottom: 0 !important;
+  }
+
+/* — единый вертикальный ритм у всех секций — */
+  #sec-intro,
+  #sec-services,
+  #sec-reviews,
+  .home-guides,
+  #sec-coverage,
+  .home-faq,
+  .final-cta {
+    padding-top: var(--sec-pad) !important;
+    padding-bottom: var(--sec-pad) !important;
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+  }
+
+/* — промежутки на cream — */
+  #sec-reviews,
+  #sec-coverage,
+  .final-cta,
+  .values {
+    background: var(--bg) !important;
+  }
 
 /* Карточки — на --surface: светлее sunk-полос и темнее cream-промежутков,
      поэтому читаются на любом фоне зебры. */
@@ -295,7 +378,56 @@
   #sec-reviews .rv-nav { display: none; }
 }
 
+/* рейтинг — итоговой плашкой под лентой */
+  #sec-reviews .reviews-rating {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin: 40px auto 0;
+    padding: 14px 28px;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    font-size: 15px;
+    color: var(--text-sub);
+  }
+
 #sec-reviews .reviews-cta { margin-top: 32px; }
+
+/* ============ Round 42: единый вертикальный ритм ============
+     Правило: у КАЖДОЙ полосы верхний отступ равен нижнему и равен --sec-pad.
+     Нарушители, найденные аудитом:
+       • .intro задавал 56px сверху / 64px снизу;
+       • между карточками принципов и шагами висел лишний margin 64px,
+         хотя полосы уже разделены сменой фона;
+       • .final-cta нёс padding 88/64 из module-process.css. */
+
+  #sec-intro,
+  #sec-services,
+  #sec-reviews,
+  .home-guides,
+  #sec-coverage,
+  .home-faq,
+  .final-cta,
+  .intro,
+  .intro__how {
+    padding-top: var(--sec-pad) !important;
+    padding-bottom: var(--sec-pad) !important;
+  }
+
+/* ============ Round 46: зебра пересобрана под новый порядок ============
+     Города переехали выше (сразу после «Популярного»), гайды — ниже отзывов.
+     Фоны привязаны к селекторам, а не к позиции, поэтому чередование сбилось:
+     города и философия оказались двумя cream подряд, гайды и вопросы — двумя
+     песочными. Переназначаем по новой последовательности:
+
+       hero cream · лента SUNK · знакомство cream · Популярное SUNK ·
+       Города cream · Философия SUNK · Как работаем cream · Отзывы SUNK ·
+       Гайды cream · Вопросы SUNK · CTA cream                              */
+
+  .values__h, .sec-dek--values, .values,
+  #sec-reviews {
+    background: var(--surface-sunk) !important;
+  }
 
 /* ============ Round 38: оживление прокрутки ============ */
 
@@ -321,6 +453,46 @@
   .rv:hover, .loc:hover { transform: none; }
 }
 
+/* ============ Round 50: типографическая ревизия ============
+     Заголовки секций собирались в разное время и разошлись: на мобильном они
+     были 17 / 18 / 24 / 36px, на десктопе 42 / 44 / 48px, веса 500 и 800, а у
+     «Вопросы? Ответы» отличался ещё и цвет. Здесь одна шкала на все секции. */
+  #sec-services h2,
+  #sec-reviews h2,
+  #sec-coverage .map-head h2,
+  .home-guides h2,
+  .home-faq .faq__aside h2,
+  .final-cta h2,
+  .intro__how h2,
+  .values__h {
+    font-family: 'Playfair Display', Georgia, serif !important;
+    font-size: clamp(30px, 4vw, 48px) !important;
+    font-weight: 500 !important;
+    line-height: 1.15 !important;
+    color: #1A2B3C !important;
+    letter-spacing: -0.01em;
+  }
+
+/* Те же правки для шкал, заданных вне медиазапроса: максимум набирался
+     уже к 1200–1400px, дальше заголовки стояли на месте. */
+  #sec-services h2,
+  #sec-reviews h2,
+  #sec-coverage .map-head h2,
+  .home-guides h2,
+  .home-faq .faq__aside h2,
+  .final-cta h2,
+  .intro__how h2,
+  .values__h {
+    font-size: clamp(25px, calc(0.95vw + 21px), 40px) !important;
+  }
+
+#sec-services h2, #sec-reviews h2, #sec-coverage .map-head h2,
+  .home-guides h2, .home-faq .faq__aside h2, .final-cta h2,
+  .intro__how h2, .values__h {
+    font-size: var(--fs-title) !important;
+    line-height: var(--lh-title) !important;
+  }
+
 /* отзыв — та же ступень, но это цитата: интерлиньяж читательский */
   #sec-reviews .rv__text, .rv__text {
     font-size: var(--fs-subtitle) !important;
@@ -331,6 +503,12 @@
   .stat__value, #sec-services .srow__num, .step__num,
   .rv__quote, .rv__avatar, .city__num {
     line-height: 1 !important;
+  }
+
+#sec-services h2, #sec-reviews h2, #sec-coverage .map-head h2,
+  .home-guides h2, .final-cta h2, .intro__how h2, .values__h {
+    margin-top: 0 !important;
+    margin-bottom: var(--gap-title-dek) !important;
   }
 
 .rv:nth-of-type(2) { transition-delay: 110ms; }
