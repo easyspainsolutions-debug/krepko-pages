@@ -185,6 +185,11 @@
   #sec-reviews {
     background: var(--surface-sunk);
     width: 100vw;
+    /* На страницах услуг обёртка задаёт `.service-tail > section {max-width:1280px}`.
+       max-width сильнее width: полоса обрывалась на 1280px, а страница вокруг шла
+       во всю ширину — на экранах шире 1280 секция «съезжала» влево, справа
+       оставался белый хвост (2026-08-08). */
+    max-width: none;
     margin-left: calc(50% - 50vw);
     margin-right: calc(50% - 50vw);
     padding-left: clamp(24px, 4.5vw, 88px);
@@ -208,6 +213,7 @@
   #sec-reviews {
     background: var(--surface-sunk);
     width: 100vw;
+    max-width: none;
     margin-left: calc(50% - 50vw);
     margin-right: calc(50% - 50vw);
     padding-left: clamp(24px, 4.5vw, 88px);

@@ -818,3 +818,156 @@
 .step:nth-of-type(3) { transition-delay: 220ms; }
 
 .step:nth-of-type(4) { transition-delay: 330ms; }
+
+/* ═══ Пять шагов в один ряд (2026-08-07, городские страницы) ═══
+   Донорская дорожка с главной рассчитана на четыре шага: сетка жёстко
+   задана как repeat(4, 1fr). У городов шагов пять — «встречаемся, если
+   нужно» добавлен по просьбе Daniil, и пятый кружок переносился на вторую
+   строку, обрывая линию между третьим и четвёртым.
+
+   Правило действует только внутри .city-process, поэтому главная со своими
+   четырьмя шагами не задета. Сегменты линии считаются от --g, так что
+   правку ширины колонок они подхватывают сами. */
+@media (min-width: 900px) {
+  .city-process .steps {
+    grid-template-columns: repeat(5, 1fr);
+  }
+  /* на пяти колонках подпись уже — иначе строки наезжают друг на друга */
+  .city-process .step__text,
+  .city-process .intro__how .step__text { max-width: 200px; }
+  .city-process .step__note { max-width: 220px; }
+}
+
+/* Планшет: пять в ряд не помещаются — двумя рядами 3 + 2, линия убирается,
+   иначе она повисает в воздухе между рядами. */
+@media (min-width: 620px) and (max-width: 899px) {
+  .city-process .steps {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px 24px;
+  }
+  .city-process .step {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    text-align: center;
+    gap: 14px;
+  }
+}
+
+/* ═══ Контейнер страницы: широкий, как на главной (2026-08-08) ═══
+   Городская страница наследовала `main { max-width: 960px }` из desktop.css —
+   ширину страницы-статьи. Блоки, перенесённые с главной («Популярное»,
+   отзывы), рвутся из неё на 100vw, а всё остальное — герой, шаги, FAQ,
+   призыв — оставалось колонкой 912px по центру. Отсюда рваная сетка:
+   полосы во всю ширину чередовались с узким текстом, а призыв в конце
+   выглядел зажатым.
+
+   Берём ту же сетку, что у главной (home-redesign.css): 1440px и поля 64px.
+   Правило действует только там, где подключён этот файл, — на шести
+   городских страницах. */
+@media (min-width: 900px) {
+  main {
+    max-width: 1440px;
+    padding-left: 64px;
+    padding-right: 64px;
+  }
+}
+
+/* ═══ «Как устроено в городе» (2026-08-08) ═══
+   Четыре пункта городской конкретики. Намеренно не карточки с рамками:
+   это текст, который читают, а не список опций, между которыми выбирают.
+   Разделяет их тонкая линия сверху — как в печатной справке. */
+.city-local { }
+
+.city-local__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 28px;
+  margin-top: 32px;
+}
+
+.city-local__item { padding-top: 20px; border-top: 1px solid var(--border-faint); }
+
+.city-local__title {
+  font-family: var(--font-display, inherit);
+  font-size: clamp(18px, 1.4vw, 22px);
+  line-height: 1.25;
+  margin: 0 0 10px;
+  color: var(--text);
+}
+
+.city-local__text {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: clamp(15px, 1.05vw, 16.5px);
+  line-height: 1.65;
+  max-width: 62ch;
+}
+
+@media (min-width: 900px) {
+  .city-local__grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 40px 56px;
+    margin-top: 44px;
+  }
+}
+
+/* ═══ Первый экран: текст слева, справка справа (2026-08-08) ═══
+   Правая половина героя пустовала — заголовок с абзацем занимали треть
+   ширины, остальное было воздухом. Кладём туда три строки справки. */
+.city-facts {
+  margin: 32px 0 0;
+  padding: 0;
+  border-top: 1px solid var(--border-faint);
+}
+
+.city-facts__row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 16px;
+  padding: 13px 0;
+  border-bottom: 1px solid var(--border-faint);
+}
+
+.city-facts dt {
+  font-size: 12px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin: 0;
+}
+
+.city-facts dd {
+  margin: 0;
+  font-size: 15px;
+  color: var(--text);
+  text-align: right;
+}
+
+@media (min-width: 900px) {
+  .hero--city--split {
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(300px, .85fr);
+    gap: clamp(48px, 6vw, 104px);
+    align-items: start;
+  }
+  .hero--city--split .hero__main { min-width: 0; }
+  .city-facts { margin-top: 12px; }
+}
+
+/* ═══ Выравнивание заголовков секций (2026-08-08) ═══
+   Блоки приехали с главной, где часть секций центрирована, а часть прижата
+   влево. На городской странице они стоят подряд, и разнобой читается как
+   вёрстка «на глаз»: заголовок слева, подзаголовок под ним по центру.
+   Приводим всю страницу к левому краю — кроме карусели отзывов, у неё
+   центрирование заложено в саму раскладку. */
+.city-blocks .sec-dek,
+.city-blocks h2 { text-align: left; }
+
+.city-blocks .sec-dek { margin-left: 0; margin-right: 0; }
+
+.city-process .intro__how > h2,
+.city-process .intro__how > .sec-dek { text-align: left; }
+
+/* подчёркивание-акцент под заголовком тоже уходит влево */
+.city-blocks h2::after { margin-left: 0 !important; margin-right: 0 !important; }
