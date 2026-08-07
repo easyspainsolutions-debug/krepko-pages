@@ -177,9 +177,14 @@
       thread.appendChild(row);
 
       var opts = el('div', 'rfinder__opts rfinder__in');
-      q.opts.forEach(function (o) {
+      q.opts.forEach(function (o, idx) {
         var b = el('button', 'rfinder__opt', o.t);
         b.type = 'button';
+        /* длинная формулировка в половине ряда рвётся на три строки, а
+           одинокий последний вариант оставляет дыру — оба случая тянем
+           на всю ширину */
+        var lonely = idx === q.opts.length - 1 && q.opts.length % 2 === 1;
+        if (o.t.length > 20 || lonely) b.classList.add('rfinder__opt--wide');
         b.addEventListener('click', function () {
           answers[q.key] = o.v;
           opts.remove();
