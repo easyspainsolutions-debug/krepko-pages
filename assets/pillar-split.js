@@ -18,11 +18,25 @@
 
   /* ── категории ── */
   var cats = [].slice.call(nav.querySelectorAll('.pillar-cat'));
+
+  function closeOtherCats(keep) {
+    cats.forEach(function (c) {
+      if (c === keep || !c.classList.contains('is-open')) return;
+      c.classList.remove('is-open');
+      var h = c.querySelector('.pillar-cat__head');
+      if (h) h.setAttribute('aria-expanded', 'false');
+    });
+  }
   cats.forEach(function (cat) {
     var head = cat.querySelector('.pillar-cat__head');
     if (!head) return;
     head.addEventListener('click', function () {
-      var open = cat.classList.toggle('is-open');
+      var open = !cat.classList.contains('is-open');
+      /* Открытая категория закрывает остальные: восемь раскрытых списков
+         по 11 услуг превращают колонку в простыню, в которой не найти,
+         где ты находишься (решение Daniil, 2026-08-07 — по всему сайту). */
+      if (open) closeOtherCats(cat);
+      cat.classList.toggle('is-open', open);
       head.setAttribute('aria-expanded', open ? 'true' : 'false');
     });
   });
@@ -38,6 +52,7 @@
     if (!/^[a-z-]+$/.test(slug)) return;
     var cat = nav.querySelector('.pillar-cat[data-cat="' + slug + '"]');
     if (!cat) return;
+    closeOtherCats(cat);
     cat.classList.add('is-open');
     var head = cat.querySelector('.pillar-cat__head');
     if (head) head.setAttribute('aria-expanded', 'true');

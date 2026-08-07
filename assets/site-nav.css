@@ -236,16 +236,18 @@ dialog:not([open]) { display: none !important; }
   font-weight: 600;
   color: #1A2B3C;
 }
+/* Крестик без рамки: обведённая кнопка спорила по весу с логотипом
+   и добавляла меню ещё одну «кнопку», которой там не нужно быть. */
 .site-menu__close {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   width: 44px;
   height: 44px;
-  border: 1px solid #E8DFD1;
+  border: 0;
   border-radius: 50%;
   background: none;
-  color: #1A2B3C;
+  color: #6B6B6B;
   cursor: pointer;
 }
 .site-menu__close svg { width: 16px; height: 16px; }
@@ -281,11 +283,14 @@ dialog:not([open]) { display: none !important; }
 }
 .site-menu__link {
   display: block;
-  padding: 14px 2px;
+  padding: 13px 2px;
   border-bottom: 1px solid #EFE7DA;
   color: #1A2B3C;
   font-family: 'Playfair Display', Georgia, serif;
-  font-size: 24px;
+  /* было 24px: четыре пункта такого кегля плюс девять плиток под ними
+     превращали меню в стену. Теперь разница с направлениями есть, но
+     не кричит */
+  font-size: 21px;
   font-weight: 500;
   text-decoration: none;
 }
@@ -301,28 +306,34 @@ dialog:not([open]) { display: none !important; }
   text-transform: uppercase;
   color: #6B6B6B;
 }
+/* Направления — список строк, а не сетка плиток.
+   Девять одинаковых прямоугольников в рамках читались как девять кнопок,
+   каждая из которых требует решения: «куча кнопок вызывает тревожность,
+   сайт не лояльный» (Daniil, 2026-08-07). Строка с разделителем — это
+   продолжение списка выше, а не ещё один выбор. */
 .site-menu__dirs-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 8px;
+  display: flex;
+  flex-direction: column;
 }
 .site-menu__dirs-grid a {
   display: flex;
   align-items: center;
-  min-height: 44px;
-  padding: 10px 12px;
-  border: 1px solid #E8DFD1;
-  border-radius: 8px;
+  min-height: 46px;
+  padding: 11px 2px;
+  border: 0;
+  border-bottom: 1px solid #EFE7DA;
+  border-radius: 0;
   color: #2D2D2D;
-  font-size: 13.5px;
-  font-weight: 600;
-  line-height: 1.3;
+  font-size: 15.5px;
+  font-weight: 500;
+  line-height: 1.35;
   text-decoration: none;
 }
+.site-menu__dirs-grid a:last-child { border-bottom: 0; }
 @media (hover: hover) {
   .site-menu__dirs-grid a:hover { border-color: #C75B39; color: #C75B39; }
   .site-menu__link:hover { color: #C75B39; }
-  .site-menu__close:hover { color: #C75B39; border-color: #C75B39; }
+  .site-menu__close:hover { color: #C75B39; }
   .site-menu__search:hover { border-color: #C75B39; }
 }
 
@@ -838,3 +849,7 @@ nav.breadcrumb {
   transform: scaleX(0);
   transform-origin: left center;
 }
+
+/* лист меню получает фокус программно — кольцо на нём не нужно */
+.site-menu__sheet:focus,
+.site-menu__sheet:focus-visible { outline: none; box-shadow: none; }

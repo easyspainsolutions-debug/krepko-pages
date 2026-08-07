@@ -93,3 +93,31 @@
   window.addEventListener('resize', schedule, { passive: true });
   update();
 })();
+
+
+/* Аккордеоны FAQ: одновременно открыт только один вопрос в группе.
+   Решение Daniil (2026-08-07) — по всему сайту, а не только на главной,
+   где такая логика жила внутри home-redesign.js вместе с анимацией.
+
+   Слушаем нативное событие toggle на всплытии: оно приходит и от клика,
+   и от клавиатуры, и от программного открытия. Группой считаем ближайший
+   общий контейнер списка — так соседние FAQ-блоки на одной странице
+   (например, в статье и в блоке услуги) не гасят друг друга.
+
+   Блок на главной пропускаем: там раскрытие анимируется вручную и уже
+   закрывает соседей — вмешательство сорвало бы анимацию на полпути. */
+(function () {
+  document.addEventListener('toggle', function (e) {
+    var d = e.target;
+    if (!d || d.tagName !== 'DETAILS' || !d.open) return;
+    if (d.closest('.home-faq')) return;
+
+    var group = d.closest('.faq__list') || d.parentElement;
+    if (!group) return;
+
+    var siblings = group.querySelectorAll(':scope > details[open]');
+    for (var i = 0; i < siblings.length; i++) {
+      if (siblings[i] !== d) siblings[i].open = false;
+    }
+  }, true);   /* capture: toggle не всплывает */
+})();
