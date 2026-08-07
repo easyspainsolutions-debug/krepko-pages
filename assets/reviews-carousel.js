@@ -1,9 +1,66 @@
-/* Лента отзывов — вынесена из home-redesign.js (2026-08-07).
+/* Карусели отзывов — обе версии блока в одном файле (2026-08-07).
 
-   Блок отзывов переехал в modules/reviews_carousel.html и включается на
-   главной и на страницах услуг. Тащить ради него весь home-redesign.js
-   (48 KB логики главной: параллакс, счётчики, карта) не нужно —
-   карусель самодостаточна и молча выходит, если трека на странице нет. */
+   На сайте живут две разметки отзывов: старая (.home-reviews__carousel,
+   ~106 страниц: города, направления, документы) и новая лента с главной
+   (#rv-track, главная + 59 страниц услуг). 2026-08-07 файл был по ошибке
+   перезаписан только новым скриптом, и точки старой карусели пропали;
+   теперь здесь оба блока, каждый молча выходит, если его разметки нет.
+
+   Подключается ОДИН раз из base.html. Guard ниже — от двойной загрузки
+   с разными ?v=: два прогона рисовали точки дважды. */
+(function () {
+  if (window.__krepkoReviewsCarousel) return;
+  window.__krepkoReviewsCarousel = true;
+})();
+if (!window.__krepkoReviewsCarouselRan) {
+window.__krepkoReviewsCarouselRan = true;
+
+/* ── 1. Старый блок: точки-индикаторы (июнь 2026) ── */
+(function () {
+  'use strict';
+
+  var carousels = document.querySelectorAll('.home-reviews__carousel');
+  if (!carousels.length || !('IntersectionObserver' in window)) return;
+
+  Array.prototype.forEach.call(carousels, function (track) {
+    var cards = track.querySelectorAll('.review-card');
+    if (cards.length < 2) return;
+
+    var dots = document.createElement('div');
+    dots.className = 'home-reviews__dots';
+    dots.setAttribute('aria-hidden', 'true');
+
+    var buttons = [];
+    Array.prototype.forEach.call(cards, function (card) {
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'home-reviews__dot';
+      b.addEventListener('click', function () {
+        card.scrollIntoView({ behavior: 'smooth', inline: 'start', block: 'nearest' });
+      });
+      dots.appendChild(b);
+      buttons.push(b);
+    });
+
+    track.parentNode.insertBefore(dots, track.nextSibling);
+    buttons[0].classList.add('is-active');
+
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        var idx = Array.prototype.indexOf.call(cards, entry.target);
+        if (idx < 0) return;
+        buttons.forEach(function (b, i) {
+          b.classList.toggle('is-active', i === idx);
+        });
+      });
+    }, { root: track, threshold: 0.6 });
+
+    Array.prototype.forEach.call(cards, function (card) { io.observe(card); });
+  });
+})();
+
+/* ── 2. Лента с главной ── */
 /* Round 43 (+ мобильные точки 2026-08-04): лента отзывов.
    Позиции считаем по offsetLeft карточек, а не по ширине трека: на
    мобилке карточка занимает 88% (следующая выглядывает из-за края),
@@ -67,3 +124,5 @@
 
   sync();
 })();
+
+}

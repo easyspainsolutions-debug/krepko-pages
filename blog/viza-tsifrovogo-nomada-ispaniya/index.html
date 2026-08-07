@@ -14,14 +14,14 @@
   <link rel="stylesheet" href="/assets/tokens.css?v=20260526h2">
   <link rel="stylesheet" href="/assets/module-section.css?v=20260526h2">
   <link rel="stylesheet" href="/assets/module-cta.css?v=20260807b">
-  <link rel="stylesheet" href="/assets/module-card.css?v=20260528">
-  <link rel="stylesheet" href="/assets/module-hero.css?v=20260528">
-  <link rel="stylesheet" href="/assets/module-trust.css?v=20260526h2">
+  <link rel="stylesheet" href="/assets/module-card.css?v=20260602">
+  <link rel="stylesheet" href="/assets/module-hero.css?v=20260602b">
+  <link rel="stylesheet" href="/assets/module-trust.css?v=20260602">
   <link rel="stylesheet" href="/assets/module-process.css?v=20260807a">
   <link rel="stylesheet" href="/assets/site-nav.css?v=20260807n">
 <script src="/assets/site-nav.js?v=20260807c" defer></script>
   <script src="/assets/cursor.js?v=20260803" defer></script>
-  <link rel="stylesheet" href="/assets/krepko-chips.css?v=20260528">
+  <link rel="stylesheet" href="/assets/krepko-chips.css?v=20260608">
   <link rel="stylesheet" href="/assets/site-footer.css?v=20260807a">
   <link rel="stylesheet" href="/assets/a11y.css?v=20260807c">
   <link rel="stylesheet" href="/assets/krepko-base.css?v=20260805">
@@ -623,13 +623,13 @@
     // Related: 1 featured + 2 regular
     var h = '<div class="divider"></div><span class="related-label">Читайте также</span>';
     var f = related[0];
-    h += '<a class="rel-featured" href="/blog/'+f.slug+'.html">';
+    h += '<a class="rel-featured" href="/blog/'+f.slug+'/">';
     h += '<span class="rel-featured-label">Читать следующим ↗</span>';
     h += '<span class="rel-featured-title">'+f.title+'</span>';
     h += '<span class="rel-card-meta">'+f.tag+' · ~'+f.time+' мин</span>';
     h += '</a>';
     related.slice(1).forEach(function(a){
-      h += '<a class="rel-card" href="/blog/'+a.slug+'.html">';
+      h += '<a class="rel-card" href="/blog/'+a.slug+'/">';
       h += '<span class="article-tag">'+a.tag+'</span>';
       h += '<span class="rel-card-title">'+a.title+'</span>';
       h += '<span class="rel-card-meta">~'+a.time+' мин чтения</span>';
