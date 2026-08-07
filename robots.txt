@@ -1,5 +1,94 @@
+# krepko.es — правила обхода.
+#
+# Базовое правило одно: сайт открыт целиком, кроме служебной песочницы.
+# Ниже перечислены боты поисковиков и AI-ассистентов поимённо. Разрешение
+# у них то же, что и у всех, — но многие читают ТОЛЬКО свою секцию и
+# игнорируют «User-agent: *», поэтому явная запись снимает разночтения.
+
 User-agent: *
 Allow: /
 Disallow: /_preview/
 
+# ── поисковые системы ───────────────────────────────────────────────────
+User-agent: Googlebot
+Allow: /
+Disallow: /_preview/
+
+User-agent: Bingbot
+Allow: /
+Disallow: /_preview/
+
+User-agent: YandexBot
+Allow: /
+Disallow: /_preview/
+
+User-agent: Applebot
+Allow: /
+Disallow: /_preview/
+
+# ── AI-ассистенты: поиск и цитирование ─────────────────────────────────
+# Эти боты ходят по сайту, когда пользователь задал вопрос ассистенту, и
+# приносят ссылку на источник. Для нас это трафик, поэтому открыто.
+
+# ChatGPT: поисковый индекс и переходы по ссылке из ответа
+User-agent: OAI-SearchBot
+Allow: /
+Disallow: /_preview/
+
+User-agent: ChatGPT-User
+Allow: /
+Disallow: /_preview/
+
+# Claude: поиск и открытие страницы по запросу пользователя
+User-agent: Claude-SearchBot
+Allow: /
+Disallow: /_preview/
+
+User-agent: Claude-User
+Allow: /
+Disallow: /_preview/
+
+# Perplexity
+User-agent: PerplexityBot
+Allow: /
+Disallow: /_preview/
+
+User-agent: Perplexity-User
+Allow: /
+Disallow: /_preview/
+
+# ── AI-краулеры: сбор данных для обучения ──────────────────────────────
+# Отдельная история от поиска: эти боты собирают тексты в обучающие наборы
+# и ссылку взамен не приводят. Оставлены открытыми осознанно — упоминание
+# Krepko в моделях работает на узнаваемость. Чтобы закрыть, поменяйте
+# Allow на Disallow в этой секции; на выдачу поисковиков это не влияет.
+
+User-agent: GPTBot
+Allow: /
+Disallow: /_preview/
+
+User-agent: ClaudeBot
+Allow: /
+Disallow: /_preview/
+
+User-agent: Google-Extended
+Allow: /
+Disallow: /_preview/
+
+User-agent: Applebot-Extended
+Allow: /
+Disallow: /_preview/
+
+User-agent: CCBot
+Allow: /
+Disallow: /_preview/
+
+User-agent: meta-externalagent
+Allow: /
+Disallow: /_preview/
+
+# ── карты сайта ────────────────────────────────────────────────────────
 Sitemap: https://krepko.es/sitemap.xml
+
+# Краткая выжимка о компании и структуре сайта для языковых моделей —
+# конвенция llmstxt.org: https://krepko.es/llms.txt

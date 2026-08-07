@@ -1,39 +1,71 @@
 # Krepko
 
-> Команда сопровождения в Испании для русско- и украиноязычных. Нотариус, банк, ВНЖ, налоги, документы из Украины — один контакт под ключ. Krepko работает в 6 городах побережья: Аликанте, Валенсия, Мурсия, Мадрид, Барселона, Малага.
+> Сопровождение в Испании для русско- и украиноязычных: нотариус, ВНЖ, банк, налоги, документы из Украины — один контакт под ключ. Krepko работает в шести городах: Аликанте, Валенсия, Мурсия, Мадрид, Барселона, Малага. База — Аликанте.
 
-Krepko берёт на себя подготовку документов, перевод на родной язык и сопровождение: представитель Krepko присутствует на встречах — у нотариуса, в банке, в госучреждениях — и объясняет каждый шаг на русском или украинском. Связь в WhatsApp: план и стоимость по задаче за 15 минут.
+Krepko берёт на себя подготовку документов, перевод на родной язык и сопровождение: представитель Krepko присутствует на встречах — у нотариуса, в банке, в госучреждениях — и объясняет каждый шаг на русском или украинском. Человек подписывает документ, в котором понимает каждый пункт, а испанская сторона получает корректный испанский текст. Связь в WhatsApp: план и стоимость по задаче за 15 минут.
 
-## Услуги
+Чем Krepko не является: это не адвокатское бюро и не нотариальная контора. Нотариус, присяжный переводчик и госорганы — самостоятельные стороны, их тарифы оплачиваются отдельно; Krepko готовит документы, согласует формулировки и ведёт процедуру.
 
-- [Доверенности у нотариуса](https://krepko.es/notario/): подготовка и сопровождение у нотариуса, перевод документа на русский и украинский.
-- [Миграция: ВНЖ, arraigo, воссоединение](https://krepko.es/migracion/): резиденция, продление, воссоединение семьи.
-- [Банк в Испании](https://krepko.es/banca/): открытие счёта, разблокировка, сопровождение по ипотеке.
-- [Перевод и сопровождение](https://krepko.es/traduccion/): присяжный перевод, устный перевод у нотариуса и в банке.
-- [Апостиль и заверение документов](https://krepko.es/legalizacion/): легализация документов для Испании.
-- [Административные процедуры](https://krepko.es/tramites/): NIE, прописка (empadronamiento), цифровой сертификат и другие трамиты.
-- [Налоги в Испании](https://krepko.es/fiscalidad/): IRPF, autónomo, отчётность в Hacienda.
-- [Юридическая помощь](https://krepko.es/juridico/): споры, наследство, консультации.
-- [Документы из Украины под ключ](https://krepko.es/ukraina/): получение и доставка украинских документов в Европу.
-- [Все услуги Krepko](https://krepko.es/services/): полный каталог.
+## Нотариальные процедуры
+
+Каталог из 59 услуг в восьми категориях — [полный список](https://krepko.es/notario/).
+
+- [Доверенности](https://krepko.es/notario/#doverennosti) — 11 видов: [генеральная](https://krepko.es/notario/doverennost-generalnaya/), [на продажу недвижимости](https://krepko.es/notario/doverennost-na-prodazhu-kvartiry/), [на банк](https://krepko.es/notario/doverennost-na-bank/), [на наследство](https://krepko.es/notario/doverennost-na-nasledstvo/), [на автомобиль](https://krepko.es/notario/doverennost-na-avtomobil/), [на развод](https://krepko.es/notario/doverennost-na-razvod/), [на представление интересов](https://krepko.es/notario/doverennost-na-predstavlenie-interesov/), [на родном языке](https://krepko.es/notario/doverennost-na-rodnom-yazyke/), [отзыв доверенности](https://krepko.es/notario/otozvat-doverennost/).
+- [Согласия, заявления и заверение подписи](https://krepko.es/notario/#soglasiya) — 11 услуг: [согласие на выезд ребёнка](https://krepko.es/notario/soglasie-na-vyezd-rebenka/), [согласие супруга](https://krepko.es/notario/soglasie-supruga/), [affidavit](https://krepko.es/notario/affidevit/), [carta de invitación](https://krepko.es/notario/carta-de-invitacion/), [спонсорское письмо](https://krepko.es/notario/sponsorskoe-pismo/).
+- [Семейные процедуры](https://krepko.es/notario/#semya) — 8 услуг: [брачный договор](https://krepko.es/notario/brachnyj-dogovor/), [заключение брака](https://krepko.es/notario/zaklyuchenie-braka/), [pareja de hecho](https://krepko.es/notario/pareja-de-hecho/), [опека](https://krepko.es/notario/opeka-i-popechitelstvo/).
+- [Финансовые и банковские документы](https://krepko.es/notario/#finansy) — 9 услуг: [документы для открытия счёта](https://krepko.es/notario/dokumenty-dlya-otkrytiya-scheta/), [подтверждение происхождения средств](https://krepko.es/notario/podtverzhdenie-proishozhdeniya-sredstv/), [договор займа](https://krepko.es/notario/dogovor-zajma/).
+- [Недвижимость](https://krepko.es/notario/#nedvizhimost) — 7 услуг: [покупка](https://krepko.es/notario/pokupka-nedvizhimosti/), [продажа](https://krepko.es/notario/prodazha-nedvizhimosti/), [contrato de arras](https://krepko.es/notario/contrato-de-arras/), [ипотечные сделки](https://krepko.es/notario/ipotechnye-sdelki/).
+- [Наследство](https://krepko.es/notario/#nasledstvo) — 6 услуг: [принятие наследства](https://krepko.es/notario/prinyatie-nasledstva/), [отказ от наследства](https://krepko.es/notario/otkaz-ot-nasledstva/), [раздел имущества](https://krepko.es/notario/razdel-imushchestva/), [поиск имущества](https://krepko.es/notario/poisk-imushchestva/).
+- [Бизнес и корпоративные документы](https://krepko.es/notario/#biznes) — 7 услуг: [учреждение компании](https://krepko.es/notario/uchrezhdenie-kompanii/), [назначение директора](https://krepko.es/notario/naznachenie-direktora/), [купля-продажа долей](https://krepko.es/notario/kuplya-prodazha-dolej/).
+- [Апостиль, переводы и легализация](https://krepko.es/notario/#apostil) — 5 услуг: [нотариальный перевод](https://krepko.es/notario/notarialnyj-perevod/), [международная доставка документов](https://krepko.es/notario/mezhdunarodnaya-dostavka-dokumentov/).
+
+## ВНЖ и миграция
+
+Раздел [/migracion/](https://krepko.es/migracion/). Ключевая ситуация 2026–2027 годов: временная защита (TPS) для украинцев в Испании перестаёт продлеваться, срок — 4 марта 2027 года, и переход на собственный ВНЖ нужно готовить заранее.
+
+- [Выход из временной защиты на ВНЖ](https://krepko.es/migracion/vyhod-iz-tps/) — разбор маршрутов и подбор подходящего.
+- [Модификация статуса (ст. 191)](https://krepko.es/migracion/modifikaciya-statusa/) — переход с TPS при году легальной работы.
+- [Продление временной защиты](https://krepko.es/migracion/prodlenie-tps/).
+- Arraigo — ВНЖ через укоренение: [sociolaboral](https://krepko.es/migracion/arraigo-sociolaboral/), [social](https://krepko.es/migracion/arraigo-social/), [socioformativo](https://krepko.es/migracion/arraigo-socioformativo/).
+- [Воссоединение семьи](https://krepko.es/migracion/vossoedinenie-semi/), [ВНЖ ребёнка](https://krepko.es/migracion/vnzh-rebenka/).
+- [Виза цифрового кочевника](https://krepko.es/migracion/viza-cifrovogo-nomada/), [ВНЖ длительного проживания](https://krepko.es/migracion/larga-duracion/).
+- [NIE и TIE](https://krepko.es/migracion/nie-tie/) — идентификационный номер и карта резидента.
+
+## Налоги
+
+Раздел [/fiscalidad/](https://krepko.es/fiscalidad/).
+
+- [Modelo 210](https://krepko.es/fiscalidad/modelo-210/) — налог нерезидента с недвижимости в Испании.
+- [Декларация IRPF](https://krepko.es/fiscalidad/irpf-deklaraciya/) — годовая декларация резидента.
+- [Режим Бекхэма](https://krepko.es/fiscalidad/rezhim-bekhema/) — специальный налоговый режим для переехавших.
+- [Autónomo](https://krepko.es/fiscalidad/autonomo/) — регистрация и отчётность самозанятого.
+
+## Остальные направления
+
+- [Документы из Украины](https://krepko.es/ukraina/) — справка о несудимости, дубликаты свидетельств, замена паспорта через консульство, апостиль диплома, присяжный перевод.
+- [Административные процедуры](https://krepko.es/tramites/) — [прописка (empadronamiento)](https://krepko.es/tramites/empadronamiento/), [цифровой сертификат](https://krepko.es/tramites/firma-digital/), [обмен водительских прав](https://krepko.es/tramites/canje-permiso/), [омологация аттестата](https://krepko.es/tramites/homologacion-bachillerato/).
+- [Апостиль и легализация](https://krepko.es/legalizacion/) — [апостиль в Испании](https://krepko.es/legalizacion/apostil-ispania/), [заверение копии](https://krepko.es/legalizacion/zaverenie-kopii-ispanskogo/), [заверение подписи](https://krepko.es/legalizacion/zaverenie-podpisi-na-dokumente/).
+- [Банк в Испании](https://krepko.es/banca/) — открытие счёта, разблокировка, сопровождение по ипотеке.
+- [Присяжный перевод](https://krepko.es/traduccion/) — письменный и устный, у нотариуса и в банке.
+- [Юридическая помощь](https://krepko.es/juridico/) — споры, наследство, консультации.
+- [Полный каталог услуг](https://krepko.es/services/).
 
 ## Города
 
-- [Аликанте](https://krepko.es/alicante/)
-- [Валенсия](https://krepko.es/valencia/)
-- [Мурсия](https://krepko.es/murcia/)
-- [Мадрид](https://krepko.es/madrid/)
-- [Барселона](https://krepko.es/barcelona/)
-- [Малага](https://krepko.es/malaga/)
+Личный представитель Krepko есть в каждом: [Аликанте](https://krepko.es/alicante/) (база), [Валенсия](https://krepko.es/valencia/), [Мурсия](https://krepko.es/murcia/), [Мадрид](https://krepko.es/madrid/), [Барселона](https://krepko.es/barcelona/), [Малага](https://krepko.es/malaga/).
 
 ## Полезное
 
-- [Блог: жизнь в Испании на русском](https://krepko.es/blog/): гайды по документам, банкам, ВНЖ и налогам.
-- [О Krepko](https://krepko.es/about/): кто стоит за сервисом и как он работает.
+- [Блог](https://krepko.es/blog/) — 33 разбора: ВНЖ, банки, налоги, жильё, документы, работа.
+- [О Krepko](https://krepko.es/about/) — кто стоит за сервисом и как он устроен.
+- [Условия оказания услуг](https://krepko.es/terminos/).
 
 ## Контакты
 
-- WhatsApp: https://wa.me/34641048296
+- WhatsApp: https://wa.me/34641048296 — основной канал, отвечает человек
+- Телефон: +34 641 048 296
+- Почта: hello@krepko.es
 - Telegram: https://t.me/krepko_es
 - Instagram: https://instagram.com/krepko.es
 - Google-профиль и отзывы: https://share.google/crEbX59eFpUVJipgr
+- Языки общения: русский, украинский, испанский
