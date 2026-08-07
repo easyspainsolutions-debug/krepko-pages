@@ -918,16 +918,22 @@ nav.breadcrumb {
 .breadcrumb__current { opacity: .7; }
 
 @media (max-width: 720px) {
-  /* Одна строка: путь не переносится, при нехватке места уезжает влево —
-     раздел со стрелкой при этом остаётся на виду, потому что стоит
-     предпоследним и прокрутка начинается с начала строки. */
+  /* Сначала строка прокручивалась вбок, но название страницы просто
+     обрывалось у края экрана — люди видели «ДОВЕРЕННОСТЬ НА РОДНОМ ЯЗ»
+     и не догадывались, что строку можно тянуть. Теперь путь переносится:
+     «Главная / ‹ Нотариус» остаётся первой строкой, длинное название
+     уходит на вторую. Ничего не прячется и не обрезается. */
   .breadcrumb--back {
-    display: block;
-    white-space: nowrap;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
+    display: flex;
+    flex-wrap: wrap;
+    row-gap: 2px;
+    white-space: normal;
   }
-  .breadcrumb--back::-webkit-scrollbar { display: none; }
+  /* Звенья пути короткие — их рвать посреди слова незачем; переносится
+     только название текущей страницы, которое одно и бывает длинным. */
+  .breadcrumb--back > a,
+  .breadcrumb__parent,
+  .breadcrumb__sep { white-space: nowrap; }
+  .breadcrumb__current { white-space: normal; }
   .breadcrumb__parent { padding: 4px 7px; }
 }
