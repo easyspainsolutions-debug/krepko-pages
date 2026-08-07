@@ -136,6 +136,12 @@ body:has(.services-catalog) main {
 .svc-card {
   display: flex;
   flex-direction: column;
+  /* min-width: 0 обязателен. Трек 1fr не может стать уже min-content своих
+     элементов, а min-content карточки задаёт flex-строка заголовка: самое
+     длинное слово титула + nowrap-счётчик. У «Административных процедур» это
+     давало 412px, и на телефоне 390px ВСЯ колонка вылезала за экран —
+     «60+ услуг» соседних карточек обрезалось краем (Daniil, 07.08). */
+  min-width: 0;
   padding: 24px 22px 20px;
   background: var(--sc-surface);
   border: 1px solid var(--sc-border);
@@ -149,7 +155,11 @@ body:has(.services-catalog) main {
   display: flex;
   align-items: baseline;
   justify-content: space-between;
-  gap: 12px;
+  gap: 4px 12px;
+  /* страховка от следующего длинного счётчика: если заголовок и nowrap-метка
+     не умещаются в строку, метка переносится под заголовок, а не распирает
+     карточку за экран */
+  flex-wrap: wrap;
   margin-bottom: 8px;
 }
 .svc-card__title {

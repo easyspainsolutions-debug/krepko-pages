@@ -117,24 +117,31 @@ body:has(.pillar-split) main {
 .pillar-nav__current::before { opacity: 1; transform: translate(0, -50%); }
 
 /* ── поиск по каталогу ──
-   Серый бокс с рамкой выбивался из колонки (Daniil 2026-08-05). Теперь это
-   строка в типографике каталога: иконка, текст и линия снизу, которая на
-   фокусе становится терракотовой. Выглядит как первый пункт списка, а не
-   как чужой виджет. */
+   Третья итерация (Daniil, ночь 07.08). История: серый бокс с рамкой
+   выбивался из колонки (05.08) → сделали строкой в типографике каталога →
+   строка перестала читаться как поле ввода и слилась с пунктами: «всё
+   одного цвета, всё на голове друг у друга». Итог — белая пилюля с тонкой
+   тёплой рамкой: это НЕ тот серый бокс (фон белый, рамка цвета линий
+   каталога), но у поля снова есть форма поля. На мобильном пилюля стоит
+   на белом листе панели, поэтому там фон меняется на бежевый — см.
+   мобильный блок. */
 .pillar-nav__search {
   position: relative;
   display: flex;
   align-items: center;
   gap: 10px;
   margin-bottom: 16px;
-  padding: 0 0 12px;
-  border-bottom: 1px solid var(--ps-border);
+  padding: 11px 14px;
+  background: #FFFFFF;
+  border: 1px solid var(--ps-border);
+  border-radius: 10px;
   color: var(--ps-text-muted);
-  transition: border-color .25s ease, color .25s ease;
+  transition: border-color .25s ease, color .25s ease, box-shadow .25s ease;
 }
 .pillar-nav__search:focus-within {
-  border-bottom-color: var(--ps-gold);
+  border-color: var(--ps-gold);
   color: var(--ps-gold);
+  box-shadow: 0 0 0 3px rgba(199, 91, 57, .08);
 }
 .pillar-nav__search input {
   flex: 1;
@@ -231,6 +238,10 @@ body:has(.pillar-split) main {
   transition: transform .3s cubic-bezier(.17, .84, .44, 1);
 }
 .pillar-cat.is-open .pillar-cat__head svg { transform: rotate(180deg); }
+/* Открытая категория помечена цветом: в раскрытом каталоге из 8 секций
+   иначе не видно, чей список сейчас читаешь, — заголовки и пункты стояли
+   «на голове друг у друга» одним цветом (Daniil, 07.08). */
+.pillar-cat.is-open > .pillar-cat__head { color: var(--ps-gold); }
 @media (hover: hover) {
   .pillar-cat__head:hover { color: var(--ps-gold); }
 }
@@ -248,8 +259,11 @@ body:has(.pillar-split) main {
 .pillar-cat.is-open > .pillar-cat__panel { max-height: 1200px; }
 .pillar-cat__list {
   list-style: none;
-  margin: 0;
-  padding: 0;
+  /* Направляющая слева привязывает пункты к их категории: список читается
+     как вложенный уровень, а не как продолжение общей простыни. */
+  margin: 2px 0 6px 3px;
+  padding: 0 0 0 13px;
+  border-left: 2px solid var(--ps-border);
   overflow: hidden;
 }
 .pillar-cat__list > li:first-child { padding-top: 2px; }
@@ -536,8 +550,29 @@ body:has(.pillar-split) main {
     max-height: 400vh;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
+    /* Белый лист: раскрытый каталог — отдельная поверхность поверх бежевой
+       страницы, а не её продолжение. Без него поиск, категории и пункты
+       сливались в одну простыню (Daniil, 07.08). */
+    margin-top: 10px;
+    padding: 16px 16px 18px;
+    background: #FFFFFF;
+    border: 1px solid var(--ps-border);
+    border-radius: 12px;
   }
   .pillar-nav__inner > ul { padding-top: 6px; }
+
+  /* Пилюля поиска на белом листе — бежевая, иначе белое-на-белом */
+  .pillar-nav__search { background: var(--ps-bg); }
+
+  /* Плотнее, чем на десктопе: раскрытый каталог из 64 услуг на телефоне
+     иначе превращается в километр прокрутки */
+  .pillar-cat__head { padding: 12px 0; }
+  .pillar-cat__list a,
+  .pillar-cat__list .pillar-nav__current {
+    padding-top: 7px;
+    padding-bottom: 7px;
+    font-size: 14px;
+  }
 
   .pillar-nav__div { margin: 14px 0; }
 }
@@ -723,4 +758,197 @@ body:has(.pillar-split) .final-cta .btn--gold {
   .pillar-faq summary::after,
   .pillar-cards a,
   .pillar-cards b { transition: none; }
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════════
+   Плашка законодательного дедлайна и подборщик маршрута (2026-08-07).
+
+   Живут на страницах, где у процедуры есть дата из BOE: до неё статус
+   действует, после — нет. Плашка не кричит, а сообщает: срочность здесь
+   настоящая, и фальшивый «таймер акции» её бы только обесценил.
+   ═══════════════════════════════════════════════════════════════════════ */
+
+.deadline {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin: 0 0 30px;
+  padding: 16px 18px;
+  background: var(--ps-surface);
+  border-left: 3px solid var(--ps-gold);
+  border-radius: 0 8px 8px 0;
+}
+.deadline__main {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 6px 14px;
+}
+.deadline__label {
+  font-size: 15.5px;
+  font-weight: 700;
+  line-height: 1.4;
+  color: var(--ps-navy);
+}
+.deadline__count {
+  padding: 3px 10px;
+  background: var(--ps-gold);
+  border-radius: 999px;
+  color: #FFFBF7;
+  font-size: 12.5px;
+  font-weight: 700;
+  letter-spacing: .02em;
+  white-space: nowrap;
+}
+.deadline__note {
+  margin: 0;
+  font-size: 14.5px;
+  line-height: 1.6;
+  color: var(--ps-text-sub);
+}
+
+/* ── подборщик маршрута ── */
+.rfinder {
+  margin: 34px 0;
+  padding: clamp(20px, 3vw, 30px);
+  background: var(--ps-surface);
+  border: 1px solid var(--ps-border);
+  border-radius: 12px;
+}
+.rfinder__head h2 {
+  margin: 0 0 8px !important;
+  font-size: clamp(21px, 2vw, 26px) !important;
+}
+.rfinder__head p {
+  margin: 0 0 22px;
+  font-size: 15.5px;
+  line-height: 1.6;
+  color: var(--ps-text-sub);
+}
+
+.rfinder__form {
+  display: grid;
+  gap: 22px;
+}
+.rfinder__q {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+.rfinder__q legend {
+  padding: 0 0 10px;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--ps-navy);
+}
+.rfinder__opts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+/* Радио прячем, но не через display:none — иначе кнопка выпадает из
+   табуляции и опрос становится недоступен с клавиатуры. */
+.rfinder__opts input {
+  position: absolute;
+  opacity: 0;
+  width: 1px;
+  height: 1px;
+}
+.rfinder__opts span {
+  display: block;
+  padding: 10px 15px;
+  background: #FFFBF7;
+  border: 1px solid var(--ps-border);
+  border-radius: 999px;
+  color: var(--ps-text-sub);
+  font-size: 14.5px;
+  line-height: 1.35;
+  cursor: pointer;
+  transition: border-color .2s ease, color .2s ease, background-color .2s ease;
+}
+@media (hover: hover) {
+  .rfinder__opts span:hover { border-color: var(--ps-gold); color: var(--ps-navy); }
+}
+.rfinder__opts input:checked + span {
+  background: var(--ps-navy);
+  border-color: var(--ps-navy);
+  color: #FFFBF7;
+  font-weight: 600;
+}
+.rfinder__opts input:focus-visible + span {
+  outline: 2px solid var(--ps-gold);
+  outline-offset: 2px;
+}
+
+.rfinder__result {
+  margin-top: 26px;
+  padding-top: 24px;
+  border-top: 1px solid var(--ps-border);
+}
+.rfinder__result-label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--ps-gold);
+}
+.rfinder__route {
+  margin: 0 0 12px !important;
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(22px, 2.2vw, 28px) !important;
+  font-weight: 500;
+  line-height: 1.2;
+  color: var(--ps-navy);
+}
+.rfinder__why {
+  margin: 0 0 16px;
+  font-size: 16px;
+  line-height: 1.65;
+  color: var(--ps-text-sub);
+}
+.rfinder__alt {
+  margin: 0 0 22px;
+  padding: 0;
+  list-style: none;
+}
+.rfinder__alt li {
+  position: relative;
+  padding-left: 20px;
+  margin-bottom: 7px;
+  font-size: 14.5px;
+  line-height: 1.55;
+  color: var(--ps-text-muted);
+}
+.rfinder__alt li::before {
+  content: '';
+  position: absolute;
+  left: 4px;
+  top: 9px;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--ps-gold);
+  opacity: .55;
+}
+.rfinder__cta {
+  display: inline-block;
+  padding: 15px 30px;
+  background: var(--ps-gold);
+  border-radius: 8px;
+  color: #FFFBF7;
+  font-size: 15px;
+  font-weight: 700;
+  text-decoration: none;
+}
+@media (hover: hover) {
+  .rfinder__cta:hover { background: var(--ps-gold-2); }
+}
+.rfinder__disclaimer {
+  margin: 14px 0 0;
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--ps-text-muted);
 }
