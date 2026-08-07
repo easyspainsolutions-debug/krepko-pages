@@ -232,6 +232,9 @@ body:has(.pillar-split) main {
   text-align: left;
   cursor: pointer;
 }
+/* счётчик услуг нужен только там, где категория свёрнута (телефон,
+   витрина) — на десктопе список и так раскрывается по наведению взгляда */
+.pillar-cat__count { display: none; }
 .pillar-cat__head svg {
   flex: 0 0 auto;
   color: var(--ps-text-muted);
@@ -519,24 +522,33 @@ body:has(.pillar-split) main {
     gap: 0;
     padding-top: 22px;
   }
-  .pillar-doc { order: 1; }
-  .pillar-nav {
+  /* Страница услуги: человек уже выбрал, ему нужен текст — каталог уезжает
+     под него. Страница направления: он пришёл именно выбирать, и каталог
+     идёт первым, сразу под заголовком. */
+  .pillar-split--doc .pillar-doc { order: 1; }
+  .pillar-split--doc .pillar-nav {
     order: 2;
-    position: static;
     margin-top: 34px;
     padding-top: 24px;
     border-top: 1px solid var(--ps-border);
   }
+  .pillar-split--hub .pillar-nav { order: 1; margin-bottom: 30px; }
+  .pillar-split--hub .pillar-doc { order: 2; }
+  .pillar-nav { position: static; }
 
   /* кнопка, поиск и подсказка пустого поиска — механика раскрытия,
      которой здесь больше нет */
-  .pillar-nav__toggle,
-  .pillar-nav__search,
-  .pillar-nav__empty { display: none; }
+  /* Кнопка-тумблер убрана везде: она заворачивала каталог в третий
+     уровень раскрытия. Поиск остаётся на витрине — 64 услуги нотариуса
+     без него не найти, а на странице услуги он лишний. */
+  .pillar-nav__toggle { display: none; }
+  .pillar-split--doc .pillar-nav__search,
+  .pillar-split--doc .pillar-nav__empty { display: none; }
+  .pillar-split--hub .pillar-nav__search { background: var(--ps-bg); margin-bottom: 14px; }
 
   /* заголовок блока — виден только на телефоне, на десктопе колонка
      говорит сама за себя */
-  .pillar-nav__mobile-title {
+  .pillar-split--doc .pillar-nav__mobile-title {
     display: block;
     margin: 0 0 16px;
     font-family: 'Playfair Display', Georgia, serif;
@@ -562,12 +574,18 @@ body:has(.pillar-split) main {
     border: 0;
     border-radius: 0;
   }
-  .pillar-cat__panel { max-height: none !important; overflow: visible; }
+  /* На странице услуги внизу показываем только её собственную категорию —
+     соседние услуги, между которыми человек реально выбирает. Остальные
+     семь категорий там же превращали блок в километр прокрутки: ровно то,
+     на что жаловался Daniil («огромный неочевидный список»). Весь каталог
+     — по ссылке под списком. */
+  .pillar-split--doc .pillar-cat:not(.is-open) { display: none; }
+  .pillar-split--doc .pillar-cat__panel { max-height: none !important; overflow: visible; }
 
-  /* заголовок категории — подпись, а не кнопка: без шеврона, без нажатия */
-  .pillar-cat { border-top: 0; margin-bottom: 18px; }
-  .pillar-cat + .pillar-cat { border-top: 0; }
-  .pillar-cat__head {
+  /* На странице услуги заголовок категории — подпись, а не кнопка */
+  .pillar-split--doc .pillar-cat { border-top: 0; margin-bottom: 18px; }
+  .pillar-split--doc .pillar-cat + .pillar-cat { border-top: 0; }
+  .pillar-split--doc .pillar-cat__head {
     padding: 0 0 8px;
     cursor: default;
     pointer-events: none;
@@ -577,7 +595,25 @@ body:has(.pillar-split) main {
     text-transform: uppercase;
     color: var(--ps-gold);
   }
-  .pillar-cat__head svg { display: none; }
+  .pillar-split--doc .pillar-cat__head svg { display: none; }
+
+  /* На витрине категория — крупная строка, по которой хочется нажать:
+     название, число услуг и шеврон. Между ними линия, как в списке. */
+  .pillar-split--hub .pillar-cat { border-top: 0; border-bottom: 1px solid var(--ps-border); }
+  .pillar-split--hub .pillar-cat__head {
+    padding: 16px 0;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--ps-navy);
+  }
+  .pillar-split--hub .pillar-cat__count {
+    display: block;
+    margin-left: auto;
+    margin-right: 10px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--ps-text-muted);
+  }
 
   .pillar-cat__list a,
   .pillar-cat__list .pillar-nav__current {
@@ -588,14 +624,24 @@ body:has(.pillar-split) main {
   .pillar-cat__list > li:last-child { padding-bottom: 0; }
 
   /* ссылка на обзор направления уходит вниз, к городам */
-  .pillar-nav__all {
+  .pillar-split--doc .pillar-nav__all {
     order: 99;
     margin: 6px 0 0;
     padding: 14px 0 0;
     border-top: 1px solid var(--ps-border);
     border-bottom: 0;
   }
-  .pillar-nav__all a { color: var(--ps-gold); }
+  .pillar-split--doc .pillar-nav__all a {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--ps-gold);
+    font-size: 14.5px;
+    font-weight: 700;
+    letter-spacing: 0;
+    text-transform: none;
+  }
+  .pillar-split--hub .pillar-nav__all { display: none; }
 
   .pillar-nav__div { margin: 14px 0; }
 }
