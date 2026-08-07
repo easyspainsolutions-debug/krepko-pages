@@ -493,86 +493,109 @@ body:has(.pillar-split) main {
   color: var(--ps-gold);
 }
 
-/* кнопка-раскрытие меню — только на узком экране */
-.pillar-nav__toggle { display: none; }
+/* кнопка-раскрытие меню и заголовок блока — только на узком экране */
+.pillar-nav__toggle,
+.pillar-nav__mobile-title { display: none; }
 
-/* ── мобильная раскладка ──
-   Перечень из десяти пунктов занимал первый экран целиком, и текст уезжал
-   под него. Сворачиваем меню за кнопку с названием текущей страницы: сразу
-   видно, где ты, и текст начинается высоко. */
+/* ── мобильная раскладка (2026-08-07, третья итерация) ──
+
+   Было: кнопка с названием страницы → панель → аккордеон категории →
+   пункты. Три уровня раскрытия подряд плюс поиск и лейбл внутри белого
+   листа. Daniil: «выглядит очень шумно и нелогично, сложно даже мне,
+   который это придумал».
+
+   Стало: на телефоне каталога в начале страницы нет вообще. Человек
+   пришёл читать про свой вопрос — он его и читает; путь назад дают
+   хлебные крошки над заголовком. Каталог уезжает под текст и лежит там
+   плоским списком: подпись категории, под ней ссылки. Разворачивать
+   нечего, кликать чтобы увидеть — тоже.
+
+   DOM при этом не дублируется: тот же блок каталога переставляется
+   через order и разворачивается стилями. */
 @media (max-width: 899px) {
   .pillar-split__cols {
-    grid-template-columns: 1fr;
-    gap: 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
     padding-top: 22px;
   }
-  .pillar-nav { position: static; }
+  .pillar-doc { order: 1; }
+  .pillar-nav {
+    order: 2;
+    position: static;
+    margin-top: 34px;
+    padding-top: 24px;
+    border-top: 1px solid var(--ps-border);
+  }
 
-  .pillar-nav__toggle {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 14px;
-    width: 100%;
-    padding: 15px 16px;
-    background: var(--ps-surface);
-    border: 1px solid var(--ps-border);
-    border-radius: 8px;
+  /* кнопка, поиск и подсказка пустого поиска — механика раскрытия,
+     которой здесь больше нет */
+  .pillar-nav__toggle,
+  .pillar-nav__search,
+  .pillar-nav__empty { display: none; }
+
+  /* заголовок блока — виден только на телефоне, на десктопе колонка
+     говорит сама за себя */
+  .pillar-nav__mobile-title {
+    display: block;
+    margin: 0 0 16px;
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 21px;
+    font-weight: 500;
+    line-height: 1.2;
     color: var(--ps-navy);
-    font-family: 'Manrope', sans-serif;
-    font-size: 15px;
-    font-weight: 700;
-    text-align: left;
-    cursor: pointer;
   }
-  .pillar-nav__toggle svg {
-    flex: 0 0 auto;
-    transition: transform .3s cubic-bezier(.17, .84, .44, 1);
-  }
-  .pillar-nav__toggle[aria-expanded="true"] svg { transform: rotate(180deg); }
 
-  /* Раскрытие панели каталога.
-     Раньше высота анимировалась через grid-template-rows: 0fr → 1fr.
-     Приём опирается на интерполяцию fr-треков — она есть в актуальных
-     браузерах, но это самое хрупкое место всей навигации: если движок её
-     не поддерживает, трек остаётся нулевым и каталог из 64 услуг просто
-     не открывается. max-height анимируется везде.
-     Запас в 400vh (на телефоне ≈ 3200px) перекрывает даже состояние, где
-     раскрыты все категории; overflow-y на внутренней обёртке — страховка
-     на случай, если контент когда-нибудь перерастёт и это значение. */
-  .pillar-nav__panel {
-    overflow: hidden;
-    max-height: 0;
-    transition: max-height .38s cubic-bezier(.17, .84, .44, 1);
-  }
-  .pillar-nav.is-open .pillar-nav__panel { max-height: 400vh; }
+  /* панель и категории всегда раскрыты: никаких max-height и is-open */
+  .pillar-nav__panel { max-height: none; overflow: visible; }
   .pillar-nav__panel > .pillar-nav__inner {
-    max-height: 400vh;
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
-    /* Белый лист: раскрытый каталог — отдельная поверхность поверх бежевой
-       страницы, а не её продолжение. Без него поиск, категории и пункты
-       сливались в одну простыню (Daniil, 07.08). */
-    margin-top: 10px;
-    padding: 16px 16px 18px;
-    background: #FFFFFF;
-    border: 1px solid var(--ps-border);
-    border-radius: 12px;
+    /* flex-колонка нужна ради order: ссылка на обзор направления должна
+       уехать под категории, иначе её капс сливается с капсом первой
+       категории в две одинаковые строки */
+    display: flex;
+    flex-direction: column;
+    max-height: none;
+    overflow: visible;
+    margin: 0;
+    padding: 0;
+    background: none;
+    border: 0;
+    border-radius: 0;
   }
-  .pillar-nav__inner > ul { padding-top: 6px; }
+  .pillar-cat__panel { max-height: none !important; overflow: visible; }
 
-  /* Пилюля поиска на белом листе — бежевая, иначе белое-на-белом */
-  .pillar-nav__search { background: var(--ps-bg); }
+  /* заголовок категории — подпись, а не кнопка: без шеврона, без нажатия */
+  .pillar-cat { border-top: 0; margin-bottom: 18px; }
+  .pillar-cat + .pillar-cat { border-top: 0; }
+  .pillar-cat__head {
+    padding: 0 0 8px;
+    cursor: default;
+    pointer-events: none;
+    font-size: 11.5px;
+    font-weight: 700;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--ps-gold);
+  }
+  .pillar-cat__head svg { display: none; }
 
-  /* Плотнее, чем на десктопе: раскрытый каталог из 64 услуг на телефоне
-     иначе превращается в километр прокрутки */
-  .pillar-cat__head { padding: 12px 0; }
   .pillar-cat__list a,
   .pillar-cat__list .pillar-nav__current {
-    padding-top: 7px;
-    padding-bottom: 7px;
-    font-size: 14px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    font-size: 15px;
   }
+  .pillar-cat__list > li:last-child { padding-bottom: 0; }
+
+  /* ссылка на обзор направления уходит вниз, к городам */
+  .pillar-nav__all {
+    order: 99;
+    margin: 6px 0 0;
+    padding: 14px 0 0;
+    border-top: 1px solid var(--ps-border);
+    border-bottom: 0;
+  }
+  .pillar-nav__all a { color: var(--ps-gold); }
 
   .pillar-nav__div { margin: 14px 0; }
 }
