@@ -96,93 +96,9 @@
   line-height: 1.7;
 }
 
-/* ── отзывы ────────────────────────────────────────────────────────── */
-.service-tail .home-reviews {
-  padding-top: clamp(44px, 5vw, 76px);
-}
-.service-tail .p-label {
-  display: block;
-  margin-bottom: 10px;
-  color: var(--st-brand);
-  font-family: 'Manrope', sans-serif;
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: .14em;
-  text-transform: uppercase;
-}
-.service-tail .home-reviews h2 {
-  margin: 0 0 clamp(18px, 2vw, 26px);
-  color: var(--st-navy);
-  font-family: 'Playfair Display', Georgia, serif;
-  font-weight: 500;
-  font-size: clamp(24px, 2.6vw, 32px);
-}
-.service-tail .home-reviews__carousel {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 16px;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  overflow: visible;
-}
-.service-tail .review-card {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  padding: clamp(18px, 2vw, 24px);
-  background: var(--st-surface);
-  border: 1px solid var(--st-border);
-  border-radius: 4px;
-  color: var(--st-text);
-}
-.service-tail .review-card__stars svg {
-  width: 14px;
-  height: 14px;
-  fill: var(--st-brand);
-}
-/* цвет задаём явно: krepko-base.css красит любой <p> в var(--text-sub)
-   из тёмной шкалы, и текст отзыва становился белым на песочном */
-.service-tail .review-card__text {
-  margin: 0;
-  color: var(--st-text);
-  font-size: 15px;
-  line-height: 1.6;
-}
-.service-tail .review-card__author {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-top: auto;
-}
-.service-tail .review-card__avatar {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  background: var(--st-navy);
-  color: #FFFBF7;
-  font-size: 13px;
-  font-weight: 700;
-}
-.service-tail .review-card__meta { display: flex; flex-direction: column; }
-.service-tail .review-card__name { color: var(--st-navy); font-size: 14px; font-weight: 700; }
-.service-tail .review-card__src {
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  color: var(--st-muted);
-  font-size: 12px;
-}
-.service-tail .home-reviews__footer { margin-top: 18px; }
-.service-tail .home-reviews__all {
-  color: var(--st-brand);
-  font-size: 14px;
-  font-weight: 600;
-  text-decoration: none;
-}
+/* Отзывы стилизует reviews-block.css — тот же блок, что на главной
+   (Daniil, 2026-08-07: «сделай 1 в 1 как на главной»). Здесь ничего
+   не переопределяем, иначе лента снова разъедется с главной. */
 
 /* ── карта ─────────────────────────────────────────────────────────── */
 .service-tail .cmap {

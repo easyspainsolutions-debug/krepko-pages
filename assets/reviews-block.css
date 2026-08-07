@@ -1,0 +1,365 @@
+/* ═══════════════════════════════════════════════════════════════════════
+   Лента отзывов — стили, вынесенные из home-redesign.css (2026-08-07).
+
+   Блок переехал в modules/reviews_carousel.html и включается и на
+   главной, и на страницах услуг. Подключать ради него весь
+   home-redesign.css нельзя: он переопределяет main, .final-cta и
+   .faq__item, ломая вёрстку страницы услуги.
+
+   Файл СГЕНЕРИРОВАН из home-redesign.css по селекторам .rv*, .home-reviews,
+   .reviews-cta. Правки вносить в исходник и пересобирать, иначе главная и
+   страницы услуг разъедутся. ═══ */
+
+/* Кнопка блока: типографика с главной (капс, разрядка, мелкий кегль) —
+   в home-redesign.css это правило .btn, которого на странице услуги нет. */
+.home-reviews .reviews-cta .btn {
+  font-family: 'Manrope', sans-serif;
+  font-weight: 600;
+  font-size: 12.65px !important;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+/* Светлая шкала блока. Правила ниже ссылаются на общие токены (--surface,
+   --text, --gold), а те на главной переопределены редизайном, на странице
+   услуги же остаются тёмными из tokens.css — блок уезжал в тёмно-синий и
+   мелкий кегль. Объявляем значения прямо на секции: одинаковый вид
+   независимо от того, какая тема действует на странице. */
+.home-reviews {
+  --bg: #FFFBF7;
+  --surface: #F5F0EB;
+  --surface-sunk: #EFE7DA;
+  --border: #DCCFB9;
+  --border-faint: #E8DFD1;
+  --text: #2D2D2D;
+  --text-muted: #6B6B6B;
+  --gold: #C75B39;
+  /* кнопка «Обсудить мою задачу» красится градиентом --gold → --gold-2 и
+     берёт цвет текста из --gold-on; вне главной это старая горчичная пара */
+  --gold-2: #B04E2F;
+  --gold-on: #FFFBF7;
+  --glow-gold: 0 4px 14px rgba(199, 91, 57, .25);
+  --fs-subtitle: clamp(18px, calc(0.44vw + 15.25px), 24px);
+}
+
+@media (min-width: 1000px) {
+  #sec-reviews .home-reviews__carousel {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      overflow: visible;
+    }
+}
+
+/* ============ Round 17: отзывы masonry-сеткой (по мотивам Flock Ramp,
+     но в тёплой палитре: sand-карточки, терракотовая кавычка) ============ */
+  .rv-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+    margin-top: 8px;
+    text-align: left;
+  }
+
+@media (min-width: 720px) {
+  .rv-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (min-width: 1000px) {
+  /* masonry: карточки разной высоты кладутся в 3 колонки без «лесенки» */
+    .rv-grid {
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: masonry;
+      align-items: start;
+      gap: 24px;
+    }
+}
+
+.rv {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    margin: 0;
+    padding: 28px;
+    background: var(--surface);
+    border: 1px solid var(--border-faint);
+    border-radius: 4px;
+  }
+
+/* крупная кавычка в кружке — акцент из референса, но терракотовый */
+  .rv__quote {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    background: var(--bg);
+    border: 1px solid var(--border-faint);
+    color: var(--gold);
+    flex-shrink: 0;
+  }
+
+.rv__text {
+    margin: 0;
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--text);
+    quotes: none;
+  }
+
+@media (min-width: 1000px) {
+  .rv__text { font-size: 17px; }
+}
+
+.rv__author { display: flex; align-items: center; gap: 12px; margin-top: auto; }
+
+.rv__avatar {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: var(--surface-sunk);
+    border: 1px solid var(--border);
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    color: #1A2B3C;
+    flex-shrink: 0;
+  }
+
+.rv__meta { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+
+.rv__name {
+    font-family: 'Manrope', sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+    color: #1A2B3C;
+  }
+
+.rv__src {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+
+.rv__glogo { flex-shrink: 0; }
+
+/* CTA после отзывов */
+  .reviews-cta { display: flex; justify-content: center; margin: 32px 0 8px; }
+
+/* — 3. контейнеры иконок и аватары — */
+  .rv__quote, .rv__avatar, .guarantee__icon {
+    border-radius: 50% !important;
+  }
+
+/* карточки на песочном фоне поднимаем до cream — иначе сливаются */
+  #sec-reviews .rv { background: var(--bg); }
+
+#sec-reviews .rv__quote { background: var(--surface); }
+
+/* надзаголовки секций */
+  .rv__avatar { color: var(--gold); }
+
+/* Карточки — на --surface: светлее sunk-полос и темнее cream-промежутков,
+     поэтому читаются на любом фоне зебры. */
+  .rv, .card, .faq__item, .loc { background: var(--surface); }
+
+/* ============ Round 43: отзывы — слайдер карточек ============
+     По мотивам Bobbin: карточки в ряд, крайняя подрезана краем экрана и
+     намекает на продолжение; круглые стрелки поверх; плашка рейтинга уехала
+     вниз под ленту, как итог блока. */
+  /* По мотивам Les Amis: один отзыв за раз во всю ширину, крупной цитатой.
+     Три коротких отзыва в ряд выглядели мелко и не читались как аргумент —
+     поштучно каждый получает вес. */
+  #sec-reviews .rv-wrap {
+    position: relative;
+    margin-top: 48px;
+    max-width: 1100px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0 clamp(56px, 7vw, 96px);   /* место под стрелки по бокам */
+  }
+
+#sec-reviews .rv-track {
+    display: flex;
+    gap: 0;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+#sec-reviews .rv-track::-webkit-scrollbar { display: none; }
+
+#sec-reviews .rv {
+    flex: 0 0 100%;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 300px;
+    background: none !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    padding: 0;
+    text-align: center;
+    transform: none !important;
+    box-shadow: none !important;
+  }
+
+/* инициалы вместо аватара — фотографий клиентов у нас нет */
+  #sec-reviews .rv__quote {
+    order: -1;
+    width: 74px; height: 74px;
+    margin: 0 0 28px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: var(--surface) !important;
+    color: var(--gold);
+    font-family: 'Playfair Display', serif;
+    font-weight: 500;
+    font-size: 26px;
+    letter-spacing: .02em;
+    line-height: 1;
+  }
+
+#sec-reviews .rv__text {
+    margin: 0;
+    max-width: 900px;
+    font-family: 'Playfair Display', serif;
+    font-weight: 500;
+    font-size: clamp(20px, 2.1vw, 30px);
+    line-height: 1.42;
+    color: #1A2B3C;
+  }
+
+#sec-reviews .rv__author {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+  }
+
+#sec-reviews .rv__avatar { display: none; }
+
+/* инициал уже сверху */
+  #sec-reviews .rv__meta { align-items: center; text-align: center; }
+
+#sec-reviews .rv__name { font-size: 17px; font-weight: 600; color: #1A2B3C; }
+
+#sec-reviews .rv__src { justify-content: center; }
+
+/* круглые стрелки поверх ленты */
+  #sec-reviews .rv-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 3;
+    width: 56px; height: 56px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--border-faint);
+    border-radius: 50% !important;
+    background: var(--surface);
+    color: #1A2B3C;
+    cursor: pointer;
+    box-shadow: none;
+    transition: opacity .25s ease, background-color .25s ease, color .25s ease;
+  }
+
+#sec-reviews .rv-nav--prev { left: 0; }
+
+#sec-reviews .rv-nav--next { right: 0; }
+
+#sec-reviews .rv-nav:disabled { opacity: .3; pointer-events: none; }
+
+@media (hover: hover) {
+  #sec-reviews .rv-nav:not(:disabled):hover {
+      background: var(--gold);
+      border-color: var(--gold);
+      color: #FFFBF7;
+    }
+}
+
+@media (max-width: 999px) {
+  #sec-reviews .rv-nav { display: none; }
+}
+
+#sec-reviews .reviews-cta { margin-top: 32px; }
+
+/* ============ Round 38: оживление прокрутки ============ */
+
+  /* hover отзывам и городам — единственные карточки, где его не было */
+  .rv, .loc {
+    position: relative;
+    z-index: 0;
+    transition: transform .32s cubic-bezier(.22, 1, .36, 1),
+                box-shadow .32s cubic-bezier(.22, 1, .36, 1);
+  }
+
+@media (hover: hover) {
+  .rv:hover, .loc:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 24px 48px -22px rgba(45, 45, 45, .30),
+                  0 3px 10px rgba(45, 45, 45, .05);
+      z-index: 2;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rv, .loc { transition: none; }
+  .rv:hover, .loc:hover { transform: none; }
+}
+
+/* отзыв — та же ступень, но это цитата: интерлиньяж читательский */
+  #sec-reviews .rv__text, .rv__text {
+    font-size: var(--fs-subtitle) !important;
+    line-height: 1.45 !important;
+  }
+
+/* — 8. декоративные цифры: своя роль, но интерлиньяж без люфта — */
+  .stat__value, #sec-services .srow__num, .step__num,
+  .rv__quote, .rv__avatar, .city__num {
+    line-height: 1 !important;
+  }
+
+.rv:nth-of-type(2) { transition-delay: 110ms; }
+
+.rv:nth-of-type(3) { transition-delay: 220ms; }
+
+@media (min-width: 1000px) {
+  .rv-dots { display: none; }
+}
+
+/* ── 4. Отзывы: лишние 56px полей и «мусор» от соседней карточки ──
+   #sec-reviews .rv-wrap держит padding: 0 clamp(56px,7vw,96px) для
+   круглых стрелок — на 430px это clamp даёт 56px с каждой стороны
+   (7vw уже меньше минимума), т.е. лента сама сужается до 270px из
+   430, а карточка (88% от неё) — до 238px. Стрелки на этой ширине
+   и так скрыты (max-width:999px), поле под них не нужно — снимаем.
+   Соседняя карточка теперь честно выглядывает на ширину экрана, а не
+   на треть суженной ленты. Плюс мягкая маска по краям: текст соседней
+   карточки центрирован, и его случайный обрезанный кусок у самого
+   края читался как визуальный мусор — гасим его в градиент. */
+@media (max-width: 999px) {
+  #sec-reviews .rv-wrap { padding-left: 0; padding-right: 0; }
+  #sec-reviews .rv-track {
+    -webkit-mask-image: linear-gradient(to right, transparent 0, #000 3%, #000 91%, transparent 100%);
+            mask-image: linear-gradient(to right, transparent 0, #000 3%, #000 91%, transparent 100%);
+  }
+
+  /* точки-пагинация были 23×23 — заметно меньше тап-зоны в 44px.
+     Увеличиваем hit-area паддингом, сам кружок (::before) не растёт. */
+  .rv-dots { gap: 4px; }
+  .rv-dots button { padding: 18px; }
+}

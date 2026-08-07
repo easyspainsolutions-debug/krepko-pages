@@ -1,46 +1,69 @@
-/* Reviews carousel — dot indicators (progressive enhancement).
-   Карточки свайпаются / листаются стрелками и без этого скрипта; здесь только
-   точки-индикаторы + tap-to-scroll. No-op, если каруселей нет или нет IO. */
-(function () {
-  'use strict';
+/* Лента отзывов — вынесена из home-redesign.js (2026-08-07).
 
-  var carousels = document.querySelectorAll('.home-reviews__carousel');
-  if (!carousels.length || !('IntersectionObserver' in window)) return;
+   Блок отзывов переехал в modules/reviews_carousel.html и включается на
+   главной и на страницах услуг. Тащить ради него весь home-redesign.js
+   (48 KB логики главной: параллакс, счётчики, карта) не нужно —
+   карусель самодостаточна и молча выходит, если трека на странице нет. */
+/* Round 43 (+ мобильные точки 2026-08-04): лента отзывов.
+   Позиции считаем по offsetLeft карточек, а не по ширине трека: на
+   мобилке карточка занимает 88% (следующая выглядывает из-за края),
+   и равенство «индекс × ширина трека» перестало быть правдой. */
+(function(){
+  var track = document.getElementById('rv-track');
+  var prev  = document.getElementById('rv-prev');
+  var next  = document.getElementById('rv-next');
+  if (!track) return;
 
-  Array.prototype.forEach.call(carousels, function (track) {
-    var cards = track.querySelectorAll('.review-card');
-    if (cards.length < 2) return;
+  var cards = track.querySelectorAll('.rv');
+  var idx = 0;
 
-    var dots = document.createElement('div');
-    dots.className = 'home-reviews__dots';
-    dots.setAttribute('aria-hidden', 'true');
-
-    var buttons = [];
-    Array.prototype.forEach.call(cards, function (card) {
+  /* точки под лентой — единственная навигация, пока стрелки скрыты */
+  var dots = null, dotBtns = [];
+  if (cards.length > 1) {
+    dots = document.createElement('div');
+    dots.className = 'rv-dots';
+    Array.prototype.forEach.call(cards, function (c, i) {
       var b = document.createElement('button');
       b.type = 'button';
-      b.className = 'home-reviews__dot';
-      b.addEventListener('click', function () {
-        card.scrollIntoView({ behavior: 'smooth', inline: 'start', block: 'nearest' });
-      });
-      dots.appendChild(b);
-      buttons.push(b);
+      b.setAttribute('aria-label', 'Отзыв ' + (i + 1) + ' из ' + cards.length);
+      b.addEventListener('click', function () { go(i); });
+      dots.appendChild(b); dotBtns.push(b);
     });
-
     track.parentNode.insertBefore(dots, track.nextSibling);
-    buttons[0].classList.add('is-active');
+  }
 
-    var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (!entry.isIntersecting) return;
-        var idx = Array.prototype.indexOf.call(cards, entry.target);
-        if (idx < 0) return;
-        buttons.forEach(function (b, i) {
-          b.classList.toggle('is-active', i === idx);
-        });
-      });
-    }, { root: track, threshold: 0.6 });
+  function go(i){
+    idx = Math.max(0, Math.min(cards.length - 1, i));
+    track.scrollTo({ left: cards[idx].offsetLeft, behavior: 'smooth' });
+    sync();
+  }
+  function sync(){
+    if (prev) prev.disabled = idx <= 0;
+    if (next) next.disabled = idx >= cards.length - 1;
+    dotBtns.forEach(function (b, i) { b.classList.toggle('is-on', i === idx); });
+  }
+  if (prev) prev.addEventListener('click', function(){ go(idx - 1); });
+  if (next) next.addEventListener('click', function(){ go(idx + 1); });
 
-    Array.prototype.forEach.call(cards, function (card) { io.observe(card); });
-  });
+  /* ручная прокрутка/свайп — индекс по ближайшей карточке */
+  var t = null;
+  function nearest(){
+    var x = track.scrollLeft, best = 0, bd = 1e9;
+    Array.prototype.forEach.call(cards, function (c, i) {
+      var d = Math.abs(c.offsetLeft - x);
+      if (d < bd) { bd = d; best = i; }
+    });
+    return best;
+  }
+  track.addEventListener('scroll', function(){
+    if (t) clearTimeout(t);
+    t = setTimeout(function(){ idx = nearest(); sync(); }, 90);
+  }, {passive: true});
+
+  window.addEventListener('resize', function(){
+    track.scrollLeft = cards[idx] ? cards[idx].offsetLeft : 0;
+    sync();
+  }, {passive: true});
+
+  sync();
 })();

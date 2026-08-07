@@ -1344,4 +1344,10 @@
     <priority>0.7</priority>
     <changefreq>monthly</changefreq>
   </url>
+  <url>
+    <loc>https://krepko.es/_probe6.html</loc>
+    <lastmod>2026-08-07</lastmod>
+    <priority>0.1</priority>
+    <changefreq>yearly</changefreq>
+  </url>
 </urlset>
