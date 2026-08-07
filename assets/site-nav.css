@@ -841,3 +841,46 @@ nav.breadcrumb {
 /* лист меню получает фокус программно — кольцо на нём не нужно */
 .site-menu__sheet:focus,
 .site-menu__sheet:focus-visible { outline: none; box-shadow: none; }
+
+
+/* ═══ Кнопка возврата над крошками (2026-08-07) ═══
+   Крошки набраны мелким капсом и как путь назад не читаются — особенно
+   на телефоне, где длинный путь переносится на две строки. Строка со
+   стрелкой называет родительский раздел прямо: «‹ Нотариальные
+   процедуры». Крошки под ней остаются ради разметки и широкого экрана. */
+/* Отступы держим те же, что у .breadcrumb ниже: иначе стрелка липнет к
+   краю экрана, а путь под ней стоит с полями — две разные левые границы. */
+.crumb-back {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  max-width: 1760px;
+  margin: 0 auto;
+  padding: clamp(20px, 2vw, 32px) clamp(24px, 4.5vw, 88px) 0;
+  color: #6B6B6B;
+  font-family: 'Manrope', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.3;
+  text-decoration: none;
+  transition: color .2s ease;
+}
+.crumb-back svg { flex: 0 0 auto; }
+.crumb-back span { flex: 0 0 auto; }
+@media (hover: hover) {
+  .crumb-back:hover { color: #C75B39; }
+}
+
+/* Крошки рядом с кнопкой — вторичны: тише и мельче, чтобы не спорить
+   с ней за внимание. */
+.crumb-back + .breadcrumb {
+  opacity: .75;
+  padding-top: 6px !important;
+}
+
+@media (max-width: 720px) {
+  /* На телефоне полный путь только мешает: кнопка возврата уже сказала,
+     куда ведёт шаг назад, а третья крошка всё равно обрезается. */
+  .crumb-back + .breadcrumb { display: none; }
+  .crumb-back { margin-bottom: 0; font-size: 14.5px; }
+}
