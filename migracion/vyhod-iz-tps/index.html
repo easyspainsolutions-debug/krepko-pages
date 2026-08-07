@@ -57,9 +57,9 @@
        Documented Phase-1 requirement (Аналитика-стратегия §IV/§VII/§XII). -->
   <script src="/assets/analytics.js?v=20260601" defer></script>
   <script src="/assets/reviews-carousel.js?v=20260602f" defer></script>
-<link rel="stylesheet" href="/assets/pillar-split.css?v=20260807a">
+<link rel="stylesheet" href="/assets/pillar-split.css?v=20260807b">
 <script src="/assets/pillar-split.js?v=20260806e" defer></script>
-<script src="/assets/route-finder.js?v=20260807a" defer></script>
+<script src="/assets/route-finder.js?v=20260807b" defer></script>
 <noscript><style>
   .pillar-nav__search { display: none !important; }
   .pillar-cat__panel { max-height: none !important; }
@@ -439,52 +439,11 @@
     <span class="deadline__count" data-deadline-count hidden></span>
   </div>
 <p class="deadline__note">Защиту продлевали уже несколько раз, и каждый раз это было решение властей, а не ваше право. Собственный ВНЖ от таких решений не зависит.</p></aside><section class="rfinder" id="route-finder" hidden>
-  <div class="rfinder__head">
+  <div class="rfinder__intro">
     <h2>Какой маршрут ваш</h2>
-    <p>Три вопроса — и вы увидите, какие пути открыты именно вам. Без регистрации, ответ сразу на экране.</p>
+    <p>Три вопроса — и вы увидите, какие пути открыты именно вам. Ответ сразу на экране, без регистрации.</p>
   </div>
-
-  <form class="rfinder__form" id="rfinder-form">
-    <fieldset class="rfinder__q" data-step="1">
-      <legend>Сколько вы живёте в Испании?</legend>
-      <div class="rfinder__opts">
-        <label><input type="radio" name="years" value="lt2"><span>Меньше 2 лет</span></label>
-        <label><input type="radio" name="years" value="2to3"><span>2–3 года</span></label>
-        <label><input type="radio" name="years" value="3to5"><span>3–5 лет</span></label>
-        <label><input type="radio" name="years" value="gt5"><span>5 лет и больше</span></label>
-      </div>
-    </fieldset>
-
-    <fieldset class="rfinder__q" data-step="2">
-      <legend>Работаете официально?</legend>
-      <div class="rfinder__opts">
-        <label><input type="radio" name="work" value="gt1y"><span>Да, больше года</span></label>
-        <label><input type="radio" name="work" value="lt1y"><span>Да, меньше года</span></label>
-        <label><input type="radio" name="work" value="no"><span>Нет</span></label>
-      </div>
-    </fieldset>
-
-    <fieldset class="rfinder__q" data-step="3">
-      <legend>Есть ли семья в Испании?</legend>
-      <div class="rfinder__opts">
-        <label><input type="radio" name="family" value="eu"><span>Супруг(а) — гражданин Испании или ЕС</span></label>
-        <label><input type="radio" name="family" value="relatives"><span>Близкие родственники с ВНЖ</span></label>
-        <label><input type="radio" name="family" value="kids"><span>Дети живут со мной</span></label>
-        <label><input type="radio" name="family" value="no"><span>Нет</span></label>
-      </div>
-    </fieldset>
-  </form>
-
-  <div class="rfinder__result" id="rfinder-result" hidden>
-    <span class="rfinder__result-label">Скорее всего вам подойдёт</span>
-    <h3 class="rfinder__route" id="rfinder-route"></h3>
-    <p class="rfinder__why" id="rfinder-why"></p>
-    <ul class="rfinder__alt" id="rfinder-alt"></ul>
-    <a class="rfinder__cta" id="rfinder-cta" href="https://wa.me/34641048296" target="_blank" rel="noopener">
-      Проверить мой случай
-    </a>
-    <p class="rfinder__disclaimer">Подбор ориентировочный: он не учитывает деталей вашей истории — прописки, перерывов в статусе, документов. Точный маршрут называем после разбора, он бесплатный.</p>
-  </div>
+  <div class="rfinder__thread" id="rfinder-thread"></div>
 </section>
       <div class="pillar-body">
 <p><strong>265 000 человек в Испании живут на временной защите.</strong> У большинства из них уже больше двух лет стажа — а значит, право на собственный ВНЖ есть прямо сейчас. Инструкция SEM 2/2026 открыла эти маршруты держателям временной защиты: переходить можно, не дожидаясь окончания защиты и не теряя ни дня накопленного стажа.</p>

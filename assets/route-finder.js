@@ -1,6 +1,11 @@
 /* Подборщик маршрута выхода из временной защиты + счётчик дней до дедлайна.
-   Страницы: /migracion/vyhod-iz-tps/ и любая другая с deadline/route_finder
-   в frontmatter.
+   Страницы: /migracion/vyhod-iz-tps/ и любая другая, где во frontmatter есть
+   deadline или route_finder.
+
+   Подборщик работает как переписка: один вопрос за раз, варианты вертикальным
+   списком, ответ уходит в историю пузырём. Первая версия показывала все
+   одиннадцать вариантов сразу — человек упирался в поле таблеток и не знал,
+   с чего начать.
 
    Маршруты — по RD 1155/2024 (пять модальностей arraigo) и Instrucción
    SEM 2/2026 (переход с временной защиты). Подбор намеренно грубый: он
@@ -8,13 +13,14 @@
    перерывы в прописке, отказы в прошлом, смешанные основания — видит только
    человек, и текст результата об этом честно говорит. */
 (function () {
+  var WA = 'https://wa.me/34641048296';
+
   /* ── счётчик дней до даты из BOE ──
      Считаем в браузере: в статическом HTML число протухло бы назавтра. */
   (function () {
     var box = document.querySelector('[data-deadline]');
     if (!box) return;
-    var iso = box.getAttribute('data-deadline');
-    var target = new Date(iso + 'T00:00:00');
+    var target = new Date(box.getAttribute('data-deadline') + 'T00:00:00');
     if (isNaN(target)) return;
 
     var out = box.querySelector('[data-deadline-count]');
@@ -34,24 +40,47 @@
   })();
 
   /* ── подборщик ── */
-  var form = document.getElementById('rfinder-form');
-  if (!form) return;
+  var thread = document.getElementById('rfinder-thread');
+  if (!thread) return;
   var section = document.getElementById('route-finder');
-  var result = document.getElementById('rfinder-result');
-  var routeEl = document.getElementById('rfinder-route');
-  var whyEl = document.getElementById('rfinder-why');
-  var altEl = document.getElementById('rfinder-alt');
-  var ctaEl = document.getElementById('rfinder-cta');
   if (section) section.hidden = false;        /* блок живёт только со скриптом */
 
-  var LABELS = {
-    years: { lt2: 'меньше 2 лет в Испании', '2to3': '2–3 года в Испании', '3to5': '3–5 лет в Испании', gt5: '5+ лет в Испании' },
-    work: { gt1y: 'официальная работа больше года', lt1y: 'официальная работа меньше года', no: 'без официальной работы' },
-    family: { eu: 'супруг(а) — гражданин Испании или ЕС', relatives: 'близкие родственники с ВНЖ', kids: 'дети живут со мной', no: 'без семьи в Испании' },
-  };
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  /* Маршруты. `alt` — что ещё стоит проверить: у большинства людей открыто
-     несколько дверей, и показать это важнее, чем назвать одну. */
+  var QUESTIONS = [
+    {
+      key: 'years',
+      ask: 'Давайте разберёмся за три вопроса. Сколько вы живёте в Испании?',
+      opts: [
+        { v: 'lt2', t: 'Меньше 2 лет' },
+        { v: '2to3', t: '2–3 года' },
+        { v: '3to5', t: '3–5 лет' },
+        { v: 'gt5', t: '5 лет и больше' },
+      ],
+    },
+    {
+      key: 'work',
+      ask: 'Понял. Работаете официально — по контракту или как autónomo?',
+      opts: [
+        { v: 'gt1y', t: 'Да, больше года' },
+        { v: 'lt1y', t: 'Да, меньше года' },
+        { v: 'no', t: 'Нет' },
+      ],
+    },
+    {
+      key: 'family',
+      ask: 'Последний вопрос: есть ли у вас семья в Испании?',
+      opts: [
+        { v: 'eu', t: 'Супруг(а) — гражданин Испании или ЕС' },
+        { v: 'relatives', t: 'Близкие родственники с ВНЖ' },
+        { v: 'kids', t: 'Дети живут со мной' },
+        { v: 'no', t: 'Нет' },
+      ],
+    },
+  ];
+
+  /* `alt` — что ещё стоит проверить: у большинства открыто несколько дверей,
+     и показать это важнее, чем назвать одну. */
   var ROUTES = {
     eu: {
       name: 'Карта члена семьи гражданина ЕС',
@@ -60,23 +89,23 @@
     },
     larga: {
       name: 'Larga duración — долгосрочная резиденция',
-      why: 'Пять лет проживания в Испании открывают долгосрочный статус. Время на временной защите засчитывается полностью — а это самый устойчивый статус из доступных: пять лет карты и почти те же права, что у резидента с постоянным ВНЖ.',
-      alt: ['Если по стажу что-то не сойдётся — запасной маршрут arraigo', 'После larga duración считается срок до гражданства'],
+      why: 'Пять лет проживания открывают долгосрочный статус, и время на временной защите засчитывается полностью. Это самый устойчивый статус из доступных: пять лет карты и почти те же права, что у постоянного резидента.',
+      alt: ['Если по стажу что-то не сойдётся — запасной маршрут arraigo', 'После larga duración начинает считаться срок до гражданства'],
     },
     mod191: {
       name: 'Модификация статуса (ст. 191)',
       why: 'При официальной работе больше года это самый выгодный переход: разрешение выдаётся сразу на четыре года — дольше, чем по любому arraigo. Ждать окончания временной защиты не нужно.',
-      alt: ['Arraigo sociolaboral — если по модификации чего-то не хватит', 'При 5 годах стажа стоит сравнить с larga duración'],
+      alt: ['Arraigo sociolaboral — если по модификации чего-то не хватит', 'При пяти годах стажа стоит сравнить с larga duración'],
     },
     sociolaboral: {
       name: 'Arraigo sociolaboral',
       why: 'Два года в Испании и действующая работа складываются в маршрут через трудовые отношения. Контракт нужен на 20 часов в неделю и больше — это ключевое требование нового регламента.',
-      alt: ['Через год работы откроется модификация статуса на 4 года', 'Arraigo social — если с контрактом возникнут сложности'],
+      alt: ['Через год работы откроется модификация статуса на четыре года', 'Arraigo social — если с контрактом возникнут сложности'],
     },
     social: {
       name: 'Arraigo social',
       why: 'Два года в Испании плюс родственные связи с резидентами дают маршрут без требования действующего контракта. Второй путь внутри него — отчёт об интеграции от автономного сообщества.',
-      alt: ['Arraigo socioformativo — через зачисление на обучение, работать можно с начала процесса', 'Появится официальная работа — откроется sociolaboral'],
+      alt: ['Arraigo socioformativo — через обучение, работать можно с начала процесса', 'Появится официальная работа — откроется sociolaboral'],
     },
     socioformativo: {
       name: 'Arraigo socioformativo',
@@ -89,10 +118,16 @@
       alt: ['Arraigo social или socioformativo — параллельно для взрослых'],
     },
     wait: {
-      name: 'Подготовка к arraigo + продление защиты',
+      name: 'Подготовка к arraigo и продление защиты',
       why: 'Основные маршруты открываются от двух лет проживания. Пока стаж набирается, задача другая: держать прописку непрерывной и заранее получить украинские справки — именно они идут дольше всего и чаще всего срывают сроки.',
-      alt: ['Работа больше года откроет модификацию статуса раньше двух лет', 'Проверим семейные основания — они не зависят от стажа'],
+      alt: ['Работа больше года откроет модификацию статуса раньше двух лет', 'Проверим семейные основания — они от стажа не зависят'],
     },
+  };
+
+  var LABELS = {
+    years: { lt2: 'меньше 2 лет в Испании', '2to3': '2–3 года в Испании', '3to5': '3–5 лет в Испании', gt5: '5 лет и больше в Испании' },
+    work: { gt1y: 'официальная работа больше года', lt1y: 'официальная работа меньше года', no: 'без официальной работы' },
+    family: { eu: 'супруг(а) — гражданин Испании или ЕС', relatives: 'близкие родственники с ВНЖ', kids: 'дети живут со мной', no: 'без семьи в Испании' },
   };
 
   function pick(v) {
@@ -108,49 +143,95 @@
       if (v.family === 'kids') return 'kids';
       return 'socioformativo';
     }
-    /* меньше двух лет: работы больше года нет — значит копим стаж */
+    /* меньше двух лет и работы больше года нет — значит копим стаж */
     if (v.family === 'kids') return 'kids';
     return 'wait';
   }
 
-  function values() {
-    var out = {};
-    ['years', 'work', 'family'].forEach(function (n) {
-      var el = form.querySelector('input[name="' + n + '"]:checked');
-      if (el) out[n] = el.value;
-    });
-    return out;
+  function el(tag, cls, html) {
+    var e = document.createElement(tag);
+    if (cls) e.className = cls;
+    if (html != null) e.innerHTML = html;
+    return e;
   }
 
-  function render() {
-    var v = values();
-    if (!v.years || !v.work || !v.family) return;   /* ждём все три ответа */
+  var answers = {}, step = 0;
 
-    var key = pick(v);
-    var r = ROUTES[key];
-    routeEl.textContent = r.name;
-    whyEl.textContent = r.why;
-
-    altEl.innerHTML = '';
-    r.alt.forEach(function (a) {
-      var li = document.createElement('li');
-      li.textContent = a;
-      altEl.appendChild(li);
-    });
-
-    /* Сообщение в WhatsApp собирается из ответов: человек отправляет не
-       «здравствуйте», а вводную — и первый ответ уже по делу. */
-    var msg = 'Здравствуйте! Хочу выйти с временной защиты на ВНЖ.\n'
-      + 'Моя ситуация: ' + LABELS.years[v.years] + ', ' + LABELS.work[v.work] + ', ' + LABELS.family[v.family] + '.\n'
-      + 'На сайте подобрался маршрут: ' + r.name + '. Подскажите, подходит ли он мне?';
-    ctaEl.href = 'https://wa.me/34641048296?text=' + encodeURIComponent(msg);
-
-    if (result.hidden) {
-      result.hidden = false;
-      var noAnim = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      result.scrollIntoView({ block: 'nearest', behavior: noAnim ? 'auto' : 'smooth' });
-    }
+  /* Пауза перед репликой: без неё вопросы сыплются пачкой и ощущение
+     разговора пропадает. При reduce-motion пауз нет — сразу текст. */
+  function afterTyping(delay, done) {
+    if (reduce) { done(); return; }
+    var typing = el('div', 'rfinder__typing rfinder__in',
+      '<span class="rfinder__ava" aria-hidden="true">K</span>' +
+      '<span class="rfinder__dots"><i></i><i></i><i></i></span>');
+    thread.appendChild(typing);
+    setTimeout(function () { typing.remove(); done(); }, delay);
   }
 
-  form.addEventListener('change', render);
+  function ask(i) {
+    var q = QUESTIONS[i];
+    afterTyping(i === 0 ? 350 : 650, function () {
+      var row = el('div', 'rfinder__ask rfinder__in',
+        '<span class="rfinder__ava" aria-hidden="true">K</span>' +
+        '<div class="rfinder__bubble">' + q.ask + '</div>');
+      thread.appendChild(row);
+
+      var opts = el('div', 'rfinder__opts rfinder__in');
+      q.opts.forEach(function (o) {
+        var b = el('button', 'rfinder__opt', o.t);
+        b.type = 'button';
+        b.addEventListener('click', function () {
+          answers[q.key] = o.v;
+          opts.remove();
+          thread.appendChild(el('div', 'rfinder__said rfinder__in', '<span>' + o.t + '</span>'));
+          step++;
+          if (step < QUESTIONS.length) ask(step);
+          else finish();
+        });
+        opts.appendChild(b);
+      });
+      thread.appendChild(opts);
+    });
+  }
+
+  function finish() {
+    afterTyping(850, function () {
+      var r = ROUTES[pick(answers)];
+      var alt = r.alt.map(function (a) { return '<li>' + a + '</li>'; }).join('');
+
+      /* Сообщение собирается из ответов: человек отправляет не «здравствуйте»,
+         а вводную — и первый ответ уже по делу. */
+      var msg = 'Здравствуйте! Хочу выйти с временной защиты на ВНЖ.\n'
+        + 'Моя ситуация: ' + LABELS.years[answers.years] + ', ' + LABELS.work[answers.work] + ', ' + LABELS.family[answers.family] + '.\n'
+        + 'На сайте подобрался маршрут: ' + r.name + '. Подскажите, подходит ли он мне?';
+
+      var box = el('div', 'rfinder__ask rfinder__ask--res rfinder__in',
+        '<span class="rfinder__ava" aria-hidden="true">K</span>' +
+        '<div class="rfinder__res">' +
+          '<span class="rfinder__res-label">Скорее всего вам подойдёт</span>' +
+          '<h3 class="rfinder__route">' + r.name + '</h3>' +
+          '<p class="rfinder__why">' + r.why + '</p>' +
+          '<ul class="rfinder__alt">' + alt + '</ul>' +
+          '<div class="rfinder__foot">' +
+            '<a class="rfinder__cta" href="' + WA + '?text=' + encodeURIComponent(msg) + '" target="_blank" rel="noopener">' +
+              '<svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.7 15l-1.3 4.7 4.8-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-2.9.8.8-2.8-.2-.3A8.2 8.2 0 1 1 12 20.2Z"/></svg>' +
+              'Продолжить в WhatsApp</a>' +
+            '<button type="button" class="rfinder__restart">Ответить заново</button>' +
+          '</div>' +
+        '</div>');
+      thread.appendChild(box);
+
+      thread.appendChild(el('p', 'rfinder__disclaimer',
+        'Подбор ориентировочный: он не учитывает деталей вашей истории — прописки, перерывов в статусе, документов. Точный маршрут называем после разбора, он бесплатный.'));
+
+      box.querySelector('.rfinder__restart').addEventListener('click', function () {
+        thread.innerHTML = '';
+        answers = {};
+        step = 0;
+        ask(0);
+      });
+    });
+  }
+
+  ask(0);
 })();
