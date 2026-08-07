@@ -528,7 +528,10 @@ body:has(.tw) { overflow-x: visible; }
     width: 100vw;
     margin-left: calc(50% - 50vw);
     margin-right: calc(50% - 50vw);
-    padding: 10px var(--pad) 8px;
+    /* Поля по бокам держит сама лента (ul) — если задать их здесь, скролл
+       обрывается за 24px до края экрана: последний чип упирается в пустую
+       полосу и лента читается как недотянутая до края. */
+    padding: 10px 0 8px;
     background: color-mix(in srgb, var(--bg) 92%, transparent);
     -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
     border-bottom: 1px solid var(--hair);
@@ -537,9 +540,12 @@ body:has(.tw) { overflow-x: visible; }
   .tw-years ul {
     display: flex; gap: 6px;
     overflow-x: auto; -ms-overflow-style: none; scrollbar-width: none;
-    /* поля теперь держит сама лента (full-bleed выше) — здесь только
-       нижний отступ под тень чипов */
-    margin: 0; padding: 0 0 4px;
+    /* Поля внутри прокручиваемой ленты: первый чип отступает от края как
+       весь остальной текст, а листается лента от края до края. */
+    margin: 0; padding: 0 var(--pad) 4px;
+    /* последний чип не должен прилипать к обрезу — иначе непонятно,
+       кончились годы или их просто не видно */
+    scroll-padding-inline: var(--pad);
   }
   .tw-years ul::-webkit-scrollbar { display: none; }
   .tw-years li { flex: 0 0 auto; }
