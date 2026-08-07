@@ -888,7 +888,7 @@
 .city-local__item { padding-top: 20px; border-top: 1px solid var(--border-faint); }
 
 .city-local__title {
-  font-family: var(--font-display, inherit);
+  font-family: 'Playfair Display', serif;
   font-size: clamp(18px, 1.4vw, 22px);
   line-height: 1.25;
   margin: 0 0 10px;
@@ -971,3 +971,209 @@
 
 /* подчёркивание-акцент под заголовком тоже уходит влево */
 .city-blocks h2::after { margin-left: 0 !important; margin-right: 0 !important; }
+
+/* ═══════════════════════════════════════════════════════════════════════
+   РИТМ СТРАНИЦЫ КАК НА ГЛАВНОЙ (2026-08-08)
+
+   Претензия владельца: городская страница выглядит нечеловечески, надо
+   «как на главной». Разобрал, чем отличается, — отличается системой полос.
+
+   На главной каждая секция идёт во всю ширину окна, с одинаковыми полями
+   внутри и чередованием фона (cream ↔ песочный), а сам контент внутри
+   ограничен 1320px и центрирован. Получается ровная лента, где границы
+   блоков читаются фоном, а не пустотой.
+
+   На городской так вели себя только две секции из семи — «Популярное» и
+   отзывы. Остальные — герой, «Как устроено», шаги, вопросы, призыв —
+   оставались колонкой внутри контейнера. Полосы во всю ширину чередовались
+   с узким текстом, и страница разваливалась на куски.
+
+   Здесь та же механика, что в home-redesign.css: full-bleed + внутренний
+   ограничитель + зебра.
+   ═══════════════════════════════════════════════════════════════════════ */
+
+/* 1. Все секции — во всю ширину окна */
+.city-blocks > section,
+.city-blocks ~ .final-cta,
+.city-blocks + .final-cta {
+  width: 100vw;
+  max-width: none;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  padding-left: clamp(24px, 4.5vw, 88px);
+  padding-right: clamp(24px, 4.5vw, 88px);
+  padding-top: var(--sec-pad);
+  padding-bottom: var(--sec-pad);
+}
+
+/* 2. Содержимое внутри — та же колонка 1320px, что на главной.
+      Ограничиваем прямых детей секции, а не саму секцию: фон должен
+      оставаться во всю ширину, а текст — стоять в колонке. */
+.city-blocks > section > *,
+.city-blocks + .final-cta > * {
+  max-width: 1320px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* у «Популярного» и отзывов внутренние ограничители уже свои */
+.city-blocks > #sec-services > *,
+.city-blocks > .home-reviews > * { max-width: none; }
+.city-blocks > #sec-services .srows,
+.city-blocks > #sec-services > h2,
+.city-blocks > #sec-services > .sec-dek,
+.city-blocks > #sec-services > .srows__foot {
+  max-width: 1320px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* 3. Зебра. Порядок повторяет главную: полоса-акцент, затем промежутки на
+      cream. Две песочные секции подряд не ставим — сливаются в одно пятно. */
+.city-blocks > .city-local,
+.city-blocks > .city-process,
+.city-blocks > .city-faq,
+.city-blocks > .city-service-hubs,
+.city-blocks + .final-cta { background: var(--bg); }
+
+.city-blocks > .city-faq { background: var(--surface-sunk); }
+
+/* 4. Герой живёт по своим правилам: на главной он тоже не полоса, а первый
+      экран в контейнере. Возвращаем ему обычную ширину. */
+.city-blocks > .hero--city {
+  width: auto;
+  margin-left: 0;
+  margin-right: 0;
+  padding-left: 0;
+  padding-right: 0;
+}
+.city-blocks > .hero--city > * { max-width: none; }
+
+/* 5. Хвост: «Все услуги в городе» и призыв стояли вплотную — между ними не
+      было ни фона, ни отступа, и список ссылок читался как часть призыва. */
+.city-blocks > .city-service-hubs { padding-top: calc(var(--sec-pad) * .6); }
+
+/* Зебра: вопросы после отзывов оказывались второй песочной полосой подряд —
+   две секции сливались в одно пятно. Отдаём вопросы на cream, как гайды на
+   главной, а песочными оставляем «Популярное» и отзывы. */
+.city-blocks > .city-faq { background: var(--bg); }
+
+/* Отступы полос: часть секций брала --sec-pad из локального объявления
+   (52–92px), часть — из глобального (42–76px), и полосы получались разной
+   высоты. Задаём одно значение на всю городскую страницу. */
+.city-blocks > section,
+.city-blocks + .final-cta {
+  padding-top: clamp(52px, 6vw, 92px) !important;
+  padding-bottom: clamp(52px, 6vw, 92px) !important;
+}
+.city-blocks > .hero--city { padding-top: clamp(40px, 4vw, 72px) !important; }
+.city-blocks > .city-service-hubs {
+  padding-top: clamp(32px, 3.4vw, 52px) !important;
+  padding-bottom: clamp(32px, 3.4vw, 52px) !important;
+}
+
+/* ═══ Типографика заголовков — как на главной (2026-08-08) ═══
+   Заголовки секций скакали: «Популярное» 35px, «Как устроено» 30px,
+   «Частые вопросы» 22px, «Задача в городе?» 15px. Разница вчетверо между
+   соседними блоками — из-за неё страница и читалась как склейка чужих
+   кусков. На главной все заголовки секций набраны одним кеглем.
+
+   Значения повторяют home-redesign.css: 48px на широких экранах,
+   пропорциональное уменьшение ниже. */
+/* Селекторы с id: «Популярное» и отзывы держат кегль правилами вида
+   `#sec-services h2 !important`, а id сильнее любого набора классов —
+   поэтому здесь тоже нужен id, иначе правило не применится. */
+.city-blocks > section > h2,
+.city-blocks > #sec-services > h2,
+.city-blocks > #sec-reviews > h2,
+.city-blocks .intro__how > h2,
+.city-blocks .faq h2,
+.city-blocks + .final-cta > h2 {
+  font-size: clamp(28px, 3.4vw, 48px) !important;
+  line-height: 1.15;
+  margin-bottom: 20px;
+}
+
+/* Подзаголовки секций — тоже одним кеглем */
+.city-blocks .sec-dek,
+.city-blocks + .final-cta > p {
+  font-size: clamp(15px, 1.25vw, 18px);
+  line-height: 1.55;
+}
+
+/* Заголовки внутри блока «Как устроено» — уровнем ниже секционных */
+.city-local__title { font-size: clamp(17px, 1.35vw, 21px); }
+
+/* ═══ Вопросы: двухколоночный блок, как на главной (2026-08-08) ═══
+   Правила на главной привязаны к `.home-faq`, у городской секция называется
+   `.city-faq` — поэтому раскладка не подхватывалась и блок выглядел голым
+   списком плашек. Повторяем ту же сетку: слева заголовок с подводкой и
+   кнопкой, справа вопросы. */
+.city-faq .faq__dek {
+  margin: 22px 0 0;
+  font-size: clamp(15px, 1.2vw, 17px);
+  line-height: 1.7;
+  color: var(--text-muted);
+  max-width: 44ch;
+  text-align: left;
+}
+
+.city-faq .faq__cta { display: inline-flex; margin-top: 28px; }
+
+.city-faq .faq__actions {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.city-faq .faq__list { gap: 0; }
+
+@media (min-width: 900px) {
+  .city-faq .faq {
+    display: grid;
+    grid-template-columns: minmax(220px, .75fr) minmax(0, 1.5fr);
+    gap: clamp(32px, 5vw, 88px);
+    align-items: start;
+    text-align: left;
+    max-width: 1320px;
+    margin: 0 auto;
+  }
+  .city-faq .faq > .faq__aside h2 { margin: 0; text-align: left; }
+  .city-faq .faq h2::after { margin-left: 0; margin-right: 0; }
+  .city-faq .faq__list { margin: 0; max-width: none; }
+}
+
+/* ═══ «Все услуги в городе» (2026-08-08) ═══
+   Был надзаголовок и два маркированных пункта — читалось как недоделанный
+   черновик, приклеенный к призыву. Делаем строкой ссылок-таблеток: тот же
+   приём, что у списка городов на главной. */
+.city-service-hubs .p-label { display: block; margin-bottom: 16px; }
+
+.city-service-hubs .city-coverage__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.city-service-hubs .city-coverage__list li { margin: 0; }
+
+.city-service-hubs .city-coverage__list a {
+  display: inline-flex;
+  align-items: center;
+  padding: 10px 18px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  font-size: 15px;
+  color: var(--text);
+  text-decoration: none;
+  transition: border-color .2s ease, color .2s ease;
+}
+
+.city-service-hubs .city-coverage__list a:hover {
+  border-color: var(--gold);
+  color: var(--gold);
+  text-decoration: none;
+}
