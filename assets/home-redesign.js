@@ -19,20 +19,7 @@
 
 
 
-(function(){
-  var bar = document.getElementById('scroll-progress-bar');
-  if (!bar) return;
-  function update(){
-    var doc = document.documentElement;
-    var max = (doc.scrollHeight - window.innerHeight);
-    var pct = max > 0 ? (window.scrollY / max) * 100 : 0;
-    if (pct < 0) pct = 0; if (pct > 100) pct = 100;
-    bar.style.width = pct + '%';
-  }
-  window.addEventListener('scroll', update, {passive: true});
-  window.addEventListener('resize', update, {passive: true});
-  update();
-})();
+/* Индикатор прочитанного переехал в site-nav.js (2026-08-07) — он глобальный. */
 
 (function(){
   // hero занимает ровно остаток экрана так, чтобы тикер сел на нижнюю кромку

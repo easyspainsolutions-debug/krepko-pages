@@ -60,3 +60,36 @@
   });
   panel.addEventListener('mouseleave', function(){ if (open) setOpen(false); });
 })();
+
+
+/* Индикатор прочитанного. Считает долю прокрутки и растягивает полосу
+   поверх шапки. Обновление привязано к кадру: на длинных страницах
+   событие scroll приходит чаще, чем браузер успевает рисовать. */
+(function () {
+  var bar = document.getElementById('scroll-progress-bar');
+  if (!bar) return;
+
+  var queued = false;
+
+  function update() {
+    queued = false;
+    var doc = document.documentElement;
+    var max = doc.scrollHeight - window.innerHeight;
+    /* страница короче экрана — прокручивать нечего, полосу не показываем */
+    var pct = max > 8 ? window.scrollY / max : 0;
+    if (pct < 0) pct = 0;
+    if (pct > 1) pct = 1;
+    bar.style.transform = 'scaleX(' + pct.toFixed(4) + ')';
+  }
+
+  function schedule() {
+    if (queued) return;
+    queued = true;
+    if (window.requestAnimationFrame) window.requestAnimationFrame(update);
+    else setTimeout(update, 16);
+  }
+
+  window.addEventListener('scroll', schedule, { passive: true });
+  window.addEventListener('resize', schedule, { passive: true });
+  update();
+})();

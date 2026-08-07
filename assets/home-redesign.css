@@ -613,26 +613,8 @@
     .marquee__track, .marquee__set { gap: 14px; }
   }
 
-  /* ============ Round 10: индикатор прогресса чтения ============ */
-  .scroll-progress {
-    position: fixed;
-    top: 0; left: 0;
-    height: 3px;
-    width: 100%;
-    z-index: 200;
-    background: transparent;
-    pointer-events: none;
-  }
-  .scroll-progress__bar {
-    height: 100%;
-    width: 0;
-    background: var(--gold);
-    transform-origin: left center;
-    transition: width .08s linear;
-  }
-  @media (prefers-reduced-motion: reduce) {
-    .scroll-progress__bar { transition: none; }
-  }
+  /* Индикатор прочитанного переехал в site-nav.css (2026-08-07): полоса
+     нужна на всех страницах, а не только там, где грузится этот файл. */
 
   /* ============ Round 10b: лента в светлой палитре (убран navy-фон) ============ */
   .marquee {

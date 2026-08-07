@@ -807,3 +807,28 @@ nav.breadcrumb {
     .site-nav__consult {
       padding: clamp(10px, 0.75vw, 14px) clamp(18px, 1.6vw, 32px) !important;
     }}
+
+
+/* ═══ Индикатор прочитанного (2026-08-07) ═══
+   Тонкая полоса поверх липкой шапки: показывает, сколько страницы позади.
+   z-index выше .site-nav (50) и мегаменю (60) — полоса не ныряет под них.
+   Растёт через scaleX, а не width: трансформация не вызывает пересчёт
+   раскладки на каждом кадре прокрутки. */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  z-index: 200;
+  pointer-events: none;
+  background: transparent;
+}
+.scroll-progress__bar {
+  display: block;
+  height: 100%;
+  width: 100%;
+  background: var(--gold);
+  transform: scaleX(0);
+  transform-origin: left center;
+}
