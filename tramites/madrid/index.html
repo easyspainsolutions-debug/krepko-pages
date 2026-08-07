@@ -39,8 +39,8 @@
   <link rel="stylesheet" href="/assets/module-pricing.css?v=20260529">
   <link rel="stylesheet" href="/assets/site-nav.css?v=20260807n">
   <script src="/assets/site-nav.js?v=20260807c" defer></script>
-  <link rel="stylesheet" href="/assets/site-search.css?v=20260806f">
-  <script src="/assets/site-search.js?v=20260806f" defer></script>
+  <link rel="stylesheet" href="/assets/site-search.css?v=20260807a">
+  <script src="/assets/site-search.js?v=20260807a" defer></script>
   <link rel="stylesheet" href="/assets/krepko-chips.css?v=20260608">
   <link rel="stylesheet" href="/assets/site-footer.css?v=20260807a">
   <link rel="stylesheet" href="/assets/a11y.css?v=20260807c">
@@ -236,9 +236,14 @@
     </div>
 
     <div class="site-search__drop">
-      <div class="site-search__tabs" role="tablist" aria-label="Область поиска">
-        <button class="site-search__tab is-on" type="button" role="tab" data-mode="services" aria-selected="true">Услуги</button>
-        <button class="site-search__tab" type="button" role="tab" data-mode="blog" aria-selected="false">Блог</button>
+      <div class="site-search__switch" aria-label="Область поиска">
+        <span class="site-search__switch-side is-on" data-side="services">Услуги</span>
+        <button class="site-search__switch-track" type="button" role="switch"
+                aria-checked="false"
+                aria-label="Область поиска: услуги. Переключить на блог">
+          <span class="site-search__switch-thumb" aria-hidden="true"></span>
+        </button>
+        <span class="site-search__switch-side" data-side="blog">Блог</span>
       </div>
 
       <div class="site-search__suggest">

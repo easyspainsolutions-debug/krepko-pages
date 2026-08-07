@@ -142,28 +142,57 @@
    развилку держат табы внутри панели. */
 .site-search__toggle { display: none; }
 
-/* ── табы ── */
-.site-search__tabs {
+/* ── переключатель «услуги ↔ блог» ──────────────────────────────────────
+   Тумблер как в настройках телефона: подписи по бокам, сам переключатель
+   по центру. Слева «Услуги» — дорожка терракотовая, справа «Блог» —
+   нейтральная серая: цвет говорит, где ищем, ещё до чтения подписей.
+   Раньше здесь стояли две пилюли, и активная читалась как кнопка. */
+.site-search__switch {
   display: flex;
-  gap: 8px;
-  padding: 12px clamp(16px, 4vw, 22px) 0;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 14px clamp(16px, 4vw, 22px) 2px;
 }
-.site-search__tab {
-  padding: 8px 16px;
-  border: 1px solid #E8DFD1;
-  border-radius: 999px;
-  background: none;
-  color: #4A4A4A;
+.site-search__switch-side {
   font-family: 'Manrope', sans-serif;
-  font-size: 13.5px;
+  font-size: 14px;
   font-weight: 600;
-  cursor: pointer;
-  transition: background .18s ease, border-color .18s ease, color .18s ease;
+  color: #8A8A8A;
+  transition: color .2s ease;
+  user-select: none;
 }
-.site-search__tab.is-on {
+.site-search__switch-side.is-on { color: #2D2D2D; }
+.site-search__switch-side[data-side="services"].is-on { color: #C75B39; }
+
+.site-search__switch-track {
+  position: relative;
+  flex: 0 0 auto;
+  width: 52px;
+  height: 31px;
+  padding: 0;
+  border: 0;
+  border-radius: 999px;
   background: #C75B39;
-  border-color: #C75B39;
-  color: #FFFBF7;
+  cursor: pointer;
+  transition: background .22s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+/* «Блог» — состояние без акцента: дорожка гаснет до нейтрального серого */
+.site-search__switch-track[aria-checked="true"] { background: #C9C2B8; }
+.site-search__switch-thumb {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 27px;
+  height: 27px;
+  border-radius: 50%;
+  background: #FFFBF7;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, .18);
+  transition: transform .22s cubic-bezier(.32, .72, 0, 1);
+}
+.site-search__switch-track[aria-checked="true"] .site-search__switch-thumb {
+  transform: translateX(21px);
 }
 
 /* ── частые запросы ── */
@@ -177,24 +206,60 @@
   text-transform: uppercase;
   color: #8A8A8A;
 }
-.site-search__chips { display: flex; flex-wrap: wrap; gap: 8px; }
+/* Список строками вместо россыпи пилюль (2026-08-07, Daniil): шесть
+   овалов в два ряда рябили и заставляли целиться. Теперь одна строка —
+   один запрос, тап по всей ширине, разделители тонкие. Лупа слева
+   повторяет иконку строки поиска: понятно, что это подставится в неё. */
+.site-search__chips { display: flex; flex-direction: column; }
 .site-search__chips button {
-  padding: 9px 15px;
-  border: 1px solid #E8DFD1;
-  border-radius: 999px;
-  background: #FFFBF7;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 13px 2px;
+  border: 0;
+  border-bottom: 1px solid #EFE7DC;
+  border-radius: 0;
+  background: none;
   color: #2D2D2D;
   font-family: 'Manrope', sans-serif;
-  font-size: 14px;
+  font-size: 15px;
+  text-align: left;
   cursor: pointer;
-  transition: border-color .18s ease, color .18s ease, transform .18s ease;
+  transition: color .18s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+.site-search__chips button:last-child { border-bottom: 0; }
+/* лупа слева и стрелка справа — рисуем фоном, чтобы не трогать разметку */
+.site-search__chips button::before {
+  content: '';
+  flex: 0 0 auto;
+  width: 16px;
+  height: 16px;
+  background: currentColor;
+  opacity: .38;
+  -webkit-mask: var(--glass) center / contain no-repeat;
+  mask: var(--glass) center / contain no-repeat;
+}
+.site-search__chips button::after {
+  content: '';
+  flex: 0 0 auto;
+  width: 13px;
+  height: 13px;
+  margin-left: auto;
+  background: currentColor;
+  opacity: .28;
+  -webkit-mask: var(--arrow) center / contain no-repeat;
+  mask: var(--arrow) center / contain no-repeat;
+}
+.site-search__chips {
+  --glass: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round'%3E%3Ccircle cx='11' cy='11' r='7'/%3E%3Cpath d='m20 20-3.5-3.5'/%3E%3C/svg%3E");
+  --arrow: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M7 17 17 7M9 7h8v8'/%3E%3C/svg%3E");
 }
 @media (hover: hover) {
-  .site-search__chips button:hover {
-    border-color: #C75B39;
-    color: #C75B39;
-    transform: translateY(-1px);
-  }
+  .site-search__chips button:hover { color: #C75B39; }
+  .site-search__chips button:hover::before,
+  .site-search__chips button:hover::after { opacity: .7; }
 }
 
 /* ── результаты ── */
@@ -331,8 +396,8 @@
     letter-spacing: .04em;
   }
   .site-search__close { display: none; }
-  /* Табы на десктопе заменены кружком-тумблером справа от строки */
-  .site-search__tabs { display: none; }
+  /* Переключатель на десктопе заменён кружком-тумблером справа от строки */
+  .site-search__switch { display: none; }
 
   /* ── раскрытие ──
      Высоту в --drop-h кладёт JS по фактическому содержимому: панель растёт
@@ -477,7 +542,8 @@
   .site-search__toggle,
   .site-search__drop,
   .site-search__ico,
-  .site-search__tab,
+  .site-search__switch-track,
+  .site-search__switch-thumb,
   .site-search__chips button,
   .site-nav__search-btn { transition: none; }
 }

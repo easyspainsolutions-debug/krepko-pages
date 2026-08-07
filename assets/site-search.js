@@ -37,7 +37,9 @@
   var empty = dlg.querySelector('.site-search__empty');
   var suggest = dlg.querySelector('.site-search__suggest');
   var toggle = dlg.querySelector('.site-search__toggle');
-  var tabs = [].slice.call(dlg.querySelectorAll('.site-search__tab'));
+  /* мобильный тумблер: дорожка + две подписи по бокам */
+  var switchTrack = dlg.querySelector('.site-search__switch-track');
+  var switchSides = [].slice.call(dlg.querySelectorAll('.site-search__switch-side'));
   var chips = [].slice.call(dlg.querySelectorAll('.site-search__chips button'));
   var index = null;
   var mode = 'services';
@@ -290,10 +292,17 @@
     mode = next;
     var m = MODES[next];
     input.placeholder = m.placeholder;
-    tabs.forEach(function (t) {
-      var on = t.dataset.mode === next;
-      t.classList.toggle('is-on', on);
-      t.setAttribute('aria-selected', on ? 'true' : 'false');
+    /* Тумблер: включённое положение (aria-checked) означает «блог» —
+       дорожка гаснет до серого, кружок уезжает вправо. Подписи по бокам
+       подсвечиваются, чтобы состояние читалось и без цвета дорожки. */
+    if (switchTrack) {
+      switchTrack.setAttribute('aria-checked', next === 'blog' ? 'true' : 'false');
+      switchTrack.setAttribute('aria-label', next === 'blog'
+        ? 'Область поиска: блог. Переключить на услуги'
+        : 'Область поиска: услуги. Переключить на блог');
+    }
+    switchSides.forEach(function (s) {
+      s.classList.toggle('is-on', s.dataset.side === next);
     });
     if (toggle) {
       toggle.classList.toggle('is-blog', next === 'blog');
@@ -357,9 +366,19 @@
     });
   }
 
-  tabs.forEach(function (tab) {
-    tab.addEventListener('click', function () {
-      setMode(tab.dataset.mode);
+  if (switchTrack) {
+    switchTrack.addEventListener('click', function () {
+      setMode(mode === 'services' ? 'blog' : 'services');
+      load().then(render);
+      input.focus();
+    });
+  }
+
+  /* тап по самой подписи тоже переключает — целиться в дорожку не нужно */
+  switchSides.forEach(function (side) {
+    side.addEventListener('click', function () {
+      if (side.dataset.side === mode) return;
+      setMode(side.dataset.side);
       load().then(render);
       input.focus();
     });
