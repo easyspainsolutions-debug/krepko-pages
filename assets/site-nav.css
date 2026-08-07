@@ -1,7 +1,15 @@
 :root {
-  /* Кольцо клавиатурного фокуса — один цвет на весь сайт (a11y.css).
-     Терракота читается и на светлых страницах, и на тёмном блоге. */
-  --focus-ring: #C75B39;
+  /* Фирменная терракота как ГЛОБАЛЬНАЯ величина.
+     Переменная --gold из tokens.css держит горчичный #C4952A (тёмная
+     шкала), а терракотовое значение переопределяется точечно — в шапке,
+     в home-redesign.css, в блоге. Из-за этого элементы вне шапки красились
+     по-разному: индикатор прочитанного был терракотовым на главной и в
+     блоге и горчичным на страницах услуг, направлений и городов.
+     --brand не зависит от того, какие файлы стилей попали на страницу. */
+  --brand: #C75B39;
+  --brand-2: #B04E2F;
+  /* Кольцо клавиатурного фокуса — один цвет на весь сайт (a11y.css) */
+  --focus-ring: var(--brand);
 }
 
 /* ============================================================
@@ -23,6 +31,28 @@ body:has(> header.site-nav) {
   border-bottom: 1px solid var(--border);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
+}
+
+/* Рукописные страницы (статьи блога, /review/) центрируют содержимое через
+   `body { display: flex | grid }`. Шапка и подвал в таком контейнере — тоже
+   элементы раскладки, и без явной ширины они меряются по содержимому: на
+   узком экране их распирает шире окна и вся страница уезжает вправо.
+   Ширину задаём здесь, чтобы не править <style> в каждой статье. */
+.topbar,
+.site-nav,
+.site-footer {
+  width: 100%;
+  min-width: 0;
+}
+
+/* В той же раскладке колонку распирает и <main>: без явной ширины он
+   меряется по содержимому (fit-content), а его собственные поля ложатся
+   сверху — колонка выходит шире окна и тянет за собой шапку с подвалом.
+   box-sizing: border-box задан глобально, поэтому 100% включает поля;
+   в обычном блочном потоке это правило ничего не меняет. */
+main {
+  width: 100%;
+  min-width: 0;
 }
 
 .site-nav__inner {
@@ -422,6 +452,10 @@ dialog:not([open]) { display: none !important; }
     display: none;
     align-items: center;
     justify-content: center;
+    /* Слово «Бесплатная» вынесено в отдельный <span> (на узких экранах оно
+       прячется), а во flex-контейнере пробел между элементами схлопывается —
+       надпись слипалась в «БЕСПЛАТНАЯКОНСУЛЬТАЦИЯ». Отступ задаём здесь. */
+    gap: 0.32em;
     background: var(--gold);
     color: #FFFBF7;
     font-family: 'Manrope', sans-serif;
@@ -786,10 +820,20 @@ nav.breadcrumb {
 @media (prefers-reduced-motion: reduce) { .site-nav { transition: none; }}
 @media (max-width: 560px) {
     .site-nav__inner { gap: 8px !important; padding-left: 16px !important; padding-right: 16px !important; }
-    .site-nav__consult { padding: 10px 12px; font-size: 10px; letter-spacing: 0.3px; }
+    /* Размер кнопки задаётся типографской шкалой (--fs-btn) через !important,
+       поэтому мобильное значение тоже должно быть !important — иначе кнопка
+       остаётся 14px, занимает 234px из 390 и выталкивает шапку за экран. */
+    .site-nav__consult { padding: 10px 10px !important; font-size: 10.5px !important; letter-spacing: 0 !important; }
     .site-nav__menu-text { display: none; }
     .site-nav__menu-btn { padding: 10px; }
     .site-nav__brand-text { font-size: 22px !important; }}
+/* Экраны 320–380px (iPhone SE, старые Android): даже на 11px полная надпись
+   занимает 188px из ~206px, что остаются от логотипа, поиска и бургера, —
+   шапка уезжает за правый край. Прячем только слово «Бесплатная»: кнопка
+   читается «Консультация» и укладывается в ~110px. На 390px и шире надпись
+   остаётся полной. */
+@media (max-width: 380px) {
+    .site-nav__consult-free { display: none; }}
 @media (prefers-reduced-motion: reduce) { .mega-overlay { transition: none; }}
 @media (prefers-reduced-motion: reduce) {
     .mega { transition: none; }}
@@ -833,7 +877,7 @@ nav.breadcrumb {
   display: block;
   height: 100%;
   width: 100%;
-  background: var(--gold);
+  background: var(--brand);
   transform: scaleX(0);
   transform-origin: left center;
 }
@@ -843,59 +887,47 @@ nav.breadcrumb {
 .site-menu__sheet:focus-visible { outline: none; box-shadow: none; }
 
 
-/* ═══ Кнопка возврата над крошками (2026-08-07) ═══
-   Крошки набраны мелким капсом и как путь назад не читаются — особенно
-   на телефоне, где длинный путь переносится на две строки. Строка со
-   стрелкой называет родительский раздел прямо: «‹ Нотариальные
-   процедуры». Крошки под ней остаются ради разметки и широкого экрана. */
-/* Отступы держим те же, что у .breadcrumb ниже: иначе стрелка липнет к
-   краю экрана, а путь под ней стоит с полями — две разные левые границы. */
-.crumb-back {
+/* ═══ Крошки со стрелкой возврата (2026-08-07) ═══
+   Сначала кнопка «назад» стояла отдельной строкой над крошками — две
+   навигации подряд, дублирующие друг друга. Теперь одна строка: стрелка
+   вплотную к разделу, куда ведёт, он же выделен цветом и весом; путь
+   вокруг тише и только объясняет структуру. */
+.breadcrumb--back {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
-  gap: 7px;
-  max-width: 1760px;
-  margin: 0 auto;
-  padding: clamp(20px, 2vw, 32px) clamp(24px, 4.5vw, 88px) 0;
-  color: #6B6B6B;
-  font-family: 'Manrope', sans-serif;
-  font-size: 14px;
-  font-weight: 600;
-  line-height: 1.3;
-  text-decoration: none;
-  transition: color .2s ease;
+  gap: 0 6px;
 }
-.crumb-back svg { flex: 0 0 auto; }
-.crumb-back span { flex: 0 0 auto; }
+.breadcrumb__parent {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  /* поле вокруг родителя даёт тап-зону: сама строка набрана мелким капсом */
+  margin: 0 2px 0 -6px;
+  padding: 5px 8px;
+  border-radius: 6px;
+  color: var(--brand) !important;
+  font-weight: 700;
+  transition: background-color .2s ease;
+}
+.breadcrumb__parent svg { flex: 0 0 auto; }
 @media (hover: hover) {
-  .crumb-back:hover { color: #C75B39; }
+  .breadcrumb__parent:hover { background: rgba(199, 91, 57, .09); }
 }
-
-/* Крошки рядом с кнопкой — вторичны: тише и мельче, чтобы не спорить
-   с ней за внимание. */
-.crumb-back + .breadcrumb {
-  opacity: .75;
-  padding-top: 6px !important;
-}
+.breadcrumb__sep { opacity: .45; }
+.breadcrumb__current { opacity: .7; }
 
 @media (max-width: 720px) {
-  /* Крошки на телефоне не прячем.
-     Сначала стояло display: none — путь и правда мешал, переносясь на две
-     строки. Но Google индексирует мобильную версию и требует, чтобы
-     BreadcrumbList соответствовал видимому на странице пути; скрытые
-     крошки при живой разметке — серая зона, которой незачем рисковать.
-     Вместо этого путь идёт одной строкой: не переносится, при нехватке
-     места прокручивается вбок. Одна тонкая строка шума не создаёт. */
-  .crumb-back + .breadcrumb {
+  /* Одна строка: путь не переносится, при нехватке места уезжает влево —
+     раздел со стрелкой при этом остаётся на виду, потому что стоит
+     предпоследним и прокрутка начинается с начала строки. */
+  .breadcrumb--back {
     display: block;
     white-space: nowrap;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
-    font-size: 10px;
-    letter-spacing: .1em;
-    opacity: .6;
   }
-  .crumb-back + .breadcrumb::-webkit-scrollbar { display: none; }
-  .crumb-back { font-size: 14.5px; }
+  .breadcrumb--back::-webkit-scrollbar { display: none; }
+  .breadcrumb__parent { padding: 4px 7px; }
 }

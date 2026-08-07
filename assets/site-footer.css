@@ -536,6 +536,20 @@ body:has(> footer.site-footer) {
     padding-right: clamp(24px, 4.5vw, 88px) !important;
   }
 
+  /* На узких экранах нижняя граница clamp'а (24px) съедает 16px, которых
+     шапке не хватает: логотип, поиск, кнопка и бургер выстраиваются ровно
+     в ширину экрана и всё вместе уезжает вправо. site-nav.css просит здесь
+     16px, но этот файл подключён позже и перебивает его при равном
+     !important — поэтому мобильное значение повторяем тут. */
+  @media (max-width: 560px) {
+    .topbar__inner,
+    .site-nav__inner,
+    .site-footer__inner {
+      padding-left: 16px !important;
+      padding-right: 16px !important;
+    }
+  }
+
   /* — карточки и поверхности: почти прямые углы — */
   .card,
   .review-card,
