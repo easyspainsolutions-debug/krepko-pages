@@ -358,19 +358,7 @@ dialog:not([open]) { display: none !important; }
   text-decoration: none;
 }
 .site-menu__cta svg { width: 18px; height: 18px; }
-.site-menu__links-row {
-  display: flex;
-  justify-content: center;
-  gap: 22px;
-  margin-top: 12px;
-}
-.site-menu__links-row a {
-  color: #4A4A4A;
-  font-size: 13.5px;
-  text-decoration: none;
-}
 @media (hover: hover) {
-  .site-menu__links-row a:hover { color: #C75B39; }
   .site-menu__cta:hover { background: #B04E2F; }
 }
 
