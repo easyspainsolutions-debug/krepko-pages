@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Подборщик маршрута — три концепции</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #FFFBF7; --surface: #F5F0EB; --border: #E8DFD1;
+    --text: #2D2D2D; --sub: #4A4A4A; --muted: #6B6B6B;
+    --gold: #C75B39; --gold2: #B04E2F; --navy: #1A2B3C;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; padding: 0 clamp(20px, 5vw, 60px) 80px;
+    background: var(--bg); color: var(--text);
+    font-family: 'Manrope', sans-serif;
+  }
+  .page { max-width: 900px; margin: 0 auto; }
+  .lead { padding: 40px 0 10px; }
+  .lead h1 { font-family: 'Playfair Display', serif; font-weight: 500; font-size: 30px; margin: 0 0 8px; color: var(--navy); }
+  .lead p { margin: 0; color: var(--muted); font-size: 15px; }
+  .concept { margin: 54px 0 0; }
+  .concept__tag {
+    display: inline-block; margin-bottom: 14px; padding: 5px 12px;
+    background: var(--navy); border-radius: 999px;
+    color: #FFFBF7; font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+  }
+  .concept__note { margin: 0 0 22px; color: var(--muted); font-size: 14.5px; line-height: 1.6; max-width: 62ch; }
+
+  /* ═══════════ A. МАРШРУТНЫЙ ЛИСТ ═══════════ */
+  .ca { }
+  .ca__head { margin-bottom: 26px; }
+  .ca__head h2 { font-family: 'Playfair Display', serif; font-weight: 500; font-size: 27px; margin: 0 0 6px; color: var(--navy); }
+  .ca__head p { margin: 0; font-size: 15px; color: var(--sub); }
+  .ca__steps { counter-reset: s; list-style: none; margin: 0; padding: 0; }
+  .ca__step { counter-increment: s; position: relative; padding: 0 0 26px 48px; }
+  .ca__step::before {
+    content: counter(s); position: absolute; left: 0; top: 0;
+    width: 30px; height: 30px; display: flex; align-items: center; justify-content: center;
+    border: 1px solid var(--border); border-radius: 50%; background: var(--bg);
+    color: var(--gold); font-family: 'Playfair Display', serif; font-size: 15px;
+    transition: background .3s, border-color .3s, color .3s;
+  }
+  .ca__step.on::before { background: var(--gold); border-color: var(--gold); color: #FFFBF7; }
+  .ca__step::after {
+    content: ''; position: absolute; left: 15px; top: 34px; bottom: 0; width: 1px;
+    background: linear-gradient(var(--gold) 0 0) no-repeat top / 100% var(--seg, 0%), var(--border);
+  }
+  .ca__step:last-child::after { display: none; }
+  .ca__q { display: block; margin-bottom: 12px; font-size: 15.5px; font-weight: 700; color: var(--navy); }
+  .ca__opts { display: flex; flex-wrap: wrap; gap: 8px; }
+  .ca__opts input { position: absolute; opacity: 0; }
+  .ca__opts span {
+    display: block; padding: 9px 16px; border: 1px solid var(--border); border-radius: 8px;
+    background: var(--bg); color: var(--sub); font-size: 14.5px; cursor: pointer;
+    transition: .2s;
+  }
+  .ca__opts span:hover { border-color: var(--gold); }
+  .ca__opts input:checked + span { background: var(--navy); border-color: var(--navy); color: #FFFBF7; font-weight: 600; }
+  .ca__res {
+    margin-left: 48px; padding: 24px 26px; border-left: 3px solid var(--gold);
+    background: var(--surface); border-radius: 0 10px 10px 0;
+  }
+  .ca__res-lbl { display: block; font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; }
+  .ca__res h3 { font-family: 'Playfair Display', serif; font-weight: 500; font-size: 25px; margin: 0 0 10px; color: var(--navy); }
+  .ca__res p { margin: 0 0 16px; font-size: 15.5px; line-height: 1.6; color: var(--sub); }
+  .ca__cta {
+    display: inline-block; padding: 13px 26px; background: var(--gold); border-radius: 8px;
+    color: #FFFBF7 !important; font-size: 14.5px; font-weight: 700; text-decoration: none;
+  }
+
+  /* ═══════════ B. ДИАЛОГ ═══════════ */
+  .cb { max-width: 640px; }
+  .cb__thread { display: flex; flex-direction: column; gap: 16px; }
+  .cb__row { display: flex; gap: 10px; align-items: flex-end; }
+  .cb__row--me { justify-content: flex-end; }
+  .cb__ava {
+    flex: 0 0 auto; width: 30px; height: 30px; border-radius: 50%;
+    background: var(--navy); color: #FFFBF7;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Playfair Display', serif; font-size: 13px;
+  }
+  .cb__bubble {
+    max-width: 78%; padding: 13px 17px; border-radius: 16px 16px 16px 4px;
+    background: var(--surface); border: 1px solid var(--border);
+    font-size: 15px; line-height: 1.55; color: var(--text);
+  }
+  .cb__opts { display: flex; flex-wrap: wrap; gap: 7px; justify-content: flex-end; margin-left: 40px; }
+  .cb__opts input { position: absolute; opacity: 0; }
+  .cb__opts span {
+    display: block; padding: 9px 15px; border: 1px solid var(--border); border-radius: 999px;
+    background: var(--bg); color: var(--sub); font-size: 14px; cursor: pointer; transition: .2s;
+  }
+  .cb__opts span:hover { border-color: var(--navy); color: var(--navy); }
+  .cb__opts input:checked + span {
+    background: var(--navy); border-color: var(--navy); color: #FFFBF7; font-weight: 600;
+    border-radius: 16px 16px 4px 16px;
+  }
+  .cb__answer { border-radius: 16px 16px 16px 4px; background: #FFF; }
+  .cb__answer b { display: block; font-family: 'Playfair Display', serif; font-weight: 500; font-size: 19px; color: var(--navy); margin-bottom: 6px; }
+  .cb__cta {
+    display: inline-flex; align-items: center; gap: 8px; margin-top: 12px;
+    padding: 12px 22px; background: #25D366; border-radius: 999px;
+    color: #FFF !important; font-size: 14.5px; font-weight: 700; text-decoration: none;
+  }
+  .cb__typing { display: inline-flex; gap: 4px; padding: 4px 0; }
+  .cb__typing i { width: 6px; height: 6px; border-radius: 50%; background: var(--muted); opacity: .4; animation: blink 1.2s infinite; }
+  .cb__typing i:nth-child(2) { animation-delay: .2s; }
+  .cb__typing i:nth-child(3) { animation-delay: .4s; }
+  @keyframes blink { 0%,100% { opacity: .25 } 50% { opacity: 1 } }
+
+  /* ═══════════ C. ТАБЛО ═══════════ */
+  .cc {
+    border: 1px solid var(--border); border-radius: 14px; overflow: hidden;
+    background: #FFF;
+  }
+  .cc__top { padding: 26px clamp(20px, 3vw, 32px) 0; }
+  .cc__top h2 { font-family: 'Playfair Display', serif; font-weight: 500; font-size: 26px; margin: 0 0 6px; color: var(--navy); }
+  .cc__top p { margin: 0 0 22px; font-size: 15px; color: var(--muted); }
+  .cc__grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 0;
+    border-top: 1px solid var(--border);
+  }
+  .cc__col { padding: 20px clamp(16px, 2vw, 22px); border-right: 1px solid var(--border); }
+  .cc__col:last-child { border-right: 0; }
+  .cc__num { display: block; font-size: 11px; font-weight: 700; letter-spacing: .1em; color: var(--gold); margin-bottom: 8px; }
+  .cc__q { display: block; margin-bottom: 14px; font-size: 14.5px; font-weight: 700; line-height: 1.35; color: var(--navy); }
+  .cc__opts { display: flex; flex-direction: column; gap: 6px; }
+  .cc__opts input { position: absolute; opacity: 0; }
+  .cc__opts span {
+    display: block; padding: 9px 12px; border-radius: 7px; background: var(--surface);
+    color: var(--sub); font-size: 14px; cursor: pointer; transition: .18s;
+  }
+  .cc__opts span:hover { background: #EDE3D6; }
+  .cc__opts input:checked + span { background: var(--navy); color: #FFFBF7; font-weight: 600; }
+  .cc__res {
+    padding: 26px clamp(20px, 3vw, 32px); background: var(--navy); color: #FFFBF7;
+    display: flex; flex-wrap: wrap; align-items: center; gap: 20px; justify-content: space-between;
+  }
+  .cc__res-txt { flex: 1 1 320px; }
+  .cc__res-lbl { display: block; font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: #E8A48C; margin-bottom: 6px; }
+  .cc__res h3 { font-family: 'Playfair Display', serif; font-weight: 500; font-size: 26px; margin: 0 0 8px; }
+  .cc__res p { margin: 0; font-size: 15px; line-height: 1.55; color: rgba(255,251,247,.78); }
+  .cc__cta {
+    display: inline-block; padding: 14px 28px; background: var(--gold); border-radius: 8px;
+    color: #FFFBF7 !important; font-size: 14.5px; font-weight: 700; text-decoration: none; white-space: nowrap;
+  }
+  @media (max-width: 760px) {
+    .cc__grid { grid-template-columns: 1fr; }
+    .cc__col { border-right: 0; border-bottom: 1px solid var(--border); }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="lead">
+    <h1>Подборщик маршрута — три концепции</h1>
+    <p>Одна и та же механика, три способа подачи. Данные и логика везде одинаковые.</p>
+  </div>
+
+  <!-- ═══════════ A ═══════════ -->
+  <section class="concept ca">
+    <span class="concept__tag">A · Маршрутный лист</span>
+    <p class="concept__note">Продолжает язык страницы: те же кружки с номерами и терракотовая нить, что в блоке «Как проходит работа». Ответ на вопрос зажигает следующий шаг — человек буквально идёт по маршруту. Результат — станция назначения.</p>
+
+    <div class="ca__head">
+      <h2>Какой маршрут ваш</h2>
+      <p>Три ответа — и вы увидите, какие пути открыты именно вам.</p>
+    </div>
+
+    <ol class="ca__steps">
+      <li class="ca__step on" style="--seg:100%">
+        <span class="ca__q">Сколько вы живёте в Испании?</span>
+        <div class="ca__opts">
+          <label><input type="radio" name="a1"><span>Меньше 2 лет</span></label>
+          <label><input type="radio" name="a1" checked><span>2–3 года</span></label>
+          <label><input type="radio" name="a1"><span>3–5 лет</span></label>
+          <label><input type="radio" name="a1"><span>5 лет и больше</span></label>
+        </div>
+      </li>
+      <li class="ca__step on" style="--seg:100%">
+        <span class="ca__q">Работаете официально?</span>
+        <div class="ca__opts">
+          <label><input type="radio" name="a2"><span>Да, больше года</span></label>
+          <label><input type="radio" name="a2" checked><span>Да, меньше года</span></label>
+          <label><input type="radio" name="a2"><span>Нет</span></label>
+        </div>
+      </li>
+      <li class="ca__step on">
+        <span class="ca__q">Есть ли семья в Испании?</span>
+        <div class="ca__opts">
+          <label><input type="radio" name="a3"><span>Супруг(а) — гражданин Испании или ЕС</span></label>
+          <label><input type="radio" name="a3"><span>Близкие родственники с ВНЖ</span></label>
+          <label><input type="radio" name="a3"><span>Дети живут со мной</span></label>
+          <label><input type="radio" name="a3" checked><span>Нет</span></label>
+        </div>
+      </li>
+    </ol>
+
+    <div class="ca__res">
+      <span class="ca__res-lbl">Ваш маршрут</span>
+      <h3>Arraigo sociolaboral</h3>
+      <p>Два года в Испании и действующая работа складываются в маршрут через трудовые отношения. Контракт нужен на 20 часов в неделю и больше.</p>
+      <a class="ca__cta" href="#">Проверить мой случай</a>
+    </div>
+  </section>
+
+  <!-- ═══════════ B ═══════════ -->
+  <section class="concept cb">
+    <span class="concept__tag">B · Диалог</span>
+    <p class="concept__note">Опрос выглядит как начало переписки: вопрос — реплика Krepko, ответ — ваш пузырь справа. Переход в WhatsApp перестаёт быть «кнопкой на сайте» и становится продолжением уже начатого разговора. Прямо отыгрывает то, что мы продаём: с вами говорит человек.</p>
+
+    <div class="cb__thread">
+      <div class="cb__row">
+        <span class="cb__ava">K</span>
+        <div class="cb__bubble">Давайте разберёмся за три вопроса. Сколько вы живёте в Испании?</div>
+      </div>
+      <div class="cb__opts">
+        <label><input type="radio" name="b1"><span>Меньше 2 лет</span></label>
+        <label><input type="radio" name="b1" checked><span>2–3 года</span></label>
+        <label><input type="radio" name="b1"><span>3–5 лет</span></label>
+        <label><input type="radio" name="b1"><span>5 лет и больше</span></label>
+      </div>
+
+      <div class="cb__row">
+        <span class="cb__ava">K</span>
+        <div class="cb__bubble">Понял. Работаете официально?</div>
+      </div>
+      <div class="cb__opts">
+        <label><input type="radio" name="b2"><span>Да, больше года</span></label>
+        <label><input type="radio" name="b2" checked><span>Да, меньше года</span></label>
+        <label><input type="radio" name="b2"><span>Нет</span></label>
+      </div>
+
+      <div class="cb__row">
+        <span class="cb__ava">K</span>
+        <div class="cb__bubble">Последний вопрос: есть ли семья в Испании?</div>
+      </div>
+      <div class="cb__opts">
+        <label><input type="radio" name="b3"><span>Супруг(а) — гражданин ЕС</span></label>
+        <label><input type="radio" name="b3"><span>Родственники с ВНЖ</span></label>
+        <label><input type="radio" name="b3"><span>Дети со мной</span></label>
+        <label><input type="radio" name="b3" checked><span>Нет</span></label>
+      </div>
+
+      <div class="cb__row">
+        <span class="cb__ava">K</span>
+        <div class="cb__bubble cb__answer">
+          <b>Скорее всего — arraigo sociolaboral</b>
+          Два года стажа и действующая работа открывают маршрут через трудовые отношения. Контракт нужен на 20 часов в неделю и больше — это ключевое требование.
+          <br>
+          <a class="cb__cta" href="#">Продолжить в WhatsApp</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ C ═══════════ -->
+  <section class="concept cc-wrap">
+    <span class="concept__tag">C · Табло</span>
+    <p class="concept__note">Строгая деловая раскладка: три вопроса стоят рядом как колонки анкеты, ответ виден целиком без прокрутки. Результат выезжает тёмной полосой во всю ширину — читается как официальное заключение. Меньше всего похоже на «квиз с сайта».</p>
+
+    <div class="cc">
+      <div class="cc__top">
+        <h2>Какой маршрут ваш</h2>
+        <p>Ответьте на три вопроса — маршрут появится внизу.</p>
+      </div>
+      <div class="cc__grid">
+        <div class="cc__col">
+          <span class="cc__num">01</span>
+          <span class="cc__q">Сколько вы живёте в Испании?</span>
+          <div class="cc__opts">
+            <label><input type="radio" name="c1"><span>Меньше 2 лет</span></label>
+            <label><input type="radio" name="c1" checked><span>2–3 года</span></label>
+            <label><input type="radio" name="c1"><span>3–5 лет</span></label>
+            <label><input type="radio" name="c1"><span>5 лет и больше</span></label>
+          </div>
+        </div>
+        <div class="cc__col">
+          <span class="cc__num">02</span>
+          <span class="cc__q">Работаете официально?</span>
+          <div class="cc__opts">
+            <label><input type="radio" name="c2"><span>Да, больше года</span></label>
+            <label><input type="radio" name="c2" checked><span>Да, меньше года</span></label>
+            <label><input type="radio" name="c2"><span>Нет</span></label>
+          </div>
+        </div>
+        <div class="cc__col">
+          <span class="cc__num">03</span>
+          <span class="cc__q">Есть ли семья в Испании?</span>
+          <div class="cc__opts">
+            <label><input type="radio" name="c3"><span>Супруг(а) — гражданин ЕС</span></label>
+            <label><input type="radio" name="c3"><span>Родственники с ВНЖ</span></label>
+            <label><input type="radio" name="c3"><span>Дети со мной</span></label>
+            <label><input type="radio" name="c3" checked><span>Нет</span></label>
+          </div>
+        </div>
+      </div>
+      <div class="cc__res">
+        <div class="cc__res-txt">
+          <span class="cc__res-lbl">Скорее всего вам подойдёт</span>
+          <h3>Arraigo sociolaboral</h3>
+          <p>Два года в Испании и действующая работа складываются в маршрут через трудовые отношения.</p>
+        </div>
+        <a class="cc__cta" href="#">Проверить мой случай</a>
+      </div>
+    </div>
+  </section>
+
+</div>
+</body>
+</html>

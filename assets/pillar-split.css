@@ -933,6 +933,10 @@ body:has(.pillar-split) .final-cta .btn--gold {
   background: var(--ps-gold);
   opacity: .55;
 }
+/* .pillar-doc a красит ссылки терракотой и перебивает по специфичности —
+   кнопка получалась терракотовым текстом на терракотовом фоне, то есть
+   пустым прямоугольником. Отсюда двойной селектор. */
+.pillar-doc .rfinder__cta,
 .rfinder__cta {
   display: inline-block;
   padding: 15px 30px;
