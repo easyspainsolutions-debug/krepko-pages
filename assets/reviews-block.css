@@ -547,3 +547,56 @@
   .rv-dots { gap: 4px; }
   .rv-dots button { padding: 18px; }
 }
+
+/* ═══ Точки-индикаторы карусели: вид самой точки (2026-08-08) ═══
+   При извлечении этого файла из home-redesign.css попали только правки
+   хитбокса — `gap: 4px` и `padding: 18px` для пальца, — а сама точка
+   рисуется через `::before` и осталась в исходнике. В результате на мобильном
+   вместо трёх аккуратных точек выводились три серых квадрата 40×40: браузер
+   показывал кнопки в дефолтном виде, раздутые тем самым padding'ом. Прижаты
+   влево они были потому, что вместе с оформлением потерялось и
+   `justify-content: center` у контейнера.
+
+   Правила скопированы из home-redesign.css без изменений, чтобы блок
+   выглядел одинаково на главной и на страницах услуг. */
+.rv-dots {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.rv-dots button {
+  appearance: none;
+  border: 0;
+  cursor: pointer;
+  padding: 8px;
+  background: none;
+  line-height: 0;
+}
+
+.rv-dots button::before {
+  content: '';
+  display: block;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--border);
+  transition: background .3s ease, transform .3s ease;
+}
+
+.rv-dots button.is-on::before {
+  background: var(--gold);
+  transform: scale(1.35);
+}
+
+/* На широких экранах лента листается стрелками, точки не нужны */
+@media (min-width: 1000px) {
+  .rv-dots { display: none; }
+}
+
+/* Увеличенный хитбокс под палец — ниже 1000px, где точки и показываются */
+@media (max-width: 999px) {
+  .rv-dots { gap: 4px; }
+  .rv-dots button { padding: 18px; }
+}
