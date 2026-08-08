@@ -1309,6 +1309,12 @@
     <changefreq>monthly</changefreq>
   </url>
   <url>
+    <loc>https://krepko.es/ukraina/spravka-semeynoe-polozhenie/</loc>
+    <lastmod>2026-08-08</lastmod>
+    <priority>0.7</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
     <loc>https://krepko.es/ukraina/svidetelstvo-rozhdenii-dubli/</loc>
     <lastmod>2026-08-08</lastmod>
     <priority>0.7</priority>
