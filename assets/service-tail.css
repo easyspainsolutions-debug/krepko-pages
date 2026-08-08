@@ -152,3 +152,20 @@
   .service-tail .cmap__city:hover .cmap__dot { r: 10; }
   .service-tail .cmap__city:hover .cmap__label { fill: var(--st-brand); }
 }
+
+/* ═══ Кегль заголовков хвоста — как у тела страницы (2026-08-08) ═══
+   Тело страницы услуги набрано шкалой pillar-split.css: clamp(24px, 2.4vw, 32px).
+   Хвост пришёл с главной и тянул свою ступень (до 40px), поэтому «Что говорят
+   клиенты» и заголовок призыва выбивались из ряда — соседние «Частые вопросы»
+   и «Работаем в шести городах» стояли на 32px.
+
+   Селекторы с id: правила в reviews-block.css написаны как `#sec-reviews h2`
+   с !important, а id сильнее любого набора классов — без id правило не сработает. */
+.service-tail #sec-reviews > h2,
+.service-tail .final-cta > h2,
+.service-tail #sec-services > h2,
+.service-tail .cmap h2,
+.service-tail .faq > h2 {
+  font-size: clamp(24px, 2.4vw, 32px) !important;
+  line-height: 1.15;
+}
