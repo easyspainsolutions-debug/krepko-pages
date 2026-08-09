@@ -454,11 +454,13 @@ body:has(> footer.site-footer) {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 36px 28px;
   }
+  /* Alpha .45 давала контраст 4.07 к фону #1A2B3C — ниже нормы 4.5 для
+     мелкого текста. .58 даёт 5.4 и подписи остаются тише ссылок. */
   .footer-map__title {
     font-family: 'Manrope', sans-serif;
     font-size: 14px;
     font-weight: 500;
-    color: rgba(255, 251, 247, .45);
+    color: rgba(255, 251, 247, .58);
     margin: 0 0 12px;
   }
   .footer-map__link {
@@ -519,7 +521,7 @@ body:has(> footer.site-footer) {
   .site-footer .site-footer__legal a,
   .site-footer .site-footer__meta {
     font-size: 14px;
-    color: rgba(255, 251, 247, .45);
+    color: rgba(255, 251, 247, .58);
     text-decoration: none;
   }
   .site-footer .site-footer__legal a:hover { color: #FFFBF7; }
@@ -613,10 +615,22 @@ body:has(> footer.site-footer) {
   }
 
 /* ═══ Адаптив футера из редизайна (2026-08-03) ═══ */
+/* Было ровно четыре колонки начиная с 720px: на узком ноуте каждая выходила
+   по 150px, и «Написать в WhatsApp» переставало помещаться в строку. Теперь
+   четыре колонки включаются только там, где под них есть ширина: самое
+   длинное название, «Административные процедуры», занимает 232px при кегле
+   14, и четырём колонкам нужно окно от 1400px. Ниже — две широкие колонки в
+   два ряда: ровный прямоугольник вместо ряда «три плюс одна». */
 @media (min-width: 720px) {
+    .footer-map__cols { grid-template-columns: repeat(2, minmax(0, 1fr)); }}
+@media (min-width: 1400px) {
     .footer-map__cols { grid-template-columns: repeat(4, minmax(0, 1fr)); }}
+/* Колонка логотипа была 2.6fr — 312px под одно слово, — и на неё уходила
+   ширина, которой не хватало ссылкам: «Административные процедуры» и
+   «Юридическое сопровождение» не влезали в 219px и ломались на две строки.
+   1.6fr оставляет логотипу достаточно и отдаёт остальное списку. */
 @media (min-width: 1000px) {
-    .footer-map { grid-template-columns: 2.6fr 8fr; gap: 40px; padding-bottom: 32px; }}
+    .footer-map { grid-template-columns: 1.6fr 9fr; gap: 40px; padding-bottom: 32px; }}
 @media (min-width: 1000px) {
     .site-footer .site-footer__brand-text { font-size: 36px !important; }}
 @media (min-width: 900px) {

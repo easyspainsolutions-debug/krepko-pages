@@ -565,9 +565,18 @@ dialog:not([open]) { display: none !important; }
   }
 
   .mega__col { display: flex; flex-direction: column; }
+  /* Заголовки прижаты к низу зоны в две строки: «Административные процедуры»
+     не влезают в колонку 298px и переносятся, остальные названия короче. Без
+     резерва высоты подпись и список под длинным заголовком уезжали вниз, и
+     ряд колонок ломался. Прижатие к низу держит их на одной линии независимо
+     от длины названия. */
   .mega__head {
+    display: flex;
+    align-items: flex-end;
+    min-height: 2.3em;
     font-family: 'Playfair Display', serif;
     font-size: 21px;
+    line-height: 1.15;
     font-weight: 500;
     color: #1A2B3C;
     text-decoration: none;
@@ -584,18 +593,28 @@ dialog:not([open]) { display: none !important; }
     padding-bottom: 12px;
     border-bottom: 1px solid var(--border-faint);
   }
+  /* Пункт списка. Вертикальный шаг задаётся padding'ом, а не margin'ом:
+     кликабельная зона тогда смыкается с соседней и мышь не проваливается в
+     щель между строками. 8px сверху и снизу дают 16px воздуха между текстами
+     при кегле 14 — на 6px строки читались сплошной простынёй. */
   .mega__doc {
     font-family: 'Manrope', sans-serif;
     font-size: 14px;
     line-height: 1.5;
     color: var(--text-sub);
     text-decoration: none;
-    padding: 6px 0;
-    transition: color .15s ease, padding-left .15s ease;
+    padding: 8px 0;
+    transition: color .15s ease, transform .15s ease;
   }
-  .mega__doc:hover { color: var(--gold); padding-left: 5px; }
+  /* Сдвиг вправо — transform, а не padding-left: padding пересчитывает
+     раскладку колонки на каждом наведении, и соседние строки подрагивают. */
+  .mega__doc:hover { color: var(--gold); transform: translateX(5px); }
+  /* margin-top:auto прижимает ссылку к низу колонки. Списки разной длины —
+     у нотариуса шесть пунктов, у процедур четыре, — и без этого «Все …→»
+     вставали на разной высоте, отчего низ панели выглядел рваным. */
   .mega__more {
-    margin-top: 10px;
+    margin-top: auto;
+    padding-top: 14px;
     font-family: 'Manrope', sans-serif;
     font-size: 13px;
     font-weight: 600;
@@ -604,22 +623,48 @@ dialog:not([open]) { display: none !important; }
   }
   .mega__more:hover { text-decoration: none; }
 
+  /* ── Подвал панели ──
+     Слева компактные направления (одна-две страницы за каждым), справа вход в
+     полный каталог. До 2026-08-09 здесь была одна ссылка на всю ширину, а
+     «Легализация» и «Присяжный перевод» в меню не показывались вовсе. */
   .mega__footer {
     border-top: 1px solid var(--border-faint);
     background: var(--surface);
   }
-  .mega__all {
-    display: block;
+  .mega__footer-inner {
     max-width: 1760px;
     margin: 0 auto;
-    padding: 18px clamp(24px, 4.5vw, 88px);
+    padding: 16px clamp(24px, 4.5vw, 88px);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px 40px;
+    flex-wrap: wrap;
+  }
+  .mega__rest {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px 28px;
+  }
+  .mega__rest-link {
     font-family: 'Manrope', sans-serif;
     font-size: 14px;
+    color: var(--text-sub);
+    text-decoration: none;
+    transition: color .15s ease;
+  }
+  .mega__rest-link:hover { color: var(--gold); }
+  .mega__all {
+    flex: none;
+    font-family: 'Manrope', sans-serif;
+    font-size: 13px;
     font-weight: 600;
     letter-spacing: 0.06em;
     text-transform: uppercase;
     color: var(--gold);
     text-decoration: none;
+    white-space: nowrap;
   }
   .mega__all:hover { text-decoration: none; }
 
