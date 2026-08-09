@@ -345,7 +345,10 @@ dialog:not([open]) { display: none !important; }
   display: flex;
   flex-direction: column;
 }
-.site-menu__dirs-grid a {
+/* Строка направления — и у раскрывающихся, и у простых одна высота и один
+   кегль: список должен читаться как один список, а не как два разных. */
+.site-menu__dir-plain,
+.site-menu__dir-head {
   display: flex;
   align-items: center;
   min-height: 46px;
@@ -359,7 +362,58 @@ dialog:not([open]) { display: none !important; }
   line-height: 1.35;
   text-decoration: none;
 }
-.site-menu__dirs-grid a:last-child { border-bottom: 0; }
+
+/* ── Раскрывающееся направление ──
+   <details> вместо кнопки с обработчиком: раскрытие работает без JS, и
+   состояние читает экранный диктор без дополнительных aria-атрибутов. */
+.site-menu__dir { border: 0; }
+.site-menu__dir-head {
+  justify-content: space-between;
+  gap: 12px;
+  cursor: pointer;
+  list-style: none;              /* убираем встроенный треугольник */
+}
+.site-menu__dir-head::-webkit-details-marker { display: none; }
+.site-menu__dir-chev {
+  flex: none;
+  color: #6B6B6B;
+  transition: transform .2s ease;
+}
+.site-menu__dir[open] > .site-menu__dir-head { color: #C75B39; }
+.site-menu__dir[open] > .site-menu__dir-head .site-menu__dir-chev {
+  transform: rotate(180deg);
+  color: #C75B39;
+}
+
+/* Вложенные услуги. Отступ слева и более тихий цвет показывают подчинение —
+   иначе раскрытый раздел сливается со списком направлений в одну простыню. */
+.site-menu__dir-body {
+  display: flex;
+  flex-direction: column;
+  padding: 2px 0 10px 14px;
+  border-bottom: 1px solid #EFE7DA;
+  border-left: 2px solid #EFE7DA;
+  margin-left: 2px;
+}
+.site-menu__dir-link,
+.site-menu__dir-all {
+  display: flex;
+  align-items: center;
+  min-height: 44px;              /* минимум под палец, стандарт iOS/Android */
+  padding: 8px 2px;
+  color: #4A4A4A;
+  font-size: 14.5px;
+  font-weight: 400;
+  line-height: 1.35;
+  text-decoration: none;
+}
+.site-menu__dir-all {
+  color: #C75B39;
+  font-weight: 600;
+  font-size: 13.5px;
+}
+.site-menu__dirs-grid > *:last-child { border-bottom: 0; }
+.site-menu__dirs-grid > .site-menu__dir:last-child .site-menu__dir-body { border-bottom: 0; }
 @media (hover: hover) {
   .site-menu__dirs-grid a:hover { border-color: #C75B39; color: #C75B39; }
   .site-menu__link:hover { color: #C75B39; }
