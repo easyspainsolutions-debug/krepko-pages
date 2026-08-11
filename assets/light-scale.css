@@ -164,3 +164,32 @@ body .hero--service--notario .btn--wa {
   color: #FFFBF7 !important;
 }
 body .hero--service--notario .btn--wa:hover { background: var(--gold-2, #B04E2F) !important; }
+
+
+/* ── Карточки документов на городских хабах (2026-08-09) ──
+   В card__bottom лежала цена. Прайс сняли, блок остался — и от него на
+   каждой карточке висел пунктир, обрывающийся в пустоту: карточка читалась
+   как недозаполненная форма. Пустой блок не рисуем. */
+.card__bottom:empty { display: none !important; }
+
+/* Карусель отзывов обрезалась правым краем: третья карточка уходила под
+   границу секции и висела разрезанной. Даём ленте прокручиваться вбок и
+   гасим обрезку у родителя — карточка либо видна целиком, либо доезжает
+   свайпом. Точки-индикаторы переносились на вторую строку, держим в одну. */
+.home-reviews { overflow: hidden; }
+.home-reviews .rv__track,
+.home-reviews [class*="track"] {
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.home-reviews [class*="track"]::-webkit-scrollbar { display: none; }
+.home-reviews .rv__card, .home-reviews [class*="card"] { scroll-snap-align: start; }
+.home-reviews .rv__dots,
+.home-reviews [class*="dots"] {
+  display: flex !important;
+  flex-wrap: nowrap !important;
+  justify-content: center;
+  gap: 8px;
+}
