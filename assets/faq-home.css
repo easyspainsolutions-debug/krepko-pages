@@ -1,0 +1,445 @@
+/* Блок «Вопросы? Ответы» — выдержка правил из home-redesign.css (2026-08-09).
+
+   На главной FAQ выглядит иначе, чем на остальных страницах: крупные вопросы
+   без плашек, черта под заголовком, пояснение и кнопка сбоку. Стили жили
+   только в home-redesign.css, а он подключён к одной главной — поэтому те же
+   вопросы на городских хабах приезжали серыми плашками мелким кеглем.
+
+   Здесь только правила .faq*, вынесенные как есть. Главную не трогаем: она
+   продолжает брать их из своего файла, а этот подключают страницы, которым
+   нужен тот же вид. */
+
+
+/* --- Centered section headers --- */
+    #sec-services, #sec-reviews, #sec-coverage, .home-guides, .home-faq { text-align: center; }
+#sec-services h2, #sec-reviews h2, #sec-coverage h2,
+    .home-guides h2, .home-faq h2, .final-cta h2 {
+      font-size: 48px;
+      line-height: 1.15;
+      margin-bottom: 20px;
+    }
+/* cards/text inside centered sections stay left-aligned for readability */
+    #sec-services .card, #sec-reviews .review-card,
+    .home-guides .card, .home-faq .faq__item { text-align: left; }
+/* --- FAQ --- */
+    .home-faq .faq__list { max-width: 980px; margin: 0 auto; }
+.home-faq .faq__q { font-size: 17px; padding: 22px 24px; }
+/* Единая черта-акцент под всеми заголовками секций главной. */
+  .values__h::after,
+  #sec-services > h2::after,
+  #sec-reviews > h2::after,
+  .home-guides > h2::after,
+  #sec-coverage h2::after,
+  .home-faq h2::after,
+  .intro__how > h2::after,
+  .final-cta > h2::after {
+    content: '';
+    display: block;
+    width: 56px;
+    height: 2px;
+    margin: 18px 0 0;
+    background: var(--gold);
+  }
+#sec-services > h2::after,
+    #sec-reviews > h2::after,
+    .home-guides > h2::after,
+    #sec-coverage h2::after,
+    .home-faq h2::after,
+    .final-cta > h2::after { margin-left: auto; margin-right: auto; }
+/* — единый вертикальный ритм у всех секций — */
+  #sec-intro,
+  #sec-services,
+  #sec-reviews,
+  .home-guides,
+  #sec-coverage,
+  .home-faq,
+  .final-cta {
+    padding-top: var(--sec-pad) !important;
+    padding-bottom: var(--sec-pad) !important;
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+  }
+/* ============ Round 30: зебра по смысловым блокам ============
+     Правило: заголовок ВСЕГДА лежит внутри своей полосы, а не над ней.
+     Раньше «Философия работы» висела на cream, а её карточки были на sunk —
+     отсюда ощущение, что часть заголовков «без фона».
+
+       hero cream · лента SUNK · знакомство cream · Популярное SUNK ·
+       Философия cream · Как мы работаем SUNK · Отзывы cream ·
+       Гайды SUNK · Города cream · Вопросы SUNK · CTA cream            */
+
+  /* — полосы цвета хедера — */
+  .marquee, .ticker,
+  #sec-services,
+  .intro__how,
+  .home-guides,
+  .home-faq {
+    background: var(--surface-sunk) !important;
+  }
+/* full-bleed для полос, у которых его ещё не было */
+  .home-guides,
+  .home-faq,
+  .final-cta {
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+    padding-left: clamp(24px, 4.5vw, 88px);
+    padding-right: clamp(24px, 4.5vw, 88px);
+  }
+/* ============ Round 32: FAQ — две колонки, список без карточек ============
+     По мотивам 1inch Questions/Answers: заголовок закреплён слева, вопросы
+     идут справа чистым списком с терракотовым «+», который при раскрытии
+     превращается в «−». Палитра и Playfair — наши. */
+
+  /* список, а не набор плашек */
+  .home-faq .faq__item {
+    background: none !important;
+    border: 0 !important;
+    border-bottom: 1px solid var(--border-faint) !important;
+    border-radius: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+.home-faq .faq__item:last-child { border-bottom: 0 !important; }
+/* Селектор с summary — в module-process.css лежит `.faq__item > summary.faq__q`
+     (специфичность 0,2,1), которое перебивало и размер, и паддинги. */
+  .home-faq .faq__list { gap: 0 !important; }
+/* gap рвал линию разделителей */
+  .home-faq .faq__item > summary.faq__q {
+    position: relative;
+    display: block;
+    padding: 26px 46px 26px 0 !important;   /* маркер справа */
+    font-family: 'Playfair Display', serif !important;
+    font-weight: 500 !important;
+    font-size: clamp(20px, 1.9vw, 27px) !important;
+    line-height: 1.35;
+    color: #1A2B3C;
+    background: none !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    margin: 0 !important;
+    cursor: pointer;
+    list-style: none;
+    text-align: left;
+  }
+.home-faq .faq__q::-webkit-details-marker { display: none; }
+.home-faq .faq__q::marker { content: ''; }
+/* «+» из двух линий: вертикаль схлопывается — получается «−» */
+  /* Маркер: две ОДИНАКОВЫЕ горизонтальные линии, вторая повёрнута на 90° —
+     центры совпадают автоматически. Прежний вариант (горизонталь + отдельная
+     вертикаль со своим margin-top) смешивался с боевым `translateY(-50%)`
+     у `.faq__q::after` и давал «⊥» вместо «+». */
+  .home-faq .faq__item > summary.faq__q::before,
+  .home-faq .faq__item > summary.faq__q::after {
+    content: '' !important;
+    left: auto !important;
+    right: 0;
+    position: absolute;
+    top: calc(26px + 0.675em);          /* центр первой строки */
+    width: 22px;
+    height: 1.8px;
+    margin: 0 !important;
+    background: var(--gold);
+    transform: translateY(-50%);
+    transition: transform .35s cubic-bezier(.22, 1, .36, 1);
+  }
+.home-faq .faq__item > summary.faq__q::after {
+    transform: translateY(-50%) rotate(90deg);
+  }
+.home-faq .faq__item[open] > summary.faq__q::after {
+    transform: translateY(-50%) rotate(90deg) scaleX(0);
+  }
+/* ответ — просто текст: в module-process.css у него фон, рамка и скругление */
+  .home-faq .faq__item > .faq__a {
+    background: none !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    padding: 0 46px 30px 0;   /* выровнен с вопросом: маркер уехал вправо */
+    margin: 0 !important;
+    overflow: hidden;
+    text-align: left;
+    font-size: clamp(15px, 1.15vw, 17px);
+    line-height: 1.7;
+    color: var(--text-sub);
+    max-width: none;      /* во всю ширину колонки — до линии-разделителя */
+  }
+.home-faq .faq {
+      display: grid;
+      grid-template-columns: minmax(220px, 0.75fr) minmax(0, 1.5fr);
+      gap: clamp(32px, 5vw, 88px);
+      align-items: start;
+      text-align: left;
+      max-width: 1320px;
+      margin: 0 auto;
+    }
+/* липкость убрана: колонка коротка, а список вопросов при закрытых
+       ответах ненамного выше — залипание давало только рывок под шапкой */
+    .home-faq .faq__aside { position: static; }
+.home-faq .faq > .faq__aside h2 { margin: 0; text-align: left; }
+.home-faq .faq h2::after { margin-left: 0; margin-right: 0; }
+.home-faq .faq__list { margin: 0; max-width: none; }
+/* левая колонка: подводка + кнопка связи */
+  .home-faq .faq__dek {
+    margin: 22px 0 0;
+    font-size: clamp(15px, 1.2vw, 17px);
+    line-height: 1.7;
+    color: var(--text-sub);
+    max-width: 44ch;
+    text-align: left;
+  }
+.home-faq .faq__cta {
+    display: inline-flex;
+    margin-top: 28px;
+  }
+/* Колонка по ширине кнопки: ссылка снизу центрируется относительно неё,
+     а не относительно всей левой колонки. */
+  .home-faq .faq__actions {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+  }
+/* Второстепенная ссылка под кнопкой: без рамки и фона, приглушена — не
+     спорит с основным действием, но остаётся кликабельной. */
+  .home-faq .faq__more {
+    margin-top: 14px;
+    font-family: 'Manrope', sans-serif;
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--text-sub);
+    opacity: .55;
+    border-bottom: none;
+    text-decoration: none;
+    transition: opacity .2s ease, color .2s ease;
+  }
+.home-faq .faq__more:hover,
+  .home-faq .faq__more:focus-visible {
+    opacity: 1;
+    color: var(--gold);
+    text-decoration: none;
+    border-bottom: none;
+  }
+/* ============ Round 42: единый вертикальный ритм ============
+     Правило: у КАЖДОЙ полосы верхний отступ равен нижнему и равен --sec-pad.
+     Нарушители, найденные аудитом:
+       • .intro задавал 56px сверху / 64px снизу;
+       • между карточками принципов и шагами висел лишний margin 64px,
+         хотя полосы уже разделены сменой фона;
+       • .final-cta нёс padding 88/64 из module-process.css. */
+
+  #sec-intro,
+  #sec-services,
+  #sec-reviews,
+  .home-guides,
+  #sec-coverage,
+  .home-faq,
+  .final-cta,
+  .intro,
+  .intro__how {
+    padding-top: var(--sec-pad) !important;
+    padding-bottom: var(--sec-pad) !important;
+  }
+/* высоту ответа анимирует JS (Round 33) — <details> нативно не плавный.
+     padding без !important: его тоже надо анимировать, иначе при height:0
+     остаётся полоса отступа и раскрытие «прыгает». */
+  .home-faq .faq__item > .faq__a { will-change: height; }
+.home-faq .faq__q::before, .home-faq .faq__q::after { transition: none; }
+/* ============ Round 50: типографическая ревизия ============
+     Заголовки секций собирались в разное время и разошлись: на мобильном они
+     были 17 / 18 / 24 / 36px, на десктопе 42 / 44 / 48px, веса 500 и 800, а у
+     «Вопросы? Ответы» отличался ещё и цвет. Здесь одна шкала на все секции. */
+  #sec-services h2,
+  #sec-reviews h2,
+  #sec-coverage .map-head h2,
+  .home-guides h2,
+  .home-faq .faq__aside h2,
+  .final-cta h2,
+  .intro__how h2,
+  .values__h {
+    font-family: 'Playfair Display', Georgia, serif !important;
+    font-size: clamp(30px, 4vw, 48px) !important;
+    font-weight: 500 !important;
+    line-height: 1.15 !important;
+    color: #1A2B3C !important;
+    letter-spacing: -0.01em;
+  }
+/* Подзаголовки секций тоже разъехались: 14 / 15 / 18px при одинаковой роли. */
+  .sec-dek,
+  #sec-coverage .home-coverage__dek,
+  .home-guides__dek,
+  .home-faq .faq__dek {
+    font-size: clamp(16px, 1.3vw, 18px) !important;
+    line-height: 1.6 !important;
+    color: var(--text-sub) !important;
+  }
+/* Те же правки для шкал, заданных вне медиазапроса: максимум набирался
+     уже к 1200–1400px, дальше заголовки стояли на месте. */
+  #sec-services h2,
+  #sec-reviews h2,
+  #sec-coverage .map-head h2,
+  .home-guides h2,
+  .home-faq .faq__aside h2,
+  .final-cta h2,
+  .intro__how h2,
+  .values__h {
+    font-size: clamp(25px, calc(0.95vw + 21px), 40px) !important;
+  }
+.sec-dek,
+  #sec-coverage .home-coverage__dek,
+  .home-guides__dek,
+  .home-faq .faq__dek {
+    font-size: clamp(14px, calc(0.14vw + 12.8px), 16px) !important;
+  }
+#sec-services h2, #sec-reviews h2, #sec-coverage .map-head h2,
+  .home-guides h2, .home-faq .faq__aside h2, .final-cta h2,
+  .intro__how h2, .values__h {
+    font-size: var(--fs-title) !important;
+    line-height: var(--lh-title) !important;
+  }
+/* — 2. заголовки карточек, вопросы, имена городов — одна ступень — */
+  .city__name,
+  .home-guides .gcard__title,
+  #sec-services .srow__title,
+  .value__title,
+  .home-faq .faq__item > summary.faq__q,
+  .intro__bridge,
+  .portrait__name {
+    font-size: var(--fs-subtitle) !important;
+    line-height: var(--lh-subtitle) !important;
+    font-weight: 500 !important;
+  }
+/* — 3. подводки и крупные абзацы — */
+  .hero--home .hero__dek, .hero__dek,
+  .sec-dek, #sec-coverage .home-coverage__dek, .home-guides__dek,
+  .home-faq .faq__dek,
+  .city__lead,
+  .intro__bridge-sub {
+    font-size: var(--fs-lead) !important;
+    line-height: var(--lh-lead) !important;
+  }
+/* у FAQ шапка стоит сбоку, поэтому ей нужен только внутренний ритм */
+  .home-faq .faq__aside h2 { margin: 0 0 var(--gap-title-dek) !important; }
+.home-faq .faq__dek { margin: 0 0 var(--gap-title-dek) !important; }
+@media (min-width: 1000px) {
+
+    /* --- Hero: centered composition, oversized serif --- */
+    .hero--home { text-align: center; padding: 96px 0 88px; }
+    .hero--home .hero__h1 {
+      max-width: 1100px;
+      margin-left: auto; margin-right: auto;
+      font-size: 84px;
+      line-height: 1.08;
+    }
+    .hero--home .hero__dek {
+      max-width: 720px;
+      margin-left: auto; margin-right: auto;
+      font-size: 20px;
+      margin-top: 24px;
+    }
+    .hero--home .hero__cta-row {
+      justify-content: center;
+      margin-top: 44px;
+      gap: 20px;
+    }
+    .hero--home .hero__cta-value { margin-top: 20px; }
+    .hero--home .hero__meta-row { justify-content: center; gap: 64px; margin-top: 64px; }
+
+    /* decorative art recentred above the headline */
+    .hero__visual {
+      position: static;
+      display: flex;
+      justify-content: center;
+      margin-bottom: 8px;
+      opacity: 0.55;
+    }
+    .hero__visual svg { width: 190px; height: 150px; }
+
+    /* hero secondary link becomes an outline button (matches reference pair) */
+    .hero--home .hero__link-secondary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px 40px;
+      border: 1px solid var(--text);
+      color: var(--text);
+      font-family: 'Manrope', sans-serif;
+      font-weight: 600;
+      font-size: 15px;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: background .18s ease, color .18s ease, transform .18s ease;
+    }
+    .hero--home .hero__link-secondary:hover {
+      background: #1A2B3C; color: #FFFBF7; transform: translateY(-2px);
+    }
+    .hero--home .btn--gold { padding: 20px 44px; font-size: 15px; }
+
+    /* --- Section rhythm: big breathing room like the reference --- */
+    main > section,
+    main > .home-body { padding-top: 88px; padding-bottom: 88px; }
+    .rh-section-break { margin-top: 0 !important; }
+
+    /* --- Centered section headers --- */
+    #sec-services, #sec-reviews, #sec-coverage, .home-guides, .home-faq { text-align: center; }
+    #sec-services .p-label, #sec-reviews .p-label,
+    #sec-coverage .p-label, .home-guides .p-label { display: inline-block; margin-bottom: 16px; }
+    #sec-services h2, #sec-reviews h2, #sec-coverage h2,
+    .home-guides h2, .home-faq h2, .final-cta h2 {
+      font-size: 48px;
+      line-height: 1.15;
+      margin-bottom: 20px;
+    }
+    .home-services-grid__h2-sub { font-size: 32px !important; margin-top: 56px; }
+    #sec-coverage .home-coverage__dek, .home-guides__dek {
+      max-width: 680px; margin-left: auto; margin-right: auto; font-size: 18px;
+    }
+    .reviews-rating { justify-content: center; }
+    .coverage-map { margin-left: auto; margin-right: auto; }
+
+    /* cards/text inside centered sections stay left-aligned for readability */
+    #sec-services .card, #sec-reviews .review-card,
+    .home-guides .card, .home-faq .faq__item { text-align: left; }
+
+    /* --- Body copy block --- */
+    .home-body .pillar-body { max-width: 860px; margin: 0 auto; }
+    .home-body h2 { font-size: 44px; line-height: 1.15; }
+    .home-body p { font-size: 18px; line-height: 1.7; }
+
+    /* --- Guarantees --- */
+    #sec-guarantees .guarantees__grid { gap: 40px; }
+    .guarantee__title { font-size: 19px; }
+    .guarantee__text { font-size: 15px; }
+
+    /* --- Founder --- */
+    #sec-founder .home-founder__card { padding: 40px; gap: 36px; }
+
+    /* --- FAQ --- */
+    .home-faq .faq__list { max-width: 980px; margin: 0 auto; }
+    .home-faq .faq__q { font-size: 17px; padding: 22px 24px; }
+
+    /* --- Final CTA --- */
+    .final-cta { text-align: center; padding: 88px 64px; }
+    .final-cta p { font-size: 19px; max-width: 720px; margin-left: auto; margin-right: auto; }
+    .final-cta__actions { justify-content: center; gap: 20px; margin-top: 36px; }
+    .final-cta .btn { padding: 20px 44px; font-size: 15px; }
+  }
+@media (min-width: 900px) {
+    .home-faq .faq {
+      display: grid;
+      grid-template-columns: minmax(220px, 0.75fr) minmax(0, 1.5fr);
+      gap: clamp(32px, 5vw, 88px);
+      align-items: start;
+      text-align: left;
+      max-width: 1320px;
+      margin: 0 auto;
+    }
+    /* липкость убрана: колонка коротка, а список вопросов при закрытых
+       ответах ненамного выше — залипание давало только рывок под шапкой */
+    .home-faq .faq__aside { position: static; }
+    .home-faq .faq > .faq__aside h2 { margin: 0; text-align: left; }
+    .home-faq .faq h2::after { margin-left: 0; margin-right: 0; }
+    .home-faq .faq__list { margin: 0; max-width: none; }
+  }
+@media (prefers-reduced-motion: reduce) {
+    .home-faq .faq__q::before, .home-faq .faq__q::after { transition: none; }
+  }
