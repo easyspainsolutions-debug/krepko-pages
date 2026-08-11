@@ -193,3 +193,21 @@ body .hero--service--notario .btn--wa:hover { background: var(--gold-2, #B04E2F)
   justify-content: center;
   gap: 8px;
 }
+
+
+/* ── Городские хабы нотариуса: выравнивание секций (2026-08-09) ──
+   «Как проходит работа» приехала с городских страниц, где живёт внутри
+   .city-blocks — контейнера, который её и центрует. Здесь такого контейнера
+   нет, и блок прижимался к левому краю. Финальный призыв по той же причине
+   стоял узкой плашкой вместо полосы во всю ширину. */
+.service-city-context ~ .city-process,
+.city-process { margin-left: auto; margin-right: auto; }
+.city-process .intro__how { max-width: 1180px; margin: 0 auto; text-align: center; }
+.city-process .steps { justify-content: center; }
+
+body .final-cta {
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+  margin-right: calc(-50vw + 50%);
+  max-width: none;
+}
