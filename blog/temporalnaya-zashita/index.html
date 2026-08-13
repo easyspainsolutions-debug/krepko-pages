@@ -24,8 +24,6 @@
   <link rel="stylesheet" href="/assets/krepko-chips.css?v=d588b7e6cf">
   <link rel="stylesheet" href="/assets/site-footer.css?v=10f623e9ba">
   <link rel="stylesheet" href="/assets/a11y.css?v=bd18bf2b40">
-  <link rel="stylesheet" href="/assets/blog-grid.css?v=5b171b8529">
-  <link rel="stylesheet" href="/assets/blog-article.css?v=c4f68e737f">
   <link rel="stylesheet" href="/assets/krepko-base.css?v=6216d1aafd">
   <link rel="stylesheet" href="/assets/cookie-consent.css?v=a4b74432ef">
   <script src="/assets/cookie-consent.js?v=8272782489" defer></script>
@@ -34,6 +32,9 @@
   <link rel="stylesheet" href="/assets/site-footer.css?v=10f623e9ba">
   <link rel="stylesheet" href="/assets/a11y.css?v=bd18bf2b40">
   <link rel="stylesheet" href="/assets/desktop.css?v=77a552d781">
+  <link rel="stylesheet" href="/assets/blog-legacy.css?v=fed011d80c">
+  <link rel="stylesheet" href="/assets/blog-grid.css?v=5b171b8529">
+  <link rel="stylesheet" href="/assets/blog-article.css?v=27862180b5">
   <meta name="yandex-verification" content="b4ef32829d6a1b94">
   <title>Временная защита в Испании: что изменилось 5 августа 2026 | Krepko</title>
   <meta name="description" content="Что на самом деле изменилось для украинцев с 5 августа 2026 года. Разбираем три неточности, которые разошлись по сетям, — каждая меняет вывод. Продление до 4 марта 2028.">
@@ -79,374 +80,6 @@
     "keywords": "временная защита Испания 2026, украинцы Испания, ВЗ продление, TIE Испания"
   }
   </script>
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-
-    body {
-      background: #FFFBF7;
-      color: #2D2D2D;
-      font-family: -apple-system, 'Inter', sans-serif;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: flex-start;
-      padding: 0 20px 0;
-      overflow-x: hidden;
-    }
-
-    .wrap {
-      width: 100%;
-      max-width: 720px;
-      display: flex;
-      flex-direction: column;
-      gap: 0;
-      padding: 0 0 60px;
-    }
-
-    /* Breadcrumbs (унификация с legal/services) */
-    .breadcrumbs {
-      font-size: 12px;
-      color: #E8DFD1;
-      margin: 18px 0 14px;
-      line-height: 1.5;
-    }
-    .breadcrumbs a {
-      color: #6B6B6B;
-      text-decoration: none;
-      border: none;
-    }
-    .breadcrumbs a:hover { color: #C75B39; }
-    .breadcrumbs .sep { color: #E8DFD1; margin: 0 4px; }
-    .breadcrumbs .current { color: #4A4A4A; }
-
-    /* Legacy .back-link */
-    .back-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      color: #6B6B6B;
-      text-decoration: none;
-      font-size: 13px;
-      margin-bottom: 28px;
-      transition: color 0.15s;
-    }
-    .back-link:hover { color: #C75B39; }
-
-    .article-tag {
-      display: inline-block;
-      font-size: 11px;
-      font-weight: 700;
-      color: #C75B39;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      margin-bottom: 12px;
-    }
-
-    h1 {
-      font-size: 28px;
-      font-family: 'Playfair Display', Georgia, serif; font-weight: 500;
-      color: #2D2D2D;
-      line-height: 1.3;
-      margin: 8px 0 14px;
-    }
-
-    .article-meta {
-      font-size: 12px;
-      color: #E8DFD1;
-      margin-bottom: 24px;
-    }
-
-    .article-intro {
-      font-size: 16px;
-      color: #4A4A4A;
-      line-height: 1.7;
-      margin-bottom: 32px;
-      padding-bottom: 24px;
-      border-bottom: 1px solid #EFE7DA;
-    }
-
-    h2 {
-      font-size: 20px;
-      font-family: 'Playfair Display', Georgia, serif; font-weight: 500;
-      color: #2D2D2D;
-      margin: 32px 0 12px;
-      line-height: 1.3;
-    }
-
-    h3 {
-      font-size: 16px;
-      font-weight: 700;
-      color: #C75B39;
-      margin: 22px 0 8px;
-    }
-
-    p {
-      font-size: 15px;
-      color: #4A4A4A;
-      line-height: 1.75;
-      margin-bottom: 14px;
-    }
-
-    ul, ol {
-      padding-left: 20px;
-      margin-bottom: 16px;
-    }
-
-    li {
-      font-size: 15px;
-      color: #4A4A4A;
-      line-height: 1.75;
-      margin-bottom: 6px;
-    }
-
-    li strong, p strong { color: #2D2D2D; font-weight: 600; }
-
-    .info-box {
-      background: #F5F0EB;
-      border: 1px solid #E8DFD1;
-      border-left: 3px solid #C75B39;
-      border-radius: 8px;
-      padding: 14px 16px;
-      margin: 20px 0;
-      font-size: 14px;
-      color: #4A4A4A;
-      line-height: 1.6;
-    }
-    .info-box strong { color: #2D2D2D; }
-
-    .warning-box {
-      background: rgba(239,68,68,0.07);
-      border: 1px solid rgba(239,68,68,0.2);
-      border-left: 3px solid #ef4444;
-      border-radius: 8px;
-      padding: 14px 16px;
-      margin: 20px 0;
-      font-size: 14px;
-      color: #4A4A4A;
-      line-height: 1.6;
-    }
-    .warning-box strong { color: #B91C1C; }
-
-    .timeline {
-      display: flex;
-      flex-direction: column;
-      gap: 0;
-      margin: 16px 0 24px;
-      position: relative;
-    }
-
-    .timeline-item {
-      display: flex;
-      gap: 16px;
-      padding-bottom: 20px;
-      position: relative;
-    }
-
-    .timeline-item:last-child { padding-bottom: 0; }
-
-    .timeline-dot {
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
-      background: #F5F0EB;
-      border: 2px solid #C75B39;
-      flex-shrink: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 12px;
-      font-weight: 700;
-      color: #C75B39;
-      position: relative;
-      z-index: 1;
-      margin-top: 2px;
-    }
-
-    .timeline-content { flex: 1; }
-
-    .timeline-title {
-      font-size: 15px;
-      font-weight: 700;
-      color: #2D2D2D;
-      margin-bottom: 4px;
-    }
-
-    .timeline-desc {
-      font-size: 13px;
-      color: #6B6B6B;
-      line-height: 1.6;
-    }
-
-    .rights-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-      margin: 16px 0 24px;
-    }
-
-    .right-item {
-      background: #F5F0EB;
-      border: 1px solid #E8DFD1;
-      border-radius: 8px;
-      padding: 12px 14px;
-      font-size: 13px;
-      color: #4A4A4A;
-      line-height: 1.5;
-    }
-
-    .right-item strong {
-      display: block;
-      font-size: 12px;
-      color: #C75B39;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      margin-bottom: 4px;
-    }
-
-    .divider {
-      width: 100%;
-      height: 1px;
-      background: #EFE7DA;
-      margin: 32px 0;
-    }
-
-    .cta-block {
-      background: #F5F0EB;
-      border: 1px solid #E8DFD1;
-      border-radius: 11px;
-      padding: 24px;
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-      margin-top: 16px;
-    }
-
-    .cta-title { font-size: 18px; font-weight: 700; color: #2D2D2D; }
-    .cta-sub { font-size: 14px; color: #6B6B6B; line-height: 1.6; margin-top: -6px; }
-
-    .btn {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      width: 100%;
-      padding: 14px 18px;
-      border-radius: 11px;
-      text-decoration: none;
-      transition: background 0.15s, transform 0.12s;
-      border: 1px solid transparent;
-      cursor: pointer;
-    }
-    .btn:hover { transform: translateX(3px); }
-    .btn-wa { background: #C75B39; border-color: #C75B39; color: #FFFBF7; }
-    .btn-wa:hover { background: #B04E2F; }
-    .btn-tg { background: #F5F0EB; border-color: #E8DFD1; color: #2D2D2D; }
-    .btn-tg:hover { background: #EFE7DA; }
-    .btn-ig {
-      background: #F5F0EB;
-      border-color: #E8DFD1;
-      color: #2D2D2D;
-    }
-    .btn-ig:hover { background: #EFE7DA; }
-
-    .btn-icon { font-size: 20px; flex-shrink: 0; }
-    .btn-icon svg { width: 20px; height: 20px; display: block; }
-    .btn-inner { display: flex; flex-direction: column; gap: 2px; }
-    .btn-title { font-size: 14px; font-weight: 700; }
-    .btn-sub-text { font-size: 12px; opacity: 0.7; }
-    @media (max-width: 480px) {
-      .rights-grid { grid-template-columns: 1fr; }
-    }
-
-    .related-section { margin: 0; }
-    .related-label {
-      font-size: 11px;
-      font-weight: 700;
-      color: #6B6B6B;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      margin-bottom: 10px;
-      margin-top: 0;
-      display: block;
-    }
-    .rel-card {
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-      padding: 14px 16px;
-      border-radius: 10px;
-      text-decoration: none;
-      border: 1px solid #E8DFD1;
-      background: #F5F0EB;
-      color: #2D2D2D;
-      transition: background 0.15s, transform 0.12s;
-      margin-bottom: 8px;
-    }
-    .rel-card:hover { background: #EFE7DA; transform: translateX(3px); }
-    .rel-card .article-tag { margin-bottom: 2px; font-size: 10px; }
-    .rel-card-title { font-size: 14px; font-weight: 600; color: #2D2D2D; line-height: 1.35; }
-    .rel-card-meta  { font-size: 11px; color: #E8DFD1; margin-top: 2px; }
-
-    /* ── Category navigation ── */
-    .cat-nav { padding: 20px 0 4px; border-top: 1px solid #EFE7DA; margin-top: 8px; }
-    .cat-nav-label {
-      font-size: 10px; font-weight: 700; color: #E8DFD1;
-      text-transform: uppercase; letter-spacing: 0.12em;
-      display: block; margin-bottom: 10px;
-    }
-    .cat-nav-pills { display: flex; flex-wrap: wrap; gap: 7px; }
-    .cat-pill {
-      padding: 6px 13px; border-radius: 20px; font-size: 12px; font-weight: 600;
-      text-decoration: none; border: 1px solid #E8DFD1; background: #F5F0EB;
-      color: #6B6B6B; transition: color 0.15s, border-color 0.15s, background 0.15s;
-    }
-    .cat-pill:hover { color: #C75B39; border-color: #C75B39; }
-    .cat-pill.active { background: rgba(199, 91, 57,0.12); border-color: #C75B39; color: #C75B39; }
-
-    /* ── Featured related article ── */
-    .rel-featured {
-      display: flex; flex-direction: column; gap: 6px;
-      padding: 16px 18px; border-radius: 10px; text-decoration: none;
-      border: 1px solid rgba(199, 91, 57,0.25); background: #F5F0EB;
-      color: #2D2D2D; transition: background 0.15s; margin-bottom: 8px;
-    }
-    .rel-featured:hover { background: #EFE7DA; }
-    .rel-featured-label { font-size: 10px; font-weight: 700; color: #C75B39; text-transform: uppercase; letter-spacing: 0.1em; }
-    .rel-featured-title { font-size: 15px; font-weight: 700; color: #2D2D2D; line-height: 1.35; }
-  
-    @media (max-width:719px){
-      body{padding:0 16px 0}
-      h1{font-size:22px;line-height:1.25;margin-bottom:10px}
-      h2{font-size:18px;margin:28px 0 12px}
-      h3{font-size:14.5px;margin:18px 0 6px}
-      p{font-size:14px;line-height:1.65;margin-bottom:11px}
-      li{font-size:14px;line-height:1.6}
-      .article-intro{font-size:14.5px;line-height:1.6;margin-bottom:22px;padding-bottom:16px}
-      .article-meta{font-size:11.5px;margin-bottom:18px}
-      .tag{font-size:10.5px;margin-bottom:10px}
-      .cta-block{padding:16px 14px}
-      .cta-title{font-size:16px}
-      .cta-sub{font-size:13px;line-height:1.5}
-      .btn{padding:12px 14px;font-size:13.5px;gap:8px}
-      .btn-title{font-size:13px}
-      .btn-icon svg{width:18px;height:18px}
-      .faq-item summary{padding:11px 13px;font-size:13.5px}
-      .faq-a{padding:0 13px 11px;font-size:13px;line-height:1.6}
-      .article-card{padding:13px 14px}
-      .article-card .article-title{font-size:14px}
-      .article-card .article-desc{font-size:12.5px;line-height:1.5}
-    }
-
-  
-    /* 2026-06-01 header-fix: legacy body{display:flex;align-items:center} collapsed the
-       shared full-width .site-nav into a narrow centered column. Restore block flow so
-       header/footer render edge-to-edge (как на остальных страницах); keep article column
-       centered via .wrap. Longhand padding не конфликтует с существующим shorthand. */
-    body{display:block;padding:0}
-    .wrap{margin-left:auto;margin-right:auto;padding-left:20px;padding-right:20px}
-    @media (max-width:719px){.wrap{padding-left:16px;padding-right:16px}}
-  </style>
   <script src="/assets/analytics.js?v=7ba69e930c" defer></script>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
   <script type="application/ld+json">
@@ -460,46 +93,44 @@
     ]
   }
   </script>
-    <script type="application/ld+json">
-{
+    <script type="application/ld+json">{
   "@context": "https://schema.org",
   "@type": "FAQPage",
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "До какого срока действует временная защита в 2026 году?",
+      "name": "Засчитывается ли время с ВЗ для постоянного ВНЖ?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Решением Совета ЕС 2026/1912 от 30 июля 2026 года временная защита продлена до 4 марта 2028 года. Тем, у кого статус уже есть, он продлевается автоматически. Для новых заявлений с 5 августа 2026 года действует условие о выполнении воинских обязанностей в Украине."
+        "text": "Временная защита не засчитывается в стандартные 5 лет непрерывного легального проживания для получения постоянного ВНЖ (residencia de larga duración). Время с arraigo social — засчитывается."
       }
     },
     {
       "@type": "Question",
-      "name": "Что даёт временная защита в Испании?",
+      "name": "Можно ли с ВЗ купить недвижимость в Испании?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "ВЗ даёт право легально жить в Испании весь срок защиты, работать по найму или как autónomo без отдельных разрешений, доступ к государственной медицине (tarjeta sanitaria), школам, банкам и социальным пособиям."
+        "text": "Да. ВЗ + TIE — достаточное основание для заключения сделки с недвижимостью. NIE при этом тоже нужен (его получают одновременно с TIE или отдельно)."
       }
     },
     {
       "@type": "Question",
-      "name": "Кто имеет право на временную защиту?",
+      "name": "Можно ли с ВЗ взять ипотеку?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Граждане Украины, покинувшие страну после 24 февраля 2022 года; лица без гражданства и граждане третьих стран с действовавшим украинским ВНЖ; члены их семей. Россияне с постоянным ВНЖ в Украине рассматриваются индивидуально."
+        "text": "Технически — да, банки рассматривают заявки. На практике получить ипотеку с ВЗ сложнее, чем с постоянным ВНЖ: банки учитывают временный характер статуса. Но варианты есть, особенно если у вас стабильный доход и хорошая кредитная история."
       }
     },
     {
       "@type": "Question",
-      "name": "Можно ли с временной защитой переезжать по странам ЕС?",
+      "name": "Что делать, если потерял TIE?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Краткосрочные поездки разрешены по правилам Шенгена. Но статус ВЗ привязан к конкретной стране ЕС — перерегистрироваться в другой стране официально нельзя, придётся подавать там новый статус с нуля."
+        "text": "Нужно обратиться в полицию с заявлением о потере и запросить дубликат. Потребуется паспорт, фото и оплата пошлины."
       }
     }
   ]
-}
-  </script>
+}</script>
 <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:site" content="@krepko_es">
   <meta name="twitter:title" content="Временная защита в Испании 2026: продление и права | Krepko">
@@ -808,7 +439,7 @@
     <div class="blog-article">
       <details class="article-toc" open>
         <summary class="article-toc__label">В статье</summary>
-        <div class="article-toc__list"><a href="#chto-takoe-vremennaya-zaschita-i-kto-ee-vve-l">Что такое временная защита и кто её ввёл</a><a href="#kto-imeet-pravo-na-vremennuyu-zaschitu">Кто имеет право на временную защиту</a><a href="#srok-dei-stviya-vz-v-2026-godu">Срок действия ВЗ в 2026 году</a><a href="#chto-izmenilos-5-avgusta-2026-goda">Что изменилось 5 августа 2026 года</a><a href="#chto-dae-t-vremennaya-zaschita">Что даёт временная защита</a><a href="#kak-prodlit-vremennuyu-zaschitu">Как продлить временную защиту</a><a href="#pereezdy-mezhdu-stranami-es-s-vz">Переезды между странами ЕС с ВЗ</a><a href="#poezdki-v-ukrainu-s-vz">Поездки в Украину с ВЗ</a><a href="#chto-budet-posle-okonchaniya-vz">Что будет после окончания ВЗ</a><a href="#chasto-zadavaemye-voprosy">Часто задаваемые вопросы</a></div>
+        <div class="article-toc__list"><a href="#chto-takoe-vremennaya-zaschita-i-kto-ee-vve-l">Что такое временная защита и кто её ввёл</a><a href="#kto-imeet-pravo-na-vremennuyu-zaschitu">Кто имеет право на временную защиту</a><a href="#srok-dei-stviya-vz-v-2026-godu">Срок действия ВЗ в 2026 году</a><a href="#chto-izmenilos-5-avgusta-2026-goda">Что изменилось 5 августа 2026 года</a><a href="#chto-dae-t-vremennaya-zaschita">Что даёт временная защита</a><a href="#kak-prodlit-vremennuyu-zaschitu">Как продлить временную защиту</a><a href="#pereezdy-mezhdu-stranami-es-s-vz">Переезды между странами ЕС с ВЗ</a><a href="#poezdki-v-ukrainu-s-vz">Поездки в Украину с ВЗ</a><a href="#chto-budet-posle-okonchaniya-vz">Что будет после окончания ВЗ</a><a href="#chastye-voprosy">Частые вопросы</a></div>
       </details>
 
       <div class="article-body">
@@ -820,13 +451,15 @@
 
     <div class="article-intro">
       С 5 августа 2026 года временная защита в Испании выдаётся по новому
-      условию. Само решение короткое, но вокруг него разошлись три неточности —
-      и каждая меняет вывод для конкретного человека: попадёте вы под
-      ограничение или нет.
+      условию. Решение короткое, но вокруг него разошлись три неточности — и
+      каждая меняет ответ на один вопрос: попадёте вы под ограничение или
+      нет.
       <br><br>
-      Разбираем по тексту решения Совета ЕС, а не по пересказам. Ниже — что
-      говорит норма, где публикации ошибаются и что это значит, если статус у
-      вас уже есть или вы только собираетесь подавать.
+      Мы разобрали текст решения Совета ЕС построчно, а не пересказы в сетях.
+      Ниже — что говорит норма, где публикации ошибаются, чем подтверждать
+      выполнение обязанностей и что делать, если статус у вас уже есть или вы
+      только собираетесь подавать. Останутся вопросы по вашей ситуации —
+      напишите нам, разберём её отдельно.
     </div>
 
     <div class="callout">
@@ -840,7 +473,7 @@
 
     <p>Временная защита (Protección Temporal, ВЗ) — это особый правовой статус, введённый Европейским союзом на основании <strong>Директивы 2001/55/EC</strong>. Совет ЕС активировал её 4 марта 2022 года в связи с войной в Украине — впервые за всю историю директивы.</p>
 
-    <p>Испания приняла тысячи украинцев в рамках этой директивы. Испанский орган, занимающийся ВЗ — <strong>Oficina de Asilo y Refugio (OAR)</strong>, подведомственная Министерству внутренних дел. ВЗ оформляется через полицию, а подтверждающим документом является <strong>TIE (Tarjeta de Identidad de Extranjero)</strong> с пометкой о временной защите.</p>
+    <p>По этой директиве Испания приняла тысячи украинцев. Статусом занимается <strong>Oficina de Asilo y Refugio (OAR)</strong> при Министерстве внутренних дел. Оформляют защиту через полицию, а на руках у вас остаётся <strong>TIE (Tarjeta de Identidad de Extranjero)</strong> с пометкой о временной защите — именно этой картой вы подтверждаете статус в банке, у арендодателя и на границе.</p>
 
     <h2 id="kto-imeet-pravo-na-vremennuyu-zaschitu">Кто имеет право на временную защиту</h2>
 
@@ -851,14 +484,14 @@
     </ul>
 
     <div class="info-box">
-      <strong>А русские?</strong> Граждане России формально не имеют права на ВЗ по данной директиве. Однако россияне, имевшие постоянный вид на жительство в Украине и покинувшие страну из-за войны, могут в некоторых случаях обратиться за защитой. Каждый случай рассматривается индивидуально.
+      <strong>А русские?</strong> Граждане России формально не имеют права на ВЗ по этой директиве. Но россияне, у которых был постоянный вид на жительство в Украине и которые уехали из-за войны, в отдельных случаях подать на защиту могут. Такие ситуации мы разбираем поштучно: смотрим, какой ВНЖ был в Украине, когда и как вы выехали, что сохранилось на руках.
     </div>
 
     <h2 id="srok-dei-stviya-vz-v-2026-godu">Срок действия ВЗ в 2026 году</h2>
 
-    <p>Изначально директива была рассчитана на 1 год с возможностью продления дважды по 6 месяцев. Однако Совет ЕС неоднократно продлевал её действие. Решением Совета ЕС 2026/1912 от 30 июля 2026 года защита продлена <strong>до 4 марта 2028 года</strong>. Продление касается всех, у кого статус уже есть.</p>
+    <p>Директиву писали на 1 год с продлением дважды по 6 месяцев, но Совет ЕС продлевал её снова и снова. Решением Совета ЕС 2026/1912 от 30 июля 2026 года защита продлена <strong>до 4 марта 2028 года</strong>. Продление касается всех, у кого статус уже есть.</p>
 
-    <p>Испания автоматически продлевает TIE-карты в рамках европейских решений. Следите за новостями в Telegram-канале Krepko — об изменениях там сообщают оперативно.</p>
+    <p>Испания продлевает TIE-карты вслед за решениями ЕС автоматически. За изменениями мы следим сами и правим эту страницу, как только выходит новый текст, — дату вверху можно читать как дату последней сверки.</p>
 
     
     <h2 id="chto-izmenilos-5-avgusta-2026-goda">Что изменилось 5 августа 2026 года</h2>
@@ -909,8 +542,9 @@
     Еврокомиссии, где описано <em>украинское</em> законодательство о запрете
     выезда, а не норма ЕС. На практике фильтр действительно ложится в первую
     очередь на мужчин, которым выезд из Украины был ограничен, — но
-    формальный критерий сформулирован иначе, и это важно при разборе
-    конкретного случая.</p>
+    формальный критерий сформулирован иначе. Разница не теоретическая: когда
+    мы разбираем конкретный случай, отталкиваемся от текста решения, а не от
+    пересказов в сетях.</p>
 
     <h3>Чем подтверждать</h3>
 
@@ -926,7 +560,9 @@
     </ul>
 
     <p>Обратите внимание на слово «проверяемый»: скриншот из приложения и
-    официальный документ с возможностью проверки — не одно и то же.</p>
+    официальный документ, который ведомство может проверить, — не одно и то
+    же. Не понимаете, что из ваших бумаг подойдёт, — пришлите нам список того,
+    что есть на руках. Скажем, чего не хватает и как это добрать.</p>
 
     <h3>Про испанскую инструкцию полиции</h3>
 
@@ -944,13 +580,17 @@
 
     <p>Продление тем, у кого защита действует, идёт в прежнем порядке.
     Но год — короткий срок, а <a href="/migracion/vyhod-iz-tps/">выход на
-    обычный ВНЖ</a> требует времени и документов. Начинать имеет смысл
-    заранее, а не когда до истечения TIE останется месяц.</p>
+    обычный ВНЖ</a> упирается в сроки и бумаги. Начинать разумно заранее, а не
+    когда до истечения TIE останется месяц: мы считаем график назад от даты
+    вашей карты и закладываем на сбор комплекта несколько месяцев.</p>
 
     <p>Большинство маршрутов — arraigo, воссоединение семьи, ВНЖ через
-    работу — упираются в одни и те же бумаги: справка о несудимости,
+    работу — упираются в один и тот же набор: справка о несудимости,
     свидетельства о рождении и браке, апостиль и присяжный перевод.
-    <a href="/ukraina/">Их мы получаем из Украины</a> без вашей поездки.</p>
+    <a href="/ukraina/">Эти документы мы получаем из Украины</a> без вашей
+    поездки: от вас — сканы паспорта и данные для запроса, дальше запрос,
+    апостиль и присяжный перевод ведём сами и присылаем готовый комплект в
+    Испанию. Стоимость обсуждаем после того, как поймём объём.</p>
 
     <h2 id="chto-dae-t-vremennaya-zaschita">Что даёт временная защита</h2>
 
@@ -991,18 +631,16 @@
 
     <aside class="inline-cta" data-article="temporalnaya-zashita" data-service="consult">
       <p class="inline-cta__header">Заканчивается временная защита?</p>
-      <p class="inline-cta__offer">Krepko разберёт варианты перехода: arraigo / residencia / другие пути под ваш случай. Бесплатно.</p>
-      <a class="inline-cta__btn"
-         href="https://t.me/krepko_es_admin_bot?start=blog_temporalnaya-zashita"
-         onclick="if(typeof gtag==='function'){gtag('event','cta_click',{article:'temporalnaya-zashita',service:'consult',cta_type:'inline_blog'});}" rel="noopener noreferrer" target="_blank">
-        Получить консультацию → @krepko_es_admin_bot
+      <p class="inline-cta__offer">Опишите свою ситуацию — разберём варианты перехода под неё: arraigo, residencia, другие маршруты. Консультация бесплатная.</p>
+      <a class="inline-cta__btn" href="https://wa.me/34641048296?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%2C%20%D0%BD%D1%83%D0%B6%D0%BD%D0%B0%20%D0%BA%D0%BE%D0%BD%D1%81%D1%83%D0%BB%D1%8C%D1%82%D0%B0%D1%86%D0%B8%D1%8F" rel="noopener noreferrer" target="_blank">
+        Получить консультацию
       </a>
-      <p class="inline-cta__alt">или WhatsApp: <a href="https://wa.me/34641048296" rel="noopener noreferrer" target="_blank">+34 641 048 296</a></p>
+      
     </aside>
 
     <h2 id="kak-prodlit-vremennuyu-zaschitu">Как продлить временную защиту</h2>
 
-    <p>Продление ВЗ происходит полуавтоматически: ЕС принимает решение о продлении, Испания имплементирует его, и TIE-карты продлеваются. Однако <strong>физически обновить карту</strong> всё равно нужно — с просроченным TIE вы можете столкнуться с проблемами при открытии счёта, аренде жилья или поездках.</p>
+    <p>Продление ВЗ идёт полуавтоматически: ЕС принимает решение, Испания вводит его у себя, и срок карт сдвигается. Но <strong>физически обновить карту</strong> всё равно придётся — с просроченным TIE вам откажут в открытии счёта, попросят другой документ при аренде и зададут лишние вопросы на границе.</p>
 
     <div class="timeline">
       <div class="timeline-item">
@@ -1036,37 +674,37 @@
     </div>
 
     <div class="warning-box">
-      <strong>Не ждите до последнего.</strong> Записывайтесь на продление за 2–3 месяца до истечения TIE. В крупных городах — особенно в Мадриде, Барселоне и Малаге — очереди в полицию могут быть растянуты на недели и месяцы.
+      <strong>Не ждите до последнего.</strong> Записывайтесь на продление за 2–3 месяца до истечения TIE. В крупных городах — особенно в Мадриде, Барселоне и Малаге — свободные окна разбирают на недели и месяцы вперёд. Если поймать запись не выходит, напишите нам: ловим слоты и готовим комплект документов к визиту.
     </div>
 
     <h2 id="pereezdy-mezhdu-stranami-es-s-vz">Переезды между странами ЕС с ВЗ</h2>
 
     <p>ВЗ оформляется в конкретной стране ЕС и действует только в ней. Если вы получили ВЗ в Испании, вы не можете автоматически работать или получать социальную помощь в Германии или Польше. Краткосрочные визиты (туристические поездки в другие страны Шенгена) возможны.</p>
 
-    <p>Переезд в другую страну ЕС потребует заново подавать на ВЗ или иной статус там. Помните об этом при планировании.</p>
+    <p>Переезд в другую страну ЕС означает новое заявление — на ВЗ или на другой статус, уже по местным правилам. И держите в голове оговорку из решения: непрерывность защиты считают по одной стране, поэтому смена страны выводит вас из-под неё.</p>
 
     <h2 id="poezdki-v-ukrainu-s-vz">Поездки в Украину с ВЗ</h2>
 
-    <p>Технически поездки в Украину допустимы, но на практике они могут поставить под угрозу ваш статус. ВЗ основана на предположении о невозможности безопасного возвращения — если вы ездите на родину, это может быть трактовано как аргумент против продления. Пока единых правил по этому вопросу нет, но риск существует. При длительных визитах в Украину рекомендуем проконсультироваться.</p>
+    <p>Технически поездки в Украину допустимы, но на практике они бьют по статусу. ВЗ стоит на предположении, что безопасно вернуться нельзя, — и регулярные поездки на родину читаются как аргумент против продления. Единых правил тут пока нет, риск есть. Собираетесь надолго — напишите нам до отъезда: посмотрим ваши даты и скажем, чем вы рискуете и что стоит зафиксировать перед поездкой.</p>
 
     <h2 id="chto-budet-posle-okonchaniya-vz">Что будет после окончания ВЗ</h2>
 
     <p>Рано или поздно временная защита завершится. Что тогда? Есть несколько сценариев:</p>
 
     <h3>Сценарий 1: Переход на arraigo social</h3>
-    <p>Если к моменту окончания ВЗ вы прожили в Испании 3+ лет непрерывно (с подтверждённым <a href="/blog/padron-municipal/" style="color:#C75B39">падроном</a>), появятся основания для arraigo social. Это полноценный ВНЖ на 1 год с правом продления. Рекомендуем готовить документы заблаговременно.</p>
+    <p>Если к моменту окончания ВЗ вы прожили в Испании 3+ лет непрерывно (с подтверждённым <a href="/blog/padron-municipal/">падроном</a>), появятся основания для arraigo social. Это полноценный ВНЖ на 1 год с правом продления. Документы под него мы собираем заранее: дольше всего идут справки из Украины, обычно именно они и держат подачу.</p>
 
     <h3>Сценарий 2: Статус беженца или вспомогательная защита</h3>
-    <p>В ряде случаев возможно подать на международную защиту (asilo o protección subsidiaria). Процедура сложнее, но даёт более долгосрочный статус.</p>
+    <p>Иногда можно подать на международную защиту (asilo o protección subsidiaria). Процедура тяжелее и дольше, зато статус даёт более долгий. Подходит она не всем — смотрим по обстоятельствам конкретной семьи.</p>
 
     <h3>Сценарий 3: ВНЖ через работу или учёбу</h3>
-    <p>Если к тому моменту у вас будет трудовой договор с испанской компанией или вы учитесь — есть соответствующие типы ВНЖ.</p>
+    <p>Если к тому моменту у вас есть трудовой договор с испанской компанией или вы учитесь — под это есть отдельные типы ВНЖ. Договор и условия учёбы мы проверяем до подачи, чтобы не собирать комплект вслепую.</p>
 
     <div class="info-box">
       <strong>Практический совет:</strong> не ждите истечения ВЗ, чтобы начать думать о следующем шаге. Если вы живёте в Испании уже 2–3 года с ВЗ, самое время проконсультироваться о переходе на arraigo social. Оценю ситуацию и составлю план действий.
     </div>
 
-    <h2 id="chasto-zadavaemye-voprosy">Часто задаваемые вопросы</h2>
+    <h2 id="chastye-voprosy">Частые вопросы</h2>
 
     <h3>Засчитывается ли время с ВЗ для постоянного ВНЖ?</h3>
     <p>Временная защита не засчитывается в стандартные 5 лет непрерывного легального проживания для получения постоянного ВНЖ (residencia de larga duración). Время с arraigo social — засчитывается.</p>
@@ -1080,11 +718,11 @@
     <h3>Что делать, если потерял TIE?</h3>
     <p>Нужно обратиться в полицию с заявлением о потере и запросить дубликат. Потребуется паспорт, фото и оплата пошлины.</p>
 
-        <p>Если разбираться самому не хочется — у нас есть <a href="/migracion/vyhod-iz-tps/">выход из временной защиты на ВНЖ</a>: посмотрим вашу ситуацию и скажем, что понадобится именно в вашем случае.</p>
+        <p>Если разбираться самому не хочется — мы ведём <a href="/migracion/vyhod-iz-tps/">выход из временной защиты на ВНЖ</a> целиком: разбираем ситуацию, называем подходящий маршрут, собираем документы из Украины и Испании и сопровождаем до подачи. Стоимость обсуждаем после того, как поймём объём.</p>
 
 <div class="cta-block">
-      <div class="cta-title">Временная защита заканчивается — что дальше?</div>
-      <div class="cta-sub">Скажите, когда истекает ваш статус и сколько лет вы в Испании. Посмотрим, какие маршруты выхода вам подходят.</div>
+      <div class="cta-title">Разберём ваш случай по временной защите</div>
+      <div class="cta-sub">Напишите, когда истекает ваш TIE и сколько лет вы живёте в Испании. Скажем, какие маршруты выхода вам открыты, что собрать и в каком порядке. Стоимость обсуждаем после того, как поймём объём.</div>
       <a class="btn btn-wa" href="https://wa.me/34641048296?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%2C%20%D0%BD%D1%83%D0%B6%D0%BD%D0%B0%20%D0%BA%D0%BE%D0%BD%D1%81%D1%83%D0%BB%D1%8C%D1%82%D0%B0%D1%86%D0%B8%D1%8F" rel="noopener noreferrer" target="_blank">
         <span class="btn-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9 8.5 8.5 0 0 1 8.5 8.5z"/></svg></span>
         <div class="btn-inner">
@@ -1092,27 +730,12 @@
           <span class="btn-sub-text">Свяжемся в течение часа</span>
         </div>
       </a>
-      <a class="btn btn-tg" href="https://t.me/krepko_es_admin_bot" target="_blank" rel="noopener noreferrer">
-        <span class="btn-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="7" width="16" height="13" rx="2"/><circle cx="9" cy="13" r="1.2" fill="currentColor"/><circle cx="15" cy="13" r="1.2" fill="currentColor"/><path d="M12 7V4M10 4h4"/></svg></span>
-        <div class="btn-inner">
-          <span class="btn-title">Telegram-бот — бесплатная консультация</span>
-          <span class="btn-sub-text">@krepko_es_admin_bot</span>
-        </div>
-      </a>
-      <a class="btn btn-ig" href="https://instagram.com/krepko.es" target="_blank" rel="noopener noreferrer"><span class="btn-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="6" width="20" height="14" rx="2"/><circle cx="12" cy="13" r="4"/><circle cx="17.5" cy="9.5" r="0.6" fill="currentColor"/></svg></span><div class="btn-inner"><span class="btn-title">Следи в Instagram</span><span class="btn-sub-text">@krepko.es</span></div></a>
+      <a class="btn btn-ig" href="https://instagram.com/krepko.es" target="_blank" rel="noopener noreferrer"><span class="btn-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="6" width="20" height="14" rx="2"/><circle cx="12" cy="13" r="4"/><circle cx="17.5" cy="9.5" r="0.6" fill="currentColor"/></svg></span><div class="btn-inner"><span class="btn-title">Мы в Instagram</span><span class="btn-sub-text">@krepko.es</span></div></a>
     </div>
 
 
         <!-- ── Cross-link: landing про регуляризацию ── -->
-    <a href="/regularizacion-2026/" style="display:flex;align-items:center;gap:12px;padding:14px 16px;margin:16px 0 12px;background:linear-gradient(180deg,rgba(199, 91, 57,0.10) 0%,#F5F0EB 60%);border:1px solid rgba(199, 91, 57,0.40);border-top:2px solid rgba(199, 91, 57,0.65);border-radius:12px;text-decoration:none;color:#2D2D2D;transition:border-color 0.15s,box-shadow 0.15s;box-shadow:0 0 14px rgba(199, 91, 57,0.10)">
-      <span style="font-size:22px;flex-shrink:0">📘</span>
-      <span style="flex:1;min-width:0">
-        <span style="display:block;font-size:11px;font-weight:800;color:#C75B39;letter-spacing:0.10em;text-transform:uppercase;margin-bottom:2px">Landing · Arraigo 2026</span>
-        <span style="display:block;font-size:14px;font-weight:700;color:#2D2D2D;line-height:1.3">Регуляризация в Испании 2026 — 4 пути через arraigo</span>
-        <span style="display:block;font-size:12px;color:#6B6B6B;margin-top:3px;line-height:1.4">Полный обзор путей social/laboral/familiar/por formación. Krepko координирует работу с миграционным юристом.</span>
-      </span>
-      <span style="color:#C75B39;font-size:18px;flex-shrink:0">→</span>
-    </a>
+    <a class="article-promo" href="/regularizacion-2026/"><span class="article-promo__kicker">Landing · Arraigo 2026</span><span class="article-promo__title">Регуляризация в Испании 2026 — 4 пути через arraigo</span><span class="article-promo__dek">Полный обзор путей social/laboral/familiar/por formación. Работу с миграционным юристом координируем мы.</span></a>
     </div>
     </div>
 

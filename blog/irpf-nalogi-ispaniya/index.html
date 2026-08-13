@@ -24,8 +24,6 @@
   <link rel="stylesheet" href="/assets/krepko-chips.css?v=d588b7e6cf">
   <link rel="stylesheet" href="/assets/site-footer.css?v=10f623e9ba">
   <link rel="stylesheet" href="/assets/a11y.css?v=bd18bf2b40">
-  <link rel="stylesheet" href="/assets/blog-grid.css?v=5b171b8529">
-  <link rel="stylesheet" href="/assets/blog-article.css?v=c4f68e737f">
   <link rel="stylesheet" href="/assets/krepko-base.css?v=6216d1aafd">
   <link rel="stylesheet" href="/assets/cookie-consent.css?v=a4b74432ef">
   <script src="/assets/cookie-consent.js?v=8272782489" defer></script>
@@ -34,6 +32,9 @@
   <link rel="stylesheet" href="/assets/site-footer.css?v=10f623e9ba">
   <link rel="stylesheet" href="/assets/a11y.css?v=bd18bf2b40">
   <link rel="stylesheet" href="/assets/desktop.css?v=77a552d781">
+  <link rel="stylesheet" href="/assets/blog-legacy.css?v=fed011d80c">
+  <link rel="stylesheet" href="/assets/blog-grid.css?v=5b171b8529">
+  <link rel="stylesheet" href="/assets/blog-article.css?v=27862180b5">
   <meta name="yandex-verification" content="b4ef32829d6a1b94">
   <title>IRPF в Испании 2026: кто платит и сколько | Krepko</title>
   <meta name="description" content="IRPF в Испании 2026: кто обязан подавать декларацию, налоговые ставки, вычеты, сроки и как платить. Для украинцев и русскоязычных.">
@@ -61,148 +62,6 @@
       }
     },"publisher":{"@type":"Organization","name":"Krepko","url":"https://krepko.es/"},"inLanguage":"ru","keywords":"IRPF Испания, налоги Испания украинцы, налоговый резидент Испания, декларация IRPF, налог на доходы Испания, Modelo 100"}
   </script>
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { background: #FFFBF7; color: #2D2D2D; font-family: -apple-system, 'Inter', sans-serif; min-height: 100vh; display: flex;
-      flex-direction: column; align-items: center; justify-content: flex-start; padding: 0  20px 0; ;overflow-x:hidden}
-    .wrap { width: 100%; max-width: 720px; display: flex; flex-direction: column; gap: 0; }
-    /* Breadcrumbs (унификация с legal/services) */
-    .breadcrumbs {
-      font-size: 12px;
-      color: #E8DFD1;
-      margin: 18px 0 14px;
-      line-height: 1.5;
-    }
-    .breadcrumbs a {
-      color: #6B6B6B;
-      text-decoration: none;
-      border: none;
-    }
-    .breadcrumbs a:hover { color: #C75B39; }
-    .breadcrumbs .sep { color: #E8DFD1; margin: 0 4px; }
-    .breadcrumbs .current { color: #4A4A4A; }
-
-    .article-tag { display: inline-block; font-size: 11px; font-weight: 700; color: #C75B39; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 12px; }
-    h1 { font-size: 26px; font-family: 'Playfair Display', Georgia, serif; font-weight: 500; color: #2D2D2D; line-height: 1.3; margin-bottom: 14px; }
-    .article-meta { font-size: 12px; color: #E8DFD1; margin-bottom: 24px; }
-    .article-intro { font-size: 16px; color: #4A4A4A; line-height: 1.7; margin-bottom: 32px; padding-bottom: 24px; border-bottom: 1px solid #EFE7DA; }
-    h2 { font-size: 20px; font-family: 'Playfair Display', Georgia, serif; font-weight: 500; color: #2D2D2D; margin: 32px 0 12px; line-height: 1.3; }
-    h3 { font-size: 16px; font-weight: 700; color: #C75B39; margin: 22px 0 8px; }
-    p { font-size: 15px; color: #4A4A4A; line-height: 1.75; margin-bottom: 14px; }
-    ul, ol { padding-left: 20px; margin-bottom: 16px; }
-    li { font-size: 15px; color: #4A4A4A; line-height: 1.75; margin-bottom: 6px; }
-    li strong, p strong { color: #2D2D2D; font-weight: 600; }
-    .info-box { background: #F5F0EB; border: 1px solid #E8DFD1; border-left: 3px solid #C75B39; border-radius: 8px; padding: 14px 16px; margin: 20px 0; font-size: 14px; color: #4A4A4A; line-height: 1.6; }
-    .info-box strong { color: #2D2D2D; }
-    .divider { width: 100%; height: 1px; background: #EFE7DA; margin: 32px 0; }
-    .cta-block { background: #F5F0EB; border: 1px solid #E8DFD1; border-radius: 11px; padding: 24px; display: flex; flex-direction: column; gap: 14px; margin-top: 16px; }
-    .cta-title { font-size: 18px; font-weight: 700; color: #2D2D2D; }
-    .cta-sub { font-size: 14px; color: #6B6B6B; line-height: 1.6; margin-top: -6px; }
-    .btn { display: flex; align-items: center; gap: 12px; width: 100%; padding: 14px 18px; border-radius: 11px; text-decoration: none; transition: background 0.15s, transform 0.12s; border: 1px solid transparent; }
-    .btn:hover { transform: translateX(3px); }
-    .btn-wa { background: #C75B39; border-color: #C75B39; color: #FFFBF7; }
-    .btn-wa:hover { background: #B04E2F; }
-    .btn-tg { background: #F5F0EB; border-color: #E8DFD1; color: #2D2D2D; }
-    .btn-tg:hover { background: #EFE7DA; }
-    .btn-ig {
-      background: #F5F0EB;
-      border-color: #E8DFD1;
-      color: #2D2D2D;
-    }
-    .btn-ig:hover { background: #EFE7DA; }
-    .btn-icon { font-size: 20px; flex-shrink: 0; }
-    .btn-icon svg { width: 20px; height: 20px; display: block; }
-    .btn-inner { display: flex; flex-direction: column; gap: 2px; }
-    .btn-title { font-size: 14px; font-weight: 700; }
-    .btn-sub-text { font-size: 12px; opacity: 0.7; }
-    .related-section { margin: 0; }
-    .related-label {
-      font-size: 11px;
-      font-weight: 700;
-      color: #6B6B6B;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      margin-bottom: 10px;
-      margin-top: 0;
-      display: block;
-    }
-    .rel-card {
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-      padding: 14px 16px;
-      border-radius: 10px;
-      text-decoration: none;
-      border: 1px solid #E8DFD1;
-      background: #F5F0EB;
-      color: #2D2D2D;
-      transition: background 0.15s, transform 0.12s;
-      margin-bottom: 8px;
-    }
-    .rel-card:hover { background: #EFE7DA; transform: translateX(3px); }
-    .rel-card .article-tag { margin-bottom: 2px; font-size: 10px; }
-    .rel-card-title { font-size: 14px; font-weight: 600; color: #2D2D2D; line-height: 1.35; }
-    .rel-card-meta  { font-size: 11px; color: #E8DFD1; margin-top: 2px; }
-
-    /* ── Category navigation ── */
-    .cat-nav { padding: 20px 0 4px; border-top: 1px solid #EFE7DA; margin-top: 8px; }
-    .cat-nav-label {
-      font-size: 10px; font-weight: 700; color: #E8DFD1;
-      text-transform: uppercase; letter-spacing: 0.12em;
-      display: block; margin-bottom: 10px;
-    }
-    .cat-nav-pills { display: flex; flex-wrap: wrap; gap: 7px; }
-    .cat-pill {
-      padding: 6px 13px; border-radius: 20px; font-size: 12px; font-weight: 600;
-      text-decoration: none; border: 1px solid #E8DFD1; background: #F5F0EB;
-      color: #6B6B6B; transition: color 0.15s, border-color 0.15s, background 0.15s;
-    }
-    .cat-pill:hover { color: #C75B39; border-color: #C75B39; }
-    .cat-pill.active { background: rgba(199, 91, 57,0.12); border-color: #C75B39; color: #C75B39; }
-
-    /* ── Featured related article ── */
-    .rel-featured {
-      display: flex; flex-direction: column; gap: 6px;
-      padding: 16px 18px; border-radius: 10px; text-decoration: none;
-      border: 1px solid rgba(199, 91, 57,0.25); background: #F5F0EB;
-      color: #2D2D2D; transition: background 0.15s; margin-bottom: 8px;
-    }
-    .rel-featured:hover { background: #EFE7DA; }
-    .rel-featured-label { font-size: 10px; font-weight: 700; color: #C75B39; text-transform: uppercase; letter-spacing: 0.1em; }
-    .rel-featured-title { font-size: 15px; font-weight: 700; color: #2D2D2D; line-height: 1.35; }
-  
-    @media (max-width:719px){
-      body{padding:0 16px 0}
-      h1{font-size:22px;line-height:1.25;margin-bottom:10px}
-      h2{font-size:18px;margin:28px 0 12px}
-      h3{font-size:14.5px;margin:18px 0 6px}
-      p{font-size:14px;line-height:1.65;margin-bottom:11px}
-      li{font-size:14px;line-height:1.6}
-      .article-intro{font-size:14.5px;line-height:1.6;margin-bottom:22px;padding-bottom:16px}
-      .article-meta{font-size:11.5px;margin-bottom:18px}
-      .tag{font-size:10.5px;margin-bottom:10px}
-      .cta-block{padding:16px 14px}
-      .cta-title{font-size:16px}
-      .cta-sub{font-size:13px;line-height:1.5}
-      .btn{padding:12px 14px;font-size:13.5px;gap:8px}
-      .btn-title{font-size:13px}
-      .btn-icon svg{width:18px;height:18px}
-      .faq-item summary{padding:11px 13px;font-size:13.5px}
-      .faq-a{padding:0 13px 11px;font-size:13px;line-height:1.6}
-      .article-card{padding:13px 14px}
-      .article-card .article-title{font-size:14px}
-      .article-card .article-desc{font-size:12.5px;line-height:1.5}
-    }
-
-  
-    /* 2026-06-01 header-fix: legacy body{display:flex;align-items:center} collapsed the
-       shared full-width .site-nav into a narrow centered column. Restore block flow so
-       header/footer render edge-to-edge (как на остальных страницах); keep article column
-       centered via .wrap. Longhand padding не конфликтует с существующим shorthand. */
-    body{display:block;padding:0}
-    .wrap{margin-left:auto;margin-right:auto;padding-left:20px;padding-right:20px}
-    @media (max-width:719px){.wrap{padding-left:16px;padding-right:16px}}
-  </style>
   <script src="/assets/analytics.js?v=7ba69e930c" defer></script>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
   <script type="application/ld+json">
@@ -216,8 +75,7 @@
     ]
   }
   </script>
-    <script type="application/ld+json">
-{
+    <script type="application/ld+json">{
   "@context": "https://schema.org",
   "@type": "FAQPage",
   "mainEntity": [
@@ -254,8 +112,7 @@
       }
     }
   ]
-}
-  </script>
+}</script>
 <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:site" content="@krepko_es">
   <meta name="twitter:title" content="IRPF в Испании 2026: кто платит и сколько | Krepko">
@@ -564,37 +421,37 @@
     <div class="blog-article">
       <details class="article-toc" open>
         <summary class="article-toc__label">В статье</summary>
-        <div class="article-toc__list"><a href="#kogda-nalogi-v-ispanii-stanovyatsya-obyazatelnym">Когда налоги в Испании становятся обязательными</a><a href="#pravilo-183-dnei-i-centr-interesov">Правило 183 дней и центр интересов</a><a href="#nalogovye-stavki-irpf-2026-progressivnaya-shkala">Налоговые ставки IRPF 2026: прогрессивная шкала</a><a href="#chto-oblagaetsya-nalogom-irpf">Что облагается налогом IRPF</a><a href="#modelo-100-kak-podat-deklaraciyu-irpf">Modelo 100: как подать декларацию IRPF</a><a href="#nalogovye-vychety-ekonomim-na-irpf">Налоговые вычеты: экономим на IRPF</a><a href="#modelo-720-deklarirovanie-zarubezhnyh-aktivov">Modelo 720: декларирование зарубежных активов</a><a href="#osobennosti-dlya-ukraincev-s-vremennoi-zaschitoi">Особенности для украинцев с временной защитой</a><a href="#chto-budet-esli-ne-podat-deklaraciyu">Что будет, если не подать декларацию</a><a href="#prakticheskii-chek-list-dlya-vas">Практический чек-лист для вас</a></div>
+        <div class="article-toc__list"><a href="#kogda-nalogi-v-ispanii-stanovyatsya-obyazatelnym">Когда налоги в Испании становятся обязательными</a><a href="#pravilo-183-dnei-i-centr-interesov">Правило 183 дней и центр интересов</a><a href="#nalogovye-stavki-irpf-2026-progressivnaya-shkala">Налоговые ставки IRPF 2026: прогрессивная шкала</a><a href="#chto-oblagaetsya-nalogom-irpf">Что облагается налогом IRPF</a><a href="#modelo-100-kak-podat-deklaraciyu-irpf">Modelo 100: как подать декларацию IRPF</a><a href="#nalogovye-vychety-ekonomim-na-irpf">Налоговые вычеты: экономим на IRPF</a><a href="#modelo-720-deklarirovanie-zarubezhnyh-aktivov">Modelo 720: декларирование зарубежных активов</a><a href="#osobennosti-dlya-ukraincev-s-vremennoi-zaschitoi">Особенности для украинцев с временной защитой</a><a href="#chto-budet-esli-ne-podat-deklaraciyu">Что будет, если не подать декларацию</a><a href="#prakticheskii-chek-list-dlya-vas">Практический чек-лист для вас</a><a href="#chastye-voprosy">Частые вопросы</a></div>
       </details>
 
       <div class="article-body">
 <div class="article-tags"><span>Налоги</span><span>IRPF</span></div>
     <h1>IRPF и налоги в Испании 2026: кто платит, сколько и когда</h1>
-    <div class="article-meta">Krepko · февраль 2026 · ~8 мин чтения</div>
-    <div class="article-intro">Разбираемся в испанской системе подоходного налога IRPF: кто становится налоговым резидентом, как правильно подать декларацию, какие ставки и вычеты действуют в 2026 году, и что грозит за несоблюдение.</div>
-    <div style="background:#F5F0EB;border:1px solid #E8DFD1;border-left:3px solid #C75B39;border-radius:8px;padding:14px 16px;margin:0 0 24px;font-size:14px;color:#4A4A4A;line-height:1.6">
-      <strong style="color:#2D2D2D">Услуги по теме:</strong>
-      <a href="/notario/zayavleniya-dlya-nalogovyh/" style="color:#C75B39;font-weight:600;text-decoration:none">Заявления для налоговых органов</a> ·
-      <a href="/services/" style="color:#6B6B6B;text-decoration:none">весь каталог</a>
+    <div class="article-meta">Krepko · обновлено 13 августа 2026 · ~8 мин чтения</div>
+    <div class="article-intro">Налоговым резидентом Испании становятся незаметно — по количеству дней, а не по своему решению. Ниже разбираем, с какого момента вы обязаны декларировать доход из всех стран, какие ставки и вычеты действуют в 2026 году, до какого числа подаётся декларация и во что обходится пропущенный срок. Мы ведём такие декларации круглый год и видим, где чаще всего теряют деньги.</div>
+    <div class="article-services">
+      <strong>Услуги по теме:</strong>
+      <a href="/notario/zayavleniya-dlya-nalogovyh/">Заявления для налоговых органов</a> ·
+      <a href="/services/" class="article-services__all">весь каталог</a>
     </div>
   
 
     <h2 id="kogda-nalogi-v-ispanii-stanovyatsya-obyazatelnym">Когда налоги в Испании становятся обязательными</h2>
-    <p>В Испании каждый, кто получает доход от работы, бизнеса, аренды имущества или инвестиций, обязан платить налоги. Но есть нюанс — всё зависит от вашего налогового статуса.</p>
-    <p><strong>Налоговый резидент Испании</strong> — это лицо, которое получает экономические выгоды в стране и несёт налоговые обязательства на всемирный доход. Нерезидент платит налоги только на испанский доход.</p>
+    <p>В Испании налоги платит каждый, кто получает доход от работы, бизнеса, аренды имущества или инвестиций. Разница в том, с какой части дохода: всё решает ваш налоговый статус, и определяется он не желанием, а фактами — днями в стране и тем, где живёт семья.</p>
+    <p><strong>Налоговый резидент Испании</strong> отчитывается перед испанской налоговой за весь свой доход — включая зарплату, счета и аренду за пределами страны. Нерезидент платит только с испанского дохода. Между этими двумя статусами разница в десятки тысяч евро, поэтому статус мы проверяем до того, как заполнена хоть одна строка декларации.</p>
 
     <h2 id="pravilo-183-dnei-i-centr-interesov">Правило 183 дней и центр интересов</h2>
-    <p>Вы становитесь налоговым резидентом Испании, если:</p>
+    <p>Резидентом вас признают автоматически, если выполнено хотя бы одно условие:</p>
     <ul>
       <li><strong>Проводите в стране 183+ дня в календарном году</strong> (не обязательно подряд)</li>
       <li><strong>Имеете постоянный центр интересов</strong> — работу, семью, недвижимость в Испании</li>
       <li><strong>Являетесь гражданином Испании</strong> (независимо от времени пребывания)</li>
     </ul>
-    <p>Если вы приехали в Испанию с защитой от временной защиты (ВЗ) в 2022–2024 годах, вы быстрее становитесь налоговым резидентом. Закон часто предусматривает льготный режим для этой категории.</p>
+    <p>Если вы приехали в Испанию по временной защите (ВЗ) в 2022–2024 годах, резидентом вы стали, скорее всего, уже в первый год — а значит, декларировать нужно и доход, оставшийся за пределами Испании. Мы разбираем такие случаи по документам: считаем дни, смотрим договор об избежании двойного налогообложения и говорим, что показывать, а что нет.</p>
 
     <h2 id="nalogovye-stavki-irpf-2026-progressivnaya-shkala">Налоговые ставки IRPF 2026: прогрессивная шкала</h2>
-    <p>В Испании действует прогрессивная система налогообложения. Чем выше доход — тем выше процент налога.</p>
-    <p><strong>Примерные налоговые траншы на 2026 год:</strong></p>
+    <p>Шкала прогрессивная, но повышенная ставка применяется не ко всему доходу — только к той его части, которая попала в следующий транш. С этим недоразумением к нам приходят чаще всего: перешагнули порог и ждут пересчёта всей зарплаты. Пересчитают только превышение.</p>
+    <p><strong>Государственная шкала на 2026 год, ориентировочно:</strong></p>
     <ul>
       <li>0–12 450 € в год: 19%</li>
       <li>12 450–20 200 €: 21%</li>
@@ -603,111 +460,118 @@
       <li>60 000–300 000 €: 37%</li>
       <li>Свыше 300 000 €: 45%</li>
     </ul>
-    <p>Ставки индексируются ежегодно, поэтому точные суммы уточняйте на сайте Agencia Tributaria (испанской налоговой службы).</p>
+    <p>Транши индексируются ежегодно, а автономные сообщества добавляют к государственной шкале свою часть — итоговая ставка в разных регионах отличается. Актуальные цифры публикует Agencia Tributaria, испанская налоговая; мы сверяем их по вашему региону перед подачей.</p>
 
     <h2 id="chto-oblagaetsya-nalogom-irpf">Что облагается налогом IRPF</h2>
     <h3>Зарплата и работа</h3>
-    <p>Налоговый агент (работодатель) автоматически удерживает налог из зарплаты. Вы получаете сумму на руки уже после IRPF. Если вы работаете на себя — IRPF платится самостоятельно: подробности в гайдах про <a href="/blog/autonomo-ispaniya/" style="color:#C75B39">регистрацию autónomo</a>, <a href="/blog/otkryt-sl-biznes-ispaniya/" style="color:#C75B39">открытие SL (sociedad limitada)</a> и <a href="/blog/viza-tsifrovogo-nomada-ispaniya/" style="color:#C75B39">визу цифрового номада</a>.</p>
+    <p>Работодатель удерживает IRPF сам — на руки вы получаете сумму уже после налога. Но удержание почти никогда не совпадает с реальным обязательством: по итогам года налоговая либо возвращает вам переплату, либо требует доплаты. Если вы работаете на себя, IRPF считаете и платите сами: подробности в гайдах про <a href="/blog/autonomo-ispaniya/">регистрацию autónomo</a>, <a href="/blog/otkryt-sl-biznes-ispaniya/">открытие SL (sociedad limitada)</a> и <a href="/blog/viza-tsifrovogo-nomada-ispaniya/">визу цифрового номада</a>.</p>
 
     <h3>Доход от аренды</h3>
-    <p>Если вы сдаёте квартиру, дом или комнату в Испании — это налогооблагаемый доход. Облагается не полная сумма аренды, а сумма после вычетов расходов (ремонт, страховка, налоги на недвижимость).</p>
+    <p>Сдаёте квартиру, дом или комнату в Испании — это налогооблагаемый доход. Облагается не вся полученная сумма, а разница после расходов: ремонт, страховка, налоги на недвижимость. Расходы нужно подтверждать документами, поэтому чеки собирайте в течение года, а не в июне перед подачей.</p>
 
     <h3>Продажа имущества</h3>
-    <p>Прибыль от продажи квартиры облагается налогом в момент продажи. Налоговая база — разница между ценой продажи и ценой покупки.</p>
+    <p>Прибыль от продажи квартиры облагается в год сделки. База — разница между ценой продажи и ценой покупки, и в неё можно включить расходы на саму покупку: нотариуса, регистрацию, налог при приобретении. Подтверждающие документы нужны в оригинале — если они остались в другой стране, мы их запрашиваем и легализуем.</p>
 
     <h3>Иностранные доходы</h3>
-    <p>Если вы налоговый резидент Испании, облагаются налогом доходы со всех источников: зарплата за работу за границей, проценты на счётах в других странах, дивиденды от акций.</p>
+    <p>Для налогового резидента считается доход из всех стран: зарплата от иностранного работодателя, проценты по счетам за рубежом, дивиденды. Испания видит эти счета через автоматический обмен банковскими данными, поэтому расчёт «о них никто не узнает» не работает. Двойного налога при этом обычно не возникает — уплаченное за границей засчитывают по договору об избежании двойного налогообложения.</p>
 
     <h2 id="modelo-100-kak-podat-deklaraciyu-irpf">Modelo 100: как подать декларацию IRPF</h2>
-    <p><strong>Modelo 100</strong> — это основная форма налоговой декларации в Испании. Подать её обязательно, если:</p>
+    <p><strong>Modelo 100</strong> — основная форма годовой декларации по IRPF. Подавать её обязательно, если выполняется хотя бы одно из условий:</p>
     <ul>
-      <li>Ваш годовой доход превышает 22 000 € (в некоторых случаях — 14 000 €)</li>
-      <li>У вас несколько источников дохода</li>
+      <li>Годовой доход выше 22 000 € от одного работодателя; при нескольких источниках порог опускается до 14 000 €</li>
+      <li>Доход приходит из нескольких источников или из-за рубежа</li>
       <li>Вы претендуете на налоговые вычеты</li>
     </ul>
 
     <h3>Сроки подачи</h3>
-    <p><strong>Декларация 2025 года подаётся в апреле–июне 2026.</strong> Точные даты объявляет Agencia Tributaria, обычно это:</p>
+    <p><strong>Декларация за 2025 год подаётся в апреле–июне 2026.</strong> Точные числа каждый год объявляет Agencia Tributaria, но окно всегда одно:</p>
     <ul>
       <li>Подача через интернет: апрель–июнь</li>
       <li>Личное обращение в налоговую: май–июнь</li>
     </ul>
 
     <h3>Как подать через Renta WEB</h3>
-    <p>Самый простой способ — заполнить декларацию через портал <strong>Renta WEB</strong> на сайте agenciatributaria.es:</p>
+    <p>Проще всего подать декларацию через портал <strong>Renta WEB</strong> на сайте agenciatributaria.es. Вход только по электронной подписи или Cl@ve — если ни того ни другого ещё нет, начинать нужно с них; оформление подписи берём на себя:</p>
     <ol>
       <li>Войдите через электронную подпись (DNIe) или Cl@ve</li>
       <li>Система автоматически подгрузит данные от работодателей и банков</li>
       <li>Проверьте информацию, внесите вычеты</li>
       <li>Отправьте декларацию</li>
     </ol>
-    <p>Если всё правильно, декларация одобрится в течение нескольких дней.</p>
+    <p>Если расхождений нет, декларацию принимают за несколько дней. Сложность в другом: Renta WEB подгружает только то, что видит испанская система. Зарубежные доходы, аренду и вычеты вы вносите руками — и именно там возникают ошибки, за которые потом штрафуют.</p>
 
     <h2 id="nalogovye-vychety-ekonomim-na-irpf">Налоговые вычеты: экономим на IRPF</h2>
     <h3>Вычет за жилищный кредит (ипотека)</h3>
-    <p>Старые ипотечные кредиты (оформленные до 2013 года) дают право на налоговый вычет части процентов. Новые кредиты уже не дают вычета.</p>
+    <p>Ипотеки, оформленные до 2013 года, дают право вычесть часть уплаченных процентов. По кредитам, взятым позже, такого вычета нет — проверьте дату в своём договоре, прежде чем на него рассчитывать.</p>
 
     <h3>Вычет за иждивенцев</h3>
-    <p>Если у вас есть дети или другие иждивенцы — вычет на сумму до 3 000 € за первого ребёнка, выше за остальных.</p>
+    <p>Дети и другие иждивенцы уменьшают налоговую базу: до 3 000 € за первого ребёнка, за следующих больше. Чтобы вычет приняли, родство подтверждают документами — свидетельством о рождении с апостилем и присяжным переводом. Эти документы мы оформляем отдельно, если на руках только украинский оригинал.</p>
 
     <h3>Вычет за благотворительность</h3>
-    <p>Пожертвования на благотворительность (не менее 150 € в год) снижают налоговую базу.</p>
+    <p>Пожертвования на благотворительность (не менее 150 € в год) снижают налоговую базу. Нужна справка от фонда: без подтверждения вычет снимают при проверке и доначисляют разницу.</p>
 
     <h3>Вычеты в зависимости от региона</h3>
-    <p>Каждое автономное сообщество может предоставлять дополнительные вычеты. Например, некоторые регионы вычитают часть расходов на аренду жилья.</p>
+    <p>Каждое автономное сообщество даёт свои вычеты поверх государственных — например, часть расходов на аренду жилья или на детский сад. Список зависит от региона, где вы жили в отчётном году, и сам собой в декларацию не подтягивается: его нужно знать и внести руками.</p>
 
     <h2 id="modelo-720-deklarirovanie-zarubezhnyh-aktivov">Modelo 720: декларирование зарубежных активов</h2>
-    <p>Если у вас за границей:</p>
+    <p>Отчитаться придётся, если за пределами Испании у вас есть:</p>
     <ul>
       <li>Счета в банках свыше 50 000 €</li>
       <li>Недвижимость</li>
       <li>Акции, облигации, крипто</li>
     </ul>
-    <p><strong>Обязательно подавайте Modelo 720 до конца января каждого года.</strong> Это декларирование иностранных активов. Невключение в декларацию грозит штрафом от 10 000 €.</p>
+    <p><strong>Modelo 720 подаётся до конца января каждого года.</strong> Это отчёт об иностранных активах, а не налог: платить по нему нечего, но штраф за неподачу начинается от 10 000 € — часто больше самого налога. Первый раз форму заполняют полностью, дальше — только при существенном изменении сумм.</p>
 
     <div class="info-box">
-      <strong>Ley Beckham — специальный режим для специалистов:</strong> Если вы приехали в Испанию работать высокопоставленным специалистом и ранее не были налоговым резидентом, можете получить сниженный налог (24%) на испанский доход на 6 лет. Условия строгие, консультируйтесь с экспертом.
+      <strong>Ley Beckham — режим для приехавших специалистов:</strong> если вы переехали в Испанию работать и до этого не были её налоговым резидентом, можно платить фиксированные 24% с испанского дохода в течение 6 лет вместо прогрессивной шкалы. Условия жёсткие, а заявление подаётся в ограниченный срок после начала работы — опоздали, и режим потерян. Если не уверены, подходит ли ваш случай, напишите нам в WhatsApp: посмотрим до подачи.
     </div>
 
     <h2 id="osobennosti-dlya-ukraincev-s-vremennoi-zaschitoi">Особенности для украинцев с временной защитой</h2>
-    <p>Если вы получили ВЗ в Испании, ваш статус налогового резидента зависит от того, где вы находитесь физически:</p>
+    <p>Временная защита сама по себе налогового статуса не задаёт — его определяет то, где вы физически находились в течение года:</p>
     <ul>
       <li><strong>Проводите более 183 дней в Испании</strong> → налоговый резидент Испании</li>
       <li><strong>Меньше 183 дней</strong> → нерезидент (платите налоги только на испанский доход)</li>
     </ul>
-    <p>Специального налогового режима для беженцев в Испании нет, но есть льготы на социальные взносы и возможности для трудоустройства.</p>
+    <p>Отдельного налогового режима для получателей временной защиты нет — правила те же, что для всех резидентов. Сложность обычно в другом: доход, счета или недвижимость остались в Украине, и непонятно, что из этого показывать. Мы разбираем такие ситуации по документам и говорим прямо, что декларировать, а что нет.</p>
 
     <h2 id="chto-budet-esli-ne-podat-deklaraciyu">Что будет, если не подать декларацию</h2>
     <p><strong>Штрафы за неподачу IRPF:</strong></p>
     <ul>
       <li><strong>5–15% от неуплаченного налога</strong> — если ошибка обнаружена в простой проверке</li>
-      <li><strong>25% штраф</strong> — за недобросовестность (не подали, когда было обязано)</li>
+      <li><strong>25% штраф</strong> — если налоговая сочтёт, что декларацию не подали сознательно</li>
       <li><strong>До 100% штрафа</strong> — при повторном нарушении за 4 года</li>
     </ul>
-    <p>Есть санкции и за опоздание на уплату налога — <strong>surcharge</strong> (доплата) в размере процентов от суммы в зависимости от количества дней задержки.</p>
+    <p>За просрочку платежа начисляют <strong>surcharge</strong> (recargo) — надбавку, которая растёт вместе с числом дней задержки. Если вы подали сами, пусть и с опозданием, надбавка меньше, чем когда декларацию затребовала налоговая. Поэтому просроченную декларацию лучше подать, чем не подавать вовсе.</p>
 
     <h2 id="prakticheskii-chek-list-dlya-vas">Практический чек-лист для вас</h2>
     <ul>
-      <li>Подсчитайте, сколько дней вы провели в Испании — это определит статус резидента</li>
-      <li>Соберите документы: контракты на работу, выписки банков, документы на имущество</li>
-      <li>Зарегистрируйте NIE (национальный номер) — необходим для налогов</li>
-      <li>Сделайте Padron (регистрацию по месту жительства) — упростит процесс</li>
-      <li>За месяц до срока подготовьте данные для декларации</li>
-      <li>Если затрудняетесь — наймите жесторву (налогового консультанта)</li>
+      <li>Посчитайте дни в Испании за календарный год — по ним определяется, резидент вы или нет</li>
+      <li>Соберите документы: трудовые договоры, выписки по счетам в Испании и за рубежом, бумаги на недвижимость</li>
+      <li>Получите NIE — без него декларацию не примут; оформляем под ключ, если номера ещё нет</li>
+      <li>Оформите падрон (empadronamiento) — от прописки зависят региональные вычеты</li>
+      <li>Готовьте данные за месяц до крайнего срока — в конце кампании исправлять ошибки уже некогда</li>
+      <li>Сомневаетесь в статусе или в составе дохода — напишите нам до подачи, а не после письма из налоговой</li>
     </ul>
 
+    
+    <h2 id="chastye-voprosy">Частые вопросы</h2>
+    <h3>Когда я становлюсь налоговым резидентом Испании?</h3>
+    <p>Налоговым резидентом признают того, кто провёл в Испании 183+ дня в календарном году, имеет в стране центр интересов (работу, семью, основное жильё) или является гражданином Испании. Резиденты платят IRPF на весь мировой доход.</p>
+    <h3>Какие ставки IRPF действуют в 2026 году?</h3>
+    <p>Шкала прогрессивная: 19% на доход до 12 450€, 21% до 20 200€, 25% до 35 200€, 30% до 60 000€, 37% до 300 000€ и 45% свыше 300 000€ в год. Точные транши уточняются на сайте Agencia Tributaria.</p>
+    <h3>Когда подавать декларацию IRPF в Испании?</h3>
+    <p>Кампания Renta проходит обычно с апреля по конец июня каждого года. Декларация подаётся через Modelo 100 в личном кабинете Agencia Tributaria — с certificado digital, Cl@ve или через gestor.</p>
+    <h3>Нужно ли нерезиденту платить IRPF в Испании?</h3>
+    <p>Нерезидент платит налоги только на доход, полученный из испанских источников: аренду недвижимости в Испании, продажу испанского имущества, работу на испанского работодателя. Используется отдельная форма Modelo 210.</p>
+
     <div class="cta-block">
-      <div class="cta-title">Krepko делает налоговой декларацией IRPF</div>
-      <div class="cta-sub">Если система налогов в Испании кажется запутанной, Krepko разберётся вместе с вами. Консультация по статусу резидента, вычетам и срокам подачи.</div>
+      <div class="cta-title">Ведём декларацию IRPF за вас</div>
+      <div class="cta-sub">Проверяем статус резидента, собираем данные по доходам и счетам, считаем вычеты и подаём декларацию в срок. От вас — документы и ответы на вопросы, ответственность за подачу и сроки на Krepko. Стоимость обсуждаем после того, как поймём объём.</div>
       <a class="btn btn-wa" href="https://wa.me/34641048296?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%2C%20%D0%BD%D1%83%D0%B6%D0%BD%D0%B0%20%D0%BA%D0%BE%D0%BD%D1%81%D1%83%D0%BB%D1%8C%D1%82%D0%B0%D1%86%D0%B8%D1%8F" rel="noopener noreferrer" target="_blank">
         <span class="btn-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9 8.5 8.5 0 0 1 8.5 8.5z"/></svg></span>
         <div class="btn-inner"><span class="btn-title">Написать в WhatsApp</span><span class="btn-sub-text">Свяжемся в течение часа</span></div>
       </a>
-      <a class="btn btn-tg" href="https://t.me/krepko_es_admin_bot" target="_blank" rel="noopener noreferrer">
-        <span class="btn-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="7" width="16" height="13" rx="2"/><circle cx="9" cy="13" r="1.2" fill="currentColor"/><circle cx="15" cy="13" r="1.2" fill="currentColor"/><path d="M12 7V4M10 4h4"/></svg></span>
-        <div class="btn-inner"><span class="btn-title">Telegram-бот — бесплатная консультация</span><span class="btn-sub-text">@krepko_es_admin_bot</span></div>
-      </a>
-      <a class="btn btn-ig" href="https://instagram.com/krepko.es" target="_blank" rel="noopener noreferrer"><span class="btn-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="6" width="20" height="14" rx="2"/><circle cx="12" cy="13" r="4"/><circle cx="17.5" cy="9.5" r="0.6" fill="currentColor"/></svg></span><div class="btn-inner"><span class="btn-title">Следи в Instagram</span><span class="btn-sub-text">@krepko.es</span></div></a>
+      <a class="btn btn-ig" href="https://instagram.com/krepko.es" target="_blank" rel="noopener noreferrer"><span class="btn-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="6" width="20" height="14" rx="2"/><circle cx="12" cy="13" r="4"/><circle cx="17.5" cy="9.5" r="0.6" fill="currentColor"/></svg></span><div class="btn-inner"><span class="btn-title">Читайте в Instagram</span><span class="btn-sub-text">@krepko.es</span></div></a>
     </div>
 
 

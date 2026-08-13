@@ -24,8 +24,6 @@
   <link rel="stylesheet" href="/assets/krepko-chips.css?v=d588b7e6cf">
   <link rel="stylesheet" href="/assets/site-footer.css?v=10f623e9ba">
   <link rel="stylesheet" href="/assets/a11y.css?v=bd18bf2b40">
-  <link rel="stylesheet" href="/assets/blog-grid.css?v=5b171b8529">
-  <link rel="stylesheet" href="/assets/blog-article.css?v=c4f68e737f">
   <link rel="stylesheet" href="/assets/krepko-base.css?v=6216d1aafd">
   <link rel="stylesheet" href="/assets/cookie-consent.css?v=a4b74432ef">
   <script src="/assets/cookie-consent.js?v=8272782489" defer></script>
@@ -34,6 +32,9 @@
   <link rel="stylesheet" href="/assets/site-footer.css?v=10f623e9ba">
   <link rel="stylesheet" href="/assets/a11y.css?v=bd18bf2b40">
   <link rel="stylesheet" href="/assets/desktop.css?v=77a552d781">
+  <link rel="stylesheet" href="/assets/blog-legacy.css?v=fed011d80c">
+  <link rel="stylesheet" href="/assets/blog-grid.css?v=5b171b8529">
+  <link rel="stylesheet" href="/assets/blog-article.css?v=27862180b5">
   <meta name="yandex-verification" content="b4ef32829d6a1b94">
   <title>Как получить ВНЖ в Испании: гид для украинцев | Krepko</title>
   <meta name="description" content="Гид по ВНЖ в Испании: временная защита, arraigo social, laboral, familiar. Документы, сроки, типичные ошибки.">
@@ -79,304 +80,6 @@
     "keywords": "ВНЖ Испания, arraigo social, временная защита, вид на жительство Испания"
   }
   </script>
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-
-    body {
-      background: #FFFBF7;
-      color: #2D2D2D;
-      font-family: -apple-system, 'Inter', sans-serif;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: flex-start;
-      padding: 0 20px 0;
-      overflow-x: hidden;
-    }
-
-    .wrap {
-      width: 100%;
-      max-width: 720px;
-      display: flex;
-      flex-direction: column;
-      gap: 0;
-      padding: 0 0 60px;
-    }
-
-    /* Breadcrumbs (унификация с legal/services) */
-    .breadcrumbs {
-      font-size: 12px;
-      color: #E8DFD1;
-      margin: 18px 0 14px;
-      line-height: 1.5;
-    }
-    .breadcrumbs a {
-      color: #6B6B6B;
-      text-decoration: none;
-      border: none;
-    }
-    .breadcrumbs a:hover { color: #C75B39; }
-    .breadcrumbs .sep { color: #E8DFD1; margin: 0 4px; }
-    .breadcrumbs .current { color: #4A4A4A; }
-
-    /* Legacy .back-link */
-    .back-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      color: #6B6B6B;
-      text-decoration: none;
-      font-size: 13px;
-      margin-bottom: 28px;
-      transition: color 0.15s;
-    }
-    .back-link:hover { color: #C75B39; }
-
-    .article-tag {
-      display: inline-block;
-      font-size: 11px;
-      font-weight: 700;
-      color: #C75B39;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      margin-bottom: 12px;
-    }
-
-    h1 {
-      font-size: 28px;
-      font-family: 'Playfair Display', Georgia, serif; font-weight: 500;
-      color: #2D2D2D;
-      line-height: 1.3;
-      margin: 8px 0 14px;
-    }
-
-    .article-meta {
-      font-size: 12px;
-      color: #E8DFD1;
-      margin-bottom: 24px;
-    }
-
-    .article-intro {
-      font-size: 16px;
-      color: #4A4A4A;
-      line-height: 1.7;
-      margin-bottom: 32px;
-      padding-bottom: 24px;
-      border-bottom: 1px solid #EFE7DA;
-    }
-
-    h2 {
-      font-size: 20px;
-      font-family: 'Playfair Display', Georgia, serif; font-weight: 500;
-      color: #2D2D2D;
-      margin: 32px 0 12px;
-      line-height: 1.3;
-    }
-
-    h3 {
-      font-size: 16px;
-      font-weight: 700;
-      color: #C75B39;
-      margin: 22px 0 8px;
-    }
-
-    p {
-      font-size: 15px;
-      color: #4A4A4A;
-      line-height: 1.75;
-      margin-bottom: 14px;
-    }
-
-    ul, ol {
-      padding-left: 20px;
-      margin-bottom: 16px;
-    }
-
-    li {
-      font-size: 15px;
-      color: #4A4A4A;
-      line-height: 1.75;
-      margin-bottom: 6px;
-    }
-
-    li strong, p strong {
-      color: #2D2D2D;
-      font-weight: 600;
-    }
-
-    .info-box {
-      background: #F5F0EB;
-      border: 1px solid #E8DFD1;
-      border-left: 3px solid #C75B39;
-      border-radius: 8px;
-      padding: 14px 16px;
-      margin: 20px 0;
-      font-size: 14px;
-      color: #4A4A4A;
-      line-height: 1.6;
-    }
-
-    .info-box strong { color: #2D2D2D; }
-
-    .divider {
-      width: 100%;
-      height: 1px;
-      background: #EFE7DA;
-      margin: 32px 0;
-    }
-
-    .cta-block {
-      background: #F5F0EB;
-      border: 1px solid #E8DFD1;
-      border-radius: 11px;
-      padding: 24px;
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-      margin-top: 16px;
-    }
-
-    .cta-title {
-      font-size: 18px;
-      font-weight: 700;
-      color: #2D2D2D;
-    }
-
-    .cta-sub {
-      font-size: 14px;
-      color: #6B6B6B;
-      line-height: 1.6;
-      margin-top: -6px;
-    }
-
-    .btn {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      width: 100%;
-      padding: 14px 18px;
-      border-radius: 11px;
-      text-decoration: none;
-      transition: background 0.15s, transform 0.12s;
-      border: 1px solid transparent;
-      cursor: pointer;
-    }
-    .btn:hover { transform: translateX(3px); }
-
-    .btn-wa {
-      background: #C75B39;
-      border-color: #C75B39;
-      color: #FFFBF7;
-    }
-    .btn-wa:hover { background: #B04E2F; }
-
-    .btn-tg {
-      background: #F5F0EB;
-      border-color: #E8DFD1;
-      color: #2D2D2D;
-    }
-    .btn-tg:hover { background: #EFE7DA; }
-    .btn-ig {
-      background: #F5F0EB;
-      border-color: #E8DFD1;
-      color: #2D2D2D;
-    }
-    .btn-ig:hover { background: #EFE7DA; }
-
-    .btn-icon { font-size: 20px; flex-shrink: 0; }
-    .btn-icon svg { width: 20px; height: 20px; display: block; }
-    .btn-inner { display: flex; flex-direction: column; gap: 2px; }
-    .btn-title { font-size: 14px; font-weight: 700; }
-    .btn-sub-text { font-size: 12px; opacity: 0.7; }
-    .related-section { margin: 0; }
-    .related-label {
-      font-size: 11px;
-      font-weight: 700;
-      color: #6B6B6B;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      margin-bottom: 10px;
-      margin-top: 0;
-      display: block;
-    }
-    .rel-card {
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-      padding: 14px 16px;
-      border-radius: 10px;
-      text-decoration: none;
-      border: 1px solid #E8DFD1;
-      background: #F5F0EB;
-      color: #2D2D2D;
-      transition: background 0.15s, transform 0.12s;
-      margin-bottom: 8px;
-    }
-    .rel-card:hover { background: #EFE7DA; transform: translateX(3px); }
-    .rel-card .article-tag { margin-bottom: 2px; font-size: 10px; }
-    .rel-card-title { font-size: 14px; font-weight: 600; color: #2D2D2D; line-height: 1.35; }
-    .rel-card-meta  { font-size: 11px; color: #E8DFD1; margin-top: 2px; }
-
-    /* ── Category navigation ── */
-    .cat-nav { padding: 20px 0 4px; border-top: 1px solid #EFE7DA; margin-top: 8px; }
-    .cat-nav-label {
-      font-size: 10px; font-weight: 700; color: #E8DFD1;
-      text-transform: uppercase; letter-spacing: 0.12em;
-      display: block; margin-bottom: 10px;
-    }
-    .cat-nav-pills { display: flex; flex-wrap: wrap; gap: 7px; }
-    .cat-pill {
-      padding: 6px 13px; border-radius: 20px; font-size: 12px; font-weight: 600;
-      text-decoration: none; border: 1px solid #E8DFD1; background: #F5F0EB;
-      color: #6B6B6B; transition: color 0.15s, border-color 0.15s, background 0.15s;
-    }
-    .cat-pill:hover { color: #C75B39; border-color: #C75B39; }
-    .cat-pill.active { background: rgba(199, 91, 57,0.12); border-color: #C75B39; color: #C75B39; }
-
-    /* ── Featured related article ── */
-    .rel-featured {
-      display: flex; flex-direction: column; gap: 6px;
-      padding: 16px 18px; border-radius: 10px; text-decoration: none;
-      border: 1px solid rgba(199, 91, 57,0.25); background: #F5F0EB;
-      color: #2D2D2D; transition: background 0.15s; margin-bottom: 8px;
-    }
-    .rel-featured:hover { background: #EFE7DA; }
-    .rel-featured-label { font-size: 10px; font-weight: 700; color: #C75B39; text-transform: uppercase; letter-spacing: 0.1em; }
-    .rel-featured-title { font-size: 15px; font-weight: 700; color: #2D2D2D; line-height: 1.35; }
-  
-    @media (max-width:719px){
-      body{padding:0 16px 0}
-      h1{font-size:22px;line-height:1.25;margin-bottom:10px}
-      h2{font-size:18px;margin:28px 0 12px}
-      h3{font-size:14.5px;margin:18px 0 6px}
-      p{font-size:14px;line-height:1.65;margin-bottom:11px}
-      li{font-size:14px;line-height:1.6}
-      .article-intro{font-size:14.5px;line-height:1.6;margin-bottom:22px;padding-bottom:16px}
-      .article-meta{font-size:11.5px;margin-bottom:18px}
-      .tag{font-size:10.5px;margin-bottom:10px}
-      .cta-block{padding:16px 14px}
-      .cta-title{font-size:16px}
-      .cta-sub{font-size:13px;line-height:1.5}
-      .btn{padding:12px 14px;font-size:13.5px;gap:8px}
-      .btn-title{font-size:13px}
-      .btn-icon svg{width:18px;height:18px}
-      .faq-item summary{padding:11px 13px;font-size:13.5px}
-      .faq-a{padding:0 13px 11px;font-size:13px;line-height:1.6}
-      .article-card{padding:13px 14px}
-      .article-card .article-title{font-size:14px}
-      .article-card .article-desc{font-size:12.5px;line-height:1.5}
-    }
-
-  
-    /* 2026-06-01 header-fix: legacy body{display:flex;align-items:center} collapsed the
-       shared full-width .site-nav into a narrow centered column. Restore block flow so
-       header/footer render edge-to-edge (как на остальных страницах); keep article column
-       centered via .wrap. Longhand padding не конфликтует с существующим shorthand. */
-    body{display:block;padding:0}
-    .wrap{margin-left:auto;margin-right:auto;padding-left:20px;padding-right:20px}
-    @media (max-width:719px){.wrap{padding-left:16px;padding-right:16px}}
-  </style>
   <script src="/assets/analytics.js?v=7ba69e930c" defer></script>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
   <script type="application/ld+json">
@@ -432,7 +135,7 @@
         "name": "Сколько стоит оформление ВНЖ через arraigo?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Государственная пошлина modelo 790 код 052 — около 16 €. Справка о несудимости с апостилем и присяжным переводом — 80–150 €. Informe social в муниципалитете — бесплатно или до 50 €. Сторонние gestoría/abogado берут за сопровождение «под ключ» 600–1 200 € в зависимости от города и сложности. Стоимость сопровождения Krepko по ВНЖ обсуждается индивидуально — зависит от типа arraigo, ситуации клиента, города и срочности. Krepko берёт оплату работы Krepko после ручного подтверждения сметы. Государственные пошлины и сторонние расходы — услуги нотариуса и переводчика по факту."
+          "text": "Государственная пошлина modelo 790 код 052 — около 16 €. Справка о несудимости с апостилем и присяжным переводом — 80–150 €. Informe social в муниципалитете — бесплатно или до 50 €. Сторонние gestoría/abogado берут за сопровождение «под ключ» 600–1 200 € в зависимости от города и сложности. Стоимость сопровождения Стоимость нашей работы по ВНЖ обсуждается индивидуально — зависит от типа arraigo, ситуации клиента, города и срочности. Оплату за свою работу берём авансом — после того как вы подтвердите смету. Государственные пошлины и сторонние расходы — услуги нотариуса и переводчика по факту."
         }
       }
     ]
@@ -754,32 +457,32 @@
 
     <h1>Как получить ВНЖ в Испании: полный гид для украинцев и русскоязычных</h1>
 
-    <div class="article-meta">Krepko · апрель 2026 · ~7 мин чтения</div>
+    <div class="article-meta">Krepko · обновлено 13 августа 2026 · ~7 мин чтения</div>
 
     <div class="article-intro">
-      Вопрос «как легализоваться в Испании» звучит в чате Krepko каждый день. Ответ зависит от вашей ситуации: сколько лет вы живёте в Испании, есть ли работа, семья, или вы приехали из Украины после февраля 2022 года. В этой статье разберём все основные пути — от временной защиты до <a href="/blog/arraigo-social-ispaniya/" style="color:#C75B39">arraigo social</a> — с реальными требованиями и подводными камнями.
+      «Как легализоваться в Испании» — вопрос, который мы слышим каждый день. Ответ зависит от вашей истории: сколько лет вы живёте в стране, есть ли работа и семья, приехали ли вы из Украины после февраля 2022 года. Ниже разбираем все рабочие пути — от временной защиты до <a href="/blog/arraigo-social-ispaniya/">arraigo social</a>: какие требования реальны, где чаще всего разворачивают на подаче и что стоит подготовить заранее, чтобы не потерять полгода.
     </div>
 
     <h2 id="chto-takoe-vnzh-i-zachem-on-nuzhen">Что такое ВНЖ и зачем он нужен</h2>
 
-    <p>ВНЖ (вид на жительство) в испанской терминологии — это <strong>autorización de residencia</strong>, разрешение на проживание, которое выдаётся сроком от 1 до 5 лет в зависимости от типа. Без него вы в Испании — турист, ограниченный 90 днями из каждых 180 в зоне Шенгена. ВНЖ открывает доступ к медицинскому страхованию (tarjeta sanitaria), возможность легально работать, регистрировать детей в школу и получать многие социальные услуги.</p>
+    <p>ВНЖ (вид на жительство) по-испански — <strong>autorización de residencia</strong>, разрешение на проживание сроком от 1 до 5 лет в зависимости от типа. Без него вы турист: 90 дней из каждых 180 в Шенгене, без права работать и без доступа к системе. С ВНЖ открываются медицинская карта (tarjeta sanitaria), легальная работа, запись детей в школу и социальные услуги.</p>
 
-    <p>Орган, занимающийся разрешениями на проживание — <strong>Oficina de Extranjería</strong> (экстранхерия). В каждом крупном городе она своя, и требования, а иногда и сроки рассмотрения, могут существенно отличаться.</p>
+    <p>Разрешения выдаёт <strong>Oficina de Extranjería</strong> (экстранхерия). В каждом крупном городе она своя: список документов и сроки заметно отличаются, поэтому мы сверяем требования вашей провинции до того, как вы начнёте собирать папку.</p>
 
     <h2 id="tip-1-vremennaya-zaschita-proteccio-n-temporal">Тип 1: Временная защита (Protección Temporal)</h2>
 
-    <p>Временная защита — особый статус, введённый ЕС в марте 2022 года специально для украинцев, бежавших от войны. Испания активировала эту директиву одной из первых и выдала сотни тысяч разрешений.</p>
+    <p>Временная защита — статус, который ЕС ввёл в марте 2022 года для украинцев, уехавших от войны. Испания включила директиву одной из первых и выдала сотни тысяч разрешений. Это самый быстрый вход в легальный статус и одновременно самый недолговечный, поэтому ниже мы отдельно разбираем, куда с него переходить.</p>
 
     <h3>Кто может получить</h3>
     <ul>
       <li>Граждане Украины, выехавшие после 24 февраля 2022 года</li>
-      <li>Лица без гражданства и граждане третьих стран с видом на жительство Украины — при невозможности вернуться на родину</li>
+      <li>Лица без гражданства и граждане третьих стран с видом на жительство Украины — если вернуться на родину нельзя</li>
       <li>Члены семей вышеупомянутых лиц</li>
     </ul>
 
     <h3>Что даёт временная защита</h3>
     <ul>
-      <li>Разрешение на проживание и работу (резидентная карточка <a href="/blog/nie-tie-ispaniya/" style="color:#C75B39">TIE</a>)</li>
+      <li>Разрешение на проживание и работу (резидентная карточка <a href="/blog/nie-tie-ispaniya/">TIE</a>)</li>
       <li>Доступ к системе здравоохранения</li>
       <li>Возможность записи детей в школу</li>
       <li>Доступ к некоторым социальным пособиям</li>
@@ -787,80 +490,78 @@
     </ul>
 
     <h3>Срок и продление</h3>
-    <p>Первоначально ВЗ выдавалась на 1 год с возможностью продления до 3 лет. На 2025 год большинство украинцев находятся на этапе первого или второго продления. Совет ЕС неоднократно продлевал действие директивы — актуальный срок уточняйте в Telegram-канале Krepko, так как ситуация меняется.</p>
+    <p>Сначала защиту выдавали на 1 год с продлением до 3 лет. На 2025 год большинство украинцев проходят первое или второе продление. Совет ЕС переносил дату окончания уже несколько раз, поэтому актуальный срок мы проверяем по свежим решениям — напишите нам в WhatsApp, если нужна дата на сегодня.</p>
 
     <div class="info-box">
-      <strong>Важно:</strong> временная защита не является классическим ВНЖ. Она не засчитывается напрямую в срок, необходимый для постоянного ВНЖ (residencia permanente). Если вы планируете остаться в Испании надолго, стоит параллельно думать о переходе на arraigo social, как только появятся основания.
+      <strong>Важно:</strong> временная защита — не классический ВНЖ. В срок для постоянного проживания (residencia permanente) она напрямую не засчитывается. Если остаётесь в Испании надолго, готовьте переход на arraigo social заранее: мы считаем ваш стаж по падрону и называем месяц, с которого можно подавать.
     </div>
 
     <h2 id="tip-2-arraigo-social-socialnaya-ukorene-nnost">Тип 2: Arraigo social (социальная укоренённость)</h2>
 
-    <p>Arraigo social — один из самых популярных путей легализации для тех, кто уже несколько лет живёт в Испании без документов или только с туристической визой. Переводится примерно как «социальная укоренённость»: вы доказываете государству, что вросли в местное общество.</p>
+    <p>Arraigo social — самый ходовой путь для тех, кто уже несколько лет живёт в Испании без документов или с туристической визой. Дословно это «социальная укоренённость»: вы доказываете государству, что вросли в местную жизнь — жильём, падроном, работой, связями.</p>
 
     <h3>Основные требования</h3>
     <ul>
       <li><strong>Непрерывное проживание в Испании не менее 2 лет</strong> (после реформы Reglamento 2025; раньше — 3 года) — подтверждается падроном (empadronamiento), свидетельствами соседей, банковскими выписками</li>
       <li><strong>Отсутствие судимостей</strong> в Испании и в стране гражданства (нужна справка об отсутствии судимости с апостилем и переводом)</li>
       <li><strong>Договор о работе</strong> или доказательство финансовой состоятельности — минимум на 1 год</li>
-      <li><strong>Социальные связи</strong> — подтверждённые родственниками-резидентами или специальным отчётом (informe social) от социальных служб муниципалитета</li>
+      <li><strong>Социальные связи</strong> — родственники-резиденты или informe social от социальных служб муниципалитета; запись на этот отчёт в части городов идёт месяцами, поэтому мы ставим её в план первой</li>
     </ul>
 
     <h3>Срок ВНЖ</h3>
-    <p>Первоначально выдаётся на <strong>1 год</strong> с правом работы. После этого можно продлить на 2 года, затем ещё на 2. Через 5 лет легального непрерывного проживания открывается путь к постоянному ВНЖ (residencia de larga duración).</p>
+    <p>Карту дают на <strong>1 год</strong> с правом работы. Дальше продление на 2 года, затем ещё на 2. Через 5 лет непрерывного легального проживания открывается постоянный ВНЖ (residencia de larga duración) — поэтому первую подачу мы считаем стартом пятилетнего отсчёта и следим, чтобы в нём не появилось разрывов.</p>
 
     <h3>Типичные ошибки</h3>
     <ul>
       <li>Пропуски в падроне — даже несколько месяцев без регистрации могут прервать отсчёт 2 лет</li>
-      <li>Устаревшая справка об отсутствии судимости — документ должен быть не старше 3 месяцев на дату подачи</li>
-      <li>Неверно оформленный трудовой договор — он должен соответствовать формату, принятому в экстранхерии</li>
+      <li>Справка о несудимости, просроченная к дате подачи — она действительна 3 месяца, поэтому мы заказываем её под уже назначенную cita, а не заранее</li>
+      <li>Неверно оформленный трудовой договор — форму и срок мы сверяем с требованиями вашей экстранхерии до того, как работодатель его подпишет</li>
     </ul>
 
     <aside class="inline-cta" data-article="vnzh-ispaniya" data-service="consult">
-      <p class="inline-cta__header">Готовишь ВНЖ или продление?</p>
-      <p class="inline-cta__offer">Krepko ведёт под ключ через профильную миграционную команду. Бесплатная консультация через бот.</p>
-      <a class="inline-cta__btn"
-         href="https://t.me/krepko_es_admin_bot?start=blog_vnzh-ispaniya"
-         onclick="if(typeof gtag==='function'){gtag('event','cta_click',{article:'vnzh-ispaniya',service:'consult',cta_type:'inline_blog'});}" rel="noopener noreferrer" target="_blank">
-        Получить консультацию → @krepko_es_admin_bot
+      <p class="inline-cta__header">Собираете ВНЖ или продление?</p>
+      <p class="inline-cta__offer">Разбираем вашу ситуацию, выбираем путь и ведём подачу вместе с миграционным юристом. Первый разбор бесплатный, от вас — переписка и подпись.</p>
+      <a class="inline-cta__btn" href="https://wa.me/34641048296?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%2C%20%D0%BD%D1%83%D0%B6%D0%BD%D0%B0%20%D0%BA%D0%BE%D0%BD%D1%81%D1%83%D0%BB%D1%8C%D1%82%D0%B0%D1%86%D0%B8%D1%8F" rel="noopener noreferrer" target="_blank">
+        Получить консультацию
       </a>
-      <p class="inline-cta__alt">или WhatsApp: <a href="https://wa.me/34641048296" rel="noopener noreferrer" target="_blank">+34 641 048 296</a></p>
+      
     </aside>
 
     <h2 id="tip-3-arraigo-laboral-trudovaya-ukorene-nnost">Тип 3: Arraigo laboral (трудовая укоренённость)</h2>
 
-    <p>Arraigo laboral подходит тем, кто работал в Испании легально, но чьё разрешение истекло или чья ситуация изменилась. Требования: <strong>минимум 2 года проживания в Испании</strong> плюс доказательства официальной работы не менее 6 месяцев за последние 2 года (взносы в Seguridad Social).</p>
+    <p>Arraigo laboral — для тех, кто работал в Испании легально, но потерял разрешение или сменил ситуацию. Нужно <strong>минимум 2 года проживания в Испании</strong> и официальная работа не меньше 6 месяцев за последние 2 года — подтверждается взносами в Seguridad Social.</p>
 
-    <p>Этот путь удобен для тех, кто работал по договору, платил взносы, но не успел оформить нормальный ВНЖ вовремя. Важно: работодатель должен подтвердить наличие вакансии на момент подачи.</p>
+    <p>Путь удобен тем, кто платил взносы, но не успел оформить карту вовремя. Работодатель при этом подтверждает вакансию на момент подачи — мы заранее запрашиваем у него нужные бумаги и проверяем vida laboral, чтобы месяцы взносов сошлись.</p>
 
     <h2 id="tip-4-arraigo-familiar-semei-naya-ukorene-nnost">Тип 4: Arraigo familiar (семейная укоренённость)</h2>
 
-    <p>Этот тип ВНЖ доступен лицам, являющимся <strong>родителем ребёнка с испанским гражданством</strong>. Требований по сроку проживания здесь нет: достаточно доказать родство и то, что вы фактически участвуете в воспитании ребёнка. Также нужна справка об отсутствии судимости.</p>
+    <p>Этот ВНЖ доступен, если вы <strong>родитель ребёнка с испанским гражданством</strong>. Срок проживания здесь не нужен: достаточно доказать родство и то, что вы действительно участвуете в жизни ребёнка. Понадобится и справка о несудимости — её мы заказываем, легализуем и переводим присяжным переводчиком.</p>
 
     <div class="info-box">
-      <strong>Совет:</strong> если у вас гражданство Украины и ребёнок с испанским паспортом, arraigo familiar — один из самых быстрых путей. Процедура занимает 3–6 месяцев в зависимости от города.
+      <strong>Совет:</strong> при украинском гражданстве и ребёнке с испанским паспортом arraigo familiar — самый короткий путь: 3–6 месяцев в зависимости от города. Документы о родстве из Украины мы готовим параллельно, чтобы они не стали узким местом.
     </div>
 
     <h2 id="drugie-vidy-vnzh-kratkii-obzor">Другие виды ВНЖ: краткий обзор</h2>
 
     <h3>Студенческий ВНЖ (visado de estudiante)</h3>
-    <p>Для тех, кто учится в испанском университете или на языковых курсах (от 20 часов в неделю). Даёт право проживать в Испании, работать до 30 часов в неделю. После окончания учёбы можно перейти на поиск работы (búsqueda de empleo).</p>
+    <p>Для тех, кто учится в испанском университете или на языковых курсах от 20 часов в неделю. Даёт право жить в Испании и работать до 30 часов в неделю, а после выпуска — перейти на статус поиска работы (búsqueda de empleo).</p>
 
     <h3>ВНЖ для работы по найму (cuenta ajena)</h3>
-    <p>Требует наличия предложения о работе от испанского работодателя и квоты (contingente) или исключительного положения. Процедура достаточно сложная и занимает от 3 до 8 месяцев.</p>
+    <p>Нужен оффер от испанского работодателя плюс квота (contingente) или основание для исключения. Путь тяжёлый и долгий — от 3 до 8 месяцев, и большая часть бумаг ложится на работодателя.</p>
 
     <h3>ВНЖ для самозанятых (cuenta propia / autónomo)</h3>
-    <p>Для тех, кто планирует открыть бизнес или работать как самозанятый. Нужен бизнес-план и подтверждение финансовой состоятельности. Для удалёнщиков с зарубежными клиентами есть отдельная <a href="/blog/viza-tsifrovogo-nomada-ispaniya/" style="color:#C75B39">виза цифрового номада</a> с льготным налоговым режимом.</p>
+    <p>Для тех, кто открывает бизнес или работает на себя. Нужен бизнес-план и подтверждение средств. Если клиенты за границей, а работа удалённая, чаще выгоднее <a href="/blog/viza-tsifrovogo-nomada-ispaniya/">виза цифрового номада</a> с льготным налоговым режимом — какой из двух путей ваш, разбираем на первом же разговоре.</p>
 
     <h2 id="sroki-rassmotreniya">Сроки рассмотрения</h2>
 
-    <p>Официальный срок рассмотрения заявки на arraigo — <strong>3 месяца</strong>. На практике в крупных городах (Мадрид, Барселона) ожидание может растянуться до 5–7 месяцев, в Аликанте и Валенсии — 3–4 месяца. Молчание экстранхерии по истечении 3 месяцев официально считается <em>silencio negativo</em> (отказом), но на практике большинство дел просто рассматриваются дольше.</p>
+    <p>Официальный срок рассмотрения arraigo — <strong>3 месяца</strong>. На практике в Мадриде и Барселоне ждут 5–7 месяцев, в Аликанте и Валенсии — 3–4 месяца. Молчание экстранхерии после 3 месяцев формально считается <em>silencio negativo</em> (отказом), но чаще дело просто рассматривается дольше. Мы держим статус вашего дела на контроле и говорим, когда пора требовать ответ, а не ждать дальше.</p>
 
     <h2 id="obschii-spisok-dokumentov-dlya-arraigo-social">Общий список документов для arraigo social</h2>
 
     <ol>
       <li>Заполненная форма EX–10 (официальный бланк заявления)</li>
       <li>Копия паспорта — все страницы</li>
-      <li>Справка об отсутствии судимости из страны гражданства с апостилем и присяжным переводом на испанский</li>
+      <li>Справка о несудимости из страны гражданства с апостилем и присяжным переводом на испанский — этот пункт мы закрываем целиком, вместе с доставкой в Испанию</li>
       <li>Подтверждение 2 лет проживания (падрон, банковские выписки, договоры аренды)</li>
       <li>Informe social или документы о социальных связях</li>
       <li>Трудовой договор сроком минимум на 1 год (или альтернативные доказательства средств к существованию)</li>
@@ -874,57 +575,16 @@
 
     <details class="faq-item"><summary>Какой ВНЖ самый быстрый для украинцев?</summary><div class="faq-a">Временная защита — её оформляют за 1–3 недели сразу по приезде из Украины. Если защита уже не подходит или заканчивается, самый быстрый следующий шаг — arraigo familiar (3–6 месяцев) при наличии ребёнка-испанца. Остальные виды arraigo требуют 2 года проживания, так что планировать переход надо заранее.</div></details>
 
-    <details class="faq-item"><summary>Чем отличается arraigo от визы цифрового номада?</summary><div class="faq-a">Arraigo оформляют уже находясь в Испании — нужно 2 года проживания и доказательства укоренённости. Виза цифрового номада подаётся либо из страны гражданства, либо в Испании в статусе туриста: требуется удалённая работа на иностранную компанию, доход от 2 760 € в месяц и льготный налоговый режим Beckham. Полный обзор путей через arraigo собран на странице <a href="/regularizacion-2026/" style="color:#C75B39">/regularizacion-2026/</a>.</div></details>
+    <details class="faq-item"><summary>Чем отличается arraigo от визы цифрового номада?</summary><div class="faq-a">Arraigo оформляют уже находясь в Испании — нужно 2 года проживания и доказательства укоренённости. Виза цифрового номада подаётся либо из страны гражданства, либо в Испании в статусе туриста: требуется удалённая работа на иностранную компанию, доход от 2 760 € в месяц и льготный налоговый режим Beckham. Полный обзор путей через arraigo собран на странице <a href="/regularizacion-2026/">/regularizacion-2026/</a>.</div></details>
 
     <details class="faq-item"><summary>Что делать после окончания временной защиты?</summary><div class="faq-a">Не ждите последнего дня — за 3–6 месяцев до конца защиты собирайте документы под следующий путь. Если прожили в Испании 2+ года и работали с контрактом — путь на arraigo laboral. Если 2 года с падроном и есть оффер работы — arraigo social. Если учились — arraigo por formación. Чистые туристические выезды из защиты в Украину прерывают непрерывность, так что фиксируйте каждый месяц проживания падроном.</div></details>
 
-    <details class="faq-item"><summary>Сколько стоит оформление ВНЖ через arraigo?</summary><div class="faq-a">Государственная пошлина modelo 790 код 052 — около 16 €. Справка о несудимости с апостилем и присяжным переводом — 80–150 €. Informe social в муниципалитете — бесплатно или до 50 €. Сторонние gestoría/abogado берут за сопровождение «под ключ» 600–1 200 € в зависимости от города и сложности. Стоимость сопровождения Krepko по ВНЖ обсуждается индивидуально — зависит от типа arraigo, ситуации клиента, города и срочности. Krepko берёт оплату работы Krepko после ручного подтверждения сметы. Государственные пошлины и сторонние расходы — услуги нотариуса и переводчика по факту.</div></details>
+    <details class="faq-item"><summary>Сколько стоит оформление ВНЖ через arraigo?</summary><div class="faq-a">Государственная пошлина modelo 790 код 052 — около 16 €. Справка о несудимости с апостилем и присяжным переводом — 80–150 €. Informe social в муниципалитете — бесплатно или до 50 €. Сторонние gestoría/abogado берут за сопровождение «под ключ» 600–1 200 € в зависимости от города и сложности. Стоимость сопровождения Стоимость нашей работы по ВНЖ обсуждается индивидуально — зависит от типа arraigo, ситуации клиента, города и срочности. Оплату за свою работу берём авансом — после того как вы подтвердите смету. Государственные пошлины и сторонние расходы — услуги нотариуса и переводчика по факту.</div></details>
 
-    <style>
-      .faq-item {
-        background: #F5F0EB;
-        border: 1px solid #E8DFD1;
-        border-radius: 10px;
-        padding: 0;
-        margin-bottom: 10px;
-        overflow: hidden;
-      }
-      .faq-item summary {
-        cursor: pointer;
-        padding: 14px 16px;
-        font-size: 15px;
-        font-weight: 600;
-        color: #2D2D2D;
-        list-style: none;
-        position: relative;
-        padding-right: 40px;
-      }
-      .faq-item summary::-webkit-details-marker { display: none; }
-      .faq-item summary::after {
-        content: '+';
-        position: absolute;
-        right: 16px;
-        top: 50%;
-        transform: translateY(-50%);
-        color: #C75B39;
-        font-size: 20px;
-        font-weight: 400;
-        transition: transform 0.2s;
-      }
-      .faq-item[open] summary::after { content: '−'; }
-      .faq-item summary:hover { color: #C75B39; }
-      .faq-a {
-        padding: 0 16px 14px;
-        font-size: 14px;
-        color: #4A4A4A;
-        line-height: 1.7;
-      }
-    </style>
-
-    <p style="margin:24px 0 18px;padding:14px 16px;background:#F5F0EB;border:1px solid #2A3450;border-left:3px solid rgba(199, 91, 57,0.55);border-radius:10px;font-size:14.5px;color:#B0BCD2;line-height:1.6"><strong style="color:#2D2D2D">Нужны документы из Украины для ВНЖ?</strong> Справка о несудимости, дубликат свидетельства, диплом с апостилем — команда Krepko в Украине делает под ключ. Готовые пакеты с фиксированной ценой, доставка в Испанию 5–7 дней. <a href="/ukraina/" style="color:#C75B39;border-bottom:1px dotted rgba(199, 91, 57,0.4)">Подробнее →</a></p>
+    <p class="article-note"><strong>Нужны документы из Украины для ВНЖ?</strong> Справку о несудимости, дубликат свидетельства, диплом с апостилем берём на себя: заказ, апостиль, присяжный перевод и доставка в Испанию — 5–7 дней. От вас — сканы и данные, стоимость обсуждаем после того, как поймём объём. <a href="/ukraina/">Подробнее →</a></p>
     <div class="cta-block">
-      <div class="cta-title">Подбор ВНЖ под ситуацию — координация юриста</div>
-      <div class="cta-sub">Krepko координирует процесс на родном языке (РУС/УКР/ENG) — подготовка, сопровождение, доставка. Барселона, Мадрид, Аликанте, Валенсия, Малага, Мурсия.</div>
+      <div class="cta-title">Разберём вашу ситуацию и назовём подходящий путь ВНЖ</div>
+      <div class="cta-sub">Считаем стаж, собираем документы и ведём подачу вместе с миграционным юристом — на родном языке (РУС/УКР/ENG). Барселона, Мадрид, Аликанте, Валенсия, Малага, Мурсия. Стоимость обсуждаем после того, как поймём объём.</div>
       <a class="btn btn-wa" href="https://wa.me/34641048296?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%2C%20%D0%BD%D1%83%D0%B6%D0%BD%D0%B0%20%D0%BA%D0%BE%D0%BD%D1%81%D1%83%D0%BB%D1%8C%D1%82%D0%B0%D1%86%D0%B8%D1%8F" rel="noopener noreferrer" target="_blank">
         <span class="btn-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9 8.5 8.5 0 0 1 8.5 8.5z"/></svg></span>
         <div class="btn-inner">
@@ -932,27 +592,12 @@
           <span class="btn-sub-text">Свяжемся в течение часа</span>
         </div>
       </a>
-      <a class="btn btn-tg" href="https://t.me/krepko_es_admin_bot" target="_blank" rel="noopener noreferrer">
-        <span class="btn-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="7" width="16" height="13" rx="2"/><circle cx="9" cy="13" r="1.2" fill="currentColor"/><circle cx="15" cy="13" r="1.2" fill="currentColor"/><path d="M12 7V4M10 4h4"/></svg></span>
-        <div class="btn-inner">
-          <span class="btn-title">Telegram-бот — бесплатная консультация</span>
-          <span class="btn-sub-text">@krepko_es_admin_bot</span>
-        </div>
-      </a>
-      <a class="btn btn-ig" href="https://instagram.com/krepko.es" target="_blank" rel="noopener noreferrer"><span class="btn-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="6" width="20" height="14" rx="2"/><circle cx="12" cy="13" r="4"/><circle cx="17.5" cy="9.5" r="0.6" fill="currentColor"/></svg></span><div class="btn-inner"><span class="btn-title">Следи в Instagram</span><span class="btn-sub-text">@krepko.es</span></div></a>
+      <a class="btn btn-ig" href="https://instagram.com/krepko.es" target="_blank" rel="noopener noreferrer"><span class="btn-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="6" width="20" height="14" rx="2"/><circle cx="12" cy="13" r="4"/><circle cx="17.5" cy="9.5" r="0.6" fill="currentColor"/></svg></span><div class="btn-inner"><span class="btn-title">Мы в Instagram</span><span class="btn-sub-text">@krepko.es</span></div></a>
     </div>
 
 
         <!-- ── Cross-link: landing про регуляризацию ── -->
-    <a href="/regularizacion-2026/" style="display:flex;align-items:center;gap:12px;padding:14px 16px;margin:16px 0 12px;background:linear-gradient(180deg,rgba(199, 91, 57,0.10) 0%,#F5F0EB 60%);border:1px solid rgba(199, 91, 57,0.40);border-top:2px solid rgba(199, 91, 57,0.65);border-radius:12px;text-decoration:none;color:#2D2D2D;transition:border-color 0.15s,box-shadow 0.15s;box-shadow:0 0 14px rgba(199, 91, 57,0.10)">
-      <span style="font-size:22px;flex-shrink:0">📘</span>
-      <span style="flex:1;min-width:0">
-        <span style="display:block;font-size:11px;font-weight:800;color:#C75B39;letter-spacing:0.10em;text-transform:uppercase;margin-bottom:2px">Landing · Arraigo 2026</span>
-        <span style="display:block;font-size:14px;font-weight:700;color:#2D2D2D;line-height:1.3">Регуляризация в Испании 2026 — 4 пути через arraigo</span>
-        <span style="display:block;font-size:12px;color:#6B6B6B;margin-top:3px;line-height:1.4">Полный обзор путей social/laboral/familiar/por formación. Krepko координирует работу с миграционным юристом.</span>
-      </span>
-      <span style="color:#C75B39;font-size:18px;flex-shrink:0">→</span>
-    </a>
+    <a class="article-promo" href="/regularizacion-2026/"><span class="article-promo__kicker">Landing · Arraigo 2026</span><span class="article-promo__title">Регуляризация в Испании 2026 — 4 пути через arraigo</span><span class="article-promo__dek">Полный обзор путей social/laboral/familiar/por formación. Разбираем, кому какой подходит, и ведём подачу с миграционным юристом.</span></a>
     </div>
     </div>
 

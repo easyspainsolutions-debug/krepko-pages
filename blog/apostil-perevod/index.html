@@ -24,8 +24,6 @@
   <link rel="stylesheet" href="/assets/krepko-chips.css?v=d588b7e6cf">
   <link rel="stylesheet" href="/assets/site-footer.css?v=10f623e9ba">
   <link rel="stylesheet" href="/assets/a11y.css?v=bd18bf2b40">
-  <link rel="stylesheet" href="/assets/blog-grid.css?v=5b171b8529">
-  <link rel="stylesheet" href="/assets/blog-article.css?v=c4f68e737f">
   <link rel="stylesheet" href="/assets/krepko-base.css?v=6216d1aafd">
   <link rel="stylesheet" href="/assets/cookie-consent.css?v=a4b74432ef">
   <script src="/assets/cookie-consent.js?v=8272782489" defer></script>
@@ -34,6 +32,9 @@
   <link rel="stylesheet" href="/assets/site-footer.css?v=10f623e9ba">
   <link rel="stylesheet" href="/assets/a11y.css?v=bd18bf2b40">
   <link rel="stylesheet" href="/assets/desktop.css?v=77a552d781">
+  <link rel="stylesheet" href="/assets/blog-legacy.css?v=fed011d80c">
+  <link rel="stylesheet" href="/assets/blog-grid.css?v=5b171b8529">
+  <link rel="stylesheet" href="/assets/blog-article.css?v=27862180b5">
   <meta name="yandex-verification" content="b4ef32829d6a1b94">
   <title>Апостиль и присяжный перевод в Испании | Krepko</title>
   <meta name="description" content="Апостиль vs присяжный перевод в Испании: разница, где получить, цена, сроки. Гид для украинцев и русскоязычных.">
@@ -79,343 +80,6 @@
     "keywords": "апостиль Испания, присяжный перевод, traducción jurada"
   }
   </script>
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-
-    body {
-      background: #FFFBF7;
-      color: #2D2D2D;
-      font-family: -apple-system, 'Inter', sans-serif;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: flex-start;
-      padding: 0 20px 0;
-      overflow-x: hidden;
-    }
-
-    .wrap {
-      width: 100%;
-      max-width: 720px;
-      display: flex;
-      flex-direction: column;
-      gap: 0;
-      padding: 0 0 60px;
-    }
-
-    /* Breadcrumbs (унификация с legal/services) */
-    .breadcrumbs {
-      font-size: 12px;
-      color: #E8DFD1;
-      margin: 18px 0 14px;
-      line-height: 1.5;
-    }
-    .breadcrumbs a {
-      color: #6B6B6B;
-      text-decoration: none;
-      border: none;
-    }
-    .breadcrumbs a:hover { color: #C75B39; }
-    .breadcrumbs .sep { color: #E8DFD1; margin: 0 4px; }
-    .breadcrumbs .current { color: #4A4A4A; }
-
-    /* Legacy .back-link оставлен на случай если где-то остался — стиль = breadcrumbs */
-    .back-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      color: #6B6B6B;
-      text-decoration: none;
-      font-size: 13px;
-      margin-bottom: 28px;
-      transition: color 0.15s;
-    }
-    .back-link:hover { color: #C75B39; }
-
-    .article-tag {
-      display: inline-block;
-      font-size: 11px;
-      font-weight: 700;
-      color: #C75B39;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      margin-bottom: 12px;
-    }
-
-    h1 {
-      font-size: 28px;
-      font-family: 'Playfair Display', Georgia, serif; font-weight: 500;
-      color: #2D2D2D;
-      line-height: 1.3;
-      margin: 8px 0 14px;
-    }
-
-    .article-meta {
-      font-size: 12px;
-      color: #E8DFD1;
-      margin-bottom: 24px;
-    }
-
-    .article-intro {
-      font-size: 16px;
-      color: #4A4A4A;
-      line-height: 1.7;
-      margin-bottom: 32px;
-      padding-bottom: 24px;
-      border-bottom: 1px solid #EFE7DA;
-    }
-
-    h2 {
-      font-size: 20px;
-      font-family: 'Playfair Display', Georgia, serif; font-weight: 500;
-      color: #2D2D2D;
-      margin: 32px 0 12px;
-      line-height: 1.3;
-    }
-
-    h3 {
-      font-size: 16px;
-      font-weight: 700;
-      color: #C75B39;
-      margin: 22px 0 8px;
-    }
-
-    p {
-      font-size: 15px;
-      color: #4A4A4A;
-      line-height: 1.75;
-      margin-bottom: 14px;
-    }
-
-    ul, ol {
-      padding-left: 20px;
-      margin-bottom: 16px;
-    }
-
-    li {
-      font-size: 15px;
-      color: #4A4A4A;
-      line-height: 1.75;
-      margin-bottom: 6px;
-    }
-
-    li strong, p strong { color: #2D2D2D; font-weight: 600; }
-
-    .info-box {
-      background: #F5F0EB;
-      border: 1px solid #E8DFD1;
-      border-left: 3px solid #C75B39;
-      border-radius: 8px;
-      padding: 14px 16px;
-      margin: 20px 0;
-      font-size: 14px;
-      color: #4A4A4A;
-      line-height: 1.6;
-    }
-    .info-box strong { color: #2D2D2D; }
-
-    .compare-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-      margin: 16px 0 24px;
-    }
-
-    .compare-box {
-      background: #F5F0EB;
-      border: 1px solid #E8DFD1;
-      border-radius: 11px;
-      padding: 14px 16px;
-    }
-
-    .compare-box-title {
-      font-size: 14px;
-      font-weight: 700;
-      color: #2D2D2D;
-      margin-bottom: 8px;
-    }
-
-    .compare-box ul {
-      padding-left: 16px;
-      margin: 0;
-    }
-
-    .compare-box li {
-      font-size: 13px;
-      color: #6B6B6B;
-      margin-bottom: 4px;
-    }
-
-    .cost-table {
-      width: 100%;
-      border-collapse: collapse;
-      margin: 16px 0 20px;
-      font-size: 14px;
-    }
-    .cost-table th {
-      text-align: left;
-      padding: 10px 12px;
-      background: #F5F0EB;
-      color: #6B6B6B;
-      font-weight: 600;
-      border-bottom: 1px solid #E8DFD1;
-    }
-    .cost-table td {
-      padding: 10px 12px;
-      color: #4A4A4A;
-      border-bottom: 1px solid #F5F0EB;
-      vertical-align: top;
-    }
-    .cost-table td:first-child { color: #2D2D2D; font-weight: 500; }
-    .cost-table tr:last-child td { border-bottom: none; }
-
-    .divider {
-      width: 100%;
-      height: 1px;
-      background: #EFE7DA;
-      margin: 32px 0;
-    }
-
-    .cta-block {
-      background: #F5F0EB;
-      border: 1px solid #E8DFD1;
-      border-radius: 11px;
-      padding: 24px;
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-      margin-top: 16px;
-    }
-
-    .cta-title { font-size: 18px; font-weight: 700; color: #2D2D2D; }
-    .cta-sub { font-size: 14px; color: #6B6B6B; line-height: 1.6; margin-top: -6px; }
-
-    .btn {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      width: 100%;
-      padding: 14px 18px;
-      border-radius: 11px;
-      text-decoration: none;
-      transition: background 0.15s, transform 0.12s;
-      border: 1px solid transparent;
-      cursor: pointer;
-    }
-    .btn:hover { transform: translateX(3px); }
-    .btn-wa { background: #C75B39; border-color: #C75B39; color: #FFFBF7; }
-    .btn-wa:hover { background: #B04E2F; }
-    .btn-tg { background: #F5F0EB; border-color: #E8DFD1; color: #2D2D2D; }
-    .btn-tg:hover { background: #EFE7DA; }
-    .btn-ig {
-      background: #F5F0EB;
-      border-color: #E8DFD1;
-      color: #2D2D2D;
-    }
-    .btn-ig:hover { background: #EFE7DA; }
-
-    .btn-icon { font-size: 20px; flex-shrink: 0; }
-    .btn-icon svg { width: 20px; height: 20px; display: block; }
-    .btn-inner { display: flex; flex-direction: column; gap: 2px; }
-    .btn-title { font-size: 14px; font-weight: 700; }
-    .btn-sub-text { font-size: 12px; opacity: 0.7; }
-    @media (max-width: 480px) {
-      .compare-grid { grid-template-columns: 1fr; }
-    }
-
-    .related-section { margin: 0; }
-    .related-label {
-      font-size: 11px;
-      font-weight: 700;
-      color: #6B6B6B;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      margin-bottom: 10px;
-      margin-top: 0;
-      display: block;
-    }
-    .rel-card {
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-      padding: 14px 16px;
-      border-radius: 10px;
-      text-decoration: none;
-      border: 1px solid #E8DFD1;
-      background: #F5F0EB;
-      color: #2D2D2D;
-      transition: background 0.15s, transform 0.12s;
-      margin-bottom: 8px;
-    }
-    .rel-card:hover { background: #EFE7DA; transform: translateX(3px); }
-    .rel-card .article-tag { margin-bottom: 2px; font-size: 10px; }
-    .rel-card-title { font-size: 14px; font-weight: 600; color: #2D2D2D; line-height: 1.35; }
-    .rel-card-meta  { font-size: 11px; color: #E8DFD1; margin-top: 2px; }
-
-    /* ── Category navigation ── */
-    .cat-nav { padding: 20px 0 4px; border-top: 1px solid #EFE7DA; margin-top: 8px; }
-    .cat-nav-label {
-      font-size: 10px; font-weight: 700; color: #E8DFD1;
-      text-transform: uppercase; letter-spacing: 0.12em;
-      display: block; margin-bottom: 10px;
-    }
-    .cat-nav-pills { display: flex; flex-wrap: wrap; gap: 7px; }
-    .cat-pill {
-      padding: 6px 13px; border-radius: 20px; font-size: 12px; font-weight: 600;
-      text-decoration: none; border: 1px solid #E8DFD1; background: #F5F0EB;
-      color: #6B6B6B; transition: color 0.15s, border-color 0.15s, background 0.15s;
-    }
-    .cat-pill:hover { color: #C75B39; border-color: #C75B39; }
-    .cat-pill.active { background: rgba(199, 91, 57,0.12); border-color: #C75B39; color: #C75B39; }
-
-    /* ── Featured related article ── */
-    .rel-featured {
-      display: flex; flex-direction: column; gap: 6px;
-      padding: 16px 18px; border-radius: 10px; text-decoration: none;
-      border: 1px solid rgba(199, 91, 57,0.25); background: #F5F0EB;
-      color: #2D2D2D; transition: background 0.15s; margin-bottom: 8px;
-    }
-    .rel-featured:hover { background: #EFE7DA; }
-    .rel-featured-label { font-size: 10px; font-weight: 700; color: #C75B39; text-transform: uppercase; letter-spacing: 0.1em; }
-    .rel-featured-title { font-size: 15px; font-weight: 700; color: #2D2D2D; line-height: 1.35; }
-  
-    @media (max-width:719px){
-      body{padding:0 16px 0}
-      h1{font-size:22px;line-height:1.25;margin-bottom:10px}
-      h2{font-size:18px;margin:28px 0 12px}
-      h3{font-size:14.5px;margin:18px 0 6px}
-      p{font-size:14px;line-height:1.65;margin-bottom:11px}
-      li{font-size:14px;line-height:1.6}
-      .article-intro{font-size:14.5px;line-height:1.6;margin-bottom:22px;padding-bottom:16px}
-      .article-meta{font-size:11.5px;margin-bottom:18px}
-      .tag{font-size:10.5px;margin-bottom:10px}
-      .cta-block{padding:16px 14px}
-      .cta-title{font-size:16px}
-      .cta-sub{font-size:13px;line-height:1.5}
-      .btn{padding:12px 14px;font-size:13.5px;gap:8px}
-      .btn-title{font-size:13px}
-      .btn-icon svg{width:18px;height:18px}
-      .faq-item summary{padding:11px 13px;font-size:13.5px}
-      .faq-a{padding:0 13px 11px;font-size:13px;line-height:1.6}
-      .article-card{padding:13px 14px}
-      .article-card .article-title{font-size:14px}
-      .article-card .article-desc{font-size:12.5px;line-height:1.5}
-      /* Cost-table: горизонтальный скролл на мобиле */
-      .cost-table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:14px -16px 18px;padding:0 16px}
-      .cost-table{font-size:13px;min-width:480px}
-      .cost-table th,.cost-table td{padding:8px 10px;font-size:12.5px}
-    }
-
-  
-    /* 2026-06-01 header-fix: legacy body{display:flex;align-items:center} collapsed the
-       shared full-width .site-nav into a narrow centered column. Restore block flow so
-       header/footer render edge-to-edge (как на остальных страницах); keep article column
-       centered via .wrap. Longhand padding не конфликтует с существующим shorthand. */
-    body{display:block;padding:0}
-    .wrap{margin-left:auto;margin-right:auto;padding-left:20px;padding-right:20px}
-    @media (max-width:719px){.wrap{padding-left:16px;padding-right:16px}}
-  </style>
   <script src="/assets/analytics.js?v=7ba69e930c" defer></script>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
   <script type="application/ld+json">
@@ -456,7 +120,7 @@
         "name": "Сколько стоит апостиль в Испании в 2026?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Апостиль на нотариальные документы в Министерстве юстиции Испании — €22 обычный (3–5 рабочих дней) или €32 срочный (1–2 дня). Апостиль на документы ЗАГСа (свидетельства о рождении, браке) ставится бесплатно через Tribunal Superior de Justicia региона. Krepko координирует подачу в любом из 6 городов — срок «под ключ» 1–3 рабочих дня. Krepko берёт оплату работы Krepko. Услуги нотариуса и переводчика по факту подписания и регистрации. Каждый случай уникален — итоговая сумма называется после короткого разговора в WhatsApp."
+          "text": "Апостиль на нотариальные документы в Министерстве юстиции Испании — €22 обычный (3–5 рабочих дней) или €32 срочный (1–2 дня). Апостиль на документы ЗАГСа (свидетельства о рождении, браке) ставится бесплатно через Tribunal Superior de Justicia региона. Подаём в любом из 6 городов — срок «под ключ» 1–3 рабочих дня. Оплату за свою работу берём авансом, после подтверждения сметы. Услуги нотариуса и переводчика по факту подписания и регистрации. Каждый случай уникален — итоговая сумма называется после короткого разговора в WhatsApp."
         }
       },
       {
@@ -464,7 +128,7 @@
         "name": "Нужен ли перевод после апостиля?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Да, если документ на иностранном языке предъявляется в Испании — нужен присяжный перевод (traducción jurada) уже с проставленным апостилем. Переводят и сам документ, и текст апостиля одной целостной работой. Обычный перевод из бюро не подойдёт — нужен только traductor jurado из реестра МИД Испании. Для документов из Украины Krepko предлагает альтернативу: нотариальный перевод + двойной апостиль через команду Krepko в Украине — дешевле и так же принимается испанскими ведомствами."
+          "text": "Да, если документ на иностранном языке предъявляется в Испании — нужен присяжный перевод (traducción jurada) уже с проставленным апостилем. Переводят и сам документ, и текст апостиля одной целостной работой. Обычный перевод из бюро не подойдёт — нужен только traductor jurado из реестра МИД Испании. Для документов из Украины Предлагаем альтернативу: нотариальный перевод + двойной апостиль через команду Krepko в Украине — дешевле и так же принимается испанскими ведомствами."
         }
       },
       {
@@ -472,7 +136,7 @@
         "name": "Где ставится апостиль на нотариальные документы?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "На нотариальные документы (доверенности, заявления, копии) апостиль ставит Министерство юстиции Испании — есть отделения в Мадриде и территориальные офисы в крупных городах (Аликанте, Барселона, Валенсия, Малага). Маршрут такой: документ заверяет нотариус, потом подпись нотариуса заверяет коллегия нотариусов (Colegio Notarial), затем Минюст ставит апостиль. Krepko ведёт весь маршрут под ключ — клиенту никуда ходить не нужно. Krepko берёт оплату работы Krepko. Услуги нотариуса и переводчика по факту подписания и регистрации."
+          "text": "На нотариальные документы (доверенности, заявления, копии) апостиль ставит Министерство юстиции Испании — есть отделения в Мадриде и территориальные офисы в крупных городах (Аликанте, Барселона, Валенсия, Малага). Маршрут такой: документ заверяет нотариус, потом подпись нотариуса заверяет коллегия нотариусов (Colegio Notarial), затем Минюст ставит апостиль. Ведём весь маршрут целиком: вам никуда ходить не нужно. Оплату за свою работу берём авансом, после подтверждения сметы. Услуги нотариуса и переводчика по факту подписания и регистрации."
         }
       },
       {
@@ -480,7 +144,7 @@
         "name": "Что делать, если документ уже в Испании, но апостиль нужен от страны выдачи?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Распространённая ситуация — украинский диплом, свидетельство или справка уже у вас в Испании, а ехать в Украину неудобно. Krepko оформляет нотариальную доверенность в Испании, команда Krepko в Украине получает дубликат или ставит апостиль на оригинал, потом возвращает документ в Испанию. Срок «под ключ» — 5–7 рабочих дней. Для документов из Украины — оплата при подтверждении заказа (это связано с невозвратными расходами на стороне Украины). Итоговая сумма называется до старта."
+          "text": "Распространённая ситуация — украинский диплом, свидетельство или справка уже у вас в Испании, а ехать в Украину неудобно. Оформляем нотариальную доверенность в Испании, команда Krepko в Украине получает дубликат или ставит апостиль на оригинал, потом возвращает документ в Испанию. Срок «под ключ» — 5–7 рабочих дней. Для документов из Украины — оплата при подтверждении заказа (это связано с невозвратными расходами на стороне Украины). Итоговая сумма называется до старта."
         }
       }
     ]
@@ -794,7 +458,7 @@
     <div class="blog-article">
       <details class="article-toc" open>
         <summary class="article-toc__label">В статье</summary>
-        <div class="article-toc__list"><a href="#chto-takoe-apostil">Что такое апостиль</a><a href="#chto-takoe-prisyazhnyi-perevod-traduccio-n-jurad">Что такое присяжный перевод (traducción jurada)</a><a href="#apostil-vs-prisyazhnyi-perevod-v-che-m-raznica">Апостиль vs присяжный перевод: в чём разница</a><a href="#gde-poluchit-apostil-na-ukrainskie-dokumenty">Где получить апостиль на украинские документы</a><a href="#gde-sdelat-prisyazhnyi-perevod-v-ispanii">Где сделать присяжный перевод в Испании</a><a href="#sroki-i-stoimost">Сроки и стоимость</a><a href="#tipichnye-situacii-chto-konkretno-nuzhno-i-chto-">Типичные ситуации — что конкретно нужно и что делает Krepko</a><a href="#chastye-voprosy">Частые вопросы</a></div>
+        <div class="article-toc__list"><a href="#chto-takoe-apostil">Что такое апостиль</a><a href="#chto-takoe-prisyazhnyi-perevod-traduccio-n-jurad">Что такое присяжный перевод (traducción jurada)</a><a href="#apostil-vs-prisyazhnyi-perevod-v-che-m-raznica">Апостиль vs присяжный перевод: в чём разница</a><a href="#gde-poluchit-apostil-na-ukrainskie-dokumenty">Где получить апостиль на украинские документы</a><a href="#gde-sdelat-prisyazhnyi-perevod-v-ispanii">Где сделать присяжный перевод в Испании</a><a href="#sroki-i-stoimost">Сроки и стоимость</a><a href="#tipichnye-situacii-chto-konkretno-nuzhno-i-chto-">Типичные ситуации: что нужно собрать и что берём на себя мы</a><a href="#chastye-voprosy">Частые вопросы</a></div>
       </details>
 
       <div class="article-body">
@@ -802,14 +466,14 @@
 
     <h1>Апостиль и присяжный перевод в Испании: что это и зачем нужно</h1>
 
-    <div class="article-meta">Krepko · апрель 2026 · ~6 мин чтения</div>
+    <div class="article-meta">Krepko · обновлено 13 августа 2026 · ~6 мин чтения</div>
 
     <div class="article-intro">
-      «Нужен апостиль» и «нужен присяжный перевод» — эти фразы Krepko регулярно слышит от клиентов. Многие путают понятия или думают, что одно заменяет другое. На пальцах: это разные документы и в большинстве случаев нужны оба. Дальше — когда что нужно, сколько стоит и как Krepko делает это под ключ.
+      «Нужен апостиль» и «нужен присяжный перевод» — эти две фразы мы слышим от клиентов чаще всего, и почти за каждой стоит путаница: люди считают, что одно заменяет другое. Это разные документы, и в большинстве случаев нужны оба. Ниже — как понять, что требуется именно в вашей ситуации, в каком порядке это делается, сколько занимает времени и какую часть маршрута мы забираем на себя.
     </div>
-    <div style="background:#F5F0EB;border:1px solid #E8DFD1;border-left:3px solid #C75B39;border-radius:8px;padding:14px 16px;margin:0 0 24px;font-size:14px;color:#4A4A4A;line-height:1.6">
-      <strong style="color:#2D2D2D">Заказать услугу:</strong>
-      <a href="/notario/notarialnyj-perevod/" style="color:#C75B39;font-weight:600;text-decoration:none">Нотариальный перевод</a> · <a href="/legalizacion/apostil-ispania/" style="color:#C75B39;font-weight:600;text-decoration:none">Апостиль</a> · <a href="/notario/mezhdunarodnaya-dostavka-dokumentov/" style="color:#C75B39;font-weight:600;text-decoration:none">Международная доставка</a> · <a href="/services/" style="color:#6B6B6B;text-decoration:none">все услуги Krepko</a>
+    <div class="article-services">
+      <strong>Заказать услугу:</strong>
+      <a href="/notario/notarialnyj-perevod/">Нотариальный перевод</a> · <a href="/legalizacion/apostil-ispania/">Апостиль</a> · <a href="/notario/mezhdunarodnaya-dostavka-dokumentov/">Международная доставка</a> · <a href="/services/" class="article-services__all">все услуги Krepko</a>
     </div>
 
 
@@ -822,7 +486,7 @@
     <h3>На каких документах нужен апостиль</h3>
     <ul>
       <li>Свидетельство о рождении</li>
-      <li>Свидетельство о <a href="/blog/matrimonio-ispaniya-inostrancev/" style="color:#C75B39">браке</a> или <a href="/blog/razvod-ispaniya-notarius/" style="color:#C75B39">разводе</a></li>
+      <li>Свидетельство о <a href="/blog/matrimonio-ispaniya-inostrancev/">браке</a> или <a href="/blog/razvod-ispaniya-notarius/">разводе</a></li>
       <li>Свидетельство о смерти</li>
       <li>Диплом об образовании</li>
       <li>Справка об отсутствии судимости</li>
@@ -831,20 +495,20 @@
     </ul>
 
     <div class="info-box">
-      <strong>Важно:</strong> апостиль ставится в стране, выдавшей документ. Украинское свидетельство о рождении — апостиль в Украине. Испанский нотариальный документ — апостиль в Испании. Krepko оформляет и то, и другое: испанские документы — через Минюст в одном из 6 городов, украинские — дистанционно через команду Krepko в Украине.
+      <strong>Важно:</strong> апостиль ставится в стране, выдавшей документ. Украинское свидетельство о рождении — апостиль в Украине. Испанский нотариальный документ — апостиль в Испании. Мы закрываем оба направления: испанские документы ведём через Минюст в одном из 6 городов, украинские — дистанционно, через команду Krepko в Украине. Ехать никуда не нужно ни в том, ни в другом случае.
     </div>
 
     <h2 id="chto-takoe-prisyazhnyi-perevod-traduccio-n-jurad">Что такое присяжный перевод (traducción jurada)</h2>
 
     <p>Присяжный перевод (traducción jurada) — это <strong>перевод документа, выполненный сертифицированным переводчиком</strong>, аккредитованным Министерством иностранных дел Испании. К переводу прикладывается печать и подпись переводчика, которые подтверждают, что перевод точен и соответствует оригиналу.</p>
 
-    <p>Это не обычный перевод, который можно сделать в любом бюро. Только <strong>traductor jurado</strong> (присяжный переводчик, внесённый в официальный реестр) имеет право выполнять такие переводы. Список аккредитованных переводчиков публикует MFA Испании.</p>
+    <p>Это не обычный перевод из бюро. Такие переводы вправе делать только <strong>traductor jurado</strong> — присяжный переводчик из официального реестра, который ведёт МИД Испании. Перевод от неаккредитованного бюро в ведомстве не примут, даже если он безупречно точен: смотрят на печать переводчика, а не на качество текста.</p>
 
     <h3>Когда нужен присяжный перевод</h3>
     <ul>
-      <li>При подаче документов в экстранхерию (<a href="/blog/vnzh-ispaniya/" style="color:#C75B39">ВНЖ</a>, arraigo)</li>
+      <li>При подаче документов в экстранхерию (<a href="/blog/vnzh-ispaniya/">ВНЖ</a>, arraigo)</li>
       <li>При открытии банковского счёта (иностранные документы о доходах)</li>
-      <li>При оформлении ипотеки или <a href="/blog/pokupka-nedvizhimosti-ispaniya/" style="color:#C75B39">сделок с недвижимостью</a></li>
+      <li>При оформлении ипотеки или <a href="/blog/pokupka-nedvizhimosti-ispaniya/">сделок с недвижимостью</a></li>
       <li>При записи детей в школу (иностранные свидетельства о рождении)</li>
       <li>При нотариальных операциях с иностранными документами</li>
       <li>При регистрации брака в Испании</li>
@@ -875,34 +539,32 @@
       </div>
     </div>
 
-    <p>Схема проста: <strong>апостиль + присяжный перевод = полностью легализованный документ</strong> для испанского учреждения. Одно без другого, как правило, не принимается.</p>
+    <p>Схема простая: <strong>апостиль + присяжный перевод = полностью легализованный документ</strong> для испанского учреждения. Одно без другого, как правило, не принимают — и разворачивают людей чаще всего именно на этом. Мы проверяем комплектность до подачи, чтобы вы не ехали в ведомство второй раз.</p>
 
     <aside class="inline-cta" data-article="apostil-perevod" data-service="legal">
-      <p class="inline-cta__header">Не хотите возиться с апостилем сами?</p>
-      <p class="inline-cta__offer">Krepko делает под ключ — апостиль + перевод + подача в нужный орган. Напишите — Krepko рассчитает под ваш пакет документов.</p>
-      <a class="inline-cta__btn"
-         href="https://t.me/krepko_es_admin_bot?start=blog_apostil-perevod"
-         onclick="if(typeof gtag==='function'){gtag('event','cta_click',{article:'apostil-perevod',service:'legal',cta_type:'inline_blog'});}" rel="noopener noreferrer" target="_blank">
-        Заказать → @krepko_es_admin_bot
+      <p class="inline-cta__header">Не хотите разбираться с апостилем сами?</p>
+      <p class="inline-cta__offer">Берём маршрут целиком: апостиль, присяжный перевод, подача в нужный орган. От вас — фото документа и название учреждения, куда подаёте. Напишите нам в WhatsApp: скажем, что понадобится и за какой срок, стоимость обсуждаем после того, как поймём объём.</p>
+      <a class="inline-cta__btn" href="https://wa.me/34641048296?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%2C%20%D0%BD%D1%83%D0%B6%D0%BD%D0%B0%20%D0%BA%D0%BE%D0%BD%D1%81%D1%83%D0%BB%D1%8C%D1%82%D0%B0%D1%86%D0%B8%D1%8F" rel="noopener noreferrer" target="_blank">
+        Заказать
       </a>
-      <p class="inline-cta__alt">или WhatsApp: <a href="https://wa.me/34641048296" rel="noopener noreferrer" target="_blank">+34 641 048 296</a></p>
+      
     </aside>
 
     <h2 id="gde-poluchit-apostil-na-ukrainskie-dokumenty">Где получить апостиль на украинские документы</h2>
 
     <p>В Украине апостиль ставит <strong>Министерство юстиции Украины</strong> — через территориальные управления или онлайн через реестр. Услуга называется «апостилювання». Срок — от 1 до 10 рабочих дней.</p>
 
-    <p>Клиенту ехать в Украину не обязательно. Krepko берёт задачу дистанционно: координирует через команду в Украине — на месте получают документ, ставят апостиль, при необходимости делают нотариальный перевод с двойным апостилем и пересылают в Испанию. Обычный срок «под ключ» — 5–7 рабочих дней. Если документ уже у клиента в Испании, но нужен апостиль в Украине — Krepko оформляет на стороне Украины доверенность через нотариуса и проводит тот же маршрут.</p>
+    <p>Ехать в Украину вам не нужно — мы ведём эту задачу дистанционно. Команда Krepko в Украине получает документ на месте, ставит апостиль, при необходимости делает нотариальный перевод с двойным апостилем и отправляет пакет в Испанию. Обычный срок «под ключ» — 5–7 рабочих дней, ваше участие — переписка и подтверждение данных. Если документ уже у вас в Испании, а апостиль нужен украинский, готовим доверенность у нотариуса здесь и проводим тот же маршрут.</p>
 
     <div class="info-box">
-      <strong>Апостиль на российские документы:</strong> Россия — участница Гаагской конвенции. Апостиль ставится в региональном органе юстиции РФ или через МФЦ. Часть испанских учреждений сейчас требует дополнительных подтверждений для российских документов — Krepko рассматривает каждый случай индивидуально и до старта называет, что именно нужно по конкретной задаче.
+      <strong>Апостиль на российские документы:</strong> Россия — участница Гаагской конвенции. Апостиль ставится в региональном органе юстиции РФ или через МФЦ. Часть испанских учреждений сейчас требует по российским документам дополнительных подтверждений — мы разбираем каждый случай отдельно и до старта говорим, что именно запросит конкретное ведомство.
     </div>
 
     <h2 id="gde-sdelat-prisyazhnyi-perevod-v-ispanii">Где сделать присяжный перевод в Испании</h2>
 
     <p>Присяжный перевод выполняет только <strong>traductor-intérprete jurado</strong> — специалист из официального реестра МИД Испании. Список открыт на сайте maec.es.</p>
 
-    <p>Возможны два пути. <strong>Первый</strong> — найти присяжного переводчика напрямую (Барселона, Мадрид, Аликанте, Валенсия, Малага, Мурсия). Рыночная цена — 40–80 € за страницу, срок 1–3 рабочих дня. <strong>Второй</strong> — передать задачу Krepko: координация перевода через присяжных переводчиков в нужном городе, без переплаты по гос.тарифу. Если документ из Украины и есть 5–7 рабочих дней — Krepko предложит более дешёвую альтернативу через команду в Украине: нотариальный перевод + двойной апостиль, юридически равноценен для испанских ведомств.</p>
+    <p>Путей два. <strong>Первый</strong> — искать присяжного переводчика самому (Барселона, Мадрид, Аликанте, Валенсия, Малага, Мурсия). Рыночная цена — 40–80 € за страницу, срок 1–3 рабочих дня. <strong>Второй</strong> — отдать задачу нам: подбираем переводчика из реестра в нужном городе, держим срок и передаём вам готовый перевод вместе с оригиналом. Если документ из Украины и у вас есть 5–7 рабочих дней, предложим более дешёвый маршрут через команду Krepko в Украине: нотариальный перевод плюс двойной апостиль — для испанских ведомств он равноценен.</p>
 
     <h2 id="sroki-i-stoimost">Сроки и стоимость</h2>
 
@@ -934,9 +596,9 @@
         <td>80–150 €</td>
       </tr>
       <tr style="background:rgba(199, 91, 57,0.06)">
-        <td><strong style="color:#2D2D2D">Альтернатива через Krepko:</strong><br><span style="font-size:12.5px">нотариальный перевод + двойной апостиль (делает дистанционно)</span></td>
-        <td>5–7 рабочих дней</td>
-        <td><strong style="color:#C75B39">18–22 €/стр.</strong></td>
+        <td><strong>Наш маршрут через Украину:</strong><br><span class="table-note">нотариальный перевод + двойной апостиль, дистанционно</span></td>
+            <td>5–7 рабочих дней</td>
+            <td><strong>считаем по объёму</strong></td>
       </tr>
       <tr>
         <td>Нотариальная доверенность (Испания)</td>
@@ -947,22 +609,22 @@
     </div>
 
     <div class="info-box" style="margin-top:14px">
-      <strong>Когда что выбрать.</strong> Если документы уже на испанском или клиенту нужно «здесь и сейчас» — присяжный перевод в Испании. Если документы из Украины и есть 5–7 рабочих дней — альтернатива через Krepko: дешевле, документ сразу с двойным апостилем, юридически равноценен для подачи в испанские ведомства.
+      <strong>Как выбрать.</strong> Если документ уже на испанском или подавать нужно «здесь и сейчас» — берите присяжный перевод в Испании. Если документ из Украины и у вас есть 5–7 рабочих дней, ведём его нашим маршрутом: выходит дешевле, документ сразу с двойным апостилем и принимается испанскими ведомствами. Не понимаете, какой вариант ваш, — напишите нам, разберём за пару сообщений.
     </div>
 
-    <h2 id="tipichnye-situacii-chto-konkretno-nuzhno-i-chto-">Типичные ситуации — что конкретно нужно и что делает Krepko</h2>
+    <h2 id="tipichnye-situacii-chto-konkretno-nuzhno-i-chto-">Типичные ситуации: что нужно собрать и что берём на себя мы</h2>
 
     <h3>Подача на arraigo social</h3>
-    <p>Понадобится справка об отсутствии судимости из страны гражданства с <strong>апостилем + присяжным переводом на испанский</strong>. Справка не должна быть старше 3 месяцев на момент подачи. Krepko ведёт весь маршрут: подаёт заявку в Украине дистанционно, ставит апостиль, делает перевод, передаёт в Испанию готовый пакет.</p>
+    <p>Понадобится справка об отсутствии судимости из страны гражданства с <strong>апостилем + присяжным переводом на испанский</strong>. Справка не должна быть старше 3 месяцев на момент подачи — поэтому порядок действий здесь важнее скорости. Мы ведём весь маршрут: заказываем справку в Украине дистанционно, ставим апостиль, делаем перевод и отдаём вам готовый пакет к дате подачи. От вас нужны данные заявителя и скан паспорта.</p>
 
     <h3>Запись ребёнка в школу</h3>
-    <p>Свидетельство о рождении: <strong>апостиль + присяжный перевод</strong>. В некоторых муниципалитетах достаточно заверенной копии, но лучше иметь полный комплект. Аналогично — для <a href="/blog/vossoedineniye-semi-ispaniya/" style="color:#C75B39">воссоединения семьи</a>. Krepko собирает пакет под конкретный муниципалитет.</p>
+    <p>Свидетельство о рождении: <strong>апостиль + присяжный перевод</strong>. В некоторых муниципалитетах хватает заверенной копии, но полный комплект спокойнее: переделывать документы в разгар записи уже некогда. То же самое для <a href="/blog/vossoedineniye-semi-ispaniya/">воссоединения семьи</a>. Мы уточняем требования вашего муниципалитета до старта и собираем пакет сразу под них.</p>
 
     <h3>Признание диплома (homologación)</h3>
-    <p>Диплом с приложением: <strong>апостиль + присяжный перевод</strong>. Сама процедура homologación в Министерстве образования Испании занимает от 6 месяцев до 2 лет — эту задачу Krepko рассматривает индивидуально. Но базовый пакет документов под подачу Krepko готовит под ключ: апостиль на оригинал и приложение, перевод присяжным переводчиком, заверенные копии.</p>
+    <p>Диплом с приложением: <strong>апостиль + присяжный перевод</strong>. Сама процедура homologación в Министерстве образования Испании занимает от 6 месяцев до 2 лет, и её мы смотрим отдельно под ваш диплом. А базовый пакет под подачу готовим под ключ: апостиль на оригинал и приложение, перевод присяжным переводчиком, заверенные копии — чтобы многолетняя очередь в министерстве не началась с возврата по формальности.</p>
 
-    <h3>Нотариус</h3>
-    <p>Для большинства нотариальных операций (доверенности, купля-продажа) иностранные документы нужны с <strong>присяжным переводом</strong>. Апостиль нотариус потребует только если документ сам по себе — юридический акт (например, иностранное свидетельство о браке). При работе через Krepko — все необходимые переводы и апостиль организуются заранее, на сделку клиент приходит с готовым пакетом. <a href="/notario/" style="color:#C75B39">Подробнее о нотариусе</a>.</p>
+    <h3>Сделка у нотариуса</h3>
+    <p>Для большинства нотариальных операций (доверенности, купля-продажа) иностранные документы нужны с <strong>присяжным переводом</strong>. Апостиль нотариус потребует только если документ сам по себе — юридический акт, например иностранное свидетельство о браке. Когда сделку ведём мы, переводы и апостиль готовим заранее: в день подписания вы приходите с готовыми документами. <a href="/notario/">Подробнее о нотариусе</a>.</p>
 
     <h2 id="chastye-voprosy">Частые вопросы</h2>
 
@@ -970,59 +632,18 @@
 
     <details class="faq-item"><summary>В каких странах принимают апостиль из Испании?</summary><div class="faq-a">Апостиль из Испании принимают все 125+ стран-участниц Гаагской конвенции 1961 года — включая Украину, РФ, Казахстан, Беларусь, страны ЕС, США, Великобританию. Никакой дополнительной консульской легализации не требуется. Для стран вне конвенции (Китай до марта 2023, ОАЭ для части документов) нужна полная консульская легализация.</div></details>
 
-    <details class="faq-item"><summary>Сколько стоит апостиль в Испании в 2026?</summary><div class="faq-a">Апостиль на нотариальные документы в Министерстве юстиции Испании — €22 обычный (3–5 рабочих дней) или €32 срочный (1–2 дня). Апостиль на документы ЗАГСа (свидетельства о рождении, браке) ставится бесплатно через Tribunal Superior de Justicia региона. Krepko координирует подачу в любом из 6 городов — срок «под ключ» 1–3 рабочих дня. Krepko берёт оплату работы Krepko. Услуги нотариуса и переводчика по факту подписания и регистрации. Каждый случай уникален — итоговая сумма называется после короткого разговора в WhatsApp.</div></details>
+    <details class="faq-item"><summary>Сколько стоит апостиль в Испании в 2026?</summary><div class="faq-a">Апостиль на нотариальные документы в Министерстве юстиции Испании — €22 обычный (3–5 рабочих дней) или €32 срочный (1–2 дня). Апостиль на документы ЗАГСа (свидетельства о рождении, браке) ставится бесплатно через Tribunal Superior de Justicia региона. Подаём в любом из 6 городов — срок «под ключ» 1–3 рабочих дня. Оплату за свою работу берём авансом, после подтверждения сметы. Услуги нотариуса и переводчика по факту подписания и регистрации. Каждый случай уникален — итоговая сумма называется после короткого разговора в WhatsApp.</div></details>
 
-    <details class="faq-item"><summary>Нужен ли перевод после апостиля?</summary><div class="faq-a">Да, если документ на иностранном языке предъявляется в Испании — нужен присяжный перевод (traducción jurada) уже с проставленным апостилем. Переводят и сам документ, и текст апостиля одной целостной работой. Обычный перевод из бюро не подойдёт — нужен только traductor jurado из реестра МИД Испании. Для документов из Украины Krepko предлагает альтернативу: нотариальный перевод + двойной апостиль через команду Krepko в Украине — дешевле и так же принимается испанскими ведомствами.</div></details>
+    <details class="faq-item"><summary>Нужен ли перевод после апостиля?</summary><div class="faq-a">Да, если документ на иностранном языке предъявляется в Испании — нужен присяжный перевод (traducción jurada) уже с проставленным апостилем. Переводят и сам документ, и текст апостиля одной целостной работой. Обычный перевод из бюро не подойдёт — нужен только traductor jurado из реестра МИД Испании. Для документов из Украины Предлагаем альтернативу: нотариальный перевод + двойной апостиль через команду Krepko в Украине — дешевле и так же принимается испанскими ведомствами.</div></details>
 
-    <details class="faq-item"><summary>Где ставится апостиль на нотариальные документы?</summary><div class="faq-a">На нотариальные документы (доверенности, заявления, копии) апостиль ставит Министерство юстиции Испании — есть отделения в Мадриде и территориальные офисы в крупных городах (Аликанте, Барселона, Валенсия, Малага). Маршрут такой: документ заверяет нотариус, потом подпись нотариуса заверяет коллегия нотариусов (Colegio Notarial), затем Минюст ставит апостиль. Krepko ведёт весь маршрут под ключ — клиенту никуда ходить не нужно. Krepko берёт оплату работы Krepko. Услуги нотариуса и переводчика по факту подписания и регистрации.</div></details>
+    <details class="faq-item"><summary>Где ставится апостиль на нотариальные документы?</summary><div class="faq-a">На нотариальные документы (доверенности, заявления, копии) апостиль ставит Министерство юстиции Испании — есть отделения в Мадриде и территориальные офисы в крупных городах (Аликанте, Барселона, Валенсия, Малага). Маршрут такой: документ заверяет нотариус, потом подпись нотариуса заверяет коллегия нотариусов (Colegio Notarial), затем Минюст ставит апостиль. Ведём весь маршрут целиком: вам никуда ходить не нужно. Оплату за свою работу берём авансом, после подтверждения сметы. Услуги нотариуса и переводчика по факту подписания и регистрации.</div></details>
 
-    <details class="faq-item"><summary>Что делать, если документ уже в Испании, но апостиль нужен от страны выдачи?</summary><div class="faq-a">Распространённая ситуация — украинский диплом, свидетельство, справка уже у вас на руках, а ехать в Украину неудобно. Krepko оформляет нотариальную доверенность в Испании, команда Krepko в Украине получает дубликат или ставит апостиль на оригинал, потом возвращает документ в Испанию. Срок «под ключ» — 5–7 рабочих дней. Для документов из Украины — 100 % предоплата при подтверждении заказа (это связано с реальными невозвратными расходами на стороне Украины). Итоговая сумма называется до старта.</div></details>
+    <details class="faq-item"><summary>Что делать, если документ уже в Испании, но апостиль нужен от страны выдачи?</summary><div class="faq-a">Распространённая ситуация — украинский диплом, свидетельство, справка уже у вас на руках, а ехать в Украину неудобно. Оформляем нотариальную доверенность в Испании, команда Krepko в Украине получает дубликат или ставит апостиль на оригинал, потом возвращает документ в Испанию. Срок «под ключ» — 5–7 рабочих дней. Для документов из Украины — 100 % предоплата при подтверждении заказа (это связано с реальными невозвратными расходами на стороне Украины). Итоговая сумма называется до старта.</div></details>
 
-    <style>
-      .faq-item {
-        background: #F5F0EB;
-        border: 1px solid #E8DFD1;
-        border-radius: 10px;
-        padding: 0;
-        margin-bottom: 10px;
-        overflow: hidden;
-      }
-      .faq-item summary {
-        cursor: pointer;
-        padding: 14px 16px;
-        font-size: 15px;
-        font-weight: 600;
-        color: #2D2D2D;
-        list-style: none;
-        position: relative;
-        padding-right: 40px;
-      }
-      .faq-item summary::-webkit-details-marker { display: none; }
-      .faq-item summary::after {
-        content: '+';
-        position: absolute;
-        right: 16px;
-        top: 50%;
-        transform: translateY(-50%);
-        color: #C75B39;
-        font-size: 20px;
-        font-weight: 400;
-        transition: transform 0.2s;
-      }
-      .faq-item[open] summary::after { content: '−'; }
-      .faq-item summary:hover { color: #C75B39; }
-      .faq-a {
-        padding: 0 16px 14px;
-        font-size: 14px;
-        color: #4A4A4A;
-        line-height: 1.7;
-      }
-    </style>
-
-    <p style="margin:24px 0 18px;padding:14px 16px;background:#F5F0EB;border:1px solid #2A3450;border-left:3px solid rgba(199, 91, 57,0.55);border-radius:10px;font-size:14.5px;color:#B0BCD2;line-height:1.6"><strong style="color:#2D2D2D">Документ из Украины с двойным апостилем — под ключ.</strong> Krepko ведёт задачу полностью: апостиль на оригинал, нотариальный перевод и второй апостиль на перевод — пакет принимается испанскими ведомствами без traductor jurado. Krepko делает дистанционно за 5–7 рабочих дней. Для документов из Украины — 100 % предоплата при подтверждении заказа (это связано с невозвратными расходами на стороне Украины), итоговая сумма называется до старта. <a href="/ukraina/" style="color:#C75B39;border-bottom:1px dotted rgba(199, 91, 57,0.4)">Подробнее →</a></p>
+    <p class="article-note"><strong>Документ из Украины с двойным апостилем — под ключ.</strong> Ведём задачу целиком: апостиль на оригинал, нотариальный перевод и второй апостиль на перевод — такой пакет испанские ведомства принимают без traductor jurado. Делаем дистанционно за 5–7 рабочих дней, от вас нужны скан документа и данные владельца. По украинскому маршруту оплата вносится при подтверждении заказа — 100 % вперёд, потому что расходы на стороне Украины невозвратные; стоимость обсуждаем после того, как поймём объём, и называем её до старта. <a href="/ukraina/">Подробнее →</a></p>
     <div class="cta-block">
-      <div class="cta-title">Апостиль или перевод — что именно у вас просят?</div>
-      <div class="cta-sub">Назовите страну и орган, куда подаёте документ. Скажем, нужен ли апостиль вообще: с частью стран он отменён договором.</div>
+      <div class="cta-title">Скажем за один разговор, что именно у вас просят</div>
+      <div class="cta-sub">Напишите нам страну выдачи документа и орган, куда подаёте. Проверим, нужен ли апостиль вообще — с частью стран он отменён договором, — назовём срок и соберём пакет под ключ. Стоимость обсуждаем после того, как поймём объём.</div>
       <a class="btn btn-wa" href="https://wa.me/34641048296?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%2C%20%D0%BD%D1%83%D0%B6%D0%BD%D0%B0%20%D0%BA%D0%BE%D0%BD%D1%81%D1%83%D0%BB%D1%8C%D1%82%D0%B0%D1%86%D0%B8%D1%8F" rel="noopener noreferrer" target="_blank">
         <span class="btn-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9 8.5 8.5 0 0 1 8.5 8.5z"/></svg></span>
         <div class="btn-inner">
@@ -1030,14 +651,7 @@
           <span class="btn-sub-text">Свяжемся в течение часа</span>
         </div>
       </a>
-      <a class="btn btn-tg" href="https://t.me/krepko_es_admin_bot" target="_blank" rel="noopener noreferrer">
-        <span class="btn-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="7" width="16" height="13" rx="2"/><circle cx="9" cy="13" r="1.2" fill="currentColor"/><circle cx="15" cy="13" r="1.2" fill="currentColor"/><path d="M12 7V4M10 4h4"/></svg></span>
-        <div class="btn-inner">
-          <span class="btn-title">Telegram-бот — бесплатная консультация</span>
-          <span class="btn-sub-text">@krepko_es_admin_bot</span>
-        </div>
-      </a>
-      <a class="btn btn-ig" href="https://instagram.com/krepko.es" target="_blank" rel="noopener noreferrer"><span class="btn-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="6" width="20" height="14" rx="2"/><circle cx="12" cy="13" r="4"/><circle cx="17.5" cy="9.5" r="0.6" fill="currentColor"/></svg></span><div class="btn-inner"><span class="btn-title">Следи в Instagram</span><span class="btn-sub-text">@krepko.es</span></div></a>
+      <a class="btn btn-ig" href="https://instagram.com/krepko.es" target="_blank" rel="noopener noreferrer"><span class="btn-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="6" width="20" height="14" rx="2"/><circle cx="12" cy="13" r="4"/><circle cx="17.5" cy="9.5" r="0.6" fill="currentColor"/></svg></span><div class="btn-inner"><span class="btn-title">Следите в Instagram</span><span class="btn-sub-text">@krepko.es</span></div></a>
     </div>
 
 

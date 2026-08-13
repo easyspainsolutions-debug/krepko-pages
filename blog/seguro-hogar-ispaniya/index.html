@@ -24,8 +24,6 @@
   <link rel="stylesheet" href="/assets/krepko-chips.css?v=d588b7e6cf">
   <link rel="stylesheet" href="/assets/site-footer.css?v=10f623e9ba">
   <link rel="stylesheet" href="/assets/a11y.css?v=bd18bf2b40">
-  <link rel="stylesheet" href="/assets/blog-grid.css?v=5b171b8529">
-  <link rel="stylesheet" href="/assets/blog-article.css?v=c4f68e737f">
   <link rel="stylesheet" href="/assets/krepko-base.css?v=6216d1aafd">
   <link rel="stylesheet" href="/assets/cookie-consent.css?v=a4b74432ef">
   <script src="/assets/cookie-consent.js?v=8272782489" defer></script>
@@ -34,6 +32,9 @@
   <link rel="stylesheet" href="/assets/site-footer.css?v=10f623e9ba">
   <link rel="stylesheet" href="/assets/a11y.css?v=bd18bf2b40">
   <link rel="stylesheet" href="/assets/desktop.css?v=77a552d781">
+  <link rel="stylesheet" href="/assets/blog-legacy.css?v=fed011d80c">
+  <link rel="stylesheet" href="/assets/blog-grid.css?v=5b171b8529">
+  <link rel="stylesheet" href="/assets/blog-article.css?v=27862180b5">
   <meta name="yandex-verification" content="b4ef32829d6a1b94">
   <title>Страховка жилья в Испании: как выбрать seguro de hogar | Krepko</title>
   <meta name="description" content="Seguro de hogar в Испании: что покрывает, обязательна ли при аренде, цена, как выбрать. Сравнение Mapfre, Allianz, Línea Directa.">
@@ -61,106 +62,6 @@
       }
     },"publisher":{"@type":"Organization","name":"Krepko","url":"https://krepko.es/"},"inLanguage":"ru","keywords":"seguro de hogar Испания, страховка жилья Испания, страховка квартиры Испания, обязательна ли страховка жилья Испания, seguro de hogar аренда, Mapfre Allianz Línea Directa Испания"}
   </script>
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { background: #FFFBF7; color: #2D2D2D; font-family: -apple-system, 'Inter', sans-serif; min-height: 100vh; display: flex;
-      flex-direction: column; align-items: center; justify-content: flex-start; padding: 0  20px 0; ;overflow-x:hidden}
-    .wrap { width: 100%; max-width: 720px; display: flex; flex-direction: column; gap: 0; }
-    /* Breadcrumbs (унификация с legal/services) */
-    .breadcrumbs {
-      font-size: 12px;
-      color: #E8DFD1;
-      margin: 18px 0 14px;
-      line-height: 1.5;
-    }
-    .breadcrumbs a {
-      color: #6B6B6B;
-      text-decoration: none;
-      border: none;
-    }
-    .breadcrumbs a:hover { color: #C75B39; }
-    .breadcrumbs .sep { color: #E8DFD1; margin: 0 4px; }
-    .breadcrumbs .current { color: #4A4A4A; }
-
-    .article-tag { display: inline-block; font-size: 11px; font-weight: 700; color: #C75B39; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 12px; }
-    h1 { font-size: 26px; font-family: 'Playfair Display', Georgia, serif; font-weight: 500; color: #2D2D2D; line-height: 1.3; margin-bottom: 14px; }
-    .article-meta { font-size: 12px; color: #E8DFD1; margin-bottom: 24px; }
-    .article-intro { font-size: 16px; color: #4A4A4A; line-height: 1.7; margin-bottom: 32px; padding-bottom: 24px; border-bottom: 1px solid #EFE7DA; }
-    h2 { font-size: 20px; font-family: 'Playfair Display', Georgia, serif; font-weight: 500; color: #2D2D2D; margin: 32px 0 12px; line-height: 1.3; }
-    h3 { font-size: 16px; font-weight: 700; color: #C75B39; margin: 22px 0 8px; }
-    p { font-size: 15px; color: #4A4A4A; line-height: 1.75; margin-bottom: 14px; }
-    ul, ol { padding-left: 20px; margin-bottom: 16px; }
-    li { font-size: 15px; color: #4A4A4A; line-height: 1.75; margin-bottom: 6px; }
-    li strong, p strong { color: #2D2D2D; font-weight: 600; }
-    .info-box { background: #F5F0EB; border: 1px solid #E8DFD1; border-left: 3px solid #C75B39; border-radius: 8px; padding: 14px 16px; margin: 20px 0; font-size: 14px; color: #4A4A4A; line-height: 1.6; }
-    .info-box strong { color: #2D2D2D; }
-    .divider { width: 100%; height: 1px; background: #EFE7DA; margin: 32px 0; }
-    .cta-block { background: #F5F0EB; border: 1px solid #E8DFD1; border-radius: 11px; padding: 24px; display: flex; flex-direction: column; gap: 14px; margin-top: 16px; }
-    .cta-title { font-size: 18px; font-weight: 700; color: #2D2D2D; }
-    .cta-sub { font-size: 14px; color: #6B6B6B; line-height: 1.6; margin-top: -6px; }
-    .btn { display: flex; align-items: center; gap: 12px; width: 100%; padding: 14px 18px; border-radius: 11px; text-decoration: none; transition: background 0.15s, transform 0.12s; border: 1px solid transparent; cursor: pointer; }
-    .btn:hover { transform: translateX(3px); }
-    .btn-wa { background: #C75B39; border-color: #C75B39; color: #FFFBF7; }
-    .btn-wa:hover { background: #B04E2F; }
-    .btn-tg { background: #F5F0EB; border-color: #E8DFD1; color: #2D2D2D; }
-    .btn-tg:hover { background: #EFE7DA; }
-    .btn-ig { background: #F5F0EB; border-color: #E8DFD1; color: #2D2D2D; }
-    .btn-ig:hover { background: #EFE7DA; }
-    .btn-icon { font-size: 20px; flex-shrink: 0; }
-    .btn-icon svg { width: 20px; height: 20px; display: block; }
-    .btn-inner { display: flex; flex-direction: column; gap: 2px; }
-    .btn-title { font-size: 14px; font-weight: 700; }
-    .btn-sub-text { font-size: 12px; opacity: 0.7; }
-    .related-section { margin: 0; }
-    .related-label { font-size: 11px; font-weight: 700; color: #6B6B6B; text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 10px; margin-top: 0; display: block; }
-    .rel-card { display: flex; flex-direction: column; gap: 4px; padding: 14px 16px; border-radius: 10px; text-decoration: none; border: 1px solid #E8DFD1; background: #F5F0EB; color: #2D2D2D; transition: background 0.15s, transform 0.12s; margin-bottom: 8px; }
-    .rel-card:hover { background: #EFE7DA; transform: translateX(3px); }
-    .rel-card .article-tag { margin-bottom: 2px; font-size: 10px; }
-    .rel-card-title { font-size: 14px; font-weight: 600; color: #2D2D2D; line-height: 1.35; }
-    .rel-card-meta { font-size: 11px; color: #E8DFD1; margin-top: 2px; }
-    .cat-nav { padding: 20px 0 4px; border-top: 1px solid #EFE7DA; margin-top: 8px; }
-    .cat-nav-label { font-size: 10px; font-weight: 700; color: #E8DFD1; text-transform: uppercase; letter-spacing: 0.12em; display: block; margin-bottom: 10px; }
-    .cat-nav-pills { display: flex; flex-wrap: wrap; gap: 7px; }
-    .cat-pill { padding: 6px 13px; border-radius: 20px; font-size: 12px; font-weight: 600; text-decoration: none; border: 1px solid #E8DFD1; background: #F5F0EB; color: #6B6B6B; transition: color 0.15s, border-color 0.15s, background 0.15s; }
-    .cat-pill:hover { color: #C75B39; border-color: #C75B39; }
-    .cat-pill.active { background: rgba(199, 91, 57,0.12); border-color: #C75B39; color: #C75B39; }
-    .rel-featured { display: flex; flex-direction: column; gap: 6px; padding: 16px 18px; border-radius: 10px; text-decoration: none; border: 1px solid rgba(199, 91, 57,0.25); background: #F5F0EB; color: #2D2D2D; transition: background 0.15s; margin-bottom: 8px; }
-    .rel-featured:hover { background: #EFE7DA; }
-    .rel-featured-label { font-size: 10px; font-weight: 700; color: #C75B39; text-transform: uppercase; letter-spacing: 0.1em; }
-    .rel-featured-title { font-size: 15px; font-weight: 700; color: #2D2D2D; line-height: 1.35; }
-  
-    @media (max-width:719px){
-      body{padding:0 16px 0}
-      h1{font-size:22px;line-height:1.25;margin-bottom:10px}
-      h2{font-size:18px;margin:28px 0 12px}
-      h3{font-size:14.5px;margin:18px 0 6px}
-      p{font-size:14px;line-height:1.65;margin-bottom:11px}
-      li{font-size:14px;line-height:1.6}
-      .article-intro{font-size:14.5px;line-height:1.6;margin-bottom:22px;padding-bottom:16px}
-      .article-meta{font-size:11.5px;margin-bottom:18px}
-      .tag{font-size:10.5px;margin-bottom:10px}
-      .cta-block{padding:16px 14px}
-      .cta-title{font-size:16px}
-      .cta-sub{font-size:13px;line-height:1.5}
-      .btn{padding:12px 14px;font-size:13.5px;gap:8px}
-      .btn-title{font-size:13px}
-      .btn-icon svg{width:18px;height:18px}
-      .faq-item summary{padding:11px 13px;font-size:13.5px}
-      .faq-a{padding:0 13px 11px;font-size:13px;line-height:1.6}
-      .article-card{padding:13px 14px}
-      .article-card .article-title{font-size:14px}
-      .article-card .article-desc{font-size:12.5px;line-height:1.5}
-    }
-
-  
-    /* 2026-06-01 header-fix: legacy body{display:flex;align-items:center} collapsed the
-       shared full-width .site-nav into a narrow centered column. Restore block flow so
-       header/footer render edge-to-edge (как на остальных страницах); keep article column
-       centered via .wrap. Longhand padding не конфликтует с существующим shorthand. */
-    body{display:block;padding:0}
-    .wrap{margin-left:auto;margin-right:auto;padding-left:20px;padding-right:20px}
-    @media (max-width:719px){.wrap{padding-left:16px;padding-right:16px}}
-  </style>
   <script src="/assets/analytics.js?v=7ba69e930c" defer></script>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
   <script type="application/ld+json">
@@ -174,8 +75,7 @@
     ]
   }
   </script>
-    <script type="application/ld+json">
-{
+    <script type="application/ld+json">{
   "@context": "https://schema.org",
   "@type": "FAQPage",
   "mainEntity": [
@@ -212,8 +112,7 @@
       }
     }
   ]
-}
-  </script>
+}</script>
 <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:site" content="@krepko_es">
   <meta name="twitter:title" content="Страховка жилья в Испании: как выбрать seguro de hogar | Krepko">
@@ -522,36 +421,36 @@
     <div class="blog-article">
       <details class="article-toc" open>
         <summary class="article-toc__label">В статье</summary>
-        <div class="article-toc__list"><a href="#nuzhna-li-strahovka-zhilya-v-ispanii">Нужна ли страховка жилья в Испании</a><a href="#chto-takoe-seguro-de-hogar-dva-vida">Что такое seguro de hogar: два вида</a><a href="#chto-pokryvaet-standartnaya-strahovka-zhilya">Что покрывает стандартная страховка жилья</a><a href="#chego-obychno-net-v-bazovom-pakete">Чего обычно нет в базовом пакете</a><a href="#skolko-stoit-strahovka-zhilya-v-ispanii">Сколько стоит страховка жилья в Испании</a><a href="#veduschie-strahovschiki-v-ispanii">Ведущие страховщики в Испании</a><a href="#kak-oformit-seguro-de-hogar">Как оформить seguro de hogar</a><a href="#arenda-kogda-arendodatel-prosit-strahovku">Аренда: когда арендодатель просит страховку</a><a href="#tipichnye-oshibki-pri-vybore-strahovki-zhilya">Типичные ошибки при выборе страховки жилья</a></div>
+        <div class="article-toc__list"><a href="#nuzhna-li-strahovka-zhilya-v-ispanii">Нужна ли страховка жилья в Испании</a><a href="#chto-takoe-seguro-de-hogar-dva-vida">Что такое seguro de hogar: два вида</a><a href="#chto-pokryvaet-standartnaya-strahovka-zhilya">Что покрывает стандартная страховка жилья</a><a href="#chego-obychno-net-v-bazovom-pakete">Чего обычно нет в базовом пакете</a><a href="#skolko-stoit-strahovka-zhilya-v-ispanii">Сколько стоит страховка жилья в Испании</a><a href="#veduschie-strahovschiki-v-ispanii">Ведущие страховщики в Испании</a><a href="#kak-oformit-seguro-de-hogar">Как оформить seguro de hogar</a><a href="#arenda-kogda-arendodatel-prosit-strahovku">Аренда: когда арендодатель просит страховку</a><a href="#tipichnye-oshibki-pri-vybore-strahovki-zhilya">Типичные ошибки при выборе страховки жилья</a><a href="#chastye-voprosy">Частые вопросы</a></div>
       </details>
 
       <div class="article-body">
 <div class="article-tags"><span>Жильё</span></div>
     <h1>Страховка жилья в Испании: как выбрать seguro de hogar</h1>
-    <div class="article-meta">Krepko · апрель 2026 · ~6 мин чтения</div>
-    <div class="article-intro">Seguro de hogar — страховка жилья в Испании — это то, о чём задумываются далеко не в первый день после переезда. Но именно она может спасти вас от многотысячного счёта, если прорвёт трубу у соседей сверху, случится пожар или кража. Разбираемся, что это такое, что покрывает, сколько стоит и как выбрать подходящий вариант — для арендаторов и собственников.</div>
+    <div class="article-meta">Krepko · обновлено 13 августа 2026 · ~6 мин чтения</div>
+    <div class="article-intro">Seguro de hogar — страховка жилья в Испании — всплывает обычно в двух ситуациях: банк требует полис под ипотеку или арендодатель вписал его в контракт. Мы читаем такие договоры за клиентов постоянно и видим, где страховка закрывает счёт на несколько тысяч евро, а где вы платите за пункт, который не сработает никогда. Ниже разбираем: чем continente отличается от contenido, что входит в базовый пакет, сколько это стоит по рынку и что проверить в полисе до подписи — отдельно для арендаторов и собственников.</div>
 
     <h2 id="nuzhna-li-strahovka-zhilya-v-ispanii">Нужна ли страховка жилья в Испании</h2>
-    <p>По испанскому законодательству <strong>seguro de hogar не является обязательной</strong> для всех жильцов. Однако есть важные исключения. Если вы берёте ипотеку (hipoteca) при <a href="/blog/pokupka-nedvizhimosti-ispaniya/" style="color:#C75B39">покупке недвижимости в Испании</a>, банк в подавляющем большинстве случаев потребует оформить как минимум <strong>seguro de continente</strong> — страховку самой конструкции здания. Это стандартная практика: без неё кредит просто не одобрят.</p>
-    <p>При <a href="/blog/arenda-zhilya-ispaniya/" style="color:#C75B39">аренде жилья в Испании</a> ситуация другая: арендодатель (propietario) может включить в условия договора требование оформить страховку гражданской ответственности (responsabilidad civil). Это его право — и нередко встречается в договорах в крупных городах, особенно в Мадриде и Барселоне.</p>
-    <p>Даже если никто ничего не требует — страховка жилья практически всегда оправдана. <strong>Daños por agua</strong> (ущерб от воды) — это самый частый страховой случай в Испании. Трубы в старых испанских домах прорывают регулярно, и затопление от соседей может обойтись в €3 000–10 000 ремонта. Страховка покроет это.</p>
+    <p>По испанскому закону <strong>seguro de hogar не является обязательной</strong> для всех жильцов. Исключения, впрочем, встречаются чаще, чем кажется. Если вы берёте ипотеку (hipoteca) при <a href="/blog/pokupka-nedvizhimosti-ispaniya/">покупке недвижимости в Испании</a>, банк почти наверняка потребует как минимум <strong>seguro de continente</strong> — страховку самой конструкции здания. Спорить тут не с чем: без полиса кредит не одобрят.</p>
+    <p>При <a href="/blog/arenda-zhilya-ispaniya/">аренде жилья в Испании</a> история другая: арендодатель (propietario) вправе вписать в договор требование оформить страховку гражданской ответственности (responsabilidad civil). В контрактах Мадрида и Барселоны мы видим такой пункт регулярно. И почти всегда он не обязывает идти к конкретному страховщику — подойдёт любой полис с разделом responsabilidad civil.</p>
+    <p>Даже когда никто ничего не требует, полис почти всегда окупается. <strong>Daños por agua</strong> (ущерб от воды) — самый частый страховой случай в Испании. В старых домах трубы текут регулярно, и ремонт после потопа обходится в €3 000–10 000. С полисом эти деньги платит страховая, без него — вы.</p>
 
     <h2 id="chto-takoe-seguro-de-hogar-dva-vida">Что такое seguro de hogar: два вида</h2>
-    <p>Испанская страховка жилья делится на два типа в зависимости от того, что именно вы страхуете:</p>
+    <p>Полисы делятся на два типа, и путаница между ними стоит дороже всего: собственники недостраховывают конструкцию, арендаторы платят за стены, которые им не принадлежат. Разница простая:</p>
 
     <h3>Seguro de continente — страховка конструкции</h3>
-    <p><strong>Continente</strong> — это само здание: стены, перекрытия, пол, крыша, окна, встроенная сантехника и электрика. Этот вид страховки нужен прежде всего <strong>собственникам жилья</strong>. Если в квартире случится пожар и пострадает несущая стена — именно continente возместит расходы на восстановление конструкции.</p>
-    <p>Банки при выдаче ипотеки требуют именно этот тип, потому что им важно, чтобы их залог (то есть ваша недвижимость) был застрахован. Страховая сумма при этом должна соответствовать <strong>стоимости строительства</strong>, а не рыночной стоимости жилья.</p>
+    <p><strong>Continente</strong> — это само здание: стены, перекрытия, пол, крыша, окна, встроенная сантехника и электрика. Этот вид нужен прежде всего <strong>собственникам жилья</strong>. Если в квартире случится пожар и пострадает несущая стена, восстановление конструкции оплатит именно continente.</p>
+    <p>Банки под ипотеку требуют именно его: их залог должен быть застрахован. Момент, на котором чаще всего теряют деньги: страховая сумма считается от <strong>стоимости строительства</strong>, а не от рыночной цены квартиры. Если менеджер вписал в полис цену покупки, вы годами переплачиваете за раздутое покрытие — мы сверяем эту цифру, когда смотрим ипотечный пакет клиента.</p>
 
     <h3>Seguro de contenido — страховка имущества</h3>
-    <p><strong>Contenido</strong> — это всё то, что находится внутри: мебель, бытовая техника, электроника, одежда, личные вещи. Этот вид особенно актуален для <strong>арендаторов</strong>, которые не владеют стенами и полом, но хотят защитить то, что принесли с собой.</p>
-    <p>При краже, пожаре или затоплении страховка contenido возместит стоимость повреждённого или утраченного имущества. Важно правильно оценить его стоимость при оформлении — об этом подробнее в разделе про типичные ошибки.</p>
+    <p><strong>Contenido</strong> — всё, что находится внутри: мебель, бытовая техника, электроника, одежда, личные вещи. Этот вид особенно актуален <strong>арендаторам</strong>: стены и пол вам не принадлежат, а вот то, что вы привезли с собой, защищать стоит.</p>
+    <p>При краже, пожаре или затоплении contenido возместит стоимость повреждённого или утраченного имущества. Всё упирается в сумму, которую вы заявите при оформлении, — про эту ловушку читайте в разделе о типичных ошибках.</p>
 
     <h3>Комбинированный пакет: continente + contenido</h3>
-    <p>Большинство страховщиков предлагают <strong>объединённый полис</strong>, который покрывает и конструкцию, и имущество. Для собственников это оптимальный вариант: вы платите одну годовую премию и получаете полную защиту. Для арендаторов такой пакет тоже удобен — особенно если вы снимаете меблированную квартиру и хотите защитить технику и мебель.</p>
+    <p>Большинство страховщиков предлагают <strong>объединённый полис</strong> сразу на конструкцию и на имущество. Собственнику так удобнее всего: одна годовая премия, один договор, одна служба аварийной помощи. Арендатору такой пакет пригодится, когда квартира меблированная и вы отвечаете за чужую технику наравне со своей.</p>
 
     <h2 id="chto-pokryvaet-standartnaya-strahovka-zhilya">Что покрывает стандартная страховка жилья</h2>
-    <p>Базовый seguro de hogar в Испании обычно включает следующие риски:</p>
+    <p>Базовый seguro de hogar обычно закрывает такой набор рисков — по нему и сверяйте предложение, которое вам прислали:</p>
     <ul>
       <li><strong>Daños por agua (ущерб от воды)</strong> — прорыв труб, протечки, затопление из-за неисправной сантехники. Самый частый страховой случай в стране. Покрывает и ущерб вашей квартиры, и ущерб соседям снизу.</li>
       <li><strong>Incendio (пожар)</strong> — повреждение имущества и конструкций в результате возгорания, включая ущерб от дыма и воды при тушении.</li>
@@ -563,43 +462,43 @@
     </ul>
 
     <div class="info-box">
-      <strong>Важно знать:</strong> если вас затопили соседи сверху — их страховка (responsabilidad civil) должна покрыть ваш ущерб. Если у соседей нет страховки или выплата затягивается — ваша собственная секция «daños por agua» поможет получить возмещение быстрее. Именно поэтому обе стороны выигрывают, когда у каждого есть страховка.
+      <strong>Из практики:</strong> если вас затопили соседи сверху, их страховка (responsabilidad civil) должна покрыть ваш ущерб. Но когда у соседей полиса нет или выплата тянется месяцами, деньги быстрее приходят по вашей собственной секции «daños por agua», а страховая потом сама разбирается с виновником. Поэтому полис выгоден обеим сторонам.
     </div>
 
     <h2 id="chego-obychno-net-v-bazovom-pakete">Чего обычно нет в базовом пакете</h2>
-    <p>Не все риски покрываются стандартным полисом. Перед подписанием обязательно читайте раздел <strong>exclusiones</strong> (исключения):</p>
+    <p>Стандартный полис закрывает не всё. Раздел <strong>exclusiones</strong> (исключения) читайте до подписи — именно там прячется причина, по которой потом отказывают в выплате:</p>
     <ul>
       <li><strong>Terremotos e inundaciones (землетрясения и наводнения)</strong> — природные катастрофы в Испании покрываются через <strong>Consorcio de Compensación de Seguros</strong> — государственный фонд. Небольшой взнос в него автоматически включён в любой страховой полис, но само страхование от стихийных бедствий — отдельная история.</li>
-      <li><strong>Umweltverschmutzung и намеренный ущерб</strong> — повреждение, нанесённое специально, не покрывается ни одной страховкой. Если страховщик докажет умысел — в выплате откажут.</li>
+      <li><strong>Загрязнение среды и намеренный ущерб</strong> — повреждение, нанесённое специально, не покрывает ни одна страховая. Если умысел докажут, в выплате откажут.</li>
       <li><strong>Оборудование старше определённого возраста</strong> — многие полисы ограничивают выплаты за технику старше 5–10 лет или применяют амортизацию.</li>
       <li><strong>Ущерб из-за халатности</strong> — если трубу прорвало из-за того, что вы давно знали о протечке и не вызвали мастера, страховщик может отказать в выплате.</li>
       <li><strong>Коммерческое использование жилья</strong> — если вы сдаёте квартиру посуточно через Airbnb, стандартный seguro de hogar, как правило, не действует. Для этого нужен специальный полис.</li>
     </ul>
 
     <h2 id="skolko-stoit-strahovka-zhilya-v-ispanii">Сколько стоит страховка жилья в Испании</h2>
-    <p>Стоимость зависит от нескольких факторов: площади жилья, его расположения, заявленной стоимости имущества и набора рисков в полисе. Вот примерные ориентиры:</p>
+    <p>Цена собирается из площади жилья, района, заявленной стоимости имущества и набора рисков. Ориентиры по рынку такие:</p>
     <ul>
       <li><strong>Арендатор, только contenido</strong> — от €80 до €150 в год. Это минимальный вариант, который защищает ваши вещи и включает responsabilidad civil.</li>
       <li><strong>Собственник, continente + contenido</strong> — от €200 до €400 в год для стандартной квартиры площадью 70–90 м². Для большого дома или элитного жилья — дороже.</li>
       <li><strong>Расширенный пакет с дополнительными рисками</strong> — от €350 в год. Включает, например, страховку от поломки техники, защиту велосипедов или расширенное покрытие кражи.</li>
     </ul>
-    <p>На цену сильно влияет регион. В прибрежных зонах (Коста-Бланка, Коста-дель-Соль) тарифы немного выше из-за рисков, связанных с влажностью и рекой. В Мадриде и Барселоне цены стандартные, но зависят от района и возраста дома.</p>
+    <p>Регион заметно двигает цену. На побережье (Коста-Бланка, Коста-дель-Соль) тарифы выше: влажность и солёный воздух быстрее убивают проводку и технику. В Мадриде и Барселоне цены средние по рынку, но считаются от района и возраста дома.</p>
 
     <div class="info-box">
-      <strong>Совет по экономии:</strong> многие страховщики дают скидку 10–20%, если вы уже являетесь их клиентом по другому полису — например, по автострахованию (seguro de coche). Если у вас уже есть Mapfre или Mutua Madrileña для машины — спросите о комбинированной скидке.
+      <strong>Где сэкономить:</strong> многие страховщики дают скидку 10–20% действующим клиентам по другому полису — например, по автострахованию (seguro de coche). Если машина застрахована в Mapfre или Mutua Madrileña, спросите про комбинированный тариф до того, как оформите жильё у конкурента.
     </div>
 
     <h2 id="veduschie-strahovschiki-v-ispanii">Ведущие страховщики в Испании</h2>
-    <p>Рынок страхования жилья в Испании хорошо развит. Вот основные игроки, которых стоит рассматривать:</p>
+    <p>Рынок плотный, и разница между компаниями не столько в цене, сколько в том, как быстро они закрывают siniestro. Вот те, кого имеет смысл сравнивать:</p>
 
     <h3>Mapfre</h3>
-    <p><strong>Mapfre</strong> — крупнейшая страховая компания Испании с разветвлённой сетью офисов по всей стране. Хороший выбор, если вам важно личное обслуживание. В крупных городах с большой русскоязычной диаспорой — Мадриде, Барселоне, Валенсии — встречаются агенты, владеющие русским языком. Полисы надёжные, но не всегда самые дешёвые.</p>
+    <p><strong>Mapfre</strong> — крупнейший страховщик Испании с офисами по всей стране. Вариант для тех, кому нужен живой агент, а не чат. В Мадриде, Барселоне и Валенсии встречаются агенты, говорящие по-русски. Полисы надёжные, но редко самые дешёвые.</p>
 
     <h3>Allianz</h3>
     <p><strong>Allianz</strong> — международный страховщик с сильным онлайн-сервисом и мобильным приложением. Хорошо подходит тем, кто привык управлять всем через телефон. Процедура оформления страхового случая (siniestro) понятная, поддержка отвечает быстро. Полисы конкурентоспособны по цене.</p>
 
     <h3>Línea Directa</h3>
-    <p><strong>Línea Directa</strong> — чисто онлайн-страховщик без физических офисов. За счёт этого цены заметно ниже, чем у традиционных компаний. Если вам не нужна помощь агента вживую и вы готовы оформить всё через сайт или приложение — один из лучших вариантов по соотношению цены и качества.</p>
+    <p><strong>Línea Directa</strong> — онлайн-страховщик без физических офисов, за счёт этого цены заметно ниже. Подойдёт, если вы готовы оформить всё через сайт или приложение и не рассчитываете на встречу с агентом. По соотношению цены и покрытия — один из лучших вариантов.</p>
 
     <h3>Mutua Madrileña</h3>
     <p><strong>Mutua Madrileña</strong> работает по модели взаимного страхования. Выгодна прежде всего тем, у кого уже есть их автострахование: скидка при добавлении seguro de hogar может быть существенной. Хорошее покрытие, надёжная служба помощи на дому.</p>
@@ -607,19 +506,19 @@
     <h3>AXA</h3>
     <p><strong>AXA</strong> — международный бренд, который особенно популярен в туристических зонах: Барселона, Коста-Бланка, Майорка. Если вы живёте в курортном районе или рассматриваете краткосрочную аренду — AXA предлагает специализированные продукты.</p>
 
-    <p>Сравнивать предложения удобно через агрегаторы: <strong>Rastreator.com</strong> и <strong>Acierto.com</strong>. Введите параметры жилья — и получите несколько предложений с разбивкой по покрытию и цене. Это занимает 5–10 минут и часто позволяет найти вариант на 20–30% дешевле, чем обращаясь напрямую в компанию.</p>
+    <p>Сравнивать удобно через агрегаторы <strong>Rastreator.com</strong> и <strong>Acierto.com</strong>: вводите параметры жилья и получаете несколько вариантов с разбивкой по покрытию и цене. Занимает 5–10 минут и обычно даёт цену на 20–30% ниже, чем заявка напрямую в компанию.</p>
 
     <h2 id="kak-oformit-seguro-de-hogar">Как оформить seguro de hogar</h2>
-    <p>Есть несколько способов оформить страховку жилья в Испании:</p>
+    <p>Оформить полис можно тремя путями, и они заметно различаются по цене:</p>
 
     <h3>Онлайн через сайт страховщика или компаратор</h3>
-    <p>Самый быстрый и часто самый дешёвый вариант. Заходите на сайт компании или агрегатора (Rastreator, Acierto), заполняете форму с параметрами жилья, выбираете покрытие и оплачиваете. Полис приходит на email. Весь процесс занимает 15–30 минут.</p>
+    <p>Самый быстрый и обычно самый дешёвый путь. Заходите на сайт компании или агрегатора (Rastreator, Acierto), заполняете форму по жилью, выбираете покрытие, платите. Полис приходит на email, весь процесс — 15–30 минут.</p>
 
     <h3>Через офис страховщика</h3>
-    <p>Подходит, если вам нужна консультация или сложная ситуация — например, жильё с особенностями (старый дом, нестандартная площадь, дополнительные риски). Агент поможет подобрать оптимальное покрытие и объяснит нюансы на месте.</p>
+    <p>Вариант для нестандартных случаев: старый дом, необычная площадь, дорогая техника, дополнительные риски. Агент подберёт покрытие под ситуацию и объяснит условия на месте, но тариф почти всегда будет выше онлайнового.</p>
 
     <h3>Через банк</h3>
-    <p>Банки — CaixaBank, Sabadell, BBVA — активно предлагают страховки жилья в пакете с текущим счётом или ипотекой. Удобно с точки зрения оформления, но <strong>обычно дороже</strong> рыночных предложений на 15–30%. Перед согласием сравните с предложениями на Rastreator.</p>
+    <p>CaixaBank, Sabadell и BBVA охотно продают страховку жилья в пакете со счётом или ипотекой. Оформляется одним движением, но выходит <strong>обычно дороже</strong> рынка на 15–30%. Прежде чем соглашаться, сверьтесь с ценами на Rastreator: банк редко возражает против своего полиса клиента, если тот подходит под условия ипотеки.</p>
 
     <h3>Что понадобится для оформления</h3>
     <ul>
@@ -631,44 +530,51 @@
     </ul>
 
     <h2 id="arenda-kogda-arendodatel-prosit-strahovku">Аренда: когда арендодатель просит страховку</h2>
-    <p>Среди арендодателей в Испании становится всё более распространённой практика включать в договор аренды требование к арендатору оформить <strong>seguro de responsabilidad civil</strong> — страховку гражданской ответственности. Это не прихоть, а логичная защита: если арендатор случайно затопит квартиру или устроит пожар, ущерб соседям и самому дому должен кто-то возместить.</p>
-    <p>Стоимость такой базовой страховки — <strong>€50–100 в год</strong>. Важно: она часто уже входит в состав стандартного contenido-пакета. То есть, оформив обычный seguro de contenido для защиты своих вещей, вы автоматически получаете и responsabilidad civil, и можете показать арендодателю полис.</p>
-    <p>Если арендодатель настаивает на конкретной компании — это его право, но вы можете предложить аналогичный полис от другого страховщика с тем же покрытием. Важно, чтобы в документе был раздел «responsabilidad civil» с суммой покрытия не менее €150 000 — это стандарт.</p>
+    <p>Арендодатели всё чаще вписывают в договор требование оформить <strong>seguro de responsabilidad civil</strong> — страховку гражданской ответственности. Это не прихоть: если вы забудете кран или устроите короткое замыкание, ущерб соседям и дому кто-то должен возместить, и без полиса это будете вы.</p>
+    <p>Такая базовая страховка стоит <strong>€50–100 в год</strong>, и чаще всего она уже зашита в стандартный contenido-пакет. То есть, оформив обычный seguro de contenido на свои вещи, вы получаете responsabilidad civil в комплекте — и этого полиса хватает, чтобы закрыть требование хозяина.</p>
+    <p>Если хозяин настаивает на конкретной компании, вы вправе предложить равноценный полис другого страховщика. Смотреть нужно на одно: в документе должен быть раздел «responsabilidad civil» с покрытием не менее €150 000 — это рыночный стандарт, и на нём спор обычно заканчивается.</p>
 
     <div class="info-box">
-      <strong>Практический кейс:</strong> арендатор в Валенсии оставил кран открытым и ушёл на несколько часов. Вода залила квартиру ниже. Ремонт у соседей — €4 200. У арендатора был seguro de contenido с responsabilidad civil на €300 000. Страховая покрыла всё — арендатор не заплатил ни евро из своего кармана.
+      <strong>Случай из практики:</strong> арендатор в Валенсии оставил открытым кран и ушёл на несколько часов. Вода залила квартиру снизу, ремонт у соседей — €4 200. У него был seguro de contenido с responsabilidad civil на €300 000, страховая закрыла сумму целиком. Из своего кармана он не заплатил ничего.
     </div>
 
     <h2 id="tipichnye-oshibki-pri-vybore-strahovki-zhilya">Типичные ошибки при выборе страховки жилья</h2>
-    <p>Многие в итоге разочаровываются в страховке не потому, что она плохая, а потому что при оформлении допустили ошибки, которые делают выплату неполной или вовсе невозможной:</p>
+    <p>Чаще всего в страховке разочаровываются не из-за компании, а из-за четырёх ошибок при оформлении. Каждая из них урезает выплату или отменяет её целиком:</p>
 
     <h3>Не читать раздел exclusiones</h3>
-    <p>Исключения — это то, что <em>не</em> покрывается полисом. Перед подписанием обязательно просмотрите этот раздел. Особенно важно для тех, кто живёт в зонах риска затопления (рядом с рекой или в низинах) — убедитесь, что «inundaciones» не исключены из вашего полиса или покрываются отдельно.</p>
+    <p>Exclusiones — это список того, что полис <em>не</em> покрывает. Пробегите его до подписи. Отдельно это касается тех, кто живёт в зоне подтоплений — рядом с рекой или в низине: проверьте, что «inundaciones» не выброшены из покрытия или закрыты хотя бы отдельной секцией.</p>
 
     <h3>Недооценивать стоимость имущества</h3>
-    <p>При оформлении contenido вас попросят указать примерную стоимость вещей. Многие называют заниженную сумму, чтобы сэкономить на премии. Но при страховом случае страховщик выплатит не больше, чем заявлено. Если вы указали €5 000, а реальный ущерб составил €12 000 — разницу вы не получите. Потратьте 20 минут на честную оценку: техника, мебель, одежда, ювелирные украшения, велосипед.</p>
+    <p>При оформлении contenido вас попросят указать примерную стоимость вещей. Многие занижают её, чтобы сбить премию. Но выплата не превысит заявленную сумму: указали €5 000, а сгорело на €12 000 — разницу закрываете сами. Потратьте 20 минут и посчитайте честно: техника, мебель, одежда, украшения, велосипед.</p>
 
     <h3>Выбирать самую дешёвую страховку с высокой франшизой</h3>
-    <p><strong>Franquicia (франшиза)</strong> — это сумма, которую вы оплачиваете из своего кармана при каждом страховом случае. Полис с франшизой €600 будет дешевле, но при мелком ущербе (прорвало трубу, ущерб на €400) вы не получите ничего. Оцените, насколько часто могут случаться небольшие инциденты, и выбирайте франшизу исходя из этого.</p>
+    <p><strong>Franquicia (франшиза)</strong> — сумма, которую при каждом страховом случае вы платите сами. Полис с франшизой €600 дешевле, но на мелком ущербе (потекла труба, ремонт на €400) он не даст ничего. Прикиньте, как часто у вас случаются небольшие поломки, и выбирайте франшизу от этого.</p>
 
     <h3>Не сообщать об изменениях в жилье</h3>
-    <p>Если вы сделали дорогой ремонт, купили новую технику или переехали в другую квартиру — сообщите страховщику. Иначе при страховом случае окажется, что реальная ситуация не совпадает с условиями полиса.</p>
+    <p>Сделали дорогой ремонт, купили технику, переехали в другую квартиру — сообщите страховщику сразу. Иначе при страховом случае выяснится, что полис описывает уже несуществующее жильё, и выплату урежут.</p>
 
     <div class="divider"></div>
-        <p>Если разбираться самому не хочется — у нас есть <a href="/juridico/">юридическое сопровождение сделок с жильём</a>: посмотрим вашу ситуацию и скажем, что понадобится именно в вашем случае.</p>
+        <p>Если разбираться во всём этом самому не хочется, у нас есть <a href="/juridico/">юридическое сопровождение сделок с жильём</a>. Присылаете договор аренды или ипотечный пакет — в течение рабочего дня разбираем, какая страховка требуется от вас по факту, что в предложении банка лишнее и на что смотреть в разделе exclusiones. Ваше участие — прислать документ и ответить на несколько вопросов о жилье; стоимость обсуждаем после того, как поймём объём.</p>
 
-<div class="cta-block">
-      <div class="cta-title">Нужна консультация по страховке или аренде жилья в Испании?</div>
-      <div class="cta-sub">Krepko берёт на себя документы при аренде, объясняет, как работают страховки и что проверить перед подписанием контракта.</div>
+
+    <h2 id="chastye-voprosy">Частые вопросы</h2>
+    <h3>Обязательна ли страховка жилья в Испании?</h3>
+    <p>По закону seguro de hogar не является обязательной для всех жильцов. Но банк при выдаче ипотеки требует как минимум seguro de continente, а арендодатель может включить требование о страховке гражданской ответственности в договор аренды.</p>
+    <h3>В чём разница между seguro de continente и contenido?</h3>
+    <p>Continente — это страховка самой конструкции: стены, перекрытия, пол, крыша, встроенная сантехника. Нужна собственникам. Contenido — это страховка имущества внутри: мебель, техника, личные вещи. Актуальна арендаторам.</p>
+    <h3>Сколько стоит страховка жилья в Испании?</h3>
+    <p>Базовый пакет seguro de hogar для квартиры 70–90 м² обходится примерно в 150–300€ в год. Расширенное покрытие с защитой от кражи, юридической помощью и более высокими лимитами — 350–600€ в год.</p>
+    <h3>Что чаще всего покрывает страховка жилья в Испании?</h3>
+    <p>Daños por agua (ущерб от воды) — самый частый случай, ремонт после потопа от соседей. Также покрываются пожар, кража, повреждение электротехники, гражданская ответственность перед соседями и юридическая защита.</p>
+
+    <div class="cta-block">
+      <div class="cta-title">Разберём вашу страховку и договор аренды до подписи</div>
+      <div class="cta-sub">Ведём документы при аренде и покупке жилья: читаем договор до подписи, проверяем требования по страховке, готовим то, что просит хозяин или банк. Напишите в WhatsApp — стоимость обсуждаем после того, как поймём объём.</div>
       <a class="btn btn-wa" href="https://wa.me/34641048296?text=%D0%A1%D1%82%D1%80%D0%B0%D1%85%D0%BE%D0%B2%D0%BA%D0%B0%20%D0%B6%D0%B8%D0%BB%D1%8C%D1%8F%20%D0%B2%20%D0%98%D1%81%D0%BF%D0%B0%D0%BD%D0%B8%D0%B8%20%E2%80%94%20%D0%BD%D1%83%D0%B6%D0%BD%D0%B0%20%D0%BF%D0%BE%D0%BC%D0%BE%D1%89%D1%8C" rel="noopener noreferrer" target="_blank">
         <span class="btn-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9 8.5 8.5 0 0 1 8.5 8.5z"/></svg></span>
         <div class="btn-inner"><span class="btn-title">Написать в WhatsApp</span><span class="btn-sub-text">Свяжемся в течение часа</span></div>
       </a>
-      <a class="btn btn-tg" href="https://t.me/krepko_es_admin_bot" target="_blank" rel="noopener noreferrer">
-        <span class="btn-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="7" width="16" height="13" rx="2"/><circle cx="9" cy="13" r="1.2" fill="currentColor"/><circle cx="15" cy="13" r="1.2" fill="currentColor"/><path d="M12 7V4M10 4h4"/></svg></span>
-        <div class="btn-inner"><span class="btn-title">Telegram-бот — бесплатная консультация</span><span class="btn-sub-text">@krepko_es_admin_bot</span></div>
-      </a>
-      <a class="btn btn-ig" href="https://instagram.com/krepko.es" target="_blank" rel="noopener noreferrer"><span class="btn-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="6" width="20" height="14" rx="2"/><circle cx="12" cy="13" r="4"/><circle cx="17.5" cy="9.5" r="0.6" fill="currentColor"/></svg></span><div class="btn-inner"><span class="btn-title">Следи в Instagram</span><span class="btn-sub-text">@krepko.es</span></div></a>
+      <a class="btn btn-ig" href="https://instagram.com/krepko.es" target="_blank" rel="noopener noreferrer"><span class="btn-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="6" width="20" height="14" rx="2"/><circle cx="12" cy="13" r="4"/><circle cx="17.5" cy="9.5" r="0.6" fill="currentColor"/></svg></span><div class="btn-inner"><span class="btn-title">Мы в Instagram</span><span class="btn-sub-text">@krepko.es</span></div></a>
     </div>
     </div>
     </div>

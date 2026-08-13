@@ -138,6 +138,90 @@ body:has(> .wrap.wrap--article) > .wrap.wrap--article {
   color: var(--text-sub, #4A4A4A);
 }
 
+/* ── Блоки внутри текста ──
+   Строка «Услуги по теме», баннер соседнего лендинга и промо-абзац писались
+   стилями прямо в разметке: 100+ атрибутов style на 32 статьи. Одинаковые по
+   смыслу блоки выглядели по-разному, а править их можно было только поиском
+   по всем файлам. Теперь у каждого класс. */
+.article-body a {
+  color: var(--gold, #C75B39);
+  font-weight: 600;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color .15s ease;
+}
+.article-body a:hover { border-bottom-color: currentColor; }
+
+.article-services {
+  background: var(--surface, #F5F0EB);
+  border: 1px solid rgba(26, 43, 60, .1);
+  border-left: 3px solid var(--gold, #C75B39);
+  border-radius: 8px;
+  padding: 14px 16px;
+  margin: 0 0 24px;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--text-sub, #4A4A4A);
+}
+.article-services__all {
+  color: var(--text-muted, #6B6B6B) !important;
+  font-weight: 400 !important;
+}
+
+/* Баннер соседнего лендинга. Было: эмодзи-книжка, градиент и свечение по
+   контуру — три приёма, запрещённых регламентом, в одном блоке. */
+.article-promo {
+  display: block;
+  padding: 16px 18px;
+  margin: 22px 0;
+  background: var(--surface, #F5F0EB);
+  border: 1px solid rgba(26, 43, 60, .12);
+  border-left: 3px solid var(--gold, #C75B39);
+  border-radius: 12px;
+  text-decoration: none;
+  transition: border-color .18s ease;
+}
+.article-promo:hover { border-color: rgba(199, 91, 57, .45); }
+.article-promo__kicker {
+  display: block;
+  font-family: 'Manrope', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--text-muted, #6B6B6B);
+  margin-bottom: 6px;
+}
+.article-promo__title {
+  display: block;
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 18px;
+  line-height: 1.3;
+  color: var(--art-ink);
+  margin-bottom: 4px;
+}
+.article-promo__dek {
+  display: block;
+  font-family: 'Manrope', sans-serif;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--text-sub, #4A4A4A);
+}
+
+/* Промо-абзац: рамка была цвета #2A3450 — из тёмной темы, на светлом фоне
+   она читалась как случайная синяя линия. */
+.article-note {
+  margin: 24px 0 18px;
+  padding: 14px 16px;
+  background: var(--surface, #F5F0EB);
+  border: 1px solid rgba(26, 43, 60, .12);
+  border-left: 3px solid var(--gold, #C75B39);
+  border-radius: 8px;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--text-sub, #4A4A4A);
+}
+
 /* ── Темы и «читайте также» — во всю ширину, под колонкой чтения ──
    Карточки берём с витрины (blog-grid.css), поэтому здесь объявляем токен,
    который там ждут: на витрине он живёт на .blog-filter, а фильтра тут нет. */
