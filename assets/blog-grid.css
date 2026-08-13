@@ -1,0 +1,218 @@
+/* ============================================================
+   Витрина блога — сетка карточек (2026-08-13)
+
+   Геометрия снята с enigma.com/resources/blog по просьбе Daniil:
+   три колонки по 384px, зазор 24px, карточка без заливки с рамкой в
+   1px и скруглением 16px, теги пилюлями 12px со скруглением 48px,
+   заголовок 20px весом 500.
+
+   Одно расхождение с референсом, осознанное. Там верх карточки —
+   изображение на 224px. У наших 34 статей изображений нет, и рисовать
+   их — отдельная работа. Место картинки отдано типографике: категория
+   крупно на подложке. Карточка держит тот же ритм, а страница не ждёт
+   иллюстраций, которых пока нет.
+
+   Цвета и шрифты — наши: Playfair на заголовках, Manrope в тексте,
+   терракота как единственный акцент.
+   ============================================================ */
+
+/* Заголовочный тёмно-синий: в шкалах блога его нет, объявляем локально —
+   тем же приёмом, что service-tail.css со своими --st-*. */
+.blog-head, .blog-grid, .blog-filter { --blog-ink: #1A2B3C; }
+
+.blog-page {
+  background: var(--bg);
+}
+
+.blog-head {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: clamp(28px, 4vw, 56px) clamp(20px, 4vw, 40px) clamp(20px, 2.5vw, 32px);
+}
+.blog-head__h1 {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(28px, 3.4vw, 44px);
+  font-weight: 500;
+  line-height: 1.12;
+  color: var(--blog-ink);
+  margin: 0 0 14px;
+}
+.blog-head__dek {
+  font-family: 'Manrope', sans-serif;
+  font-size: clamp(15px, 1.2vw, 17px);
+  line-height: 1.55;
+  color: var(--text-sub);
+  max-width: 640px;
+  margin: 0;
+}
+
+/* ── Фильтр по темам ──
+   Те же пилюли, что и на карточках: список читается как одна система. */
+.blog-filter {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 clamp(20px, 4vw, 40px) clamp(18px, 2vw, 26px);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.blog-filter__pill {
+  appearance: none;
+  border: 1px solid rgba(26, 43, 60, 0.14);
+  background: transparent;
+  border-radius: 48px;
+  padding: 7px 15px;
+  font-family: 'Manrope', sans-serif;
+  font-size: 13.5px;
+  font-weight: 500;
+  color: var(--text-sub);
+  cursor: pointer;
+  transition: background .15s ease, border-color .15s ease, color .15s ease;
+}
+.blog-filter__pill:hover { border-color: var(--gold-tint); color: var(--gold); }
+.blog-filter__pill.is-on {
+  background: var(--gold);
+  border-color: var(--gold);
+  color: var(--bg);
+}
+
+/* ── Сетка ── */
+.blog-grid {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 clamp(20px, 4vw, 40px) clamp(48px, 6vw, 88px);
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 24px;
+}
+
+/* ── Карточка ──
+   Заливки нет, держит форму рамка — как в референсе. Ссылка целиком
+   кликабельна, поэтому внутри только span'ы: вложенные ссылки в HTML
+   недопустимы. */
+.blog-card {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid rgba(26, 43, 60, 0.12);
+  border-radius: 16px;
+  overflow: hidden;
+  text-decoration: none;
+  background: transparent;
+  transition: border-color .18s ease, transform .18s ease;
+}
+@media (hover: hover) {
+  .blog-card:hover {
+    border-color: rgba(199, 91, 57, 0.45);
+    transform: translateY(-2px);
+  }
+}
+
+/* Верх карточки — вместо изображения. Высота 224px повторяет референс,
+   чтобы ряд карточек стоял в том же ритме. */
+.blog-card__top {
+  height: 224px;
+  display: flex;
+  align-items: flex-end;
+  padding: 22px;
+  background: var(--surface);
+}
+.blog-card__cat {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 27px;
+  font-weight: 500;
+  line-height: 1.1;
+  color: var(--blog-ink);
+  opacity: .72;
+}
+/* Оттенок подложки по теме: страница листается глазами, а не читается. */
+.blog-card[data-cat="docs"]    .blog-card__top { background: #F1EAE2; }
+.blog-card[data-cat="vnzh"]    .blog-card__top { background: #EDE6DC; }
+.blog-card[data-cat="finance"] .blog-card__top { background: #F3EDE6; }
+.blog-card[data-cat="life"]    .blog-card__top { background: var(--surface); }
+.blog-card[data-cat="work"]    .blog-card__top { background: #EFE9E1; }
+.blog-card[data-cat="social"]  .blog-card__top { background: #F2ECE4; }
+
+.blog-card__body {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: 20px 22px 22px;
+}
+.blog-card__kicker {
+  font-family: 'Manrope', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 10px;
+}
+.blog-card__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+.blog-card__tag {
+  background: var(--surface);
+  border-radius: 48px;
+  padding: 4px 11px;
+  font-family: 'Manrope', sans-serif;
+  font-size: 12px;
+  color: var(--text-sub);
+  white-space: nowrap;
+}
+.blog-card__title {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 1.25;
+  color: var(--blog-ink);
+  margin-bottom: 10px;
+}
+.blog-card__desc {
+  font-family: 'Manrope', sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--text-sub);
+  margin-bottom: 18px;
+  /* три строки: карточки в ряду держат одинаковую высоту тела */
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+/* Дата прижата к низу: в референсе она стоит на одной линии у всех
+   карточек ряда независимо от длины заголовка. */
+.blog-card__date {
+  margin-top: auto;
+  font-family: 'Manrope', sans-serif;
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+/* ── Мобильные ──
+   Одна колонка и более низкая шапка карточки: на 390px картинка в
+   224px съедала бы пол-экрана на каждую запись. */
+@media (max-width: 720px) {
+  .blog-grid { grid-template-columns: 1fr; gap: 16px; }
+  .blog-card__top { height: 132px; padding: 18px; }
+  .blog-card__cat { font-size: 22px; }
+  .blog-card__body { padding: 16px 18px 18px; }
+  .blog-filter { gap: 6px; }
+  .blog-filter__pill { font-size: 13px; padding: 6px 13px; }
+}
+
+
+/* Витрина шире колонки статьи.
+   <main> на страницах блога ограничен 960px — это ширина под чтение текста,
+   и для одной статьи она верная. Но сетка карточек в неё укладывается лишь
+   в две колонки вместо трёх из референса. Снимаем ограничение только на
+   витрине, страницы статей не трогаем. */
+body:has(.blog-grid) main {
+  max-width: 1280px !important;
+}
+
+/* Пустая дата не должна оставлять зазор: две карточки ведут не на статьи
+   блога, а на посадочные страницы, и даты у них нет. */
+.blog-card__date:empty { display: none; }

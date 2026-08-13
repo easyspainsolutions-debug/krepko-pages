@@ -24,6 +24,7 @@
   <link rel="stylesheet" href="/assets/krepko-chips.css?v=d588b7e6cf">
   <link rel="stylesheet" href="/assets/site-footer.css?v=10f623e9ba">
   <link rel="stylesheet" href="/assets/a11y.css?v=bd18bf2b40">
+  <link rel="stylesheet" href="/assets/blog-grid.css?v=7941c43217">
   <link rel="stylesheet" href="/assets/krepko-base.css?v=6216d1aafd">
   <link rel="stylesheet" href="/assets/cookie-consent.css?v=a4b74432ef">
   <script src="/assets/cookie-consent.js?v=8272782489" defer></script>
@@ -650,354 +651,377 @@
 <nav class="breadcrumb breadcrumb--back" aria-label="Хлебные крошки">
   <a class="breadcrumb__parent" href="/" aria-label="Назад: Главная"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg><span>Главная</span></a> / <span>Блог</span>
 </nav>
-<div class="card">
-    <span class="blog-eyebrow">Блог Krepko · 2026</span>
-    <h1 class="blog-heading">Жизнь в Испании на родном языке — <span class="accent">статьи и гайды</span></h1>
-    <div class="blog-sub"><strong>34 практических гайда</strong> для украинцев и русскоязычных в Испании: ВНЖ, документы, банки, налоги, жильё. Только практика, без воды.</div>
 
-
-    <div class="filter-bar" id="filter-bar">
-      <button class="filter-btn active" data-filter="all">Все <span class="cnt" id="cnt-all"></span></button>
-      <button class="filter-btn" data-filter="vnzh">ВНЖ <span class="cnt" id="cnt-vnzh"></span></button>
-      <button class="filter-btn" data-filter="docs">Документы <span class="cnt" id="cnt-docs"></span></button>
-      <button class="filter-btn" data-filter="finance">Финансы <span class="cnt" id="cnt-finance"></span></button>
-      <button class="filter-btn" data-filter="work">Работа <span class="cnt" id="cnt-work"></span></button>
-      <button class="filter-btn" data-filter="life">Жильё <span class="cnt" id="cnt-life"></span></button>
-      <button class="filter-btn" data-filter="social">Семья <span class="cnt" id="cnt-social"></span></button>
+    <div class="blog-head">
+      <h1 class="blog-head__h1">Жизнь в Испании на родном языке</h1>
+      <p class="blog-head__dek">Разбираем процедуры, из-за которых обычно теряют время и деньги: документы, ВНЖ, банки, налоги. Пишем по первоисточникам и обновляем, когда меняются правила.</p>
     </div>
 
-    <div class="divider"></div>
+    <div class="blog-filter"><button class="blog-filter__pill is-on" data-filter="all">Все темы</button><button class="blog-filter__pill" data-filter="vnzh">ВНЖ и статус</button><button class="blog-filter__pill" data-filter="docs">Документы</button><button class="blog-filter__pill" data-filter="finance">Деньги</button><button class="blog-filter__pill" data-filter="work">Работа</button><button class="blog-filter__pill" data-filter="life">Жизнь здесь</button><button class="blog-filter__pill" data-filter="social">Соцвопросы</button></div>
 
-    <a class="article-card article-card--featured" data-cat="vnzh" href="/regularizacion-2026/">
-      <span class="article-tag">📘 LANDING · ВНЖ · ARRAIGO 2026</span>
-      <span class="article-title">Регуляризация в Испании 2026 — 4 пути через arraigo</span>
-      <span class="article-desc">Полный обзор путей arraigo (social, laboral, familiar, por formación): требования, документы, сроки, частые ошибки. Krepko координирует работу с миграционным юристом на русском/украинском.</span>
-      <span class="article-meta">→ Подробная landing-страница</span>
-    </a>
-
-    <a class="article-card article-card--featured" data-cat="docs" href="/notario/">
-      <span class="article-tag">📘 GUIDE · НОТАРИУС В ИСПАНИИ</span>
-      <span class="article-title">Нотариус в Испании 2026 — полный гайд: документы, цена, сроки, апостиль</span>
-      <span class="article-desc">Всё о нотариальных услугах: 10 типичных сценариев, 5 шагов как сделать, сроки 1-3 дня, апостиль. Без пост-перевода с испанского. 6 городов.</span>
-      <span class="article-meta">→ Pillar-гайд, ~10 мин чтения</span>
-    </a>
-
-    <a class="article-card" data-cat="docs" href="https://krepko.es/blog/doverennost-na-russkom/">
-      <span class="article-tag">Документы · Нотариус</span>
-      <span class="article-title">Доверенность в Испании на русском за 30 минут</span>
-      <span class="article-desc">Нотариальная доверенность на родном языке (РУС/УКР/ENG) — за 30 минут вместо нескольких визитов с переводчиком. Когда нужна, как делается, апостиль для Украины/РФ.</span>
-      <span class="article-meta">~6 мин чтения</span>
-    </a>
-
-    <a class="article-card" data-cat="docs" href="https://krepko.es/blog/carta-de-invitacion-ispaniya/">
-      <span class="article-tag">Документы · Нотариус</span>
-      <span class="article-title">Carta de invitación через нотариуса — день в день вместо 2 месяцев в полиции</span>
-      <span class="article-desc">Cita в migración сейчас 1-3 месяца. Альтернатива — нотариальное приглашение день в день. Принимается консульством для шенгенской визы.</span>
-      <span class="article-meta">~6 мин чтения</span>
-    </a>
-
-    <a class="article-card" data-cat="docs" href="https://krepko.es/blog/matrimonio-ispaniya-inostrancev/">
-      <span class="article-tag">Документы · Нотариус · Семья</span>
-      <span class="article-title">Свадьба в Испании для иностранцев: брак в нотариусе или в ЗАГСе</span>
-      <span class="article-desc">Гражданский брак (matrimonio civil) для иностранцев: пути через Registro Civil или нотариуса, документы, апостили, церемония на родном языке.</span>
-      <span class="article-meta">~6 мин чтения</span>
-    </a>
-
-    <a class="article-card" data-cat="docs" href="https://krepko.es/blog/separacion-de-bienes-ispaniya/">
-      <span class="article-tag">Документы · Нотариус · Семья</span>
-      <span class="article-title">Брачный контракт (separación de bienes) в Испании: как защитить активы</span>
-      <span class="article-desc">Раздельное владение имуществом у нотариуса. Когда нужен, как оформить, документы, признание в Украине/РФ.</span>
-      <span class="article-meta">~5 мин чтения</span>
-    </a>
-
-    <a class="article-card" data-cat="docs" href="https://krepko.es/blog/razvod-ispaniya-notarius/">
-      <span class="article-tag">Документы · Нотариус · Семья</span>
-      <span class="article-title">Развод в Испании через нотариуса: быстрее и дешевле, чем суд</span>
-      <span class="article-desc">Развод по согласию у нотариуса за 2-3 недели вместо 6-12 месяцев в суде. Условия, convenio regulador, документы, признание за рубежом.</span>
-      <span class="article-meta">~5 мин чтения</span>
-    </a>
-
-    <a class="article-card" data-cat="vnzh" href="https://krepko.es/blog/vnzh-ispaniya/">
-      <span class="article-tag">ВНЖ · Статус</span>
-      <span class="article-title">Как получить ВНЖ в Испании: полный гид для украинцев и русскоязычных</span>
-      <span class="article-desc">Все типы ВНЖ: временная защита, arraigo social, arraigo laboral, arraigo familiar. Документы, сроки, частые ошибки.</span>
-      <span class="article-meta">~7 мин чтения</span>
-    </a>
-
-    <a class="article-card" data-cat="finance" href="https://krepko.es/blog/bank-nerezident/">
-      <span class="article-tag">Банк · Финансы</span>
-      <span class="article-title">Как открыть счёт в испанском банке нерезиденту: пошаговый гайд</span>
-      <span class="article-desc">Какие банки работают с нерезидентами, какие документы нужны, советы по CaixaBank, Sabadell и другим.</span>
-      <span class="article-meta">~6 мин чтения</span>
-    </a>
-
-    <a class="article-card" data-cat="work" href="https://krepko.es/blog/autonomo-ispaniya/">
-      <span class="article-tag">Autónomo · Налоги</span>
-      <span class="article-title">Регистрация autónomo в Испании: налоги, взносы, как работать легально</span>
-      <span class="article-desc">Пошаговая регистрация, tarifa plana, квартальные декларации IRPF и IVA, реальные расходы самозанятого.</span>
-      <span class="article-meta">~8 мин чтения</span>
-    </a>
-
-    <a class="article-card" data-cat="docs" href="https://krepko.es/blog/apostil-perevod/">
-      <span class="article-tag">Документы · Нотариус</span>
-      <span class="article-title">Апостиль и присяжный перевод в Испании: что это и зачем нужно</span>
-      <span class="article-desc">В чём разница между апостилем и присяжным переводом, где получить, сколько стоит и сколько ждать.</span>
-      <span class="article-meta">~6 мин чтения</span>
-    </a>
-
-    <a class="article-card" data-cat="vnzh" href="https://krepko.es/blog/temporalnaya-zashita/">
-      <span class="article-tag">Временная защита · 2025</span>
-      <span class="article-title">Временная защита в Испании 2026: продление, права, что делать украинцам</span>
-      <span class="article-desc">Актуальный статус ВЗ, какие права она даёт, как продлить и когда переходить на обычный ВНЖ.</span>
-      <span class="article-meta">~7 мин чтения</span>
-    </a>
-
-    <a class="article-card" data-cat="docs" href="https://krepko.es/blog/nie-tie-ispaniya/">
-      <span class="article-tag">Документы · Статус</span>
-      <span class="article-title">NIE и TIE в Испании: в чём разница и как получить</span>
-      <span class="article-desc">NIE — номер иностранца, TIE — карточка резидента. Как получить каждый, сколько стоит, типичные ошибки при записи и оплате тасы.</span>
-      <span class="article-meta">~7 мин чтения</span>
-    </a>
-
-    <a class="article-card" data-cat="docs" href="https://krepko.es/blog/padron-municipal/">
-      <span class="article-tag">Документы · Регистрация</span>
-      <span class="article-title">Прописка в Испании (padrón municipal): зачем нужна и как оформить</span>
-      <span class="article-desc">Почему падрон — ключевой документ для медицины, школы и ВНЖ. Как записаться, что принести и можно ли без официального договора аренды.</span>
-      <span class="article-meta">~7 мин чтения</span>
-    </a>
-
-    <a class="article-card" data-cat="life" href="https://krepko.es/blog/meditsinskaya-strahovka-ispaniya/">
-      <span class="article-tag">Страховка · Медицина</span>
-      <span class="article-title">Медицинская страховка в Испании: государственная и частная</span>
-      <span class="article-desc">Tarjeta sanitaria — кто имеет право бесплатно, Sanitas, Adeslas, Asisa — цены и плюсы частной страховки, требования для визы.</span>
-      <span class="article-meta">~8 мин чтения</span>
-    </a>
-
-    <a class="article-card" data-cat="life" href="https://krepko.es/blog/pokupka-nedvizhimosti-ispaniya/">
-      <span class="article-tag">Недвижимость · Инвестиции</span>
-      <span class="article-title">Покупка недвижимости в Испании: пошаговый гид для иностранцев</span>
-      <span class="article-desc">NIE, нотариус, реестр, налоги IVA и ITP, ипотека для нерезидентов 60–70% LTV, типичные ловушки при покупке.</span>
-      <span class="article-meta">~9 мин чтения</span>
-    </a>
-
-    <a class="article-card" data-cat="finance" href="https://krepko.es/blog/perevod-deneg-ispaniya/">
-      <span class="article-tag">Финансы · Переводы</span>
-      <span class="article-title">Как перевести деньги в Испанию: Wise, SWIFT, наличные</span>
-      <span class="article-desc">Сравниваем Wise, SWIFT, Revolut, Western Union и ввоз наличных. Комиссии, лимиты, правила декларирования и что делать, если банк заморозил перевод.</span>
-      <span class="article-meta">~8 мин чтения</span>
-    </a>
-
-    <a class="article-card" data-cat="finance" href="https://krepko.es/blog/neobanki-ispaniya/">
-      <span class="article-tag">Финансы · Необанки</span>
-      <span class="article-title">Необанки в Испании 2026: Wise, Revolut, N26 для нерезидентов и украинцев</span>
-      <span class="article-desc">Сравниваем Wise, Revolut, N26 и Bunq: комиссии, лимиты, карты, IBAN и что подойдёт без NIE. Реальный опыт.</span>
-      <span class="article-meta">~7 мин чтения</span>
-    </a>
-
-    <a class="article-card" data-cat="life" href="https://krepko.es/blog/arenda-zhilya-ispaniya/">
-      <span class="article-tag">Жильё · Аренда</span>
-      <span class="article-title">Как снять квартиру в Испании: полный гайд для украинцев и русскоязычных</span>
-      <span class="article-desc">Idealista, Fotocasa, contrato de arrendamiento — как найти жильё, что проверить, как не попасть на мошенников и что делать без NIE.</span>
-      <span class="article-meta">~8 мин чтения</span>
-    </a>
-
-    <a class="article-card" data-cat="work" href="https://krepko.es/blog/irpf-nalogi-ispaniya/">
-      <span class="article-tag">Налоги · IRPF</span>
-      <span class="article-title">IRPF и налоги в Испании 2026: кто платит, сколько и когда</span>
-      <span class="article-desc">Ставки IRPF, декларация Renta, резиденты и нерезиденты, дедакции и как не попасть на штраф. Понятно для тех, кто не бухгалтер.</span>
-      <span class="article-meta">~9 мин чтения</span>
-    </a>
-
-    <a class="article-card" data-cat="work" href="https://krepko.es/blog/otkryt-sl-biznes-ispaniya/">
-      <span class="article-tag">Бизнес · SL</span>
-      <span class="article-title">Как открыть SL (ООО) в Испании: пошаговый гайд 2026</span>
-      <span class="article-desc">Sociedad Limitada vs autónomo, минимальный капитал €3000, нотариус, registro mercantil, счёт и типичные ошибки при регистрации.</span>
-      <span class="article-meta">~9 мин чтения</span>
-    </a>
-
-    <a class="article-card" data-cat="vnzh" href="https://krepko.es/blog/viza-tsifrovogo-nomada-ispaniya/">
-      <span class="article-tag">Виза · Цифровой номад</span>
-      <span class="article-title">Виза цифрового номада в Испании 2026: требования, документы, подводные камни</span>
-      <span class="article-desc">Ley Startups, минимальный доход, список документов, сроки, разница с autónomo и как подать заявку без ошибок.</span>
-      <span class="article-meta">~8 мин чтения</span>
-    </a>
-
-    <a class="article-card" data-cat="vnzh" href="https://krepko.es/blog/vossoedineniye-semi-ispaniya/">
-      <span class="article-tag">ВНЖ · Семья</span>
-      <span class="article-title">Воссоединение семьи в Испании: кто может и как</span>
-      <span class="article-desc">Reagrupación familiar: кто имеет право, какие документы нужны, сроки и что делать, если отказали. Для резидентов с ВНЖ.</span>
-      <span class="article-meta">~7 мин чтения</span>
-    </a>
-
-    <a class="article-card" data-cat="social" href="https://krepko.es/blog/socialnye-posobiya-ispaniya/">
-      <span class="article-tag">Пособия · Социалка</span>
-      <span class="article-title">Социальные пособия в Испании для украинцев 2026: IMV, RMI, льготы</span>
-      <span class="article-desc">Ingreso Mínimo Vital, Renta Mínima, пособие по безработице, льготы по ВЗ — кто имеет право и как подать заявку.</span>
-      <span class="article-meta">~8 мин чтения</span>
-    </a>
-
-    <a class="article-card" data-cat="docs" href="https://krepko.es/blog/zamena-prav-ispaniya/">
-      <span class="article-tag">Документы · Права</span>
-      <span class="article-title">Замена украинских водительских прав на испанские 2026</span>
-      <span class="article-desc">Пошаговый гайд: DGT, tasa, экзамен или без него, сроки и типичные отказы при замене украинского удостоверения.</span>
-      <span class="article-meta">~7 мин чтения</span>
-    </a>
-
-    <a class="article-card" data-cat="life" href="https://krepko.es/blog/tarjeta-sanitaria-ispaniya/">
-      <span class="article-tag">Медицина · Карта здоровья</span>
-      <span class="article-title">Tarjeta Sanitaria в Испании: как получить медицинскую карту</span>
-      <span class="article-desc">Кто имеет право на бесплатную карту здоровья, как записаться в centro de salud, документы и что делать до получения карты.</span>
-      <span class="article-meta">~6 мин чтения</span>
-    </a>
-
-    <a class="article-card" data-cat="social" href="https://krepko.es/blog/shkola-deti-ispaniya/">
-      <span class="article-tag">Дети · Образование</span>
-      <span class="article-title">Как записать ребёнка в школу в Испании: гайд для украинских родителей</span>
-      <span class="article-desc">Matriculación, зоны, документы, языковые классы адаптации и как помочь ребёнку влиться в испанскую школу.</span>
-      <span class="article-meta">~7 мин чтения</span>
-    </a>
-
-    <a class="article-card" data-cat="vnzh" href="https://krepko.es/blog/arraigo-social-ispaniya/">
-      <span class="article-tag">ВНЖ</span>
-      <span class="article-title">Arraigo social — ВНЖ через 2 года жизни в Испании</span>
-      <span class="article-desc">Кто подходит, какие документы собирать, как доказать интеграцию и что делать после получения ВНЖ.</span>
-      <span class="article-meta">~7 мин чтения</span>
-    </a>
-
-    <a class="article-card" data-cat="vnzh" href="https://krepko.es/blog/arraigo-laboral-ispaniya/">
-      <span class="article-tag">ВНЖ</span>
-      <span class="article-title">Arraigo laboral — ВНЖ через 2 года работы в Испании</span>
-      <span class="article-desc">Кто проходит, как подтвердить трудовой стаж, отличия от arraigo social и пошаговый порядок подачи.</span>
-      <span class="article-meta">~7 мин чтения</span>
-    </a>
-
-    <a class="article-card" data-cat="docs" href="https://krepko.es/blog/zamena-pasporta-ukraina-ispaniya/">
-      <span class="article-tag">Документы</span>
-      <span class="article-title">Замена украинского паспорта в Испании 2026</span>
-      <span class="article-desc">Где можно поменять паспорт без выезда в Украину, документы, сроки и стоимость в посольстве и ГП «Документ».</span>
-      <span class="article-meta">~5 мин чтения</span>
-    </a>
-
-    <a class="article-card" data-cat="docs" href="https://krepko.es/blog/certificado-empadronamiento/">
-      <span class="article-tag">Документы</span>
-      <span class="article-title">Certificado de empadronamiento: как получить выписку из падрона</span>
-      <span class="article-desc">Зачем нужна справка, как заказать онлайн или в ayuntamiento, сколько стоит и сколько действует.</span>
-      <span class="article-meta">~6 мин чтения</span>
-    </a>
-
-    <a class="article-card" data-cat="docs" href="https://krepko.es/blog/modelo-030/">
-      <span class="article-tag">Документы · Налоговая</span>
-      <span class="article-title">Modelo 030: регистрация и изменение данных в налоговой Испании</span>
-      <span class="article-desc">Когда подавать modelo 030, как заполнить онлайн с certificado digital и без него, типичные ошибки.</span>
-      <span class="article-meta">~6 мин чтения</span>
-    </a>
-
-    <a class="article-card" data-cat="docs" href="https://krepko.es/blog/certificado-digital/">
-      <span class="article-tag">Документы · Электронная подпись</span>
-      <span class="article-title">Certificado digital: электронная подпись в Испании 2026</span>
-      <span class="article-desc">Зачем нужна, как получить через FNMT, что делать на Mac, и какие сервисы откроются после установки.</span>
-      <span class="article-meta">~7 мин чтения</span>
-    </a>
-
-    <a class="article-card" data-cat="life" href="https://krepko.es/blog/seguro-hogar-ispaniya/">
-      <span class="article-tag">Жильё · Страховка</span>
-      <span class="article-title">Страховка жилья в Испании: как выбрать seguro de hogar</span>
-      <span class="article-desc">Что покрывает базовая страховка, разница continente vs contenido, обязательно ли при ипотеке и где сравнивать.</span>
-      <span class="article-meta">~6 мин чтения</span>
-    </a>
-
-    <!-- Контекстная карточка: всегда последняя, текст и href меняются от фильтра -->
-    <a class="article-card article-card--suggest" id="suggestCard"
-       href="https://t.me/krepko_es_admin_bot?start=suggest"
-       target="_blank" rel="noopener noreferrer">
-      <span class="article-tag" id="suggestTag"><svg class="tag-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6"/><path d="M10 21h4"/><path d="M12 3a6 6 0 0 0-4 10c.7.8 1 1.6 1 2.5V17h6v-1.5c0-.9.3-1.7 1-2.5a6 6 0 0 0-4-10z"/></svg> Своя идея</span>
-      <span class="article-title" id="suggestTitle">Не нашли тему — предложите свою</span>
-      <span class="article-desc" id="suggestDesc">Опишите вопрос или ситуацию, которой нет в блоге Krepko. Если тема актуальна — станет статьёй или постом в @krepko_es.</span>
-      <span class="article-meta">~1 минута заполнить</span>
-    </a>
-
-    <div class="divider"></div>
-
-    <div class="cta-block">
-      <div class="cta-block-title">Krepko ведёт под ключ — документами?</div>
-      <div class="cta-block-sub">Krepko работает в Барселоне, Мадриде, Аликанте, Валенсии и Малаге. Бесплатная консультация.</div>
-      <a class="btn" href="https://wa.me/34641048296?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%2C%20%D0%BD%D1%83%D0%B6%D0%BD%D0%B0%20%D0%BA%D0%BE%D0%BD%D1%81%D1%83%D0%BB%D1%8C%D1%82%D0%B0%D1%86%D0%B8%D1%8F" rel="noopener noreferrer" target="_blank">
-        <span class="btn-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9 8.5 8.5 0 0 1 8.5 8.5z"/></svg></span>
-        <span class="btn-title">Написать в WhatsApp</span>
+    <div class="blog-grid">
+      <a class="blog-card" data-cat="vnzh" href="/regularizacion-2026/">
+        <span class="blog-card__top"><span class="blog-card__cat">ВНЖ и статус</span></span>
+        <span class="blog-card__body">
+          <span class="blog-card__kicker">Блог</span>
+          <span class="blog-card__tags"><span class="blog-card__tag">ВНЖ</span><span class="blog-card__tag">Arraigo 2026</span></span>
+          <span class="blog-card__title">Регуляризация в Испании 2026 — 4 пути через arraigo</span>
+          <span class="blog-card__desc">Полный обзор путей arraigo (social, laboral, familiar, por formación): требования, документы, сроки, частые ошибки. Krepko координирует работу с миграционным юристом на русском/украинском.</span>
+          <span class="blog-card__date"></span>
+        </span>
       </a>
-      <a class="btn" href="https://t.me/krepko_es_admin_bot" target="_blank" rel="noopener noreferrer" style="background:#F5F0EB;border-color:#E8DFD1;color:#2D2D2D;">
-        <span class="btn-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="7" width="16" height="13" rx="2"/><circle cx="9" cy="13" r="1.2" fill="currentColor"/><circle cx="15" cy="13" r="1.2" fill="currentColor"/><path d="M12 7V4M10 4h4"/></svg></span>
-        <span class="btn-title">Telegram-бот</span>
+      <a class="blog-card" data-cat="docs" href="/notario/">
+        <span class="blog-card__top"><span class="blog-card__cat">Документы</span></span>
+        <span class="blog-card__body">
+          <span class="blog-card__kicker">Блог</span>
+          <span class="blog-card__tags"><span class="blog-card__tag">Нотариус в испании</span></span>
+          <span class="blog-card__title">Нотариус в Испании 2026 — полный гайд: документы, цена, сроки, апостиль</span>
+          <span class="blog-card__desc">Всё о нотариальных услугах: 10 типичных сценариев, 5 шагов как сделать, сроки 1-3 дня, апостиль. Без пост-перевода с испанского. 6 городов.</span>
+          <span class="blog-card__date"></span>
+        </span>
+      </a>
+      <a class="blog-card" data-cat="docs" href="https://krepko.es/blog/doverennost-na-russkom/">
+        <span class="blog-card__top"><span class="blog-card__cat">Документы</span></span>
+        <span class="blog-card__body">
+          <span class="blog-card__kicker">Блог</span>
+          <span class="blog-card__tags"><span class="blog-card__tag">Документы</span><span class="blog-card__tag">Нотариус</span></span>
+          <span class="blog-card__title">Доверенность в Испании на русском за 30 минут</span>
+          <span class="blog-card__desc">Нотариальная доверенность на родном языке (РУС/УКР/ENG) — за 30 минут вместо нескольких визитов с переводчиком. Когда нужна, как делается, апостиль для Украины/РФ.</span>
+          <span class="blog-card__date">13 августа 2026</span>
+        </span>
+      </a>
+      <a class="blog-card" data-cat="docs" href="https://krepko.es/blog/carta-de-invitacion-ispaniya/">
+        <span class="blog-card__top"><span class="blog-card__cat">Документы</span></span>
+        <span class="blog-card__body">
+          <span class="blog-card__kicker">Блог</span>
+          <span class="blog-card__tags"><span class="blog-card__tag">Документы</span><span class="blog-card__tag">Нотариус</span></span>
+          <span class="blog-card__title">Carta de invitación через нотариуса — день в день вместо 2 месяцев в полиции</span>
+          <span class="blog-card__desc">Cita в migración сейчас 1-3 месяца. Альтернатива — нотариальное приглашение день в день. Принимается консульством для шенгенской визы.</span>
+          <span class="blog-card__date">13 августа 2026</span>
+        </span>
+      </a>
+      <a class="blog-card" data-cat="docs" href="https://krepko.es/blog/matrimonio-ispaniya-inostrancev/">
+        <span class="blog-card__top"><span class="blog-card__cat">Документы</span></span>
+        <span class="blog-card__body">
+          <span class="blog-card__kicker">Блог</span>
+          <span class="blog-card__tags"><span class="blog-card__tag">Документы</span><span class="blog-card__tag">Нотариус</span><span class="blog-card__tag">Семья</span></span>
+          <span class="blog-card__title">Свадьба в Испании для иностранцев: брак в нотариусе или в ЗАГСе</span>
+          <span class="blog-card__desc">Гражданский брак (matrimonio civil) для иностранцев: пути через Registro Civil или нотариуса, документы, апостили, церемония на родном языке.</span>
+          <span class="blog-card__date">13 августа 2026</span>
+        </span>
+      </a>
+      <a class="blog-card" data-cat="docs" href="https://krepko.es/blog/separacion-de-bienes-ispaniya/">
+        <span class="blog-card__top"><span class="blog-card__cat">Документы</span></span>
+        <span class="blog-card__body">
+          <span class="blog-card__kicker">Блог</span>
+          <span class="blog-card__tags"><span class="blog-card__tag">Документы</span><span class="blog-card__tag">Нотариус</span><span class="blog-card__tag">Семья</span></span>
+          <span class="blog-card__title">Брачный контракт (separación de bienes) в Испании: как защитить активы</span>
+          <span class="blog-card__desc">Раздельное владение имуществом у нотариуса. Когда нужен, как оформить, документы, признание в Украине/РФ.</span>
+          <span class="blog-card__date">13 августа 2026</span>
+        </span>
+      </a>
+      <a class="blog-card" data-cat="docs" href="https://krepko.es/blog/razvod-ispaniya-notarius/">
+        <span class="blog-card__top"><span class="blog-card__cat">Документы</span></span>
+        <span class="blog-card__body">
+          <span class="blog-card__kicker">Блог</span>
+          <span class="blog-card__tags"><span class="blog-card__tag">Документы</span><span class="blog-card__tag">Нотариус</span><span class="blog-card__tag">Семья</span></span>
+          <span class="blog-card__title">Развод в Испании через нотариуса: быстрее и дешевле, чем суд</span>
+          <span class="blog-card__desc">Развод по согласию у нотариуса за 2-3 недели вместо 6-12 месяцев в суде. Условия, convenio regulador, документы, признание за рубежом.</span>
+          <span class="blog-card__date">13 августа 2026</span>
+        </span>
+      </a>
+      <a class="blog-card" data-cat="vnzh" href="https://krepko.es/blog/vnzh-ispaniya/">
+        <span class="blog-card__top"><span class="blog-card__cat">ВНЖ и статус</span></span>
+        <span class="blog-card__body">
+          <span class="blog-card__kicker">Блог</span>
+          <span class="blog-card__tags"><span class="blog-card__tag">ВНЖ</span><span class="blog-card__tag">Статус</span></span>
+          <span class="blog-card__title">Как получить ВНЖ в Испании: полный гид для украинцев и русскоязычных</span>
+          <span class="blog-card__desc">Все типы ВНЖ: временная защита, arraigo social, arraigo laboral, arraigo familiar. Документы, сроки, частые ошибки.</span>
+          <span class="blog-card__date">13 августа 2026</span>
+        </span>
+      </a>
+      <a class="blog-card" data-cat="finance" href="https://krepko.es/blog/bank-nerezident/">
+        <span class="blog-card__top"><span class="blog-card__cat">Деньги</span></span>
+        <span class="blog-card__body">
+          <span class="blog-card__kicker">Блог</span>
+          <span class="blog-card__tags"><span class="blog-card__tag">Банк</span><span class="blog-card__tag">Финансы</span></span>
+          <span class="blog-card__title">Как открыть счёт в испанском банке нерезиденту: пошаговый гайд</span>
+          <span class="blog-card__desc">Какие банки работают с нерезидентами, какие документы нужны, советы по CaixaBank, Sabadell и другим.</span>
+          <span class="blog-card__date">13 августа 2026</span>
+        </span>
+      </a>
+      <a class="blog-card" data-cat="work" href="https://krepko.es/blog/autonomo-ispaniya/">
+        <span class="blog-card__top"><span class="blog-card__cat">Работа</span></span>
+        <span class="blog-card__body">
+          <span class="blog-card__kicker">Блог</span>
+          <span class="blog-card__tags"><span class="blog-card__tag">Autónomo</span><span class="blog-card__tag">Налоги</span></span>
+          <span class="blog-card__title">Регистрация autónomo в Испании: налоги, взносы, как работать легально</span>
+          <span class="blog-card__desc">Пошаговая регистрация, tarifa plana, квартальные декларации IRPF и IVA, реальные расходы самозанятого.</span>
+          <span class="blog-card__date">13 августа 2026</span>
+        </span>
+      </a>
+      <a class="blog-card" data-cat="docs" href="https://krepko.es/blog/apostil-perevod/">
+        <span class="blog-card__top"><span class="blog-card__cat">Документы</span></span>
+        <span class="blog-card__body">
+          <span class="blog-card__kicker">Блог</span>
+          <span class="blog-card__tags"><span class="blog-card__tag">Документы</span><span class="blog-card__tag">Нотариус</span></span>
+          <span class="blog-card__title">Апостиль и присяжный перевод в Испании: что это и зачем нужно</span>
+          <span class="blog-card__desc">В чём разница между апостилем и присяжным переводом, где получить, сколько стоит и сколько ждать.</span>
+          <span class="blog-card__date">13 августа 2026</span>
+        </span>
+      </a>
+      <a class="blog-card" data-cat="vnzh" href="https://krepko.es/blog/temporalnaya-zashita/">
+        <span class="blog-card__top"><span class="blog-card__cat">ВНЖ и статус</span></span>
+        <span class="blog-card__body">
+          <span class="blog-card__kicker">Блог</span>
+          <span class="blog-card__tags"><span class="blog-card__tag">Временная защита</span><span class="blog-card__tag">2025</span></span>
+          <span class="blog-card__title">Временная защита в Испании 2026: продление, права, что делать украинцам</span>
+          <span class="blog-card__desc">Актуальный статус ВЗ, какие права она даёт, как продлить и когда переходить на обычный ВНЖ.</span>
+          <span class="blog-card__date">13 августа 2026</span>
+        </span>
+      </a>
+      <a class="blog-card" data-cat="docs" href="https://krepko.es/blog/nie-tie-ispaniya/">
+        <span class="blog-card__top"><span class="blog-card__cat">Документы</span></span>
+        <span class="blog-card__body">
+          <span class="blog-card__kicker">Блог</span>
+          <span class="blog-card__tags"><span class="blog-card__tag">Документы</span><span class="blog-card__tag">Статус</span></span>
+          <span class="blog-card__title">NIE и TIE в Испании: в чём разница и как получить</span>
+          <span class="blog-card__desc">NIE — номер иностранца, TIE — карточка резидента. Как получить каждый, сколько стоит, типичные ошибки при записи и оплате тасы.</span>
+          <span class="blog-card__date">13 августа 2026</span>
+        </span>
+      </a>
+      <a class="blog-card" data-cat="docs" href="https://krepko.es/blog/padron-municipal/">
+        <span class="blog-card__top"><span class="blog-card__cat">Документы</span></span>
+        <span class="blog-card__body">
+          <span class="blog-card__kicker">Блог</span>
+          <span class="blog-card__tags"><span class="blog-card__tag">Документы</span><span class="blog-card__tag">Регистрация</span></span>
+          <span class="blog-card__title">Прописка в Испании (padrón municipal): зачем нужна и как оформить</span>
+          <span class="blog-card__desc">Почему падрон — ключевой документ для медицины, школы и ВНЖ. Как записаться, что принести и можно ли без официального договора аренды.</span>
+          <span class="blog-card__date">13 августа 2026</span>
+        </span>
+      </a>
+      <a class="blog-card" data-cat="life" href="https://krepko.es/blog/meditsinskaya-strahovka-ispaniya/">
+        <span class="blog-card__top"><span class="blog-card__cat">Жизнь здесь</span></span>
+        <span class="blog-card__body">
+          <span class="blog-card__kicker">Блог</span>
+          <span class="blog-card__tags"><span class="blog-card__tag">Страховка</span><span class="blog-card__tag">Медицина</span></span>
+          <span class="blog-card__title">Медицинская страховка в Испании: государственная и частная</span>
+          <span class="blog-card__desc">Tarjeta sanitaria — кто имеет право бесплатно, Sanitas, Adeslas, Asisa — цены и плюсы частной страховки, требования для визы.</span>
+          <span class="blog-card__date">13 августа 2026</span>
+        </span>
+      </a>
+      <a class="blog-card" data-cat="life" href="https://krepko.es/blog/pokupka-nedvizhimosti-ispaniya/">
+        <span class="blog-card__top"><span class="blog-card__cat">Жизнь здесь</span></span>
+        <span class="blog-card__body">
+          <span class="blog-card__kicker">Блог</span>
+          <span class="blog-card__tags"><span class="blog-card__tag">Недвижимость</span><span class="blog-card__tag">Инвестиции</span></span>
+          <span class="blog-card__title">Покупка недвижимости в Испании: пошаговый гид для иностранцев</span>
+          <span class="blog-card__desc">NIE, нотариус, реестр, налоги IVA и ITP, ипотека для нерезидентов 60–70% LTV, типичные ловушки при покупке.</span>
+          <span class="blog-card__date">13 августа 2026</span>
+        </span>
+      </a>
+      <a class="blog-card" data-cat="finance" href="https://krepko.es/blog/perevod-deneg-ispaniya/">
+        <span class="blog-card__top"><span class="blog-card__cat">Деньги</span></span>
+        <span class="blog-card__body">
+          <span class="blog-card__kicker">Блог</span>
+          <span class="blog-card__tags"><span class="blog-card__tag">Финансы</span><span class="blog-card__tag">Переводы</span></span>
+          <span class="blog-card__title">Как перевести деньги в Испанию: Wise, SWIFT, наличные</span>
+          <span class="blog-card__desc">Сравниваем Wise, SWIFT, Revolut, Western Union и ввоз наличных. Комиссии, лимиты, правила декларирования и что делать, если банк заморозил перевод.</span>
+          <span class="blog-card__date">13 августа 2026</span>
+        </span>
+      </a>
+      <a class="blog-card" data-cat="finance" href="https://krepko.es/blog/neobanki-ispaniya/">
+        <span class="blog-card__top"><span class="blog-card__cat">Деньги</span></span>
+        <span class="blog-card__body">
+          <span class="blog-card__kicker">Блог</span>
+          <span class="blog-card__tags"><span class="blog-card__tag">Финансы</span><span class="blog-card__tag">Необанки</span></span>
+          <span class="blog-card__title">Необанки в Испании 2026: Wise, Revolut, N26 для нерезидентов и украинцев</span>
+          <span class="blog-card__desc">Сравниваем Wise, Revolut, N26 и Bunq: комиссии, лимиты, карты, IBAN и что подойдёт без NIE. Реальный опыт.</span>
+          <span class="blog-card__date">13 августа 2026</span>
+        </span>
+      </a>
+      <a class="blog-card" data-cat="life" href="https://krepko.es/blog/arenda-zhilya-ispaniya/">
+        <span class="blog-card__top"><span class="blog-card__cat">Жизнь здесь</span></span>
+        <span class="blog-card__body">
+          <span class="blog-card__kicker">Блог</span>
+          <span class="blog-card__tags"><span class="blog-card__tag">Жильё</span><span class="blog-card__tag">Аренда</span></span>
+          <span class="blog-card__title">Как снять квартиру в Испании: полный гайд для украинцев и русскоязычных</span>
+          <span class="blog-card__desc">Idealista, Fotocasa, contrato de arrendamiento — как найти жильё, что проверить, как не попасть на мошенников и что делать без NIE.</span>
+          <span class="blog-card__date">13 августа 2026</span>
+        </span>
+      </a>
+      <a class="blog-card" data-cat="work" href="https://krepko.es/blog/irpf-nalogi-ispaniya/">
+        <span class="blog-card__top"><span class="blog-card__cat">Работа</span></span>
+        <span class="blog-card__body">
+          <span class="blog-card__kicker">Блог</span>
+          <span class="blog-card__tags"><span class="blog-card__tag">Налоги</span><span class="blog-card__tag">IRPF</span></span>
+          <span class="blog-card__title">IRPF и налоги в Испании 2026: кто платит, сколько и когда</span>
+          <span class="blog-card__desc">Ставки IRPF, декларация Renta, резиденты и нерезиденты, дедакции и как не попасть на штраф. Понятно для тех, кто не бухгалтер.</span>
+          <span class="blog-card__date">13 августа 2026</span>
+        </span>
+      </a>
+      <a class="blog-card" data-cat="work" href="https://krepko.es/blog/otkryt-sl-biznes-ispaniya/">
+        <span class="blog-card__top"><span class="blog-card__cat">Работа</span></span>
+        <span class="blog-card__body">
+          <span class="blog-card__kicker">Блог</span>
+          <span class="blog-card__tags"><span class="blog-card__tag">Бизнес</span><span class="blog-card__tag">SL</span></span>
+          <span class="blog-card__title">Как открыть SL (ООО) в Испании: пошаговый гайд 2026</span>
+          <span class="blog-card__desc">Sociedad Limitada vs autónomo, минимальный капитал €3000, нотариус, registro mercantil, счёт и типичные ошибки при регистрации.</span>
+          <span class="blog-card__date">13 августа 2026</span>
+        </span>
+      </a>
+      <a class="blog-card" data-cat="vnzh" href="https://krepko.es/blog/viza-tsifrovogo-nomada-ispaniya/">
+        <span class="blog-card__top"><span class="blog-card__cat">ВНЖ и статус</span></span>
+        <span class="blog-card__body">
+          <span class="blog-card__kicker">Блог</span>
+          <span class="blog-card__tags"><span class="blog-card__tag">Виза</span><span class="blog-card__tag">Цифровой номад</span></span>
+          <span class="blog-card__title">Виза цифрового номада в Испании 2026: требования, документы, подводные камни</span>
+          <span class="blog-card__desc">Ley Startups, минимальный доход, список документов, сроки, разница с autónomo и как подать заявку без ошибок.</span>
+          <span class="blog-card__date">13 августа 2026</span>
+        </span>
+      </a>
+      <a class="blog-card" data-cat="vnzh" href="https://krepko.es/blog/vossoedineniye-semi-ispaniya/">
+        <span class="blog-card__top"><span class="blog-card__cat">ВНЖ и статус</span></span>
+        <span class="blog-card__body">
+          <span class="blog-card__kicker">Блог</span>
+          <span class="blog-card__tags"><span class="blog-card__tag">ВНЖ</span><span class="blog-card__tag">Семья</span></span>
+          <span class="blog-card__title">Воссоединение семьи в Испании: кто может и как</span>
+          <span class="blog-card__desc">Reagrupación familiar: кто имеет право, какие документы нужны, сроки и что делать, если отказали. Для резидентов с ВНЖ.</span>
+          <span class="blog-card__date">13 августа 2026</span>
+        </span>
+      </a>
+      <a class="blog-card" data-cat="social" href="https://krepko.es/blog/socialnye-posobiya-ispaniya/">
+        <span class="blog-card__top"><span class="blog-card__cat">Соцвопросы</span></span>
+        <span class="blog-card__body">
+          <span class="blog-card__kicker">Блог</span>
+          <span class="blog-card__tags"><span class="blog-card__tag">Пособия</span><span class="blog-card__tag">Социалка</span></span>
+          <span class="blog-card__title">Социальные пособия в Испании для украинцев 2026: IMV, RMI, льготы</span>
+          <span class="blog-card__desc">Ingreso Mínimo Vital, Renta Mínima, пособие по безработице, льготы по ВЗ — кто имеет право и как подать заявку.</span>
+          <span class="blog-card__date">13 августа 2026</span>
+        </span>
+      </a>
+      <a class="blog-card" data-cat="docs" href="https://krepko.es/blog/zamena-prav-ispaniya/">
+        <span class="blog-card__top"><span class="blog-card__cat">Документы</span></span>
+        <span class="blog-card__body">
+          <span class="blog-card__kicker">Блог</span>
+          <span class="blog-card__tags"><span class="blog-card__tag">Документы</span><span class="blog-card__tag">Права</span></span>
+          <span class="blog-card__title">Замена украинских водительских прав на испанские 2026</span>
+          <span class="blog-card__desc">Пошаговый гайд: DGT, tasa, экзамен или без него, сроки и типичные отказы при замене украинского удостоверения.</span>
+          <span class="blog-card__date">13 августа 2026</span>
+        </span>
+      </a>
+      <a class="blog-card" data-cat="life" href="https://krepko.es/blog/tarjeta-sanitaria-ispaniya/">
+        <span class="blog-card__top"><span class="blog-card__cat">Жизнь здесь</span></span>
+        <span class="blog-card__body">
+          <span class="blog-card__kicker">Блог</span>
+          <span class="blog-card__tags"><span class="blog-card__tag">Медицина</span><span class="blog-card__tag">Карта здоровья</span></span>
+          <span class="blog-card__title">Tarjeta Sanitaria в Испании: как получить медицинскую карту</span>
+          <span class="blog-card__desc">Кто имеет право на бесплатную карту здоровья, как записаться в centro de salud, документы и что делать до получения карты.</span>
+          <span class="blog-card__date">13 августа 2026</span>
+        </span>
+      </a>
+      <a class="blog-card" data-cat="social" href="https://krepko.es/blog/shkola-deti-ispaniya/">
+        <span class="blog-card__top"><span class="blog-card__cat">Соцвопросы</span></span>
+        <span class="blog-card__body">
+          <span class="blog-card__kicker">Блог</span>
+          <span class="blog-card__tags"><span class="blog-card__tag">Дети</span><span class="blog-card__tag">Образование</span></span>
+          <span class="blog-card__title">Как записать ребёнка в школу в Испании: гайд для украинских родителей</span>
+          <span class="blog-card__desc">Matriculación, зоны, документы, языковые классы адаптации и как помочь ребёнку влиться в испанскую школу.</span>
+          <span class="blog-card__date">13 августа 2026</span>
+        </span>
+      </a>
+      <a class="blog-card" data-cat="vnzh" href="https://krepko.es/blog/arraigo-social-ispaniya/">
+        <span class="blog-card__top"><span class="blog-card__cat">ВНЖ и статус</span></span>
+        <span class="blog-card__body">
+          <span class="blog-card__kicker">Блог</span>
+          <span class="blog-card__tags"><span class="blog-card__tag">ВНЖ</span></span>
+          <span class="blog-card__title">Arraigo social — ВНЖ через 2 года жизни в Испании</span>
+          <span class="blog-card__desc">Кто подходит, какие документы собирать, как доказать интеграцию и что делать после получения ВНЖ.</span>
+          <span class="blog-card__date">13 августа 2026</span>
+        </span>
+      </a>
+      <a class="blog-card" data-cat="vnzh" href="https://krepko.es/blog/arraigo-laboral-ispaniya/">
+        <span class="blog-card__top"><span class="blog-card__cat">ВНЖ и статус</span></span>
+        <span class="blog-card__body">
+          <span class="blog-card__kicker">Блог</span>
+          <span class="blog-card__tags"><span class="blog-card__tag">ВНЖ</span></span>
+          <span class="blog-card__title">Arraigo laboral — ВНЖ через 2 года работы в Испании</span>
+          <span class="blog-card__desc">Кто проходит, как подтвердить трудовой стаж, отличия от arraigo social и пошаговый порядок подачи.</span>
+          <span class="blog-card__date">13 августа 2026</span>
+        </span>
+      </a>
+      <a class="blog-card" data-cat="docs" href="https://krepko.es/blog/zamena-pasporta-ukraina-ispaniya/">
+        <span class="blog-card__top"><span class="blog-card__cat">Документы</span></span>
+        <span class="blog-card__body">
+          <span class="blog-card__kicker">Блог</span>
+          <span class="blog-card__tags"><span class="blog-card__tag">Документы</span></span>
+          <span class="blog-card__title">Замена украинского паспорта в Испании 2026</span>
+          <span class="blog-card__desc">Где можно поменять паспорт без выезда в Украину, документы, сроки и стоимость в посольстве и ГП «Документ».</span>
+          <span class="blog-card__date">13 августа 2026</span>
+        </span>
+      </a>
+      <a class="blog-card" data-cat="docs" href="https://krepko.es/blog/certificado-empadronamiento/">
+        <span class="blog-card__top"><span class="blog-card__cat">Документы</span></span>
+        <span class="blog-card__body">
+          <span class="blog-card__kicker">Блог</span>
+          <span class="blog-card__tags"><span class="blog-card__tag">Документы</span></span>
+          <span class="blog-card__title">Certificado de empadronamiento: как получить выписку из падрона</span>
+          <span class="blog-card__desc">Зачем нужна справка, как заказать онлайн или в ayuntamiento, сколько стоит и сколько действует.</span>
+          <span class="blog-card__date">13 августа 2026</span>
+        </span>
+      </a>
+      <a class="blog-card" data-cat="docs" href="https://krepko.es/blog/modelo-030/">
+        <span class="blog-card__top"><span class="blog-card__cat">Документы</span></span>
+        <span class="blog-card__body">
+          <span class="blog-card__kicker">Блог</span>
+          <span class="blog-card__tags"><span class="blog-card__tag">Документы</span><span class="blog-card__tag">Налоговая</span></span>
+          <span class="blog-card__title">Modelo 030: регистрация и изменение данных в налоговой Испании</span>
+          <span class="blog-card__desc">Когда подавать modelo 030, как заполнить онлайн с certificado digital и без него, типичные ошибки.</span>
+          <span class="blog-card__date">13 августа 2026</span>
+        </span>
+      </a>
+      <a class="blog-card" data-cat="docs" href="https://krepko.es/blog/certificado-digital/">
+        <span class="blog-card__top"><span class="blog-card__cat">Документы</span></span>
+        <span class="blog-card__body">
+          <span class="blog-card__kicker">Блог</span>
+          <span class="blog-card__tags"><span class="blog-card__tag">Документы</span><span class="blog-card__tag">Электронная подпись</span></span>
+          <span class="blog-card__title">Certificado digital: электронная подпись в Испании 2026</span>
+          <span class="blog-card__desc">Зачем нужна, как получить через FNMT, что делать на Mac, и какие сервисы откроются после установки.</span>
+          <span class="blog-card__date">13 августа 2026</span>
+        </span>
+      </a>
+      <a class="blog-card" data-cat="life" href="https://krepko.es/blog/seguro-hogar-ispaniya/">
+        <span class="blog-card__top"><span class="blog-card__cat">Жизнь здесь</span></span>
+        <span class="blog-card__body">
+          <span class="blog-card__kicker">Блог</span>
+          <span class="blog-card__tags"><span class="blog-card__tag">Жильё</span><span class="blog-card__tag">Страховка</span></span>
+          <span class="blog-card__title">Страховка жилья в Испании: как выбрать seguro de hogar</span>
+          <span class="blog-card__desc">Что покрывает базовая страховка, разница continente vs contenido, обязательно ли при ипотеке и где сравнивать.</span>
+          <span class="blog-card__date">13 августа 2026</span>
+        </span>
       </a>
     </div>
-</div>
-
-
-  <script>
-  (function(){
-    var btns = document.querySelectorAll('.filter-btn');
-    var cards = document.querySelectorAll('.article-card[data-cat]');
-
-    // Count per category
-    var counts = {all: cards.length};
-    cards.forEach(function(c){ var k = c.dataset.cat; counts[k] = (counts[k]||0)+1; });
-
-    // Fill all count badges
-    ['all','vnzh','docs','finance','work','life','social'].forEach(function(cat){
-      var el = document.getElementById('cnt-' + cat);
-      if(el && counts[cat]) el.textContent = counts[cat];
-    });
-
-    // Контекстный suggest-card в зависимости от выбранного фильтра.
-    var SUGGEST_CONTEXT = {
-      all:     { tag: '<svg class="tag-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6"/><path d="M10 21h4"/><path d="M12 3a6 6 0 0 0-4 10c.7.8 1 1.6 1 2.5V17h6v-1.5c0-.9.3-1.7 1-2.5a6 6 0 0 0-4-10z"/></svg> Своя идея',          title: 'Не нашли тему — предложите свою',                        desc: 'Опишите вопрос или ситуацию, которой нет в блоге Krepko. Если тема актуальна — станет статьёй или постом в @krepko_es.', payload: 'suggest' },
-      vnzh:    { tag: '<svg class="tag-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6"/><path d="M10 21h4"/><path d="M12 3a6 6 0 0 0-4 10c.7.8 1 1.6 1 2.5V17h6v-1.5c0-.9.3-1.7 1-2.5a6 6 0 0 0-4-10z"/></svg> Своя тема по ВНЖ',     title: 'Не нашли вашу ситуацию по ВНЖ — расскажите',           desc: 'Какой вид ВНЖ, какая страна, какой документ? Опишите — разберём в новой статье.', payload: 'suggest_vnzh' },
-      docs:    { tag: '<svg class="tag-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6"/><path d="M10 21h4"/><path d="M12 3a6 6 0 0 0-4 10c.7.8 1 1.6 1 2.5V17h6v-1.5c0-.9.3-1.7 1-2.5a6 6 0 0 0-4-10z"/></svg> Своя тема по документам', title: 'Какого документа нет в блоге?',                       desc: 'Что нужно оформить? С какой страной? Расскажите ситуацию — превратим в гайд.', payload: 'suggest_docs' },
-      finance: { tag: '<svg class="tag-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6"/><path d="M10 21h4"/><path d="M12 3a6 6 0 0 0-4 10c.7.8 1 1.6 1 2.5V17h6v-1.5c0-.9.3-1.7 1-2.5a6 6 0 0 0-4-10z"/></svg> Своя тема по банкам',  title: 'Какой финансовый вопрос остался без ответа?',           desc: 'Банки, переводы, ипотека, инвестиции в Испании — опишите свой кейс.', payload: 'suggest_finance' },
-      work:    { tag: '<svg class="tag-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6"/><path d="M10 21h4"/><path d="M12 3a6 6 0 0 0-4 10c.7.8 1 1.6 1 2.5V17h6v-1.5c0-.9.3-1.7 1-2.5a6 6 0 0 0-4-10z"/></svg> Своя тема по работе',  title: 'Какой вопрос по работе или autónomo не закрыт?',         desc: 'Регистрация, налоги, контракты, поиск работы — расскажите ситуацию.', payload: 'suggest_work' },
-      life:    { tag: '<svg class="tag-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6"/><path d="M10 21h4"/><path d="M12 3a6 6 0 0 0-4 10c.7.8 1 1.6 1 2.5V17h6v-1.5c0-.9.3-1.7 1-2.5a6 6 0 0 0-4-10z"/></svg> Своя тема по жизни',   title: 'Какой бытовой вопрос интересует?',                       desc: 'Жильё, страховки, медицина, транспорт, дети — опишите, чем поделиться.', payload: 'suggest_life' },
-      social:  { tag: '<svg class="tag-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6"/><path d="M10 21h4"/><path d="M12 3a6 6 0 0 0-4 10c.7.8 1 1.6 1 2.5V17h6v-1.5c0-.9.3-1.7 1-2.5a6 6 0 0 0-4-10z"/></svg> Своя тема по соц. помощи', title: 'Какое пособие или помощь интересует?',              desc: 'IMV, ayudas, Cruz Roja, Cáritas — расскажите свою ситуацию, разберём в посте.', payload: 'suggest_social' },
-    };
-    var suggestCard  = document.getElementById('suggestCard');
-    var suggestTag   = document.getElementById('suggestTag');
-    var suggestTitle = document.getElementById('suggestTitle');
-    var suggestDesc  = document.getElementById('suggestDesc');
-
-    function applyFilter(f) {
-      btns.forEach(function(b){ b.classList.toggle('active', b.dataset.filter === f); });
-      cards.forEach(function(c){
-        c.classList.toggle('hidden', f !== 'all' && c.dataset.cat !== f);
-      });
-      // Обновляем suggest-карточку под текущую категорию
-      var ctx = SUGGEST_CONTEXT[f] || SUGGEST_CONTEXT.all;
-      if (suggestCard)  suggestCard.href      = 'https://t.me/krepko_es_admin_bot?start=' + ctx.payload;
-      if (suggestTag)   suggestTag.innerHTML      = ctx.tag;
-      if (suggestTitle) suggestTitle.textContent = ctx.title;
-      if (suggestDesc)  suggestDesc.textContent  = ctx.desc;
-    }
-
-    // Read filter from URL on load
-    var urlCat = (new URLSearchParams(location.search)).get('cat') || 'all';
-    applyFilter(urlCat);
-
-    btns.forEach(function(btn){
-      btn.addEventListener('click', function(){
-        var f = btn.dataset.filter;
-        applyFilter(f);
-        // Update URL without reload
-        var url = f === 'all' ? location.pathname : location.pathname + '?cat=' + f;
-        history.pushState({cat: f}, '', url);
+  
+<script>
+/* Фильтр витрины блога. Прячет карточки чужой темы, не трогая разметку:
+   так работает без перерисовки и переживает отключённый JS — при нём
+   просто видны все записи, что для витрины нормально. */
+(function () {
+  var pills = document.querySelectorAll('.blog-filter__pill');
+  var cards = document.querySelectorAll('.blog-card');
+  if (!pills.length) return;
+  pills.forEach(function (pill) {
+    pill.addEventListener('click', function () {
+      var want = pill.dataset.filter;
+      pills.forEach(function (p) { p.classList.toggle('is-on', p === pill); });
+      cards.forEach(function (card) {
+        card.style.display = (want === 'all' || card.dataset.cat === want) ? '' : 'none';
       });
     });
-
-    // Handle browser back/forward
-    window.addEventListener('popstate', function(e){
-      var f = (e.state && e.state.cat) || 'all';
-      applyFilter(f);
-    });
-  })();
-  </script>
-</main>
+  });
+})();
+</script>
+  </main>
 <footer id="sec-footer" class="site-footer">
   <div class="site-footer__inner">
 
