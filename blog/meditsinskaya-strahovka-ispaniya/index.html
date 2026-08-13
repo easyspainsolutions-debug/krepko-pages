@@ -24,6 +24,8 @@
   <link rel="stylesheet" href="/assets/krepko-chips.css?v=d588b7e6cf">
   <link rel="stylesheet" href="/assets/site-footer.css?v=10f623e9ba">
   <link rel="stylesheet" href="/assets/a11y.css?v=bd18bf2b40">
+  <link rel="stylesheet" href="/assets/blog-grid.css?v=5b171b8529">
+  <link rel="stylesheet" href="/assets/blog-article.css?v=c4f68e737f">
   <link rel="stylesheet" href="/assets/krepko-base.css?v=6216d1aafd">
   <link rel="stylesheet" href="/assets/cookie-consent.css?v=a4b74432ef">
   <script src="/assets/cookie-consent.js?v=8272782489" defer></script>
@@ -706,12 +708,20 @@
   }
 })();</script>
 
-<div class="wrap">
+<div class="wrap wrap--article">
 <main id="main">
 <nav class="breadcrumb breadcrumb--back" aria-label="Хлебные крошки">
-  <a href="/">Главная</a> / <a class="breadcrumb__parent" href="/blog/" aria-label="Назад: Блог"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg><span>Блог</span></a> / <span>Медстраховка в Испании: государственная и частная</span>
+  <a href="/">Главная</a> / <a class="breadcrumb__parent" href="/blog/" aria-label="Назад: Блог"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg><span>Блог</span></a> / <span>Медицинская страховка в Испании: государственная и частная</span>
 </nav>
-<span class="article-tag">Страховка · Медицина</span>
+
+    <div class="blog-article">
+      <details class="article-toc" open>
+        <summary class="article-toc__label">В статье</summary>
+        <div class="article-toc__list"><a href="#gosudarstvennaya-medicina-kto-imeet-pravo">Государственная медицина: кто имеет право</a><a href="#chastnaya-medicinskaya-strahovka">Частная медицинская страховка</a><a href="#gosudarstvennaya-vs-chastnaya-chto-vybrat">Государственная vs. частная: что выбрать</a></div>
+      </details>
+
+      <div class="article-body">
+<div class="article-tags"><span>Страховка</span><span>Медицина</span></div>
 
     <h1>Медицинская страховка в Испании: государственная и частная</h1>
 
@@ -721,7 +731,7 @@
       Испанская система здравоохранения — одна из лучших в Европе. Но не все иностранцы автоматически имеют право на государственную медицину. Разбираемся, кто получает tarjeta sanitaria бесплатно, когда нужна частная страховка и сколько она стоит.
     </div>
 
-    <h2>Государственная медицина: кто имеет право</h2>
+    <h2 id="gosudarstvennaya-medicina-kto-imeet-pravo">Государственная медицина: кто имеет право</h2>
 
     <p>Испанская государственная система здравоохранения называется <strong>Sistema Nacional de Salud (SNS)</strong>. Доступ к ней подтверждается карточкой — <strong><a href="/blog/tarjeta-sanitaria-ispaniya/" style="color:#C75B39">tarjeta sanitaria individual (TSI)</a></strong>. Карточка выдаётся в местном центре здоровья (centro de salud) — государственной поликлинике.</p>
 
@@ -747,7 +757,7 @@
       <strong>Важно:</strong> наличие tarjeta sanitaria даёт право на бесплатные визиты к врачу, анализы, скорую помощь и льготные рецепты (co-pago — небольшая доплата за лекарства). Плановые операции — по очереди (lista de espera), которая в зависимости от региона и специализации может занять от нескольких недель до нескольких месяцев.
     </div>
 
-    <h2>Частная медицинская страховка</h2>
+    <h2 id="chastnaya-medicinskaya-strahovka">Частная медицинская страховка</h2>
 
     <p>Частная страховка (<strong>seguro médico privado</strong>) позволяет обращаться в частные клиники без очередей, выбирать врача самостоятельно и получать услуги более высокого уровня сервиса. Кроме того, для ряда типов ВНЖ частная страховка является обязательным требованием.</p>
 
@@ -782,7 +792,7 @@
       <strong>Для визы:</strong> если страховка нужна для подачи документов на ВНЖ или визу, убедитесь, что в полисе нет <strong>exclusiones por condición preexistente</strong> (исключений по хроническим болезням) и нет <strong>franquicia</strong> (франшизы). Консульства и экстранхерия требуют именно такой полис.
     </div>
 
-    <h2>Государственная vs. частная: что выбрать</h2>
+    <h2 id="gosudarstvennaya-vs-chastnaya-chto-vybrat">Государственная vs. частная: что выбрать</h2>
 
     <p>Для большинства людей с ВНЖ и официальной работой государственная медицина полностью закрывает базовые потребности — и это бесплатно. Частная страховка становится необходимостью, если:</p>
     <ul>
@@ -817,54 +827,18 @@
     </div>
 
 
-    <div id="cat-nav" class="cat-nav"></div>
+    </div>
+    </div>
+
+    <div class="article-more">
+      <div id="cat-nav" class="cat-nav"></div>
     <div class="related-section" id="related-articles"></div>
+    </div>
+
 </div>
 
   <script src="/blog/articles-data.js" defer></script>
-  <script>
-  (function(){
-    var parts = location.pathname.replace(/\/$/,'').split('/'); var slug = parts.pop().replace('.html','');
-    var cur = ARTICLES.find(function(a){return a.slug===slug;});
-    if(!cur) return;
-    // same-category first, fall back to any articles
-    var pool = ARTICLES.filter(function(a){return a.cat===cur.cat && a.slug!==slug;});
-    if(pool.length < 2) pool = ARTICLES.filter(function(a){return a.slug!==slug;});
-    var related = pool.slice(0,3);
-    if(!related.length) return;
-    // Category navigation pills
-    var CATS = [
-      {id:'vnzh',label:'ВНЖ'},{id:'docs',label:'Документы'},
-      {id:'finance',label:'Финансы'},{id:'work',label:'Работа'},
-      {id:'life',label:'Жильё'},{id:'social',label:'Семья'}
-    ];
-    var catEl = document.getElementById('cat-nav');
-    if(catEl){
-      var pills = CATS.map(function(c){
-        var act = c.id===cur.cat?' active':'';
-        return '<a class="cat-pill'+act+'" href="/blog/?cat='+c.id+'">'+c.label+'</a>';
-      }).join('');
-      catEl.innerHTML='<span class="cat-nav-label">Другие темы</span><div class="cat-nav-pills">'+pills+'</div>';
-    }
-
-    // Related: 1 featured + 2 regular
-    var h = '<div class="divider"></div><span class="related-label">Читайте также</span>';
-    var f = related[0];
-    h += '<a class="rel-featured" href="/blog/'+f.slug+'/">';
-    h += '<span class="rel-featured-label">Читать следующим ↗</span>';
-    h += '<span class="rel-featured-title">'+f.title+'</span>';
-    h += '<span class="rel-card-meta">'+f.tag+' · ~'+f.time+' мин</span>';
-    h += '</a>';
-    related.slice(1).forEach(function(a){
-      h += '<a class="rel-card" href="/blog/'+a.slug+'/">';
-      h += '<span class="article-tag">'+a.tag+'</span>';
-      h += '<span class="rel-card-title">'+a.title+'</span>';
-      h += '<span class="rel-card-meta">~'+a.time+' мин чтения</span>';
-      h += '</a>';
-    });
-    document.getElementById('related-articles').innerHTML = h;
-  })();
-  </script>
+  <script src="/assets/blog-article.js?v=349b6b6f4e" defer></script>
 </main>
 <footer id="sec-footer" class="site-footer">
   <div class="site-footer__inner">
@@ -942,6 +916,7 @@
 
   </div>
 </footer>
+
 
 </body>
 </html>

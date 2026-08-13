@@ -1,0 +1,243 @@
+/* ============================================================
+   Страница статьи блога (2026-08-13)
+
+   Приводит статьи к тому же языку, что витрина: шапка и подвал во всю
+   ширину, теги пилюлями, оглавление боковой колонкой — тем же приёмом,
+   что фильтр тем на /blog/ и pillar-nav на хабах услуг.
+
+   Статьи блога — рукописный HTML первой версии сайта: у каждой свой
+   <style> на 10 КБ внутри файла. Этот файл не переписывает их целиком,
+   а снимает расхождения с системой. Полная разборка тех стилей — отдельная
+   задача, она в бэклоге.
+   ============================================================ */
+
+.article-page, .blog-article { --art-ink: #1A2B3C; }
+
+/* ── Шапка и подвал во всю ширину ──
+   body рукописной страницы центрирует содержимое через flex и держит поля
+   по 20px. Из-за них шапка не доходит до краёв окна. Снимаем поля у body и
+   возвращаем их самой колонке текста — читать широкую строку невозможно. */
+body:has(> .wrap.wrap--article) {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  align-items: stretch !important;
+}
+body:has(.blog-article) main { width: 100%; }
+
+/* Хлебные крошки desktop.css запирает в те же 760px и центрирует. Ставим их
+   по левому краю сетки — иначе они висят посреди страницы отдельно от текста. */
+.wrap--article > main > nav.breadcrumb,
+.wrap--article > main > nav.breadcrumbs {
+  max-width: 1180px !important;
+  width: 100% !important;
+  margin: 0 auto !important;
+  padding: 8px clamp(20px, 4vw, 40px) !important;
+}
+
+/* ── Раскладка: оглавление слева, текст справа ── */
+.blog-article {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 clamp(20px, 4vw, 40px) clamp(48px, 6vw, 88px);
+  display: grid;
+  grid-template-columns: minmax(190px, 220px) minmax(0, 1fr);
+  gap: clamp(28px, 3.5vw, 56px);
+  align-items: start;
+}
+.blog-article > * { min-width: 0; }
+
+/* ── Оглавление ──
+   Липкое с тем же отступом, что фильтр на витрине: 161px — высота липкой
+   шапки плюс воздух. Без этого пункты уезжают под меню. */
+.article-toc {
+  position: sticky;
+  top: 161px;
+}
+.article-toc__list {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+/* Маркер треугольника убираем: на широком экране блок всегда раскрыт и
+   стрелка означала бы действие, которого там нет. На мобильном её роль
+   играет наш собственный знак «+». */
+.article-toc__label {
+  list-style: none;
+  cursor: default;
+  font-family: 'Manrope', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--text-muted, #6B6B6B);
+  padding: 0 12px 10px;
+}
+.article-toc a {
+  display: block;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-family: 'Manrope', sans-serif;
+  font-size: 13.5px;
+  line-height: 1.35;
+  color: var(--text-sub, #4A4A4A);
+  text-decoration: none;
+  transition: background .15s ease, color .15s ease;
+}
+.article-toc__label::-webkit-details-marker { display: none; }
+.article-toc a:hover { color: var(--gold, #C75B39); }
+/* Активный раздел подсвечивается при прокрутке — так же, как выбранная
+   тема на витрине. Класс вешает скрипт внизу страницы. */
+.article-toc a.is-on {
+  background: var(--surface, #F5F0EB);
+  color: var(--art-ink);
+  font-weight: 600;
+}
+
+/* ── Тело статьи ──
+   .wrap из старой вёрстки — не внутри статьи, а СНАРУЖИ: он оборачивает всю
+   страницу. Ширину ему даёт desktop.css правилом
+   `body:has(> .wrap) > .wrap { max-width: 760px !important }` — это была
+   колонка чтения, когда статья шла одним столбцом. Теперь рядом стоит
+   оглавление, и 760px делятся на двоих: тексту остаётся 370px, заголовок
+   ломается на четыре строки.
+
+   Просто `.wrap--article` тут бессилен: у боевого правила вес выше, и
+   подключается desktop.css позже. Поэтому селектор той же формы плюс класс —
+   он перевешивает и по специфичности, и по важности. */
+body:has(> .wrap.wrap--article) > .wrap.wrap--article {
+  max-width: none !important;
+  width: 100% !important;
+}
+.article-body { max-width: 760px; }
+
+/* ── Наследие тёмной темы ──
+   Статьи писались под тёмный фон, и подписи в них цвета #E8DFD1. На светлом
+   фоне это контраст 1,28 — строка «Krepko · обновлено … · ~9 мин чтения»
+   практически не видна. Перекрашиваем в приглушённый текстовый: 5,3. */
+.wrap--article .article-meta,
+.wrap--article .breadcrumbs,
+.wrap--article .breadcrumbs .sep {
+  color: var(--text-muted, #6B6B6B);
+}
+
+/* ── Теги — пилюлями, как на карточках витрины ──
+   Раньше здесь была строка капсом «ВРЕМЕННАЯ ЗАЩИТА · 2026» — свой стиль,
+   не встречающийся больше нигде. */
+.article-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 16px;
+}
+.article-tags span {
+  background: var(--surface, #F5F0EB);
+  border-radius: 48px;
+  padding: 4px 12px;
+  font-family: 'Manrope', sans-serif;
+  font-size: 12px;
+  color: var(--text-sub, #4A4A4A);
+}
+
+/* ── Темы и «читайте также» — во всю ширину, под колонкой чтения ──
+   Карточки берём с витрины (blog-grid.css), поэтому здесь объявляем токен,
+   который там ждут: на витрине он живёт на .blog-filter, а фильтра тут нет. */
+.article-more {
+  --blog-ink: #1A2B3C;
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 clamp(20px, 4vw, 40px) clamp(48px, 6vw, 88px);
+}
+
+/* Темы блога — строкой ссылок.
+   На витрине это боковая колонка, но здесь она была бы вторым оглавлением
+   рядом с настоящим. Оставляем тот же набор и те же названия, меняем только
+   раскладку: строка внизу читается как «куда пойти дальше», а не как
+   навигация по текущей странице. */
+.article-topics {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 8px 18px;
+  padding: 22px 0;
+  border-top: 1px solid rgba(26, 43, 60, .1);
+  margin-bottom: clamp(28px, 3vw, 44px);
+}
+.article-topics__label {
+  font-family: 'Manrope', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--text-muted, #6B6B6B);
+}
+.article-topics__link {
+  font-family: 'Manrope', sans-serif;
+  font-size: 14.5px;
+  color: var(--text-sub, #4A4A4A);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: color .15s ease, border-color .15s ease;
+}
+.article-topics__link:hover {
+  color: var(--gold, #C75B39);
+  border-bottom-color: currentColor;
+}
+.article-topics__link.is-on {
+  color: var(--art-ink);
+  font-weight: 600;
+}
+.article-more__h {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(22px, 2.4vw, 30px);
+  font-weight: 500;
+  color: var(--art-ink);
+  margin: 0 0 20px;
+}
+.article-more__grid {
+  display: grid;
+  /* auto-fit, а не auto-fill: карточек здесь ровно три, и при auto-fill
+     сетка отводила место под четвёртую — ряд обрывался пустой колонкой. */
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+}
+
+/* ── Мобильные ──
+   Оглавление уходит наверх и сворачивается: на телефоне десять пунктов
+   перед текстом — это экран, который придётся пролистывать каждый раз. */
+@media (max-width: 900px) {
+  .blog-article { grid-template-columns: 1fr; gap: 20px; }
+  /* Поля на телефоне уже дают две обёртки над нами — .wrap (16px) и main
+     (24px). Свои 20px делали третий слой: колонка текста ужималась до 255px
+     при экране в 375. */
+  .blog-article,
+  .article-more { padding-left: 0; padding-right: 0; }
+  /* Одна колонка карточек — как на витрине ниже 720px. minmax(260px) при
+     ширине колонки 295 давал карточку шире контейнера. */
+  .article-more__grid { grid-template-columns: 1fr; }
+  .article-toc {
+    position: static;
+    border: 1px solid rgba(26, 43, 60, .12);
+    border-radius: 12px;
+    padding: 4px;
+  }
+  /* Свёрнутое оглавление: строка с плюсом, раскрывается по нажатию.
+     Раскрытым оно занимало весь первый экран — до заголовка статьи
+     приходилось листать. */
+  .article-toc__label {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 13px 14px;
+    cursor: pointer;
+  }
+  .article-toc__label::after {
+    content: '+';
+    font-size: 18px;
+    font-weight: 400;
+    color: var(--text-muted, #6B6B6B);
+  }
+  .article-toc[open] .article-toc__label::after { content: '−'; }
+  .article-toc[open] .article-toc__label { padding-bottom: 4px; }
+  .article-toc__list { padding-bottom: 8px; }
+  .article-toc a { font-size: 14px; }
+}

@@ -24,6 +24,8 @@
   <link rel="stylesheet" href="/assets/krepko-chips.css?v=d588b7e6cf">
   <link rel="stylesheet" href="/assets/site-footer.css?v=10f623e9ba">
   <link rel="stylesheet" href="/assets/a11y.css?v=bd18bf2b40">
+  <link rel="stylesheet" href="/assets/blog-grid.css?v=5b171b8529">
+  <link rel="stylesheet" href="/assets/blog-article.css?v=c4f68e737f">
   <link rel="stylesheet" href="/assets/krepko-base.css?v=6216d1aafd">
   <link rel="stylesheet" href="/assets/cookie-consent.css?v=a4b74432ef">
   <script src="/assets/cookie-consent.js?v=8272782489" defer></script>
@@ -712,12 +714,20 @@
   }
 })();</script>
 
-<div class="wrap">
+<div class="wrap wrap--article">
 <main id="main">
 <nav class="breadcrumb breadcrumb--back" aria-label="Хлебные крошки">
   <a href="/">Главная</a> / <a class="breadcrumb__parent" href="/blog/" aria-label="Назад: Блог"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg><span>Блог</span></a> / <span>Certificado digital: электронная подпись в Испании 2026</span>
 </nav>
-<span class="article-tag">Документы · Электронная подпись</span>
+
+    <div class="blog-article">
+      <details class="article-toc" open>
+        <summary class="article-toc__label">В статье</summary>
+        <div class="article-toc__list"><a href="#chto-takoe-certificado-digital">Что такое certificado digital</a><a href="#vidy-elektronnyh-sertifikatov-v-ispanii">Виды электронных сертификатов в Испании</a><a href="#kak-poluchit-certificado-digital-fnmt">Как получить certificado digital FNMT</a><a href="#ustanovka-certificado-digital-v-brauzer">Установка certificado digital в браузер</a><a href="#gde-ispolzovat-certificado-digital">Где использовать certificado digital</a><a href="#bezopasnost-i-hranenie-sertifikata">Безопасность и хранение сертификата</a><a href="#sroki-dei-stviya-i-prodlenie-certificado-digital">Сроки действия и продление certificado digital</a><a href="#mac-vs-windows-est-li-razlichiya">Mac vs Windows — есть ли различия?</a><a href="#faq-po-certificado-digital">FAQ по Certificado digital</a></div>
+      </details>
+
+      <div class="article-body">
+<div class="article-tags"><span>Документы</span><span>Электронная подпись</span></div>
 
     <h1>Certificado digital: электронная подпись в Испании 2026</h1>
 
@@ -727,13 +737,13 @@
       Certificado digital — это электронный сертификат, который даёт вам возможность подписывать документы онлайн и подавать их в испанские госучреждения без очередей. Если вы хотите подать <a href="/blog/modelo-030/" style="color:#C75B39">Modelo 030</a> в Hacienda онлайн, открыть счёт в банке, оформить <a href="/blog/nie-tie-ispaniya/" style="color:#C75B39">NIE</a> или управлять своими делами как <a href="/blog/autonomo-ispaniya/" style="color:#C75B39">autónomo</a> — вам понадобится электронная подпись. В этой статье разбираемся, как её получить и установить.
     </div>
 
-    <h2>Что такое certificado digital</h2>
+    <h2 id="chto-takoe-certificado-digital">Что такое certificado digital</h2>
 
     <p>Certificado digital — это <strong>электронный сертификат безопасности</strong>, который содержит вашу цифровую подпись и ключи шифрования. Он выполняет роль вашей «электронной личности» в Испании: вы можете подписывать документы, автентифицироваться на государственных порталах, подавать заявления в Hacienda, Seguridad Social, Extranjería и другие организации.</p>
 
     <p>По своему функционалу certificado digital приближен к электронной подписи в других странах, но в Испании это устоявшийся стандарт, встроенный во всю бюрократическую систему. Без электронной подписи вы можете только ходить в офисы, с подписью — все процедуры делаются из дома.</p>
 
-    <h2>Виды электронных сертификатов в Испании</h2>
+    <h2 id="vidy-elektronnyh-sertifikatov-v-ispanii">Виды электронных сертификатов в Испании</h2>
 
     <h3>FNMT-RCM (Certificado Electrónico de Persona Física)</h3>
     <p>Это основной и самый распространённый тип сертификата. FNMT расшифровывается как <strong>Fábrica Nacional de Moneda y Timbre</strong> — государственное учреждение, выпускающее электронные сертификаты. Certificado FNMT выдаётся совершенно <strong>бесплатно</strong> любому лицу, имеющему <a href="/blog/nie-tie-ispaniya/" style="color:#C75B39">NIE</a> или DNI.</p>
@@ -754,7 +764,7 @@
       <strong>Выбор для иностранца:</strong> если вы не испанец и не гражданин ЕС, вам нужен FNMT. Это самый универсальный и признаваемый вариант. Cl@ve тоже работает, но FNMT даёт больше возможностей и пригодится дольше.
     </div>
 
-    <h2>Как получить certificado digital FNMT</h2>
+    <h2 id="kak-poluchit-certificado-digital-fnmt">Как получить certificado digital FNMT</h2>
 
     <p>Процесс состоит из трёх шагов: онлайн-запрос → cita previa в админ-органе → скачивание сертификата в браузер.</p>
 
@@ -787,7 +797,7 @@
       <li>Введите пароль для защиты сертификата</li>
     </ol>
 
-    <h2>Установка certificado digital в браузер</h2>
+    <h2 id="ustanovka-certificado-digital-v-brauzer">Установка certificado digital в браузер</h2>
 
     <h3>Chrome (Windows и macOS)</h3>
     <ul>
@@ -817,7 +827,7 @@
       <strong>Совет для Windows:</strong> можно также импортировать сертификат через диспетчер сертификатов Windows (certmgr.msc). Это даст доступ ко всем браузерам на компьютере без повторного импорта в каждый.
     </div>
 
-    <h2>Где использовать certificado digital</h2>
+    <h2 id="gde-ispolzovat-certificado-digital">Где использовать certificado digital</h2>
 
     <ul>
       <li><strong>Hacienda:</strong> Подача <a href="/blog/modelo-030/" style="color:#C75B39">Modelo 030</a>, <a href="/blog/irpf-nalogi-ispaniya/" style="color:#C75B39">IRPF (декларация о доходах)</a>, заявки на возврат налогов, запросы справок</li>
@@ -837,7 +847,7 @@
       <li><strong>Suscripción a notificaciones (электронные уведомления):</strong> Подписка на официальные письма из Hacienda и других органов с использованием буквального домашнего адреса электронной почты</li>
     </ul>
 
-    <h2>Безопасность и хранение сертификата</h2>
+    <h2 id="bezopasnost-i-hranenie-sertifikata">Безопасность и хранение сертификата</h2>
 
     <h3>Защита паролем</h3>
     <p>Когда вы импортируете сертификат в браузер, вы устанавливаете пароль для приватного ключа. <strong>Запомните этот пароль</strong> — он потребуется каждый раз при использовании сертификата для подписания документов.</p>
@@ -858,7 +868,7 @@
       <li>По возможности использовать Cl@ve PIN вместо сертификата на общих машинах</li>
     </ul>
 
-    <h2>Сроки действия и продление certificado digital</h2>
+    <h2 id="sroki-dei-stviya-i-prodlenie-certificado-digital">Сроки действия и продление certificado digital</h2>
 
     <p>FNMT-сертификат <strong>действует 4 года</strong> с момента выдачи. После истечения срока нужно получить новый сертификат, повторив процесс заново (онлайн-запрос, cita previa, биометрия, скачивание).</p>
 
@@ -868,7 +878,7 @@
       <strong>Совет:</strong> Вам не обязательно ждать истечения сертификата. Если у вас есть проблемы с текущим сертификатом (потеря пароля, повреждение файла), вы можете запросить новый в любой момент, даже если текущий ещё действует.
     </div>
 
-    <h2>Mac vs Windows — есть ли различия?</h2>
+    <h2 id="mac-vs-windows-est-li-razlichiya">Mac vs Windows — есть ли различия?</h2>
 
     <p>Процесс получения FNMT-сертификата одинаков на обеих платформах. Различия только в установке в браузер:</p>
 
@@ -880,7 +890,7 @@
       <li><strong>Linux:</strong> Для Chrome/Chromium импортируйте в настройки браузера. Для Firefox — отдельно в Firefox. Система не предоставляет централизованного хранилища сертификатов.</li>
     </ul>
 
-    <h2>FAQ по Certificado digital</h2>
+    <h2 id="faq-po-certificado-digital">FAQ по Certificado digital</h2>
 
     <h3>Сколько стоит сертификат?</h3>
     <p>Абсолютно бесплатно. FNMT выпускает сертификаты на государственные деньги для всех граждан и резидентов Испании.</p>
@@ -930,50 +940,18 @@
       <a class="btn btn-ig" href="https://instagram.com/krepko.es" target="_blank" rel="noopener noreferrer"><span class="btn-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="6" width="20" height="14" rx="2"/><circle cx="12" cy="13" r="4"/><circle cx="17.5" cy="9.5" r="0.6" fill="currentColor"/></svg></span><div class="btn-inner"><span class="btn-title">Следи в Instagram</span><span class="btn-sub-text">@krepko.es</span></div></a>
     </div>
 
-    <div id="cat-nav" class="cat-nav"></div>
+    </div>
+    </div>
+
+    <div class="article-more">
+      <div id="cat-nav" class="cat-nav"></div>
     <div class="related-section" id="related-articles"></div>
+    </div>
+
 </div>
 
   <script src="/blog/articles-data.js" defer></script>
-  <script>
-  (function(){
-    var parts = location.pathname.replace(/\/$/,'').split('/'); var slug = parts.pop().replace('.html','');
-    var cur = ARTICLES.find(function(a){return a.slug===slug;});
-    if(!cur) return;
-    var pool = ARTICLES.filter(function(a){return a.cat===cur.cat && a.slug!==slug;});
-    if(pool.length < 2) pool = ARTICLES.filter(function(a){return a.slug!==slug;});
-    var related = pool.slice(0,3);
-    if(!related.length) return;
-    var CATS = [
-      {id:'vnzh',label:'ВНЖ'},{id:'docs',label:'Документы'},
-      {id:'finance',label:'Финансы'},{id:'work',label:'Работа'},
-      {id:'life',label:'Жильё'},{id:'social',label:'Семья'}
-    ];
-    var catEl = document.getElementById('cat-nav');
-    if(catEl){
-      var pills = CATS.map(function(c){
-        var act = c.id===cur.cat?' active':'';
-        return '<a class="cat-pill'+act+'" href="/blog/?cat='+c.id+'">'+c.label+'</a>';
-      }).join('');
-      catEl.innerHTML='<span class="cat-nav-label">Другие темы</span><div class="cat-nav-pills">'+pills+'</div>';
-    }
-    var h = '<div class="divider"></div><span class="related-label">Читайте также</span>';
-    var f = related[0];
-    h += '<a class="rel-featured" href="/blog/'+f.slug+'/">';
-    h += '<span class="rel-featured-label">Читать следующим ↗</span>';
-    h += '<span class="rel-featured-title">'+f.title+'</span>';
-    h += '<span class="rel-card-meta">'+f.tag+' · ~'+f.time+' мин</span>';
-    h += '</a>';
-    related.slice(1).forEach(function(a){
-      h += '<a class="rel-card" href="/blog/'+a.slug+'/">';
-      h += '<span class="article-tag">'+a.tag+'</span>';
-      h += '<span class="rel-card-title">'+a.title+'</span>';
-      h += '<span class="rel-card-meta">~'+a.time+' мин чтения</span>';
-      h += '</a>';
-    });
-    document.getElementById('related-articles').innerHTML = h;
-  })();
-  </script>
+  <script src="/assets/blog-article.js?v=349b6b6f4e" defer></script>
 </main>
 <footer id="sec-footer" class="site-footer">
   <div class="site-footer__inner">
@@ -1051,6 +1029,7 @@
 
   </div>
 </footer>
+
 
 </body>
 </html>
