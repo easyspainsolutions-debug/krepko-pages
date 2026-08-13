@@ -34,6 +34,19 @@ body:has(.blog-article) main { width: 100%; }
   padding: 8px clamp(20px, 4vw, 40px) !important;
 }
 
+/* ── Переход по оглавлению — прокруткой, а не прыжком ──
+   Клик по разделу переносил страницу мгновенно: человек терял, где он был и
+   куда попал. Плавная прокрутка сохраняет связь между «нажал» и «оказался».
+
+   scroll-margin-top — чтобы заголовок не уехал под липкую шапку: она держит
+   89px на широком экране и 65px на телефоне, плюс воздух.
+
+   Тем, кто выключил анимации в системе, прокрутка остаётся мгновенной —
+   это делает общий блок prefers-reduced-motion в a11y.css. */
+html:has(.blog-article) { scroll-behavior: smooth; }
+.article-body h2[id],
+.article-body h3[id] { scroll-margin-top: 110px; }
+
 /* ── Раскладка: оглавление слева, текст справа ── */
 .blog-article {
   max-width: 1180px;
@@ -324,4 +337,7 @@ body:has(> .wrap.wrap--article) > .wrap.wrap--article {
   .article-toc[open] .article-toc__label { padding-bottom: 4px; }
   .article-toc__list { padding-bottom: 8px; }
   .article-toc a { font-size: 14px; }
+  /* Шапка на телефоне ниже — 65px вместо 89. */
+  .article-body h2[id],
+  .article-body h3[id] { scroll-margin-top: 84px; }
 }
