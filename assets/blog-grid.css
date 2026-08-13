@@ -130,30 +130,27 @@
   }
 }
 
-/* Верх карточки — вместо изображения. Высота 224px повторяет референс,
-   чтобы ряд карточек стоял в том же ритме. */
+/* Верх карточки — полоса темы.
+   Раньше здесь стоял блок в 224px с названием темы крупными буквами. Daniil
+   его забраковал, и по делу: на витрине уже три места говорят, о чём статья —
+   надпись «Блог · тема», пилюли тегов и сам заголовок. Четвёртый повтор той
+   же мысли крупным кеглем был шумом.
+
+   Четыре пикселя цвета делают то же самое, ничего не повторяя: тема
+   читается краем глаза, ряд получает ритм, место остаётся тексту. Цвета
+   держим приглушёнными — терракота на витрине остаётся одна, у ссылок. */
 .blog-card__top {
-  height: 224px;
-  display: flex;
-  align-items: flex-end;
-  padding: 22px;
-  background: var(--surface);
+  height: 4px;
+  flex: none;
 }
-.blog-card__cat {
-  font-family: 'Playfair Display', Georgia, serif;
-  font-size: 27px;
-  font-weight: 500;
-  line-height: 1.1;
-  color: var(--blog-ink);
-  opacity: .72;
-}
-/* Оттенок подложки по теме: страница листается глазами, а не читается. */
-.blog-card[data-cat="docs"]    .blog-card__top { background: #F1EAE2; }
-.blog-card[data-cat="vnzh"]    .blog-card__top { background: #EDE6DC; }
-.blog-card[data-cat="finance"] .blog-card__top { background: #F3EDE6; }
-.blog-card[data-cat="life"]    .blog-card__top { background: var(--surface); }
-.blog-card[data-cat="work"]    .blog-card__top { background: #EFE9E1; }
-.blog-card[data-cat="social"]  .blog-card__top { background: #F2ECE4; }
+.blog-card__cat { display: none; }
+
+.blog-card[data-cat="docs"]    .blog-card__top { background: var(--gold); }
+.blog-card[data-cat="vnzh"]    .blog-card__top { background: #8A6A4F; }
+.blog-card[data-cat="finance"] .blog-card__top { background: #7C8B72; }
+.blog-card[data-cat="life"]    .blog-card__top { background: #A8845C; }
+.blog-card[data-cat="work"]    .blog-card__top { background: #6E7F8C; }
+.blog-card[data-cat="social"]  .blog-card__top { background: #9C7B86; }
 
 .blog-card__body {
   display: flex;
@@ -247,8 +244,6 @@
 
 @media (max-width: 720px) {
   .blog-grid { grid-template-columns: 1fr; gap: 16px; }
-  .blog-card__top { height: 132px; padding: 18px; }
-  .blog-card__cat { font-size: 22px; }
   .blog-card__body { padding: 16px 18px 18px; }
   .blog-filter { gap: 6px; }
   .blog-filter__pill { font-size: 13px; padding: 6px 13px; }
