@@ -148,7 +148,31 @@
 .rv__glogo { flex-shrink: 0; }
 
 /* CTA после отзывов */
-  .reviews-cta { display: flex; justify-content: center; margin: 32px 0 8px; }
+  .reviews-cta {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+    margin: 32px 0 8px;
+  }
+
+/* Приглашение оставить свой отзыв — тише основной кнопки: человек пришёл
+   за услугой, а не за формой обратной связи. Но стоит там, где он читает
+   чужие отзывы, и потому попадается на глаза. */
+.reviews-cta__own {
+  font-family: 'Manrope', sans-serif;
+  font-size: 13.5px;
+  color: var(--text-muted, #6B6B6B);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: color .18s ease, border-color .18s ease;
+}
+@media (hover: hover) {
+  .reviews-cta__own:hover {
+    color: var(--gold, #C75B39);
+    border-bottom-color: currentColor;
+  }
+}
 
 /* — 3. контейнеры иконок и аватары — */
   .rv__quote, .rv__avatar, .guarantee__icon {
