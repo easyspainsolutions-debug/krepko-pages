@@ -152,3 +152,38 @@
   }
   .review__stars svg { width: 20px; height: 20px; }
 }
+
+/* ── Развилка «как всё прошло» (2026-08-14) ──
+   Второй экран открывается якорем :target — без скриптов, поэтому работает
+   везде и не мигает при загрузке.
+
+   Важно про сам приём: дорога в Google открыта с обоих экранов. Механика,
+   где недовольных к форме отзыва не пускают, называется review gating и
+   запрещена правилами Google Business Profile — за неё снимают отзывы с
+   профиля. Здесь развилка помогает человеку выбрать, а не фильтрует его. */
+.review__step--issue { display: none; }
+.review__step--issue:target { display: block; }
+/* Когда открыт второй экран, первый прячется — иначе на странице окажутся
+   две пары кнопок подряд. */
+.review__card:has(.review__step--issue:target) #review-start { display: none; }
+
+.review__wa--primary {
+  width: 100%;
+  max-width: 340px;
+  padding: 15px 20px;
+  border-color: rgba(199, 91, 57, .45);
+  font-size: 15.5px;
+  font-weight: 700;
+}
+@media (hover: hover) {
+  .review__wa--primary:hover { border-color: var(--gold, #C75B39); }
+}
+
+.review__note a {
+  color: var(--text-muted, #6B6B6B);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+@media (hover: hover) {
+  .review__note a:hover { color: var(--gold, #C75B39); }
+}
