@@ -37,7 +37,7 @@
   <link rel="stylesheet" href="/assets/module-trust.css?v=32a7136440">
   <link rel="stylesheet" href="/assets/module-process.css?v=b33de6f64d">
   <link rel="stylesheet" href="/assets/module-pricing.css?v=b52e077913">
-  <link rel="stylesheet" href="/assets/site-nav.css?v=196943e686">
+  <link rel="stylesheet" href="/assets/site-nav.css?v=9e6e48a0f5">
   <script src="/assets/site-nav.js?v=80f82ff50c" defer></script>
   <link rel="stylesheet" href="/assets/site-search.css?v=d9edf7f390">
   <script src="/assets/site-search.js?v=77c2afc426" defer></script>
@@ -345,12 +345,7 @@
   // - focus returns to trigger on close
   var d=document.getElementById('site-menu-dialog');
   var trigger=document.querySelector('.site-nav__menu-btn');
-  // Пока меню открыто, статус-бар iOS красим в цвет самого меню. Safari
-  // берёт его из theme-color, а поверх кладёт затемнение диалога — от этого
-  // над шторкой висела серая полоса, будто меню не дошло до верха экрана.
-  // Следим за атрибутом open, а не за событием close: закрыть меню можно
-  // крестиком, кликом по фону, Esc и кнопкой «назад», и каждый путь пришлось
-  // бы обслуживать отдельно.
+  // Статус-бар iOS под цвет открытого меню — почему так, см. site-nav.css
   var themeMeta=document.querySelector('meta[name="theme-color"]');
   var themeIdle=themeMeta?themeMeta.getAttribute('content'):null;
   if(d&&themeMeta&&themeIdle&&window.MutationObserver){
