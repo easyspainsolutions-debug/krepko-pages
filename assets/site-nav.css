@@ -214,7 +214,11 @@ dialog:not([open]) { display: none !important; }
   inset: 0;
   overflow: hidden;
 }
-.site-menu::backdrop { background: rgba(26, 43, 60, 0.4); }
+.site-menu::backdrop { background: #FFFBF7; }
+@media (min-width: 720px) {
+  /* на широком экране шторка занимает часть экрана — затемнение возвращается */
+  .site-menu::backdrop { background: rgba(26, 43, 60, 0.4); }
+}
 .site-menu[open] { animation: site-menu-fade 200ms ease-out; }
 @keyframes site-menu-fade { from { opacity: 0; } to { opacity: 1; } }
 
@@ -225,7 +229,8 @@ dialog:not([open]) { display: none !important; }
   background: #FFFBF7;
   color: #2D2D2D;
   animation: site-menu-slide 240ms ease-out;
-  /* нижний отступ под home-индикатор iOS */
+  /* отступы под вырез и home-индикатор iOS */
+  padding-top: env(safe-area-inset-top, 0);
   padding-bottom: env(safe-area-inset-bottom, 0);
 }
 @keyframes site-menu-slide {
@@ -305,6 +310,22 @@ dialog:not([open]) { display: none !important; }
   cursor: pointer;
 }
 .site-menu__search svg { flex: 0 0 auto; width: 17px; height: 17px; color: #C75B39; }
+
+@media (max-width: 719px) {
+  .site-menu__search {
+    padding: 4px 2px 14px;
+    border: 0;
+    border-bottom: 1px solid #E8DFD1;
+    border-radius: 0;
+    background: none;
+    /* текст темнее плейсхолдерного: строка читается как приглашение искать,
+       а не как незаполненное поле */
+    color: #4A4A4A;
+    font-size: 16px;
+  }
+  .site-menu__search svg { width: 19px; height: 19px; }
+  .site-menu__nav { margin-top: 4px; }
+}
 
 .site-menu__nav {
   display: flex;
