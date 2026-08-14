@@ -1,0 +1,154 @@
+/* ============================================================
+   Страница «Спасибо за выбор» (2026-08-14)
+
+   Ссылку на неё отправляют клиенту после закрытой задачи, поэтому она
+   должна выглядеть продолжением сайта, а не отдельной посадочной.
+
+   Было: тёмно-синий остров между светлой шапкой и подвалом, золотая
+   монограмма «K» из палитры первой версии сайта и кнопка того же золота —
+   всё это осталось от тёмной темы. Стили лежали инлайном на 5 КБ.
+   ============================================================ */
+
+.review {
+  --rv-ink: #1A2B3C;
+  max-width: 620px;
+  margin: 0 auto;
+  padding: clamp(28px, 5vw, 56px) clamp(20px, 4vw, 32px) clamp(56px, 7vw, 88px);
+  text-align: center;
+}
+
+/* Карточка — тот же контур, что у карточек витрины блога: рамка и радиус,
+   без заливки. Заливка здесь спорила бы с песочной шапкой. */
+.review__card {
+  padding: clamp(28px, 5vw, 44px) clamp(20px, 4vw, 36px);
+  background: var(--surface, #F5F0EB);
+  border: 1px solid rgba(26, 43, 60, .1);
+  border-radius: 18px;
+}
+
+.review__stars {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  margin-bottom: 20px;
+}
+.review__stars svg {
+  width: 22px;
+  height: 22px;
+  fill: var(--gold, #C75B39);
+}
+
+.review__h1 {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(26px, 3.4vw, 34px);
+  font-weight: 500;
+  line-height: 1.2;
+  color: var(--rv-ink);
+  margin: 0 0 14px;
+}
+
+.review__lead {
+  font-family: 'Manrope', sans-serif;
+  font-size: 15.5px;
+  line-height: 1.6;
+  color: var(--text-sub, #4A4A4A);
+  max-width: 420px;
+  margin: 0 auto 26px;
+}
+
+/* Кнопка Google остаётся белой с фирменным логотипом — так её узнают, —
+   но контур берёт терракоту, чтобы она читалась как наша. */
+.review__google {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  max-width: 340px;
+  padding: 15px 20px;
+  background: #FFFFFF;
+  border: 1px solid rgba(199, 91, 57, .45);
+  border-radius: 12px;
+  font-family: 'Manrope', sans-serif;
+  font-size: 15.5px;
+  font-weight: 700;
+  color: var(--rv-ink);
+  text-decoration: none;
+  transition: border-color .18s ease, transform .18s ease;
+}
+@media (hover: hover) {
+  .review__google:hover {
+    border-color: var(--gold, #C75B39);
+    transform: translateY(-1px);
+  }
+}
+.review__google svg { width: 20px; height: 20px; flex: none; }
+
+.review__note {
+  font-family: 'Manrope', sans-serif;
+  font-size: 13px;
+  color: var(--text-muted, #6B6B6B);
+  margin: 12px 0 0;
+}
+
+/* Разделитель «или» — линия с подписью посередине. */
+.review__or {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 26px 0 20px;
+  font-family: 'Manrope', sans-serif;
+  font-size: 12px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--text-muted, #6B6B6B);
+}
+.review__or::before,
+.review__or::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: rgba(26, 43, 60, .12);
+}
+
+.review__alt-text {
+  font-family: 'Manrope', sans-serif;
+  font-size: 14.5px;
+  line-height: 1.55;
+  color: var(--text-sub, #4A4A4A);
+  margin: 0 0 14px;
+}
+
+.review__wa {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  padding: 12px 22px;
+  border: 1px solid rgba(26, 43, 60, .14);
+  border-radius: 12px;
+  font-family: 'Manrope', sans-serif;
+  font-size: 14.5px;
+  font-weight: 600;
+  color: var(--rv-ink);
+  text-decoration: none;
+  transition: border-color .18s ease;
+}
+@media (hover: hover) {
+  .review__wa:hover { border-color: var(--gold, #C75B39); }
+}
+.review__wa svg { width: 17px; height: 17px; flex: none; color: var(--gold, #C75B39); }
+
+@media (max-width: 560px) {
+  /* Поля на телефоне уже даёт main (24px). Свои 20px сжимали карточку до
+     287px при экране в 375, и надпись на кнопке ломалась на две строки. */
+  .review { padding-left: 0; padding-right: 0; }
+  .review__card { padding-left: 18px; padding-right: 18px; }
+  .review__google {
+    max-width: none;
+    padding-left: 14px;
+    padding-right: 14px;
+    font-size: 15px;
+  }
+  .review__stars svg { width: 20px; height: 20px; }
+}

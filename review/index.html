@@ -9,7 +9,7 @@
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
   <link rel="manifest" href="/site.webmanifest">
-  <meta name="theme-color" content="#171C28">
+  <meta name="theme-color" content="#EFE7DA">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <link rel="preconnect" href="https://worker-production-eabe.up.railway.app" crossorigin>
   <meta name="krepko-track-endpoint" content="https://worker-production-eabe.up.railway.app/api/track">
@@ -48,210 +48,8 @@
   <meta property="og:image" content="https://krepko.es/og-image.png">
   <meta property="og:locale" content="ru_RU">
 
-  <style>
-    *{margin:0;padding:0;box-sizing:border-box}
-    html{height:100%}
-    body{
-      background:#171C28;
-      color:#EDF1F8;
-      font-family:-apple-system,'Inter',sans-serif;
-      min-height:100vh;
-      min-height:100dvh; /* dynamic viewport — без прыжков на iOS */
-      display:grid;
-      place-items:center;
-      padding:24px 16px calc(24px + env(safe-area-inset-bottom)) 16px;
-      overflow-x:hidden;
-    }
-
-    /* ─── Карточка — минималистичная, без gold-glow ─── */
-    .card{
-      width:100%;
-      max-width:500px;
-      padding:44px 36px 36px;
-      background:rgba(31,38,56,0.55);
-      border:1px solid rgba(255,255,255,0.06);
-      border-radius:20px;
-      text-align:center;
-      position:relative;
-      box-shadow:0 16px 48px rgba(0,0,0,0.40);
-    }
-
-    /* Тонкая золотая линия сверху — единственный gold-акцент структуры */
-    .card::before{
-      content:"";
-      position:absolute;
-      top:0; left:24px; right:24px;
-      height:2px;
-      background:#C4952A;
-      border-radius:0 0 2px 2px;
-    }
-
-    /* ─── Логотип (только icon, без текста) ─── */
-    .logo{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      width:44px;
-      height:44px;
-      margin:0 auto 28px;
-      text-decoration:none;
-    }
-    .logo svg{width:100%;height:100%;display:block}
-
-    /* ─── Stars — flat, без свечения ─── */
-    .stars{
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      gap:7px;
-      margin:0 0 26px;
-      font-size:0;
-    }
-    .stars svg{
-      width:22px;
-      height:22px;
-      fill:#C4952A;
-      display:block;
-    }
-
-    /* ─── Hero text ─── */
-    h1{
-      font-size:26px;
-      font-weight:800;
-      color:#EDF1F8;
-      line-height:1.25;
-      letter-spacing:-0.5px;
-      margin:0 0 16px;
-    }
-    h1 .accent{color:#C4952A}
-    .lead{
-      font-size:15px;
-      color:#A8B5CC;
-      line-height:1.65;
-      margin:0 auto 28px;
-      max-width:400px;
-    }
-    .lead strong{color:#EDF1F8;font-weight:600}
-
-    /* ─── Primary CTA — solid gold, dark text ─── */
-    .cta-google{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      gap:12px;
-      width:100%;
-      max-width:340px;
-      padding:15px 22px;
-      border-radius:12px;
-      font-size:15px;
-      font-weight:700;
-      text-decoration:none;
-      background:#C4952A;
-      color:#171C28;
-      border:none;
-      transition:background 0.18s, transform 0.14s;
-      margin:0 auto;
-    }
-    .cta-google:hover{
-      background:#D4A535;
-      transform: translateY(-1px);
-    }
-    .cta-google:active{transform: translateY(0)}
-    .cta-google svg.g-logo{
-      width:20px;
-      height:20px;
-      flex-shrink:0;
-      background:white;
-      border-radius:50%;
-      padding:2px;
-    }
-
-    .cta-note{
-      font-size:12.5px;
-      color:#7E8FA8;
-      line-height:1.55;
-      margin:14px auto 0;
-      max-width:340px;
-    }
-
-    /* ─── Soft divider ─── */
-    .divider{
-      display:flex;
-      align-items:center;
-      gap:14px;
-      margin:32px 0 22px;
-      color:#5A6A84;
-      font-size:11px;
-      font-weight:500;
-      letter-spacing:0.08em;
-      text-transform:uppercase;
-    }
-    .divider::before, .divider::after{
-      content:"";
-      flex:1;
-      height:1px;
-      background:#262E45;
-    }
-
-    /* ─── Secondary fallback ─── */
-    .fallback-text{
-      font-size:13.5px;
-      color:#A8B5CC;
-      line-height:1.6;
-      margin:0 auto 16px;
-      max-width:380px;
-    }
-    .fallback-text strong{color:#EDF1F8;font-weight:600}
-
-    .fallback-wa{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      padding:11px 20px;
-      border-radius:10px;
-      font-size:13.5px;
-      font-weight:600;
-      text-decoration:none;
-      background:transparent;
-      border:1px solid rgba(78,216,138,0.40);
-      color:#4ED88A;
-      transition:background 0.15s, border-color 0.15s;
-    }
-    .fallback-wa:hover{
-      background:rgba(78,216,138,0.08);
-      border-color:rgba(78,216,138,0.65);
-    }
-    .fallback-wa svg{width:15px;height:15px}
-
-    /* ─── Back link — в левом верхнем углу карточки ─── */
-    .back-link{
-      position:absolute;
-      top:18px;
-      left:22px;
-      font-size:12.5px;
-      font-weight:500;
-      color:#7E8FA8;
-      text-decoration:none;
-      transition:color 0.15s;
-    }
-    .back-link:hover{color:#C4952A}
-    @media (max-width: 480px){
-      .back-link{top:14px;left:16px;font-size:12px}
-    }
-
-    /* ─── Mobile ≤480px ─── */
-    @media (max-width: 480px){
-      body{padding:16px 12px calc(16px + env(safe-area-inset-bottom)) 12px}
-      .card{padding:32px 22px 28px; border-radius:18px}
-      .card::before{left:18px;right:18px}
-      .logo-mark{width:30px;height:30px}
-      .logo-text{font-size:19px}
-      h1{font-size:22px;letter-spacing:-0.3px}
-      .lead{font-size:14px}
-      .cta-google{padding:14px 18px;font-size:14.5px}
-      .divider{margin:26px 0 18px}
-    }
-  </style>
+  <link rel="stylesheet" href="/assets/light-scale.css?v=e52f76217e">
+  <link rel="stylesheet" href="/assets/page-review.css?v=c24a314d58">
   <script src="/assets/analytics.js?v=7ba69e930c" defer></script>
   <script defer src="/assets/ga-events.js?v=f7a36bf6ac"></script>
   <script src="/assets/site-nav.js?v=80f82ff50c" defer></script>
@@ -565,55 +363,30 @@
 })();</script>
 
 
-<main class="card" role="main">
+<div class="review">
+  <div class="review__card">
+    <div class="review__stars" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
 
-  <a class="back-link" href="/">← krepko.es</a>
+    <h1 class="review__h1">Спасибо, что выбрали Krepko</h1>
+    <p class="review__lead">Если результат работы вас устроил, короткий отзыв в Google
+    поможет другим русско- и украиноязычным выбрать, к кому идти. Для нас это ещё и
+    обратная связь: видно, что стоит поправить.</p>
 
-  <a class="logo" href="/" aria-label="Krepko — на главную">
-    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-      <g fill="none" stroke="#C4952A" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round">
-        <line x1="6" y1="3" x2="6" y2="21"/>
-        <line x1="6" y1="12" x2="18" y2="3"/>
-        <line x1="6" y1="12" x2="18" y2="21"/>
-      </g>
-    </svg>
-  </a>
+    <a class="review__google" href="https://g.page/r/CVhRZxBaPAsFEBI/review" target="_blank" rel="noopener noreferrer" data-cta="review-google">
+      <svg viewBox="0 0 48 48" aria-hidden="true"><path fill="#FFC107" d="M43.6 20.1H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 7.9 3l5.7-5.7C34.4 6.1 29.5 4 24 4 13 4 4 13 4 24s9 20 20 20 20-9 20-20c0-1.3-.1-2.6-.4-3.9z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.8 1.2 7.9 3l5.7-5.7C34.4 6.1 29.5 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.4 0 10.3-2.1 13.9-5.4l-6.4-5.4c-2 1.5-4.6 2.5-7.5 2.5-5.2 0-9.6-3.3-11.3-7.9l-6.5 5C9.6 39.7 16.3 44 24 44z"/><path fill="#1976D2" d="M43.6 20.1H42V20H24v8h11.3c-.8 2.3-2.3 4.3-4.3 5.7l6.4 5.4c-.4.4 6.6-4.8 6.6-15.2 0-1.3-.1-2.6-.4-3.9z"/></svg>
+      Оставить отзыв в Google
+    </a>
+    <p class="review__note">Занимает меньше минуты.</p>
 
-  <div class="stars" aria-hidden="true">
-    <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-    <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-    <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-    <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-    <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+    <div class="review__or">или</div>
+
+    <p class="review__alt-text">Что-то стоило сделать иначе? Напишите нам — разберём.</p>
+    <a class="review__wa" href="https://wa.me/34641048296?text=%D0%9F%D0%B8%D1%88%D1%83%20%D0%BF%D0%BE%20%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%B5%20Krepko%20%E2%80%94%20%D0%B5%D1%81%D1%82%D1%8C%20%D0%BE%D0%B1%D1%80%D0%B0%D1%82%D0%BD%D0%B0%D1%8F%20%D1%81%D0%B2%D1%8F%D0%B7%D1%8C" target="_blank" rel="noopener noreferrer" data-cta="review-feedback-wa">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9 8.5 8.5 0 0 1 8.5 8.5z"/></svg>
+      Написать в WhatsApp
+    </a>
   </div>
-
-  <h1>Спасибо за выбор <span class="accent">Krepko</span></h1>
-  <p class="lead">Если результат работы вас устроил — короткий отзыв в Google поможет другим клиентам при выборе сервиса и станет важной обратной связью для команды Krepko.</p>
-
-  <a class="cta-google" href="https://g.page/r/CVhRZxBaPAsFEBI/review" target="_blank" rel="noopener noreferrer" data-cta="review-google">
-    <svg class="g-logo" viewBox="0 0 48 48" aria-hidden="true">
-      <path fill="#FFC107" d="M43.6 20.1H42V20H24v8h11.3c-1.6 4.7-6.1 8-11.3 8c-6.6 0-12-5.4-12-12s5.4-12 12-12c3 0 5.8 1.1 7.9 3l5.7-5.7C34.4 6.1 29.5 4 24 4C12.9 4 4 12.9 4 24s8.9 20 20 20s20-8.9 20-20c0-1.3-.1-2.6-.4-3.9z"/>
-      <path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 15.1 19 12 24 12c3 0 5.8 1.1 7.9 3l5.7-5.7C34.4 6.1 29.5 4 24 4C16.3 4 9.7 8.3 6.3 14.7z"/>
-      <path fill="#4CAF50" d="M24 44c5.4 0 10.3-2.1 13.9-5.4l-6.4-5.4c-2 1.5-4.6 2.5-7.5 2.5c-5.2 0-9.6-3.3-11.3-7.9l-6.5 5C9.6 39.7 16.3 44 24 44z"/>
-      <path fill="#1976D2" d="M43.6 20.1H42V20H24v8h11.3c-.8 2.3-2.3 4.3-4.3 5.7l6.4 5.4c-.4.4 6.6-4.8 6.6-15.2c0-1.3-.1-2.6-.4-3.9z"/>
-    </svg>
-    Оставить отзыв в Google
-  </a>
-
-  <p class="cta-note">Занимает меньше минуты.</p>
-
-  <div class="divider" aria-hidden="true">или</div>
-
-  <p class="fallback-text">Что-то стоило сделать иначе?</p>
-  <a class="fallback-wa" href="https://wa.me/34641048296?text=%D0%9F%D0%B8%D1%88%D1%83%20%D0%BF%D0%BE%20%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%B5%20Krepko%20%E2%80%94%20%D0%B5%D1%81%D1%82%D1%8C%20%D0%BE%D0%B1%D1%80%D0%B0%D1%82%D0%BD%D0%B0%D1%8F%20%D1%81%D0%B2%D1%8F%D0%B7%D1%8C" target="_blank" rel="noopener noreferrer" data-cta="review-feedback-wa">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-      <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9 8.5 8.5 0 0 1 8.5 8.5z"/>
-    </svg>
-    Написать Krepko
-  </a>
-
-
-</main>
+</div>
 
 <div class="cookie-consent" id="cookie-consent" hidden role="region" aria-label="Уведомление о cookies" aria-live="polite" aria-atomic="true">
   <div class="cookie-consent__inner">
