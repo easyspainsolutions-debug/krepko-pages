@@ -184,7 +184,12 @@
   color: var(--text-sub);
   white-space: nowrap;
 }
+/* Заголовок карточки — h2 ради структуры страницы: витрина из 34 статей
+   иначе выглядит как один заголовок и плоский список. Отступы гасим:
+   общий стиль h2 добавляет 32px сверху и разрывает карточку. */
+h2.blog-card__title,
 .blog-card__title {
+  margin: 0 0 10px;
   font-family: 'Playfair Display', Georgia, serif;
   font-size: 20px;
   font-weight: 500;
