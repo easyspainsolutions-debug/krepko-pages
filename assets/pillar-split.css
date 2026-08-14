@@ -96,7 +96,9 @@ body:has(.pillar-split) main {
 .pillar-nav__current::before {
   content: '';
   position: absolute;
-  left: 0;
+  /* 5px от края строки: точка стоит между направляющей линией списка и
+     текстом. На нуле она ложилась прямо на линию и слипалась с ней. */
+  left: 5px;
   top: 50%;
   width: 6px;
   height: 6px;
@@ -112,7 +114,10 @@ body:has(.pillar-split) main {
 .pillar-nav__current {
   color: var(--ps-navy);
   font-weight: 700;
-  padding-left: 22px;
+  /* Отступ тот же, что у соседних ссылок: раньше активный пункт стоял на
+     4px правее и читался как случайно сдвинутая строка. Точка-маркер
+     помещается в это же поле — см. правило ::before ниже. */
+  padding-left: 18px;
 }
 .pillar-nav__current::before { opacity: 1; transform: translate(0, -50%); }
 
@@ -653,7 +658,7 @@ body:has(.pillar-split) main {
   /* «Индивидуальные документы»: на телефоне серая карточка с рамкой
      весила больше, чем весь список над ней. Оставляем строку — заголовок
      ссылкой и одна поясняющая фраза. */
-  .pillar-nav__custom {
+  .pillar-nav a.pillar-nav__custom {
     margin-top: 20px;
     padding: 16px 0 0;
     background: none;
@@ -821,6 +826,10 @@ body:has(.pillar-split) .final-cta .btn--gold {
   border-top: 1px solid var(--ps-border);
 }
 .pillar-guides li { border-bottom: 1px solid var(--ps-border); margin: 0; }
+/* Последняя строка обходится без своей линии: сразу под блоком начинается
+   каталог, и он приносит собственную верхнюю границу. Две линии подряд с
+   пустой полосой между ними читались как поломанная вёрстка. */
+.pillar-guides li:last-child { border-bottom: 0; }
 .pillar-guides a {
   display: block;
   padding: 12px 0;

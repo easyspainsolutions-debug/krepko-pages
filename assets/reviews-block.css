@@ -181,6 +181,11 @@
     .final-cta > h2::after { margin-left: auto; margin-right: auto; }
 }
 
+/* Финальный призыв центрирован на любой ширине — значит и черта под ним.
+   В эту выдержку из home-redesign.css правило не попало, и на телефоне
+   черта висела у левого края под центрированным заголовком. */
+.final-cta > h2::after { margin-left: auto; margin-right: auto; }
+
 /* 2. отзывы — песочная подложка во всю ширину, чтобы разбить череду cream */
   #sec-reviews {
     background: var(--surface-sunk);
