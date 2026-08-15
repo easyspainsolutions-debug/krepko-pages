@@ -156,14 +156,14 @@ body:has(> .wrap.wrap--article) > .wrap.wrap--article {
    стилями прямо в разметке: 100+ атрибутов style на 32 статьи. Одинаковые по
    смыслу блоки выглядели по-разному, а править их можно было только поиском
    по всем файлам. Теперь у каждого класс. */
-.article-body a {
+.article-body a:not(.btn):not(.inline-cta__btn):not(.article-promo) {
   color: var(--gold, #C75B39);
   font-weight: 600;
   text-decoration: none;
   border-bottom: 1px solid transparent;
   transition: border-color .15s ease;
 }
-.article-body a:hover { border-bottom-color: currentColor; }
+.article-body a:not(.btn):not(.inline-cta__btn):hover { border-bottom-color: currentColor; }
 
 .article-services {
   background: var(--surface, #F5F0EB);
