@@ -420,7 +420,6 @@ dialog:not([open]) { display: none !important; }
   flex-direction: column;
   padding: 2px 0 10px 14px;
   border-bottom: 1px solid #EFE7DA;
-  border-left: 2px solid #EFE7DA;
   margin-left: 2px;
 }
 .site-menu__dir-link,

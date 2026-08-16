@@ -269,11 +269,10 @@ body:has(.pillar-split) main {
 .pillar-cat.is-open > .pillar-cat__panel { max-height: 1200px; }
 .pillar-cat__list {
   list-style: none;
-  /* Направляющая слева привязывает пункты к их категории: список читается
-     как вложенный уровень, а не как продолжение общей простыни. */
+  /* Вложенность держится отступом и цветом пунктов. Направляющая линия
+     слева убрана 17.08 по просьбе владельца — мешала и на ПК, и на телефоне. */
   margin: 2px 0 6px 3px;
   padding: 0 0 0 13px;
-  border-left: 2px solid var(--ps-border);
   overflow: hidden;
 }
 .pillar-cat__list > li:first-child { padding-top: 2px; }
@@ -405,6 +404,9 @@ a.pillar-nav__custom {
   counter-increment: step;
   position: relative;
   padding: 0 0 22px 46px;
+  /* сбрасываем общий отступ пунктов из .pillar-doc li: с ним нить
+     не дотягивалась до кружка следующего шага и рвалась */
+  margin: 0;
 }
 .pillar-steps > li::before {
   content: counter(step);
@@ -430,7 +432,8 @@ a.pillar-nav__custom {
   content: '';
   position: absolute;
   left: 15px;
-  top: 34px;
+  /* кружок высотой 30 — нить начинается сразу под ним, без зазора */
+  top: 31px;
   /* до самой границы пункта: ниже неё сразу начинается кружок следующего
      шага, поэтому нить стыкуется с ним без разрыва */
   bottom: 0;
@@ -651,22 +654,38 @@ a.pillar-nav__custom {
   }
   .pillar-split--doc .pillar-cat__head svg { display: none; }
 
-  /* На витрине категория — крупная строка, по которой хочется нажать:
-     название, число услуг и шеврон. Между ними линия, как в списке. */
-  .pillar-split--hub .pillar-cat { border-top: 0; border-bottom: 1px solid var(--ps-border); }
+  /* На витрине категория — крупная строка, по которой хочется нажать.
+     Линий между строками нет: восемь одинаковых разделителей подряд
+     превращали список в простыню (правка 17.08). Разделяет воздух. */
+  .pillar-split--hub .pillar-cat { border-top: 0; border-bottom: 0; }
   .pillar-split--hub .pillar-cat__head {
-    padding: 16px 0;
-    font-size: 16px;
+    padding: 15px 0;
+    font-size: 16.5px;
     font-weight: 600;
     color: var(--ps-navy);
   }
+  /* Счётчик — тихая пилюля: строки перестают быть одинаковыми, и глаз
+     цепляется за объём категории, а не за очередную линию. */
   .pillar-split--hub .pillar-cat__count {
-    display: block;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 24px;
+    height: 22px;
+    padding: 0 7px;
     margin-left: auto;
     margin-right: 10px;
-    font-size: 13px;
-    font-weight: 500;
+    border-radius: 999px;
+    background: var(--ps-surface);
+    font-size: 12.5px;
+    font-weight: 600;
     color: var(--ps-text-muted);
+  }
+  /* Раскрытая категория подсвечивается фоном — видно, где ты находишься. */
+  .pillar-split--hub .pillar-cat[open] > .pillar-cat__head { color: var(--ps-gold); }
+  .pillar-split--hub .pillar-cat[open] .pillar-cat__count {
+    background: rgba(199, 91, 57, .12);
+    color: var(--ps-gold);
   }
 
   .pillar-cat__list a,
