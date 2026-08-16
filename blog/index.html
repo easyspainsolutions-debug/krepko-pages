@@ -25,7 +25,7 @@
   <link rel="stylesheet" href="/assets/krepko-chips.css?v=d588b7e6cf">
   <link rel="stylesheet" href="/assets/site-footer.css?v=10f623e9ba">
   <link rel="stylesheet" href="/assets/a11y.css?v=bd18bf2b40">
-  <link rel="stylesheet" href="/assets/blog-grid.css?v=b6a9507a85">
+  <link rel="stylesheet" href="/assets/blog-grid.css?v=c661d60e32">
   <link rel="stylesheet" href="/assets/krepko-base.css?v=6216d1aafd">
   <link rel="stylesheet" href="/assets/cookie-consent.css?v=a4b74432ef">
   <script src="/assets/cookie-consent.js?v=8272782489" defer></script>
@@ -1053,8 +1053,8 @@
         </span>
       </a>
     </div>
-    </div>
-  
+      </div>
+      <button class="blog-more" id="blog-more" type="button" hidden>Показать ещё <span>0</span></button> 
 <script>
 /* Фильтр витрины блога. Прячет карточки чужой темы, не трогая разметку:
    так работает без перерисовки и переживает отключённый JS — при нём
@@ -1077,15 +1077,54 @@
     syncEnd();
   }
 
+  /* ── порционный показ ──
+     39 карточек подряд давали 16,6 экрана прокрутки на телефоне. Показываем
+     первые 12, остальные — по кнопке. Скрываем только те, что за порцией:
+     без JS видны все, как и раньше. */
+  var PORTION = 12;
+  var want = 'all';
+  var shown = PORTION;
+  var more = document.getElementById('blog-more');
+
+  function matches(card) { return want === 'all' || card.dataset.cat === want; }
+
+  function render() {
+    var n = 0, hidden = 0;
+    cards.forEach(function (card) {
+      if (!matches(card)) { card.style.display = 'none'; return; }
+      n += 1;
+      if (n <= shown) { card.style.display = ''; }
+      else { card.style.display = 'none'; hidden += 1; }
+    });
+    if (!more) return;
+    if (hidden > 0) {
+      more.hidden = false;
+      more.querySelector('span').textContent = hidden;
+    } else {
+      more.hidden = true;
+    }
+  }
+
+  if (more) {
+    more.addEventListener('click', function () {
+      shown += PORTION;
+      render();
+      /* фокус на первую из досыпанных — чтобы клавиатура не улетала наверх */
+      var next = [].filter.call(cards, function (c) { return c.style.display !== 'none'; })[shown - PORTION];
+      if (next) next.setAttribute('tabindex', '-1'), next.focus({ preventScroll: true });
+    });
+  }
+
   pills.forEach(function (pill) {
     pill.addEventListener('click', function () {
-      var want = pill.dataset.filter;
+      want = pill.dataset.filter;
+      shown = PORTION;
       pills.forEach(function (p) { p.classList.toggle('is-on', p === pill); });
-      cards.forEach(function (card) {
-        card.style.display = (want === 'all' || card.dataset.cat === want) ? '' : 'none';
-      });
+      render();
     });
   });
+
+  render();
 })();
 </script>
   </main>

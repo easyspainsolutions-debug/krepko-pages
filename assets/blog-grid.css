@@ -306,3 +306,30 @@ body:has(.blog-grid) {
   align-items: stretch !important;
 }
 body:has(.blog-grid) main { width: 100%; }
+
+
+/* ── «Показать ещё» (17.08) ──
+   Витрина отдаёт первые 12 карточек: 39 подряд давали 16,6 экрана
+   прокрутки на телефоне. Кнопка досыпает следующие и показывает,
+   сколько осталось в выбранной теме. */
+.blog-more {
+  display: block;
+  margin: 8px auto clamp(28px, 4vw, 48px);
+  padding: 13px 30px;
+  background: transparent;
+  border: 1px solid rgba(26, 43, 60, .18);
+  border-radius: 10px;
+  font-family: 'Manrope', sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--blog-ink, #1A2B3C);
+  cursor: pointer;
+  transition: border-color .2s ease, color .2s ease;
+}
+.blog-more span { color: var(--text-muted, #6B6B6B); font-weight: 500; }
+@media (hover: hover) {
+  .blog-more:hover { border-color: var(--gold); color: var(--gold); }
+  .blog-more:hover span { color: inherit; }
+}
+@media (prefers-reduced-motion: reduce) { .blog-more { transition: none; } }
+@media (max-width: 700px) { .blog-more { width: calc(100% - 40px); } }
