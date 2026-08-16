@@ -229,6 +229,8 @@
     #sec-coverage .home-coverage__grid {
       display: flex;
       overflow-x: auto;
+  touch-action: pan-x;
+  overscroll-behavior-x: contain;
       scroll-snap-type: x mandatory;
       gap: 16px;
       padding-bottom: 10px;
@@ -684,7 +686,9 @@
   }
   @media (prefers-reduced-motion: reduce) {
     .ticker__track { animation: none; }
-    .ticker { overflow-x: auto; }
+    .ticker { overflow-x: auto;
+  touch-action: pan-x;
+  overscroll-behavior-x: contain; }
   }
 
   /* ============ Round 11b: hero растягивается, тикер прижат к низу экрана ============ */
@@ -1871,6 +1875,8 @@
     display: flex;
     gap: 28px;
     overflow-x: auto;
+  touch-action: pan-x;
+  overscroll-behavior-x: contain;
     scroll-snap-type: x mandatory;
     scroll-behavior: smooth;
     padding: 36px 0 6px;
@@ -2559,6 +2565,8 @@
     display: flex;
     gap: 0;
     overflow-x: auto;
+  touch-action: pan-x;
+  overscroll-behavior-x: contain;
     scroll-snap-type: x mandatory;
     scroll-behavior: smooth;
     -ms-overflow-style: none;
@@ -2896,6 +2904,8 @@
   .city__track {
     display: flex;
     overflow-x: auto;
+  touch-action: pan-x;
+  overscroll-behavior-x: contain;
     scroll-snap-type: x mandatory;
     scroll-behavior: smooth;
     -ms-overflow-style: none;

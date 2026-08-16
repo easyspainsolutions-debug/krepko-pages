@@ -180,6 +180,8 @@ body .hero--service--notario .btn--wa:hover { background: var(--gold-2, #B04E2F)
 .home-reviews .rv__track,
 .home-reviews [class*="track"] {
   overflow-x: auto;
+  touch-action: pan-x;
+  overscroll-behavior-x: contain;
   scroll-snap-type: x mandatory;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;

@@ -621,6 +621,8 @@ li strong,p strong {
 .table-wrap,
 .cost-table-wrap {
   overflow-x: auto;
+  touch-action: pan-x;
+  overscroll-behavior-x: contain;
   margin: 18px 0 22px;
   -webkit-overflow-scrolling: touch;
 }

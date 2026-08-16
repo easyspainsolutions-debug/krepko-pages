@@ -539,7 +539,9 @@ body:has(.tw) { overflow-x: visible; }
   .tw-years__k { display: none; }
   .tw-years ul {
     display: flex; gap: 6px;
-    overflow-x: auto; -ms-overflow-style: none; scrollbar-width: none;
+    overflow-x: auto;
+  touch-action: pan-x;
+  overscroll-behavior-x: contain; -ms-overflow-style: none; scrollbar-width: none;
     /* Поля внутри прокручиваемой ленты: первый чип отступает от края как
        весь остальной текст, а листается лента от края до края. */
     margin: 0; padding: 0 var(--pad) 4px;
