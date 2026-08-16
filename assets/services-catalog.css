@@ -316,3 +316,81 @@ body:has(.services-catalog) .final-cta .btn--gold {
   .svc-search,
   .svc-faq .pillar-faq summary::after { transition: none; }
 }
+
+
+/* ── список услуг направления: аккордеон на телефоне (17.08) ──
+   Раньше все семь ссылок висели раскрытыми в каждой из девяти карточек, и
+   каталог растягивался на 6,4 экрана телефона. Теперь список свёрнут:
+   человек видит девять направлений сразу и раскрывает нужное.
+   На широком экране места достаточно — там аккордеон «разбирается»:
+   заголовок прячется, список всегда открыт. */
+.svc-card__fold { margin: 0 0 14px; }
+.svc-card__fold > summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 11px 0;
+  border-top: 1px solid var(--svc-border, #E8DFD1);
+  border-bottom: 1px solid var(--svc-border, #E8DFD1);
+  cursor: pointer;
+  list-style: none;
+  font-family: 'Manrope', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--svc-navy, #1A2B3C);
+}
+.svc-card__fold > summary::-webkit-details-marker { display: none; }
+/* счётчик + шеврон: сколько внутри и куда нажать */
+.svc-card__fold > summary span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 22px;
+  height: 20px;
+  padding: 0 6px;
+  border-radius: 999px;
+  background: var(--svc-surface, #F5F0EB);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--svc-muted, #6B6B6B);
+}
+.svc-card__fold > summary::after {
+  content: '';
+  width: 8px;
+  height: 8px;
+  margin-left: 2px;
+  border-right: 1.6px solid var(--svc-muted, #6B6B6B);
+  border-bottom: 1.6px solid var(--svc-muted, #6B6B6B);
+  transform: rotate(45deg) translate(-2px, -2px);
+  transition: transform .25s ease;
+}
+.svc-card__fold[open] > summary::after { transform: rotate(-135deg) translate(-3px, -3px); }
+.svc-card__fold[open] > summary { border-bottom-color: transparent; }
+@media (prefers-reduced-motion: reduce) {
+  .svc-card__fold > summary::after { transition: none; }
+}
+
+/* Десктоп: аккордеон не нужен — список показан всегда. */
+@media (min-width: 861px) {
+  .svc-card__fold > summary { display: none; }
+  .svc-card__fold > .svc-card__links { display: block !important; }
+}
+
+
+@media (max-width: 860px) {
+  /* описание — две строки: направление понятно и по ним, а третья строка
+     умножалась на девять карточек */
+  .svc-card__desc {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    margin-bottom: 12px;
+  }
+  /* шапка каталога: на телефоне первый экран должен показывать сам
+     каталог, а не воздух над заголовком */
+  .svc-head { padding-top: 6px; }
+  .svc-head__dek { margin-bottom: 14px; }
+  .svc-card { padding-top: 16px; padding-bottom: 16px; }
+}

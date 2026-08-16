@@ -1279,3 +1279,53 @@ body:has(.pillar-split) .final-cta .btn--gold {
 }
 .pillar-table tr:last-child td { border-bottom: 0; }
 .pillar-table td:first-child { color: var(--ps-navy); font-weight: 600; }
+
+
+/* ── призыв в середине текста услуги (17.08) ──
+   Мобильная страница услуги — 13 000 пикселей, и первая кнопка встречалась
+   на 11 647-м: человек читал десять экранов, не имея, куда нажать. Липкая
+   панель снизу запрещена регламентом, поэтому блок стоит в потоке — как
+   врезка в статьях блога. Оформлен тише соседнего текста: он предлагает,
+   а не перебивает чтение. */
+.doc-cta {
+  margin: 30px 0;
+  padding: 20px 22px;
+  background: var(--ps-surface);
+  border-radius: 12px;
+}
+.doc-cta__t {
+  margin: 0 0 6px;
+  font-family: 'Manrope', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.35;
+  color: var(--ps-navy);
+}
+.doc-cta__d {
+  margin: 0 0 16px;
+  font-family: 'Manrope', sans-serif;
+  font-size: 14.5px;
+  line-height: 1.6;
+  color: var(--ps-text-sub);
+}
+.doc-cta__b {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0 22px;
+  border-radius: 10px;
+  background: var(--ps-gold);
+  font-family: 'Manrope', sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  color: #FFFBF7;
+  text-decoration: none;
+  transition: opacity .2s ease;
+}
+@media (hover: hover) { .doc-cta__b:hover { opacity: .9; } }
+@media (prefers-reduced-motion: reduce) { .doc-cta__b { transition: none; } }
+@media (max-width: 700px) {
+  .doc-cta { padding: 18px; margin: 24px 0; }
+  .doc-cta__b { width: 100%; }
+}
