@@ -819,31 +819,52 @@ body:has(.pillar-split) .final-cta .btn--gold {
 /* ── «Статьи по теме» ──
    Обратная перелинковка с блогом: услуга продаёт, статья объясняет. */
 .pillar-guides { margin-top: 34px; }
-.pillar-guides ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  border-top: 1px solid var(--ps-border);
+.pillar-guides .p-label { display: block; margin-bottom: 14px; }
+
+/* Сетка на две колонки: больше двух статей в этом блоке не бывает
+   (проверено по всем 41 странице с блоком). На узком экране — в столбик. */
+.pillar-guides__list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 12px;
 }
-.pillar-guides li { border-bottom: 1px solid var(--ps-border); margin: 0; }
-/* Последняя строка обходится без своей линии: сразу под блоком начинается
-   каталог, и он приносит собственную верхнюю границу. Две линии подряд с
-   пустой полосой между ними читались как поломанная вёрстка. */
-.pillar-guides li:last-child { border-bottom: 0; }
-.pillar-guides a {
-  display: block;
-  padding: 12px 0;
-  font-size: 15.5px;
-  line-height: 1.45;
-  color: var(--ps-text-sub);
+
+.pillar-guide {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 16px 18px;
+  border: 1px solid var(--ps-border);
+  border-radius: 12px;
   text-decoration: none;
-  transition: color .2s ease, padding-left .3s cubic-bezier(.17, .84, .44, 1);
+  transition: border-color .2s ease, transform .2s ease;
 }
 @media (hover: hover) {
-  .pillar-guides a:hover { color: var(--ps-gold); padding-left: 6px; }
+  .pillar-guide:hover { border-color: var(--ps-gold); transform: translateY(-1px); }
 }
 @media (prefers-reduced-motion: reduce) {
-  .pillar-guides a { transition: none; }
+  .pillar-guide { transition: none; }
+  .pillar-guide:hover { transform: none; }
+}
+
+.pillar-guide__tag {
+  font-family: 'Manrope', sans-serif;
+  font-size: 11px;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+  color: var(--ps-gold);
+}
+.pillar-guide__title {
+  font-family: 'Manrope', sans-serif;
+  font-size: 15.5px;
+  font-weight: 600;
+  line-height: 1.35;
+  color: var(--ps-text);
+}
+.pillar-guide__time {
+  font-family: 'Manrope', sans-serif;
+  font-size: 12.5px;
+  color: var(--ps-text-muted, var(--ps-text-sub));
 }
 
 /* ── карточки смежных услуг ──
