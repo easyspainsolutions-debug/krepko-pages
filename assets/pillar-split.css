@@ -317,15 +317,13 @@ a.pillar-nav__custom {
 }
 
 .pillar-nav__div { height: 1px; margin: 18px 0; background: var(--ps-border); }
-/* Список городов был голой строкой без всякого оформления — «очень сыро»
-   (Daniil, 15.08). Даём ему ту же карточную опору, что у блока выше, но
-   тише: без заливки, только верхняя линия и разрядка. */
+/* Разделитель перед блоком уже даёт .pillar-nav__div — своя граница
+   рисовала вторую черту рядом с первой (правка 17.08). */
 .pillar-nav__cities {
-  margin: 18px 0 0;
-  padding: 16px 0 0;
-  border-top: 1px solid var(--ps-border);
+  margin: 14px 0 0;
+  padding: 0;
   font-size: 13px;
-  line-height: 1.9;
+  line-height: 1.85;
   color: var(--ps-text-muted);
 }
 .pillar-nav__cities-label {
@@ -339,20 +337,23 @@ a.pillar-nav__custom {
 }
 /* display: inline — иначе ссылки городов наследуют блочный показ пунктов
    меню и встают столбиком, а запятые повисают отдельными строками */
+/* Ссылки строкой, разделённые тонкой точкой. Пилюли с рамками владельцу
+   не подходят как формат — 17.08. */
 .pillar-nav__cities a {
-  display: inline-block;
-  padding: 3px 10px;
-  margin: 0 2px 4px 0;
-  border: 1px solid var(--ps-border);
-  border-radius: 999px;
-  font-size: 12.5px;
-  line-height: 1.5;
-  color: var(--ps-text-sub);
+  display: inline;
+  padding: 0;
+  font-size: 13px;
+  color: var(--ps-gold);
   text-decoration: none;
-  transition: border-color .2s ease, color .2s ease;
+  transition: color .2s ease;
+}
+.pillar-nav__cities a + a::before {
+  content: '·';
+  margin: 0 7px;
+  color: var(--ps-border);
 }
 @media (hover: hover) {
-  .pillar-nav__cities a:hover { color: var(--ps-gold); border-color: var(--ps-gold); }
+  .pillar-nav__cities a:hover { color: var(--ps-gold-2, var(--ps-navy)); }
 }
 
 /* ── правая колонка: текст ── */
