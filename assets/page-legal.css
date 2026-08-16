@@ -92,7 +92,15 @@ table {
   border-collapse: collapse;
   margin: var(--space-4) 0;
   font-size: var(--ts-body-sm);
+  /* На телефоне таблица не сжимается ниже своего содержимого — прокручиваем
+     её саму, а не страницу. display:block нужен, чтобы overflow сработал:
+     у table он игнорируется. */
+  display: block;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
 }
+table thead, table tbody { display: table; width: 100%; min-width: 460px; }
+table thead { table-layout: fixed; }
 
 th,
 td {
@@ -169,3 +177,8 @@ td strong {
     padding: var(--space-3) var(--rh-1);
   }
 }
+
+
+/* Длинные заголовки вроде «Política de privacidad / Политика
+   конфиденциальности» не помещались в строку на узком экране. */
+h1, h2, h3 { overflow-wrap: anywhere; }
