@@ -551,6 +551,10 @@ a.pillar-nav__custom {
   .pillar-split__cols {
     display: flex;
     flex-direction: column;
+    /* сбрасываем align-items: start из десктопного правила — во flex-колонке
+       он даёт детям ширину по содержимому, и широкий блок уводит страницу
+       вбок (правка 17.08) */
+    align-items: stretch;
     gap: 0;
     padding-top: 22px;
   }

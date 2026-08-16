@@ -232,6 +232,24 @@ h2.blog-card__title,
     overflow-x: auto;
     scrollbar-width: none;
     border-bottom: 1px solid rgba(26, 43, 60, .12);
+    /* от края до края экрана независимо от полей родителя: строка
+       обрывалась посреди экрана, будто её обрезали. 50vw считает от
+       вьюпорта, поэтому подгонять под padding контейнера не нужно. */
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+    padding-left: max(20px, calc(50vw - 50%));
+    padding-right: max(20px, calc(50vw - 50%));
+    box-sizing: border-box;
+    /* затухание справа — признак, что темы продолжаются за краем */
+    -webkit-mask-image: linear-gradient(to right, #000 calc(100% - 44px), transparent 100%);
+    mask-image: linear-gradient(to right, #000 calc(100% - 44px), transparent 100%);
+  }
+  /* у прокрученной до конца строки маска не нужна — иначе последняя тема
+     остаётся полупрозрачной */
+  .blog-filter.is-end {
+    -webkit-mask-image: none;
+    mask-image: none;
   }
   .blog-filter::-webkit-scrollbar { display: none; }
   .blog-filter__label { display: none; }
