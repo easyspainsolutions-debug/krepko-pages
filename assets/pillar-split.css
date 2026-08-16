@@ -286,7 +286,11 @@ body:has(.pillar-split) main {
 }
 
 /* ── «Индивидуальные документы» ── */
-.pillar-nav__custom {
+/* Селектор с тегом: правило `.pillar-nav a` выше задаёт пунктам списка
+   padding: 13px 0 13px 18px и по весу (0,1,1) перебивает одиночный класс.
+   Карточка получала левый отступ 18 и нулевой правый — текст прижимался
+   к рамке справа и блок читался как съехавший. */
+a.pillar-nav__custom {
   display: block;
   margin-top: 18px;
   padding: 16px;
@@ -314,24 +318,42 @@ body:has(.pillar-split) main {
 }
 
 .pillar-nav__div { height: 1px; margin: 18px 0; background: var(--ps-border); }
+/* Список городов был голой строкой без всякого оформления — «очень сыро»
+   (Daniil, 15.08). Даём ему ту же карточную опору, что у блока выше, но
+   тише: без заливки, только верхняя линия и разрядка. */
 .pillar-nav__cities {
-  padding-left: 18px;
-  margin: 0;
+  margin: 18px 0 0;
+  padding: 16px 0 0;
+  border-top: 1px solid var(--ps-border);
   font-size: 13px;
-  line-height: 1.7;
+  line-height: 1.9;
+  color: var(--ps-text-muted);
+}
+.pillar-nav__cities-label {
+  display: block;
+  margin-bottom: 6px;
+  font-family: 'Manrope', sans-serif;
+  font-size: 11px;
+  letter-spacing: .09em;
+  text-transform: uppercase;
   color: var(--ps-text-muted);
 }
 /* display: inline — иначе ссылки городов наследуют блочный показ пунктов
    меню и встают столбиком, а запятые повисают отдельными строками */
 .pillar-nav__cities a {
-  display: inline;
-  padding: 0;
-  font-size: 13px;
-  color: var(--ps-gold);
+  display: inline-block;
+  padding: 3px 10px;
+  margin: 0 2px 4px 0;
+  border: 1px solid var(--ps-border);
+  border-radius: 999px;
+  font-size: 12.5px;
+  line-height: 1.5;
+  color: var(--ps-text-sub);
   text-decoration: none;
+  transition: border-color .2s ease, color .2s ease;
 }
 @media (hover: hover) {
-  .pillar-nav__cities a:hover { color: var(--ps-gold-2); }
+  .pillar-nav__cities a:hover { color: var(--ps-gold); border-color: var(--ps-gold); }
 }
 
 /* ── правая колонка: текст ── */
@@ -818,7 +840,10 @@ body:has(.pillar-split) .final-cta .btn--gold {
 
 /* ── «Статьи по теме» ──
    Обратная перелинковка с блогом: услуга продаёт, статья объясняет. */
-.pillar-guides { margin-top: 34px; }
+/* margin-bottom: хвост страницы (FAQ) несёт свою верхнюю линию и без
+   отступа она прилипала вплотную к нижней рамке карточки — две линии
+   в двух пикселях друг от друга. */
+.pillar-guides { margin-top: 34px; margin-bottom: 28px; }
 .pillar-guides .p-label { display: block; margin-bottom: 14px; }
 
 /* Сетка на две колонки: больше двух статей в этом блоке не бывает
