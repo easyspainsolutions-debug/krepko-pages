@@ -4528,3 +4528,21 @@
   #city-prev { left: 0; }
   #city-next { right: 0; }
 }
+
+
+/* ── телефон: заголовки секций в общий ряд (17.08) ──
+   Центрирование секций объявлено в @media (min-width: 1000px), поэтому на
+   узком экране «Разобраться самому» и «Вопросы? Ответы» оставались слева
+   вместе с чертой-акцентом и выбивались из шести соседних секций. */
+@media (max-width: 999px) {
+  .home-guides > h2,
+  .home-faq h2,
+  .home-faq .faq > .faq__aside h2 { text-align: center; }
+
+  .home-guides > h2::after,
+  .home-faq h2::after,
+  .home-faq .faq h2::after { margin-left: auto; margin-right: auto; }
+
+  .home-guides__dek,
+  .home-faq .faq__dek { text-align: center; }
+}

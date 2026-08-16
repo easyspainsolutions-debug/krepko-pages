@@ -443,3 +443,4 @@
 @media (prefers-reduced-motion: reduce) {
     .home-faq .faq__q::before, .home-faq .faq__q::after { transition: none; }
   }
+
