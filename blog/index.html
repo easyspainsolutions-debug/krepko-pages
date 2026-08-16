@@ -1077,10 +1077,8 @@
     syncEnd();
   }
 
-  /* ── порционный показ ──
-     39 карточек подряд давали 16,6 экрана прокрутки на телефоне. Показываем
-     первые 12, остальные — по кнопке. Скрываем только те, что за порцией:
-     без JS видны все, как и раньше. */
+  /* Порционный показ — почему и как, см. .blog-more в blog-grid.css.
+     Без JS видны все карточки. */
   var PORTION = 12;
   var want = 'all';
   var shown = PORTION;
@@ -1089,31 +1087,26 @@
   function matches(card) { return want === 'all' || card.dataset.cat === want; }
 
   function render() {
-    var n = 0, hidden = 0;
-    cards.forEach(function (card) {
-      if (!matches(card)) { card.style.display = 'none'; return; }
+    var n = 0, hid = 0;
+    cards.forEach(function (c) {
+      if (!matches(c)) { c.style.display = 'none'; return; }
       n += 1;
-      if (n <= shown) { card.style.display = ''; }
-      else { card.style.display = 'none'; hidden += 1; }
+      if (n <= shown) c.style.display = '';
+      else { c.style.display = 'none'; hid += 1; }
     });
     if (!more) return;
-    if (hidden > 0) {
-      more.hidden = false;
-      more.querySelector('span').textContent = hidden;
-    } else {
-      more.hidden = true;
-    }
+    more.hidden = hid === 0;
+    if (hid) more.querySelector('span').textContent = hid;
   }
 
-  if (more) {
-    more.addEventListener('click', function () {
-      shown += PORTION;
-      render();
-      /* фокус на первую из досыпанных — чтобы клавиатура не улетала наверх */
-      var next = [].filter.call(cards, function (c) { return c.style.display !== 'none'; })[shown - PORTION];
-      if (next) next.setAttribute('tabindex', '-1'), next.focus({ preventScroll: true });
-    });
-  }
+  if (more) more.addEventListener('click', function () {
+    var was = shown;
+    shown += PORTION;
+    render();
+    /* фокус на первую досыпанную: клавиатура не улетает наверх */
+    var vis = [].filter.call(cards, function (c) { return c.style.display !== 'none'; });
+    if (vis[was]) vis[was].setAttribute('tabindex', '-1'), vis[was].focus({ preventScroll: true });
+  });
 
   pills.forEach(function (pill) {
     pill.addEventListener('click', function () {
