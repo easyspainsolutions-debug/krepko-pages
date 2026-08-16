@@ -50,7 +50,12 @@
   height: 100dvh;
   max-width: none;
   max-height: none;
-  background: transparent;
+  /* фон на самом диалоге, а не только на ::backdrop: на iOS с открытой
+     клавиатурой backdrop оставлял незакрытую полосу, и сквозь неё
+     просвечивала страница */
+  background: rgba(26, 43, 60, 0.34);
+  -webkit-backdrop-filter: blur(3px);
+  backdrop-filter: blur(3px);
   overflow: hidden;
 }
 /* Затемнение с размытием — фон уходит на второй план, как в Spotlight.
