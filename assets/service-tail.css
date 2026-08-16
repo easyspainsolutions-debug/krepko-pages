@@ -237,3 +237,11 @@
   padding-top: var(--sec-pad);
   padding-bottom: var(--sec-pad);
 }
+
+
+/* Городской FAQ на страницах административных процедур (2026-08-15).
+   Блок отвечает про город, а не про саму услугу, поэтому над ним стоит
+   отдельная метка — иначе вопрос про прописку на странице про обмен прав
+   читается как случайный. */
+.city-faq--tramites > .p-label { display: block; margin-bottom: 10px; }
+.city-faq--tramites .faq h2 { font-size: clamp(20px, 2.4vw, 26px); }
