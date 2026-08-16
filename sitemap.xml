@@ -901,6 +901,18 @@
     <changefreq>yearly</changefreq>
   </url>
   <url>
+    <loc>https://krepko.es/blog/nasledstvo-v-ispanii/</loc>
+    <lastmod>2026-08-15</lastmod>
+    <priority>0.6</priority>
+    <changefreq>yearly</changefreq>
+  </url>
+  <url>
+    <loc>https://krepko.es/blog/konsulskie-uslugi-muzhchinam/</loc>
+    <lastmod>2026-08-15</lastmod>
+    <priority>0.6</priority>
+    <changefreq>yearly</changefreq>
+  </url>
+  <url>
     <loc>https://krepko.es/blog/zamena-pasporta-ukraina-ispaniya/</loc>
     <lastmod>2026-08-13</lastmod>
     <priority>0.6</priority>
@@ -961,8 +973,26 @@
     <changefreq>yearly</changefreq>
   </url>
   <url>
+    <loc>https://krepko.es/blog/rebenok-rodilsya-v-ispanii/</loc>
+    <lastmod>2026-08-15</lastmod>
+    <priority>0.6</priority>
+    <changefreq>yearly</changefreq>
+  </url>
+  <url>
     <loc>https://krepko.es/blog/pokupka-nedvizhimosti-ispaniya/</loc>
     <lastmod>2026-08-13</lastmod>
+    <priority>0.6</priority>
+    <changefreq>yearly</changefreq>
+  </url>
+  <url>
+    <loc>https://krepko.es/blog/spravka-o-nesudimosti-ispaniya-ukraina/</loc>
+    <lastmod>2026-08-15</lastmod>
+    <priority>0.6</priority>
+    <changefreq>yearly</changefreq>
+  </url>
+  <url>
+    <loc>https://krepko.es/blog/soglasie-na-vyezd-rebenka-ispaniya/</loc>
+    <lastmod>2026-08-15</lastmod>
     <priority>0.6</priority>
     <changefreq>yearly</changefreq>
   </url>

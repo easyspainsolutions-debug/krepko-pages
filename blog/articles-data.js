@@ -39,5 +39,11 @@ var ARTICLES = [
   { slug: 'carta-de-invitacion-ispaniya', title: 'Carta de invitación через нотариуса — день в день',             tag: 'Документы · Нотариус',    cat: 'docs',    time: 6 },
   { slug: 'matrimonio-ispaniya-inostrancev', title: 'Свадьба в Испании для иностранцев: брак в нотариусе или ЗАГСе', tag: 'Документы · Нотариус · Семья', cat: 'docs', time: 6 },
   { slug: 'separacion-de-bienes-ispaniya', title: 'Брачный контракт (separación de bienes) в Испании: как защитить активы', tag: 'Документы · Нотариус · Семья', cat: 'docs', time: 5 },
-  { slug: 'razvod-ispaniya-notarius', title: 'Развод в Испании через нотариуса: быстрее и дешевле, чем суд', tag: 'Документы · Нотариус · Семья', cat: 'docs', time: 5 }
+  { slug: 'razvod-ispaniya-notarius', title: 'Развод в Испании через нотариуса: быстрее и дешевле, чем суд', tag: 'Документы · Нотариус · Семья', cat: 'docs', time: 5 },
+  // Август 2026 — документы и семья
+  { slug: 'konsulskie-uslugi-muzhchinam', title: 'Консульство отказало мужчине 18–60: что делать с документами', tag: 'Документы · Украина', cat: 'docs', time: 9 },
+  { slug: 'spravka-o-nesudimosti-ispaniya-ukraina', title: 'Справка о несудимости: две разные справки, которые путают', tag: 'Документы · Украина', cat: 'docs', time: 9 },
+  { slug: 'soglasie-na-vyezd-rebenka-ispaniya', title: 'Согласие на выезд ребёнка: почему полиция Испании его не выдаёт', tag: 'Дети · Нотариус', cat: 'social', time: 9 },
+  { slug: 'rebenok-rodilsya-v-ispanii', title: 'Ребёнок родился в Испании: какие документы нужны украинской семье', tag: 'Дети · Документы', cat: 'social', time: 9 },
+  { slug: 'nasledstvo-v-ispanii', title: 'Наследство в Испании: что делать в первые месяцы', tag: 'Наследство · Нотариус', cat: 'docs', time: 10 }
 ];
