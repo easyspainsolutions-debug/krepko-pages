@@ -163,21 +163,14 @@
     color: var(--text-sub);
     max-width: none;      /* во всю ширину колонки — до линии-разделителя */
   }
-.home-faq .faq {
-      display: grid;
-      grid-template-columns: minmax(220px, 0.75fr) minmax(0, 1.5fr);
-      gap: clamp(32px, 5vw, 88px);
-      align-items: start;
-      text-align: left;
-      max-width: 1320px;
-      margin: 0 auto;
-    }
-/* липкость убрана: колонка коротка, а список вопросов при закрытых
-       ответах ненамного выше — залипание давало только рывок под шапкой */
-    .home-faq .faq__aside { position: static; }
-.home-faq .faq > .faq__aside h2 { margin: 0; text-align: left; }
-.home-faq .faq h2::after { margin-left: 0; margin-right: 0; }
-.home-faq .faq__list { margin: 0; max-width: none; }
+/* Двухколонная раскладка блока живёт ниже, в @media (min-width: 900px).
+   Здесь она стояла второй раз и уже без обёртки медиа — след механического
+   выноса правил из home-redesign.css 9 августа. На главной это не было видно:
+   там home-redesign.css грузится после и перекрывает. А на городских хабах,
+   где faq-home.css идёт один, телефон получал те же две колонки — 220 px под
+   заголовок и 90 px под список вопросов, из-за чего ответы вылезали за экран
+   и страница ехала вбок на 10–18 px (замерено на /tramites/valencia/,
+   /tramites/malaga/, /notario/valencia/). Дубль снят 2026-08-17. */
 /* левая колонка: подводка + кнопка связи */
   .home-faq .faq__dek {
     margin: 22px 0 0;
