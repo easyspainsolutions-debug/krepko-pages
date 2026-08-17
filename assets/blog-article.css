@@ -341,3 +341,59 @@ body:has(> .wrap.wrap--article) > .wrap.wrap--article {
   .article-body h2[id],
   .article-body h3[id] { scroll-margin-top: 84px; }
 }
+
+/* ── Врезка-призыв в теле статьи ────────────────────────────────────
+   Разметка `.inline-cta` жила в пяти статьях от 15 августа и в 22
+   дописанных 17-го, но собственных правил у неё не было ни одной строки:
+   в файле упоминался только `.inline-cta__btn` — и то как исключение из
+   подчёркивания ссылок. Врезка выглядела обычным абзацем, а кнопка —
+   строчной ссылкой; человек её просто не замечал.
+
+   Оформление повторяет `.doc-cta` со страниц услуг: та же подложка,
+   то же скругление, та же терракотовая кнопка. Один приём на весь сайт. */
+.inline-cta {
+  margin: 34px 0;
+  padding: 22px 24px;
+  background: var(--surface, #F5F0EB);
+  border-radius: 12px;
+  /* Тонкая полоса слева — отделяет предложение от повествования, не
+     превращая блок в рекламный баннер. */
+  border-left: 3px solid var(--gold, #C75B39);
+}
+.inline-cta__header {
+  margin: 0 0 8px;
+  font-family: 'Manrope', sans-serif;
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 1.35;
+  color: var(--text, #2D2D2D);
+}
+.inline-cta__offer {
+  margin: 0 0 18px;
+  font-family: 'Manrope', sans-serif;
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--text-sub, #4A4A4A);
+}
+.inline-cta__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 46px;
+  padding: 0 24px;
+  border-radius: 10px;
+  background: var(--gold, #C75B39);
+  font-family: 'Manrope', sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--gold-on, #FFFBF7);
+  text-decoration: none;
+  border-bottom: 0;
+  transition: opacity .18s ease;
+}
+@media (hover: hover) { .inline-cta__btn:hover { opacity: .9; } }
+@media (prefers-reduced-motion: reduce) { .inline-cta__btn { transition: none; } }
+@media (max-width: 700px) {
+  .inline-cta { margin: 28px 0; padding: 18px; }
+  .inline-cta__btn { width: 100%; }
+}
