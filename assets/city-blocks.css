@@ -1032,11 +1032,11 @@
       cream. Две песочные секции подряд не ставим — сливаются в одно пятно. */
 .city-blocks > .city-local,
 .city-blocks > .city-process,
-.city-blocks > .city-faq,
+.city-blocks > .home-faq,
 .city-blocks > .city-service-hubs,
 .city-blocks + .final-cta { background: var(--bg); }
 
-.city-blocks > .city-faq { background: var(--surface-sunk); }
+.city-blocks > .home-faq { background: var(--surface-sunk); }
 
 /* 4. Герой живёт по своим правилам: на главной он тоже не полоса, а первый
       экран в контейнере. Возвращаем ему обычную ширину. */
@@ -1056,7 +1056,7 @@
 /* Зебра: вопросы после отзывов оказывались второй песочной полосой подряд —
    две секции сливались в одно пятно. Отдаём вопросы на cream, как гайды на
    главной, а песочными оставляем «Популярное» и отзывы. */
-.city-blocks > .city-faq { background: var(--bg); }
+.city-blocks > .home-faq { background: var(--bg); }
 
 /* Отступы полос: часть секций брала --sec-pad из локального объявления
    (52–92px), часть — из глобального (42–76px), и полосы получались разной
@@ -1104,76 +1104,55 @@
 /* Заголовки внутри блока «Как устроено» — уровнем ниже секционных */
 .city-local__title { font-size: clamp(17px, 1.35vw, 21px); }
 
-/* ═══ Вопросы: двухколоночный блок, как на главной (2026-08-08) ═══
-   Правила на главной привязаны к `.home-faq`, у городской секция называется
-   `.city-faq` — поэтому раскладка не подхватывалась и блок выглядел голым
-   списком плашек. Повторяем ту же сетку: слева заголовок с подводкой и
-   кнопкой, справа вопросы. */
-.city-faq .faq__dek {
-  margin: 22px 0 0;
-  font-size: clamp(15px, 1.2vw, 17px);
-  line-height: 1.7;
-  color: var(--text-muted);
-  max-width: 44ch;
-  text-align: left;
-}
+/* ═══ Вопросы ═══
+   2026-08-19: собственная копия раскладки `.city-faq .faq*` удалена. Она
+   повторяла колонки главной, но не несла правил самих вопросов — те
+   рендерились глобальными плашками, а кнопка прилипала к списку (скриншот
+   Daniil с /alicante/). Город теперь использует modules/faq_home.html +
+   faq-home.css — тот же блок, что главная и хабы услуг, без копий. */
 
-.city-faq .faq__cta { display: inline-flex; margin-top: 28px; }
-
-.city-faq .faq__actions {
-  display: inline-flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.city-faq .faq__list { gap: 0; }
-
-@media (min-width: 900px) {
-  .city-faq .faq {
-    display: grid;
-    grid-template-columns: minmax(220px, .75fr) minmax(0, 1.5fr);
-    gap: clamp(32px, 5vw, 88px);
-    align-items: start;
-    text-align: left;
-    max-width: 1320px;
-    margin: 0 auto;
-  }
-  .city-faq .faq > .faq__aside h2 { margin: 0; text-align: left; }
-  .city-faq .faq h2::after { margin-left: 0; margin-right: 0; }
-  .city-faq .faq__list { margin: 0; max-width: none; }
-}
-
-/* ═══ «Все услуги в городе» (2026-08-08) ═══
-   Был надзаголовок и два маркированных пункта — читалось как недоделанный
-   черновик, приклеенный к призыву. Делаем строкой ссылок-таблеток: тот же
-   приём, что у списка городов на главной. */
-.city-service-hubs .p-label { display: block; margin-bottom: 16px; }
+/* ═══ «Все услуги в городе» ═══
+   2026-08-19: таблетки сняты — Daniil не принимает формат пилюль для ссылок
+   (говорил трижды: каталог 16.08, городская страница 19.08). Теперь та же
+   строка ссылок через точку-разделитель, что у городов в каталоге услуг
+   (.pillar-nav__cities) — один приём на весь сайт. */
+.city-service-hubs .p-label { display: block; margin-bottom: 14px; }
 
 .city-service-hubs .city-coverage__list {
   list-style: none;
   margin: 0;
   padding: 0;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
 }
 
-.city-service-hubs .city-coverage__list li { margin: 0; }
+/* На телефоне — столбиком: инлайн-строка с двумя длинными названиями
+   ломалась посреди слова, а точка-разделитель повисала в начале строки. */
+.city-service-hubs .city-coverage__list li {
+  display: block;
+  margin: 0 0 10px;
+}
+.city-service-hubs .city-coverage__list li:last-child { margin-bottom: 0; }
 
 .city-service-hubs .city-coverage__list a {
-  display: inline-flex;
-  align-items: center;
-  padding: 10px 18px;
-  border: 1px solid var(--border);
-  border-radius: 999px;
-  font-size: 15px;
-  color: var(--text);
-  text-decoration: none;
-  transition: border-color .2s ease, color .2s ease;
-}
-
-.city-service-hubs .city-coverage__list a:hover {
-  border-color: var(--gold);
+  display: inline;
+  font-size: 16px;
+  line-height: 1.5;
   color: var(--gold);
   text-decoration: none;
+  transition: color .2s ease;
+}
+
+@media (min-width: 700px) {
+  .city-service-hubs .city-coverage__list li {
+    display: inline;
+    margin: 0;
+  }
+  .city-service-hubs .city-coverage__list li + li::before {
+    content: '·';
+    margin: 0 10px;
+    color: var(--border);
+  }
+}
+
+@media (hover: hover) {
+  .city-service-hubs .city-coverage__list a:hover { color: var(--gold-2); }
 }

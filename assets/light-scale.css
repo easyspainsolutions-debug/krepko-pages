@@ -213,3 +213,38 @@ body .final-cta {
   margin-right: calc(-50vw + 50%);
   max-width: none;
 }
+
+/* ── «Где Krepko работает» на страницах документ×город (2026-08-19) ──
+   Блок modules/city_coverage.html не имел стилей вовсе: города рендерились
+   маркированным списком с дисками-буллетами — сырой чужеродный кусок на
+   вычищенной странице. Тот же приём, что у городов в каталоге услуг и в
+   секции «Все услуги в городе»: строка ссылок через точку-разделитель. */
+.city-coverage__title {
+  font-size: clamp(20px, 2vw, 26px);
+  margin: 0 0 12px;
+}
+.city-coverage__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.city-coverage__list li {
+  display: inline;
+  margin: 0;
+}
+.city-coverage__list li + li::before {
+  content: '·';
+  margin: 0 9px;
+  color: var(--border, #E8DFD1);
+}
+.city-coverage__list a {
+  display: inline;
+  font-size: 15.5px;
+  line-height: 2;
+  color: var(--gold, #C75B39);
+  text-decoration: none;
+  transition: color .2s ease;
+}
+@media (hover: hover) {
+  .city-coverage__list a:hover { color: var(--gold-2, #B04E2F); }
+}
