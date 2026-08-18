@@ -59,6 +59,7 @@
     }
 
     .name {
+      margin: 0;
       font-size: 22px;
       font-weight: 700;
       color: #EDF1F8;
@@ -140,8 +141,9 @@
     <!-- Big 404 -->
     <div class="code-404">404</div>
 
-    <!-- Title -->
-    <div class="name">Страница не найдена</div>
+    <!-- Title. h1, а не div: страница была единственной живой без заголовка
+         первого уровня (ночная ревизия 2026-08-18) -->
+    <h1 class="name">Страница не найдена</h1>
 
     <!-- Lead text -->
     <div class="lead">
