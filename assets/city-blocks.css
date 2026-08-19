@@ -1163,3 +1163,31 @@
 .srows__hubs a { color: var(--gold); text-decoration: none; }
 .srows__hubs span { margin: 0 8px; color: var(--border); }
 @media (hover: hover) { .srows__hubs a:hover { color: var(--gold-2); } }
+
+/* ═══ Процесс: двойные поля и двойной фон (2026-08-19, скриншот Daniil) ═══
+   На главной .intro__how сам является полосой — несёт --sec-pad сверху и снизу
+   и свой фон. На городской он лежит ВНУТРИ секции .city-process, у которой
+   тот же --sec-pad и свой фон. Поля складывались: под шагами получалась
+   пустая полоса высотой в секционный отступ, и только потом начинались
+   отзывы — «секции разорваны». Внутри секции у блока полей и фона быть не
+   должно. !important — потому что исходные правила выдержки тоже с ним. */
+.city-blocks .city-process > .intro__how {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  background: transparent !important;
+}
+
+/* Черта под «Как проходит работа» уехала влево: базовое правило выдержки
+   ставит margin: 18px 0 0, а центрирующее .intro__how > h2::after стоит
+   раньше него в каскаде и проигрывает по порядку. Здесь — после всех. */
+.city-blocks .intro__how > h2::after { margin-left: auto !important; margin-right: auto !important; }
+
+/* Зебра городской после снятия блока «Все услуги» (2026-08-19): подряд шли
+   «Как устроено» (cream) и «Как проходит работа» (cream) — граница между
+   секциями пропадала. Новый ритм: герой cream → Популярное песок → Как
+   устроено cream → Как проходит ПЕСОК → Отзывы CREAM → Вопросы песок →
+   призыв cream. Строгое чередование, как на главной. !important — выдержка
+   главной красит отзывы песком с тем же весом. */
+.city-blocks > .city-process { background: var(--surface-sunk) !important; }
+.city-blocks > #sec-reviews  { background: var(--bg) !important; }
+.city-blocks > .home-faq     { background: var(--surface-sunk) !important; }
