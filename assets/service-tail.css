@@ -81,6 +81,11 @@
 /* плюс/минус справа — рисуем сами, чтобы не зависеть от палитры главной */
 .service-tail .faq__item > summary.faq__q::after {
   content: '+';
+  /* module-process.css (грузится в base.html на все страницы) даёт этому же
+     ::after position:absolute; right:12px — свойства мержатся, и плюс висел
+     поверх текста вопроса (наезд на телефоне, скриншот Daniil 20.08).
+     Возвращаем его в flex-поток явно. */
+  position: static;
   flex: 0 0 auto;
   color: var(--st-brand);
   font-size: 20px;

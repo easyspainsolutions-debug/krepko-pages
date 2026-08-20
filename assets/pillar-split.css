@@ -1308,6 +1308,10 @@ body:has(.pillar-split) .final-cta .btn--gold {
   line-height: 1.6;
   color: var(--ps-text-sub);
 }
+/* .pillar-doc a (селектор контентных ссылок) специфичнее одиночного класса
+   и перекрашивал текст кнопки в терракоту по терракотовому фону —
+   кнопка выглядела залитой, текст исчезал (скриншот Daniil, 20.08). */
+.pillar-doc a.doc-cta__b,
 .doc-cta__b {
   display: inline-flex;
   align-items: center;
