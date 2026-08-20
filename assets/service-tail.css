@@ -59,11 +59,16 @@
   border-radius: 0;
 }
 .service-tail .faq__item > summary.faq__q {
+  position: relative;
+  /* Ровная высота свёрнутых секций (Daniil 20.08): однострочный вопрос держит
+     ту же высоту, что двухстрочный, текст по вертикальному центру.
+     2.9em = две строки при line-height 1.45; box-sizing: border-box —
+     min-height включает вертикальные паддинги. */
   display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 16px;
-  padding: clamp(16px, 2vw, 22px) 0;
+  align-items: center;
+  min-height: calc(2.9em + 2 * clamp(16px, 2vw, 22px));
+  /* правый отступ — под рисованный крест-маркер */
+  padding: clamp(16px, 2vw, 22px) 40px clamp(16px, 2vw, 22px) 0;
   /* тёмную плашку из module-process.css гасим явно: без background тот
      фон остаётся и вопрос читается тёмно-серым по тёмно-синему */
   background: none;
@@ -78,21 +83,33 @@
   list-style: none;
 }
 .service-tail .faq__item > summary.faq__q::-webkit-details-marker { display: none; }
-/* плюс/минус справа — рисуем сами, чтобы не зависеть от палитры главной */
+/* Маркер — тот же рисованный «+» из двух линий, что на главной и городских
+   (faq-home.css): ::after повёрнута на 90°, при открытии схлопывается в «−».
+   Текстовый символ '+' заменён 20.08 — один знак раскрытия на всём сайте. */
+.service-tail .faq__item > summary.faq__q::before,
 .service-tail .faq__item > summary.faq__q::after {
-  content: '+';
-  /* module-process.css (грузится в base.html на все страницы) даёт этому же
-     ::after position:absolute; right:12px — свойства мержатся, и плюс висел
-     поверх текста вопроса (наезд на телефоне, скриншот Daniil 20.08).
-     Возвращаем его в flex-поток явно. */
-  position: static;
-  flex: 0 0 auto;
-  color: var(--st-brand);
-  font-size: 20px;
-  font-weight: 400;
-  line-height: 1;
+  content: '';
+  position: absolute;
+  left: auto;
+  right: 0;
+  top: 50%;  /* по центру секции — текст тоже центрирован */
+  width: 18px;
+  height: 1.8px;
+  margin: 0;
+  background: var(--st-brand);
+  transform: translateY(-50%);
+  transition: transform .35s cubic-bezier(.22, 1, .36, 1);
 }
-.service-tail .faq__item[open] > summary.faq__q::after { content: '−'; }
+.service-tail .faq__item > summary.faq__q::after {
+  transform: translateY(-50%) rotate(90deg);
+}
+.service-tail .faq__item[open] > summary.faq__q::after {
+  transform: translateY(-50%) rotate(90deg) scaleX(0);
+}
+@media (prefers-reduced-motion: reduce) {
+  .service-tail .faq__item > summary.faq__q::before,
+  .service-tail .faq__item > summary.faq__q::after { transition: none; }
+}
 .service-tail .faq__a {
   padding: 0 0 clamp(18px, 2vw, 24px);
   max-width: 74ch;
