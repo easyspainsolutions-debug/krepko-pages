@@ -27,10 +27,37 @@
       if (h) h.setAttribute('aria-expanded', 'false');
     });
   }
+  /* ── мобильная doc-раскладка: заголовок категории — подпись, не кнопка ──
+     CSS даёт head pointer-events:none, но Enter с клавиатуры всё равно
+     диспатчит click: категория схлопывалась, и правило
+     .pillar-cat:not(.is-open){display:none} стирало весь блок «Похожие
+     услуги» без пути назад (критика 2026-08-23, P2). Поэтому на doc-страницах
+     при узкой раскладке head уходит из tab-order и теряет aria-expanded,
+     а click-обработчик игнорируется. */
+  var docMq = window.matchMedia ? window.matchMedia('(max-width: 899px)') : null;
+  var isDocPage = !!document.querySelector('.pillar-split--doc');
+  function headIsLabel() { return isDocPage && docMq && docMq.matches; }
+  function applyHeadMode() {
+    cats.forEach(function (cat) {
+      var head = cat.querySelector('.pillar-cat__head');
+      if (!head) return;
+      if (headIsLabel()) {
+        head.setAttribute('tabindex', '-1');
+        head.removeAttribute('aria-expanded');
+      } else {
+        head.removeAttribute('tabindex');
+        head.setAttribute('aria-expanded', cat.classList.contains('is-open') ? 'true' : 'false');
+      }
+    });
+  }
+  applyHeadMode();
+  if (docMq && docMq.addEventListener) docMq.addEventListener('change', applyHeadMode);
+
   cats.forEach(function (cat) {
     var head = cat.querySelector('.pillar-cat__head');
     if (!head) return;
     head.addEventListener('click', function () {
+      if (headIsLabel()) return;
       var open = !cat.classList.contains('is-open');
       /* Открытая категория закрывает остальные: восемь раскрытых списков
          по 11 услуг превращают колонку в простыню, в которой не найти,
