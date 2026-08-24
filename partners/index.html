@@ -58,7 +58,7 @@
        Documented Phase-1 requirement (Аналитика-стратегия §IV/§VII/§XII). -->
   <script src="/assets/analytics.js?v=7ba69e930c" defer></script>
   <script src="/assets/reviews-carousel.js?v=1275b192f2" defer></script>
-  <link rel="stylesheet" href="/assets/partners.css?v=b7f3a545d3">
+  <link rel="stylesheet" href="/assets/partners.css?v=cc833f2a9d">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","url":"https://krepko.es/partners/","dateModified":"2026-08-20","inLanguage":"ru","isPartOf":{"@type":"WebSite","name":"Krepko","url":"https://krepko.es/"},"name":"Партнёрство с Krepko — Аликанте, документы и нотариат"}</script>
 </head>
 <body>
@@ -419,10 +419,10 @@
         <p>Напишите пару строк: чем занимаетесь, в каком городе, с какими задачами ваши клиенты чаще всего упираются в документы.</p>
         <p>Дальше — короткий разговор и письменные условия.</p>
         <form class="pb-form" id="partners-form" autocomplete="on" novalidate>
-          <label>Имя<input type="text" name="name" maxlength="120" autocomplete="name"></label>
-          <label>Компания или сайт <span class="pb-opt">(необязательно)</span><input type="text" name="company" maxlength="120" autocomplete="organization"></label>
-          <label>Чем занимаетесь<input type="text" name="what" maxlength="120" placeholder="например: агентство недвижимости"></label>
-          <label>Город <span class="pb-opt">(необязательно)</span><input type="text" name="city" maxlength="120" autocomplete="address-level2"></label>
+          <label><span class="pb-lab">Имя</span><input type="text" name="name" maxlength="120" autocomplete="name"></label>
+          <label><span class="pb-lab">Компания или сайт <span class="pb-opt">(необязательно)</span></span><input type="text" name="company" maxlength="120" autocomplete="organization"></label>
+          <label><span class="pb-lab">Чем занимаетесь</span><input type="text" name="what" maxlength="120" placeholder="например: агентство недвижимости"></label>
+          <label><span class="pb-lab">Город <span class="pb-opt">(необязательно)</span></span><input type="text" name="city" maxlength="120" autocomplete="address-level2"></label>
           <label class="pb-hp" aria-hidden="true">Оставьте пустым<input type="text" name="note2" tabindex="-1" autocomplete="off"></label>
           <button class="btn btn--gold" type="submit">Отправить в WhatsApp</button>
           <p class="pb-hint" role="status">Кнопка откроет WhatsApp с готовым сообщением из ваших ответов — останется нажать «отправить».</p>
@@ -482,7 +482,19 @@
     navLinks.forEach(function (a) { a.classList.toggle('is-active', a.getAttribute('href') === '#' + id); });
   }
   var stageOn = wide && !reduce && slides.length > 1;
-  if (stageOn) {
+  /* окно могло быть узким/фоновым при загрузке — пробуем включить сцену,
+     когда ширина дорастёт до десктопной (гейт иначе одноразовый) */
+  if (!stageOn && !reduce && slides.length > 1) {
+    window.addEventListener('resize', function lateInit() {
+      if (window.innerWidth < 900) return;
+      window.removeEventListener('resize', lateInit);
+      initStage();
+    });
+  }
+  if (stageOn) initStage();
+  function initStage() {
+    stageOn = true;
+    if (typeof spy !== 'undefined' && spy) spy.disconnect();   /* поздний старт: scrollspy потока больше не нужен */
     document.documentElement.classList.add('pb-stage-on');
     /* сцена: обернуть слайды в sticky-вьюпорт внутри высокого трека */
     var track = document.createElement('div'); track.className = 'pb-track';
