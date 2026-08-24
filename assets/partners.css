@@ -1,0 +1,187 @@
+/* /partners/ — раскладка «как блог» (Daniil 24.08): слева sticky-темы,
+   справа текст в блоговой типографике. Шкала --pb-* (SCALE_FILE_NAMES).
+   Форма временная — придёт референс от Daniil. */
+
+.pb {
+  --pb-terra: #C75B39;
+  --pb-terra-deep: #B04E2F;
+  --pb-cream: #FFFBF7;
+  --pb-sand: #F5F0EB;
+  --pb-border: #E8DFD1;
+  --pb-ink: #2D2D2D;
+  --pb-sub: #4A4A4A;
+  --pb-muted: #6B6B6B;
+  --pb-navy: #1A2B3C;
+  --focus-ring: rgba(199, 91, 57, 0.5);
+  background: var(--pb-cream);
+  color: var(--pb-ink);
+  font-family: 'Manrope', sans-serif;
+  padding: clamp(28px, 4vw, 56px) 0 clamp(64px, 8vw, 104px);
+}
+.pb ::selection { background: rgba(199, 91, 57, 0.18); color: var(--pb-navy); }
+.pb input { caret-color: var(--pb-terra); accent-color: var(--pb-terra); }
+
+.pb-layout {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0 clamp(20px, 4vw, 48px);
+  display: grid;
+  grid-template-columns: 250px minmax(0, 720px);
+  gap: clamp(36px, 5vw, 72px);
+  justify-content: center;
+  align-items: start;
+}
+
+/* ── левая колонка: темы ── */
+/* меню тем заморожено по вертикальному центру вьюпорта (Daniil 24.08):
+   aside тянется на всю высоту грида как распорка, внутренность — sticky
+   по центру; у конца страницы уезжает сама, футер не перекрывает. */
+.pb-nav { align-self: stretch; }
+.pb-nav__in {
+  position: sticky;
+  top: 50vh;
+  transform: translateY(-50%);
+}
+.pb-nav__label {
+  margin: 0 0 12px;
+  font-size: 11px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase;
+  color: var(--pb-muted);
+}
+.pb-nav__list { display: flex; flex-direction: column; }
+.pb-nav__list a {
+  position: relative;
+  padding: 9px 0 9px 16px;
+  font-size: 14.5px; font-weight: 600; line-height: 1.4;
+  color: var(--pb-sub);
+  text-decoration: none;
+  border-left: 1.8px solid var(--pb-border);
+  transition: color .15s ease, border-color .15s ease;
+}
+.pb-nav__list a:hover { color: var(--pb-navy); }
+.pb-nav__list a.is-active { color: var(--pb-terra-deep); border-left-color: var(--pb-terra); }
+.pb-nav__cta { margin-top: 10px; color: var(--pb-terra-deep) !important; }
+.pb-nav__cta:hover { color: var(--pb-terra) !important; }
+
+/* ── правая колонка: блоговая типографика ── */
+.pb-body { min-width: 0; }
+.pb-body section { scroll-margin-top: 110px; }
+.pb h1 {
+  margin: 0 0 18px;
+  font-family: 'Playfair Display', Georgia, serif;
+  font-weight: 500;
+  font-size: clamp(30px, 4vw, 44px);
+  line-height: 1.12;
+  color: var(--pb-navy);
+  text-wrap: balance;
+}
+/* лид-интро — как article-intro в блоге: выделенная подводка */
+.pb-intro {
+  margin: 0 0 clamp(22px, 3vw, 32px);
+  padding: 18px 22px;
+  background: var(--pb-sand);
+  border-left: 1.8px solid var(--pb-terra);
+  border-radius: 0 10px 10px 0;
+  font-size: clamp(15.5px, 1.4vw, 17px);
+  line-height: 1.65;
+  color: var(--pb-ink);
+}
+.pb h2 {
+  margin: clamp(36px, 4.6vw, 56px) 0 14px;
+  font-family: 'Playfair Display', Georgia, serif;
+  font-weight: 500;
+  font-size: clamp(22px, 2.4vw, 28px);
+  line-height: 1.2;
+  color: var(--pb-navy);
+}
+.pb p { margin: 0 0 14px; font-size: clamp(15px, 1.35vw, 16.5px); line-height: 1.75; color: var(--pb-sub); }
+.pb p strong { color: var(--pb-navy); }
+.pb-list { margin: 0 0 14px; padding: 0 0 0 2px; list-style: none; }
+.pb-list li {
+  position: relative;
+  padding: 5px 0 5px 22px;
+  font-size: clamp(15px, 1.35vw, 16.5px);
+  line-height: 1.6;
+  color: var(--pb-sub);
+}
+.pb-list li::before {
+  content: '';
+  position: absolute; left: 0; top: calc(5px + .8em);
+  width: 12px; height: 1.8px;
+  background: var(--pb-terra);
+  transform: translateY(-50%);
+}
+
+/* ── форма (временная, до референса Daniil) ── */
+.pb-form {
+  margin: 18px 0 12px;
+  padding: clamp(20px, 2.6vw, 30px);
+  background: var(--pb-sand);
+  border: 1px solid var(--pb-border);
+  border-radius: 12px;
+  display: flex; flex-direction: column; gap: 16px;
+}
+.pb-form label { display: block; font-size: 13px; font-weight: 700; letter-spacing: .02em; color: var(--pb-navy); }
+.pb-opt { display: inline; font-weight: 400; color: var(--pb-muted); font-size: 12px; white-space: nowrap; }
+.pb-form input {
+  display: block; width: 100%; margin-top: 2px;
+  padding: 8px 2px;
+  font: inherit; font-weight: 400; font-size: 16px; /* iOS не зумит */
+  color: var(--pb-ink);
+  background: transparent;
+  border: 0;
+  border-bottom: 1.8px solid var(--pb-border);
+  border-radius: 0;
+  transition: border-color .18s ease;
+}
+.pb-form input::placeholder { color: var(--pb-muted); opacity: 1; }
+.pb-form input:focus { border-bottom-color: var(--pb-terra); outline: none; box-shadow: none; }
+.pb-hp { position: absolute !important; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+.pb-form .btn { align-self: flex-start; margin-top: 4px; }
+.pb p.pb-hint { font-size: 13px; color: var(--pb-muted); margin: 0; }
+.pb p.pb-alt { font-size: 14.5px; }
+.pb-alt a { color: var(--pb-terra-deep); font-weight: 600; text-decoration: none; }
+.pb-alt a:hover { color: var(--pb-terra); }
+
+/* ── адаптив: слева-темы уезжают наверх горизонтальной лентой ── */
+@media (max-width: 900px) {
+  .pb-layout { grid-template-columns: minmax(0, 1fr); gap: 24px; }
+  .pb-nav { align-self: start; }
+  .pb-nav__in { position: static; transform: none; }
+  .pb-nav__list { flex-direction: row; flex-wrap: nowrap; overflow-x: auto; gap: 6px; padding-bottom: 6px; }
+  .pb-nav__list a {
+    flex: 0 0 auto;
+    padding: 8px 14px;
+    border: 1px solid var(--pb-border);
+    border-left: 1px solid var(--pb-border);
+    border-radius: 999px;
+    font-size: 13.5px;
+    white-space: nowrap;
+  }
+  .pb-nav__list a.is-active { border-color: var(--pb-terra); }
+  .pb-nav__cta { margin-top: 0; }
+  .pb-form .btn { align-self: stretch; text-align: center; }
+}
+
+/* ── слайд-сцена: sticky-вьюпорт под хедером, кроссфейд секций (JS ≥900px).
+   top/height сцены и --pb-align (верх текста = верх меню тем) ставит JS ── */
+.pb-track { position: relative; }
+.pb-stage { position: sticky; top: 0; height: 100vh; }
+.pb-stage [data-slide] {
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column; justify-content: flex-start;
+  padding-top: var(--pb-align, 25vh);
+  will-change: opacity, transform;
+}
+.pb-stage [data-slide] h2 { margin-top: 0; }
+/* заявка-слайд: форма компактнее и полями в 2 колонки, чтобы влезть в экран */
+html.pb-stage-on .pb-form {
+  margin: 12px 0 8px; padding: 14px 20px;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 12px 20px;
+}
+html.pb-stage-on .pb-form .btn,
+html.pb-stage-on .pb-form .pb-hint { grid-column: 1 / -1; }
+html.pb-stage-on .pb-form .btn { margin-top: 0; justify-self: start; }
+html.pb-stage-on .pb-form input { padding: 6px 2px; }
+html.pb-stage-on .pb p.pb-hint { font-size: 12px; margin: 0; }
+/* до инициализации JS секции в потоке — без сцены ничего не ломается */
+html:not(.pb-stage-on) .pb-stage [data-slide] { position: static; padding-top: 0; }
