@@ -58,7 +58,7 @@
        Documented Phase-1 requirement (Аналитика-стратегия §IV/§VII/§XII). -->
   <script src="/assets/analytics.js?v=7ba69e930c" defer></script>
   <script src="/assets/reviews-carousel.js?v=1275b192f2" defer></script>
-  <link rel="stylesheet" href="/assets/partners.css?v=cc833f2a9d">
+  <link rel="stylesheet" href="/assets/partners.css?v=d6d62990ec">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","url":"https://krepko.es/partners/","dateModified":"2026-08-20","inLanguage":"ru","isPartOf":{"@type":"WebSite","name":"Krepko","url":"https://krepko.es/"},"name":"Партнёрство с Krepko — Аликанте, документы и нотариат"}</script>
 </head>
 <body>
@@ -425,7 +425,6 @@
           <label><span class="pb-lab">Город</span><input type="text" name="city" maxlength="120" autocomplete="address-level2"></label>
           <label class="pb-hp" aria-hidden="true">Оставьте пустым<input type="text" name="note2" tabindex="-1" autocomplete="off"></label>
           <button class="btn btn--gold" type="submit">Отправить в WhatsApp</button>
-          <p class="pb-hint" role="status">Кнопка откроет WhatsApp с готовым сообщением из ваших ответов — останется нажать «отправить».</p>
         </form>
         <p class="pb-alt">Привычнее без формы? <a href="https://wa.me/34641048296?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%2C%20%D0%B2%D0%BE%D0%BF%D1%80%D0%BE%D1%81%20%D0%BF%D0%BE%20%D0%BF%D0%B0%D1%80%D1%82%D0%BD%D1%91%D1%80%D1%81%D1%82%D0%B2%D1%83" rel="noopener noreferrer" target="_blank">Просто напишите в WhatsApp</a> или на почту <a href="mailto:hello@krepko.es?subject=%D0%9F%D0%B0%D1%80%D1%82%D0%BD%D1%91%D1%80%D1%81%D1%82%D0%B2%D0%BE">hello@krepko.es</a>.</p>
       </section>
@@ -464,9 +463,7 @@
     }
     var url = 'https://wa.me/34641048296?text=' + encodeURIComponent(composeMessage());
     var w = window.open(url, '_blank', 'noopener');
-    if (!w) { window.location.href = url; return; }
-    var hint = f.querySelector('.pb-hint');
-    if (hint) hint.textContent = 'Чат открыт в соседней вкладке. Если не открылся — нажмите ссылку ниже.';
+    if (!w) { window.location.href = url; }
   });
 
   /* ── слайд-сцена (Daniil 24.08): ВСЕ секции, включая заявку, — слайды.

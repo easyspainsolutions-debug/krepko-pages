@@ -137,7 +137,6 @@
 .pb-form input:focus { border-bottom-color: var(--pb-terra); outline: none; box-shadow: none; }
 .pb-hp { position: absolute !important; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
 .pb-form .btn { align-self: flex-start; margin-top: 4px; }
-.pb p.pb-hint { font-size: 13px; color: var(--pb-muted); margin: 0; }
 .pb p.pb-alt { font-size: 14.5px; }
 .pb-alt a { color: var(--pb-terra-deep); font-weight: 600; text-decoration: none; }
 .pb-alt a:hover { color: var(--pb-terra); }
@@ -178,14 +177,12 @@ html.pb-stage-on .pb-form {
   margin: 12px 0 8px; padding: 14px 20px;
   display: grid; grid-template-columns: 1fr 1fr; gap: 12px 20px;
 }
-html.pb-stage-on .pb-form .btn,
-html.pb-stage-on .pb-form .pb-hint { grid-column: 1 / -1; }
+html.pb-stage-on .pb-form .btn { grid-column: 1 / -1; }
 html.pb-stage-on .pb-form .btn { margin-top: 0; justify-self: start; }
 /* label'ы в ряду разной высоты («(необязательно)» переносится) —
    input прижат к низу ячейки, линии полей ряда на одном уровне */
 html.pb-stage-on .pb-form label { display: flex; flex-direction: column; }
 html.pb-stage-on .pb-form label input { margin-top: auto; }
 html.pb-stage-on .pb-form input { padding: 6px 2px; }
-html.pb-stage-on .pb p.pb-hint { font-size: 12px; margin: 0; }
 /* до инициализации JS секции в потоке — без сцены ничего не ломается */
 html:not(.pb-stage-on) .pb-stage [data-slide] { position: static; padding-top: 0; }
