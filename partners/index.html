@@ -421,7 +421,6 @@
         <form class="pb-form" id="partners-form" autocomplete="on" novalidate>
           <label><span class="pb-lab">Имя</span><input type="text" name="name" maxlength="120" autocomplete="name"></label>
           <label><span class="pb-lab">Компания или сайт <span class="pb-opt">(необязательно)</span></span><input type="text" name="company" maxlength="120" autocomplete="organization"></label>
-          <label><span class="pb-lab">Чем занимаетесь</span><input type="text" name="what" maxlength="120" placeholder="например: агентство недвижимости"></label>
           <label><span class="pb-lab">Город <span class="pb-opt">(необязательно)</span></span><input type="text" name="city" maxlength="120" autocomplete="address-level2"></label>
           <label class="pb-hp" aria-hidden="true">Оставьте пустым<input type="text" name="note2" tabindex="-1" autocomplete="off"></label>
           <button class="btn btn--gold" type="submit">Отправить в WhatsApp</button>
@@ -442,7 +441,6 @@
     var parts = ['Здравствуйте! Пишу по партнёрству.'];
     if (f && f.name.value) parts.push('Меня зовут: ' + f.name.value.trim());
     if (f && f.company.value) parts.push('Компания: ' + f.company.value.trim());
-    if (f && f.what.value) parts.push('Чем занимаемся: ' + f.what.value.trim());
     if (f && f.city.value) parts.push('Город: ' + f.city.value.trim());
     return parts.join('\n');
   }
