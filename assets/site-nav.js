@@ -130,6 +130,7 @@
   var p = location.pathname;
   var k = (p === '/' || p === '/index.html') ? 'home'
         : p.indexOf('/blog') === 0 ? 'blog'
+        : p.indexOf('/partners') === 0 ? 'partners'
         : (p.indexOf('/services') === 0 || p.indexOf('/notario') === 0 ||
            p.indexOf('/ukraina') === 0 || p.indexOf('/banca') === 0 ||
            p.indexOf('/traduccion') === 0 || p.indexOf('/legalizacion') === 0) ? 'services'
