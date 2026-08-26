@@ -141,23 +141,11 @@
 .pb-alt a { color: var(--pb-terra-deep); font-weight: 600; text-decoration: none; }
 .pb-alt a:hover { color: var(--pb-terra); }
 
-/* ── адаптив: слева-темы уезжают наверх горизонтальной лентой ── */
+/* ── адаптив: на мобиле темы не нужны — обычный поток читается сверху
+   вниз, заголовки секций ведут сами (решение Daniil 24.08, вариант А) ── */
 @media (max-width: 900px) {
   .pb-layout { grid-template-columns: minmax(0, 1fr); gap: 24px; }
-  .pb-nav { align-self: start; }
-  .pb-nav__in { position: static; transform: none; }
-  .pb-nav__list { flex-direction: row; flex-wrap: nowrap; overflow-x: auto; gap: 6px; padding-bottom: 6px; }
-  .pb-nav__list a {
-    flex: 0 0 auto;
-    padding: 8px 14px;
-    border: 1px solid var(--pb-border);
-    border-left: 1px solid var(--pb-border);
-    border-radius: 999px;
-    font-size: 13.5px;
-    white-space: nowrap;
-  }
-  .pb-nav__list a.is-active { border-color: var(--pb-terra); }
-  .pb-nav__cta { margin-top: 0; }
+  .pb-nav { display: none; }
   .pb-form .btn { align-self: stretch; text-align: center; }
 }
 
