@@ -164,3 +164,40 @@
     if (trigger) { try { trigger.focus(); } catch (_) {} }
   });
 })();
+
+/* Drill-down каталога в мобильном меню (2026-08-24): «Каталог услуг»
+   проваливается на уровень с категориями и услугами мегаменю. Без JS
+   пункт остаётся ссылкой на /services/ — здесь перехватываем клик. */
+(function(){
+  var scroll = document.querySelector('.site-menu__scroll');
+  if (!scroll) return;
+  var open = scroll.querySelector('[data-drill-open]');
+  var back = scroll.querySelector('[data-drill-back]');
+  var dlg = document.getElementById('site-menu-dialog');
+  if (!open || !back) return;
+  open.addEventListener('click', function (e) {
+    e.preventDefault();
+    scroll.classList.remove('is-drillback');
+    scroll.classList.add('is-sub');
+    open.setAttribute('aria-expanded', 'true');
+    scroll.scrollTop = 0;
+    try { back.focus({ preventScroll: true }); } catch (_) {}
+  });
+  back.addEventListener('click', function () {
+    scroll.classList.remove('is-sub');
+    scroll.classList.add('is-drillback');
+    open.setAttribute('aria-expanded', 'false');
+    scroll.scrollTop = 0;
+    try { open.focus({ preventScroll: true }); } catch (_) {}
+  });
+  /* закрытое меню возвращается на верхний уровень — при повторном
+     открытии человек видит меню, а не каталог, где остановился */
+  if (dlg && window.MutationObserver) {
+    new MutationObserver(function(){
+      if (!dlg.open) {
+        scroll.classList.remove('is-sub', 'is-drillback');
+        open.setAttribute('aria-expanded', 'false');
+      }
+    }).observe(dlg, { attributes: true, attributeFilter: ['open'] });
+  }
+})();

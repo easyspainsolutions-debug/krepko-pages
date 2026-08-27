@@ -19,8 +19,8 @@
   <link rel="stylesheet" href="/assets/module-hero.css?v=9f01409c29">
   <link rel="stylesheet" href="/assets/module-trust.css?v=32a7136440">
   <link rel="stylesheet" href="/assets/module-process.css?v=b33de6f64d">
-  <link rel="stylesheet" href="/assets/site-nav.css?v=d11e751efb">
-<script src="/assets/site-nav.js?v=06ca6515c2" defer></script>
+  <link rel="stylesheet" href="/assets/site-nav.css?v=18adb81298">
+<script src="/assets/site-nav.js?v=727580b8c5" defer></script>
   <script src="/assets/cursor.js?v=b32744207b" defer></script>
   <link rel="stylesheet" href="/assets/krepko-chips.css?v=d588b7e6cf">
   <link rel="stylesheet" href="/assets/site-footer.css?v=10f623e9ba">
@@ -29,7 +29,7 @@
   <link rel="stylesheet" href="/assets/cookie-consent.css?v=a4b74432ef">
   <script src="/assets/cookie-consent.js?v=8272782489" defer></script>
 
-  <link rel="stylesheet" href="/assets/site-nav.css?v=d11e751efb">
+  <link rel="stylesheet" href="/assets/site-nav.css?v=18adb81298">
   <link rel="stylesheet" href="/assets/site-footer.css?v=10f623e9ba">
   <link rel="stylesheet" href="/assets/a11y.css?v=bd18bf2b40">
   <link rel="stylesheet" href="/assets/desktop.css?v=77a552d781">
@@ -254,86 +254,100 @@
     </header>
 
     <div class="site-menu__scroll">
+      <button class="site-menu__back" type="button" data-drill-back>
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 6 9 12 15 18"/></svg>
+        Меню
+      </button>
+
       <button class="site-menu__search" type="button" data-open-search>
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
         <span>Найти услугу или статью</span>
       </button>
 
-      <nav class="site-menu__nav" aria-label="Основное меню">
-        <a href="/" data-page="home" class="site-menu__link">Главная</a>
-        <a href="/services/" data-page="services" class="site-menu__link">Каталог услуг</a>
-        <a href="/about/" data-page="about" class="site-menu__link">О Krepko</a>
-        <a href="/blog/" data-page="blog" class="site-menu__link">Блог</a>
-        <a href="/partners/" data-page="partners" class="site-menu__link">Партнёрам</a>
-      </nav>
+      <div class="site-menu__levels">
+        <div class="site-menu__level site-menu__level--root">
+          <nav class="site-menu__nav" aria-label="Основное меню">
+            <a href="/" data-page="home" class="site-menu__link">Главная</a>
+            <a href="/services/" data-page="services" data-drill-open class="site-menu__link site-menu__link--drill" aria-expanded="false">
+              Каталог услуг
+              <svg class="site-menu__drill-chev" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 6 15 12 9 18"/></svg>
+            </a>
+            <a href="/about/" data-page="about" class="site-menu__link">О Krepko</a>
+            <a href="/blog/" data-page="blog" class="site-menu__link">Блог</a>
+            <a href="/partners/" data-page="partners" class="site-menu__link">Партнёрам</a>
+          </nav>
+        </div>
 
-      <div class="site-menu__dirs">
-        <span class="site-menu__label">Направления</span>
-        <nav class="site-menu__dirs-grid" aria-label="Направления услуг">
-          <details class="site-menu__dir" name="site-menu-dirs">
-            <summary class="site-menu__dir-head">
-              Нотариус и документы
-              <svg class="site-menu__dir-chev" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
-            </summary>
-            <div class="site-menu__dir-body">
-              <a class="site-menu__dir-link" href="/notario/#doverennosti">Доверенности</a>
-              <a class="site-menu__dir-link" href="/notario/#soglasiya">Согласия и заявления</a>
-              <a class="site-menu__dir-link" href="/notario/doverennost-generalnaya/">Генеральная доверенность</a>
-              <a class="site-menu__dir-link" href="/notario/doverennost-na-rodnom-yazyke/">Доверенность на родном языке</a>
-              <a class="site-menu__dir-link" href="/notario/carta-de-invitacion/">Приглашение (carta de invitación)</a>
-              <a class="site-menu__dir-link" href="/notario/soglasie-na-vyezd-rebenka/">Согласие на выезд ребёнка</a>
-              <a class="site-menu__dir-all" href="/notario/">Все нотариальные услуги&nbsp;→</a>
+        <div class="site-menu__level site-menu__level--catalog">
+          <nav class="site-menu__catalog" aria-label="Каталог услуг">
+            <a class="site-menu__all-link" href="/services/">Все услуги&nbsp;→</a>
+            <details class="site-menu__cat" name="site-menu-cats">
+              <summary class="site-menu__cat-head">
+                Нотариус и документы
+                <svg class="site-menu__cat-chev" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+              </summary>
+              <div class="site-menu__cat-body">
+                <a class="site-menu__cat-link" href="/notario/#doverennosti">Доверенности</a>
+                <a class="site-menu__cat-link" href="/notario/#soglasiya">Согласия и заявления</a>
+                <a class="site-menu__cat-link" href="/notario/doverennost-generalnaya/">Генеральная доверенность</a>
+                <a class="site-menu__cat-link" href="/notario/doverennost-na-rodnom-yazyke/">Доверенность на родном языке</a>
+                <a class="site-menu__cat-link" href="/notario/carta-de-invitacion/">Приглашение (carta de invitación)</a>
+                <a class="site-menu__cat-link" href="/notario/soglasie-na-vyezd-rebenka/">Согласие на выезд ребёнка</a>
+                <a class="site-menu__cat-more" href="/notario/">Все нотариальные услуги&nbsp;→</a>
+              </div>
+            </details>
+            <details class="site-menu__cat" name="site-menu-cats">
+              <summary class="site-menu__cat-head">
+                ВНЖ и миграция
+                <svg class="site-menu__cat-chev" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+              </summary>
+              <div class="site-menu__cat-body">
+                <a class="site-menu__cat-link" href="/migracion/vyhod-iz-tps/">Выход из TPS на ВНЖ</a>
+                <a class="site-menu__cat-link" href="/migracion/modifikaciya-statusa/">Модификация статуса (ст. 191)</a>
+                <a class="site-menu__cat-link" href="/migracion/arraigo-sociolaboral/">Arraigo — через работу</a>
+                <a class="site-menu__cat-link" href="/migracion/vossoedinenie-semi/">Воссоединение семьи</a>
+                <a class="site-menu__cat-link" href="/migracion/viza-cifrovogo-nomada/">Виза цифрового номада</a>
+                <a class="site-menu__cat-link" href="/migracion/nie-tie/">NIE и TIE</a>
+                <a class="site-menu__cat-more" href="/migracion/">Все маршруты ВНЖ&nbsp;→</a>
+              </div>
+            </details>
+            <details class="site-menu__cat" name="site-menu-cats">
+              <summary class="site-menu__cat-head">
+                Документы из Украины
+                <svg class="site-menu__cat-chev" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+              </summary>
+              <div class="site-menu__cat-body">
+                <a class="site-menu__cat-link" href="/ukraina/spravka-o-nesudimosti/">Справка о несудимости</a>
+                <a class="site-menu__cat-link" href="/ukraina/svidetelstvo-rozhdenii-dubli/">Свидетельство о рождении</a>
+                <a class="site-menu__cat-link" href="/ukraina/svidetelstvo-brake-dublikat/">Свидетельство о браке</a>
+                <a class="site-menu__cat-link" href="/ukraina/spravka-semeynoe-polozhenie/">Справка о семейном положении</a>
+                <a class="site-menu__cat-link" href="/ukraina/perevod-prisyazhnyy/">Присяжный перевод</a>
+                <a class="site-menu__cat-link" href="/ukraina/doverennost-ukraina/">Доверенность в Украину</a>
+                <a class="site-menu__cat-more" href="/ukraina/">Все услуги из Украины&nbsp;→</a>
+              </div>
+            </details>
+            <details class="site-menu__cat" name="site-menu-cats">
+              <summary class="site-menu__cat-head">
+                Административные процедуры
+                <svg class="site-menu__cat-chev" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+              </summary>
+              <div class="site-menu__cat-body">
+                <a class="site-menu__cat-link" href="/tramites/empadronamiento/">Прописка (empadronamiento)</a>
+                <a class="site-menu__cat-link" href="/tramites/firma-digital/">Цифровая подпись (firma digital)</a>
+                <a class="site-menu__cat-link" href="/tramites/canje-permiso/">Замена прав на испанские</a>
+                <a class="site-menu__cat-link" href="/tramites/homologacion-bachillerato/">Омологация аттестата</a>
+                <a class="site-menu__cat-more" href="/tramites/">Все процедуры&nbsp;→</a>
+              </div>
+            </details>
+            <div class="site-menu__cat-rest">
+              <a class="site-menu__cat-plain" href="/legalizacion/">Легализация и апостиль</a>
+              <a class="site-menu__cat-plain" href="/traduccion/">Присяжный перевод</a>
+              <a class="site-menu__cat-plain" href="/banca/">Банковский счёт</a>
+              <a class="site-menu__cat-plain" href="/fiscalidad/">Налоги</a>
+              <a class="site-menu__cat-plain" href="/juridico/">Юридическое сопровождение</a>
             </div>
-          </details>
-          <details class="site-menu__dir" name="site-menu-dirs">
-            <summary class="site-menu__dir-head">
-              ВНЖ и миграция
-              <svg class="site-menu__dir-chev" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
-            </summary>
-            <div class="site-menu__dir-body">
-              <a class="site-menu__dir-link" href="/migracion/vyhod-iz-tps/">Выход из TPS на ВНЖ</a>
-              <a class="site-menu__dir-link" href="/migracion/modifikaciya-statusa/">Модификация статуса (ст. 191)</a>
-              <a class="site-menu__dir-link" href="/migracion/arraigo-sociolaboral/">Arraigo — через работу</a>
-              <a class="site-menu__dir-link" href="/migracion/vossoedinenie-semi/">Воссоединение семьи</a>
-              <a class="site-menu__dir-link" href="/migracion/viza-cifrovogo-nomada/">Виза цифрового номада</a>
-              <a class="site-menu__dir-link" href="/migracion/nie-tie/">NIE и TIE</a>
-              <a class="site-menu__dir-all" href="/migracion/">Все маршруты ВНЖ&nbsp;→</a>
-            </div>
-          </details>
-          <details class="site-menu__dir" name="site-menu-dirs">
-            <summary class="site-menu__dir-head">
-              Документы из Украины
-              <svg class="site-menu__dir-chev" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
-            </summary>
-            <div class="site-menu__dir-body">
-              <a class="site-menu__dir-link" href="/ukraina/spravka-o-nesudimosti/">Справка о несудимости</a>
-              <a class="site-menu__dir-link" href="/ukraina/svidetelstvo-rozhdenii-dubli/">Свидетельство о рождении</a>
-              <a class="site-menu__dir-link" href="/ukraina/svidetelstvo-brake-dublikat/">Свидетельство о браке</a>
-              <a class="site-menu__dir-link" href="/ukraina/spravka-semeynoe-polozhenie/">Справка о семейном положении</a>
-              <a class="site-menu__dir-link" href="/ukraina/perevod-prisyazhnyy/">Присяжный перевод</a>
-              <a class="site-menu__dir-link" href="/ukraina/doverennost-ukraina/">Доверенность в Украину</a>
-              <a class="site-menu__dir-all" href="/ukraina/">Все услуги из Украины&nbsp;→</a>
-            </div>
-          </details>
-          <details class="site-menu__dir" name="site-menu-dirs">
-            <summary class="site-menu__dir-head">
-              Административные процедуры
-              <svg class="site-menu__dir-chev" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
-            </summary>
-            <div class="site-menu__dir-body">
-              <a class="site-menu__dir-link" href="/tramites/empadronamiento/">Прописка (empadronamiento)</a>
-              <a class="site-menu__dir-link" href="/tramites/firma-digital/">Цифровая подпись (firma digital)</a>
-              <a class="site-menu__dir-link" href="/tramites/canje-permiso/">Замена прав на испанские</a>
-              <a class="site-menu__dir-link" href="/tramites/homologacion-bachillerato/">Омологация аттестата</a>
-              <a class="site-menu__dir-all" href="/tramites/">Все процедуры&nbsp;→</a>
-            </div>
-          </details>
-          <a class="site-menu__dir-plain" href="/legalizacion/">Легализация и апостиль</a>
-          <a class="site-menu__dir-plain" href="/traduccion/">Присяжный перевод</a>
-          <a class="site-menu__dir-plain" href="/banca/">Банковский счёт</a>
-          <a class="site-menu__dir-plain" href="/fiscalidad/">Налоги</a>
-          <a class="site-menu__dir-plain" href="/juridico/">Юридическое сопровождение</a>
-        </nav>
+          </nav>
+        </div>
       </div>
     </div>
 

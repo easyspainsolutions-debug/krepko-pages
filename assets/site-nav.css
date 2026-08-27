@@ -354,76 +354,105 @@ dialog:not([open]) { display: none !important; }
 }
 .site-menu__link.active { color: #C75B39; }
 
-.site-menu__dirs { margin-top: 22px; }
-.site-menu__label {
+/* ── Два уровня меню (Daniil 24.08) ──
+   «Каталог услуг» проваливается на экран с категориями-аккордеонами;
+   секция «Направления» снята. Класс is-sub стоит на .site-menu__scroll:
+   кнопка возврата живёт над поиском, вне контейнера уровней.
+   Переключение display, а не transform-стек: грид-стек панелей
+   растягивал скролл верхнего уровня до высоты каталога. Слайд-ощущение
+   даёт короткая keyframes-анимация. */
+.site-menu__level--catalog { display: none; }
+.site-menu__scroll.is-sub .site-menu__level--root { display: none; }
+.site-menu__scroll.is-sub .site-menu__level--catalog {
   display: block;
-  margin-bottom: 10px;
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: .14em;
-  text-transform: uppercase;
-  color: #6B6B6B;
+  animation: siteMenuDrill .22s ease both;
 }
-/* Направления — список строк, а не сетка плиток.
-   Девять одинаковых прямоугольников в рамках читались как девять кнопок,
-   каждая из которых требует решения: «куча кнопок вызывает тревожность,
-   сайт не лояльный» (Daniil, 2026-08-07). Строка с разделителем — это
-   продолжение списка выше, а не ещё один выбор. */
-.site-menu__dirs-grid {
+.site-menu__scroll.is-drillback .site-menu__level--root {
+  animation: siteMenuDrillBack .22s ease both;
+}
+@keyframes siteMenuDrill { from { opacity: 0; transform: translateX(28px); } to { opacity: 1; transform: none; } }
+@keyframes siteMenuDrillBack { from { opacity: 0; transform: translateX(-28px); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) {
+  .site-menu__scroll.is-sub .site-menu__level--catalog,
+  .site-menu__scroll.is-drillback .site-menu__level--root { animation: none; }
+}
+
+/* пункт-провал: та же строка, что соседние, плюс шеврон вправо */
+.site-menu__link--drill {
   display: flex;
-  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
 }
-/* Строка направления — и у раскрывающихся, и у простых одна высота и один
-   кегль: список должен читаться как один список, а не как два разных. */
-.site-menu__dir-plain,
-.site-menu__dir-head {
+.site-menu__drill-chev { flex: none; color: #6B6B6B; }
+
+/* возврат на верхний уровень — над поиском, виден только в каталоге */
+.site-menu__back {
+  display: none;
+  align-items: center;
+  gap: 6px;
+  margin: 0 0 10px;
+  padding: 8px 2px;
+  border: 0;
+  background: none;
+  color: #6B6B6B;
+  font-family: 'Manrope', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+.site-menu__scroll.is-sub .site-menu__back { display: flex; }
+.site-menu__back svg { flex: none; }
+
+.site-menu__catalog { display: flex; flex-direction: column; }
+.site-menu__all-link {
   display: flex;
   align-items: center;
   min-height: 46px;
   padding: 11px 2px;
-  border: 0;
   border-bottom: 1px solid #EFE7DA;
-  border-radius: 0;
-  color: #2D2D2D;
+  color: #C75B39;
   font-size: 15.5px;
-  font-weight: 500;
-  line-height: 1.35;
+  font-weight: 600;
   text-decoration: none;
 }
 
-/* ── Раскрывающееся направление ──
-   <details> вместо кнопки с обработчиком: раскрытие работает без JS, и
-   состояние читает экранный диктор без дополнительных aria-атрибутов. */
-.site-menu__dir { border: 0; }
-.site-menu__dir-head {
+/* категория-аккордеон: раскрытие одной закрывает остальные (name=) */
+.site-menu__cat { border-bottom: 1px solid #EFE7DA; }
+.site-menu__cat-head {
+  display: flex;
+  align-items: center;
   justify-content: space-between;
   gap: 12px;
+  min-height: 46px;
+  padding: 11px 2px;
+  color: #1A2B3C;
+  font-size: 15.5px;
+  font-weight: 600;
+  line-height: 1.35;
   cursor: pointer;
   list-style: none;              /* убираем встроенный треугольник */
 }
-.site-menu__dir-head::-webkit-details-marker { display: none; }
-.site-menu__dir-chev {
+.site-menu__cat-head::-webkit-details-marker { display: none; }
+.site-menu__cat-chev {
   flex: none;
   color: #6B6B6B;
   transition: transform .2s ease;
 }
-.site-menu__dir[open] > .site-menu__dir-head { color: #C75B39; }
-.site-menu__dir[open] > .site-menu__dir-head .site-menu__dir-chev {
+.site-menu__cat[open] > .site-menu__cat-head { color: #C75B39; }
+.site-menu__cat[open] > .site-menu__cat-head .site-menu__cat-chev {
   transform: rotate(180deg);
   color: #C75B39;
 }
-
-/* Вложенные услуги. Отступ слева и более тихий цвет показывают подчинение —
-   иначе раскрытый раздел сливается со списком направлений в одну простыню. */
-.site-menu__dir-body {
+.site-menu__cat-body {
   display: flex;
   flex-direction: column;
-  padding: 2px 0 10px 14px;
-  border-bottom: 1px solid #EFE7DA;
-  margin-left: 2px;
+  padding: 0 0 10px 14px;
 }
-.site-menu__dir-link,
-.site-menu__dir-all {
+.site-menu__cat-link,
+.site-menu__cat-more {
   display: flex;
   align-items: center;
   min-height: 44px;              /* минимум под палец, стандарт iOS/Android */
@@ -434,15 +463,31 @@ dialog:not([open]) { display: none !important; }
   line-height: 1.35;
   text-decoration: none;
 }
-.site-menu__dir-all {
+.site-menu__cat-more {
   color: #C75B39;
   font-weight: 600;
   font-size: 13.5px;
 }
-.site-menu__dirs-grid > *:last-child { border-bottom: 0; }
-.site-menu__dirs-grid > .site-menu__dir:last-child .site-menu__dir-body { border-bottom: 0; }
+
+/* компактные направления — одна-две страницы, раскрывать нечего */
+.site-menu__cat-rest { display: flex; flex-direction: column; }
+.site-menu__cat-plain {
+  display: flex;
+  align-items: center;
+  min-height: 46px;
+  padding: 11px 2px;
+  border-bottom: 1px solid #EFE7DA;
+  color: #2D2D2D;
+  font-size: 15.5px;
+  font-weight: 500;
+  line-height: 1.35;
+  text-decoration: none;
+}
+.site-menu__cat-rest > .site-menu__cat-plain:last-child { border-bottom: 0; }
+
 @media (hover: hover) {
-  .site-menu__dirs-grid a:hover { border-color: #C75B39; color: #C75B39; }
+  .site-menu__catalog a:hover { color: #C75B39; }
+  .site-menu__back:hover { color: #C75B39; }
   .site-menu__link:hover { color: #C75B39; }
   .site-menu__close:hover { color: #C75B39; }
   .site-menu__search:hover { border-color: #C75B39; }
