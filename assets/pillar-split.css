@@ -130,18 +130,21 @@ body:has(.pillar-split) main {
    каталога), но у поля снова есть форма поля. На мобильном пилюля стоит
    на белом листе панели, поэтому там фон меняется на бежевый — см.
    мобильный блок. */
+/* «Тихий каталог» (Daniil 29.09): колонка без коробок — поиск строкой,
+   категории легче, единственный акцент остаётся карточке внизу. */
 .pillar-nav__search {
   position: relative;
   display: flex;
   align-items: center;
-  gap: 10px;
-  margin-bottom: 16px;
-  padding: 11px 14px;
-  background: #FFFFFF;
-  border: 1px solid var(--ps-border);
-  border-radius: 10px;
+  gap: 9px;
+  margin-bottom: 18px;
+  padding: 6px 2px 12px;
+  background: none;
+  border: 0;
+  border-bottom: 1px solid var(--ps-border);
+  border-radius: 0;
   color: var(--ps-text-muted);
-  transition: border-color .25s ease, color .25s ease, box-shadow .25s ease;
+  transition: border-color .25s ease, color .25s ease;
 }
 /* При наборе поле лишь слегка темнеет рамкой (2026-08-07, Daniil: «слева
    стрёмная терракотовая обводка»). Раньше вокруг поля загоралась рамка
@@ -181,9 +184,9 @@ body:has(.pillar-split) main {
 .pillar-nav__all a,
 .pillar-nav__all .pillar-nav__current {
   padding: 0;
-  font-size: 13px;
-  font-weight: 600;
-  letter-spacing: .06em;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .09em;
   text-transform: uppercase;
   color: var(--ps-text-muted);
 }
@@ -231,10 +234,10 @@ body:has(.pillar-split) main {
   padding: 14px 0;
   background: none;
   border: 0;
-  color: var(--ps-navy);
+  color: var(--ps-text, #2D2D2D);
   font-family: 'Manrope', sans-serif;
   font-size: 14.5px;
-  font-weight: 600;
+  font-weight: 500;
   line-height: 1.35;
   text-align: left;
   cursor: pointer;
