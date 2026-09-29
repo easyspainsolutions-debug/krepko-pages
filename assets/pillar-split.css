@@ -87,6 +87,9 @@ body:has(.pillar-split) main {
   overscroll-behavior: contain;
   scrollbar-width: thin;
   scrollbar-color: var(--ps-border) transparent;
+  /* жёлоб под скроллбар: полоска не ложится на шевроны аккордеонов */
+  padding-right: 12px;
+  scrollbar-gutter: stable;
 }
 .pillar-nav ul { list-style: none; margin: 0; padding: 0; }
 .pillar-nav li { margin: 0; }
