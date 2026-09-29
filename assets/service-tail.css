@@ -267,3 +267,11 @@
    читается как случайный. */
 .city-faq--tramites > .p-label { display: block; margin-bottom: 10px; }
 .city-faq--tramites .faq h2 { font-size: clamp(20px, 2.4vw, 26px); }
+
+/* приглашение к отзыву не конкурирует с кнопкой (Daniil 29.09):
+   каскад красил ссылку в терракоту — глушим с запасом веса */
+.service-tail .reviews-cta__own {
+  color: var(--text-muted, #6B6B6B) !important;
+  font-size: 13px;
+}
+.service-tail .reviews-cta__own:hover { color: var(--gold, #C75B39) !important; }

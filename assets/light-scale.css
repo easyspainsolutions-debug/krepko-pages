@@ -188,12 +188,16 @@ body .hero--service--notario .btn--wa:hover { background: var(--gold-2, #B04E2F)
 }
 .home-reviews [class*="track"]::-webkit-scrollbar { display: none; }
 .home-reviews .rv__card, .home-reviews [class*="card"] { scroll-snap-align: start; }
+/* !important нужен против инлайн-скрытий, но только на мобиле: на десктопе
+   точки спрятаны штатно (стрелки заменяют), и flex их воскрешал (29.09). */
+@media (max-width: 999px) {
 .home-reviews .rv__dots,
 .home-reviews [class*="dots"] {
   display: flex !important;
   flex-wrap: nowrap !important;
   justify-content: center;
   gap: 8px;
+}
 }
 
 

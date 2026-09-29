@@ -339,6 +339,22 @@ a.pillar-nav__custom {
    меню и встают столбиком, а запятые повисают отдельными строками */
 /* Ссылки строкой, разделённые тонкой точкой. Пилюли с рамками владельцу
    не подходят как формат — 17.08. */
+/* строка городских версий услуги под компакт-картой (прототип 29.09) */
+.cmap__coverage {
+  margin: 18px 0 0;
+  text-align: center;
+  font-family: 'Manrope', sans-serif;
+  font-size: 13px;
+  line-height: 1.9;
+  color: var(--ps-text-muted);
+}
+.cmap__coverage a {
+  display: inline;
+  padding: 0 7px;
+  color: var(--ps-gold);
+  text-decoration: none;
+}
+.cmap__coverage a:hover { text-decoration: underline; }
 .pillar-nav__cities a {
   display: inline;
   padding: 0;
@@ -869,27 +885,24 @@ body:has(.pillar-split) .final-cta .btn--gold {
    в двух пикселях друг от друга. */
 .pillar-guides { margin-top: 34px; margin-bottom: 28px; }
 .pillar-guides .p-label { display: block; margin-bottom: 14px; }
+/* без точки-буллета: метки хвоста единые с «ПОПУЛЯРНЫЕ…» (29.09) */
+.pillar-guides .p-label::before { content: none; }
 
 /* Сетка на две колонки: больше двух статей в этом блоке не бывает
    (проверено по всем 41 странице с блоком). На узком экране — в столбик. */
-.pillar-guides__list {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 12px;
-}
+.pillar-guides__list { display: flex; flex-direction: column; }
 
 .pillar-guide {
   display: flex;
   flex-direction: column;
-  gap: 6px;
-  padding: 16px 18px;
-  border: 1px solid var(--ps-border);
-  border-radius: 12px;
+  gap: 3px;
+  padding: 12px 2px;
+  border-bottom: 1px solid var(--ps-border);
   text-decoration: none;
-  transition: border-color .2s ease, transform .2s ease;
 }
+.pillar-guide:last-child { border-bottom: 0; }
 @media (hover: hover) {
-  .pillar-guide:hover { border-color: var(--ps-gold); transform: translateY(-1px); }
+  .pillar-guide:hover .pillar-guide__title { color: var(--ps-gold); }
 }
 @media (prefers-reduced-motion: reduce) {
   .pillar-guide { transition: none; }
@@ -898,17 +911,18 @@ body:has(.pillar-split) .final-cta .btn--gold {
 
 .pillar-guide__tag {
   font-family: 'Manrope', sans-serif;
-  font-size: 11px;
+  font-size: 10.5px;
   letter-spacing: .09em;
   text-transform: uppercase;
-  color: var(--ps-gold);
+  color: var(--ps-text-muted);
 }
 .pillar-guide__title {
   font-family: 'Manrope', sans-serif;
   font-size: 15.5px;
   font-weight: 600;
   line-height: 1.35;
-  color: var(--ps-text);
+  color: var(--ps-navy);
+  transition: color .2s ease;
 }
 .pillar-guide__time {
   font-family: 'Manrope', sans-serif;
@@ -920,37 +934,46 @@ body:has(.pillar-split) .final-cta .btn--gold {
    Перелинковка внутри направления: под текстом услуги стоят 2–3 соседние
    доверенности, чтобы посетитель ушёл на смежную задачу, а не с сайта. */
 .pillar-cards-block { margin-top: 40px; }
-.pillar-cards {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
-  gap: 14px;
+/* Прототип «тихое оглавление» (Daniil 29.09): хвост страницы — не витрина
+   коробок, а редакционный список. Коробки сняты, строки с разделителями. */
+.pillar-cards-block > h2 {
+  margin: 0 0 6px;
+  font-family: 'Manrope', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+  color: var(--ps-text-muted);
 }
+.pillar-cards { display: flex; flex-direction: column; }
 .pillar-cards a {
-  display: block;
-  padding: 20px 18px;
-  background: var(--ps-surface);
-  border: 1px solid var(--ps-border);
-  border-radius: 8px;
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  padding: 13px 2px;
+  border-bottom: 1px solid var(--ps-border);
   text-decoration: none;
-  transition: border-color .25s ease;
+  transition: none;
 }
+.pillar-cards a:last-child { border-bottom: 0; }
 .pillar-cards b {
-  display: block;
-  margin-bottom: 7px;
+  flex: none;
   color: var(--ps-navy);
   font-size: 15.5px;
-  font-weight: 700;
-  line-height: 1.35;
-  transition: color .25s ease;
+  font-weight: 600;
+  line-height: 1.4;
+  transition: color .2s ease;
 }
 .pillar-cards span {
   display: block;
-  font-size: 13.5px;
-  line-height: 1.55;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
   color: var(--ps-text-muted);
+  font-size: 13.5px;
+  line-height: 1.5;
 }
-@media (hover: hover) {
-  .pillar-cards a:hover { border-color: var(--ps-gold); }
   .pillar-cards a:hover b { color: var(--ps-gold); }
 }
 @media (prefers-reduced-motion: reduce) {

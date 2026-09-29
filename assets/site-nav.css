@@ -833,6 +833,9 @@ dialog:not([open]) { display: none !important; }
   .gcards__foot .btn {
     color: var(--gold-2) !important;
   }
+  /* но на залитом терракотой hover текст обязан белеть, иначе сливается
+     с фоном (Daniil 29.09) — исключение позже и специфичнее a11y-правила */
+  .home-guides .gcard:hover .gcard__more { color: #FFFBF7 !important; }
 
   /* Микро-лейблы капсом шли с шестью разными трекингами (0.06–0.16em).
      Кнопки и действия сюда не входят — у них свой шаг 0.5px. */
