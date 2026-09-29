@@ -85,7 +85,7 @@
   }
 
   function patchWhatsAppLinks() {
-    var links = document.querySelectorAll('a[href*="wa.me/34641048296"], a[href*="api.whatsapp.com"]');
+    var links = document.querySelectorAll('a[href*="wa.me/34624309985"], a[href*="api.whatsapp.com"]');
     links.forEach(function (a) {
       var origHref = a.getAttribute('href');
       // Если уже есть text= в URL — оставляем (шаблонные с конкретным сообщением для услуги)
