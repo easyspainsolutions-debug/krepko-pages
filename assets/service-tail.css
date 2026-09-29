@@ -276,3 +276,9 @@
   font-size: 13px;
 }
 .service-tail .reviews-cta__own:hover { color: var(--gold, #C75B39) !important; }
+
+/* Хабы без FAQ: отзывы шли первым ребёнком хвоста и склеивались с текстом —
+   home-redesign глушит их ритм-отступ (!important) под главную (Daniil 30.09) */
+/* id в селекторе — иначе проигрываем групповому «#sec-reviews … margin-top:0
+   !important» из reviews-block (специфичность ID) */
+.service-tail > #sec-reviews.home-reviews:first-child { margin-top: clamp(40px, 5vw, 72px) !important; }
