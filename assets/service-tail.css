@@ -34,7 +34,8 @@
 /* ── вопросы ───────────────────────────────────────────────────────── */
 .service-tail .service-faq {
   padding-top: clamp(40px, 5vw, 72px);
-  border-top: 1px solid var(--st-border);
+  /* линия-шов убрана (Daniil 29.09): хвост «тихого оглавления» сам
+     заканчивается разделителем строк, вторая черта дублировала */
 }
 .service-tail .faq h2 {
   margin: 0 0 clamp(18px, 2vw, 26px);
