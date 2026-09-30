@@ -45,6 +45,6 @@ var ARTICLES = [
   { slug: 'spravka-o-nesudimosti-ispaniya-ukraina', title: 'Справка о несудимости: две разные справки, которые путают', tag: 'Документы · Украина', cat: 'docs', time: 9 },
   { slug: 'soglasie-na-vyezd-rebenka-ispaniya', title: 'Согласие на выезд ребёнка: почему полиция Испании его не выдаёт', tag: 'Дети · Нотариус', cat: 'social', time: 9 },
   { slug: 'rebenok-rodilsya-v-ispanii', title: 'Ребёнок родился в Испании: какие документы нужны украинской семье', tag: 'Дети · Документы', cat: 'social', time: 9 },
-  { slug: 'nasledstvo-v-ispanii', title: 'Наследство в Испании: что делать в первые месяцы', tag: 'Наследство · Нотариус', cat: 'docs', time: 10 }
+  { slug: 'nasledstvo-v-ispanii', title: 'Наследство в Испании: что делать в первые месяцы', tag: 'Наследство · Нотариус', cat: 'docs', time: 10 },
   { slug: 'identifikaciya-pensionerov-ispaniya', title: 'Идентификация для украинской пенсии: как пройти из Испании до 31 декабря', tag: 'Документы · Пенсия', cat: 'docs', time: 7 },
 ];
