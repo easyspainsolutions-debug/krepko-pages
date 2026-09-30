@@ -133,6 +133,7 @@
   function autoCTAFromHref(a) {
     var href = a.getAttribute('href') || '';
     if (href.indexOf('wa.me') > -1 || href.indexOf('whatsapp.com') > -1) return 'cta_click_whatsapp';
+    if (href.indexOf('t.me/+34624309985') > -1) return 'cta_click_telegram';
     if (href.indexOf('t.me/krepko_es_admin_bot') > -1) return 'cta_click_bot';
     if (href.indexOf('t.me/krepko_es') > -1) return 'cta_click_channel';
     if (href.indexOf('t.me/krepko_es_chat') > -1) return 'cta_click_chat';
