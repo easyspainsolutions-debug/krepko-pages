@@ -53,6 +53,14 @@
   applyHeadMode();
   if (docMq && docMq.addEventListener) docMq.addEventListener('change', applyHeadMode);
 
+  /* «Ещё N в разделе» (Daniil 01.10): показать все услуги открытого раздела */
+  [].forEach.call(nav.querySelectorAll('.pillar-cat__more'), function (btn) {
+    btn.addEventListener('click', function () {
+      var cat = btn.closest('.pillar-cat');
+      if (cat) cat.classList.remove('is-compact');
+    });
+  });
+
   cats.forEach(function (cat) {
     var head = cat.querySelector('.pillar-cat__head');
     if (!head) return;
@@ -219,6 +227,8 @@
   }
 
   input.addEventListener('input', function () {
+    /* поиск ищет по всем пунктам — свёрнутый до текущей услуги раздел разворачиваем */
+    [].forEach.call(nav.querySelectorAll('.pillar-cat.is-compact'), function (c) { c.classList.remove('is-compact'); });
     var q = input.value.trim().toLowerCase();
     if (q.length < 2) { reset(); return; }
 
