@@ -883,6 +883,12 @@
     <changefreq>yearly</changefreq>
   </url>
   <url>
+    <loc>https://krepko.es/blog/spravka-o-semeynom-polozhenii-ispaniya/</loc>
+    <lastmod>2026-10-01</lastmod>
+    <priority>0.6</priority>
+    <changefreq>yearly</changefreq>
+  </url>
+  <url>
     <loc>https://krepko.es/blog/viza-tsifrovogo-nomada-ispaniya/</loc>
     <lastmod>2026-08-13</lastmod>
     <priority>0.6</priority>
@@ -931,8 +937,32 @@
     <changefreq>yearly</changefreq>
   </url>
   <url>
+    <loc>https://krepko.es/blog/proishozhdenie-sredstv-bank-ispaniya/</loc>
+    <lastmod>2026-10-01</lastmod>
+    <priority>0.6</priority>
+    <changefreq>yearly</changefreq>
+  </url>
+  <url>
+    <loc>https://krepko.es/blog/svidetelstvo-o-rozhdenii-ukraina-ispaniya/</loc>
+    <lastmod>2026-10-01</lastmod>
+    <priority>0.6</priority>
+    <changefreq>yearly</changefreq>
+  </url>
+  <url>
+    <loc>https://krepko.es/blog/dohod-dlya-vizy-nomada/</loc>
+    <lastmod>2026-10-01</lastmod>
+    <priority>0.6</priority>
+    <changefreq>yearly</changefreq>
+  </url>
+  <url>
     <loc>https://krepko.es/blog/otkryt-sl-biznes-ispaniya/</loc>
     <lastmod>2026-08-13</lastmod>
+    <priority>0.6</priority>
+    <changefreq>yearly</changefreq>
+  </url>
+  <url>
+    <loc>https://krepko.es/blog/larga-duracion-ispaniya/</loc>
+    <lastmod>2026-10-01</lastmod>
     <priority>0.6</priority>
     <changefreq>yearly</changefreq>
   </url>
@@ -997,6 +1027,12 @@
     <changefreq>yearly</changefreq>
   </url>
   <url>
+    <loc>https://krepko.es/blog/ukrainskie-prava-v-ispanii/</loc>
+    <lastmod>2026-10-01</lastmod>
+    <priority>0.6</priority>
+    <changefreq>yearly</changefreq>
+  </url>
+  <url>
     <loc>https://krepko.es/blog/spravka-o-nesudimosti-ispaniya-ukraina/</loc>
     <lastmod>2026-08-15</lastmod>
     <priority>0.6</priority>
@@ -1023,6 +1059,12 @@
   <url>
     <loc>https://krepko.es/blog/perevod-deneg-ispaniya/</loc>
     <lastmod>2026-08-13</lastmod>
+    <priority>0.6</priority>
+    <changefreq>yearly</changefreq>
+  </url>
+  <url>
+    <loc>https://krepko.es/blog/posobiya-imv-ispaniya/</loc>
+    <lastmod>2026-10-01</lastmod>
     <priority>0.6</priority>
     <changefreq>yearly</changefreq>
   </url>

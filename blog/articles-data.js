@@ -1,5 +1,13 @@
 /* Krepko Blog — centralized articles registry */
 var ARTICLES = [
+  // Новые разборы 01.10.2026 — первыми, чтобы «Читайте также» брал их, а не устаревшие
+  { slug: 'larga-duracion-ispaniya', title: 'ПМЖ в Испании после временной защиты: когда подавать и что проверить заранее', tag: 'ВНЖ · Временная защита', cat: 'vnzh', time: 9 },
+  { slug: 'dohod-dlya-vizy-nomada', title: 'Доход для визы цифрового номада в 2026 году: сколько нужно и как доказать', tag: 'Виза · Удалённая работа', cat: 'vnzh', time: 8 },
+  { slug: 'ukrainskie-prava-v-ispanii', title: 'Украинские права в Испании: сколько по ним можно ездить и как обменять без ошибок', tag: 'Документы · Транспорт', cat: 'docs', time: 9 },
+  { slug: 'posobiya-imv-ispaniya', title: 'Пособия в Испании в 2026 году: что реально положено с временной защитой', tag: 'Пособия · Временная защита', cat: 'social', time: 9 },
+  { slug: 'spravka-o-semeynom-polozhenii-ispaniya', title: 'Брак в Испании: какой документ о семейном положении из Украины нужен ЗАГСу', tag: 'Документы · Семья', cat: 'docs', time: 9 },
+  { slug: 'svidetelstvo-o-rozhdenii-ukraina-ispaniya', title: 'Свидетельство о рождении из Украины, не выезжая из Испании', tag: 'Документы · Украина', cat: 'docs', time: 8 },
+  { slug: 'proishozhdenie-sredstv-bank-ispaniya', title: 'Банк спросил, откуда деньги: какие документы подготовить', tag: 'Финансы · Нотариус', cat: 'finance', time: 9 },
   // ВНЖ / Статус
   { slug: 'vnzh-ispaniya',              title: 'Как получить ВНЖ в Испании: полный гид для украинцев',          tag: 'ВНЖ · Статус',            cat: 'vnzh',    time: 7 },
   { slug: 'arraigo-social-ispaniya',    title: 'Arraigo social — ВНЖ через 2 года жизни в Испании',             tag: 'ВНЖ',                     cat: 'vnzh',    time: 7 },
