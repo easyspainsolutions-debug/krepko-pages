@@ -1,5 +1,11 @@
 /* Krepko Blog — centralized articles registry */
 var ARTICLES = [
+  // Серия «справка ДПСУ / нет штампа» 01.10.2026
+  { slug: 'kak-poluchit-spravku-o-peresechenii-granicy', title: 'Справка о пересечении границы Украины: как получить из Испании', tag: 'Документы · Украина', cat: 'docs', time: 9 },
+  { slug: 'vremennaya-zashita-bez-shtampa', title: 'Временная защита в Испании без штампа: чем доказать выезд', tag: 'Временная защита · Украина', cat: 'vnzh', time: 8 },
+  { slug: 'net-shtampa-v-pasporte-ukraina', title: 'Почему на границе Украины не ставят штамп и что делать, если его нет', tag: 'Документы · Украина', cat: 'docs', time: 8 },
+  { slug: 'vremennaya-zashita-pereezd-iz-drugoy-strany-es', title: 'Из Польши или Германии в Испанию на временную защиту: что изменилось в 2026 году', tag: 'ВНЖ · Временная защита', cat: 'vnzh', time: 9 },
+  { slug: 'net-shtampa-o-vezde-v-ispaniyu', title: 'Нет штампа о въезде в Испанию: EES и как доказать дату въезда', tag: 'ВНЖ · Украина', cat: 'vnzh', time: 8 },
   // Новые разборы 01.10.2026 — первыми, чтобы «Читайте также» брал их, а не устаревшие
   { slug: 'larga-duracion-ispaniya', title: 'ПМЖ в Испании после временной защиты: когда подавать и что проверить заранее', tag: 'ВНЖ · Временная защита', cat: 'vnzh', time: 9 },
   { slug: 'dohod-dlya-vizy-nomada', title: 'Доход для визы цифрового номада в 2026 году: сколько нужно и как доказать', tag: 'Виза · Удалённая работа', cat: 'vnzh', time: 8 },
