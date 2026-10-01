@@ -55,6 +55,16 @@
      нигде на сайте. Отдаём ту же выборку карточками витрины — человек уже
      видел их на /blog/ и узнаёт форму. */
   function more() {
+    /* С 01.10.2026 оба блока приходят готовыми из сборки
+       (scripts/generator/blog_related.py): боты ИИ-поиска JS не исполняют
+       и видели пустые div. Заполненный контейнер не трогаем — иначе
+       задвоится заголовок «Читайте также». Код ниже — запасной путь для
+       страницы, открытой из исходников, без сборки. */
+    var nav = document.getElementById('cat-nav');
+    var box = document.getElementById('related-articles');
+    var navReady = !nav || nav.children.length > 0;
+    var boxReady = !box || box.children.length > 0;
+    if (navReady && boxReady) return;
     if (typeof ARTICLES === 'undefined') return;
     var slug = location.pathname.replace(/\/$/, '').split('/').pop().replace('.html', '');
     var cur = ARTICLES.find(function (a) { return a.slug === slug; });
@@ -70,8 +80,7 @@
     }
     var rel = pool.slice(0, 3);
 
-    var nav = document.getElementById('cat-nav');
-    if (nav) {
+    if (!navReady) {
       nav.className = 'article-topics';
       nav.innerHTML = '<span class="article-topics__label">Темы блога</span>' +
         Object.keys(CATS).map(function (id) {
@@ -80,8 +89,7 @@
         }).join('');
     }
 
-    var box = document.getElementById('related-articles');
-    if (!box || !rel.length) return;
+    if (boxReady || !rel.length) return;
     box.className = 'article-more__grid';
     box.innerHTML = rel.map(function (a) {
       var tags = a.tag.split('·').map(function (t) {
