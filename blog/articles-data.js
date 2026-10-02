@@ -1,5 +1,7 @@
 /* Krepko Blog — centralized articles registry */
 var ARTICLES = [
+  // Доверенность из Испании для Украины 02.10.2026
+  { slug: 'doverennost-iz-ispanii-v-ukrainu', title: 'Доверенность из Испании для Украины: как оформить в 2026 году', tag: 'Документы · Украина', cat: 'docs', time: 8 },
   // Серия «справка ДПСУ / нет штампа» 01.10.2026
   { slug: 'kak-poluchit-spravku-o-peresechenii-granicy', title: 'Справка о пересечении границы Украины: как получить из Испании', tag: 'Документы · Украина', cat: 'docs', time: 9 },
   { slug: 'vremennaya-zashita-bez-shtampa', title: 'Временная защита в Испании без штампа: чем доказать выезд', tag: 'Временная защита · Украина', cat: 'vnzh', time: 8 },

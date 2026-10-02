@@ -542,6 +542,14 @@ a.pillar-nav__custom {
   color: var(--ps-navy);
 }
 
+/* ── мелкая подпись под заголовком (2026-10-02), разметка «^ » в md ── */
+.pillar-doc .pillar-small {
+  margin: -4px 0 18px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--ps-text-muted);
+}
+
 /* ── выделенный блок: условия, оговорки ── */
 .pillar-note {
   margin: 26px 0;

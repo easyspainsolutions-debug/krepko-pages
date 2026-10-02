@@ -68,7 +68,7 @@
   </url>
   <url>
     <loc>https://krepko.es/blog/</loc>
-    <lastmod>2026-10-01</lastmod>
+    <lastmod>2026-10-02</lastmod>
     <priority>0.7</priority>
     <changefreq>weekly</changefreq>
   </url>
@@ -170,7 +170,7 @@
   </url>
   <url>
     <loc>https://krepko.es/notario/doverennost-na-rodnom-yazyke/</loc>
-    <lastmod>2026-08-20</lastmod>
+    <lastmod>2026-10-02</lastmod>
     <priority>0.7</priority>
     <changefreq>monthly</changefreq>
   </url>
@@ -865,6 +865,12 @@
     <changefreq>yearly</changefreq>
   </url>
   <url>
+    <loc>https://krepko.es/blog/doverennost-iz-ispanii-v-ukrainu/</loc>
+    <lastmod>2026-10-02</lastmod>
+    <priority>0.6</priority>
+    <changefreq>yearly</changefreq>
+  </url>
+  <url>
     <loc>https://krepko.es/blog/apostil-perevod/</loc>
     <lastmod>2026-08-13</lastmod>
     <priority>0.6</priority>
@@ -1406,7 +1412,7 @@
   </url>
   <url>
     <loc>https://krepko.es/ukraina/doverennost-ukraina/</loc>
-    <lastmod>2026-08-20</lastmod>
+    <lastmod>2026-10-02</lastmod>
     <priority>0.7</priority>
     <changefreq>monthly</changefreq>
   </url>
