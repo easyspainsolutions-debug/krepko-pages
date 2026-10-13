@@ -208,7 +208,11 @@
          а вводную — и первый ответ уже по делу. */
       var msg = 'Здравствуйте! Хочу выйти с временной защиты на ВНЖ.\n'
         + 'Моя ситуация: ' + LABELS.years[answers.years] + ', ' + LABELS.work[answers.work] + ', ' + LABELS.family[answers.family] + '.\n'
-        + 'На сайте подобрался маршрут: ' + r.name + '. Подскажите, подходит ли он мне?';
+        + 'На сайте подобрался маршрут: ' + r.name + '. Подскажите, подходит ли он мне?'
+        /* Метка источника — та же, что у всех ссылок WhatsApp на сайте
+           (renderer.WA_MARKER): по ней Kommo отличает лиды с сайта. До
+           2026-10-13 сообщения подборщика уходили без неё. */
+        + '. Я с Krepko.es';
 
       var box = el('div', 'rfinder__ask rfinder__ask--res rfinder__in',
         '<span class="rfinder__ava" aria-hidden="true">K</span>' +
