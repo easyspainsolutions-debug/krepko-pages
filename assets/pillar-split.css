@@ -625,7 +625,9 @@ a.pillar-nav__custom {
   }
   .pillar-split--hub .pillar-nav { order: 1; margin-bottom: 30px; }
   .pillar-split--hub .pillar-doc { order: 2; }
-  .pillar-nav { position: static; }
+  /* На телефоне колонка — обычный блок: без max-height и внутреннего скролла,
+     иначе категории ниже «Семейных процедур» прятались в коробке со своей прокруткой. */
+  .pillar-nav { position: static; max-height: none; overflow: visible; padding-right: 0; }
 
   /* кнопка, поиск и подсказка пустого поиска — механика раскрытия,
      которой здесь больше нет */
