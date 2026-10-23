@@ -212,7 +212,7 @@
         /* Метка источника — та же, что у всех ссылок WhatsApp на сайте
            (renderer.WA_MARKER): по ней Kommo отличает лиды с сайта. До
            2026-10-13 сообщения подборщика уходили без неё. */
-        + '. Я с Krepko.es';
+        + '. Я с krepko.es' + (location.pathname || '/');  // адрес страницы в хвосте (Daniil 24.10)
 
       var box = el('div', 'rfinder__ask rfinder__ask--res rfinder__in',
         '<span class="rfinder__ava" aria-hidden="true">K</span>' +
