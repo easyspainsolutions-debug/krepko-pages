@@ -3,6 +3,7 @@ var ARTICLES = [
   // Доверенность из Испании для Украины 02.10.2026
   { slug: 'doverennost-iz-ispanii-v-ukrainu', title: 'Доверенность из Испании для Украины: как оформить в 2026 году', tag: 'Документы · Украина', cat: 'docs', time: 8 },
   // Серия «справка ДПСУ / нет штампа» 01.10.2026
+  { slug: 'otvet-na-requerimiento-extranjeria-soglasie-roditelya', title: 'Запрос Extranjería на согласие второго родителя: как ответить за 10 дней', tag: 'ВНЖ · Дети', cat: 'vnzh', time: 10 },
   { slug: 'kak-poluchit-spravku-o-peresechenii-granicy', title: 'Справка о пересечении границы Украины: как получить из Испании', tag: 'Документы · Украина', cat: 'docs', time: 9 },
   { slug: 'vremennaya-zashita-bez-shtampa', title: 'Временная защита в Испании без штампа: чем доказать выезд', tag: 'Временная защита · Украина', cat: 'vnzh', time: 8 },
   { slug: 'net-shtampa-v-pasporte-ukraina', title: 'Почему на границе Украины не ставят штамп и что делать, если его нет', tag: 'Документы · Украина', cat: 'docs', time: 8 },
