@@ -1,0 +1,33 @@
+/* Липкая кнопка WhatsApp на мобильном (решение Daniil 24.10.2026, план оптимизации п.3).
+   Появляется после прокрутки на экран, прячется, когда виден финальный призыв или подвал.
+   На экранах от 900px не показывается: там кнопки в тексте видны без прокрутки. */
+.sticky-cta {
+  position: fixed;
+  left: 0; right: 0; bottom: 0;
+  z-index: 50; /* ниже cookie-баннера (60): пока баннер открыт, он сверху */
+  padding: var(--space-3) var(--space-4) calc(var(--space-3) + env(safe-area-inset-bottom, 0px));
+  background: rgba(255, 255, 255, 0.94);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 -6px 18px rgba(0, 0, 0, 0.08);
+  transform: translateY(110%);
+  transition: transform 0.25s ease;
+}
+.sticky-cta.is-on { transform: none; }
+.sticky-cta__btn {
+  display: flex; align-items: center; justify-content: center; gap: var(--space-2);
+  width: 100%;
+  padding: var(--space-4);
+  border-radius: 14px;
+  background: var(--wa);
+  color: rgb(255, 255, 255);
+  font-weight: 700;
+  font-size: var(--fs-lead);
+  line-height: 1.2;
+  text-decoration: none;
+  box-shadow: var(--glow-wa);
+}
+.sticky-cta__btn:hover, .sticky-cta__btn:focus { color: rgb(255, 255, 255); text-decoration: none; filter: brightness(1.05); }
+.sticky-cta__btn svg { width: 20px; height: 20px; flex: none; fill: currentColor; }
+@media (min-width: 900px) { .sticky-cta { display: none; } }
+@media (prefers-reduced-motion: reduce) { .sticky-cta { transition: none; } }
