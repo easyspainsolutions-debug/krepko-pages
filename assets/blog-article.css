@@ -400,9 +400,11 @@ body:has(> .wrap.wrap--article) > .wrap.wrap--article {
   .inline-cta { margin: 28px 0; padding: 18px; }
   .inline-cta__btn { width: 100%; }
 }
-/* 25.10: шесть тем ложились 4/3 строками в зависимости от ширины —
-   на телефоне задаём сетку 3×2, метка «Темы блога» отдельной строкой. */
+/* 25.10: темы ложились по-разному от ширины (4/3 строки на телефоне, 6+1 на
+   1024 px). Метка — отдельной строкой; ссылки — одной строкой из шести на
+   десктопе и сеткой 3×2 на телефоне. */
+.article-topics { display: grid; grid-template-columns: repeat(6, auto); justify-content: start; column-gap: 18px; row-gap: 10px; }
+.article-topics__label { grid-column: 1 / -1; }
 @media (max-width: 899px) {
-  .article-topics { display: grid; grid-template-columns: repeat(3, auto); justify-content: start; column-gap: 18px; row-gap: 10px; }
-  .article-topics__label { grid-column: 1 / -1; }
+  .article-topics { grid-template-columns: repeat(3, auto); }
 }
