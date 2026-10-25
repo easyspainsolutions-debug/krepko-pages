@@ -125,19 +125,7 @@ body .final-cta > h2 {
   --wa: #C75B39;
 }
 
-/* Фон, рамка и свечение в module-cta.css заданы хардкодом rgba(78,216,138,…)
-   мимо токена, поэтому перекраски одного --wa мало: надпись становилась
-   терракотовой, а плашка под ней оставалась зелёной. Переопределяем правило
-   целиком — вид совпадает со второй кнопкой первого экрана. */
-.btn--wa {
-  background: rgba(199, 91, 57, 0.10);
-  border-color: rgba(199, 91, 57, 0.32);
-  box-shadow: none;
-}
-.btn--wa:hover {
-  background: rgba(199, 91, 57, 0.18);
-  box-shadow: 0 0 14px rgba(199, 91, 57, 0.28);
-}
+/* Переопределение .btn--wa снято 25.10.2026: кнопка унифицирована с gold в module-cta.css. */
 
 /* ═══ Вертикальный ритм секций (2026-08-08) ═══
    Вторая ловушка того же рода, что с --fs-title. reviews-block.css задаёт
@@ -158,12 +146,7 @@ body .final-cta > h2 {
    страниц городов. Точечные заплатки отсюда убраны; осталось одно: кнопка в
    геро размечена классом btn--wa, а ведёт в WhatsApp как первичное действие,
    и бледная заливка мессенджера читалась на ней как «кнопка отключена». */
-body .hero--service--notario .btn--wa {
-  background: var(--gold) !important;
-  border-color: var(--gold) !important;
-  color: #FFFBF7 !important;
-}
-body .hero--service--notario .btn--wa:hover { background: var(--gold-2, #B04E2F) !important; }
+/* Заплатка для .hero--service--notario .btn--wa снята 25.10.2026 (см. module-cta.css). */
 
 
 /* ── Карточки документов на городских хабах (2026-08-09) ──

@@ -26,11 +26,12 @@
   .hero__h1 { font-weight: 600; }
   h2 { font-weight: 500; }
 
+  /* 25.10.2026: кнопки без капса и разрядки — единый вид «Написать в WhatsApp» */
   .btn {
     font-family: 'Manrope', 'Inter', sans-serif;
-    font-weight: 600;
-    letter-spacing: 0.5px;
-    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: 0;
+    text-transform: none;
   }
 
   .guarantee__icon svg, .card__icon svg {

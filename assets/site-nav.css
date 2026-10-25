@@ -587,8 +587,8 @@ dialog:not([open]) { display: none !important; }
     font-family: 'Manrope', sans-serif;
     font-weight: 600;
     font-size: 14px;
-    letter-spacing: 0.5px;
-    text-transform: uppercase;
+    letter-spacing: 0;
+    text-transform: none;
     text-decoration: none;
     padding: 20px 32px;
     transition: filter .18s ease, transform .18s ease;
@@ -997,7 +997,7 @@ nav.breadcrumb {
     /* Размер кнопки задаётся типографской шкалой (--fs-btn) через !important,
        поэтому мобильное значение тоже должно быть !important — иначе кнопка
        остаётся 14px, занимает 234px из 390 и выталкивает шапку за экран. */
-    .site-nav__consult { padding: 10px 10px !important; font-size: 10.5px !important; letter-spacing: 0 !important; }
+    .site-nav__consult { padding: 10px 12px !important; font-size: 12px !important; letter-spacing: 0 !important; }
     .site-nav__menu-text { display: none; }
     .site-nav__menu-btn { padding: 10px; }
     .site-nav__brand-text { font-size: 22px !important; }}

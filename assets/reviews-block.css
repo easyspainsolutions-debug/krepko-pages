@@ -36,10 +36,9 @@
    в home-redesign.css это правило .btn, которого на странице услуги нет. */
 .home-reviews .reviews-cta .btn {
   font-family: 'Manrope', sans-serif;
-  font-weight: 600;
-  font-size: 12.65px !important;
-  letter-spacing: 0.5px;
-  text-transform: uppercase;
+  font-weight: 700;
+  letter-spacing: 0;
+  text-transform: none;
 }
 
 @media (min-width: 1000px) {

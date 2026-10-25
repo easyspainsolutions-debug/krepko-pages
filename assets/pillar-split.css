@@ -318,7 +318,7 @@ body:has(.pillar-split) main {
    padding: 13px 0 13px 18px и по весу (0,1,1) перебивает одиночный класс.
    Карточка получала левый отступ 18 и нулевой правый — текст прижимался
    к рамке справа и блок читался как съехавший. */
-a.pillar-nav__custom {
+.pillar-nav__custom {
   display: block;
   margin-top: 18px;
   padding: 16px;
@@ -340,10 +340,7 @@ a.pillar-nav__custom {
   line-height: 1.55;
   color: var(--ps-text-muted);
 }
-@media (hover: hover) {
-  .pillar-nav__custom:hover { border-color: var(--ps-gold); }
-  .pillar-nav__custom:hover b { color: var(--ps-gold); }
-}
+.pillar-nav__custom .btn { margin-top: 12px; width: 100%; }
 
 .pillar-nav__div { height: 1px; margin: 18px 0; background: var(--ps-border); }
 /* Разделитель перед блоком уже даёт .pillar-nav__div — своя граница
@@ -760,7 +757,7 @@ a.pillar-nav__custom {
   /* «Индивидуальные документы»: на телефоне серая карточка с рамкой
      весила больше, чем весь список над ней. Оставляем строку — заголовок
      ссылкой и одна поясняющая фраза. */
-  .pillar-nav a.pillar-nav__custom {
+  .pillar-nav .pillar-nav__custom {
     margin-top: 20px;
     padding: 16px 0 0;
     background: none;

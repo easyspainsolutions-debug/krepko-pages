@@ -34,16 +34,17 @@
   box-shadow: 0 6px 18px rgba(196, 149, 42, 0.40);
 }
 
-/* === Primary: WhatsApp === */
+/* === Primary: WhatsApp — с 25.10.2026 тот же вид, что gold (решение Daniil:
+   одна кнопка «Написать в WhatsApp» на всём сайте; бледная рамка читалась
+   как выключенная кнопка). Класс оставлен ради старых шаблонов и тестов. === */
 .btn--wa {
-  background: rgba(78, 216, 138, 0.14);
-  border-color: rgba(78, 216, 138, 0.32);
-  color: var(--wa);
-  box-shadow: var(--glow-wa);
+  background: linear-gradient(135deg, var(--gold) 0%, var(--gold-2) 100%);
+  border-color: var(--gold);
+  color: var(--gold-on);
+  box-shadow: var(--glow-gold);
 }
 .btn--wa:hover {
-  background: rgba(78, 216, 138, 0.22);
-  box-shadow: 0 0 14px rgba(78, 216, 138, 0.32);
+  box-shadow: 0 6px 18px rgba(196, 149, 42, 0.40);
 }
 
 /* === Secondary: outline === */
