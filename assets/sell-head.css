@@ -81,3 +81,7 @@
 }
 .pillar-doc .sell-facts li,
 .pillar-split .sell-facts li { font-size: var(--ts-body-sm); line-height: 1.5; }
+
+/* Модульные страницы документов (document_page.html): блок в той же колонке,
+   что остальные модули. */
+.doc-sell-trust { max-width: var(--w-read); margin: 0 auto; padding: 0 var(--space-4); }
