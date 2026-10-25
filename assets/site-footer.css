@@ -623,6 +623,10 @@ body:has(> footer.site-footer) {
    два ряда: ровный прямоугольник вместо ряда «три плюс одна». */
 @media (min-width: 720px) {
     .footer-map__cols { grid-template-columns: repeat(2, minmax(0, 1fr)); }}
+/* 25.10.2026: колонок стало пять («Популярное»). При двух колонках пятая
+   оставалась одна в третьем ряду — от 1000px даём три (ряды 3+2), от 1400 — пять. */
+@media (min-width: 1000px) {
+    .footer-map__cols { grid-template-columns: repeat(3, minmax(0, 1fr)); }}
 @media (min-width: 1400px) {
     .footer-map__cols { grid-template-columns: repeat(5, minmax(0, 1fr)); }}
 /* Колонка логотипа была 2.6fr — 312px под одно слово, — и на неё уходила
