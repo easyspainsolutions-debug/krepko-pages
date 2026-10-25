@@ -44,7 +44,7 @@
   <link rel="stylesheet" href="/assets/site-search.css?v=72dc453373">
   <script src="/assets/site-search.js?v=77c2afc426" defer></script>
   <link rel="stylesheet" href="/assets/krepko-chips.css?v=d588b7e6cf">
-  <link rel="stylesheet" href="/assets/site-footer.css?v=10f623e9ba">
+  <link rel="stylesheet" href="/assets/site-footer.css?v=bda382bc6b">
   <link rel="stylesheet" href="/assets/a11y.css?v=bd18bf2b40">
   <link rel="stylesheet" href="/assets/krepko-base.css?v=6216d1aafd">
   <link rel="stylesheet" href="/assets/desktop.css?v=77a552d781">
@@ -104,7 +104,7 @@
     <nav class="site-nav__links" aria-label="Основное меню">
       <a class="site-nav__link" href="/">Главная</a>
       <a class="site-nav__link" href="/about/">О Krepko</a>
-      <button class="site-nav__link site-nav__link--mega" type="button" aria-expanded="false" aria-controls="mega-menu" id="mega-trigger">Каталог услуг<svg class="site-nav__chev" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg></button>
+      <a class="site-nav__link" href="/services/">Каталог услуг</a>
       <a class="site-nav__link" href="/blog/">Блог</a>
       <a class="site-nav__link" href="/partners/">Партнёрам</a>
     </nav>
@@ -120,69 +120,8 @@
       </button>
     </div>
   </div>
-<div class="mega" id="mega-menu" hidden>
-  <div class="mega__inner">
-      <div class="mega__col">
-        <a class="mega__head" href="/notario/">Нотариус и документы</a>
-        <span class="mega__count">60+ услуг</span>
-        <a class="mega__doc" href="/notario/#doverennosti">Доверенности</a>
-        <a class="mega__doc" href="/notario/#soglasiya">Согласия и заявления</a>
-        <a class="mega__doc" href="/notario/doverennost-generalnaya/">Генеральная доверенность</a>
-        <a class="mega__doc" href="/notario/doverennost-na-rodnom-yazyke/">Доверенность на родном языке</a>
-        <a class="mega__doc" href="/notario/carta-de-invitacion/">Приглашение (carta de invitación)</a>
-        <a class="mega__doc" href="/notario/soglasie-na-vyezd-rebenka/">Согласие на выезд ребёнка</a>
-        <a class="mega__more" href="/notario/">Все нотариальные услуги&nbsp;→</a>
-      </div>
-      <div class="mega__col">
-        <a class="mega__head" href="/migracion/">ВНЖ и миграция</a>
-        <span class="mega__count">10+ услуг</span>
-        <a class="mega__doc" href="/migracion/vyhod-iz-tps/">Выход из TPS на ВНЖ</a>
-        <a class="mega__doc" href="/migracion/modifikaciya-statusa/">Модификация статуса (ст. 191)</a>
-        <a class="mega__doc" href="/migracion/arraigo-sociolaboral/">Arraigo — через работу</a>
-        <a class="mega__doc" href="/migracion/vossoedinenie-semi/">Воссоединение семьи</a>
-        <a class="mega__doc" href="/migracion/viza-cifrovogo-nomada/">Виза цифрового номада</a>
-        <a class="mega__doc" href="/migracion/nie-tie/">NIE и TIE</a>
-        <a class="mega__more" href="/migracion/">Все маршруты ВНЖ&nbsp;→</a>
-      </div>
-      <div class="mega__col">
-        <a class="mega__head" href="/ukraina/">Документы из Украины</a>
-        <span class="mega__count">11 услуг</span>
-        <a class="mega__doc" href="/ukraina/spravka-o-nesudimosti/">Справка о несудимости</a>
-        <a class="mega__doc" href="/ukraina/spravka-o-peresechenii-granicy/">Справка о пересечении границы</a>
-        <a class="mega__doc" href="/ukraina/svidetelstvo-rozhdenii-dubli/">Свидетельство о рождении</a>
-        <a class="mega__doc" href="/ukraina/svidetelstvo-brake-dublikat/">Свидетельство о браке</a>
-        <a class="mega__doc" href="/ukraina/spravka-semeynoe-polozhenie/">Справка о семейном положении</a>
-        <a class="mega__doc" href="/ukraina/perevod-prisyazhnyy/">Присяжный перевод</a>
-        <a class="mega__doc" href="/ukraina/doverennost-ukraina/">Доверенность в Украину</a>
-        <a class="mega__more" href="/ukraina/">Все услуги из Украины&nbsp;→</a>
-      </div>
-      <div class="mega__col">
-        <a class="mega__head" href="/tramites/">Административные процедуры</a>
-        <span class="mega__count">Процедуры и сервисы</span>
-        <a class="mega__doc" href="/tramites/empadronamiento/">Прописка (empadronamiento)</a>
-        <a class="mega__doc" href="/tramites/firma-digital/">Цифровая подпись (firma digital)</a>
-        <a class="mega__doc" href="/tramites/canje-permiso/">Замена прав на испанские</a>
-        <a class="mega__doc" href="/tramites/homologacion-bachillerato/">Омологация аттестата</a>
-        <a class="mega__more" href="/tramites/">Все процедуры&nbsp;→</a>
-      </div>
-  </div>
-
-  <div class="mega__footer">
-    <div class="mega__footer-inner">
-      <nav class="mega__rest" aria-label="Остальные направления">
-        <a class="mega__rest-link" href="/legalizacion/">Легализация и апостиль</a>
-        <a class="mega__rest-link" href="/traduccion/">Присяжный перевод</a>
-        <a class="mega__rest-link" href="/banca/">Банковский счёт</a>
-        <a class="mega__rest-link" href="/fiscalidad/">Налоги</a>
-        <a class="mega__rest-link" href="/juridico/">Юридическое сопровождение</a>
-      </nav>
-      <a class="mega__all" href="/services/">Весь каталог&nbsp;→</a>
-    </div>
-  </div>
-</div>
 </header>
 
-<div class="mega-overlay" id="mega-overlay" aria-hidden="true"></div>
 
 <dialog id="site-menu-dialog" class="site-menu" aria-label="Меню сайта" aria-modal="true">
   <div class="site-menu__sheet" tabindex="-1" autofocus>
@@ -230,12 +169,12 @@
                 <svg class="site-menu__cat-chev" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
               </summary>
               <div class="site-menu__cat-body">
-                <a class="site-menu__cat-link" href="/notario/#doverennosti">Доверенности</a>
-                <a class="site-menu__cat-link" href="/notario/#soglasiya">Согласия и заявления</a>
-                <a class="site-menu__cat-link" href="/notario/doverennost-generalnaya/">Генеральная доверенность</a>
                 <a class="site-menu__cat-link" href="/notario/doverennost-na-rodnom-yazyke/">Доверенность на родном языке</a>
-                <a class="site-menu__cat-link" href="/notario/carta-de-invitacion/">Приглашение (carta de invitación)</a>
+                <a class="site-menu__cat-link" href="/notario/doverennost-generalnaya/">Генеральная доверенность</a>
                 <a class="site-menu__cat-link" href="/notario/soglasie-na-vyezd-rebenka/">Согласие на выезд ребёнка</a>
+                <a class="site-menu__cat-link" href="/notario/soglasie-vtorogo-roditelya-vnzh/">Согласие второго родителя для ВНЖ</a>
+                <a class="site-menu__cat-link" href="/notario/carta-de-invitacion/">Приглашение (carta de invitación)</a>
+                <a class="site-menu__cat-link" href="/notario/otozvat-doverennost/">Отозвать доверенность</a>
                 <a class="site-menu__cat-more" href="/notario/">Все нотариальные услуги&nbsp;→</a>
               </div>
             </details>
@@ -246,10 +185,10 @@
               </summary>
               <div class="site-menu__cat-body">
                 <a class="site-menu__cat-link" href="/migracion/vyhod-iz-tps/">Выход из TPS на ВНЖ</a>
+                <a class="site-menu__cat-link" href="/migracion/vnzh-rebenka/">ВНЖ для ребёнка</a>
                 <a class="site-menu__cat-link" href="/migracion/modifikaciya-statusa/">Модификация статуса (ст. 191)</a>
                 <a class="site-menu__cat-link" href="/migracion/arraigo-sociolaboral/">Arraigo — через работу</a>
                 <a class="site-menu__cat-link" href="/migracion/vossoedinenie-semi/">Воссоединение семьи</a>
-                <a class="site-menu__cat-link" href="/migracion/viza-cifrovogo-nomada/">Виза цифрового номада</a>
                 <a class="site-menu__cat-link" href="/migracion/nie-tie/">NIE и TIE</a>
                 <a class="site-menu__cat-more" href="/migracion/">Все маршруты ВНЖ&nbsp;→</a>
               </div>
@@ -265,7 +204,6 @@
                 <a class="site-menu__cat-link" href="/ukraina/svidetelstvo-rozhdenii-dubli/">Свидетельство о рождении</a>
                 <a class="site-menu__cat-link" href="/ukraina/svidetelstvo-brake-dublikat/">Свидетельство о браке</a>
                 <a class="site-menu__cat-link" href="/ukraina/spravka-semeynoe-polozhenie/">Справка о семейном положении</a>
-                <a class="site-menu__cat-link" href="/ukraina/perevod-prisyazhnyy/">Присяжный перевод</a>
                 <a class="site-menu__cat-link" href="/ukraina/doverennost-ukraina/">Доверенность в Украину</a>
                 <a class="site-menu__cat-more" href="/ukraina/">Все услуги из Украины&nbsp;→</a>
               </div>
@@ -286,8 +224,8 @@
             <div class="site-menu__cat-rest">
               <a class="site-menu__cat-plain" href="/legalizacion/">Легализация и апостиль</a>
               <a class="site-menu__cat-plain" href="/traduccion/">Присяжный перевод</a>
-              <a class="site-menu__cat-plain" href="/banca/">Банковский счёт</a>
               <a class="site-menu__cat-plain" href="/fiscalidad/">Налоги</a>
+              <a class="site-menu__cat-plain" href="/banca/">Банковский счёт</a>
               <a class="site-menu__cat-plain" href="/juridico/">Юридическое сопровождение</a>
             </div>
           </nav>
@@ -562,9 +500,19 @@
         <a class="footer-map__link" href="/tramites/">Административные процедуры</a>
         <a class="footer-map__link" href="/legalizacion/">Легализация и апостиль</a>
         <a class="footer-map__link" href="/traduccion/">Присяжный перевод</a>
-        <a class="footer-map__link" href="/banca/">Банковский счёт</a>
         <a class="footer-map__link" href="/fiscalidad/">Налоги</a>
+        <a class="footer-map__link" href="/banca/">Банковский счёт</a>
         <a class="footer-map__link" href="/juridico/">Юридическое сопровождение</a>
+      </div>
+
+      <div class="footer-map__col">
+        <p class="footer-map__title">Популярное</p>
+        <a class="footer-map__link" href="/notario/doverennost-na-rodnom-yazyke/">Доверенность на родном языке</a>
+        <a class="footer-map__link" href="/ukraina/spravka-o-nesudimosti/">Справка о несудимости из Украины</a>
+        <a class="footer-map__link" href="/notario/soglasie-na-vyezd-rebenka/">Согласие на выезд ребёнка</a>
+        <a class="footer-map__link" href="/notario/soglasie-vtorogo-roditelya-vnzh/">Согласие второго родителя для ВНЖ</a>
+        <a class="footer-map__link" href="/migracion/vyhod-iz-tps/">Выход из временной защиты на ВНЖ</a>
+        <a class="footer-map__link" href="/tramites/canje-permiso/">Замена украинских прав</a>
       </div>
 
       <div class="footer-map__col">

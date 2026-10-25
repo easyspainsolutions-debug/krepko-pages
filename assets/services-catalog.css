@@ -88,6 +88,11 @@ body:has(.services-catalog) main {
   outline: none;
 }
 .svc-search input::placeholder { color: var(--sc-text-muted); }
+/* Глобальное focus-кольцо из a11y.css рисовало толстую терракотовую рамку
+   вокруг поля (Daniil 25.10: «жирный прямоугольник»). Признак фокуса здесь —
+   терракотовое подчёркивание строки (.svc-search:focus-within). */
+.svc-search input:focus,
+.svc-search input:focus-visible { outline: none; box-shadow: none; }
 .svc-empty {
   margin: 10px 0 0;
   font-size: 14px;
@@ -298,8 +303,7 @@ body:has(.services-catalog) .final-cta .btn--gold {
   font-family: 'Manrope', sans-serif;
   font-size: 14px;
   font-weight: 700;
-  letter-spacing: .04em;
-  text-transform: uppercase;
+  letter-spacing: 0;
   text-decoration: none;
 }
 @media (hover: hover) {
@@ -394,3 +398,127 @@ body:has(.services-catalog) .final-cta .btn--gold {
   .svc-head__dek { margin-bottom: 14px; }
   .svc-card { padding-top: 16px; padding-bottom: 16px; }
 }
+
+/* ═══ v2 «карта + продажа» (2026-10-25) ═══
+   Группы по задаче клиента, пункты «название + результат», «чаще всего»,
+   полоса доверия, три шага, FAQ про выбор. Старые правила выше оставлены
+   ради поиска (.svc-search, .svc-results, .svc-empty) и FAQ (.pillar-faq). */
+.svc-label {
+  margin: 0 0 12px;
+  font: 600 12px/1.4 'Manrope', sans-serif;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--sc-text-muted);
+}
+/* «Чаще всего» — нумерованный список 01–06, как «Популярное» на главной (вариант 2, Daniil 25.10) */
+.svc-popular { margin: 28px 0 0; }
+.svc-popular__list { list-style: none; margin: 0; padding: 0; counter-reset: pop; }
+.svc-popular__list li { counter-increment: pop; }
+.svc-popular__list li + li { border-top: 1px solid var(--sc-border); }
+/* без фоновой подсветки: плашка с закруглением не стыковалась с разделителями (Daniil 25.10) */
+.svc-popular__list a {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--sc-navy);
+  text-decoration: none;
+}
+.svc-popular__list a::before {
+  content: counter(pop, decimal-leading-zero);
+  min-width: 28px;
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--sc-gold);
+}
+.svc-popular__list a::after { content: '›'; margin-left: auto; font-size: 24px; line-height: 1; color: var(--sc-navy); opacity: .5; }
+@media (hover: hover) {
+  .svc-popular__list a:hover { color: var(--sc-gold); }
+  .svc-popular__list a:hover::after { color: var(--sc-gold); opacity: 1; }
+}
+@media (min-width: 900px) {
+  .svc-popular__list { display: grid; grid-template-columns: 1fr 1fr; column-gap: 56px; }
+  .svc-popular__list li:nth-child(2) { border-top: 0; }
+}
+
+.svc-groups { display: grid; grid-template-columns: 1fr; gap: 36px 56px; margin-top: 36px; }
+@media (min-width: 900px) { .svc-groups { grid-template-columns: 1fr 1fr; } }
+.svc-group { padding-top: 22px; border-top: 1px solid var(--sc-border); }
+.svc-group__job {
+  margin: 0 0 8px;
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(22px, 2.2vw, 27px);
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: -.01em;
+  color: var(--sc-navy);
+}
+.svc-group__who { margin: 0 0 10px; max-width: 520px; font-size: 15px; line-height: 1.6; color: var(--sc-text-muted); }
+/* Пункт = ссылка целиком: название подчёркнуто, справа шеврон, при наведении
+   фон и терракота. Без этого список читался как текст (Daniil, 25.10). */
+.svc-group__list { list-style: none; margin: 0; padding: 0; }
+.svc-group__list li + li { border-top: 1px solid var(--sc-border); }
+.svc-group__list a {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 11px 0;
+  color: var(--sc-text);
+  text-decoration: none;
+}
+.svc-item__t { flex: 1 1 auto; min-width: 0; }
+.svc-group__list b { display: inline; font-size: 16px; font-weight: 600; color: var(--sc-navy); }
+.svc-item__n { display: block; margin-top: 3px; font-size: 14px; line-height: 1.5; color: var(--sc-text-muted); }
+/* шеврон — единственный маркер ссылки (вариант В, Daniil 25.10): спокойный, как в списках iOS */
+.svc-item__go { flex: 0 0 auto; font-size: 24px; line-height: 1; color: var(--sc-navy); opacity: .5; }
+@media (hover: hover) {
+  .svc-group__list a:hover b { color: var(--sc-gold); }
+  .svc-group__list a:hover .svc-item__go { color: var(--sc-gold); opacity: 1; }
+}
+.svc-group__list a:active b { color: var(--sc-gold); }
+.svc-group__more { display: inline-block; margin-top: 12px; font-size: 14.5px; font-weight: 600; color: var(--sc-gold); text-decoration: none; }
+
+.svc-trust { margin: 48px 0 0; padding: 22px 24px; background: var(--sc-surface); border-radius: 12px; }
+.svc-trust ul { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr; gap: 16px 28px; }
+@media (min-width: 720px) { .svc-trust ul { grid-template-columns: repeat(4, 1fr); } }
+.svc-trust b { display: block; font-size: 16px; color: var(--sc-navy); }
+.svc-trust span { display: block; margin-top: 4px; font-size: 14px; line-height: 1.5; color: var(--sc-text-muted); }
+
+.svc-steps { margin-top: 48px; }
+.services-catalog--v2 .svc-steps h2,
+.services-catalog--v2 .svc-faq h2 {
+  margin: 0 0 18px;
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(22px, 2.2vw, 28px);
+  font-weight: 500;
+  color: var(--sc-navy);
+}
+.svc-steps ol { list-style: none; margin: 0; padding: 0; counter-reset: step; display: grid; grid-template-columns: 1fr; gap: 18px 28px; }
+@media (min-width: 720px) { .svc-steps ol { grid-template-columns: repeat(3, 1fr); } }
+.svc-steps li { counter-increment: step; position: relative; padding-left: 44px; }
+.svc-steps li::before {
+  content: counter(step);
+  position: absolute; left: 0; top: 0;
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  background: var(--sc-gold);
+  color: var(--sc-bg);
+  font: 600 14px/32px 'Manrope', sans-serif;
+  text-align: center;
+}
+.svc-steps b { display: block; font-size: 16px; color: var(--sc-navy); }
+.svc-steps span { display: block; margin-top: 4px; font-size: 14.5px; line-height: 1.55; color: var(--sc-text-sub); }
+.svc-price { margin: 22px 0 0; max-width: 720px; font-size: 14.5px; line-height: 1.6; color: var(--sc-text-muted); }
+.services-catalog--v2 .svc-faq { margin-top: 44px; }
+
+/* Шапка каталога: вопрос, под ним строка поиска вместо подзаголовка
+   (Daniil 25.10). Разделитель на всю ширину — у .svc-top. */
+.services-catalog--v2 .svc-head::after { display: none; }
+.services-catalog--v2 .svc-head { padding: 0; }
+.services-catalog--v2 .svc-head h1 { margin-bottom: 0; }
+.services-catalog--v2 .svc-top { padding: 34px 0 0; }
+.services-catalog--v2 .svc-top::after { content: ''; display: block; height: 1px; margin-top: 26px; background: var(--sc-border); }
+.services-catalog--v2 .svc-search { margin: 18px 0 0; max-width: 520px; }
