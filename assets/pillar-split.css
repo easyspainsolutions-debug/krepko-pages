@@ -85,20 +85,18 @@ body:has(.pillar-split) main {
 .pillar-split__cols > .pillar-doc { grid-column: 2; grid-row: 1; }
 
 /* ── левая колонка: перечень услуг направления ── */
-/* Прилипание строго ПОД sticky-шапкой (Daniil 30.09: панель уезжала под
-   неё и прятала поиск), а длинный каталог получает свой тонкий скролл —
-   колонка всегда целиком под рукой, «замирание в случайном месте» ушло. */
+/* Колонка без собственной прокрутки (Daniil 25.10: два независимых скролла —
+   колонки и текста — сбивали с толку). Прилипает под шапкой только когда
+   целиком помещается в экран (класс .is-sticky ставит pillar-split.js);
+   иначе едет вместе со страницей как обычный блок. */
 .pillar-nav {
+  position: static;
+  max-height: none;
+  overflow: visible;
+}
+.pillar-nav.is-sticky {
   position: sticky;
   top: 112px;
-  max-height: calc(100vh - 128px);
-  overflow-y: auto;
-  overscroll-behavior: contain;
-  scrollbar-width: thin;
-  scrollbar-color: var(--ps-border) transparent;
-  /* жёлоб под скроллбар: полоска не ложится на шевроны аккордеонов */
-  padding-right: 12px;
-  scrollbar-gutter: stable;
 }
 .pillar-nav ul { list-style: none; margin: 0; padding: 0; }
 .pillar-nav li { margin: 0; }

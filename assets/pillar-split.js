@@ -249,3 +249,21 @@
     if (empty) empty.hidden = found > 0;
   });
 })();
+
+/* Прилипание колонки без второго скролла (Daniil 25.10): sticky только если
+   колонка целиком помещается под шапкой; иначе — обычный блок в потоке.
+   Пересчёт при раскрытии категорий, поиске и смене размера окна. */
+(function () {
+  var nav = document.querySelector('.pillar-nav');
+  if (!nav) return;
+  var mq = window.matchMedia ? window.matchMedia('(min-width: 900px)') : null;
+  var TOP = 112, GAP = 24;
+  function fit() {
+    var ok = (!mq || mq.matches) && nav.offsetHeight <= window.innerHeight - TOP - GAP;
+    nav.classList.toggle('is-sticky', ok);
+  }
+  fit();
+  window.addEventListener('resize', fit, { passive: true });
+  if ('ResizeObserver' in window) { new ResizeObserver(fit).observe(nav); }
+  else { nav.addEventListener('click', function () { setTimeout(fit, 350); }); }
+})();
