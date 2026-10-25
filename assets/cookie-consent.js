@@ -34,6 +34,22 @@
     window.gtag('config', GA_ID, { anonymize_ip: true });
   }
 
+  // Microsoft Clarity (записи сессий и тепловые карты) — только после «Принять все»,
+  // как GA4. Включается ID проекта в <meta name="krepko-clarity"> (data/site.yaml →
+  // clarity.project_id, подставляет сборщик). Нет meta — ничего не грузим. 2026-10-25.
+  function loadClarity() {
+    var m = document.querySelector('meta[name="krepko-clarity"]');
+    var id = m && (m.getAttribute('content') || '').trim();
+    if (!id || window.__krepkoClarityLoaded) return;
+    window.__krepkoClarityLoaded = true;
+    window.clarity = window.clarity || function () { (window.clarity.q = window.clarity.q || []).push(arguments); };
+    var s = document.createElement('script');
+    s.async = true;
+    s.src = 'https://www.clarity.ms/tag/' + encodeURIComponent(id);
+    document.head.appendChild(s);
+    window.clarity('consentv2', { ad_Storage: 'denied', analytics_Storage: 'granted' });
+  }
+
   function hideBanner() {
     var banner = document.getElementById('cookie-consent');
     if (banner) banner.setAttribute('hidden', '');
@@ -50,7 +66,7 @@
     var value = btn.getAttribute('data-consent');
     if (value !== 'all' && value !== 'essential') return;
     setConsent(value);
-    if (value === 'all') loadGA();
+    if (value === 'all') { loadGA(); loadClarity(); }
     hideBanner();
   }
 
@@ -58,6 +74,7 @@
     var consent = getConsent();
     if (consent === 'all') {
       loadGA();
+      loadClarity();
       hideBanner();
     } else if (consent === 'essential') {
       hideBanner();

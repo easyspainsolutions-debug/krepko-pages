@@ -216,3 +216,9 @@
 .service-tail .cmap__city.is-current { cursor: default; }
 .service-tail .cmap__city.is-current .cmap__dot { r: 11; stroke: var(--bg); stroke-width: 4; }
 .service-tail .cmap__city.is-current .cmap__label { fill: var(--gold); font-weight: 800; }
+
+/* Хабы направлений: на телефоне каталог стоит над текстом и заканчивается
+   своей кнопкой WhatsApp — вторая кнопка с фактами шла бы сразу под ней. */
+@media (max-width: 899px) {
+  .pillar-split--hub .sell-head { display: none; }
+}

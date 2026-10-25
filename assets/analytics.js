@@ -12,37 +12,10 @@
     if (typeof window.gtag === 'function') {
       try { window.gtag('event', name, params || {}); } catch (e) { /* no-op */ }
     }
-    sendToBot(name, params);
   }
 
-  // Дублирование событий в наш Railway-бот. Endpoint берётся из
-  // <meta name="krepko-track-endpoint"> — если meta нет, тихо ничего не шлём.
-  // sendBeacon выбран, потому что переживает уход на новую вкладку (WA/TG/mailto).
-  function sendToBot(name, params) {
-    var meta = document.querySelector('meta[name="krepko-track-endpoint"]');
-    var endpoint = meta && (meta.getAttribute('content') || '').trim();
-    if (!endpoint) return;
-    var p = params || {};
-    var payload = JSON.stringify({
-      cta_id:   name,
-      cta_page: p.page || window.location.pathname,
-      cta_text: (p.location || p.service || p.question || '') + ''
-    });
-    try {
-      if (navigator.sendBeacon) {
-        navigator.sendBeacon(endpoint, new Blob([payload], { type: 'text/plain;charset=UTF-8' }));
-        return;
-      }
-    } catch (e) { /* fall through */ }
-    try {
-      fetch(endpoint, {
-        method: 'POST',
-        body: payload,
-        headers: { 'Content-Type': 'text/plain;charset=UTF-8' },
-        keepalive: true, mode: 'cors', credentials: 'omit'
-      }).catch(function () {});
-    } catch (e) { /* no-op */ }
-  }
+  // 25.10.2026: дубль событий в Railway-бот снят — адреса <meta name="krepko-track-endpoint">
+  // нет ни на одной странице, отправка не срабатывала никогда. Своё поведение пишет Pulse.
 
   function getUTM() {
     var p = new URLSearchParams(window.location.search);
@@ -138,6 +111,7 @@
     if (href.indexOf('t.me/krepko_es') > -1) return 'cta_click_channel';
     if (href.indexOf('t.me/krepko_es_chat') > -1) return 'cta_click_chat';
     if (href.indexOf('mailto:') === 0) return 'cta_click_email';
+    if (href.indexOf('tel:') === 0) return 'cta_click_phone';   // 25.10: звонки не считал никто
     if (href.indexOf('instagram.com') > -1) return 'cta_click_instagram';
     return null;
   }
