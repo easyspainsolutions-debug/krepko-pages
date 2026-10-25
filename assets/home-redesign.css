@@ -4231,9 +4231,11 @@
 @media (max-width: 719px) {
   .hero--home .hero__cta-row {
     flex-direction: row !important; align-items: center !important;
-    flex-wrap: wrap; gap: 14px;
+    /* 25.10: nowrap — на 402 px подпись уезжала под кнопку, на 440 стояла рядом:
+       первый экран выглядел по-разному на 16 Pro и 16 Pro Max */
+    flex-wrap: nowrap; gap: 14px;
   }
-  .hero__free-m { margin: 0; max-width: 150px; line-height: 1.5; }
+  .hero__free-m { margin: 0; flex: 0 1 150px; min-width: 0; max-width: 150px; line-height: 1.5; }
 }
 
 

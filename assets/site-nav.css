@@ -1110,4 +1110,15 @@ nav.breadcrumb {
   .breadcrumb__sep { white-space: nowrap; }
   .breadcrumb__current { white-space: normal; }
   .breadcrumb__parent { padding: 4px 7px; }
+  /* 25.10: на телефоне путь занимал 2–3 строки капсом и перестраивался от
+     ширины (402 px — три строки, 440 — две). Оставляем одну кнопку назад:
+     «‹ Раздел». Полный путь — в разметке BreadcrumbList и на десктопе. */
+  .breadcrumb--back > a:not(.breadcrumb__parent),
+  .breadcrumb--back > .breadcrumb__sep,
+  .breadcrumb--back > .breadcrumb__current,
+  .breadcrumb--back > span:not(.breadcrumb__sep) { display: none; }
+  /* в рукописных статьях «/» — голый текст: гасим кегль строки, ссылке-назад
+     возвращаем свой */
+  nav.breadcrumb--back { font-size: 0; }
+  nav.breadcrumb--back > .breadcrumb__parent { font-size: var(--fs-micro, 11px); }
 }

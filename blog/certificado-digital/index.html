@@ -12,30 +12,30 @@
   <meta name="theme-color" content="#EFE7DA">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="/assets/tokens.css?v=c148233d2b">
-  <link rel="stylesheet" href="/assets/light-scale.css?v=5845ecc19a">
+  <link rel="stylesheet" href="/assets/light-scale.css?v=4e98461995">
   <link rel="stylesheet" href="/assets/module-section.css?v=e99f1da332">
   <link rel="stylesheet" href="/assets/module-cta.css?v=9911b86894">
   <link rel="stylesheet" href="/assets/module-card.css?v=9a4ebfbec1">
   <link rel="stylesheet" href="/assets/module-hero.css?v=9f01409c29">
   <link rel="stylesheet" href="/assets/module-trust.css?v=32a7136440">
-  <link rel="stylesheet" href="/assets/module-process.css?v=b33de6f64d">
-  <link rel="stylesheet" href="/assets/site-nav.css?v=10d8c8e724">
+  <link rel="stylesheet" href="/assets/module-process.css?v=1d5884d9d2">
+  <link rel="stylesheet" href="/assets/site-nav.css?v=956ed7ec2b">
 <script src="/assets/site-nav.js?v=727580b8c5" defer></script>
   <script src="/assets/cursor.js?v=b32744207b" defer></script>
   <link rel="stylesheet" href="/assets/krepko-chips.css?v=d588b7e6cf">
-  <link rel="stylesheet" href="/assets/site-footer.css?v=0bc6ae0d00">
+  <link rel="stylesheet" href="/assets/site-footer.css?v=d846d3c762">
   <link rel="stylesheet" href="/assets/a11y.css?v=268494d89b">
   <link rel="stylesheet" href="/assets/krepko-base.css?v=6216d1aafd">
   <link rel="stylesheet" href="/assets/cookie-consent.css?v=a4b74432ef">
   <script src="/assets/cookie-consent.js?v=8272782489" defer></script>
 
-  <link rel="stylesheet" href="/assets/site-nav.css?v=10d8c8e724">
-  <link rel="stylesheet" href="/assets/site-footer.css?v=0bc6ae0d00">
+  <link rel="stylesheet" href="/assets/site-nav.css?v=956ed7ec2b">
+  <link rel="stylesheet" href="/assets/site-footer.css?v=d846d3c762">
   <link rel="stylesheet" href="/assets/a11y.css?v=268494d89b">
   <link rel="stylesheet" href="/assets/desktop.css?v=77a552d781">
   <link rel="stylesheet" href="/assets/blog-legacy.css?v=aa882ee0d3">
   <link rel="stylesheet" href="/assets/blog-grid.css?v=c661d60e32">
-  <link rel="stylesheet" href="/assets/blog-article.css?v=07fb38de9f">
+  <link rel="stylesheet" href="/assets/blog-article.css?v=4154b12396">
   <meta name="yandex-verification" content="b4ef32829d6a1b94">
   <title>Как сделать электронную подпись в Испании | Krepko</title>
   <meta name="description" content="Электронная подпись (certificado digital) в Испании: запрос в FNMT, явка с NIE, установка в браузер. Бесплатно, до 4 лет. Ведём до готовой подписи.">
@@ -578,30 +578,41 @@
     </ul>
 
     <h2 id="chastye-voprosy">Частые вопросы</h2>
+    <div class="faq__list">
+      <details class="faq__item">
+        <summary class="faq__q">Сколько стоит сертификат?</summary>
+        <div class="faq__a"><p>Абсолютно бесплатно. FNMT выпускает сертификаты на государственные деньги для всех граждан и резидентов Испании.</p></div>
+      </details>
+      <details class="faq__item">
+        <summary class="faq__q">Нужен ли мне NIE для получения сертификата?</summary>
+        <div class="faq__a"><p>Да, обязательно. Сертификат выпускается на имя владельца NIE (для иностранцев) или DNI (для испанцев). Если у вас ещё нет NIE — сначала получите его, потом заказывайте сертификат.</p></div>
+      </details>
+      <details class="faq__item">
+        <summary class="faq__q">Смогу ли я получить сертификат, если я нерезидент?</summary>
+        <div class="faq__a"><p>Да, нерезидент с NIE тоже может получить FNMT. Процесс тот же: онлайн-запрос, явка в офис для биометрии, скачивание. Нерезидентство не помешает.</p></div>
+      </details>
+      <details class="faq__item">
+        <summary class="faq__q">Сколько времени занимает получение сертификата?</summary>
+        <div class="faq__a"><p>Из времени активных действий — минут 30–40: онлайн-запрос (5 мин), поездка в офис и биометрия (15 мин), скачивание (5 мин). Но между запросом и явкой в офис может пройти 1–3 недели, пока идёт очередь на cita previa. После биометрии сертификат готов в течение 1–2 часов.</p></div>
+      </details>
+      <details class="faq__item">
+        <summary class="faq__q">Нужен ли мне сертификат для Cl@ve PIN?</summary>
+        <div class="faq__a"><p>Нет. Cl@ve — это альтернативная система, не требующая установки сертификата. Но Cl@ve менее универсален: не все порталы его поддерживают. Certificado FNMT работает везде.</p></div>
+      </details>
+      <details class="faq__item">
+        <summary class="faq__q">Что делать, если я забыл пароль к сертификату?</summary>
+        <div class="faq__a"><p>К сожалению, пароль восстановить нельзя. Нужно запросить новый сертификат через FNMT (бесплатно). Старый удалить из браузера, новый скачать и установить.</p></div>
+      </details>
+      <details class="faq__item">
+        <summary class="faq__q">Может ли одновременно использоваться несколько сертификатов (например, на разных компьютерах)?</summary>
+        <div class="faq__a"><p>Да, можно скачать один и тот же сертификат (файл .p12) на несколько компьютеров и браузеров. При использовании система попросит пароль — это безопасно. Но сам сертификат остаётся одним, только копируется.</p></div>
+      </details>
+      <details class="faq__item">
+        <summary class="faq__q">Если я сменю фамилию, нужно ли получать новый сертификат?</summary>
+        <div class="faq__a"><p>Да, нужно. Сертификат выпущен на ваше текущее имя. Если оно изменилось (например, после свадьбы), старый сертификат теряет юридическую силу. Запросите новый через FNMT после изменения данных в реестре.</p></div>
+      </details>
+    </div>
 
-    <h3>Сколько стоит сертификат?</h3>
-    <p>Абсолютно бесплатно. FNMT выпускает сертификаты на государственные деньги для всех граждан и резидентов Испании.</p>
-
-    <h3>Нужен ли мне NIE для получения сертификата?</h3>
-    <p>Да, обязательно. Сертификат выпускается на имя владельца NIE (для иностранцев) или DNI (для испанцев). Если у вас ещё нет NIE — сначала получите его, потом заказывайте сертификат.</p>
-
-    <h3>Смогу ли я получить сертификат, если я нерезидент?</h3>
-    <p>Да, нерезидент с NIE тоже может получить FNMT. Процесс тот же: онлайн-запрос, явка в офис для биометрии, скачивание. Нерезидентство не помешает.</p>
-
-    <h3>Сколько времени занимает получение сертификата?</h3>
-    <p>Из времени активных действий — минут 30–40: онлайн-запрос (5 мин), поездка в офис и биометрия (15 мин), скачивание (5 мин). Но между запросом и явкой в офис может пройти 1–3 недели, пока идёт очередь на cita previa. После биометрии сертификат готов в течение 1–2 часов.</p>
-
-    <h3>Нужен ли мне сертификат для Cl@ve PIN?</h3>
-    <p>Нет. Cl@ve — это альтернативная система, не требующая установки сертификата. Но Cl@ve менее универсален: не все порталы его поддерживают. Certificado FNMT работает везде.</p>
-
-    <h3>Что делать, если я забыл пароль к сертификату?</h3>
-    <p>К сожалению, пароль восстановить нельзя. Нужно запросить новый сертификат через FNMT (бесплатно). Старый удалить из браузера, новый скачать и установить.</p>
-
-    <h3>Может ли одновременно использоваться несколько сертификатов (например, на разных компьютерах)?</h3>
-    <p>Да, можно скачать один и тот же сертификат (файл .p12) на несколько компьютеров и браузеров. При использовании система попросит пароль — это безопасно. Но сам сертификат остаётся одним, только копируется.</p>
-
-    <h3>Если я сменю фамилию, нужно ли получать новый сертификат?</h3>
-    <p>Да, нужно. Сертификат выпущен на ваше текущее имя. Если оно изменилось (например, после свадьбы), старый сертификат теряет юридическую силу. Запросите новый через FNMT после изменения данных в реестре.</p>
 
     <div class="divider"></div>
 
@@ -684,6 +695,7 @@
         <a class="footer-map__link" href="/about/">О Krepko</a>
         <a class="footer-map__link" href="/services/">Каталог услуг</a>
         <a class="footer-map__link" href="/blog/">Блог</a>
+        <a class="footer-map__link" href="/partners/">Партнёрам</a>
         <a class="footer-map__link" href="/review/">Оставить отзыв</a>
       </div>
 
@@ -708,7 +720,6 @@
       <div class="site-footer__legalmeta">
         <div class="site-footer__meta">© 2026 Krepko</div>
         <nav class="site-footer__legal" aria-label="Юридическая информация">
-          <a href="/partners/">Партнёрам</a>
           <a href="/aviso-legal/">Aviso legal</a>
           <a href="/privacidad/">Privacidad</a>
           <a href="/terminos/">Términos</a>

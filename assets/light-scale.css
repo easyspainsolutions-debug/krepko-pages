@@ -235,3 +235,9 @@ body .final-cta {
 @media (hover: hover) {
   .city-coverage__list a:hover { color: var(--gold-2, #B04E2F); }
 }
+/* 25.10: на телефоне города переносились с точкой в начале строки («· Малага») —
+   задаём сетку из трёх колонок без разделителей. */
+@media (max-width: 599px) {
+  .city-coverage__list { display: grid; grid-template-columns: repeat(3, auto); justify-content: start; column-gap: 24px; }
+  .city-coverage__list li + li::before { content: none; }
+}
