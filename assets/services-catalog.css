@@ -541,3 +541,10 @@ body:has(.services-catalog) .final-cta .btn--gold {
 @media (max-width: 899px) {
   .services-catalog--v2 .svc-search input { font-size: 16px; }
 }
+
+/* Блоки главной («Философия работы», «Как мы работаем») на каталоге: на главной
+   .intro выезжает за поля main отрицательными margin, а здесь main без полей —
+   получался горизонтальный скролл на десктопе (QA 25.10). */
+body:has(.services-catalog) .intro,
+body:has(.services-catalog) .intro--flow { margin-left: 0 !important; margin-right: 0 !important; width: auto !important; max-width: none !important; }
+body:has(.services-catalog) main { overflow-x: clip; }
