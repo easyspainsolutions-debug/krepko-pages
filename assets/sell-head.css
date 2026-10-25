@@ -84,4 +84,5 @@
 
 /* Модульные страницы документов (document_page.html): блок в той же колонке,
    что остальные модули. */
-.doc-sell-trust { max-width: var(--w-read); margin: 0 auto; padding: 0 var(--space-4); }
+.doc-sell-trust { max-width: var(--w-read); margin: 0 auto; }
+@media (min-width: 900px) { .doc-sell-trust { padding: 0 var(--space-4); } }
