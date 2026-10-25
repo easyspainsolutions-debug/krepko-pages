@@ -306,7 +306,8 @@
 }
 /* строка под кареткой клавиатуры */
 .site-search__results li.is-active a {
-  background: rgba(199, 91, 57, .09);
+  background: #F5F0EB; /* QA 25.10: тот же оттенок, что у наведения */
+  border-radius: 0 10px 10px 0;
   box-shadow: inset 2px 0 0 #C75B39;
 }
 .site-search__empty {

@@ -24,7 +24,7 @@ details:focus-visible {
      (#C4952A) и рисовал чужое горчичное кольцо поверх терракотового
      оформления — три обводки на одном поле поиска. */
   box-shadow: 0 0 0 2px var(--focus-ring, var(--gold));
-  border-radius: var(--space-1);
+  /* радиус элемента не трогаем: кольцо идёт по его собственной форме (QA 25.10) */
 }
 
 /* На всякий случай: убираем любой default :focus outline (mouse/touch).
@@ -76,4 +76,9 @@ label,
 }
 .skip-link:focus {
   left: 0;
+}
+/* QA 25.10 «наслоения»: строки списков с разделителями — фокус внутри строки, не поверх линий */
+.svc-popular__list a:focus-visible, .svc-group__list a:focus-visible, .svc-results a:focus-visible,
+.pillar-nav a:focus-visible, .srow:focus-visible {
+  box-shadow: none; outline: 2px solid var(--focus-ring, var(--gold)); outline-offset: -2px; border-radius: 0;
 }

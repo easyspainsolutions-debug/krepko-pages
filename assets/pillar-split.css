@@ -230,14 +230,14 @@ body:has(.pillar-split) main {
    дважды пульсирует и гаснет. box-shadow тем же цветом расширяет поле
    подсветки за края текста, не трогая геометрию колонки. */
 @keyframes pillarCatFlash {
-  0%   { background-color: rgba(199, 91, 57, 0);   box-shadow: 0 0 0 10px rgba(199, 91, 57, 0); }
-  18%  { background-color: rgba(199, 91, 57, .16); box-shadow: 0 0 0 10px rgba(199, 91, 57, .16); }
-  48%  { background-color: rgba(199, 91, 57, .05); box-shadow: 0 0 0 10px rgba(199, 91, 57, .05); }
-  68%  { background-color: rgba(199, 91, 57, .13); box-shadow: 0 0 0 10px rgba(199, 91, 57, .13); }
-  100% { background-color: rgba(199, 91, 57, 0);   box-shadow: 0 0 0 10px rgba(199, 91, 57, 0); }
+  0%   { background-color: rgba(199, 91, 57, 0); }
+  18%  { background-color: rgba(199, 91, 57, .16); }
+  48%  { background-color: rgba(199, 91, 57, .05); }
+  68%  { background-color: rgba(199, 91, 57, .13); }
+  100% { background-color: rgba(199, 91, 57, 0); }
 }
 .pillar-cat.is-hilite {
-  border-radius: 8px;
+  /* QA 25.10: без скругления и выноса — заливка ровно между линиями категорий */
   animation: pillarCatFlash 1.8s ease-out both;
 }
 @media (prefers-reduced-motion: reduce) {
@@ -245,7 +245,6 @@ body:has(.pillar-split) main {
   .pillar-cat.is-hilite {
     animation: none;
     background-color: rgba(199, 91, 57, .10);
-    box-shadow: 0 0 0 10px rgba(199, 91, 57, .10);
   }
 }
 .pillar-cat__head {
@@ -790,7 +789,8 @@ body:has(.pillar-split) main {
   /* ссылка на обзор направления уходит вниз, к городам */
   .pillar-split--doc .pillar-nav__all {
     order: 99;
-    margin: 6px 0 0;
+    /* 20px: линия не прилипает к кнопке «Индивидуальные документы» (QA 25.10) */
+    margin: 20px 0 0;
     padding: 14px 0 0;
     border-top: 1px solid var(--ps-border);
     border-bottom: 0;

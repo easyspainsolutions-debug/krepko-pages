@@ -22,7 +22,7 @@
 
 /* Add accent strip ::before */
 .card::before {
-  content: '';
+  content: none; /* QA 25.10: второй штрих под рамкой при наведении — снят */
   position: absolute;
   top: 0;
   left: 0;
@@ -41,10 +41,10 @@
    после тапа hover «прилипал» к карточке — карточка оставалась с золотой обводкой. */
 @media (hover: hover) {
   .card:hover {
-    border-color: rgba(196, 149, 42, 0.55);
+    border-color: rgba(199, 91, 57, .45);
     background: var(--surface-2);
     transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 8px 20px rgba(45, 45, 45, .10);
     text-decoration: none;
   }
   .card:hover::before {

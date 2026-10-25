@@ -163,7 +163,7 @@ body:has(> .wrap.wrap--article) > .wrap.wrap--article {
   border-bottom: 1px solid transparent;
   transition: border-color .15s ease;
 }
-.article-body a:not(.btn):not(.inline-cta__btn):hover { border-bottom-color: currentColor; }
+.article-body a:not(.btn):not(.inline-cta__btn):not(.article-promo):hover { border-bottom-color: currentColor; }
 
 .article-services {
   background: var(--surface, #F5F0EB);
@@ -194,7 +194,10 @@ body:has(> .wrap.wrap--article) > .wrap.wrap--article {
   text-decoration: none;
   transition: border-color .18s ease;
 }
-.article-promo:hover { border-color: rgba(199, 91, 57, .45); }
+.article-body a.article-promo { border-bottom-color: rgba(26, 43, 60, .12); } /* QA 25.10: рамка со всех четырёх сторон */
+@media (hover: hover) {
+  .article-body a.article-promo:hover { border-color: rgba(199, 91, 57, .45); border-left-color: var(--gold, #C75B39); }
+}
 .article-promo__kicker {
   display: block;
   font-family: 'Manrope', sans-serif;

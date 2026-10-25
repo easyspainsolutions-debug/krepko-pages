@@ -943,8 +943,7 @@ nav.breadcrumb {
 .breadcrumb a:hover,
 .breadcrumb a:focus-visible {
   color: var(--gold-2);
-  border-bottom-color: var(--gold-2);
-  text-decoration: none;
+  text-decoration: none; /* QA 25.10: подчёркивание снято — достаточно цвета */
 }
 /* текущая страница — тем же кеглем, но темнее: это не ссылка */
 .breadcrumb > span:last-child { color: var(--text); }
@@ -1086,7 +1085,8 @@ nav.breadcrumb {
 }
 .breadcrumb__parent svg { flex: 0 0 auto; }
 @media (hover: hover) {
-  .breadcrumb__parent:hover { background: rgba(199, 91, 57, .09); }
+  /* без плашки: розовая подложка + курсор давали двойной отклик (25.10) */
+  .breadcrumb__parent:hover { color: var(--gold-2, #B04E2F) !important; }
 }
 .breadcrumb__sep { opacity: .45; }
 .breadcrumb__current { opacity: .7; }

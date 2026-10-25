@@ -50,4 +50,4 @@ a[style*="border-bottom"]:hover { border-bottom-color: transparent !important; }
 
 /* Клавиатурная навигация: без подчёркивания фокус остаётся единственным
    признаком «я здесь», поэтому обводку делаем заметной. */
-a:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; border-radius: 2px; }
+/* QA 25.10 «наслоения»: второе кольцо фокуса снято — оставлено одно из a11y.css (было два концентрических) */

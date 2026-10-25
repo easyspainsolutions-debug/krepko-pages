@@ -446,3 +446,4 @@
 @media (max-width: 899px) {
   .home-faq .faq__aside { margin-bottom: 28px; }
 }
+.home-faq { border-top: 0 !important; } /* QA 25.10: фон уже отделяет блок */

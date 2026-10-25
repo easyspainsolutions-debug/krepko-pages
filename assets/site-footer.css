@@ -307,14 +307,11 @@ body:has(> footer.site-footer) {
 .site-footer__legal a {
   color: var(--text-label);
   text-decoration: none;
-  padding: var(--space-1) var(--space-2);
-  border-radius: var(--r-1);
+  padding: var(--space-1) 0;
+  border-radius: 0;
   transition: color var(--t-1), background var(--t-1);
 }
-.site-footer__legal a:hover {
-  color: var(--gold);
-  background: rgba(196, 149, 42, 0.08);
-}
+.site-footer__legal a:hover { color: var(--gold); } /* QA 25.10: без горчичной плашки */
 .site-footer__legal .sep { color: var(--border); }
 
 .site-footer__meta {
@@ -504,7 +501,8 @@ body:has(> footer.site-footer) {
     color: rgba(255, 251, 247, .55);
     transition: color .15s ease;
   }
-  .footer-chat__link:hover { color: #FFFBF7; } для контурных иконок, и атрибут
+  .footer-chat__link:hover { color: #FFFBF7; }
+  /* stroke: none — общий стиль svg рассчитан для контурных иконок, и атрибут
      fill на разметке им проигрывает — эти иконки заливные, ставим явно */
   .footer-chat__link svg { fill: currentColor; stroke: none; display: block; }
   .site-footer__legalmeta {

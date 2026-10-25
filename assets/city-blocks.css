@@ -676,8 +676,7 @@
 @media (hover: hover) {
   #sec-services .srow:hover {
       padding-left: 20px;
-      border-color: var(--gold) !important;
-      background: none !important;
+      background: none !important; /* QA 25.10: линии не перекрашиваем — строка 01 выглядела «в рамке», 02–03 нет */
     }
   #sec-services .srow:hover .srow__num { opacity: 1; }
   #sec-services .srow:hover .srow__go { transform: translateX(6px); }
@@ -1191,3 +1190,6 @@
 .city-blocks > .city-process { background: var(--surface-sunk) !important; }
 .city-blocks > #sec-reviews  { background: var(--bg) !important; }
 .city-blocks > .home-faq     { background: var(--surface-sunk) !important; }
+/* QA 25.10: полосы разделяет фон — линия на кромке была второй границей */
+.city-blocks > .rh-section-break { border-top: 0 !important; }
+.city-blocks > #sec-services + .city-process { border-top: 1px solid var(--border-faint) !important; }

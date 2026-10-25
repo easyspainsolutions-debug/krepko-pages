@@ -21,7 +21,8 @@
               transform var(--t-2), border-color var(--t-1);
   cursor: pointer;
 }
-.btn:hover { text-decoration: none; transform: translateY(-1px); }
+.btn:hover { text-decoration: none; }
+@media (hover: hover) { .btn:hover { transform: translateY(-1px); } }
 
 /* === Primary: Gold === */
 .btn--gold {
@@ -31,7 +32,7 @@
   box-shadow: var(--glow-gold);
 }
 .btn--gold:hover {
-  box-shadow: 0 6px 18px rgba(196, 149, 42, 0.40);
+  box-shadow: 0 6px 18px rgba(199, 91, 57, .32); /* было горчичное свечение старой тёмной темы */
 }
 
 /* === Primary: WhatsApp — с 25.10.2026 тот же вид, что gold (решение Daniil:
@@ -44,7 +45,7 @@
   box-shadow: var(--glow-gold);
 }
 .btn--wa:hover {
-  box-shadow: 0 6px 18px rgba(196, 149, 42, 0.40);
+  box-shadow: 0 6px 18px rgba(199, 91, 57, .32); /* было горчичное свечение старой тёмной темы */
 }
 
 /* === Secondary: outline === */

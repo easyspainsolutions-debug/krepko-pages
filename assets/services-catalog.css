@@ -520,7 +520,7 @@ body:has(.services-catalog) .final-cta .btn--gold {
 .services-catalog--v2 .svc-head { padding: 0; }
 .services-catalog--v2 .svc-head h1 { margin-bottom: 0; }
 .services-catalog--v2 .svc-top { padding: 34px 0 0; }
-.services-catalog--v2 .svc-top::after { content: ''; display: block; height: 1px; margin-top: 26px; background: var(--sc-border); }
+.services-catalog--v2 .svc-top::after { content: none; } /* QA 25.10: вторая линия под строкой поиска — двойная черта */
 .services-catalog--v2 .svc-search { margin: 18px 0 0; max-width: 520px; }
 
 /* ═══ Типографика v2 после аудита 25.10 ═══
@@ -548,3 +548,4 @@ body:has(.services-catalog) .final-cta .btn--gold {
 body:has(.services-catalog) .intro,
 body:has(.services-catalog) .intro--flow { margin-left: 0 !important; margin-right: 0 !important; width: auto !important; max-width: none !important; }
 body:has(.services-catalog) main { overflow-x: clip; }
+.services-catalog--v2 .svc-popular { margin-top: 36px; }

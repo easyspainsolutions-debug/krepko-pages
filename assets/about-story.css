@@ -266,7 +266,8 @@ body:has(.tw) { overflow-x: visible; }
 .tw-keep__i:last-child { border-bottom: 1px solid var(--hair); }
 /* заливка выезжает из-под строки при наведении — реакция без рамок и теней */
 .tw-keep__i::before {
-  content: ''; position: absolute;
+  content: none; /* QA 25.10 «наслоения»: заливка выезжала за волосяные линии — снята, как на /services/ */
+  position: absolute;
   left: calc(var(--pad) * -.32); right: calc(var(--pad) * -.32); top: 0; bottom: 0;
   background: linear-gradient(90deg, rgba(199, 91, 57, .07), transparent 78%);
   opacity: 0; transform: translateX(-14px);
@@ -581,4 +582,10 @@ body:has(.tw) { overflow-x: visible; }
 
   /* Цитата: кавычка над текстом упиралась в портрет */
   .tw-voice__mark { left: -.05em; top: -.5em; opacity: .14; }
+}
+
+/* Телефон: под липкой лентой годов своя нижняя линия, и первая глава с
+   border-top давала вторую черту через 28px (QA 25.10). */
+@media (max-width: 939px) {
+  .tw-rows .tw-row:first-of-type { border-top: 0; }
 }
