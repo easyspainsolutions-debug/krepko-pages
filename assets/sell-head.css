@@ -28,13 +28,23 @@
   border-radius: 50%;
   background: var(--gold);
 }
-.sell-cta { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-3) var(--space-5); }
+/* Daniil 25.10: «Первая консультация бесплатно» всегда как на главной —
+   справа от кнопки, в три строки (home-redesign.css, .hero__free-m).
+   nowrap: подпись не уезжает под кнопку ни на одной ширине. */
+.sell-cta { display: flex; flex-wrap: nowrap; align-items: center; gap: var(--space-4); }
+.sell-cta .btn { flex: 0 0 auto; }
 .sell-cta__free {
-  font-size: var(--ts-label);
-  font-weight: 600;
-  letter-spacing: .06em;
+  flex: 0 1 150px;
+  min-width: 0;
+  max-width: 150px;
+  margin: 0;
+  font-family: 'Manrope', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .18em;
+  line-height: 1.5;
   text-transform: uppercase;
-  color: var(--gold);
+  color: var(--gold-2);
 }
 .sell-trust {
   margin: var(--space-6) 0;
@@ -84,5 +94,125 @@
 
 /* Модульные страницы документов (document_page.html): блок в той же колонке,
    что остальные модули. */
-.doc-sell-trust { max-width: var(--w-read); margin: 0 auto; }
-@media (min-width: 900px) { .doc-sell-trust { padding: 0 var(--space-4); } }
+/* 25.10: блок доверия — в той же колонке, что заголовок и текст страницы
+   (был уже на 190 px и сдвинут вправо) */
+.doc-sell-trust { max-width: none; margin: 0; }
+
+/* Страница «документ × город» (канон 25.10): текст города тем же кеглем,
+   что основной текст страниц услуг; заголовок раздела вместо эйрбоу. */
+/* ══ Город = та же типографика, что у основной страницы услуги (25.10.2026) ══
+   Раньше на городской странице жили три кегля заголовков (31/22/22) и три
+   кегля текста (17/15/13), список документов сидел в розовой плашке, а шаги —
+   в моно-цифрах. Основная страница (pillar-split.css) держит один ритм:
+   заголовок Playfair 24–32, подводка 18, текст 16.5, шаги — кружок с нитью.
+   Селекторы через «.city-context ~» — модули общие, правим только город. */
+.city-context .city-context__h,
+.city-context ~ .required-docs > h2,
+.city-context ~ section .process-steps > h2,
+.city-context ~ .pricing-block .pricing-block__title,
+.city-context ~ .city-faq h2 {
+  margin: 0 0 var(--space-4);
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(24px, 2.4vw, 32px);
+  font-weight: 500;
+  line-height: 1.2;
+  color: var(--text);
+}
+.city-context p,
+.city-context ~ .required-docs li,
+.city-context ~ section .what-we-do-specific li,
+.city-context ~ .pricing-block .pricing-block__explain {
+  font-size: 16.5px;
+  line-height: 1.72;
+  color: var(--text-sub);
+}
+/* первый абзац под заголовком — подводка, как на основной странице */
+.city-context .city-context__h + p,
+.city-context ~ .pricing-block .pricing-block__title + .pricing-block__explain {
+  font-size: 18px;
+  color: var(--text);
+}
+.city-context p { margin: 0 0 var(--space-4); }
+.city-context .city-context__more { margin-top: var(--space-5); }
+.city-context .city-context__more a { color: var(--gold); font-weight: 600; text-decoration: none; }
+.city-context ~ .pricing-block .pricing-block__explain + .pricing-block__explain { margin-top: var(--space-3); }
+
+/* «Что нужно от вас» — список без плашки, маркер терракотовый */
+.city-context ~ .required-docs {
+  background: none;
+  border: 0;
+  border-radius: 0;
+  padding: 0;
+}
+.city-context ~ .required-docs .required-docs__list,
+.city-context ~ section .what-we-do-specific ul {
+  margin: 0;
+  padding-left: var(--space-5);
+  list-style: disc;
+}
+.city-context ~ .required-docs li,
+.city-context ~ section .what-we-do-specific li { margin-bottom: var(--space-2); }
+.city-context ~ .required-docs li::marker,
+.city-context ~ section .what-we-do-specific li::marker { color: var(--gold); }
+.city-context ~ section .what-we-do-specific h3 {
+  margin: var(--space-6) 0 var(--space-3);
+  font-family: 'Manrope', sans-serif;
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 1.35;
+  color: var(--text);
+}
+
+/* «Как проходит оформление» — кружок с цифрой и тонкая нить, как .pillar-steps */
+.city-context ~ section .process-steps { margin: 0; }
+.city-context ~ section .process-steps__list { gap: 0; }
+.city-context ~ section .process-step {
+  grid-template-columns: 30px 1fr;
+  gap: var(--space-4);
+  padding: 0 0 var(--space-5);
+}
+.city-context ~ section .process-step:last-child { padding-bottom: 0; }
+.city-context ~ section .process-step__n {
+  width: 30px;
+  height: 30px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--gold);
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 15px;
+  font-weight: 400;
+}
+.city-context ~ section .process-step:not(:last-child)::before {
+  left: 14.5px;
+  top: 31px;
+  width: 1px;
+  background: var(--border);
+}
+.city-context ~ section .process-step__content { gap: var(--space-1); padding-top: var(--space-1); }
+.city-context ~ section .process-step__title {
+  font-size: 17px;
+  line-height: 1.35;
+  color: var(--text);
+}
+.city-context ~ section .process-step__text {
+  font-size: 16.5px;
+  line-height: 1.65;
+  color: var(--text-sub);
+}
+
+/* Разделы города отделяет воздух, а не линии: на основной странице услуги
+   между разделами линий нет, а здесь одни шли с чертой, другие без. */
+.city-context ~ .rh-section-break,
+.city-context ~ .required-docs,
+.city-context ~ .pricing-block {
+  border-top: 0;
+  margin-top: var(--rh-3);
+  padding-top: 0;
+}
+/* перелинковка городов стояла вплотную к ленте отзывов */
+.city-context ~ section .city-coverage { padding-bottom: var(--rh-3); }
+
+/* Карта на городской странице: текущий город — подсвеченная точка без ссылки */
+.service-tail .cmap__city.is-current { cursor: default; }
+.service-tail .cmap__city.is-current .cmap__dot { r: 11; stroke: var(--bg); stroke-width: 4; }
+.service-tail .cmap__city.is-current .cmap__label { fill: var(--gold); font-weight: 800; }
