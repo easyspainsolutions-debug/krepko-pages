@@ -1,0 +1,77 @@
+/* Продающая шапка страницы услуги и блок доверия (25.10.2026).
+   Только токены: цвета и отступы из tokens.css. */
+.sell-head { margin: var(--space-4) 0 var(--space-5); }
+.sell-facts {
+  list-style: none;
+  margin: 0 0 var(--space-4);
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2) var(--space-5);
+  font-size: var(--ts-body-sm);
+  color: var(--text-sub);
+}
+.sell-facts li { position: relative; padding-left: var(--space-4); }
+.sell-facts li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.55em;
+  width: var(--space-2);
+  height: var(--space-2);
+  border-radius: 50%;
+  background: var(--gold);
+}
+.sell-cta { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-3) var(--space-5); }
+.sell-cta__free {
+  font-size: var(--ts-label);
+  font-weight: 600;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+.sell-trust {
+  margin: var(--space-6) 0;
+  padding: var(--space-5);
+  background: var(--surface);
+  border: 1px solid var(--border-faint);
+  border-radius: var(--r-3);
+}
+.sell-trust__t {
+  margin: 0 0 var(--space-3);
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: var(--ts-h3);
+  font-weight: 500;
+  color: var(--text);
+}
+.sell-trust__list { list-style: none; margin: 0; padding: 0; }
+.sell-trust__list li {
+  position: relative;
+  padding: var(--space-2) 0 var(--space-2) var(--space-6);
+  font-size: var(--ts-body);
+  line-height: 1.55;
+  color: var(--text-sub);
+}
+.sell-trust__list li + li { border-top: 1px solid var(--border-faint); }
+.sell-trust__list li::before {
+  content: '';
+  position: absolute;
+  left: var(--space-1);
+  top: 1em;
+  width: var(--space-3);
+  height: var(--space-2);
+  border-left: 2px solid var(--gold);
+  border-bottom: 2px solid var(--gold);
+  transform: rotate(-45deg);
+}
+
+/* Внутри .pillar-doc правило «.pillar-doc a» красит любой <a> в терракоту и
+   делает его flex — кнопка под H1 теряла белый текст (пилот 25.10). */
+.pillar-doc .sell-cta .btn,
+.pillar-split .sell-cta .btn {
+  display: inline-flex;
+  color: var(--gold-on);
+  text-decoration: none;
+}
+.pillar-doc .sell-facts li,
+.pillar-split .sell-facts li { font-size: var(--ts-body-sm); line-height: 1.5; }
