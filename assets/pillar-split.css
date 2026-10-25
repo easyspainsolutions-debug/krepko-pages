@@ -340,7 +340,18 @@ body:has(.pillar-split) main {
   line-height: 1.55;
   color: var(--ps-text-muted);
 }
-.pillar-nav__custom .btn { margin-top: 12px; width: 100%; }
+/* Кнопка внутри блока: правила колонки (.pillar-nav a — block, 15.5px, серый,
+   точка ::before) сильнее .btn, поэтому возвращаем вид кнопки явно. */
+.pillar-nav .pillar-nav__custom .btn {
+  display: inline-flex;
+  justify-content: center;
+  width: 100%;
+  margin-top: 12px;
+  padding: var(--space-3) var(--space-5);
+  font-size: var(--ts-body-sm);
+  color: var(--gold-on);
+}
+.pillar-nav .pillar-nav__custom .btn::before { content: none; }
 
 .pillar-nav__div { height: 1px; margin: 18px 0; background: var(--ps-border); }
 /* Разделитель перед блоком уже даёт .pillar-nav__div — своя граница
