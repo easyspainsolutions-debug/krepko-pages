@@ -141,3 +141,22 @@
 @media (prefers-reduced-motion: reduce) {
   .cookie-consent { animation: none; }
 }
+
+/* 26.10.2026: «Принять все» — тёмно-синяя, не терракотовая. Терракотовая
+   заливка на сайте только у кнопки WhatsApp: баннер не спорит с ней за палец,
+   а «Принять все» остаётся главной кнопкой баннера (согласия на аналитику). */
+.cookie-consent {
+  --cc-accept: rgb(26, 43, 60);
+  --cc-accept-hover: rgb(36, 56, 77);
+  --cc-accept-on: rgb(255, 255, 255);
+}
+.cookie-consent__btn--accept {
+  background: var(--cc-accept);
+  border-color: var(--cc-accept);
+  color: var(--cc-accept-on);
+  box-shadow: none;
+}
+.cookie-consent__btn--accept:hover {
+  background: var(--cc-accept-hover);
+  box-shadow: 0 6px 18px rgba(26, 43, 60, 0.25);
+}
