@@ -383,4 +383,4 @@ Krepko берёт на себя подготовку документов, пе�
 - [Aviso Legal — Krepko | Юридическая информация](https://krepko.es/aviso-legal/) — Юридическая информация о владельце сайта krepko.es, условиях использования и применимом законодательстве согласно LSSICE.
 - [Términos y Condiciones — Krepko | Условия оказания услуг](https://krepko.es/terminos/) — Условия оказания услуг Krepko: порядок работы, оплата, сроки, возвраты, ответственность и разрешение споров.
 - [Política de privacidad — Krepko | Защита персональных данных](https://krepko.es/privacidad/) — Политика обработки персональных данных Krepko. Кто обрабатывает данные, какие данные собирает Krepko, на каком основании, ваши права.
-- [Política de Cookies — Krepko | Использование cookies](https://krepko.es/cookies/) — Какие cookies использует сайт krepko.es, для чего и как ими управлять. Только аналитика Google Analytics 4, без рекламных или трекинговых cookies.
+- [Política de Cookies — Krepko | Использование cookies](https://krepko.es/cookies/) — Какие cookies использует сайт krepko.es, для чего и как ими управлять. Только аналитика: Google Analytics 4 и Microsoft Clarity, без рекламных cookies.
