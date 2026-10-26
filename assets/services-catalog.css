@@ -549,3 +549,9 @@ body:has(.services-catalog) .intro,
 body:has(.services-catalog) .intro--flow { margin-left: 0 !important; margin-right: 0 !important; width: auto !important; max-width: none !important; }
 body:has(.services-catalog) main { overflow-x: clip; }
 .services-catalog--v2 .svc-popular { margin-top: 36px; }
+
+/* 26.10: нижний отступ белого блока «Философия работы» торчал белой щелью
+   между песочной полосой шагов и песочной полосой вопросов (Daniil), а сверху
+   отступ был двойным. faq-home.css задаёт .intro отступы с !important и грузится
+   после home-redesign.css — повторяем правило главной (Round 26) с весом выше. */
+body:has(.services-catalog) .intro--flow { padding-top: 0 !important; padding-bottom: 0 !important; }

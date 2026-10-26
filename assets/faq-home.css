@@ -46,6 +46,12 @@
     #sec-coverage h2::after,
     .home-faq h2::after,
     .final-cta > h2::after { margin-left: auto; margin-right: auto; }
+/* 26.10: правило выше сбрасывало margin черты в «18px 0 0» и, грузясь после
+   home-redesign.css, уводило черту под «Философией работы» и «Как мы работаем»
+   (/services/, хабы /notario/{город}/ и /tramites/{город}/) к левому краю.
+   Эти заголовки центрированы на любой ширине — черта тоже. */
+.values__h::after,
+.intro__how > h2::after { margin-left: auto; margin-right: auto; }
 /* — единый вертикальный ритм у всех секций — */
   #sec-intro,
   #sec-services,
