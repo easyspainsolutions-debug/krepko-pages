@@ -13,6 +13,11 @@
    Тексты из полей ввода не уходят, кроме запросов в поиске по сайту —
    из них вырезаются цифры и e-mail.
 
+   Свои визиты (2026-10-26). krepko.es/?pulse=off один раз на устройстве
+   владельца или тестового браузера — и оно больше не считается (отметка
+   krepko-pulse-off в localStorage, как plausible_ignore; ?pulse=on снимает).
+   Посетителям сайта ничего не записывается: отметка ставится только по этой ссылке.
+
    Куда. navigator.sendBeacon на тот же домен (/api/p) — Cloudflare Worker
    krepko-pulse пишет в D1. Адрес берётся из <meta name="krepko-pulse">:
    нет meta — скрипт ничего не делает (так счётчик выключается в site.yaml).
@@ -23,6 +28,12 @@
   var EP = meta && (meta.getAttribute('content') || '').trim();
   if (!EP || !navigator.sendBeacon) return;
   if (navigator.webdriver) return;
+  try {
+    var q = location.search;
+    if (/[?&]pulse=off\b/.test(q)) localStorage.setItem('krepko-pulse-off', '1');
+    else if (/[?&]pulse=on\b/.test(q)) localStorage.removeItem('krepko-pulse-off');
+    if (localStorage.getItem('krepko-pulse-off') === '1') return;
+  } catch (e) { /* хранилище недоступно — считаем как обычно */ }
   if (/bot|crawl|spider|slurp|headless|lighthouse|pagespeed|preview|prerender|facebookexternalhit|whatsapp\//i.test(navigator.userAgent || '')) return;
 
   var T0 = Date.now();
