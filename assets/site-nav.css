@@ -805,19 +805,25 @@ dialog:not([open]) { display: none !important; }
   .btn, .site-nav__consult, .cookie-consent__btn,
   .srow__action, button.site-nav__link--mega {
     border-radius: 0 !important;
-  }` в
-     krepko-base.css плюс пять точечных правил здесь же. Гасим на самой ссылке:
-     декорацию рисует предок и протягивает сквозь потомков, поэтому
-     `text-decoration: none` на вложенном span её бы не снял. */
-  a:hover, a:focus,
-  a:hover *, a:focus *,
-  .srows__all:hover,
-  .mega__more:hover,
-  .mega__all:hover,
-  .loc__link:hover,
-  summary:hover, summary:hover * {
-    text-decoration: none !important;
   }
+
+  /* 28.10.2026: здесь был обрывок комментария без открывающих «/*» — начало
+     потерялось 03.08 при переносе шапки (c054303). Обрывок склеивался с
+     селектором правила ниже, и браузер выбрасывал правило целиком: в CSSOM
+     его не было ни дня. Синтаксис починен, а правило оставлено ВЫКЛЮЧЕННЫМ:
+     включить его — видимая правка (снимет подчёркивание на hover у
+     .cmap__coverage a и .review__note a, перебьёт любой underline через
+     !important). Решение — в пакете вида (Ф2), с пилотом.
+
+     Уцелевший текст: «…в krepko-base.css плюс пять точечных правил здесь же.
+     Гасим на самой ссылке: декорацию рисует предок и протягивает сквозь
+     потомков, поэтому `text-decoration: none` на вложенном span её бы не снял.»
+
+     Выключенное правило:
+       a:hover, a:focus, a:hover *, a:focus *, .srows__all:hover,
+       .mega__more:hover, .mega__all:hover, .loc__link:hover,
+       summary:hover, summary:hover * { text-decoration: none !important; }
+  */
 
   /* Контраст. Терракота --gold (#C75B39) на кремовом фоне даёт 4.09:1 — ниже
      нормы 4.5:1 для текста мельче 18px, а ею набраны все ссылки-действия.
