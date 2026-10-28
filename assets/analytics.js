@@ -77,6 +77,10 @@
   }
 
   function patchWhatsAppLinks() {
+    // /es/ (28.10.2026): заготовка испанская («Hola… Vengo de krepko.es/es/»),
+    // русское «Источник:» в неё не дописываем.
+    var root = document.documentElement;
+    if (root && (root.getAttribute('lang') || '').slice(0, 2) === 'es') return;
     var links = document.querySelectorAll('a[href*="wa.me/34624309985"], a[href*="api.whatsapp.com"]');
     links.forEach(function (a) {
       var origHref = a.getAttribute('href');

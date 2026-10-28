@@ -2,7 +2,9 @@
    Только токены: цвета и отступы из tokens.css. */
 .sell-head { margin: var(--space-4) 0 var(--space-5); }
 /* Daniil 25.10: факты либо в одну строку (десктоп), либо столбиком (телефон),
-   никогда не 2+1 с переносом. */
+   никогда не 2+1 с переносом.
+   Ф2b-3 (28.10.2026): кегль 13 → 15 px (--fs-fact, light-scale.css) — это
+   второе, что читают после H1, а было набрано мельче всего на экране. */
 .sell-facts {
   list-style: none;
   margin: 0 0 var(--space-4);
@@ -10,11 +12,27 @@
   display: flex;
   flex-direction: column;
   gap: var(--space-2);
-  font-size: var(--ts-body-sm);
+  font-size: var(--fs-fact);
   color: var(--text-sub);
 }
+/* В строку — только когда строка влезает в колонку (Ф2b-3, 28.10.2026).
+   Самый длинный набор фактов (/uk/notario/carta-de-invitacion/) с отступом
+   списка 20 px («.pillar-doc ul») занимает 866 px при 15 px и 810 px при
+   14 px. Колонка от 870 px (окно от ≈1420) — строка 15 px; 812–869 px
+   (≈1330–1420, в том числе 1366) — строка 14 px; уже — столбиком 15 px, как
+   на телефоне. Раньше строка с nowrap на окнах 900–1270 px вылезала за
+   колонку и за край экрана (горизонтальная прокрутка), а с 15 px вылезала
+   бы и на 1280. Контейнер — только с 900 px: на телефоне ничего не меняется. */
 @media (min-width: 900px) {
-  .sell-facts { flex-direction: row; flex-wrap: nowrap; gap: var(--space-5); }
+  .sell-head { container-type: inline-size; }
+}
+/* Проверка R7 (28.10): с порогом 812 px и nowrap на окнах 1024–1330 (ноутбук
+   1280) факты стояли столбиком в 3 строки, кнопка уезжала на 85 px. Правило
+   Daniil 25.10 — «строка на десктопе». Теперь от колонки 700 px факты идут
+   строкой и переносятся целыми пунктами, если не влезают (две самые длинные
+   пары фактов — во вторую строку), кегль везде 15 px. */
+@container (min-width: 700px) {
+  .sell-facts { flex-direction: row; flex-wrap: wrap; column-gap: var(--space-5); row-gap: var(--space-2); }
   .sell-facts li { white-space: nowrap; }
 }
 .sell-facts li { position: relative; padding-left: var(--space-4); }
@@ -22,7 +40,8 @@
   content: '';
   position: absolute;
   left: 0;
-  top: 0.55em;
+  /* точка по середине строчных букв первой строки при 15 px */
+  top: 0.58em;
   width: var(--space-2);
   height: var(--space-2);
   border-radius: 50%;
@@ -86,16 +105,11 @@
   transform: rotate(-45deg);
 }
 
-/* Внутри .pillar-doc правило «.pillar-doc a» красит любой <a> в терракоту и
-   делает его flex — кнопка под H1 теряла белый текст (пилот 25.10). */
-.pillar-doc .sell-cta .btn,
-.pillar-split .sell-cta .btn {
-  display: inline-flex;
-  color: var(--gold-on);
-  text-decoration: none;
-}
+/* Кнопка под H1 — общий компонент кнопки WhatsApp (module-cta.css, body.tpl,
+   Ф2b-1): его вес выше «.pillar-doc a», и белый текст кнопки не
+   перекрашивается в терракоту (пилот 25.10). */
 .pillar-doc .sell-facts li,
-.pillar-split .sell-facts li { font-size: var(--ts-body-sm); line-height: 1.5; }
+.pillar-split .sell-facts li { font-size: var(--fs-fact); line-height: 1.5; }
 
 /* Модульные страницы документов (document_page.html): блок в той же колонке,
    что остальные модули. */
@@ -223,7 +237,17 @@
 .service-tail .cmap__city.is-current .cmap__label { fill: var(--gold-text); font-weight: 800; }
 
 /* Хабы направлений: на телефоне каталог стоит над текстом и заканчивается
-   своей кнопкой WhatsApp — вторая кнопка с фактами шла бы сразу под ней. */
+   своей кнопкой WhatsApp — вторая кнопка с фактами шла бы сразу под ней.
+   Ф2b-5 (Daniil 28.10, «5 да»): вместо шапки с фактами — одна кнопка между
+   H1 и поиском с каталогом (.hub-cta в service_pillar_split.html,
+   data-cta="hub-top"), без фактов и без подписи. На десктопе её нет: там
+   кнопка стоит под фактами. */
+.hub-cta { display: none; }
 @media (max-width: 899px) {
   .pillar-split--hub .sell-head { display: none; }
+  /* 20 px от черты под H1, 4 px до поиска — как в концепте */
+  .pillar-split--hub .hub-cta {
+    display: block;
+    margin: calc(var(--space-4) + var(--space-1)) 0 var(--space-1);
+  }
 }

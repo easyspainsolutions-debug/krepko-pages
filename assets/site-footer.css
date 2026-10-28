@@ -314,11 +314,16 @@ body:has(> footer.site-footer) {
 .site-footer__legal a:hover { color: var(--gold); } /* QA 25.10: без горчичной плашки */
 .site-footer__legal .sep { color: var(--border); }
 
+/* «© 2026 Krepko» — Manrope, как ссылки «Aviso legal · Privacidad…» рядом
+   (Ф2b-6, 28.10.2026, «да» Daniil): моно было третьей гарнитурой на странице
+   ради 13 знаков. Кегль и цвет — общие с ссылками (правила ниже). Шрифт
+   IBM Plex Mono из загрузки не убран: он ещё живёт на главной и в /about/. */
 .site-footer__meta {
-  font-family: 'IBM Plex Mono', monospace;
+  font-family: 'Manrope', sans-serif;
   color: var(--text-label);
   font-size: var(--ts-meta);
-  letter-spacing: 0.04em;
+  letter-spacing: 0;
+  font-variant-numeric: tabular-nums;
 }
 
 /* ── Focus visible (a11y) ── */
@@ -648,4 +653,8 @@ body:has(> footer.site-footer) {
 @media (max-width: 599px) {
   .site-footer .site-footer__legal { flex-wrap: nowrap; justify-content: center; gap: var(--space-4); }
   .site-footer .site-footer__legal a { white-space: nowrap; }
+  /* Ф2b-6 (28.10.2026): «©» — своей строкой над ссылками, как было с моно.
+     Manrope уже, и на 430 px строка вставала в ряд со ссылками: перенос
+     зависел бы от ширины экрана, а подвал мобильной главной — эталон. */
+  .site-footer .site-footer__meta { flex-basis: 100%; text-align: left; }
 }

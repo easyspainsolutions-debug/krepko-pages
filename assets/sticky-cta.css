@@ -1,33 +1,45 @@
 /* Липкая кнопка WhatsApp на мобильном (решение Daniil 24.10.2026, план оптимизации п.3).
    Появляется после прокрутки на экран, прячется, когда виден финальный призыв или подвал.
-   На экранах от 900px не показывается: там кнопки в тексте видны без прокрутки. */
+   На экранах от 900px не показывается: там кнопки в тексте видны без прокрутки.
+   Ф2b-2 (28.10.2026, «да» Daniil): полоса кремовая и непрозрачная, сверху тонкая
+   линия, без размытия и тени (сквозь полупрозрачную полосу просвечивал текст, а
+   чёрная тень запрещена DESIGN.md). Внутри — тот же вид кнопки, что в тексте
+   (module-cta.css): сплошная --gold-2, 14 px, высота 48, углы 0, без зелёного
+   ореола --glow-wa. Файл общий со статьями блога — полоса там такая же. */
 .sticky-cta {
   position: fixed;
   left: 0; right: 0; bottom: 0;
   z-index: 50; /* ниже cookie-баннера (60): пока баннер открыт, он сверху */
   padding: var(--space-3) var(--space-4) calc(var(--space-3) + env(safe-area-inset-bottom, 0px));
-  background: rgba(255, 255, 255, 0.94);
-  -webkit-backdrop-filter: blur(8px);
-  backdrop-filter: blur(8px);
-  box-shadow: 0 -6px 18px rgba(0, 0, 0, 0.08);
+  background: var(--bg);
+  /* --border-faint (#E8DFD1) одинаков в light-scale, blog-light и
+     home-redesign; --border на /services/ и /about/ темнее (#DCCFB9) */
+  border-top: 1px solid var(--border-faint);
   transform: translateY(110%);
   transition: transform 0.25s ease;
 }
 .sticky-cta.is-on { transform: none; }
 .sticky-cta__btn {
   display: flex; align-items: center; justify-content: center; gap: var(--space-2);
+  box-sizing: border-box;
   width: 100%;
-  padding: var(--space-4);
-  border-radius: 14px;
-  background: var(--wa);
-  color: rgb(255, 255, 255);
+  min-height: var(--cta-h, 48px);
+  padding: 0 var(--cta-pad-x);
+  border-radius: 0;
+  background: var(--gold-2);
+  color: var(--gold-on);
+  font-family: 'Manrope', sans-serif;
   font-weight: 700;
-  font-size: var(--fs-lead);
+  font-size: var(--fs-cta, 14px);
   line-height: 1.2;
   text-decoration: none;
-  box-shadow: var(--glow-wa);
 }
-.sticky-cta__btn:hover, .sticky-cta__btn:focus { color: rgb(255, 255, 255); text-decoration: none; filter: brightness(1.05); }
+.sticky-cta__btn:hover, .sticky-cta__btn:focus { color: var(--gold-on); text-decoration: none; }
+@media (hover: hover) { .sticky-cta__btn:hover { background: var(--gold-hover); } }
+/* Кольцо фокуса — как у кнопок шаблонов (a11y.css, .tpl): navy 2 px с отступом
+   3 px. Полоса стоит и вне шаблонов (блог, /services/, /about/), где общее
+   кольцо — терракотовое вплотную и на терракотовой кнопке не видно. */
+.sticky-cta__btn:focus-visible { outline: 2px solid var(--navy); outline-offset: 3px; box-shadow: none; }
 .sticky-cta__btn svg { width: 20px; height: 20px; flex: none; fill: currentColor; }
 @media (min-width: 900px) { .sticky-cta { display: none; } }
 @media (prefers-reduced-motion: reduce) { .sticky-cta { transition: none; } }

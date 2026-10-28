@@ -42,12 +42,14 @@ body:has(.pillar-split) main {
   /* граница поля поиска: #E8DFD1 давала 1,28:1, норма для полей — 3:1 */
   --ps-border-field: #9C8F7A;
   --ps-navy: #1A2B3C;
+  /* боковые поля страницы; на них же хвост в сетке (Ф2b-8) выходит во всю ширину */
+  --ps-pad: clamp(24px, 3vw, 56px);
 
   /* во всю ширину окна, как у референса: колонки разъезжаются к краям,
      контент держат только боковые поля страницы */
   max-width: none;
   margin: 0;
-  padding: 0 clamp(24px, 3vw, 56px);
+  padding: 0 var(--ps-pad);
   font-family: 'Manrope', sans-serif;
   color: var(--ps-text);
 }
@@ -214,12 +216,13 @@ body:has(.pillar-split) main {
   padding-bottom: 12px;
   border-bottom: 1px solid var(--ps-border);
 }
+/* метки капсом — не мельче 12 px (Ф2b-3, 28.10.2026; токены — light-scale.css) */
 .pillar-nav__all a,
 .pillar-nav__all .pillar-nav__current {
   padding: 0;
-  font-size: 11px;
+  font-size: var(--fs-label);
   font-weight: 700;
-  letter-spacing: .09em;
+  letter-spacing: var(--ls-label);
   text-transform: uppercase;
   color: var(--ps-text-muted);
 }
@@ -349,16 +352,13 @@ body:has(.pillar-split) main {
   line-height: 1.55;
   color: var(--ps-text-muted);
 }
-/* Кнопка внутри блока: правила колонки (.pillar-nav a — block, 15.5px, серый,
-   точка ::before) сильнее .btn, поэтому возвращаем вид кнопки явно. */
+/* Кнопка внутри блока: вид — общий компонент кнопки WhatsApp (module-cta.css,
+   body.tpl, Ф2b-1), он сильнее правил колонки (.pillar-nav a — block, 15.5px,
+   серый). Здесь только место: во всю ширину колонки, отступ от текста, без
+   точки ::before пунктов каталога. */
 .pillar-nav .pillar-nav__custom .btn {
-  display: inline-flex;
-  justify-content: center;
   width: 100%;
   margin-top: 12px;
-  padding: var(--space-3) var(--space-5);
-  font-size: var(--ts-body-sm);
-  color: var(--gold-on);
 }
 .pillar-nav .pillar-nav__custom .btn::before { content: none; }
 
@@ -754,9 +754,9 @@ body:has(.pillar-split) main {
     padding: 0 0 8px;
     cursor: default;
     pointer-events: none;
-    font-size: 11.5px;
+    font-size: var(--fs-label);
     font-weight: 700;
-    letter-spacing: .1em;
+    letter-spacing: var(--ls-label);
     text-transform: uppercase;
     color: var(--ps-text-muted);
   }
@@ -907,23 +907,8 @@ body:has(.pillar-split) .final-cta p {
   line-height: 1.7;
   color: #4A4A4A;
 }
-body:has(.pillar-split) .final-cta .btn--gold {
-  display: inline-block;
-  padding: 17px 34px;
-  background: #C75B39;
-  border: 0;
-  border-radius: 0;
-  color: #FFFBF7;
-  font-family: 'Manrope', sans-serif;
-  font-size: 14px;
-  font-weight: 700;
-  letter-spacing: .04em;
-  text-transform: uppercase;
-  text-decoration: none;
-}
-@media (hover: hover) {
-  body:has(.pillar-split) .final-cta .btn--gold:hover { background: #B04E2F; }
-}
+/* Кнопка финала — общий компонент кнопки WhatsApp (module-cta.css, body.tpl):
+   капс с разрядкой и поля 17/34 сняты (Ф2b-1, 28.10.2026). */
 
 @media (prefers-reduced-motion: reduce) {
   .pillar-nav a,
@@ -932,6 +917,47 @@ body:has(.pillar-split) .final-cta .btn--gold {
   .pillar-nav__current::before,
   .pillar-nav__panel,
   .pillar-nav__toggle svg { transition: none; }
+}
+
+/* ── хвост страницы услуги в сетке колонок (Ф2b-8, Daniil 28.10) ──
+   Порядок: текст → вопросы и отзывы (.service-tail) → смежные услуги и
+   «Читайте также» (.pillar-more) → каталог (на телефоне) → карта → финал.
+   Блоки стоят в .pillar-split__cols после текста, потому что на телефоне
+   каталог должен прийти после них, а он живёт в этой же сетке. На десктопе
+   каталог остаётся левой колонкой первого ряда, хвост встаёт рядами ниже
+   во всю ширину — там же, где стоял, когда был вне .pillar-split. */
+.pillar-split__cols { row-gap: 0; }
+/* Каталог страниц услуг стоит в обёртке .pillar-split__side: она занимает
+   только первый ряд и тянется на его высоту, и липкая колонка
+   (.pillar-nav.is-sticky) упирается в её низ. Без обёртки sticky держится за
+   всю сетку (Chromium ограничивает его контейнером, а не областью сетки) и
+   ехал поверх вопросов и отзывов во втором ряду. */
+.pillar-split__cols > .pillar-split__side { grid-column: 1; grid-row: 1; align-self: stretch; }
+/* вопросы и отзывы — во всю ширину окна: поля страницы гасятся, свои поля
+   хвост задаёт сам (service-tail.css, .service-tail > section). Шрифт — как
+   у body (krepko-base.css), а не урезанный стек .pillar-split: вне сетки
+   хвост наследовал его от body. */
+.pillar-split__cols > .service-tail {
+  margin: 0 calc(-1 * var(--ps-pad));
+  font-family: 'Manrope', -apple-system, sans-serif;
+}
+@media (min-width: 900px) {
+  .pillar-split__cols > .service-tail,
+  .pillar-split__cols > .pillar-more { grid-column: 1 / -1; }
+  /* смежные и «Читайте также» — по центру, между лентой отзывов и картой
+     (обе центрированы); ширина — как у колонки текста */
+  .pillar-split__cols > .pillar-more {
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 24px clamp(24px, 4.5vw, 88px) 8px;
+  }
+}
+@media (max-width: 899px) {
+  /* после текста (order 1, по порядку в DOM) и перед каталогом (order 2) */
+  .pillar-split__cols > .service-tail,
+  .pillar-split__cols > .pillar-more { order: 1; }
+  .pillar-split__cols > .pillar-split__side { order: 2; }
 }
 
 /* ═══ Страницы конкретных услуг (2026-08-05) ═══
@@ -1001,7 +1027,12 @@ body:has(.pillar-split) .final-cta .btn--gold {
    отступа она прилипала вплотную к нижней рамке карточки — две линии
    в двух пикселях друг от друга. */
 .pillar-guides { margin-top: 34px; margin-bottom: 28px; }
-.pillar-guides .p-label { display: block; margin-bottom: 14px; }
+.pillar-guides .p-label {
+  display: block;
+  margin-bottom: 14px;
+  font-size: var(--fs-label);
+  letter-spacing: var(--ls-label);
+}
 /* без точки-буллета: метки хвоста единые с «ПОПУЛЯРНЫЕ…» (29.09) */
 .pillar-guides .p-label::before { content: none; }
 
@@ -1028,8 +1059,8 @@ body:has(.pillar-split) .final-cta .btn--gold {
 
 .pillar-guide__tag {
   font-family: 'Manrope', sans-serif;
-  font-size: 10.5px;
-  letter-spacing: .09em;
+  font-size: var(--fs-label);
+  letter-spacing: var(--ls-label);
   text-transform: uppercase;
   color: var(--ps-text-muted);
 }
@@ -1056,9 +1087,11 @@ body:has(.pillar-split) .final-cta .btn--gold {
 .pillar-cards-block > h2 {
   margin: 0 0 6px;
   font-family: 'Manrope', sans-serif;
-  font-size: 11px;
+  font-size: var(--fs-label);
+  /* 1.2 раньше приходил из «.pillar-doc h2»; с Ф2b-8 блок стоит вне .pillar-doc */
+  line-height: 1.2;
   font-weight: 700;
-  letter-spacing: .09em;
+  letter-spacing: var(--ls-label);
   text-transform: uppercase;
   color: var(--ps-text-muted);
 }
@@ -1316,7 +1349,8 @@ body:has(.pillar-split) .final-cta .btn--gold {
 .rfinder__res-label {
   display: block;
   margin-bottom: 7px;
-  font-size: 11px;
+  /* метка капсом — не мельче 12 px (Ф2b-3, 28.10.2026; light-scale.css) */
+  font-size: var(--fs-label, 12px);
   font-weight: 700;
   letter-spacing: .1em;
   text-transform: uppercase;
@@ -1436,7 +1470,8 @@ body:has(.pillar-split) .final-cta .btn--gold {
   padding: 10px 12px;
   text-align: left;
   font-family: 'Manrope', sans-serif;
-  font-size: 11.5px;
+  /* метка капсом — не мельче 12 px (Ф2b-3, 28.10.2026; light-scale.css) */
+  font-size: var(--fs-label);
   font-weight: 700;
   letter-spacing: .08em;
   text-transform: uppercase;
@@ -1481,27 +1516,10 @@ body:has(.pillar-split) .final-cta .btn--gold {
   line-height: 1.6;
   color: var(--ps-text-sub);
 }
-/* .pillar-doc a (селектор контентных ссылок) специфичнее одиночного класса
-   и перекрашивал текст кнопки в терракоту по терракотовому фону —
-   кнопка выглядела залитой, текст исчезал (скриншот Daniil, 20.08). */
-.pillar-doc a.doc-cta__b,
-.doc-cta__b {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 44px;
-  padding: 0 22px;
-  border-radius: 10px;
-  background: var(--ps-gold);
-  font-family: 'Manrope', sans-serif;
-  font-size: 15px;
-  font-weight: 600;
-  color: #FFFBF7;
-  text-decoration: none;
-  transition: opacity .2s ease;
-}
-@media (hover: hover) { .doc-cta__b:hover { opacity: .9; } }
-@media (prefers-reduced-motion: reduce) { .doc-cta__b { transition: none; } }
+/* Кнопка врезки — общий компонент кнопки WhatsApp (module-cta.css, body.tpl,
+   Ф2b-1 28.10.2026): скругление 10 и 15 px / 600 сняты. Вес body.tpl выше
+   «.pillar-doc a», поэтому текст кнопки не перекрашивается в терракоту по
+   терракотовому фону (скриншот Daniil, 20.08). На телефоне — во всю ширину. */
 @media (max-width: 700px) {
   .doc-cta { padding: 18px; margin: 24px 0; }
   .doc-cta__b { width: 100%; }
@@ -1532,4 +1550,41 @@ body:has(.pillar-split) .final-cta .btn--gold {
 }
 @media (max-width: 899px) {
   .pillar-split__head--doc { margin-bottom: 22px; }
+}
+
+
+/* ═══ Мера строки текста услуги на десктопе (Ф2b-3, 28.10.2026, «да» Daniil) ═══
+   Колонка 890 px давала 95–109 знаков в строке (посимвольный замер 28.10) —
+   на ноутбуке текст читался «простынёй». Абзацы, списки, цитаты и плашки
+   («Почему с нами спокойно», «Не уверены…») встают в одну меру --measure
+   (68ch основного текста, light-scale.css) с общей правой кромкой; справа
+   остаётся воздух, как и задумано у .pillar-doc выше. 68ch считается по
+   ширине цифры «0», кириллица уже: в строке 71–84 знака с пробелами.
+   Заголовки, таблицы, подборщик и списки услуг — во всю колонку. На телефоне
+   колонка уже меры, там ничего не меняется. */
+@media (min-width: 900px) {
+  .pillar-body > :is(p, ul, ol, blockquote, .sell-trust, .doc-cta),
+  .city-context > p,
+  .pillar-doc > .city-lead,
+  .pillar-doc > .doc-sell-trust { max-width: var(--measure); }
+}
+
+/* ═══ Первый экран страницы услуги на телефоне (Ф2b-4, 28.10.2026, «да» Daniil) ═══
+   До H1 уходило 220 px из 660 видимых: верхняя строка 33 + шапка 65 + крошка 60
+   (поля 20/14) + поле main 32 + поле колонок 30 — кнопка под фактами уходила
+   под баннер cookies. Сжата только пустота: поля крошки 8/4 (site-nav.css
+   читает --crumb-pt/--crumb-pb), main 4, колонки 4. Ни одного элемента не
+   убрано; верхняя строка «почта · телефон» и шапка остаются (Daniil 28.10).
+   Поле колонок — только у страниц услуг и городов (--doc), где H1 стоит внутри
+   колонок; на хабах оно под H1 и не меняется. Десктоп не меняется. */
+@media (max-width: 720px) {
+  .tpl nav.breadcrumb { --crumb-pt: var(--space-2); --crumb-pb: var(--space-1); }
+  .tpl main { padding-top: var(--space-1); }
+  .tpl .pillar-split--doc .pillar-split__cols { padding-top: var(--space-1); }
+}
+
+/* Ф2b-4 (проверка R7): на хабах над H1 оставался padding-top 34 px шапки
+   раздела — H1 на 177 px против 147 на страницах услуг. Единый ритм. */
+@media (max-width: 720px) {
+  .tpl .pillar-split--hub .pillar-split__head { padding-top: var(--space-1); }
 }

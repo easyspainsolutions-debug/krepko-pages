@@ -3493,11 +3493,9 @@
      пенсионеров»: дело не в браузере, а в ширине окна. Ниже интерполяция:
      нижняя граница — размер для окна ~1000px, верхняя — прежний максимум,
      который набирается к ~2000px. */
+  /* 28.10.2026: кегль H1 главной на десктопе задаёт блок «Мобильная ось»
+     (Ф2b-10, конец файла) — доли кегля, а не эта шкала. */
   @media (min-width: 1000px) {
-    .hero--home .hero__h1,
-    .hero__h1 {
-      font-size: clamp(34px, calc(2.28vw + 26.6px), 72px) !important;
-    }
     .hero--home .hero__dek,
     .hero__dek {
       font-size: clamp(14px, calc(0.14vw + 12.8px), 16px) !important;
@@ -3533,11 +3531,8 @@
      половина экрана уходит в пустоту. Та же интерполяция, что у кеглей. */
   :root { --sec-pad: clamp(42px, calc(3.04vw + 15.2px), 76px); }
 
+  /* 28.10.2026: поля hero главной на десктопе — в блоке «Мобильная ось» (Ф2b-10). */
   @media (min-width: 1000px) {
-    .hero--home {
-      padding-top: clamp(42px, calc(2.66vw + 15.2px), 68px) !important;
-      padding-bottom: clamp(40px, calc(2.66vw + 13.3px), 72px) !important;
-    }
     .hero--home .hero__meta-row {
       gap: clamp(23px, calc(1.71vw + 5.7px), 49px) !important;
       margin-top: clamp(23px, calc(1.71vw + 5.7px), 49px) !important;
@@ -3563,7 +3558,8 @@
      строку. На узких экранах строка ломается сама, и жёсткий перенос там
      только мешает — поэтому он выключается. */
   .hero__br { display: none; }
-  @media (min-width: 760px) { .hero__br { display: inline; } }
+  /* от 900 px заголовок ломается как на телефоне — перед «нужный» (Ф2b-10) */
+  @media (min-width: 760px) and (max-width: 899px) { .hero__br { display: inline; } }
   .ticker__item { font-weight: 500 !important; }
   .ticker { padding: clamp(7px, 0.6vw, 11px) 0 !important; }
   
@@ -3594,9 +3590,12 @@
   }
 
   /* — 1. дисплей и заголовки секций — */
-  .hero--home .hero__h1, .hero__h1 {
-    font-size: var(--fs-display) !important;
-    line-height: 1.08 !important;
+  /* 28.10.2026: от 900 px H1 главной живёт в долях кегля телефона (Ф2b-10) */
+  @media (max-width: 899px) {
+    .hero--home .hero__h1, .hero__h1 {
+      font-size: var(--fs-display) !important;
+      line-height: 1.08 !important;
+    }
   }
   #sec-services h2, #sec-reviews h2, #sec-coverage .map-head h2,
   .home-guides h2, .home-faq .faq__aside h2, .final-cta h2,
@@ -4041,17 +4040,13 @@
    вертикально сам: активная строка тёмная с терракотовым маркером,
    соседние тают. Тикер на мобилке скрыт — его контент переехал сюда. */
 .hero__roll { display: none; }
-@media (max-width: 719px) {
+/* 28.10.2026 (Ф2b-10): компонент общий для телефона и десктопа главной (≥ 900 px).
+   Здесь — механика (строки, точка, подсветка); размеры телефона — сразу ниже,
+   десктопа — в блоке «Мобильная ось» в конце файла. 720–899 px — прежний тикер. */
+@media (max-width: 719px), (min-width: 900px) {
   .ticker { display: none !important; }
 
-  .hero__roll {
-    display: block; position: relative;
-    height: calc(5 * 28px); overflow: hidden;
-    margin-top: clamp(44px, 11vw, 56px);   /* у референса большой воздух после заголовка */
-    /* хвосты почти гаснут — оптический центр держит активная строка */
-    -webkit-mask-image: linear-gradient(180deg, transparent, rgba(0,0,0,.35) 16%, #000 34%, #000 66%, rgba(0,0,0,.35) 84%, transparent);
-    mask-image: linear-gradient(180deg, transparent, rgba(0,0,0,.35) 16%, #000 34%, #000 66%, rgba(0,0,0,.35) 84%, transparent);
-  }
+  .hero__roll { display: block; position: relative; overflow: hidden; }
   .hero__roll ul {
     list-style: none; margin: 0; padding: 0;
     /* движение ведёт JS покадрово — CSS-транзиция на iOS иногда
@@ -4059,7 +4054,7 @@
     will-change: transform;
   }
   .hero__roll li {
-    height: 28px; display: flex; align-items: center;
+    display: flex; align-items: center;
     /* старый глобальный стиль даёт li { margin-bottom: 4px } — шаг ленты
        становился 36px при формуле 32, и подсветка уползала на +4px за такт */
     margin: 0 !important;
@@ -4069,7 +4064,7 @@
     position: relative; padding-left: 0;
     /* по референсу: неактивные у левого края; активную выделяют цвет,
        вес, буллет и сдвиг вправо с лёгким ростом */
-    font-family: 'Manrope', sans-serif; font-size: 14.5px; font-weight: 500;
+    font-family: 'Manrope', sans-serif; font-weight: 500;
     color: var(--text-muted); opacity: .3;
     white-space: nowrap;
     transition: color 640ms cubic-bezier(.17, .84, .44, 1),
@@ -4100,6 +4095,18 @@
     padding-left: 1em;
   }
   .hero__roll li.is-n { opacity: .55; }
+}
+@media (max-width: 719px) {
+  /* размеры ротатора на телефоне: пять строк по 28 px, активная — третья
+     (home-redesign.js: LINE = 28) */
+  .hero__roll {
+    height: calc(5 * 28px);
+    margin-top: clamp(44px, 11vw, 56px);   /* у референса большой воздух после заголовка */
+    /* хвосты почти гаснут — оптический центр держит активная строка */
+    -webkit-mask-image: linear-gradient(180deg, transparent, rgba(0,0,0,.35) 16%, #000 34%, #000 66%, rgba(0,0,0,.35) 84%, transparent);
+    mask-image: linear-gradient(180deg, transparent, rgba(0,0,0,.35) 16%, #000 34%, #000 66%, rgba(0,0,0,.35) 84%, transparent);
+  }
+  .hero__roll li { height: 28px; font-size: 14.5px; }
 
   /* CTA — пилюля по контенту, как у референса; старые мобильные правила
      растягивали кнопку на всю ширину */
@@ -4133,13 +4140,14 @@
 /* ═══════════ Верх мобильной главной по rockfi.fr (2026-08-04) ═══════════
    Поток: hero (заголовок → ротатор → CTA → фото-карточка) → манифест →
    «промесса» с одной большой метрикой. Прежние элементы знакомства
-   на мобилке скрыты; десктоп не тронут. */
+   на мобилке скрыты; десктоп не тронут.
+   28.10.2026 (Ф2b-10): подпись у кнопки и фото-карточка — общие с десктопом
+   главной (≥ 900 px); остальное в блоке — только телефон. */
 .hero__free-m, .hcard { display: none; }
 
-@media (max-width: 719px) {
+@media (max-width: 719px), (min-width: 900px) {
   /* hero: подводка не нужна — у rockfi после ротатора сразу CTA */
   .hero--home .hero__lead { display: none !important; }
-  .hero--home { padding-bottom: 26px; }
 
   .hero__free-m {
     display: block; margin: 12px 0 0;
@@ -4170,7 +4178,9 @@
     -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
   }
   .hcard__go:active { transform: scale(.96); }
-
+}
+@media (max-width: 719px) {
+  .hero--home { padding-bottom: 26px; }
 
   /* «промесса»: на мобилке прежнее знакомство уходит целиком */
   #sec-intro .intro__bridge,
@@ -4227,8 +4237,9 @@
 }
 
 
-/* «Первая консультация бесплатно» — справа от кнопки, в одну строку с ней */
-@media (max-width: 719px) {
+/* «Первая консультация бесплатно» — справа от кнопки, в одну строку с ней
+   (с 28.10.2026 так же на десктопе главной, Ф2b-10) */
+@media (max-width: 719px), (min-width: 900px) {
   .hero--home .hero__cta-row {
     flex-direction: row !important; align-items: center !important;
     /* 25.10: nowrap — на 402 px подпись уезжала под кнопку, на 440 стояла рядом:
@@ -4556,4 +4567,109 @@
 
   .home-guides__dek,
   .home-faq .faq__dek { text-align: center; }
+}
+
+
+/* ═══════════ Десктоп главной «Мобильная ось» (Ф2b-10, 28.10.2026) ═══════════
+   Решение Daniil 28.10: «10 А1 с карточкой». Только от 900 px: 720–899 —
+   прежний вид по центру, телефон — эталон (его правила выше не меняются).
+   Ось телефона: всё по левому краю; H1 в те же две строки («Krepko —
+   единственный / нужный контакт.»); под H1 — тот же ротатор, что на телефоне
+   (три строки, бегущей строки нет); справа от кнопки — подпись «Первая
+   консультация бесплатно»; справа — та же карточка с фото (верх = верх H1,
+   низ = низ кнопки). Подводки «Мы знаем…» нет, как и на телефоне.
+   Отступы — доли кегля H1 (F) с мобильной главной 390×844, где F = 29,71 px:
+   H1 → ротатор 0,875F · шаг строки 0,942F · кегль строки 0,488F ·
+   ротатор → кнопка 1,75F · над H1 не меньше 0,8F. Кнопка (≈ 214×55)
+   и подпись (11 px, три строки) не масштабируются.
+   Концепт: Омут знаний/30 Проекты/Сайт/Конвейер/Концепты/f2b/10-desktop-glavnoy-mobilnaya-os. */
+@media (max-width: 899px) {
+  .hcard--hero { display: none; }   /* на телефоне карточка живёт в сцене-стеке */
+}
+@media (min-width: 900px) {
+  .hero--home {
+    /* низ шапки (верхняя строка + меню), замер 28.10: 103 px на 900–999;
+       home-redesign.js (fit) ставит сюда фактический — если шапка
+       поменяется, пропорции не разъедутся */
+    --hdr: 103px;
+    /* Кегль H1 — меньшее из трёх:
+       по высоте — низ кнопки на 75 % окна (там садится баннер cookies):
+         0,8 + 2,32 (H1 в две строки) + 0,875 + 3 × 0,942 + 1,75 = 8,573F, кнопка 55 px;
+       по ширине — первая строка H1 (замер 11,2–11,4F) рядом с карточкой не
+         переносится: колонка = 95vw − 48 px − ширина карточки (не уже 357 px,
+         с ростом F — 6,94F + 49 px), запас ≥ 10 px;
+       и не больше 60 px. Меньше 30 px не опускается. */
+    --F-h: calc((75vh - var(--hdr) - 55px) / 8.573);
+    --F-w: min(calc((95vw - 415px) / 11.5), calc((95vw - 115px) / 18.5));
+    --F: clamp(30px, min(var(--F-h), var(--F-w)), 60px);
+    --roll-step: calc(0.942 * var(--F));
+
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    column-gap: clamp(40px, 5vw, 96px);
+    align-content: start;
+    justify-content: stretch;
+    text-align: left;
+    /* отсчёт от низа шапки: поле main (32 px) над hero снимаем */
+    margin-top: calc(-1 * var(--space-6));
+    /* над H1 — не меньше 0,8F; когда H1 упёрся в 60 px, остаток уходит сюда,
+       и низ кнопки по-прежнему на 75 % окна */
+    padding: max(calc(0.8 * var(--F)), calc(75vh - var(--hdr) - 7.773 * var(--F) - 55px)) 0 calc(0.8 * var(--F));
+    /* первый экран целиком: бегущей строки внизу больше нет
+       (fit в home-redesign.js держит ту же высоту по факту) */
+    min-height: calc(100vh - var(--hdr));
+  }
+  /* шаг ротатора — целые пиксели: лента стоит без дробного сдвига,
+     текст не мылится (round() — Chrome 125+, Safari 15.4+, Firefox 118+;
+     без него — дробный шаг, как выше) */
+  @supports (width: round(1.5px, 1px)) {
+    .hero--home { --roll-step: round(calc(0.942 * var(--F)), 1px); }
+  }
+  .hero--home .hero__visual { display: none; }
+  .hero--home .hero__h1 {
+    grid-column: 1; grid-row: 1;
+    font-size: var(--F); line-height: 1.16;
+    max-width: none; margin: 0; text-align: left;
+    /* ровно две строки: при полосе прокрутки (Windows, ~17 px) колонка уже
+       расчётной — строка лучше чуть заступит в поле до карточки, чем
+       переломится в три */
+    white-space: nowrap;
+  }
+  /* перенос перед «нужный», как на телефоне; текст и разметка те же */
+  .hero--home .hero__accent::before { content: "\A"; white-space: pre; }
+
+  .hero--home .hero__roll {
+    grid-column: 1; grid-row: 2;
+    height: calc(3 * var(--roll-step));
+    margin-top: calc(0.875 * var(--F));
+    -webkit-mask-image: linear-gradient(180deg, rgba(0,0,0,.35), black 30%, black 70%, rgba(0,0,0,.35));
+    mask-image: linear-gradient(180deg, rgba(0,0,0,.35), black 30%, black 70%, rgba(0,0,0,.35));
+  }
+  /* шаг ленты home-redesign.js берёт отсюда — из высоты строки */
+  .hero--home .hero__roll li { height: var(--roll-step); font-size: calc(0.488 * var(--F)); }
+
+  .hero--home .hero__cta-row {
+    grid-column: 1; grid-row: 3;
+    justify-content: flex-start;
+    margin: calc(1.75 * var(--F)) 0 0;
+  }
+
+  /* карточка тянется по высоте строк H1…кнопка: фото лежит абсолютно и
+     высоту строкам не навязывает; ширина — по пропорции фото телефона
+     (1 : 1,12), но не уже 357 px — иначе имя наезжает на «История Krepko» */
+  .hero--home .hcard--hero {
+    grid-column: 2; grid-row: 1 / 4;
+    align-self: stretch;
+    width: max(357px, calc((7.773 * var(--F) + 55px) / 1.12));
+    margin: 0;
+  }
+  .hero--home .hcard--hero img { position: absolute; inset: 0; height: 100%; }
+}
+@media (min-width: 1000px) {
+  .hero--home {
+    /* меню десктопа: 129 px до ~1280, дальше растёт до 147 px к 2200 */
+    --hdr: clamp(129px, calc(2.58vw + 96px), 147px);
+    /* поля main — 4,5vw: колонка = 86vw − ширина карточки */
+    --F-w: min(calc((86vw - 367px) / 11.5), calc((86vw - 67px) / 18.5));
+  }
 }

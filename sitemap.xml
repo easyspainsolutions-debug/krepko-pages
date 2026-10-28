@@ -7,6 +7,7 @@
     <changefreq>weekly</changefreq>
     <xhtml:link rel="alternate" hreflang="ru" href="https://krepko.es/"/>
     <xhtml:link rel="alternate" hreflang="uk" href="https://krepko.es/uk/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://krepko.es/es/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://krepko.es/"/>
   </url>
   <url>
@@ -136,6 +137,7 @@
     <changefreq>weekly</changefreq>
     <xhtml:link rel="alternate" hreflang="ru" href="https://krepko.es/"/>
     <xhtml:link rel="alternate" hreflang="uk" href="https://krepko.es/uk/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://krepko.es/es/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://krepko.es/"/>
   </url>
   <url>
@@ -182,6 +184,16 @@
     <lastmod>2026-10-26</lastmod>
     <priority>0.3</priority>
     <changefreq>yearly</changefreq>
+  </url>
+  <url>
+    <loc>https://krepko.es/es/</loc>
+    <lastmod>2026-10-28</lastmod>
+    <priority>1.0</priority>
+    <changefreq>weekly</changefreq>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://krepko.es/"/>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://krepko.es/uk/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://krepko.es/es/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://krepko.es/"/>
   </url>
   <url>
     <loc>https://krepko.es/murcia/</loc>

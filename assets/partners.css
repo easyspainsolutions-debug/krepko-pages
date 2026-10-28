@@ -139,6 +139,8 @@
 .pb-form .btn { align-self: flex-start; margin-top: 4px; }
 .pb p.pb-alt { font-size: 14.5px; }
 .pb-alt a { color: var(--pb-terra-deep); font-weight: 600; text-decoration: none; }
+/* /es/: «По-русски» не рвётся по дефису на 390 px (проверка 28.10) */
+.pb-alt a[lang] { white-space: nowrap; }
 .pb-alt a:hover { color: var(--pb-terra); }
 
 /* ── адаптив: на мобиле темы не нужны — обычный поток читается сверху

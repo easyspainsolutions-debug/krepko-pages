@@ -26,10 +26,16 @@
   var hero = document.querySelector('.hero--home');
   var ticker = document.querySelector('.ticker');
   if (!hero || !ticker) return;
+  /* 28.10.2026 (Ф2b-10): от 900 px тикера нет (высота 0) — hero до низа
+     экрана, а кегль и поля десктопа считаются от низа шапки: CSS знает его
+     по замеру (--hdr), здесь ставим фактический */
+  var mqD = window.matchMedia('(min-width: 900px)');
   function fit(){
     if (window.innerWidth <= 720) { hero.style.minHeight = ''; return; }
     hero.style.minHeight = '';                       // сброс перед замером
     var heroTop = hero.getBoundingClientRect().top + window.scrollY;
+    if (mqD.matches) hero.style.setProperty('--hdr', Math.round(heroTop) + 'px');
+    else hero.style.removeProperty('--hdr');
     var tickerH = ticker.getBoundingClientRect().height;
     var avail = window.innerHeight - heroTop - tickerH;
     hero.style.minHeight = Math.max(340, Math.round(avail)) + 'px';
@@ -852,6 +858,10 @@
   var box = document.getElementById('hero-roll');
   if (!box) return;
   var mq = window.matchMedia('(max-width: 719px)');
+  /* 28.10.2026 (Ф2b-10): тот же ротатор на десктопе главной (≥ 900 px) —
+     три строки, шаг задаёт CSS (0,942 кегля H1), его и читаем.
+     Телефон — как был: пять строк по LINE, активная третья. */
+  var mqD = window.matchMedia('(min-width: 900px)');
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var ul = box.querySelector('ul');
   var LINE = 28, PAUSE_MS = 1900, RIDE_MS = 640;
@@ -861,8 +871,15 @@
   base.forEach(function (li) { ul.appendChild(li.cloneNode(true)); });
   var items = ul.children;
 
+  var L = LINE, OFF = 2;          /* шаг ленты и строк над активной */
+  function geom() {
+    if (mqD.matches) { L = items[0].getBoundingClientRect().height || LINE; OFF = 1; }
+    else { L = LINE; OFF = 2; }
+  }
+  geom();
+
   var idx = n;                    /* строка в центре окна */
-  var y = (idx - 2) * LINE;       /* фактическая позиция ленты (px) */
+  var y = (idx - OFF) * L;        /* фактическая позиция ленты (px) */
 
   function setY(v) { y = v; ul.style.transform = 'translateY(' + (-v) + 'px)'; }
   function paint(clearOnly) {
@@ -876,23 +893,33 @@
   }
   function snap() {               /* мгновенно привести всё в согласованный кадр */
     while (idx >= 2 * n) idx -= n;
-    setY((idx - 2) * LINE);
+    setY((idx - OFF) * L);
     paint(false);
   }
 
+  var animating = false, stale = false;
+  /* десктоп: шаг зависит от размера окна — пересчитать и встать в кадр
+     (во время езды — сразу после неё). На телефоне не срабатывает. */
+  function refit() {
+    if (animating) { stale = true; return; }
+    geom(); snap();
+  }
+  window.addEventListener('resize', function () { if (mqD.matches) refit(); }, { passive: true });
+  if (mqD.addEventListener) mqD.addEventListener('change', refit);
+  else if (mqD.addListener) mqD.addListener(refit);
+
   if (reduce) { snap(); return; }
 
-  var animating = false;
   function stepOnce() {
-    if (!mq.matches || document.hidden || animating) return;
+    if (!(mq.matches || mqD.matches) || document.hidden || animating) return;
     animating = true;
-    if (idx >= 2 * n) { idx -= n; setY((idx - 2) * LINE); }
+    if (idx >= 2 * n) { idx -= n; setY((idx - OFF) * L); }
     /* всё параллельно с первого кадра: старая теряет подсветку и уезжает
        влево, новая уже наливается и выезжает вправо, лента крутится —
        CSS-транзиции строк растягивают преображение на время езды */
     idx++;
     paint(false);
-    var from = y, to = (idx - 2) * LINE, t0 = null;
+    var from = y, to = (idx - OFF) * L, t0 = null;
     function frame(ts) {
       if (t0 === null) t0 = ts;
       var p = Math.min((ts - t0) / RIDE_MS, 1);
@@ -900,13 +927,13 @@
       var e = p < 0.5 ? 4 * p * p * p : 1 - Math.pow(-2 * p + 2, 3) / 2;
       setY(from + (to - from) * e);
       if (p < 1) { requestAnimationFrame(frame); }
-      else { animating = false; }
+      else { animating = false; if (stale) { stale = false; geom(); snap(); } }
     }
     requestAnimationFrame(frame);
   }
   setInterval(stepOnce, PAUSE_MS + RIDE_MS);
   document.addEventListener('visibilitychange', function () {
-    if (!document.hidden) { animating = false; snap(); }
+    if (!document.hidden) { animating = false; stale = false; geom(); snap(); }
   });
   snap();
 })();

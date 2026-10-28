@@ -864,8 +864,11 @@ dialog:not([open]) { display: none !important; }
     letter-spacing: 0.14em !important;
   }
   .site-nav__link { font-weight: 500 !important; }
-  .site-nav__consult { font-weight: 500 !important; }
-  .topbar__item { font-weight: 400 !important; }
+  /* --nav-cta-*: значения кнопки шапки на шаблонах (body.tpl, Ф2b-1,
+     module-cta.css); без них — прежние, главная и блог не меняются */
+  .site-nav__consult { font-weight: var(--nav-cta-fw, 500) !important; }
+  /* «UA» переключателя языка (Ф2b-9) — полужирный, см. .topbar__lang-short */
+  .topbar__item:not(.topbar__lang-short) { font-weight: 400 !important; }
 
 
   /* Полосы над страницей были массивными по высоте: шапка около 100px,
@@ -932,16 +935,20 @@ dialog:not([open]) { display: none !important; }
    `body:has(> nav) > nav:first-of-type` зажимает крошки в 1100px и поля 12/4/8px,
    тоже через !important — без этого строка висит по центру, оторванная и от
    шапки, и от колонки текста. */
+/* Ф2b (28.10.2026): на шаблонах (body.tpl) крошка 12 px с разрядкой .1em
+   (--fs-label, --ls-label, light-scale.css), а на телефоне поля сверху и снизу
+   8/4 вместо 20/14 (--crumb-pt, --crumb-pb, pillar-split.css). Без переменных —
+   прежние значения: блог и юридические страницы не меняются. */
 body:has(> nav) > nav.breadcrumb:first-of-type,
 nav.breadcrumb {
   max-width: 1760px !important;
   width: auto !important;
   margin: 0 auto !important;
-  padding: clamp(20px, 2vw, 32px) clamp(24px, 4.5vw, 88px) clamp(14px, 1.4vw, 22px) !important;
+  padding: var(--crumb-pt, clamp(20px, 2vw, 32px)) clamp(24px, 4.5vw, 88px) var(--crumb-pb, clamp(14px, 1.4vw, 22px)) !important;
   font-family: 'Manrope', sans-serif;
-  font-size: var(--fs-micro, 11px);
+  font-size: var(--fs-label, var(--fs-micro, 11px));
   font-weight: 600;
-  letter-spacing: .14em;
+  letter-spacing: var(--ls-label, .14em);
   text-transform: uppercase;
   color: var(--text-muted);
 }
@@ -986,6 +993,59 @@ nav.breadcrumb {
     .topbar__contacts { gap: 14px; justify-content: center; width: 100%; }
     .topbar__item { font-size: 11px; }
     .topbar__socials { display: none; }}
+
+/* ═══ Переключатель языка (Ф2b-9, решение Daniil 28.10) ═══
+   Десктоп (≥ 900 px) — текстовая ссылка «Українською» / «По-русски» справа,
+   перед мессенджерами. Телефон (вариант Б) — короткое «UA» / «RU» в той же
+   строке, что почта и телефон, за тонким разделителем. Флагов нет: язык ≠
+   страна, и цветной флаг рядом с кнопкой — лишний шум первого экрана.
+   Обе ссылки стоят в разметке всегда; видна одна — по ширине экрана. */
+.topbar__lang-short {
+  position: relative;
+  /* цель нажатия ≥ 24 px (как у значков, Д16): поле 8 px и отрицательное
+     поле той же величины — строка не сдвигается; слева 14 px до текста
+     плюс 1 px разделителя */
+  padding: 8px 8px 8px 15px;
+  margin: -8px -8px -8px 0;
+  font-weight: 700;
+  color: var(--navy, var(--text));
+}
+.topbar__lang-short::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 8px;
+  bottom: 8px;
+  border-left: 1px solid var(--border);
+}
+@media (min-width: 900px) { .topbar__lang-short { display: none; } }
+/* проверка R7: кольцо фокуса внутри поля ссылки, иначе верх уходит за экран,
+   а низ — под липкую шапку */
+.topbar__lang-short:focus-visible { outline-offset: -2px; }
+/* Уже 360 px строка «почта · телефон · UA» (305 px) не влезает в 288 px и
+   переносилась на вторую строку (замер 320 px: 33 → 65 px высоты). Там —
+   плотнее зазоры; 360 px и шире не затрагиваются. */
+@media (max-width: 359px) {
+  .topbar__contacts { gap: 8px; }
+  .topbar__lang-short { padding-left: 9px; }
+}
+/* Полная подпись живёт в .topbar__socials — до 899 px блок скрыт целиком */
+.topbar__lang {
+  /* поле 2 px отделяет черту от букв; отрицательное поле той же величины —
+     строка не становится выше (на 900–999 px ссылка выше соседей) */
+  margin: -2px 22px -2px 0;
+  padding: 2px 0;
+  border-bottom: 1px solid var(--rule-link, var(--border));
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.3;
+  color: var(--text);
+  text-decoration: none;
+  transition: color .15s ease, border-color .15s ease;
+}
+@media (hover: hover) {
+  .topbar__lang:hover { color: var(--gold-2); border-bottom-color: var(--gold-2); }
+}
 @media (min-width: 1000px) {
     .site-nav__brand-text { font-size: 28px !important; }
     .site-nav__links { gap: 36px; }
@@ -1007,7 +1067,7 @@ nav.breadcrumb {
     /* Размер кнопки задаётся типографской шкалой (--fs-btn) через !important,
        поэтому мобильное значение тоже должно быть !important — иначе кнопка
        остаётся 14px, занимает 234px из 390 и выталкивает шапку за экран. */
-    .site-nav__consult { padding: 10px 12px !important; font-size: 12px !important; letter-spacing: 0 !important; }
+    .site-nav__consult { padding: var(--nav-cta-pad, 10px 12px) !important; font-size: var(--nav-cta-fs, 12px) !important; letter-spacing: 0 !important; }
     .site-nav__menu-text { display: none; }
     .site-nav__menu-btn { padding: 10px; }
     .site-nav__brand-text { font-size: 22px !important; }}
@@ -1018,6 +1078,9 @@ nav.breadcrumb {
    остаётся полной. */
 @media (max-width: 380px) {
     .site-nav__consult-free { display: none; }}
+/* Ф2b-1 (проверка R7): на шаблонах кнопка шапки шире (14 px / 700), на 381–388 px
+   полная надпись упиралась в меню — «Написать в» прячем до 388 px */
+@media (max-width: 388px) { body.tpl .site-nav__consult-free { display: none; } }
 @media (prefers-reduced-motion: reduce) { .mega-overlay { transition: none; }}
 @media (prefers-reduced-motion: reduce) {
     .mega { transition: none; }}
@@ -1032,13 +1095,13 @@ nav.breadcrumb {
       font-size: clamp(12.5px, calc(0.19vw + 11.4px), 15.2px) !important;
     }
     .site-nav__consult {
-      font-size: clamp(10.5px, calc(0.14vw + 10.5px), 13.3px) !important;
-      padding: clamp(14px, 1.1vw, 22px) clamp(22px, 1.9vw, 38px) !important;
+      font-size: var(--nav-cta-fs, clamp(10.5px, calc(0.14vw + 10.5px), 13.3px)) !important;
+      padding: var(--nav-cta-pad, clamp(14px, 1.1vw, 22px) clamp(22px, 1.9vw, 38px)) !important;
     }}
 @media (min-width: 1000px) {
     /* кнопка задаёт высоту шапки — её поля тоже ужимаем */
     .site-nav__consult {
-      padding: clamp(10px, 0.75vw, 14px) clamp(18px, 1.6vw, 32px) !important;
+      padding: var(--nav-cta-pad, clamp(10px, 0.75vw, 14px) clamp(18px, 1.6vw, 32px)) !important;
     }}
 
 
@@ -1144,5 +1207,5 @@ nav.breadcrumb {
   /* в рукописных статьях «/» — голый текст: гасим кегль строки, ссылке-назад
      возвращаем свой */
   nav.breadcrumb--back { font-size: 0; }
-  nav.breadcrumb--back > .breadcrumb__parent { font-size: var(--fs-micro, 11px); }
+  nav.breadcrumb--back > .breadcrumb__parent { font-size: var(--fs-label, var(--fs-micro, 11px)); }
 }

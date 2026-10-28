@@ -123,6 +123,69 @@
   }
 }
 
+/* ═══ Кнопка «Написать в WhatsApp» на страницах услуг, хабов и городов ═══
+   Ф2b-1 (28.10.2026, «да» Daniil). На одной странице услуги было семь видов
+   одной кнопки: шапка 12 px, под H1 12 px, врезка 15 px со скруглением 10,
+   каталог, под отзывами, финал капсом, меню со скруглением и значком.
+   Теперь один вид: сплошная --gold-2 (5,13:1), Manrope 700 строчными,
+   14 px на телефоне / 15 px с 900 px, высота 48 (в шапке 44), углы 0,
+   hover темнее, без подъёма. Токены — light-scale.css.
+   Только body.tpl: главная, блог и юридические страницы класса не получают,
+   их кнопки (и кнопка шапки главной) не меняются. Вес body.tpl (0,2,1)
+   выше «.final-cta .btn» из module-process.css, который грузится позже.
+   Кегль .btn и кнопки шапки держит site-nav.css через !important — на
+   шаблонах он приходит токеном --fs-btn (= --fs-cta, light-scale.css).
+   Кольцо фокуса — a11y.css (.tpl, navy). Липкая полоса — sticky-cta.css. */
+body.tpl .btn--gold,
+body.tpl .doc-cta__b,
+body.tpl .site-nav__consult,
+body.tpl .site-menu__cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  min-height: var(--cta-h);
+  padding: 0 var(--cta-pad-x);
+  background: var(--gold-2);
+  border: 0;
+  border-radius: 0;
+  color: var(--gold-on);
+  font-family: 'Manrope', sans-serif;
+  font-size: var(--fs-cta);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: 0;
+  text-transform: none;
+  text-decoration: none;
+  box-shadow: var(--glow-gold);
+}
+/* Шапка: высота 44, без тени покоя (тень — только у кнопок в тексте).
+   Поля, кегль и вес шапки задают правила site-nav.css с !important —
+   на шаблонах они берут значения из этих переменных. */
+body.tpl .site-nav__consult {
+  --nav-cta-fs: var(--fs-cta);
+  --nav-cta-pad: 0 var(--cta-pad-x-nav);
+  --nav-cta-fw: 700;
+  min-height: var(--cta-h-nav);
+  padding: var(--nav-cta-pad);
+  box-shadow: none;
+}
+/* Меню телефона: во всю ширину и без значка — тот же вид, что в тексте */
+body.tpl .site-menu__cta { display: flex; width: 100%; }
+body.tpl .site-menu__cta svg { display: none; }
+@media (hover: hover) {
+  body.tpl .btn--gold:hover,
+  body.tpl .doc-cta__b:hover,
+  body.tpl .site-nav__consult:hover,
+  body.tpl .site-menu__cta:hover {
+    background: var(--gold-hover);
+    color: var(--gold-on);
+    transform: none;
+    filter: none;
+    opacity: 1;
+  }
+}
+
 /* Финальный CTA примыкает к подвалу (2026-08-07, Daniil: «СТА не прижат
    к футеру»). Секция закрашена песочным и лежит последней внутри <main>,
    у которого свой нижний отступ 64px, — между цветным блоком и тёмным
