@@ -56,7 +56,7 @@
     if (open && !panel.contains(e.target) && e.target !== trigger) setOpen(false);
   });
   document.addEventListener('keydown', function(e){
-    if (e.key === 'Escape' && open) { setOpen(false); trigger.focus(); }
+    if (e.key === 'Escape' && open) { setOpen(false); trigger.focus({ preventScroll: true }); }
   });
   panel.addEventListener('mouseleave', function(){ if (open) setOpen(false); });
 })();
@@ -174,7 +174,9 @@
         trigger.removeEventListener('blur', off);
       });
     }
-    try { trigger.focus(); } catch (_) {}
+    /* preventScroll: без него браузер подкатывал страницу к кнопке —
+       прыжок вверх на 70–78 px после закрытия меню (разбор /es/ 28.10) */
+    try { trigger.focus({ preventScroll: true }); } catch (_) {}
   });
 })();
 
