@@ -651,7 +651,10 @@ body:has(> footer.site-footer) {
 /* 25.10: юридическая строка — 4 ссылки, на телефоне всегда одна строка
    (без переноса, который зависел от ширины экрана). */
 @media (max-width: 599px) {
-  .site-footer .site-footer__legal { flex-wrap: nowrap; justify-content: center; gap: var(--space-4); }
+  /* 28.10.2026: в строке стало 6–7 ссылок (+ «Español» / языки, «krepko.eu») —
+     в одну строку не помещались, страница уезжала вбок на 40–150 px.
+     Четыре юридические ссылки остаются первой строкой, остальные — второй. */
+  .site-footer .site-footer__legal { flex-wrap: wrap; row-gap: var(--space-1); justify-content: center; gap: var(--space-4); }
   .site-footer .site-footer__legal a { white-space: nowrap; }
   /* Ф2b-6 (28.10.2026): «©» — своей строкой над ссылками, как было с моно.
      Manrope уже, и на 430 px строка вставала в ряд со ссылками: перенос

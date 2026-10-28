@@ -1,7 +1,7 @@
 {
-  "name": "Krepko — Испания под ключ",
+  "name": "Krepko",
   "short_name": "Krepko",
-  "description": "Нотариус, банк, документы в Испании на родном языке. Под ключ.",
+  "description": "Krepko — сопровождение в Испании на русском и украинском: нотариус, ВНЖ, документы.",
   "icons": [
     {
       "src": "/icon-192.png",
@@ -22,8 +22,8 @@
       "purpose": "any"
     }
   ],
-  "theme_color": "#171C28",
-  "background_color": "#171C28",
+  "theme_color": "#EFE7DA",
+  "background_color": "#EC833B",
   "display": "standalone",
   "start_url": "/",
   "lang": "ru"

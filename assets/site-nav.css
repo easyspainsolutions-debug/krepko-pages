@@ -1214,3 +1214,22 @@ nav.breadcrumb {
   nav.breadcrumb--back { font-size: 0; }
   nav.breadcrumb--back > .breadcrumb__parent { font-size: var(--fs-label, var(--fs-micro, 11px)); }
 }
+
+/* /es/ (28.10.2026, Р1 Daniil): мелкая пометка «(en ruso)» у пунктов шапки и
+   меню, которые ведут на русские страницы; ставит generator/es_chrome.py */
+.es-ru {
+  margin-left: var(--space-1);
+  font-size: .72em;
+  font-weight: 500;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+/* /es/: на десктопе пометка «(en ruso)» — второй строкой под пунктом; в строку
+   пункты с пометкой выталкивали кнопку WhatsApp за край на 1000–1199 px
+   (проверка /es/ 28.10: вылезание вбок до 168 px) */
+@media (min-width: 1000px) {
+  .site-nav__link .es-ru { display: block; margin-left: 0; line-height: 1.1; }
+}
+@media (min-width: 1000px) and (max-width: 1199px) {
+  html[lang="es"] .site-nav__links { gap: var(--space-6); }
+}

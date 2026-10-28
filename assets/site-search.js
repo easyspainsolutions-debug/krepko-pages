@@ -54,7 +54,20 @@
 
   /* Украинская версия /uk/ (28.10.2026): подписи по <html lang> */
   var UK = (document.documentElement.getAttribute('lang') || '').slice(0, 2) === 'uk';
-  var MODES = UK ? {
+  /* /es/ (28.10.2026, Р1 Daniil): испанские подписи; ищем по русскому индексу */
+  var ES = (document.documentElement.getAttribute('lang') || '').slice(0, 2) === 'es';
+  var MODES = ES ? {
+    services: {
+      placeholder: '¿Qué trámite necesita?',
+      tip: 'Cambiar al blog',
+      aria: 'Buscamos en los servicios. Cambiar al blog'
+    },
+    blog: {
+      placeholder: '¿Sobre qué quiere leer?',
+      tip: 'Cambiar a los servicios',
+      aria: 'Buscamos en el blog. Cambiar a los servicios'
+    }
+  } : UK ? {
     services: {
       placeholder: 'Що потрібно оформити?',
       tip: 'Перемкнути на блог',
@@ -105,6 +118,14 @@
      'хочу хоче хочемо треба потрібно потрібен потрібна потрібні необхідно ' +
      'підкажіть допоможіть скажіть питання ситуація випадок ' +
      'іспанія іспанії іспанію іспанією')
+      .split(' ').forEach(function (w) { STOP[w] = 1; });
+  }
+  /* /es/ (28.10.2026): испанские связки. Индекс русский, испанские слова в нём —
+     только из словаря поиска; без этого «Certificado de antecedentes penales»
+     отсекал справку из Украины на слове «de». */
+  if (ES) {
+    ('de del la las el los lo un una unos unas y e o u a al en con por para ' +
+     'su sus mi mis que como sobre necesito quiero españa')
       .split(' ').forEach(function (w) { STOP[w] = 1; });
   }
 
@@ -385,6 +406,9 @@
 
     var nothing = query.length >= 2 && !!index && !hits.length;
     empty.hidden = !nothing;
+    /* /es/: над результатами — «Resultados en ruso» (индекс поиска русский) */
+    var ruNote = dlg.querySelector('.site-search__ru-note');
+    if (ruNote) ruNote.hidden = nothing || !list.children.length;
     /* Частые запросы: на мобильном встречают при пустой строке, на десктопе
        работают как запасной выход, когда ничего не нашлось. */
     if (suggest) suggest.hidden = !(query.length < 2 || nothing);
@@ -406,7 +430,10 @@
        подсвечиваются, чтобы состояние читалось и без цвета дорожки. */
     if (switchTrack) {
       switchTrack.setAttribute('aria-checked', next === 'blog' ? 'true' : 'false');
-      switchTrack.setAttribute('aria-label', UK
+      switchTrack.setAttribute('aria-label', ES
+        ? (next === 'blog' ? 'Ámbito de búsqueda: blog. Cambiar a los servicios'
+                           : 'Ámbito de búsqueda: servicios. Cambiar al blog')
+        : UK
         ? (next === 'blog' ? 'Область пошуку: блог. Перемкнути на послуги'
                            : 'Область пошуку: послуги. Перемкнути на блог')
         : (next === 'blog' ? 'Область поиска: блог. Переключить на услуги'
