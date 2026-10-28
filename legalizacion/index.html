@@ -29,7 +29,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/assets/tokens.css?v=c148233d2b">
-  
+  <link rel="stylesheet" href="/assets/light-scale.css?v=70fc1c838d">
   <link rel="stylesheet" href="/assets/module-section.css?v=e99f1da332">
   <link rel="stylesheet" href="/assets/module-cta.css?v=b96e95f683">
   <link rel="stylesheet" href="/assets/sticky-cta.css?v=adf682fd6c">
@@ -57,12 +57,23 @@
   <!-- Consent-safe event layer (no-op until window.gtag exists, i.e. after "Accept all"):
        WhatsApp UTM-attribution + custom events cta_click_*, pricing_view, blog_finish_read.
        Documented Phase-1 requirement (Аналитика-стратегия §IV/§VII/§XII). -->
-  <script src="/assets/analytics.js?v=781be8051d" defer></script>
+  <script src="/assets/analytics.js?v=ce33e594cf" defer></script>
   <script src="/assets/reviews-carousel.js?v=1275b192f2" defer></script>
-<link rel="stylesheet" href="/assets/light-scale.css?v=70fc1c838d">
-<link rel="stylesheet" href="/assets/reviews-block.css?v=e3226d1ef2"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Главная","item":"https://krepko.es/"},{"@type":"ListItem","position":2,"name":"Легализация"}]}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Сколько стоит апостиль в Испании?","acceptedAnswer":{"@type":"Answer","text":"Цена апостиля зависит от срочности — обычный (3–4 рабочих дня) или срочный (тот же день или следующий, при подаче до 10:30 утра). На нотариальные документы апостиль ставит нотариальная коллегия по своему тарифу. Стоимость по вашему документу называем до начала работы."}},{"@type":"Question","name":"Может ли документ из Украины получить апостиль в Испании?","acceptedAnswer":{"@type":"Answer","text":"Нет. Апостиль ставится в стране происхождения документа. Для украинских документов апостиль оформляется в Украине (через команду Krepko в Украине), затем документ отправляется курьером в Испанию. Испанские органы ставят апостиль только на испанские документы."}},{"@type":"Question","name":"День в день — это возможно?","acceptedAnswer":{"@type":"Answer","text":"Да, при условии. Если подать документ на апостиль до 10:30 утра, готовый апостиль обычно к 13:00 того же дня, по срочному тарифу. Работает только в рабочие дни, не в выходные и праздники. Krepko организует срочную подачу через установленные контакты."}},{"@type":"Question","name":"Как оплачивается легализация?","acceptedAnswer":{"@type":"Answer","text":"Стоимость зависит от того, входит ли легализация в нотариальный кейс или оформляется отдельно, от количества документов и срочности. Krepko изучает задачу и согласует стоимость до начала работы."}},{"@type":"Question","name":"Сколько документов можно оформить в одном кейсе?","acceptedAnswer":{"@type":"Answer","text":"Один кейс — один пакет документов в рамках одной цели (например, апостиль на три выписки для банка — это один кейс). Если документы разных целей (один апостиль для банка, другой для наследства) — это два отдельных кейса. От числа документов в кейсе зависит стоимость — её согласуем заранее."}}]}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"Service","@id":"https://krepko.es/legalizacion/#service","name":"Апостиль и заверение документов в Испании","serviceType":"Апостиль и легализация документов","description":"Krepko оформляет апостиль на испанские документы, заверение копий и подписей. Обычно 3–4 рабочих дня, срочно — день в день.","url":"https://krepko.es/legalizacion/","dateModified":"2026-10-28","provider":{"@type":"Organization","@id":"https://krepko.es/#organization","name":"Krepko","url":"https://krepko.es/"},"areaServed":[{"@type":"City","name":"Аликанте"},{"@type":"City","name":"Валенсия"},{"@type":"City","name":"Мурсия"},{"@type":"City","name":"Мадрид"},{"@type":"City","name":"Барселона"},{"@type":"City","name":"Малага"}],"availableLanguage":["ru","uk","es"],"hasOfferCatalog":{"@type":"OfferCatalog","name":"Апостиль и заверение документов в Испании","itemListElement":[{"@type":"OfferCatalog","name":"Легализация документов","itemListElement":[{"@type":"Offer","itemOffered":{"@type":"Service","name":"Заверение подписи на документе","url":"https://krepko.es/legalizacion/zaverenie-podpisi-na-dokumente/"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Апостиль на испанский документ","url":"https://krepko.es/legalizacion/apostil-ispania/"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Заверение копии испанского документа","url":"https://krepko.es/legalizacion/zaverenie-kopii-ispanskogo/"}}]}]}}</script>
+<link rel="stylesheet" href="/assets/pillar-split.css?v=de63f0b94c">
+<script src="/assets/pillar-split.js?v=6c933741bf" defer></script>
+<noscript><style>
+  .pillar-nav__search { display: none !important; }
+  .pillar-cat__panel { max-height: none !important; }
+  .pillar-cat__head::after { display: none; }
+  @media (max-width: 899px) {
+    .pillar-nav__panel { display: block !important; }
+    .pillar-nav__toggle { display: none !important; }
+  }
+</style></noscript>  <link rel="stylesheet" href="/assets/service-tail.css?v=171cb0932e">
+  <link rel="stylesheet" href="/assets/reviews-block.css?v=e3226d1ef2">
+  <link rel="stylesheet" href="/assets/sell-head.css?v=a3d5fad4cd"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Главная","item":"https://krepko.es/"},{"@type":"ListItem","position":2,"name":"Апостиль и заверение"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Сколько стоит апостиль в Испании?","acceptedAnswer":{"@type":"Answer","text":"Стоимость апостиля зависит от срочности — обычный (3–4 рабочих дня) или срочный (тот же день или следующий, при подаче до 10:30 утра). На нотариальные документы апостиль ставит нотариальная коллегия по своему тарифу: государственного тарифа нет. Стоимость по вашему документу называем до начала работы."}},{"@type":"Question","name":"Апостиль нужен для любой страны?","acceptedAnswer":{"@type":"Answer","text":"Только для стран — участниц Гаагской конвенции 1961 года. Для остальных стран нужна консульская легализация, а с некоторыми странами действуют договоры, по которым не нужно ни то ни другое. Проверяем это до начала работы, чтобы не делать лишний шаг."}},{"@type":"Question","name":"Можно ли сделать апостиль в тот же день?","acceptedAnswer":{"@type":"Answer","text":"Да, при условии. Если подать документ на апостиль до 10:30 утра, готовый апостиль обычно к 13:00 того же дня, по срочному тарифу. Работает только в рабочие дни, не в выходные и праздники. Срочную подачу готовим заранее, чтобы успеть к этому времени."}},{"@type":"Question","name":"Может ли документ из Украины получить апостиль в Испании?","acceptedAnswer":{"@type":"Answer","text":"Нет. Апостиль ставится в стране, которая выдала документ: на украинские документы — в Украине. Это делает команда Krepko в Украине, затем документ едет к вам курьером. Испанские органы ставят апостиль только на испанские документы."}},{"@type":"Question","name":"Как за границей проверят, что апостиль настоящий?","acceptedAnswer":{"@type":"Answer","text":"Каждый испанский апостиль, бумажный и электронный, вносится в электронный реестр апостилей Министерства юстиции. Принимающая сторона проверяет его там по номеру и дате апостиля."}},{"@type":"Question","name":"Как оплачивается апостиль и заверение?","acceptedAnswer":{"@type":"Answer","text":"Если апостиль нужен на документ, который мы оформляем у нотариуса, он входит в одну сумму за всё дело, и вы платите по факту подписания. Если нужен только апостиль, стоимость называем одной суммой до начала работы. Она зависит от количества документов и срочности."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Service","@id":"https://krepko.es/legalizacion/#service","name":"Апостиль и заверение документов в Испании","serviceType":"Апостиль и легализация документов","description":"Апостиль на испанские документы, заверение копий и подписей у нотариуса: проверяем, что примут в стране назначения, готовим документ, подаём на апостиль и возвращаем оригинал.","url":"https://krepko.es/legalizacion/","dateModified":"2026-10-28","provider":{"@type":"Organization","@id":"https://krepko.es/#organization","name":"Krepko","url":"https://krepko.es/"},"areaServed":[{"@type":"City","name":"Аликанте"},{"@type":"City","name":"Валенсия"},{"@type":"City","name":"Мурсия"},{"@type":"City","name":"Мадрид"},{"@type":"City","name":"Барселона"},{"@type":"City","name":"Малага"}],"availableLanguage":["ru","uk","es"],"hasOfferCatalog":{"@type":"OfferCatalog","name":"Апостиль и заверение документов в Испании","itemListElement":[{"@type":"OfferCatalog","name":"Апостиль и заверение","itemListElement":[{"@type":"Offer","itemOffered":{"@type":"Service","name":"Апостиль на испанский документ","url":"https://krepko.es/legalizacion/apostil-ispania/"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Заверение подписи на документе","url":"https://krepko.es/legalizacion/zaverenie-podpisi-na-dokumente/"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Заверение копии испанского документа","url":"https://krepko.es/legalizacion/zaverenie-kopii-ispanskogo/"}}]}]}}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","@id":"https://krepko.es/legalizacion/#webpage","url":"https://krepko.es/legalizacion/","dateModified":"2026-10-28","inLanguage":"ru","isPartOf":{"@type":"WebSite","@id":"https://krepko.es/#website","name":"Krepko","url":"https://krepko.es/"},"name":"Апостиль и заверение документов в Испании","description":"Апостиль на испанские документы, заверение копий и подписей: готовим, подаём на апостиль, забираем. Обычно 3–4 рабочих дня, срочно — день в день.","mainEntity":{"@id":"https://krepko.es/legalizacion/#service"}}</script>
 <meta name="krepko-pulse" content="/api/p"><script src="/assets/pulse.js?v=5d390527da" defer></script><meta name="krepko-clarity" content="z3npvw3og1"><meta name="robots" content="max-image-preview:large"></head>
 <body class="tpl">
@@ -81,7 +92,7 @@
       </a>
     </div>
     <div class="topbar__socials">
-      <a class="topbar__social" href="https://wa.me/34624309985?text=%D0%94%D0%BE%D0%B1%D1%80%D1%8B%D0%B9%20%D0%B4%D0%B5%D0%BD%D1%8C%2C%20%D1%83%20%D0%BC%D0%B5%D0%BD%D1%8F%20%D0%B2%D0%BE%D0%BF%D1%80%D0%BE%D1%81%20%D0%BF%D0%BE%20%D0%BD%D0%B0%D0%BF%D1%80%D0%B0%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D1%8E%20%C2%AB%D0%9B%D0%B5%D0%B3%D0%B0%D0%BB%D0%B8%D0%B7%D0%B0%D1%86%D0%B8%D1%8F%C2%BB.%20%D0%AF%20%D1%81%20krepko.es/legalizacion/" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+      <a class="topbar__social" href="https://wa.me/34624309985?text=%D0%94%D0%BE%D0%B1%D1%80%D1%8B%D0%B9%20%D0%B4%D0%B5%D0%BD%D1%8C%2C%20%D1%83%20%D0%BC%D0%B5%D0%BD%D1%8F%20%D0%B2%D0%BE%D0%BF%D1%80%D0%BE%D1%81%20%D0%BF%D0%BE%20%D0%BD%D0%B0%D0%BF%D1%80%D0%B0%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D1%8E%20%C2%AB%D0%9B%D0%B5%D0%B3%D0%B0%D0%BB%D0%B8%D0%B7%D0%B0%D1%86%D0%B8%D1%8F%C2%BB.%20%D0%AF%20%D1%81%20krepko.es/legalizacion/" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" data-cta="topbar">
         <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9 8.5 8.5 0 0 1 8.5 8.5z"/></svg>
       </a>
       <a class="topbar__social" href="https://t.me/+34624309985?text=%D0%94%D0%BE%D0%B1%D1%80%D1%8B%D0%B9%20%D0%B4%D0%B5%D0%BD%D1%8C%2C%20%D1%83%20%D0%BC%D0%B5%D0%BD%D1%8F%20%D0%B2%D0%BE%D0%BF%D1%80%D0%BE%D1%81%20%D0%BF%D0%BE%20%D0%BD%D0%B0%D0%BF%D1%80%D0%B0%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D1%8E%20%C2%AB%D0%9B%D0%B5%D0%B3%D0%B0%D0%BB%D0%B8%D0%B7%D0%B0%D1%86%D0%B8%D1%8F%C2%BB.%20%D0%AF%20%D1%81%20krepko.es/legalizacion/" target="_blank" rel="noopener noreferrer" aria-label="Telegram">
@@ -109,7 +120,7 @@
       <a class="site-nav__search-btn" href="/services/" data-open-search aria-label="Поиск по сайту" aria-haspopup="dialog" aria-controls="site-search-dialog">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
       </a>
-      <a class="site-nav__consult" href="https://wa.me/34624309985?text=%D0%94%D0%BE%D0%B1%D1%80%D1%8B%D0%B9%20%D0%B4%D0%B5%D0%BD%D1%8C%2C%20%D1%85%D0%BE%D1%87%D1%83%20%D0%B1%D0%B5%D1%81%D0%BF%D0%BB%D0%B0%D1%82%D0%BD%D1%83%D1%8E%20%D0%BA%D0%BE%D0%BD%D1%81%D1%83%D0%BB%D1%8C%D1%82%D0%B0%D1%86%D0%B8%D1%8E.%20%D0%AF%20%D1%81%20krepko.es/legalizacion/" target="_blank" rel="noopener noreferrer"><span class="site-nav__consult-free">Написать в</span> WhatsApp</a>
+      <a class="site-nav__consult" href="https://wa.me/34624309985?text=%D0%94%D0%BE%D0%B1%D1%80%D1%8B%D0%B9%20%D0%B4%D0%B5%D0%BD%D1%8C%2C%20%D1%83%20%D0%BC%D0%B5%D0%BD%D1%8F%20%D0%B2%D0%BE%D0%BF%D1%80%D0%BE%D1%81%20%D0%BF%D0%BE%20%D0%BD%D0%B0%D0%BF%D1%80%D0%B0%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D1%8E%20%C2%AB%D0%9B%D0%B5%D0%B3%D0%B0%D0%BB%D0%B8%D0%B7%D0%B0%D1%86%D0%B8%D1%8F%C2%BB.%20%D0%AF%20%D1%81%20krepko.es/legalizacion/" target="_blank" rel="noopener noreferrer" data-cta="header"><span class="site-nav__consult-free">Написать в</span> WhatsApp</a>
       <button class="site-nav__menu-btn" type="button" aria-label="Открыть меню" aria-haspopup="dialog" aria-controls="site-menu-dialog" onclick="document.getElementById('site-menu-dialog').showModal()">
         <span class="site-nav__menu-text">Меню</span>
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg>
@@ -230,7 +241,7 @@
     </div>
 
     <div class="site-menu__contacts">
-      <a class="site-menu__cta" href="https://wa.me/34624309985?text=%D0%94%D0%BE%D0%B1%D1%80%D1%8B%D0%B9%20%D0%B4%D0%B5%D0%BD%D1%8C%2C%20%D1%83%20%D0%BC%D0%B5%D0%BD%D1%8F%20%D0%B2%D0%BE%D0%BF%D1%80%D0%BE%D1%81%20%D0%BF%D0%BE%20%D0%BD%D0%B0%D0%BF%D1%80%D0%B0%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D1%8E%20%C2%AB%D0%9B%D0%B5%D0%B3%D0%B0%D0%BB%D0%B8%D0%B7%D0%B0%D1%86%D0%B8%D1%8F%C2%BB.%20%D0%AF%20%D1%81%20krepko.es/legalizacion/" rel="noopener noreferrer" target="_blank">
+      <a class="site-menu__cta" href="https://wa.me/34624309985?text=%D0%94%D0%BE%D0%B1%D1%80%D1%8B%D0%B9%20%D0%B4%D0%B5%D0%BD%D1%8C%2C%20%D1%83%20%D0%BC%D0%B5%D0%BD%D1%8F%20%D0%B2%D0%BE%D0%BF%D1%80%D0%BE%D1%81%20%D0%BF%D0%BE%20%D0%BD%D0%B0%D0%BF%D1%80%D0%B0%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D1%8E%20%C2%AB%D0%9B%D0%B5%D0%B3%D0%B0%D0%BB%D0%B8%D0%B7%D0%B0%D1%86%D0%B8%D1%8F%C2%BB.%20%D0%AF%20%D1%81%20krepko.es/legalizacion/" rel="noopener noreferrer" target="_blank" data-cta="menu">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9 8.5 8.5 0 0 1 8.5 8.5z"/></svg>
         Написать в WhatsApp
       </a>
@@ -275,7 +286,7 @@
       </div>
 
       <ul class="site-search__results" role="listbox" aria-label="Результаты поиска"></ul>
-      <p class="site-search__empty" hidden>Ничего не нашлось. Опишите задачу в <a href="https://wa.me/34624309985?text=%D0%94%D0%BE%D0%B1%D1%80%D1%8B%D0%B9%20%D0%B4%D0%B5%D0%BD%D1%8C%2C%20%D1%83%20%D0%BC%D0%B5%D0%BD%D1%8F%20%D0%B2%D0%BE%D0%BF%D1%80%D0%BE%D1%81%20%D0%BF%D0%BE%20%D0%BD%D0%B0%D0%BF%D1%80%D0%B0%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D1%8E%20%C2%AB%D0%9B%D0%B5%D0%B3%D0%B0%D0%BB%D0%B8%D0%B7%D0%B0%D1%86%D0%B8%D1%8F%C2%BB.%20%D0%AF%20%D1%81%20krepko.es/legalizacion/" rel="noopener noreferrer" target="_blank">WhatsApp</a> — подберём решение.</p>
+      <p class="site-search__empty" hidden>Ничего не нашлось. Опишите задачу в <a href="https://wa.me/34624309985?text=%D0%94%D0%BE%D0%B1%D1%80%D1%8B%D0%B9%20%D0%B4%D0%B5%D0%BD%D1%8C%2C%20%D1%83%20%D0%BC%D0%B5%D0%BD%D1%8F%20%D0%B2%D0%BE%D0%BF%D1%80%D0%BE%D1%81%20%D0%BF%D0%BE%20%D0%BD%D0%B0%D0%BF%D1%80%D0%B0%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D1%8E%20%C2%AB%D0%9B%D0%B5%D0%B3%D0%B0%D0%BB%D0%B8%D0%B7%D0%B0%D1%86%D0%B8%D1%8F%C2%BB.%20%D0%AF%20%D1%81%20krepko.es/legalizacion/" rel="noopener noreferrer" target="_blank" data-cta="search">WhatsApp</a> — подберём решение.</p>
     </div>
 
   </div>
@@ -293,121 +304,155 @@
         <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>
         <span>Главная</span>
       </a>
-      <span class="breadcrumb__sep" aria-hidden="true">/</span>      <span class="breadcrumb__current">Легализация</span></nav>  <main id="main">
-<section class="hero hero--service hero--service--legalizacion">
-  <h1 class="hero__h1">Легализация документов</h1>
-  <p class="hero__dek">Krepko оформляет апостиль на испанские документы, заверение копий и подписей. Обычно 3–4 рабочих дня, срочно — день в день.</p>
-  <div class="cta-row">
-    <a class="btn btn--gold" href="https://wa.me/34624309985?text=%D0%94%D0%BE%D0%B1%D1%80%D1%8B%D0%B9%20%D0%B4%D0%B5%D0%BD%D1%8C%2C%20%D1%83%20%D0%BC%D0%B5%D0%BD%D1%8F%20%D0%B2%D0%BE%D0%BF%D1%80%D0%BE%D1%81%20%D0%BF%D0%BE%20%D0%BD%D0%B0%D0%BF%D1%80%D0%B0%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D1%8E%20%C2%AB%D0%9B%D0%B5%D0%B3%D0%B0%D0%BB%D0%B8%D0%B7%D0%B0%D1%86%D0%B8%D1%8F%C2%BB.%20%D0%AF%20%D1%81%20krepko.es/legalizacion/" data-cta="hero">Написать в WhatsApp</a>
-    <a class="cta-row__jump" href="#documents">Каталог документов →</a>
-  </div>
-  <div class="hero__meta-row">
-    <div class="hero__meta-item">
-      <small>языки</small>
-      <b>RU · UA · ES</b>
-    </div>
-    <div class="hero__meta-item">
-      <small>срок</small>
-      <b>1–4 дня</b>
-    </div>
-    <div class="hero__meta-item">
-      <small>охват</small>
-      <b>6 городов</b>
-    </div>
-  </div>
-</section>
-  <section class="pillar-chips" aria-label="Гарантии Krepko">
-    <ul class="krepko-chips">
-      <li class="krepko-chip">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8 12l3 3 5-6"/></svg>
-        Стоимость согласуем заранее
-      </li>
-      <li class="krepko-chip">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8 12l3 3 5-6"/></svg>
-        Полное ведение
-      </li>
-    </ul>
-  </section>
+      <span class="breadcrumb__sep" aria-hidden="true">/</span>      <span class="breadcrumb__current">Апостиль и заверение</span></nav>  <main id="main">
 
-    <div class="pillar-body">
-<h2 id="chto-delaet-krepko-v-legalizacii">Что делает Krepko в легализации</h2>
-<p>Krepko координирует легализацию документов внутри Испании: оформление апостиля на нотариальные акты для использования за рубежом (его ставит нотариальная коллегия), нотариальное заверение копий испанских документов, заверение подписей. Krepko занимается логистикой, согласует с нотариусом и нотариальной коллегией, контролирует сроки.</p>
-<p>Обычный срок апостиля — 3–4 рабочих дня, срочный — тот же день или следующий, при подаче до 10:30 утра.</p>
+<div class="pillar-split pillar-split--hub">
+  <header class="pillar-split__head"><h1>Апостиль и заверение документов в Испании</h1></header>
+
+  <div class="pillar-split__cols">
+    <div class="pillar-doc">
+<div class="sell-head">
+<ul class="sell-facts" aria-label="Коротко об услуге">
+<li>специалист ответит за 15 минут</li><li>условия фиксируем до начала</li><li>на русском, украинском, испанском</li></ul>
+  <div class="sell-cta">
+    <a class="btn btn--gold" href="https://wa.me/34624309985?text=%D0%94%D0%BE%D0%B1%D1%80%D1%8B%D0%B9%20%D0%B4%D0%B5%D0%BD%D1%8C%2C%20%D1%83%20%D0%BC%D0%B5%D0%BD%D1%8F%20%D0%B2%D0%BE%D0%BF%D1%80%D0%BE%D1%81%20%D0%BF%D0%BE%20%D0%BD%D0%B0%D0%BF%D1%80%D0%B0%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D1%8E%20%C2%AB%D0%9B%D0%B5%D0%B3%D0%B0%D0%BB%D0%B8%D0%B7%D0%B0%D1%86%D0%B8%D1%8F%C2%BB.%20%D0%AF%20%D1%81%20krepko.es/legalizacion/" rel="noopener noreferrer" target="_blank" data-cta="sell-head">Написать в WhatsApp</a>
+  </div>
+</div><div class="pillar-body">
+<p><strong>Если коротко.</strong> Апостиль — штамп, по которому испанский документ признают в странах Гаагской конвенции. На нотариальные документы его ставит нотариальная коллегия, на свидетельства Registro Civil и другие государственные документы — Министерство юстиции, секретариат высшего суда автономии или та же коллегия. Обычный срок — 3–4 рабочих дня, срочный — тот же или следующий день. Частный документ без нотариуса апостилировать нельзя: сначала заверяют подпись или копию. Источник: <a href="https://www.boe.es/eli/es/rd/2011/10/24/1497/con">RD 1497/2011</a>.</p>
+<p>Готовим испанский документ к подаче за границей: ставим апостиль, заверяем у нотариуса подпись или копию. Сначала проверяем, что примут в стране назначения, — потом подаём и возвращаем вам оригинал.</p>
+<p><strong>Что вы получаете:</strong></p>
+<ul class="pillar-checks"><li>ответ, нужен ли апостиль и какое заверение примут там, куда вы подаёте документ;</li><li>подготовку документа и подачу на апостиль в нужный орган;</li><li>подписание у нотариуса с представителем Krepko, если нужно заверить подпись или копию;</li><li>срочную подачу, когда сроки горят;</li><li>готовый оригинал — в руки или курьером в другой город.</li></ul>
+<aside class="sell-trust"><h2 class="sell-trust__t" id="pochemu-s-nami-spokojno">Почему с нами спокойно</h2><ul class="sell-trust__list"><li>Пишете в WhatsApp — специалист ответит за 15 минут, ежедневно 9–⁠20. Разбор бесплатный: скажем, что нужно, сколько это стоит и сколько займёт, а решаете вы.</li><li>Условия и стоимость фиксируем до начала работы, без скрытых доплат. Если ошибка наша — переделываем за свой счёт.</li><li>Подбираем вариант под вашу ситуацию и не навязываем лишнего: если услуга не нужна, скажем прямо.</li><li>Если ситуация не ждёт, принимаем в нерабочие часы и берёмся за случаи, от которых другие отказываются.</li><li><a href="https://maps.google.com/?cid=13162404013177787736" target="_blank" rel="noopener noreferrer">5,0 · 15 отзывов в Google →</a></li></ul></aside><h2 id="kak-prohodit">Как проходит</h2>
+<ol class="pillar-steps"><li><b class="pillar-step__title">Запрос в WhatsApp</b><span class="pillar-step__text">Опишите документ: что это (доверенность, свидетельство, выписка), какой орган его выдал и в какую страну он едет. Специалист ответит за 15 минут.</span></li><li><b class="pillar-step__title">Проверка</b><span class="pillar-step__text">Говорим, нужен ли апостиль для этой страны и какое заверение там примут.</span></li><li><b class="pillar-step__title">Подготовка и подача</b><span class="pillar-step__text">Готовим документ и подаём на апостиль: нотариальные документы — в нотариальную коллегию. Обычный срок — 3–4 рабочих дня, срочный — тот же или следующий день.</span></li><li><b class="pillar-step__title">Готовый документ</b><span class="pillar-step__text">Возвращаем оригинал с апостилем в руки, в другой город — курьером: доставку называем отдельной строкой.</span></li></ol>
+<h2 id="s-chego-nachat">С чего начать</h2>
+<p>Испанский документ нужно подать в другой стране — свидетельство, справку, нотариальный акт — это <a href="/legalizacion/apostil-ispania/">апостиль на испанский документ</a>.</p>
+<p>Нужно подписать документ для заграницы — заявление, согласие, доверенность на вашем языке — это <a href="/legalizacion/zaverenie-podpisi-na-dokumente/">заверение подписи у нотариуса</a>.</p>
+<p>Нужна копия паспорта, диплома или свидетельства с отметкой нотариуса — это <a href="/legalizacion/zaverenie-kopii-ispanskogo/">заверение копии испанского документа</a>.</p>
+<p>Документ выдан в Украине — апостиль на него ставят в Украине, это делает <a href="/ukraina/">команда Krepko в Украине</a>. Какой перевод примет ваш орган, — в разделе <a href="/traduccion/">перевод документов</a>.</p>
+<h2 id="kto-stavit-apostil-v-ispanii">Кто ставит апостиль в Испании</h2>
+<ul><li><strong>нотариальные документы</strong> — доверенности, заявления, заверенные подписи и копии — только нотариальная коллегия, на бумаге, независимо от того, в каком городе Испании документ оформлен;</li><li><strong>свидетельства Registro Civil и другие государственные документы</strong> — Министерство юстиции, секретариат высшего суда автономии или нотариальная коллегия;</li><li><strong>частный документ</strong> — договор, справку компании — апостилировать нельзя: сначала нотариус заверяет подпись на нём, и апостиль ставят на это заверение.</li></ul>
+<p>Каждый апостиль вносится в электронный реестр Министерства юстиции — по нему принимающая сторона проверяет документ.</p>
 <h2 id="kogda-nuzhna-legalizaciya">Когда нужна легализация</h2>
-<ul><li><strong>Доверенность из Испании за рубеж</strong> — апостиль на нотариальную доверенность для использования в Украине, России, других странах</li><li><strong>Свидетельство о браке или разводе из Испании</strong> — апостиль на испанские свидетельства Registro Civil для использования за рубежом</li><li><strong>Учредительные документы испанской компании</strong> — для подачи в иностранный реестр</li><li><strong>Копия испанского документа</strong> — нотариальное заверение копии для подачи где требуется заверенная копия</li><li><strong>Заверение подписи</strong> — на документе клиента (на любом языке), для использования за рубежом</li></ul>
-<h2 id="stoimost">Стоимость</h2>
-<p>Сопровождение Krepko считается по кейсу. Опишите задачу в WhatsApp — Krepko согласует стоимость и срок готовности до начала работы.</p>
+<ul><li><strong>Доверенность из Испании за рубеж</strong> — апостиль на нотариальную доверенность для Украины, России, других стран</li><li><strong>Свидетельство о браке или разводе из Испании</strong> — апостиль на свидетельства Registro Civil для использования за рубежом</li><li><strong>Учредительные документы испанской компании</strong> — для подачи в иностранный реестр</li><li><strong>Копия испанского документа</strong> — нотариальное заверение копии там, где требуется заверенная копия</li><li><strong>Заверение подписи</strong> — на документе на любом языке, для использования за рубежом</li></ul>
+</div>    </div>
+
+<aside class="pillar-nav">
+  <button class="pillar-nav__toggle" type="button" aria-expanded="false" aria-controls="pillar-nav-panel">
+    <span>Все услуги — легализация</span>
+    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+  </button>
+
+  <h2 class="pillar-nav__mobile-title">Другие услуги направления</h2>
+
+  <div class="pillar-nav__panel" id="pillar-nav-panel">
+    <div class="pillar-nav__inner">
+
+      <div class="pillar-nav__search">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        <input type="search" id="pillar-search" placeholder="Найти услугу" aria-label="Поиск по услугам направления" autocomplete="off">
+      </div>
+      <p class="pillar-nav__empty" id="pillar-search-empty" hidden>Ничего не нашлось. Опишите задачу — подберём решение.</p>
+
+      <p class="pillar-nav__all">
+          <span class="pillar-nav__current" aria-current="page">Все услуги направления</span>
+      </p>
+
+      <div class="pillar-cat" data-cat="legalizacion">
+        <button class="pillar-cat__head" type="button" aria-expanded="false" aria-controls="cat-legalizacion">
+          <span>Апостиль и заверение</span>
+          <span class="pillar-cat__count">3</span>
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="pillar-cat__panel" id="cat-legalizacion">
+        <ul class="pillar-cat__list">
+          <li>
+              <a href="/legalizacion/apostil-ispania/">Апостиль на испанский документ</a>
+          </li>
+          <li>
+              <a href="/legalizacion/zaverenie-podpisi-na-dokumente/">Заверение подписи на документе</a>
+          </li>
+          <li>
+              <a href="/legalizacion/zaverenie-kopii-ispanskogo/">Заверение копии испанского документа</a>
+          </li>
+        </ul>
+        </div>
+      </div>
+      <div class="pillar-cat" data-cat="smezhnye">
+        <button class="pillar-cat__head" type="button" aria-expanded="false" aria-controls="cat-smezhnye">
+          <span>Смежные направления</span>
+          <span class="pillar-cat__count">6</span>
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="pillar-cat__panel" id="cat-smezhnye">
+        <ul class="pillar-cat__list">
+          <li>
+              <a href="/notario/doverennost-na-rodnom-yazyke/">Доверенность на родном языке</a>
+          </li>
+          <li>
+              <a href="/notario/notarialnyj-perevod/">Нотариальный перевод документов</a>
+          </li>
+          <li>
+              <a href="/traduccion/">Перевод документов</a>
+          </li>
+          <li>
+              <a href="/notario/mezhdunarodnaya-dostavka-dokumentov/">Международная доставка документов</a>
+          </li>
+          <li>
+              <a href="/rossiya-belarus/">Документы из России и Беларуси</a>
+          </li>
+          <li>
+              <a href="/notario/">Весь нотариальный каталог</a>
+          </li>
+        </ul>
+        </div>
+      </div>
+
+      <div class="pillar-nav__custom">
+        <b>Не нашли свою задачу?</b>
+        <span>Напишите, что нужно сделать, — скажем, как решим.</span>
+        <a class="btn btn--gold" href="https://wa.me/34624309985?text=%D0%94%D0%BE%D0%B1%D1%80%D1%8B%D0%B9%20%D0%B4%D0%B5%D0%BD%D1%8C%2C%20%D1%83%20%D0%BC%D0%B5%D0%BD%D1%8F%20%D0%B2%D0%BE%D0%BF%D1%80%D0%BE%D1%81%20%D0%BF%D0%BE%20%D0%BD%D0%B0%D0%BF%D1%80%D0%B0%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D1%8E%20%C2%AB%D0%9B%D0%B5%D0%B3%D0%B0%D0%BB%D0%B8%D0%B7%D0%B0%D1%86%D0%B8%D1%8F%C2%BB.%20%D0%AF%20%D1%81%20krepko.es/legalizacion/" rel="noopener noreferrer" target="_blank" data-cta="catalog-custom">Написать в WhatsApp</a>
+      </div>
+
+    </div>
+  </div>
+</aside>  </div>
 </div>
-  <section id="documents" class="pillar-grid-wrapper rh-section-break">
-    <span class="p-label">Каталог</span>
-    <h2>Документы по услуге</h2>
-<section class="card-grid">
-<a href="/legalizacion/apostil-ispania/" class="card card--document">
-  <h3 class="card__title-ru">Апостиль на испанский документ</h3>
-  <p class="card__title-es" lang="es">Apostilla de La Haya</p>
-</a><a href="/legalizacion/zaverenie-podpisi-na-dokumente/" class="card card--document">
-  <h3 class="card__title-ru">Заверение подписи на документе</h3>
-  <p class="card__title-es" lang="es">Legitimación de firma</p>
-</a><a href="/legalizacion/zaverenie-kopii-ispanskogo/" class="card card--document">
-  <h3 class="card__title-ru">Заверение копии испанского документа</h3>
-  <p class="card__title-es" lang="es">Compulsa notarial de copia</p>
-</a></section>  </section>
-  <section class="rh-section-break">
-    <span class="p-label">Как проходит</span>
-<div class="process-steps">
-  <h2>Как проходит оформление</h2>
-  <ol class="process-steps__list">
-    <li class="process-step">
-      <span class="process-step__n">1</span>
-      <div class="process-step__content">
-        <h3 class="process-step__title">Запрос в WhatsApp</h3>
-        <p class="process-step__text">Опишите документ — тип (доверенность, свидетельство, выписка), оригинал из какого органа (нотариус, Registro Civil, Минюст), нужен ли срочный апостиль. Специалист ответит за 15 минут.</p>
-      </div>
-    </li>
-    <li class="process-step">
-      <span class="process-step__n">2</span>
-      <div class="process-step__content">
-        <h3 class="process-step__title">Подготовка и подача</h3>
-        <p class="process-step__text">Krepko подготавливает документ и подаёт на апостиль: нотариальные документы — в нотариальную коллегию. Обычный срок — 3–4 рабочих дня. Срочный (при подаче до 10:30 утра) — тот же день или следующий.</p>
-      </div>
-    </li>
-    <li class="process-step">
-      <span class="process-step__n">3</span>
-      <div class="process-step__content">
-        <h3 class="process-step__title">Получение и доставка</h3>
-        <p class="process-step__text">Krepko получает готовый документ с апостилем и привозит клиенту. Логистика внутри города входит в сопровождение. Доставка в другой город — оплачивается отдельно по себестоимости.</p>
-      </div>
-    </li>
-  </ol>
-</div>  </section>
-  <section class="rh-section-break">
+
+<div class="service-tail">
+<section class="service-faq">
 <div class="faq">
   <h2>Частые вопросы</h2>
   <div class="faq__list">
     <details class="faq__item">
       <summary class="faq__q">Сколько стоит апостиль в Испании?</summary>
-      <div class="faq__a">Цена апостиля зависит от срочности — обычный (3–4 рабочих дня) или срочный (тот же день или следующий, при подаче до 10:30 утра). На нотариальные документы апостиль ставит нотариальная коллегия по своему тарифу. Стоимость по вашему документу называем до начала работы.</div>
+      <div class="faq__a">Стоимость апостиля зависит от срочности — обычный (3–4 рабочих дня) или срочный (тот же день или следующий, при подаче до 10:30 утра). На нотариальные документы апостиль ставит нотариальная коллегия по своему тарифу: государственного тарифа нет. Стоимость по вашему документу называем до начала работы.</div>
+    </details>
+    <details class="faq__item">
+      <summary class="faq__q">Апостиль нужен для любой страны?</summary>
+      <div class="faq__a">Только для стран — участниц Гаагской конвенции 1961 года. Для остальных стран нужна консульская легализация, а с некоторыми странами действуют договоры, по которым не нужно ни то ни другое. Проверяем это до начала работы, чтобы не делать лишний шаг.</div>
+    </details>
+    <details class="faq__item">
+      <summary class="faq__q">Можно ли сделать апостиль в тот же день?</summary>
+      <div class="faq__a">Да, при условии. Если подать документ на апостиль до 10:30 утра, готовый апостиль обычно к 13:00 того же дня, по срочному тарифу. Работает только в рабочие дни, не в выходные и праздники. Срочную подачу готовим заранее, чтобы успеть к этому времени.</div>
     </details>
     <details class="faq__item">
       <summary class="faq__q">Может ли документ из Украины получить апостиль в Испании?</summary>
-      <div class="faq__a">Нет. Апостиль ставится в стране происхождения документа. Для украинских документов апостиль оформляется в Украине (через команду Krepko в Украине), затем документ отправляется курьером в Испанию. Испанские органы ставят апостиль только на испанские документы.</div>
+      <div class="faq__a">Нет. Апостиль ставится в стране, которая выдала документ: на украинские документы — в Украине. Это делает команда Krepko в Украине, затем документ едет к вам курьером. Испанские органы ставят апостиль только на испанские документы.</div>
     </details>
     <details class="faq__item">
-      <summary class="faq__q">День в день — это возможно?</summary>
-      <div class="faq__a">Да, при условии. Если подать документ на апостиль до 10:30 утра, готовый апостиль обычно к 13:00 того же дня, по срочному тарифу. Работает только в рабочие дни, не в выходные и праздники. Krepko организует срочную подачу через установленные контакты.</div>
+      <summary class="faq__q">Как за границей проверят, что апостиль настоящий?</summary>
+      <div class="faq__a">Каждый испанский апостиль, бумажный и электронный, вносится в электронный реестр апостилей Министерства юстиции. Принимающая сторона проверяет его там по номеру и дате апостиля.</div>
     </details>
     <details class="faq__item">
-      <summary class="faq__q">Как оплачивается легализация?</summary>
-      <div class="faq__a">Стоимость зависит от того, входит ли легализация в нотариальный кейс или оформляется отдельно, от количества документов и срочности. Krepko изучает задачу и согласует стоимость до начала работы.</div>
-    </details>
-    <details class="faq__item">
-      <summary class="faq__q">Сколько документов можно оформить в одном кейсе?</summary>
-      <div class="faq__a">Один кейс — один пакет документов в рамках одной цели (например, апостиль на три выписки для банка — это один кейс). Если документы разных целей (один апостиль для банка, другой для наследства) — это два отдельных кейса. От числа документов в кейсе зависит стоимость — её согласуем заранее.</div>
+      <summary class="faq__q">Как оплачивается апостиль и заверение?</summary>
+      <div class="faq__a">Если апостиль нужен на документ, который мы оформляем у нотариуса, он входит в одну сумму за всё дело, и вы платите по факту подписания. Если нужен только апостиль, стоимость называем одной суммой до начала работы. Она зависит от количества документов и срочности.</div>
     </details>
   </div>
-</div>  </section>
+</div></section>
+
 <section id="sec-reviews" class="rh-section-break home-reviews">
   <h2>Что говорят клиенты</h2>
+  <div class="reviews-cta"><a class="reviews-cta__own" href="https://maps.google.com/?cid=13162404013177787736" target="_blank" rel="noopener noreferrer">5,0 · 15 отзывов в Google →</a></div>
 <div class="rv-wrap">
     <div class="rv-track" id="rv-track">
       <svg class="rv__sprite" width="0" height="0" aria-hidden="true"><symbol id="rv-glogo" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></symbol></svg>
@@ -531,9 +576,48 @@
     <a class="reviews-cta__own" href="/review/">Уже работали с нами? Оставьте отзыв</a>
   </div>
 </section>
+<section class="cmap">
+  <div class="cmap__head">
+    <h2>Работаем в шести городах</h2>
+    <p class="cmap__dek">В каждом — свой представитель Krepko: сопровождение на встрече, а не только переписка.</p>
+  </div>
+  <svg class="cmap__svg" viewBox="0 25 1000 775" role="img" aria-label="Карта Испании: города, где работает Krepko">
+    <g class="cmap__land-group">
+      <path class="map__land" d="M 15 107 C 23 94, 56 70, 85 59 C 114 48, 158 46, 192 44 C 226 42, 260 46, 292 49 C 324 52, 361 59, 385 59 C 409 59, 418 48, 438 49 C 458 50, 482 60, 508 63 C 534 66, 564 59, 592 66 C 620 73, 645 97, 677 107 C 709 117, 750 120, 785 127 C 820 134, 853 140, 885 146 C 917 152, 974 148, 977 166 C 980 184, 928 234, 900 254 C 872 274, 827 272, 808 283 C 789 294, 795 306, 785 322 C 775 338, 759 360, 746 380 C 733 400, 713 418, 708 439 C 703 460, 718 488, 715 507 C 712 526, 700 541, 692 556 C 684 571, 675 584, 669 595 C 663 606, 667 613, 654 624 C 641 635, 611 650, 592 663 C 573 676, 560 694, 538 702 C 516 710, 486 710, 462 712 C 438 714, 414 706, 392 712 C 370 718, 346 740, 331 751 C 316 762, 314 783, 300 780 C 286 777, 263 752, 246 732 C 229 712, 214 674, 200 663 C 186 652, 167 676, 162 663 C 157 650, 164 614, 169 585 C 174 556, 187 520, 192 488 C 197 456, 197 422, 200 390 C 203 358, 209 324, 208 293 C 207 262, 210 221, 192 205 C 174 189, 122 200, 100 195 C 78 190, 72 186, 62 176 C 52 166, 46 148, 38 137 C 30 126, 7 120, 15 107 Z"/>
+      <path class="map__isle" d="M 856 404 C 868 396, 890 396, 902 402 C 914 408, 916 420, 908 428 C 900 436, 878 438, 866 432 C 854 426, 844 412, 856 404 Z"/>
+      <path class="map__isle" d="M 928 380 C 936 374, 950 375, 955 381 C 960 387, 956 394, 948 396 C 940 398, 930 394, 926 389 C 922 384, 924 383, 928 380 Z"/>
+      <path class="map__isle" d="M 812 466 C 820 460, 832 461, 837 467 C 842 473, 838 482, 830 485 C 822 488, 812 484, 809 478 C 806 472, 808 469, 812 466 Z"/>
+    </g>
+      <a class="cmap__city" href="/alicante/" aria-label="Krepko в городе Аликанте">
+        <circle class="cmap__dot" cx="694" cy="551" r="7"/>
+        <text class="cmap__label" x="694" y="533" text-anchor="middle">Аликанте</text>
+      </a>
+      <a class="cmap__city" href="/valencia/" aria-label="Krepko в городе Валенсия">
+        <circle class="cmap__dot" cx="702" cy="442" r="7"/>
+        <text class="cmap__label" x="702" y="424" text-anchor="middle">Валенсия</text>
+      </a>
+      <a class="cmap__city" href="/murcia/" aria-label="Krepko в городе Мурсия">
+        <circle class="cmap__dot" cx="644" cy="586" r="7"/>
+        <text class="cmap__label" x="628" y="622" text-anchor="middle">Мурсия</text>
+      </a>
+      <a class="cmap__city" href="/madrid/" aria-label="Krepko в городе Мадрид">
+        <circle class="cmap__dot" cx="446" cy="349" r="7"/>
+        <text class="cmap__label" x="446" y="331" text-anchor="middle">Мадрид</text>
+      </a>
+      <a class="cmap__city" href="/barcelona/" aria-label="Krepko в городе Барселона">
+        <circle class="cmap__dot" cx="898" cy="255" r="7"/>
+        <text class="cmap__label" x="898" y="237" text-anchor="middle">Барселона</text>
+      </a>
+      <a class="cmap__city" href="/malaga/" aria-label="Krepko в городе Малага">
+        <circle class="cmap__dot" cx="391" cy="710" r="7"/>
+        <text class="cmap__label" x="391" y="692" text-anchor="middle">Малага</text>
+      </a>
+  </svg>
+</section></div>
+
 <section class="final-cta">
-  <h2>Нужна услуга «легализация»?</h2>
-  <p>Опишите задачу в WhatsApp — специалист ответит за 15 минут.</p>
+  <h2>Нужен апостиль или заверение?</h2>
+  <p>Напишите, что за документ и в какую страну он едет, — скажем, нужен ли апостиль и какое заверение там примут. Специалист ответит за 15 минут, ежедневно 9–⁠20.</p>
     <a class="btn btn--gold" href="https://wa.me/34624309985?text=%D0%94%D0%BE%D0%B1%D1%80%D1%8B%D0%B9%20%D0%B4%D0%B5%D0%BD%D1%8C%2C%20%D1%83%20%D0%BC%D0%B5%D0%BD%D1%8F%20%D0%B2%D0%BE%D0%BF%D1%80%D0%BE%D1%81%20%D0%BF%D0%BE%20%D0%BD%D0%B0%D0%BF%D1%80%D0%B0%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D1%8E%20%C2%AB%D0%9B%D0%B5%D0%B3%D0%B0%D0%BB%D0%B8%D0%B7%D0%B0%D1%86%D0%B8%D1%8F%C2%BB.%20%D0%AF%20%D1%81%20krepko.es/legalizacion/" data-cta="final">Написать в WhatsApp</a>
 </section>  </main>
 <footer id="sec-footer" class="site-footer">
@@ -547,6 +631,7 @@
         <a class="site-footer__brand" href="/" aria-label="Krepko — на главную">
           <span class="site-footer__brand-text">Krepko</span>
         </a>
+        <p class="footer-map__title">WEONERENT, S.L.<br>CIF&nbsp;B22809552<br>Avinguda de la Costa Blanca&nbsp;93<br>03540&nbsp;Alicante<br>Ежедневно 9–20</p>
       </div>
 
       <div class="footer-map__cols">
@@ -596,14 +681,14 @@
         <p class="footer-map__title">Связаться</p>
         <a class="footer-map__link" href="tel:+34624309985">+34 624 309 985</a>
         <a class="footer-map__link" href="mailto:hello@krepko.es">hello@krepko.es</a>
-        <a class="footer-map__link" href="https://wa.me/34624309985?text=%D0%94%D0%BE%D0%B1%D1%80%D1%8B%D0%B9%20%D0%B4%D0%B5%D0%BD%D1%8C%2C%20%D1%83%20%D0%BC%D0%B5%D0%BD%D1%8F%20%D0%B2%D0%BE%D0%BF%D1%80%D0%BE%D1%81%20%D0%BF%D0%BE%20%D0%BD%D0%B0%D0%BF%D1%80%D0%B0%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D1%8E%20%C2%AB%D0%9B%D0%B5%D0%B3%D0%B0%D0%BB%D0%B8%D0%B7%D0%B0%D1%86%D0%B8%D1%8F%C2%BB.%20%D0%AF%20%D1%81%20krepko.es/legalizacion/" target="_blank" rel="noopener noreferrer">Написать в WhatsApp</a>
+        <a class="footer-map__link" href="https://wa.me/34624309985?text=%D0%94%D0%BE%D0%B1%D1%80%D1%8B%D0%B9%20%D0%B4%D0%B5%D0%BD%D1%8C%2C%20%D1%83%20%D0%BC%D0%B5%D0%BD%D1%8F%20%D0%B2%D0%BE%D0%BF%D1%80%D0%BE%D1%81%20%D0%BF%D0%BE%20%D0%BD%D0%B0%D0%BF%D1%80%D0%B0%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D1%8E%20%C2%AB%D0%9B%D0%B5%D0%B3%D0%B0%D0%BB%D0%B8%D0%B7%D0%B0%D1%86%D0%B8%D1%8F%C2%BB.%20%D0%AF%20%D1%81%20krepko.es/legalizacion/" target="_blank" rel="noopener noreferrer" data-cta="footer">Написать в WhatsApp</a>
       </div>
       </div>
     </div>
 
     <div class="site-footer__bottom">
       <div class="footer-chat" aria-label="Мессенджеры">
-        <a class="footer-chat__link" href="https://wa.me/34624309985?text=%D0%94%D0%BE%D0%B1%D1%80%D1%8B%D0%B9%20%D0%B4%D0%B5%D0%BD%D1%8C%2C%20%D1%83%20%D0%BC%D0%B5%D0%BD%D1%8F%20%D0%B2%D0%BE%D0%BF%D1%80%D0%BE%D1%81%20%D0%BF%D0%BE%20%D0%BD%D0%B0%D0%BF%D1%80%D0%B0%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D1%8E%20%C2%AB%D0%9B%D0%B5%D0%B3%D0%B0%D0%BB%D0%B8%D0%B7%D0%B0%D1%86%D0%B8%D1%8F%C2%BB.%20%D0%AF%20%D1%81%20krepko.es/legalizacion/" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+        <a class="footer-chat__link" href="https://wa.me/34624309985?text=%D0%94%D0%BE%D0%B1%D1%80%D1%8B%D0%B9%20%D0%B4%D0%B5%D0%BD%D1%8C%2C%20%D1%83%20%D0%BC%D0%B5%D0%BD%D1%8F%20%D0%B2%D0%BE%D0%BF%D1%80%D0%BE%D1%81%20%D0%BF%D0%BE%20%D0%BD%D0%B0%D0%BF%D1%80%D0%B0%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D1%8E%20%C2%AB%D0%9B%D0%B5%D0%B3%D0%B0%D0%BB%D0%B8%D0%B7%D0%B0%D1%86%D0%B8%D1%8F%C2%BB.%20%D0%AF%20%D1%81%20krepko.es/legalizacion/" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" data-cta="footer-icon">
           <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M12.04 2c-5.46 0-9.9 4.44-9.9 9.9 0 1.75.46 3.45 1.32 4.95L2 22l5.3-1.39a9.9 9.9 0 0 0 4.74 1.2h.01c5.46 0 9.9-4.44 9.9-9.9S17.5 2 12.04 2Zm0 18.06h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.11.82.83-3.04-.2-.31a8.19 8.19 0 0 1-1.26-4.4c0-4.53 3.69-8.22 8.24-8.22a8.22 8.22 0 0 1 0 16.44Zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.24-.64.8-.78.97-.15.16-.29.18-.53.06-.25-.13-1.05-.39-1.99-1.23-.74-.65-1.23-1.46-1.38-1.71-.14-.24-.01-.37.11-.5.11-.11.25-.29.37-.44.13-.15.17-.25.25-.41.09-.17.04-.31-.02-.44-.06-.12-.56-1.34-.76-1.84-.2-.48-.4-.42-.56-.42l-.47-.01c-.16 0-.43.06-.65.3-.23.25-.86.85-.86 2.06 0 1.21.88 2.39 1 2.55.13.17 1.74 2.66 4.22 3.73.59.25 1.05.4 1.4.52.59.19 1.13.16 1.55.1.48-.07 1.47-.6 1.67-1.18.21-.58.21-1.07.15-1.18-.06-.1-.22-.16-.47-.28Z"/></svg>
         </a>
         <a class="footer-chat__link" href="https://t.me/+34624309985?text=%D0%94%D0%BE%D0%B1%D1%80%D1%8B%D0%B9%20%D0%B4%D0%B5%D0%BD%D1%8C%2C%20%D1%83%20%D0%BC%D0%B5%D0%BD%D1%8F%20%D0%B2%D0%BE%D0%BF%D1%80%D0%BE%D1%81%20%D0%BF%D0%BE%20%D0%BD%D0%B0%D0%BF%D1%80%D0%B0%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D1%8E%20%C2%AB%D0%9B%D0%B5%D0%B3%D0%B0%D0%BB%D0%B8%D0%B7%D0%B0%D1%86%D0%B8%D1%8F%C2%BB.%20%D0%AF%20%D1%81%20krepko.es/legalizacion/" target="_blank" rel="noopener noreferrer" aria-label="Telegram">

@@ -27,11 +27,22 @@
     };
   }
 
-  // Persist UTM in localStorage (first-touch attribution на 30 дней)
+  // 28.10.2026 (канон §6.1 п. 4, LSSI ст. 22.2, гайд AEPD): метку первого
+  // захода храним в браузере только после «Принять все» в баннере cookies
+  // (ключ krepko_consent_v1 = 'all', assets/cookie-consent.js). Без согласия
+  // «Источник:» берётся из адреса текущей страницы, ничего не записывая;
+  // при отказе ранее записанная метка удаляется.
+  function hasConsent() {
+    try { return localStorage.getItem('krepko_consent_v1') === 'all'; }
+    catch (e) { return false; }
+  }
+
+  // Persist UTM in localStorage (first-touch attribution) — только с согласием
   function rememberUTM() {
-    var u = getUTM();
-    if (!u.source) return;
     try {
+      if (!hasConsent()) { localStorage.removeItem('es_utm'); return; }
+      var u = getUTM();
+      if (!u.source) return;
       var stored = JSON.parse(localStorage.getItem('es_utm') || 'null');
       if (!stored) {
         u.first_seen = new Date().toISOString();
@@ -41,10 +52,18 @@
   }
 
   function getStoredUTM() {
+    if (!hasConsent()) return getUTM();
     try {
       var stored = JSON.parse(localStorage.getItem('es_utm') || 'null');
       return stored || getUTM();
     } catch (e) { return getUTM(); }
+  }
+
+  // Согласие дали на этой же странице — запоминаем метку сразу, не дожидаясь
+  // следующего захода (кнопка баннера: [data-consent="all"]).
+  function onConsentClick(e) {
+    var btn = e.target.closest && e.target.closest('[data-consent="all"]');
+    if (btn) setTimeout(rememberUTM, 0);
   }
 
   // ── WhatsApp: автоподстановка «Источник:» в text= ───────────────────────
@@ -168,6 +187,7 @@
     patchWhatsAppLinks();
     attachAutoCTAListeners();
     document.addEventListener('click', onDelegatedClick);
+    document.addEventListener('click', onConsentClick);
     trackScrollDepth('.tariff-grid, .pricing, [data-track-section="pricing"]', 'pricing_view');
     trackBlogReadComplete();
   }
