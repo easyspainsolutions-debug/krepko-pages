@@ -4673,3 +4673,23 @@
     --F-w: min(calc((86vw - 367px) / 11.5), calc((86vw - 67px) / 18.5));
   }
 }
+
+/* 28.10.2026 — барабан до загрузки скрипта (первый заход, скрипт не в кэше).
+   Раньше до home-redesign.js ни одна строка не была активной: всё бледное и
+   без точки, пока скрипт не догрузится. Теперь CSS рисует тот же первый кадр,
+   что поставит скрипт: первая услуга — активная с точкой, на своей строке
+   (телефон — третья из пяти, десктоп — вторая из трёх), следующая — соседняя.
+   Скрипт в snap() ставит .is-live и дальше ведёт ленту сам — без скачка. */
+@media (max-width: 719px), (min-width: 900px) {
+  .hero__roll:not(.is-live) li:first-child {
+    color: var(--text); opacity: 1; font-weight: 600; padding-left: 1em; transition: none;
+  }
+  .hero__roll:not(.is-live) li:first-child::before { transform: translate(0, -50%); opacity: 1; transition: none; }
+  .hero__roll:not(.is-live) li:nth-child(2) { opacity: .55; }
+}
+@media (max-width: 719px) {
+  .hero__roll:not(.is-live) ul { transform: translateY(calc(2 * 28px)); }
+}
+@media (min-width: 900px) {
+  .hero--home .hero__roll:not(.is-live) ul { transform: translateY(var(--roll-step)); }
+}

@@ -895,6 +895,10 @@
     while (idx >= 2 * n) idx -= n;
     setY((idx - OFF) * L);
     paint(false);
+    /* 28.10.2026: до этого кадр «до скрипта» рисует CSS (.hero__roll:not(.is-live)),
+       с тем же активным пунктом на том же месте — на первом заходе нет бледного
+       барабана без точки, пока грузится скрипт */
+    box.classList.add('is-live');
   }
 
   var animating = false, stale = false;
@@ -907,11 +911,25 @@
   window.addEventListener('resize', function () { if (mqD.matches) refit(); }, { passive: true });
   if (mqD.addEventListener) mqD.addEventListener('change', refit);
   else if (mqD.addListener) mqD.addListener(refit);
+  /* 28.10.2026: Safari выполняет скрипт раньше, чем применит стили главной, —
+     первая высота строки 18 px вместо 47, лента крутилась с неверным шагом и
+     подсвеченная строка уезжала за окно барабана (все строки бледные). Шаг
+     перемеряем, как только строка меняет высоту, и после полной загрузки. */
+  if (window.ResizeObserver) {
+    new ResizeObserver(function () { if (mqD.matches) refit(); }).observe(items[0]);
+  }
+  window.addEventListener('load', function () { if (mqD.matches) refit(); });
 
   if (reduce) { snap(); return; }
 
   function stepOnce() {
     if (!(mq.matches || mqD.matches) || document.hidden || animating) return;
+    /* шаг ленты сверяем перед каждым тактом: если стили догрузились позже
+       скрипта, сначала встаём в верный кадр */
+    if (mqD.matches) {
+      var was = L; geom();
+      if (L !== was) snap();
+    }
     animating = true;
     if (idx >= 2 * n) { idx -= n; setY((idx - OFF) * L); }
     /* всё параллельно с первого кадра: старая теряет подсветку и уезжает
