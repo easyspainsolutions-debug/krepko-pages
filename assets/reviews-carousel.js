@@ -82,7 +82,9 @@ window.__krepkoReviewsCarouselRan = true;
     Array.prototype.forEach.call(cards, function (c, i) {
       var b = document.createElement('button');
       b.type = 'button';
-      b.setAttribute('aria-label', 'Отзыв ' + (i + 1) + ' из ' + cards.length);
+      /* /uk/ (28.10.2026): подпись точки по <html lang> */
+      var uk = (document.documentElement.getAttribute('lang') || '').slice(0, 2) === 'uk';
+      b.setAttribute('aria-label', (uk ? 'Відгук ' : 'Отзыв ') + (i + 1) + (uk ? ' з ' : ' из ') + cards.length);
       b.addEventListener('click', function () { go(i); });
       dots.appendChild(b); dotBtns.push(b);
     });

@@ -45,7 +45,20 @@
   var mode = 'services';
   var cursor = -1;          /* индекс выделенной строки; -1 — ничего не выбрано */
 
-  var MODES = {
+  /* Украинская версия /uk/ (28.10.2026): подписи по <html lang> */
+  var UK = (document.documentElement.getAttribute('lang') || '').slice(0, 2) === 'uk';
+  var MODES = UK ? {
+    services: {
+      placeholder: 'Що потрібно оформити?',
+      tip: 'Перемкнути на блог',
+      aria: 'Шукаємо в послугах. Перемкнути на блог'
+    },
+    blog: {
+      placeholder: 'Про що почитати?',
+      tip: 'Перемкнути на послуги',
+      aria: 'Шукаємо в блозі. Перемкнути на послуги'
+    }
+  } : {
     services: {
       placeholder: 'Что нужно оформить?',
       tip: 'Переключить на блог',
@@ -345,9 +358,11 @@
        подсвечиваются, чтобы состояние читалось и без цвета дорожки. */
     if (switchTrack) {
       switchTrack.setAttribute('aria-checked', next === 'blog' ? 'true' : 'false');
-      switchTrack.setAttribute('aria-label', next === 'blog'
-        ? 'Область поиска: блог. Переключить на услуги'
-        : 'Область поиска: услуги. Переключить на блог');
+      switchTrack.setAttribute('aria-label', UK
+        ? (next === 'blog' ? 'Область пошуку: блог. Перемкнути на послуги'
+                           : 'Область пошуку: послуги. Перемкнути на блог')
+        : (next === 'blog' ? 'Область поиска: блог. Переключить на услуги'
+                           : 'Область поиска: услуги. Переключить на блог'));
     }
     switchSides.forEach(function (s) {
       s.classList.toggle('is-on', s.dataset.side === next);
