@@ -6,7 +6,10 @@
    сайта (/search-index.json — тот же, что у лупы в шапке) и показывает
    результаты списком над карточками; сами карточки не трогаем.
 
-   Без скрипта поиск скрыт (<noscript> в шаблоне) — каталог полный. */
+   Без скрипта поиск скрыт (<noscript> в шаблоне) — каталог полный.
+
+   /uk/services/ (28.10.2026): индекс по <html lang> — /search-index.uk.json
+   (украинские названия, ссылки на /uk/), как у лупы в шапке. */
 (function () {
   var input = document.getElementById('svc-search');
   var grid = document.getElementById('svc-grid');
@@ -15,15 +18,24 @@
   if (!input || !grid || !resultsBox || !window.fetch) return;
 
   var index = null;
+  var UK = (document.documentElement.getAttribute('lang') || '').slice(0, 2) === 'uk';
 
   function load() {
     if (index) return Promise.resolve(index);
-    return fetch('/search-index.json')
+    return fetch(UK ? '/search-index.uk.json' : '/search-index.json')
       .then(function (r) { return r.json(); })
       .then(function (data) { index = data; return data; });
   }
 
-  function norm(s) { return (s || '').toLowerCase().replace(/ё/g, 'е'); }
+  /* апостроф и испанское ударение не важны: «сім'я» = «сімʼя»,
+     «autonomo» находит «Autónomo» (как в site-search.js) */
+  var LATIN = { 'á': 'a', 'à': 'a', 'â': 'a', 'ä': 'a', 'é': 'e', 'è': 'e', 'ê': 'e', 'ë': 'e',
+    'í': 'i', 'ì': 'i', 'î': 'i', 'ï': 'i', 'ó': 'o', 'ò': 'o', 'ô': 'o', 'ö': 'o',
+    'ú': 'u', 'ù': 'u', 'û': 'u', 'ü': 'u', 'ñ': 'n', 'ç': 'c' };
+  function norm(s) {
+    return (s || '').toLowerCase().replace(/ё/g, 'е').replace(/['’ʼ`]/g, '')
+      .replace(/[áàâäéèêëíìîïóòôöúùûüñç]/g, function (c) { return LATIN[c]; });
+  }
 
   function render(q) {
     var query = norm(q.trim());
@@ -53,7 +65,7 @@
       var b = document.createElement('b');
       b.textContent = h.t;
       a.appendChild(b);
-      if (h.c && h.c !== 'Направление') {
+      if (h.c && h.c !== 'Направление' && h.c !== 'Напрям') {
         var s = document.createElement('span');
         s.textContent = h.c;
         a.appendChild(s);
