@@ -281,7 +281,7 @@ body .final-cta > h2 {
   #sec-reviews .rv-dots button { padding: var(--space-3) var(--space-1); }
   #sec-reviews .rv-dots button::before {
     width: 6px; height: 6px; border-radius: 3px;
-    transition: width .3s ease, background .3s ease;
+    transition: width .15s ease, background .15s ease;
   }
   #sec-reviews .rv-dots button.is-on::before { width: 16px; transform: none; background: var(--gold); }
 }

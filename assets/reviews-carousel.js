@@ -104,8 +104,11 @@ window.__krepkoReviewsCarouselRan = true;
   if (prev) prev.addEventListener('click', function(){ go(idx - 1); });
   if (next) next.addEventListener('click', function(){ go(idx + 1); });
 
-  /* ручная прокрутка/свайп — индекс по ближайшей карточке */
-  var t = null;
+  /* ручная прокрутка/свайп — индекс по ближайшей карточке. 28.10.2026
+     (Daniil: «у точек оч большая задержка после свайпа»): раньше точка
+     ждала конца прокрутки + 90 мс, а на iOS снап с инерцией идёт ещё
+     полсекунды. Теперь точка следует за лентой в каждом кадре прокрутки. */
+  var raf = 0;
   function nearest(){
     var x = track.scrollLeft, best = 0, bd = 1e9;
     Array.prototype.forEach.call(cards, function (c, i) {
@@ -115,8 +118,12 @@ window.__krepkoReviewsCarouselRan = true;
     return best;
   }
   track.addEventListener('scroll', function(){
-    if (t) clearTimeout(t);
-    t = setTimeout(function(){ idx = nearest(); sync(); }, 90);
+    if (raf) return;
+    raf = requestAnimationFrame(function(){
+      raf = 0;
+      var n = nearest();
+      if (n !== idx) { idx = n; sync(); }
+    });
   }, {passive: true});
 
   window.addEventListener('resize', function(){
