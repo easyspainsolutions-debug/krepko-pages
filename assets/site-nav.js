@@ -160,8 +160,21 @@
   d.addEventListener('keydown', function(e){
     if (e.key === 'Escape') { e.preventDefault(); d.close(); }
   });
+  /* Чем закрыли меню — пальцем/мышью или клавиатурой: после касания фокус
+     возвращаем без кольца (iOS рисовал обводку бургера, Daniil 28.10) */
+  var viaKey = false;
+  document.addEventListener('keydown', function(){ viaKey = true; }, true);
+  document.addEventListener('pointerdown', function(){ viaKey = false; }, true);
   d.addEventListener('close', function(){
-    if (trigger) { try { trigger.focus(); } catch (_) {} }
+    if (!trigger) return;
+    if (!viaKey) {
+      trigger.classList.add('is-quiet-focus');
+      trigger.addEventListener('blur', function off(){
+        trigger.classList.remove('is-quiet-focus');
+        trigger.removeEventListener('blur', off);
+      });
+    }
+    try { trigger.focus(); } catch (_) {}
   });
 })();
 

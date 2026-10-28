@@ -163,6 +163,11 @@ main {
   outline: 2px solid var(--gold);
   outline-offset: 2px;
 }
+/* 28.10.2026 (Daniil: «обводку бургера при нажатии убери»): меню закрыли
+   пальцем — фокус всё равно возвращается на кнопку (нужно экранным
+   читалкам), но iOS Safari рисует на ней кольцо. Класс вешает site-nav.js
+   и снимает на blur; закрыли с клавиатуры (Esc) — кольцо остаётся. */
+.site-nav__menu-btn.is-quiet-focus:focus-visible { outline: none; box-shadow: none; }
 
 /* ── Mobile (<540px) — скрыть WhatsApp text, показать только icon ── */
 @media (max-width: 540px) {
