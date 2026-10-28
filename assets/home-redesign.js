@@ -1032,3 +1032,103 @@
   addEventListener('resize', wake, { passive: true });
   wake();
 })();
+
+
+/* ═══ Переписка-«фантомы» в первом экране десктопа (28.10.2026) ═══
+   Источник пар — ul.hero-chat__src в home.html (на /uk/ — переведённый).
+   Пары по кругу; прошлая — бледный след, позапрошлая — бледнее, третья
+   растворяется. Пауза, когда блок вне экрана или вкладка скрыта; при
+   «уменьшить движение» — одна первая пара без анимации. Телефон — без блока. */
+(function () {
+  var stage = document.querySelector('.hero-chat');
+  if (!stage) return;
+  var src = stage.querySelectorAll('.hero-chat__src li');
+  if (!src.length) return;
+  var mqD = window.matchMedia('(min-width: 900px)');
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var PAIRS = Array.prototype.map.call(src, function (li) {
+    return { q: li.getAttribute('data-q'), a: li.textContent.trim(), card: li.getAttribute('data-card') };
+  });
+  /* четыре полосы по высоте (top %), через одну — соседние пары далеко.
+     Вопрос клиента — от правого края колонки (right %); ответ уходит левее
+     колонки, в пустое поле к заголовку: доля этого поля (Daniil 28.10:
+     «пусть шире разлетаются, вторые сообщения ближе к заголовку») */
+  var BANDS = [[1, 0, .55], [51, 9, .95], [26, 4, .3], [74, 13, .8]];
+  var h1 = document.querySelector('.hero--home .hero__h1');
+  /* свободное поле между правым краем текста H1 и колонкой, с запасом 40 px */
+  function field() {
+    if (!h1) return 0;
+    var r = document.createRange(); r.selectNodeContents(h1);
+    return Math.max(0, stage.getBoundingClientRect().left - r.getBoundingClientRect().right - 40);
+  }
+  var timers = [], k = 0, live = [], running = false, visible = true;
+  function later(fn, ms) { timers.push(setTimeout(fn, ms)); }
+  function stop() { timers.forEach(clearTimeout); timers = []; running = false; }
+  function esc(t) { var d = document.createElement('div'); d.textContent = t; return d.innerHTML; }
+  function mk(html) {
+    var d = document.createElement('div'); d.className = 'hero-chat__fl';
+    d.innerHTML = '<span class="hero-chat__drift">' + html + '</span>'; return d;
+  }
+  /* ответ — сразу под фактической высотой вопроса (вопрос бывает в две
+     строки); пара целиком не выходит за низ блока */
+  function place(b, q, a, dots) {
+    var H = stage.clientHeight, qh = q.offsetHeight, gap = 10;
+    var ah = Math.max(a.offsetHeight, dots ? dots.offsetHeight : 0);
+    var top = Math.max(0, Math.min(b[0] / 100 * H, H - qh - gap - ah));
+    var al = -Math.round(b[2] * field());
+    q.style.right = b[1] + '%'; q.style.top = top + 'px';
+    [a, dots].forEach(function (e) { if (e) { e.style.left = al + 'px'; e.style.top = (top + qh + gap) + 'px'; } });
+  }
+  function answer(p) {
+    var card = p.card === 'maps'
+      ? '<span class="hero-chat__maps"><b>Krepko</b><span class="hero-chat__stars">★★★★★</span><small>5,0 · Google Maps</small></span>'
+      : '';
+    return '<span class="hero-chat__b hero-chat__b--a"><span class="hero-chat__who">Krepko</span>' + esc(p.a) + card + '</span>';
+  }
+  function retire() {
+    live.forEach(function (pr, idx) {
+      var age = live.length - idx;
+      pr.forEach(function (e) {
+        e.classList.remove('is-ghost', 'is-ghost2');
+        if (age === 1) e.classList.add('is-ghost');
+        else if (age === 2) e.classList.add('is-ghost2');
+        else { e.classList.add('is-out'); later(function () { e.remove(); }, 2100); }
+      });
+    });
+    live = live.slice(-2);
+  }
+  function pair() {
+    var p = PAIRS[k % PAIRS.length], b = BANDS[k % BANDS.length]; k++;
+    var q = mk('<span class="hero-chat__b hero-chat__b--q">' + esc(p.q) + '</span>');
+    var dots = mk('<span class="hero-chat__b hero-chat__b--dots"><i></i><i></i><i></i></span>');
+    var a = mk(answer(p));
+    retire();
+    stage.appendChild(q); stage.appendChild(dots); stage.appendChild(a);
+    place(b, q, a, dots);
+    later(function () { q.classList.add('is-in'); }, 500);
+    later(function () { dots.classList.add('is-in'); }, 1400);
+    later(function () { dots.classList.remove('is-in'); a.classList.add('is-in'); }, 2700);
+    later(function () { dots.remove(); }, 3300);
+    live.push([q, a]);
+    later(function () { if (running) pair(); }, 6800);
+  }
+  function start() {
+    if (running || !visible || document.hidden || !mqD.matches) return;
+    running = true; pair();
+  }
+  if (reduce) {
+    var p0 = PAIRS[0], q0 = mk('<span class="hero-chat__b hero-chat__b--q">' + esc(p0.q) + '</span>'), a0 = mk(answer(p0));
+    stage.appendChild(q0); stage.appendChild(a0); place(BANDS[0], q0, a0);
+    q0.classList.add('is-in'); a0.classList.add('is-in');
+    return;
+  }
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver(function (es) {
+      visible = es[0].isIntersecting;
+      if (visible) start(); else stop();
+    }).observe(stage);
+  }
+  document.addEventListener('visibilitychange', function () { if (document.hidden) stop(); else start(); });
+  if (mqD.addEventListener) mqD.addEventListener('change', function () { if (mqD.matches) start(); else stop(); });
+  start();
+})();
