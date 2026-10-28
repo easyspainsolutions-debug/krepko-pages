@@ -53,12 +53,17 @@
   border: 1px solid var(--border-faint);
   border-radius: var(--r-3);
 }
-.sell-trust__t {
+/* Заголовок блока доверия — <h2> (Ф2a, 28.10.2026): Manrope 700, 18 px, navy.
+   Двойной класс — против «.pillar-doc h2» (Playfair 24–32 px) и голого h2
+   старых шаблонов (krepko-base.css). */
+.sell-trust .sell-trust__t {
   margin: 0 0 var(--space-3);
-  font-family: 'Playfair Display', Georgia, serif;
-  font-size: var(--ts-h3);
-  font-weight: 500;
-  color: var(--text);
+  font-family: 'Manrope', sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.35;
+  letter-spacing: 0;
+  color: var(--navy);
 }
 .sell-trust__list { list-style: none; margin: 0; padding: 0; }
 .sell-trust__list li {
@@ -134,7 +139,7 @@
 }
 .city-context p { margin: 0 0 var(--space-4); }
 .city-context .city-context__more { margin-top: var(--space-5); }
-.city-context .city-context__more a { color: var(--gold); font-weight: 600; text-decoration: none; }
+.city-context .city-context__more a { color: var(--gold-text); font-weight: 600; text-decoration: none; }
 .city-context ~ .pricing-block .pricing-block__explain + .pricing-block__explain { margin-top: var(--space-3); }
 
 /* «Что нужно от вас» — список без плашки, маркер терракотовый */
@@ -177,7 +182,7 @@
   height: 30px;
   border: 1px solid var(--border);
   background: var(--surface);
-  color: var(--gold);
+  color: var(--gold-text);
   font-family: 'Playfair Display', Georgia, serif;
   font-size: 15px;
   font-weight: 400;
@@ -215,7 +220,7 @@
 /* Карта на городской странице: текущий город — подсвеченная точка без ссылки */
 .service-tail .cmap__city.is-current { cursor: default; }
 .service-tail .cmap__city.is-current .cmap__dot { r: 11; stroke: var(--bg); stroke-width: 4; }
-.service-tail .cmap__city.is-current .cmap__label { fill: var(--gold); font-weight: 800; }
+.service-tail .cmap__city.is-current .cmap__label { fill: var(--gold-text); font-weight: 800; }
 
 /* Хабы направлений: на телефоне каталог стоит над текстом и заканчивается
    своей кнопкой WhatsApp — вторая кнопка с фактами шла бы сразу под ней. */

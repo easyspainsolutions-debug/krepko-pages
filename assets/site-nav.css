@@ -558,8 +558,13 @@ dialog:not([open]) { display: none !important; }
   .topbar__item:hover { color: var(--gold); }
   .topbar__item svg { color: var(--gold); flex-shrink: 0; }
   .topbar__socials { display: flex; align-items: center; gap: 14px; }
+  /* Д16 (Ф2a, 28.10.2026): цель нажатия 17×17 → 33×33 — поле вокруг значка
+     и отрицательное поле той же величины, на глаз ничего не сдвигается.
+     Промах в зазор между значками был мёртвым кликом (Pulse, /madrid/). */
   .topbar__social {
     display: inline-flex;
+    padding: 8px;
+    margin: -8px;
     color: var(--text-muted);
     transition: color .15s ease, transform .15s ease;
   }
@@ -1085,7 +1090,9 @@ nav.breadcrumb {
   margin: 0 2px 0 -6px;
   padding: 5px 8px;
   border-radius: 6px;
-  color: var(--brand) !important;
+  /* --crumb-link = #B04E2F на страницах услуг, хабов и городов (body.tpl):
+     #C75B39 мелким капсом давал 4,09:1 — ниже AA (Ф2a, 28.10.2026) */
+  color: var(--crumb-link, var(--brand)) !important;
   font-weight: 700;
   transition: background-color .2s ease;
 }
@@ -1096,6 +1103,17 @@ nav.breadcrumb {
 }
 .breadcrumb__sep { opacity: .45; }
 .breadcrumb__current { opacity: .7; }
+
+/* Д15 (Ф2a, 28.10.2026): на десктопе «ГЛАВНАЯ» (ссылка) и текущая страница
+   были одного серого вида — по текущей кликали впустую (Pulse). На страницах
+   услуг, хабов и городов все ссылки пути — терракотовым текстом, текущая
+   остаётся серой. Шеврон «‹» — мобильный приём «назад», на десктопе снят. */
+@media (min-width: 721px) {
+  .tpl .breadcrumb a { color: var(--crumb-link); }
+  .tpl .breadcrumb__parent svg { display: none; }
+  /* поле под тап-зону телефона на десктопе раздвигало «НОТАРИУС  /» */
+  .tpl .breadcrumb__parent { margin: 0; padding: 5px 0; }
+}
 
 @media (max-width: 720px) {
   /* Сначала строка прокручивалась вбок, но название страницы просто

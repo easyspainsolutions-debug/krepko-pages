@@ -27,6 +27,24 @@ details:focus-visible {
   /* радиус элемента не трогаем: кольцо идёт по его собственной форме (QA 25.10) */
 }
 
+/* Страницы услуг, хабов и городов (body.tpl, Ф2a 28.10.2026): кольцо navy
+   2 px с отступом 3 px. Терракотовое кольцо вплотную терялось на
+   терракотовой кнопке (WCAG 2.4.7, замер focus.mjs). Отступ даёт outline:
+   box-shadow рисует кольцо вплотную. :focus-visible после тапа не
+   срабатывает, поэтому «пунктира» Safari из комментария выше здесь нет. */
+.tpl a:focus-visible,
+.tpl button:focus-visible,
+.tpl summary:focus-visible,
+.tpl [role="button"]:focus-visible,
+.tpl input:focus-visible,
+.tpl textarea:focus-visible,
+.tpl select:focus-visible,
+.tpl details:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 3px;
+  box-shadow: none;
+}
+
 /* На всякий случай: убираем любой default :focus outline (mouse/touch).
    Tab-навигация всё ещё подсвечивается через :focus-visible выше. */
 a:focus:not(:focus-visible),

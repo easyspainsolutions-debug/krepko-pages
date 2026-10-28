@@ -35,7 +35,8 @@
      при узкой раскладке head уходит из tab-order и теряет aria-expanded,
      а click-обработчик игнорируется. */
   var docMq = window.matchMedia ? window.matchMedia('(max-width: 899px)') : null;
-  var isDocPage = !!document.querySelector('.pillar-split--doc');
+  /* /notario/{город}/ (--city): категории — аккордеон, как на витрине (Д1, 28.10) */
+  var isDocPage = !!document.querySelector('.pillar-split--doc:not(.pillar-split--city)');
   function headIsLabel() { return isDocPage && docMq && docMq.matches; }
   function applyHeadMode() {
     cats.forEach(function (cat) {
@@ -266,4 +267,29 @@
   window.addEventListener('resize', fit, { passive: true });
   if ('ResizeObserver' in window) { new ResizeObserver(fit).observe(nav); }
   else { nav.addEventListener('click', function () { setTimeout(fit, 350); }); }
+})();
+
+/* Д8 (Ф2a, 28.10.2026): строка городов под картой. На телефоне подписи
+   городов на карте — цели 32–48×18 px, Аликанте и Мурсия в 21 px друг от
+   друга: промах уходил в фон карты, мёртвый тап. Под картой — те же шесть
+   ссылок крупными строками (CSS показывает строку только до 560 px).
+   Строку собирает скрипт из ссылок самой карты: те же адреса и названия,
+   а 139 страниц не тяжелеют на полкилобайта разметки (бюджет веса). */
+(function () {
+  var svg = document.querySelector('.cmap .cmap__svg');
+  if (!svg || svg.parentNode.querySelector('.cmap__row')) return;
+  var row = document.createElement('p');
+  row.className = 'cmap__row';
+  [].forEach.call(svg.querySelectorAll('.cmap__city'), function (city) {
+    var label = city.querySelector('.cmap__label');
+    var name = label ? label.textContent.trim() : '';
+    if (!name) return;
+    var href = city.getAttribute('href');
+    var el = document.createElement(href ? 'a' : 'span');
+    if (href) el.setAttribute('href', href);
+    else el.setAttribute('aria-current', 'page');
+    el.textContent = name;
+    row.appendChild(el);
+  });
+  if (row.children.length) svg.parentNode.insertBefore(row, svg.nextSibling);
 })();

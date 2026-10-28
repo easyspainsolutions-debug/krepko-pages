@@ -156,8 +156,9 @@
   color: var(--text);
   margin: 0;
 }
+/* без курсива: на шаблонах его нет (стандарт 25–26.10, Ф2a 28.10.2026) */
 .card--document .card__title-es {
-  font-style: italic;
+  font-style: normal;
   font-size: var(--ts-meta);
   color: var(--text-label);
   margin: var(--space-1) 0 var(--space-2);

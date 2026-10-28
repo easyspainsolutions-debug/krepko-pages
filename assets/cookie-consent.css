@@ -4,6 +4,17 @@
    Pattern: fixed bottom card, 2 actions (Принять все / Только необходимые),
             link to /cookies/ policy, hides after any choice.
    Depends on tokens.css — ensure loaded на каждой странице где включён banner.
+
+   28.10.2026 (Ф2a, решение Daniil «делай как нужно»):
+   • обе кнопки одного вида и размера — navy-заливка, равная ширина
+     (AEPD, Guía sobre el uso de las cookies, ред. 05.2024, с. 23–24:
+     отказ не должен быть менее заметным, чем согласие);
+   • на телефоне — компактная полоса во всю ширину: заголовок идёт в одну
+     строку с текстом, ≈120 px вместо 158 — баннер больше не закрывает
+     кнопку «Написать в WhatsApp» первого экрана на 390×660;
+   • без терракоты (линия сверху, ссылка) и без чёрной тени: терракота на
+     сайте — только у действия «написать нам», тени — тёплые (DESIGN.md).
+   Текст баннера не менялся: он же вморожен в 56 рукописных страниц.
    ============================================================ */
 
 .cookie-consent {
@@ -17,12 +28,16 @@
   margin: 0 auto;
   background: var(--surface-sunk);
   border: 1px solid var(--border);
-  border-top: 2px solid var(--gold);
   border-radius: var(--r-5);
   padding: var(--space-4) var(--space-5);
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.55);
+  box-shadow: 0 12px 32px rgba(26, 43, 60, 0.16);
   font-family: 'Manrope', -apple-system, sans-serif;
   animation: cookie-consent-slide-up 280ms cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* navy — цвет обеих кнопок и ссылки */
+  --cc-btn: rgb(26, 43, 60);
+  --cc-btn-hover: rgb(36, 56, 77);
+  --cc-btn-on: rgb(255, 255, 255);
 }
 
 @keyframes cookie-consent-slide-up {
@@ -61,16 +76,20 @@
   margin: 0;
 }
 
+/* Ссылка — navy с подчёркиванием: терракоты в баннере нет, а #C75B39 на
+   тёмном песке давал 3,4:1. */
 .cookie-consent__desc a {
-  color: var(--gold);
-  border-bottom: 1px solid rgba(196, 149, 42, 0.4);
+  color: var(--cc-btn);
+  border-bottom: 1px solid currentColor;
   text-decoration: none;
   transition: border-color var(--t-1);
 }
-.cookie-consent__desc a:hover { border-bottom-color: var(--gold); }
+.cookie-consent__desc a:hover { border-bottom-color: transparent; }
 
+/* Две колонки равной ширины: кнопки одного размера при любой длине надписи */
 .cookie-consent__actions {
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   gap: var(--space-2);
   flex-shrink: 0;
 }
@@ -79,6 +98,7 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  min-height: 44px;
   padding: var(--space-2) var(--space-4);
   border-radius: var(--r-3);
   font-family: 'Manrope', sans-serif;
@@ -86,77 +106,59 @@
   font-weight: 700;
   cursor: pointer;
   white-space: nowrap;
-  transition: background var(--t-2), border-color var(--t-1),
-              color var(--t-1), box-shadow var(--t-2),
-              transform var(--t-2);
+  transition: background var(--t-2), border-color var(--t-1), color var(--t-1);
 }
 
-.cookie-consent__btn--essential {
-  background: transparent;
-  border: 1px solid var(--border);
-  color: var(--text-sub);
-}
-.cookie-consent__btn--essential:hover {
-  border-color: var(--text-sub);
-  color: var(--text);
-  background: rgba(237, 241, 248, 0.04);
-}
-
+/* Обе кнопки — один вид: «Только необходимые» больше не прозрачная
+   с рамкой 1,08:1, а та же navy-кнопка, что «Принять все». */
+.cookie-consent__btn--essential,
 .cookie-consent__btn--accept {
-  background: linear-gradient(135deg, var(--gold) 0%, var(--gold-2) 100%);
-  border: 1px solid var(--gold);
-  color: var(--gold-on);
-  box-shadow: var(--glow-gold);
+  background: var(--cc-btn);
+  border: 1px solid var(--cc-btn);
+  color: var(--cc-btn-on);
+  box-shadow: none;
 }
+.cookie-consent__btn--essential:hover,
 .cookie-consent__btn--accept:hover {
-  box-shadow: 0 6px 18px rgba(196, 149, 42, 0.40);
-  transform: translateY(-1px);
+  background: var(--cc-btn-hover);
+  border-color: var(--cc-btn-hover);
 }
 
 .cookie-consent__btn:focus-visible {
-  outline: 2px solid var(--gold);
-  outline-offset: 2px;
+  outline: 2px solid var(--cc-btn);
+  outline-offset: 3px;
+  box-shadow: none;
 }
 
-/* Mobile — stack actions to full-width pair */
+/* Телефон — полоса во всю ширину, заголовок в одну строку с текстом */
 @media (max-width: 540px) {
   .cookie-consent {
-    bottom: var(--space-2);
-    left: var(--space-2);
-    right: var(--space-2);
-    padding: var(--space-3) var(--space-4);
+    bottom: 0;
+    left: 0;
+    right: 0;
+    border-width: 1px 0 0;
+    border-radius: 0;
+    padding: var(--space-2) var(--space-4) max(var(--space-2), env(safe-area-inset-bottom));
+    box-shadow: 0 -6px 24px rgba(26, 43, 60, 0.12);
   }
-  .cookie-consent__inner { gap: var(--space-3); }
-  .cookie-consent__actions {
-    width: 100%;
-    justify-content: stretch;
+  .cookie-consent__inner { gap: var(--space-2); }
+  .cookie-consent__text {
+    min-width: 0;
+    font-size: var(--ts-meta);
+    line-height: 1.4;
   }
-  .cookie-consent__btn {
-    flex: 1;
-    padding: var(--space-3);
+  .cookie-consent__title,
+  .cookie-consent__desc {
+    display: inline;
+    font-size: var(--ts-meta);
+    line-height: 1.4;
   }
+  .cookie-consent__title::after { content: '. '; }
+  .cookie-consent__actions { width: 100%; }
+  .cookie-consent__btn { padding: 0 var(--space-3); }
 }
 
 /* Reduce motion — skip slide animation */
 @media (prefers-reduced-motion: reduce) {
   .cookie-consent { animation: none; }
-}
-
-/* 26.10.2026: «Принять все» — тёмно-синяя, не терракотовая. Терракотовая
-   заливка на сайте только у кнопки WhatsApp: баннер не спорит с ней за палец,
-   а «Принять все» остаётся главной кнопкой баннера (согласия на аналитику). */
-.cookie-consent {
-  --cc-accept: rgb(26, 43, 60);
-  --cc-accept-hover: rgb(36, 56, 77);
-  --cc-accept-on: rgb(255, 255, 255);
-}
-.cookie-consent__btn--accept {
-  background: var(--cc-accept);
-  border-color: var(--cc-accept);
-  color: var(--cc-accept-on);
-  box-shadow: none;
-}
-.cookie-consent__btn--accept:hover {
-  background: var(--cc-accept-hover);
-  box-shadow: 0 6px 18px rgba(26, 43, 60, 0.25);
 }

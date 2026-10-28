@@ -78,8 +78,10 @@ p {
 
 strong { color: var(--text); font-weight: 700; }
 
+/* --link задают шаблоны страниц услуг, хабов и городов (body.tpl, light-scale.css):
+   там ссылки #B04E2F (AA). Без него — прежний --gold. */
 a {
-  color: var(--gold);
+  color: var(--link, var(--gold));
   text-decoration: none;
   transition: color var(--t-1);
 }

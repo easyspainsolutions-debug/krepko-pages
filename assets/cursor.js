@@ -51,8 +51,12 @@
      Тёмные поверхности перечислены явно: определять яркость фона в рантайме
      дорого и ненадёжно (фон часто на родителе или в градиенте). */
   var DARK = '.site-footer, .marquee, .ab-dark, .home-founder--dark, [data-dark]';
+  /* Д9 (Ф2a, 28.10.2026): из списка убраны .rv (отзыв) и .city__card
+     (карточка города, в ней нажимается только «Подробнее →») — точка гасла
+     над ними, как над ссылкой, хотя они не нажимаются. .creed и .gcard в
+     разметке нет, а ссылки .srow ловит и так «a». */
   var HOT = 'a, button, summary, input, select, textarea, label[for], ' +
-            '.map__pin, .creed, .srow, .gcard, .rv, .city__card, [role="button"]';
+            '.map__pin, [role="button"]';
 
   document.addEventListener('mouseover', function (e) {
     var t = e.target;

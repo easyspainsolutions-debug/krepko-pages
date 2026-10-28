@@ -83,6 +83,22 @@
   border-bottom-color: var(--gold);
 }
 
+/* === Переход к разделу ниже на этой же странице (Д22, Ф2a 28.10.2026) ===
+   Рамка (.btn--outline) — переход на другую страницу. Прокрутка к своему
+   разделу — текстовая ссылка рядом с кнопкой, высота цели 44 px. */
+.cta-row__jump {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  font-family: 'Manrope', sans-serif;
+  font-size: var(--ts-body-sm);
+  font-weight: 700;
+  color: var(--gold-text);
+  text-decoration: none;
+}
+@media (hover: hover) { .cta-row__jump:hover { color: var(--text); } }
+@media (min-width: 721px) { .cta-row__jump { margin-left: var(--space-3); } }
+
 /* === CTA row layout === */
 .cta-row {
   display: flex;

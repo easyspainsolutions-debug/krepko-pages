@@ -35,6 +35,12 @@ body:has(.pillar-split) main {
   --ps-text-muted: #6B6B6B;
   --ps-gold: #C75B39;
   --ps-gold-2: #B04E2F;
+  /* Ф2a (28.10.2026): терракотовый ТЕКСТ — #B04E2F (5,13:1 на кремовом).
+     --ps-gold (#C75B39, 4,09:1) — только заливки, точки, галочки, линии. */
+  --ps-gold-text: #B04E2F;
+  --ps-gold-hover: #9E4529;
+  /* граница поля поиска: #E8DFD1 давала 1,28:1, норма для полей — 3:1 */
+  --ps-border-field: #9C8F7A;
   --ps-navy: #1A2B3C;
 
   /* во всю ширину окна, как у референса: колонки разъезжаются к краям,
@@ -164,7 +170,8 @@ body:has(.pillar-split) main {
   padding: 6px 2px 12px;
   background: none;
   border: 0;
-  border-bottom: 1px solid var(--ps-border);
+  /* Ф2a (28.10.2026): граница поля #9C8F7A (3,08:1) вместо цвета линий каталога */
+  border-bottom: 1px solid var(--ps-border-field);
   border-radius: 0;
   color: var(--ps-text-muted);
   transition: border-color .25s ease, color .25s ease;
@@ -173,9 +180,12 @@ body:has(.pillar-split) main {
    стрёмная терракотовая обводка»). Раньше вокруг поля загоралась рамка
    цвета бренда с ореолом — на светлой колонке каталога она выглядела
    ошибкой ввода, а не фокусом. Курсор в поле и так виден. */
+/* Фокус — линия navy: курсор в поле виден, но без линии фокус с клавиатуры
+   был не заметен (outline у поля снят, Ф2a 28.10.2026). */
 .pillar-nav__search:focus-within {
-  border-color: var(--ps-border-strong, #D9CEBC);
+  border-color: var(--ps-navy);
 }
+.tpl .pillar-nav__search input:focus-visible { outline: none; }
 .pillar-nav__search input {
   flex: 1;
   min-width: 0;
@@ -217,13 +227,15 @@ body:has(.pillar-split) main {
 .pillar-nav__all .pillar-nav__current::before { content: none; }
 .pillar-nav__all .pillar-nav__current { color: var(--ps-navy); }
 @media (hover: hover) {
-  .pillar-nav__all a:hover { color: var(--ps-gold); }
+  .pillar-nav__all a:hover { color: var(--ps-gold-text); }
 }
 
 /* ── категория-аккордеон ── */
 .pillar-cat + .pillar-cat { border-top: 1px solid var(--ps-border); }
 /* при deep-link скролле категория не должна нырять под липкую шапку */
-.pillar-cat { scroll-margin-top: 110px; }
+/* 110 → 8: отступ под липкую шапку с 28.10 задаёт scroll-padding-top страницы
+   (light-scale.css, body.tpl) — вместе они уводили категорию на 214 px вниз */
+.pillar-cat { scroll-margin-top: 8px; }
 
 /* ── вспышка категории при переходе из мегаменю ──
    Класс вешает pillar-split.js после подскролла: терракотовая заливка
@@ -276,9 +288,9 @@ body:has(.pillar-split) main {
 /* Открытая категория помечена цветом: в раскрытом каталоге из 8 секций
    иначе не видно, чей список сейчас читаешь, — заголовки и пункты стояли
    «на голове друг у друга» одним цветом (Daniil, 07.08). */
-.pillar-cat.is-open > .pillar-cat__head { color: var(--ps-gold); }
+.pillar-cat.is-open > .pillar-cat__head { color: var(--ps-gold-text); }
 @media (hover: hover) {
-  .pillar-cat__head:hover { color: var(--ps-gold); }
+  .pillar-cat__head:hover { color: var(--ps-gold-text); }
 }
 /* Список внутри категории.
    Раньше высота анимировалась через grid-template-rows: 0fr → 1fr. Приём
@@ -385,15 +397,39 @@ body:has(.pillar-split) main {
 .cmap__coverage a {
   display: inline;
   padding: 0 7px;
-  color: var(--ps-gold);
+  color: var(--ps-gold-text);
   text-decoration: none;
 }
 .cmap__coverage a:hover { text-decoration: underline; }
+/* Д8 (Ф2a, 28.10.2026): строка городов под картой — только на телефоне.
+   Разметку собирает pillar-split.js из ссылок карты. Сетка 3×2, а не
+   перенос строкой: ряд не рвётся «4+2» на разных ширинах. Цель — 44 px. */
+.cmap__row { display: none; }
+@media (max-width: 560px) {
+  .cmap__row {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    max-width: 360px;
+    margin: 12px auto 0;
+    font-family: 'Manrope', sans-serif;
+  }
+  .cmap__row > * {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--gold-text);
+    text-decoration: none;
+  }
+  .cmap__row > span { color: var(--navy); }
+}
 .pillar-nav__cities a {
   display: inline;
   padding: 0;
   font-size: 13px;
-  color: var(--ps-gold);
+  color: var(--ps-gold-text);
   text-decoration: none;
   transition: color .2s ease;
 }
@@ -436,9 +472,9 @@ body:has(.pillar-split) main {
 .pillar-doc ul, .pillar-doc ol { margin: 0 0 18px; padding-left: 20px; }
 .pillar-doc li { margin-bottom: 8px; }
 .pillar-doc b, .pillar-doc strong { color: var(--ps-navy); font-weight: 700; }
-.pillar-doc a { color: var(--ps-gold); text-decoration: none; }
+.pillar-doc a { color: var(--ps-gold-text); text-decoration: none; }
 @media (hover: hover) {
-  .pillar-doc a:hover { color: var(--ps-gold-2); }
+  .pillar-doc a:hover { color: var(--ps-gold-hover); }
 }
 /* первый абзац после заголовка — крупнее, как подводка. Тело pillar-а
    генератор оборачивает в .pillar-body, поэтому селектор без > */
@@ -472,7 +508,7 @@ body:has(.pillar-split) main {
   border: 1px solid var(--ps-border);
   border-radius: 50%;
   background: var(--ps-surface);
-  color: var(--ps-gold);
+  color: var(--ps-gold-text);
   font-family: 'Playfair Display', Georgia, serif;
   font-size: 15px;
 }
@@ -585,7 +621,7 @@ body:has(.pillar-split) main {
   font-family: 'Playfair Display', Georgia, serif;
   font-size: 22px;
   font-weight: 500;
-  color: var(--ps-gold);
+  color: var(--ps-gold-text);
 }
 
 /* кнопка-раскрытие меню и заголовок блока — только на узком экране */
@@ -653,12 +689,12 @@ body:has(.pillar-split) main {
     padding: 12px 2px;
     background: none;
     border: 0;
-    border-bottom: 1px solid var(--ps-border);
+    border-bottom: 1px solid var(--ps-border-field);
     border-radius: 0;
     box-shadow: none;
   }
   .pillar-split--hub .pillar-nav__search:focus-within {
-    border-bottom-color: var(--ps-gold);
+    border-bottom-color: var(--ps-navy);
     box-shadow: none;
   }
   .pillar-split--hub .pillar-nav__search input { font-size: 16px; }
@@ -702,13 +738,19 @@ body:has(.pillar-split) main {
      семь категорий там же превращали блок в километр прокрутки: ровно то,
      на что жаловался Daniil («огромный неочевидный список»). Весь каталог
      — по ссылке под списком. */
-  .pillar-split--doc .pillar-cat:not(.is-open) { display: none; }
-  .pillar-split--doc .pillar-cat__panel { max-height: none !important; overflow: visible; }
+  /* Кроме /notario/{город}/ (--city, Д1): там открытой категории нет, и
+     правило прятало весь каталог — под заголовком «Все нотариальные услуги»
+     было пусто. Там категории — аккордеон, как на витрине (ниже). */
+  .pillar-split--doc:not(.pillar-split--city) .pillar-cat:not(.is-open) { display: none; }
+  .pillar-split--doc:not(.pillar-split--city) .pillar-cat__panel { max-height: none !important; overflow: visible; }
 
-  /* На странице услуги заголовок категории — подпись, а не кнопка */
-  .pillar-split--doc .pillar-cat { border-top: 0; margin-bottom: 18px; }
-  .pillar-split--doc .pillar-cat + .pillar-cat { border-top: 0; }
-  .pillar-split--doc .pillar-cat__head {
+  /* На странице услуги заголовок категории — подпись, а не кнопка.
+     Д4 (Ф2a, 28.10.2026): подпись серая, как надзаголовки на /services/ —
+     терракотовым капсом она выглядела ссылкой «‹ НОТАРИУС» из крошек, а не
+     нажималась. */
+  .pillar-split--doc:not(.pillar-split--city) .pillar-cat { border-top: 0; margin-bottom: 18px; }
+  .pillar-split--doc:not(.pillar-split--city) .pillar-cat + .pillar-cat { border-top: 0; }
+  .pillar-split--doc:not(.pillar-split--city) .pillar-cat__head {
     padding: 0 0 8px;
     cursor: default;
     pointer-events: none;
@@ -716,15 +758,17 @@ body:has(.pillar-split) main {
     font-weight: 700;
     letter-spacing: .1em;
     text-transform: uppercase;
-    color: var(--ps-gold);
+    color: var(--ps-text-muted);
   }
-  .pillar-split--doc .pillar-cat__head svg { display: none; }
+  .pillar-split--doc:not(.pillar-split--city) .pillar-cat__head svg { display: none; }
 
   /* На витрине категория — крупная строка, по которой хочется нажать.
      Линий между строками нет: восемь одинаковых разделителей подряд
      превращали список в простыню (правка 17.08). Разделяет воздух. */
-  .pillar-split--hub .pillar-cat { border-top: 0; border-bottom: 0; }
-  .pillar-split--hub .pillar-cat__head {
+  .pillar-split--hub .pillar-cat,
+  .pillar-split--city .pillar-cat { border-top: 0; border-bottom: 0; }
+  .pillar-split--hub .pillar-cat__head,
+  .pillar-split--city .pillar-cat__head {
     padding: 15px 0;
     font-size: 16.5px;
     font-weight: 600;
@@ -732,7 +776,8 @@ body:has(.pillar-split) main {
   }
   /* Счётчик — тихая пилюля: строки перестают быть одинаковыми, и глаз
      цепляется за объём категории, а не за очередную линию. */
-  .pillar-split--hub .pillar-cat__count {
+  .pillar-split--hub .pillar-cat__count,
+  .pillar-split--city .pillar-cat__count {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -748,10 +793,10 @@ body:has(.pillar-split) main {
     color: var(--ps-text-muted);
   }
   /* Раскрытая категория подсвечивается фоном — видно, где ты находишься. */
-  .pillar-split--hub .pillar-cat[open] > .pillar-cat__head { color: var(--ps-gold); }
+  .pillar-split--hub .pillar-cat[open] > .pillar-cat__head { color: var(--ps-gold-text); }
   .pillar-split--hub .pillar-cat[open] .pillar-cat__count {
     background: rgba(199, 91, 57, .12);
-    color: var(--ps-gold);
+    color: var(--ps-gold-text);
   }
 
   .pillar-cat__list a,
@@ -762,9 +807,33 @@ body:has(.pillar-split) main {
   }
   .pillar-cat__list > li:last-child { padding-bottom: 0; }
 
+  /* Д3 (Ф2a, 28.10.2026): строки каталога цвета абзацев (#4A4A4A), без
+     шеврона и подчёркивания, читались простым перечнем. Теперь — как
+     эталонные строки /services/: navy и шеврон › справа. Пункты, которые
+     ведут в WhatsApp (.pillar-nav__ask), шеврона не получают — это не
+     переход на страницу. */
+  .pillar-cat__list a:not(.pillar-nav__ask) {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 8px;
+    color: var(--ps-navy);
+  }
+  .pillar-cat__list a:not(.pillar-nav__ask)::after {
+    content: '\203A';
+    content: '\203A' / '';
+    flex: none;
+    font-size: 20px;
+    line-height: 1;
+    color: var(--ps-navy);
+    opacity: .5;
+  }
+
   /* «Индивидуальные документы»: на телефоне серая карточка с рамкой
-     весила больше, чем весь список над ней. Оставляем строку — заголовок
-     ссылкой и одна поясняющая фраза. */
+     весила больше, чем весь список над ней. Оставляем строку — заголовок и
+     одна поясняющая фраза; действие — кнопка под ними (UX-аудит 24.10).
+     Д2 (Ф2a, 28.10.2026): заголовок navy, как на десктопе, — терракотовый
+     жирный выглядел ссылкой «Весь каталог направления →» и не нажимался. */
   .pillar-nav .pillar-nav__custom {
     margin-top: 20px;
     padding: 16px 0 0;
@@ -775,7 +844,7 @@ body:has(.pillar-split) main {
   }
   .pillar-nav__custom b {
     margin-bottom: 4px;
-    color: var(--ps-gold);
+    color: var(--ps-navy);
     font-size: 15px;
   }
   .pillar-nav__custom span { font-size: 13.5px; line-height: 1.5; }
@@ -799,7 +868,9 @@ body:has(.pillar-split) main {
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    color: var(--ps-gold);
+    /* цель нажатия 44 px: строкой 14,5 px ссылка была 21 px в высоту (Ф2a, 28.10.2026) */
+    min-height: 44px;
+    color: var(--ps-gold-text);
     font-size: 14.5px;
     font-weight: 700;
     letter-spacing: 0;
@@ -919,7 +990,7 @@ body:has(.pillar-split) .final-cta .btn--gold {
 }
 .pillar-faq[open] summary::after { transform: rotate(45deg); }
 @media (hover: hover) {
-  .pillar-faq summary:hover { color: var(--ps-gold); }
+  .pillar-faq summary:hover { color: var(--ps-gold-text); }
 }
 .pillar-faq__a { padding: 0 0 18px; }
 .pillar-faq__a p { margin: 0; font-size: 15.5px; }
@@ -948,7 +1019,7 @@ body:has(.pillar-split) .final-cta .btn--gold {
 }
 .pillar-guide:last-child { border-bottom: 0; }
 @media (hover: hover) {
-  .pillar-guide:hover .pillar-guide__title { color: var(--ps-gold); }
+  .pillar-guide:hover .pillar-guide__title { color: var(--ps-gold-text); }
 }
 @media (prefers-reduced-motion: reduce) {
   .pillar-guide { transition: none; }
@@ -1020,7 +1091,33 @@ body:has(.pillar-split) .final-cta .btn--gold {
   font-size: 13.5px;
   line-height: 1.5;
 }
-  .pillar-cards a:hover b { color: var(--ps-gold); }
+/* Открывающая строка @media потерялась при правке — висящая «}» съедала
+   следующее правило reduce-motion целиком (Ф2a, 28.10.2026). */
+@media (hover: hover) {
+  .pillar-cards a:hover b { color: var(--ps-gold-text); }
+}
+/* Д18 (Ф2a, 28.10.2026): на телефоне строки «…под конкретную задачу» — с
+   шевроном ›, как каталог выше и /services/; описание не обрезается
+   многоточием («Купля-продаж…»), а уходит второй строкой. */
+@media (max-width: 899px) {
+  .pillar-cards a { position: relative; padding-right: 28px; }
+  .pillar-cards a::after {
+    content: '\203A';
+    content: '\203A' / '';
+    position: absolute;
+    right: 2px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 22px;
+    line-height: 1;
+    color: var(--ps-navy);
+    opacity: .5;
+  }
+}
+@media (max-width: 560px) {
+  .pillar-cards a { flex-direction: column; align-items: stretch; gap: 2px; }
+  .pillar-cards b { flex: initial; }
+  .pillar-cards span { white-space: normal; overflow: visible; }
 }
 @media (prefers-reduced-motion: reduce) {
   .pillar-faq summary::after,
@@ -1060,14 +1157,13 @@ body:has(.pillar-split) .final-cta .btn--gold {
   line-height: 1.4;
   color: var(--ps-navy);
 }
+/* Д6 (Ф2a, 28.10.2026): «осталось N дней» — текст, а не пилюля. Залитая
+   терракотовая пилюля сразу под «Написать в WhatsApp» читалась второй
+   кнопкой того же цвета и не нажималась; заливка на сайте = написать нам. */
 .deadline__count {
-  padding: 3px 10px;
-  background: var(--ps-gold);
-  border-radius: 999px;
-  color: #FFFBF7;
-  font-size: 12.5px;
+  color: var(--ps-navy);
+  font-size: 14.5px;
   font-weight: 700;
-  letter-spacing: .02em;
   white-space: nowrap;
 }
 .deadline__note {
@@ -1224,7 +1320,7 @@ body:has(.pillar-split) .final-cta .btn--gold {
   font-weight: 700;
   letter-spacing: .1em;
   text-transform: uppercase;
-  color: var(--ps-gold);
+  color: var(--ps-gold-text);
 }
 .rfinder__route {
   margin: 0 0 10px !important;
@@ -1293,7 +1389,7 @@ body:has(.pillar-split) .final-cta .btn--gold {
   cursor: pointer;
 }
 @media (hover: hover) {
-  .rfinder__restart:hover { color: var(--ps-gold); }
+  .rfinder__restart:hover { color: var(--ps-gold-text); }
 }
 /* дисклеймер стоит под веткой, а не внутри пузыря: в пузыре он утяжелял
    ответ и спорил с кнопкой за внимание */
@@ -1428,7 +1524,7 @@ body:has(.pillar-split) .final-cta .btn--gold {
     border: 0;
     font: inherit;
     font-size: 14px;
-    color: var(--ps-gold);
+    color: var(--ps-gold-text);
     cursor: pointer;
     text-align: left;
   }

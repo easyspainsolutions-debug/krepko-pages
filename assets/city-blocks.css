@@ -222,11 +222,12 @@
     flex-shrink: 0;
   }
 
+/* 22 px — ещё не «крупный» текст (норма 3:1 с 24 px): цифра #B04E2F (Ф2a, 28.10.2026) */
 .step__num {
     font-family: 'Playfair Display', serif;
     font-size: 22px;
     font-weight: 500;
-    color: var(--gold);
+    color: var(--gold-text);
     line-height: 1;
   }
 
@@ -260,7 +261,10 @@
 }
 
 /* ============ Round 26: шаги во всю ширину, без заголовка ============ */
-  .intro__how {
+  /* Ф2a (28.10.2026): кроме колонки текста на /notario/{город}/ — оттуда
+     полоса на 100vw уезжала за правый край окна (scrollWidth 1672 при 1440).
+     :where() держит вес селектора прежним (0,1,0). */
+  :where(:not(.pillar-doc) > .city-process) > .intro__how {
     max-width: none !important;
     width: 100vw;
     margin: 0 calc(50% - 50vw) !important;
@@ -349,6 +353,10 @@
      центрированы на любой ширине), остальные — с десктопа */
   .values__h::after,
   .intro__how > h2::after { margin-left: auto; margin-right: auto; }
+/* в колонке текста /notario/{город}/ (Ф2a, 28.10.2026): reviews-block.css
+     подключён позже и сбрасывает поля черты в 0 — черта вставала у левого
+     края колонки, пока полоса шагов не перестала уезжать за окно */
+  .pillar-doc .intro__how > h2::after { margin-left: auto; margin-right: auto; }
 
 @media (min-width: 1000px) {
   #sec-services > h2::after,
@@ -552,6 +560,10 @@
      контента. Приводим к outline-виду карточной кнопки: обводка + терракотовый
      текст, заливка приходит только при наведении. Заливка у .btn--gold идёт
      через background-image (градиент), поэтому гасим именно его. */
+  /* Ф2a (28.10.2026): «Смотреть все услуги» — вторичная кнопка по словарю
+     кликабельности: рамка и текст графитом (#4A4A4A / #2D2D2D, ≥3:1).
+     Терракотовая рамка и терракотовая заливка при наведении читались
+     кнопкой WhatsApp, а ведёт она в каталог. */
   .srows__foot .btn,
   .gcards__foot .btn {
     display: inline-flex;
@@ -561,7 +573,7 @@
     padding: 16px 34px !important;
     background: none !important;
     background-image: none !important;
-    border: 1px solid var(--gold) !important;
+    border: 1px solid var(--text-sub) !important;
     border-radius: 0 !important;
     box-shadow: none !important;
     font-family: 'Manrope', sans-serif;
@@ -569,16 +581,17 @@
     font-weight: 600;
     letter-spacing: .1em;
     text-transform: uppercase;
-    color: var(--gold) !important;
-    transition: background-color .25s ease, color .25s ease;
+    color: var(--text) !important;
+    transition: border-color .25s ease, color .25s ease;
   }
 
 @media (hover: hover) {
   .srows__foot .btn:hover,
     .gcards__foot .btn:hover {
-      background: var(--gold) !important;
+      background: none !important;
       background-image: none !important;
-      color: #FFFBF7 !important;
+      border-color: #1A2B3C !important;
+      color: #1A2B3C !important;
     }
 }
 
@@ -1159,9 +1172,9 @@
   line-height: 1.6;
   color: var(--text-muted);
 }
-.srows__hubs a { color: var(--gold); text-decoration: none; }
+.srows__hubs a { color: var(--gold-text); text-decoration: none; }
 .srows__hubs span { margin: 0 8px; color: var(--border); }
-@media (hover: hover) { .srows__hubs a:hover { color: var(--gold-2); } }
+@media (hover: hover) { .srows__hubs a:hover { color: #9E4529; } }
 
 /* ═══ Процесс: двойные поля и двойной фон (2026-08-19, скриншот Daniil) ═══
    На главной .intro__how сам является полосой — несёт --sec-pad сверху и снизу

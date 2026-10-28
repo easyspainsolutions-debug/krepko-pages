@@ -421,7 +421,11 @@ body:has(> footer.site-footer) {
    home-redesign.css, потому что футер общий для всех страниц. */
 
 
-  h1, h2,
+  /* метка «…под конкретную задачу» и заголовок блока доверия — Manrope:
+     Playfair мельче 22 px рассыпается (Ф2a, 28.10.2026). :where() держит
+     вес «h2» прежним (0,0,1): иначе цвет navy перебивал правила вида
+     «.legal h2» в блоге и на юридических страницах. */
+  h1, h2:where(:not(.pillar-cards-block > h2, .sell-trust__t)),
   .hero__h1,
   .final-cta h2,
   .home-founder__name,

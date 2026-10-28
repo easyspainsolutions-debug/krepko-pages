@@ -125,9 +125,10 @@
   border-top: 1px solid var(--border);
   flex-wrap: wrap;
 }
+/* Manrope вместо IBM Plex Mono: моно на шаблонах нет (Ф2a, 28.10.2026) */
 .hero__meta-item small {
   display: block;
-  font-family: 'IBM Plex Mono', monospace;
+  font-family: 'Manrope', sans-serif;
   font-size: var(--ts-meta);
   color: var(--text-label);
   letter-spacing: 0.06em;
@@ -141,8 +142,9 @@
 }
 
 /* === DocumentHero === */
+/* без курсива: на шаблонах его нет (стандарт 25–26.10, Ф2a 28.10.2026) */
 .hero--document .hero__title-es {
-  font-style: italic;
+  font-style: normal;
   font-size: var(--ts-meta);
   color: var(--text-label);
   margin: 0 0 var(--space-3);
@@ -167,7 +169,7 @@
   display: flex;
   gap: var(--space-3);
   align-items: center;
-  font-family: 'IBM Plex Mono', monospace;
+  font-family: 'Manrope', sans-serif;
   font-size: var(--ts-mono);
   color: var(--text-label);
   flex-wrap: wrap;

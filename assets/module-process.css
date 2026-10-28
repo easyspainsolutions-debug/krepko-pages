@@ -48,12 +48,16 @@
   background: rgba(196, 149, 42, 0.3);
 }
 
+/* Д7 (Ф2a, 28.10.2026): контурный круг, как .pillar-steps на новых шаблонах.
+   Залитые терракотой круги читались рядом «кнопок» цвета кнопки WhatsApp,
+   а цифра была набрана моноширинным — его на шаблонах нет. */
 .process-step__n {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: var(--ts-label);
-  font-weight: 700;
-  color: var(--gold-on);
-  background: var(--gold);
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--gold-text);
+  background: var(--surface);
+  border: 1px solid var(--border);
   border-radius: 50%;
   width: 32px;
   height: 32px;

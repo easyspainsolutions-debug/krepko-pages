@@ -466,29 +466,9 @@
     background: var(--surface-sunk) !important;
   }
 
-/* ============ Round 38: оживление прокрутки ============ */
-
-  /* hover отзывам и городам — единственные карточки, где его не было */
-  .rv, .loc {
-    position: relative;
-    z-index: 0;
-    transition: transform .32s cubic-bezier(.22, 1, .36, 1),
-                box-shadow .32s cubic-bezier(.22, 1, .36, 1);
-  }
-
-@media (hover: hover) {
-  .rv:hover, .loc:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 24px 48px -22px rgba(45, 45, 45, .30),
-                  0 3px 10px rgba(45, 45, 45, .05);
-      z-index: 2;
-    }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .rv, .loc { transition: none; }
-  .rv:hover, .loc:hover { transform: none; }
-}
+/* Round 38 (подъём отзыва при наведении) снят 28.10.2026 (Д9, Ф2a): правило
+   давно перебито «#sec-reviews .rv { transform: none !important }» выше, а
+   отзыв не нажимается — реакция на наведение у него была бы ложной. */
 
 /* ============ Round 50: типографическая ревизия ============
      Заголовки секций собирались в разное время и разошлись: на мобильном они

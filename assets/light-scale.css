@@ -48,6 +48,52 @@
   --danger: #B91C1C;
 
   --glow-gold: 0 4px 14px rgba(199, 91, 57, 0.25);
+
+  /* Ф2a (28.10.2026). Терракотовый ТЕКСТ — только #B04E2F: на кремовом
+     5,13:1, а #C75B39 даёт 4,09:1 — ниже AA для текста мельче 24 px.
+     #C75B39 остаётся заливкам, точкам и галочкам. Navy — заголовки и
+     кольцо фокуса. */
+  --gold-text: #B04E2F;
+  --navy: #1A2B3C;
+}
+
+/* ═══ Страницы услуг, хабов и городов: body.tpl (Ф2a, 28.10.2026) ═══
+   Класс ставят только шаблоны этих страниц — главная, блог и юридические
+   его не получают и не меняются.
+   --link читает krepko-base.css (цвет ссылок по умолчанию),
+   --crumb-link — site-nav.css (родитель в крошках),
+   --focus-ring — a11y.css (кольцо navy с отступом 3 px). */
+.tpl {
+  --link: var(--gold-text);
+  --crumb-link: var(--gold-text);
+  --focus-ring: var(--navy);
+}
+/* Шапка, меню, поиск и подвал общие с главной — цвет ссылок в них не трогаем.
+   На тёмном подвале navy-кольцо не видно — там кремовое. */
+.tpl :is(.topbar, .site-nav, .site-footer, dialog) { --link: initial; }
+.tpl .site-footer { --focus-ring: #FFFBF7; }
+
+/* Отступ под липкую шапку и липкую кнопку: фокус по Tab и переход по якорю
+   не прячутся под ними (WCAG 2.4.11). Шапка 65 px на телефоне и 91 px на
+   десктопе, липкая кнопка 75 px (только до 899 px). */
+html:has(> body.tpl) {
+  scroll-padding-top: 80px;
+  scroll-padding-bottom: 88px;
+}
+@media (min-width: 900px) {
+  html:has(> body.tpl) {
+    scroll-padding-top: 104px;
+    scroll-padding-bottom: 0;
+  }
+}
+
+/* Playfair загружен только в 500 и 600 (base.html): 700/800 браузер рисовал
+   синтетическим жирным — H1 и H2 городов и старых шаблонов (стандарт 25.10:
+   Playfair 500). Метка «…под конкретную задачу» и заголовок блока доверия
+   набраны Manrope и исключены. */
+.tpl main :is(h1, h2):not(.pillar-cards-block > h2, .sell-trust__t),
+.tpl .city-local__title {
+  font-weight: 500;
 }
 
 /* ═══ Типографская шкала (2026-08-08) ═══
@@ -228,7 +274,7 @@ body .final-cta {
   display: inline;
   font-size: 15.5px;
   line-height: 2;
-  color: var(--gold, #C75B39);
+  color: var(--gold-text);
   text-decoration: none;
   transition: color .2s ease;
 }
