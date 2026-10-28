@@ -124,7 +124,7 @@
      только из словаря поиска; без этого «Certificado de antecedentes penales»
      отсекал справку из Украины на слове «de». */
   if (ES) {
-    ('de del la las el los lo un una unos unas y e o u a al en con por para ' +
+    ('de del la las el los lo un una unos unas y e o u a al en con por para ante ' +
      'su sus mi mis que como sobre necesito quiero españa')
       .split(' ').forEach(function (w) { STOP[w] = 1; });
   }

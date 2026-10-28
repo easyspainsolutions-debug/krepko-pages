@@ -653,11 +653,19 @@ body:has(> footer.site-footer) {
 @media (max-width: 599px) {
   /* 28.10.2026: в строке стало 6–7 ссылок (+ «Español» / языки, «krepko.eu») —
      в одну строку не помещались, страница уезжала вбок на 40–150 px.
-     Четыре юридические ссылки остаются первой строкой, остальные — второй. */
-  .site-footer .site-footer__legal { flex-wrap: wrap; row-gap: var(--space-1); justify-content: center; gap: var(--space-4); }
+     Всегда ровно две строки: четыре юридические ссылки, под ними — языки и
+     krepko.eu (без переноса «как получится» на разных ширинах). */
+  .site-footer .site-footer__legal { flex-wrap: wrap; justify-content: center; gap: var(--space-1) var(--space-4); }
+  .site-footer .site-footer__legal::after { content: ""; flex-basis: 100%; order: 1; }
+  .site-footer .site-footer__legal a[lang],
+  .site-footer .site-footer__legal a[href^="http"] { order: 2; }
   .site-footer .site-footer__legal a { white-space: nowrap; }
   /* Ф2b-6 (28.10.2026): «©» — своей строкой над ссылками, как было с моно.
      Manrope уже, и на 430 px строка вставала в ряд со ссылками: перенос
      зависел бы от ширины экрана, а подвал мобильной главной — эталон. */
   .site-footer .site-footer__meta { flex-basis: 100%; text-align: left; }
 }
+
+/* /es/ (28.10.2026): длинные испанские подписи переносятся — межстрочный шаг
+   внутри ссылки меньше, чем между ссылками, чтобы хвост не читался отдельной ссылкой */
+html[lang="es"] .footer-map__link { line-height: 1.35 !important; padding: .175em 0; }

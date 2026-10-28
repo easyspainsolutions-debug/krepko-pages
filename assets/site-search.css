@@ -540,3 +540,9 @@
   .site-search__chips button,
   .site-nav__search-btn { transition: none; }
 }
+
+/* /es/ (28.10.2026): «Resultados en ruso» над результатами; .site-search__label
+   задаёт display:block и перебивал атрибут hidden */
+.site-search__ru-note { padding: var(--space-3) var(--space-4) 0; }
+.site-search__ru-note[hidden] { display: none; }
+@media (min-width: 720px) { .site-search__ru-note { padding: var(--space-2) var(--space-4) 0; } }

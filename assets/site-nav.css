@@ -1221,15 +1221,19 @@ nav.breadcrumb {
   margin-left: var(--space-1);
   font-size: .72em;
   font-weight: 500;
-  color: var(--text-muted);
+  color: var(--text-sub);   /* --text-muted давал 4,34:1 — ниже AA */
   white-space: nowrap;
 }
 /* /es/: на десктопе пометка «(en ruso)» — второй строкой под пунктом; в строку
    пункты с пометкой выталкивали кнопку WhatsApp за край на 1000–1199 px
    (проверка /es/ 28.10: вылезание вбок до 168 px) */
 @media (min-width: 1000px) {
-  .site-nav__link .es-ru { display: block; margin-left: 0; line-height: 1.1; }
+  html[lang="es"] .site-nav__link { position: relative; }
+  /* пометка под словом, вне потока — все пять пунктов на одной линии с логотипом */
+  .site-nav__link .es-ru { display: block; position: absolute; left: 0; top: 100%; margin-left: 0; line-height: 1.1; }
 }
+/* бургер: пункт «Servicios» — flex с space-between, пометка уезжала в середину */
+.site-menu__link--drill .es-ru { margin: 0 auto 0 calc(-1 * var(--space-1)); }
 @media (min-width: 1000px) and (max-width: 1199px) {
   html[lang="es"] .site-nav__links { gap: var(--space-6); }
 }
