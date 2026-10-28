@@ -216,6 +216,24 @@
 
   var opened = cats.filter(function (c) { return c.classList.contains('is-open'); });
 
+  /* Тот же вид, что norm() в site-search.js: регистр, ё→е, без апострофов —
+     на /uk/ в названиях ’, а с клавиатуры обычно набирают ' («сім'я») — и без
+     испанских ударений («autonomo» находит «Autónomo»). */
+  var LATIN = { 'á': 'a', 'à': 'a', 'â': 'a', 'ä': 'a', 'é': 'e', 'è': 'e', 'ê': 'e', 'ë': 'e',
+    'í': 'i', 'ì': 'i', 'î': 'i', 'ï': 'i', 'ó': 'o', 'ò': 'o', 'ô': 'o', 'ö': 'o',
+    'ú': 'u', 'ù': 'u', 'û': 'u', 'ü': 'u', 'ñ': 'n', 'ç': 'c' };
+  function norm(s) {
+    return (s || '').toLowerCase().replace(/ё/g, 'е').replace(/['’ʼ`]/g, '')
+      .replace(/[áàâäéèêëíìîïóòôöúùûüñç]/g, function (c) { return LATIN[c]; });
+  }
+  /* Окончание последнего слова запроса не требуем: «сім'я» находит «сім’ї»
+     и «сім’ю», «прописка» — «прописки». Основа не короче трёх букв и ищется
+     только с начала слова: иначе «права» находит «сПРАВка», «дети» — «свиДЕТельство». */
+  function loose(q) {
+    var t = q.replace(/[аяоеєуюіїиыьй]$/, '');
+    return t.length >= 3 ? t : q;
+  }
+
   function reset() {
     cats.forEach(function (cat) {
       cat.hidden = false;
@@ -230,14 +248,17 @@
   input.addEventListener('input', function () {
     /* поиск ищет по всем пунктам — свёрнутый до текущей услуги раздел разворачиваем */
     [].forEach.call(nav.querySelectorAll('.pillar-cat.is-compact'), function (c) { c.classList.remove('is-compact'); });
-    var q = input.value.trim().toLowerCase();
+    var q = norm(input.value.trim());
     if (q.length < 2) { reset(); return; }
+    var stem = loose(q);
 
     var found = 0;
     cats.forEach(function (cat) {
       var hits = 0;
       [].forEach.call(cat.querySelectorAll('li'), function (li) {
-        var match = li.textContent.toLowerCase().indexOf(q) !== -1;
+        var text = norm(li.textContent);
+        var match = text.indexOf(q) !== -1 ||
+          (stem !== q && (' ' + text.replace(/[^0-9a-zа-яіїєґ]+/g, ' ')).indexOf(' ' + stem) !== -1);
         li.hidden = !match;
         if (match) hits++;
       });

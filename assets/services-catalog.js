@@ -47,14 +47,20 @@
       return;
     }
     if (!index) return;
-    var hits = [];
+    /* Сначала совпадения в названии и категории, за ними — в словах услуги
+       (поле k, как у лупы): на /uk/ «прописка» есть только в словах
+       «Реєстрація за місцем проживання». Слова — от трёх букв. */
+    var hits = [], byWords = [];
     var pool = index.services || [];
-    for (var i = 0; i < pool.length && hits.length < 40; i++) {
+    for (var i = 0; i < pool.length; i++) {
       if (norm(pool[i].t).indexOf(query) !== -1 ||
           norm(pool[i].c || '').indexOf(query) !== -1) {
         hits.push(pool[i]);
+      } else if (query.length >= 3 && norm(pool[i].k || '').indexOf(query) !== -1) {
+        byWords.push(pool[i]);
       }
     }
+    hits = hits.concat(byWords).slice(0, 40);
     grid.hidden = true;
     resultsBox.hidden = false;
     if (!hits.length) { empty.hidden = false; return; }
