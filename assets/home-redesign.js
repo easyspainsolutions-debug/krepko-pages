@@ -1036,9 +1036,12 @@
 
 /* ═══ Переписка-«фантомы» в первом экране десктопа (28.10.2026) ═══
    Источник пар — ul.hero-chat__src в home.html (на /uk/ — переведённый).
-   Пары по кругу; прошлая — бледный след, позапрошлая — бледнее, третья
-   растворяется. Пауза, когда блок вне экрана или вкладка скрыта; при
-   «уменьшить движение» — одна первая пара без анимации. Телефон — без блока. */
+   Пара «вопрос → ответ» — один блок, как кусок переписки: вопрос справа,
+   ответ под ним слева. Блоки всплывают в разных местах поля (справа вверху,
+   слева по центру, внизу…), поле — от колонки влево до заголовка (Daniil
+   28.10: «пусть шире разлетаются», но вопрос и ответ не разрывать).
+   Прошлая пара — бледный след, позапрошлая — бледнее, третья растворяется.
+   Пауза вне экрана и на скрытой вкладке; «уменьшить движение» — одна пара. */
 (function () {
   var stage = document.querySelector('.hero-chat');
   if (!stage) return;
@@ -1049,35 +1052,23 @@
   var PAIRS = Array.prototype.map.call(src, function (li) {
     return { q: li.getAttribute('data-q'), a: li.textContent.trim(), card: li.getAttribute('data-card') };
   });
-  /* четыре полосы по высоте (top %), через одну — соседние пары далеко.
-     Вопрос клиента — от правого края колонки (right %); ответ уходит левее
-     колонки, в пустое поле к заголовку: доля этого поля (Daniil 28.10:
-     «пусть шире разлетаются, вторые сообщения ближе к заголовку») */
-  var BANDS = [[1, 0, .55], [51, 9, .95], [26, 4, .3], [74, 13, .8]];
+  /* места блоков в поле: [x, y] — доли свободного хода (0 — левый/верхний край,
+     1 — правый/нижний); соседние места далеко друг от друга, 6 мест на 7 пар —
+     на каждом круге пары встают по-новому */
+  var SLOTS = [[1, 0], [0, .5], [.8, 1], [.25, .04], [1, .62], [0, 1]];
   var h1 = document.querySelector('.hero--home .hero__h1');
-  /* свободное поле между правым краем текста H1 и колонкой, с запасом 40 px */
+  var timers = [], k = 0, live = [], running = false, visible = true;
+  /* мерить поле можно только после стилей и шрифтов — иначе колонка ещё
+     не в сетке и пара улетает за край (как было с барабаном 28.10) */
+  var ready = document.readyState === 'complete';
+  function later(fn, ms) { timers.push(setTimeout(fn, ms)); }
+  function stop() { timers.forEach(clearTimeout); timers = []; running = false; }
+  function esc(t) { var d = document.createElement('div'); d.textContent = t; return d.innerHTML; }
+  /* свободное поле слева от колонки: до правого края текста H1 с запасом 40 px */
   function field() {
     if (!h1) return 0;
     var r = document.createRange(); r.selectNodeContents(h1);
     return Math.max(0, stage.getBoundingClientRect().left - r.getBoundingClientRect().right - 40);
-  }
-  var timers = [], k = 0, live = [], running = false, visible = true;
-  function later(fn, ms) { timers.push(setTimeout(fn, ms)); }
-  function stop() { timers.forEach(clearTimeout); timers = []; running = false; }
-  function esc(t) { var d = document.createElement('div'); d.textContent = t; return d.innerHTML; }
-  function mk(html) {
-    var d = document.createElement('div'); d.className = 'hero-chat__fl';
-    d.innerHTML = '<span class="hero-chat__drift">' + html + '</span>'; return d;
-  }
-  /* ответ — сразу под фактической высотой вопроса (вопрос бывает в две
-     строки); пара целиком не выходит за низ блока */
-  function place(b, q, a, dots) {
-    var H = stage.clientHeight, qh = q.offsetHeight, gap = 10;
-    var ah = Math.max(a.offsetHeight, dots ? dots.offsetHeight : 0);
-    var top = Math.max(0, Math.min(b[0] / 100 * H, H - qh - gap - ah));
-    var al = -Math.round(b[2] * field());
-    q.style.right = b[1] + '%'; q.style.top = top + 'px';
-    [a, dots].forEach(function (e) { if (e) { e.style.left = al + 'px'; e.style.top = (top + qh + gap) + 'px'; } });
   }
   function answer(p) {
     var card = p.card === 'maps'
@@ -1085,43 +1076,63 @@
       : '';
     return '<span class="hero-chat__b hero-chat__b--a"><span class="hero-chat__who">Krepko</span>' + esc(p.a) + card + '</span>';
   }
+  function build(p) {
+    var el = document.createElement('div'); el.className = 'hero-chat__pair';
+    el.innerHTML = '<div class="hero-chat__drift">'
+      + '<div class="hero-chat__fl hero-chat__fl--q"><span class="hero-chat__b hero-chat__b--q">' + esc(p.q) + '</span></div>'
+      + '<div class="hero-chat__fl hero-chat__fl--a">' + answer(p) + '</div>'
+      + '<div class="hero-chat__fl hero-chat__fl--dots"><span class="hero-chat__b hero-chat__b--dots"><i></i><i></i><i></i></span></div>'
+      + '</div>';
+    return el;
+  }
+  /* ширина блока и место: ответ уже в потоке (прозрачный), поэтому высота
+     пары известна до показа и блок не вылезает за низ поля */
+  function place(el, slot) {
+    var sw = stage.clientWidth, f = field(), W = sw + f, H = stage.clientHeight;
+    var pw = Math.min(W, Math.max(300, Math.min(400, sw * .92)));
+    el.style.width = pw + 'px';
+    var a = el.querySelector('.hero-chat__fl--a'), d = el.querySelector('.hero-chat__fl--dots');
+    d.style.top = a.offsetTop + 'px';
+    el.style.left = Math.round(-f + slot[0] * (W - pw)) + 'px';
+    el.style.top = Math.round(slot[1] * Math.max(0, H - el.offsetHeight)) + 'px';
+  }
   function retire() {
-    live.forEach(function (pr, idx) {
+    live.forEach(function (e, idx) {
       var age = live.length - idx;
-      pr.forEach(function (e) {
-        e.classList.remove('is-ghost', 'is-ghost2');
-        if (age === 1) e.classList.add('is-ghost');
-        else if (age === 2) e.classList.add('is-ghost2');
-        else { e.classList.add('is-out'); later(function () { e.remove(); }, 2100); }
-      });
+      e.classList.remove('is-ghost', 'is-ghost2');
+      if (age === 1) e.classList.add('is-ghost');
+      else if (age === 2) e.classList.add('is-ghost2');
+      else { e.classList.add('is-out'); later(function () { e.remove(); }, 2100); }
     });
     live = live.slice(-2);
   }
   function pair() {
-    var p = PAIRS[k % PAIRS.length], b = BANDS[k % BANDS.length]; k++;
-    var q = mk('<span class="hero-chat__b hero-chat__b--q">' + esc(p.q) + '</span>');
-    var dots = mk('<span class="hero-chat__b hero-chat__b--dots"><i></i><i></i><i></i></span>');
-    var a = mk(answer(p));
+    var p = PAIRS[k % PAIRS.length], slot = SLOTS[k % SLOTS.length]; k++;
+    var el = build(p);
     retire();
-    stage.appendChild(q); stage.appendChild(dots); stage.appendChild(a);
-    place(b, q, a, dots);
+    stage.appendChild(el); place(el, slot);
+    var q = el.querySelector('.hero-chat__fl--q'), a = el.querySelector('.hero-chat__fl--a'), d = el.querySelector('.hero-chat__fl--dots');
     later(function () { q.classList.add('is-in'); }, 500);
-    later(function () { dots.classList.add('is-in'); }, 1400);
-    later(function () { dots.classList.remove('is-in'); a.classList.add('is-in'); }, 2700);
-    later(function () { dots.remove(); }, 3300);
-    live.push([q, a]);
+    later(function () { d.classList.add('is-in'); }, 1400);
+    later(function () { d.classList.remove('is-in'); a.classList.add('is-in'); }, 2700);
+    live.push(el);
     later(function () { if (running) pair(); }, 6800);
   }
   function start() {
-    if (running || !visible || document.hidden || !mqD.matches) return;
+    if (!ready || running || !visible || document.hidden || !mqD.matches) return;
     running = true; pair();
   }
   if (reduce) {
-    var p0 = PAIRS[0], q0 = mk('<span class="hero-chat__b hero-chat__b--q">' + esc(p0.q) + '</span>'), a0 = mk(answer(p0));
-    stage.appendChild(q0); stage.appendChild(a0); place(BANDS[0], q0, a0);
-    q0.classList.add('is-in'); a0.classList.add('is-in');
+    var still = function () {
+      var el0 = build(PAIRS[0]);
+      stage.appendChild(el0); place(el0, SLOTS[0]);
+      el0.querySelector('.hero-chat__fl--q').classList.add('is-in');
+      el0.querySelector('.hero-chat__fl--a').classList.add('is-in');
+    };
+    if (ready) still(); else window.addEventListener('load', still);
     return;
   }
+  if (!ready) window.addEventListener('load', function () { ready = true; start(); });
   if ('IntersectionObserver' in window) {
     new IntersectionObserver(function (es) {
       visible = es[0].isIntersecting;
