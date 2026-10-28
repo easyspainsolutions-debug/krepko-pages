@@ -270,6 +270,22 @@ body .final-cta > h2 {
 }
 }
 
+/* Точки под отзывами скромнее (28.10.2026, Daniil: «что за тыща точек…
+   надо скромнее»). На страницах услуг хитбокс 18 px растягивал 8 точек на
+   всю ширину экрана (шаг 47 px). Теперь компактная группа по центру: точка
+   6 px, шаг 14 px, текущая — короткая черта. Листают свайпом, точки —
+   указатель; по высоте тап-зона 30 px. Одно правило на главную и услуги
+   (#sec-reviews есть на всех 382 страницах с лентой). */
+@media (max-width: 999px) {
+  #sec-reviews .rv-dots { gap: 0; margin-top: var(--space-3); }
+  #sec-reviews .rv-dots button { padding: var(--space-3) var(--space-1); }
+  #sec-reviews .rv-dots button::before {
+    width: 6px; height: 6px; border-radius: 3px;
+    transition: width .3s ease, background .3s ease;
+  }
+  #sec-reviews .rv-dots button.is-on::before { width: 16px; transform: none; background: var(--gold); }
+}
+
 
 /* ── Городские хабы нотариуса: выравнивание секций (2026-08-09) ──
    «Как проходит работа» приехала с городских страниц, где живёт внутри
