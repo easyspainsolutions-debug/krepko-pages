@@ -6,31 +6,65 @@
      по-разному: индикатор прочитанного был терракотовым на главной и в
      блоге и горчичным на страницах услуг, направлений и городов.
      --brand не зависит от того, какие файлы стилей попали на страницу. */
-  --brand: #C75B39;
-  --brand-2: #B04E2F;
+  /* Кожа v3 (30.10.2026): цвет текста-акцента — нейтральный, цветом залита
+     только кнопка WhatsApp (--k-action). Имя оставлено: его читают крошки. */
+  --brand: var(--k-heading);
+  --brand-2: var(--k-heading);
   /* Кольцо клавиатурного фокуса — один цвет на весь сайт (a11y.css) */
-  --focus-ring: var(--brand);
+  --focus-ring: var(--k-focus);
 }
 
-/* ============================================================
-   Krepko — Site Nav
-   Sticky top, brand left + WhatsApp CTA + Menu button right.
-   Menu button открывает <dialog id="site-menu-dialog"> overlay.
-   Spec: visual-system-design-2026-05-25.md §4.2 (Layout & Chrome)
-   ============================================================ */
+/* ═══════════════════════════════════════════════════════════════════════
+   Обвязка v3 (30.10.2026): строка контактов, шапка, полоса поиска,
+   меню телефона. Итог v3 §3.5–3.6, directions.md §3, решения Daniil 30.10
+   п. 5, 6, 11. Все значения — роли кожи --k-* (assets/theme-<x>.css):
+   обвязка одинакова на сайте, в блоге и на юридических страницах.
+
+   Состояния при прокрутке ставит site-nav.js на <html data-bar>:
+     top  — первый экран: шапка на месте, полос нет;
+     down — ниже первого экрана листают вниз: шапка уезжает вверх; на
+            компьютере вместо неё встаёт полоса поиска (она — часть шапки и
+            уезжает «на её место» тем же движением), на телефоне снизу
+            выезжает полоса «Поиск + WhatsApp» (sticky-cta.css);
+     up   — листают вверх: шапка вернулась, полосы ушли.
+   Пока открыты меню или поиск — data-bar-lock, ничего не двигается.
+   Выключатели отката — data/site.yaml → bars (атрибут шапки data-bars).
+
+   --chrome-top — сколько сверху сейчас занимает обвязка: по нему прилипают
+   вкладки каталога и карточка услуги (top: var(--chrome-top)).
+   ═══════════════════════════════════════════════════════════════════════ */
+:root {
+  --nav-h: 65px;          /* шапка телефона (directions.md §3.1), плюс линия 1 px */
+  --nav-bar-h: 64px;      /* полоса поиска компьютера, плюс линия 1 px */
+  --nav-btn-pad: 14px;    /* поля кнопки шапки: 14 — только так шапка помещается в 390 px */
+  --chrome-top: 66px;
+}
+@media (min-width: 900px) {
+  :root {
+    --nav-h: 72px;
+    --nav-btn-pad: 20px;
+    --chrome-top: 73px;
+  }
+}
+html[data-bar="down"] { --chrome-top: 0px; }
+@media (min-width: 900px) {
+  html[data-bar="down"] { --chrome-top: 65px; }
+}
+/* переход к якорю и фокус по Tab не прячутся под обвязкой (WCAG 2.4.11) —
+   общий отступ задаёт light-scale.css (html:has(> body.tpl)) */
+/* Вкладки каталога и разделов (catalog.css: top: var(--cp-stick-top)) липнут
+   под шапкой, а когда она уехала — к самому верху (на компьютере — под
+   полосой поиска): vnedrenie §3.2. catalog.js пишет в --cp-stick высоту
+   шапки, не зная, что она уехала, — здесь её место занимает --chrome-top.
+   Вес (0,1,1) — выше «.cp» в catalog.css, который грузится позже. */
+body .cp { --cp-stick-top: var(--chrome-top); }
+body .cp .cp__toc { transition: top .2s ease-out; }
+@media (prefers-reduced-motion: reduce) {
+  body .cp .cp__toc { transition: none; }
+}
 
 body:has(> header.site-nav) {
   padding-top: 0 !important;
-}
-
-.site-nav {
-  position: sticky;
-  top: 0;
-  z-index: 50;
-  background: var(--surface-sunk);
-  border-bottom: 1px solid var(--border);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
 }
 
 /* Рукописные страницы (статьи блога, /review/) центрируют содержимое через
@@ -55,145 +89,412 @@ main {
   min-width: 0;
 }
 
-.site-nav__inner {
-  max-width: 1180px;
-  margin: 0 auto;
-  padding: var(--space-3) var(--space-4);
+/* ── Строка контактов — не липкая. Телефон 33 px: почта, телефон, «UA» за
+   чертой; компьютер 40 px: слева почта и телефон, справа «Українською»,
+   «Español» и значки мессенджеров. Мелкий серый текст, без капса. Ширину и
+   поля строки (рамка 144–1296 на 1440) задаёт site-footer.css. ── */
+.topbar {
+  position: relative;
+  z-index: 45;
+  background: var(--k-bar-bg);
+  font-family: var(--k-font-text);
+}
+.topbar__inner {
   display: flex;
   align-items: center;
-  justify-content: space-between;
   gap: var(--space-4);
+  box-sizing: border-box;
+  height: 33px;
+  margin: 0 auto;
+}
+.topbar__contacts {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  flex: 1 1 auto;
+  min-width: 0;
+}
+.topbar__item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 33px;
+  font-size: var(--k-fs-ui);
+  font-weight: var(--k-w-regular);
+  line-height: 1;
+  color: var(--k-muted);
+  text-decoration: none;
+  white-space: nowrap;
+}
+.topbar__item svg { flex: none; width: 14px; height: 14px; color: var(--k-muted); }
+@media (hover: hover) {
+  .topbar__item:hover { color: var(--k-heading); }
+}
+/* Переключатель языка (Ф2b-9, Daniil 28.10): до 899 px — «UA» / «RU» справа,
+   за чертой 16 px; цель нажатия ≥ 24 px — поле и отрицательное поле той же
+   величины, строка не сдвигается. С 900 px — полная подпись справа. */
+.topbar__lang-short {
+  position: relative;
+  margin: -8px -8px -8px auto;
+  padding: 8px 8px 8px 15px;
+  font-weight: var(--k-w-strong);
+  color: var(--k-heading);
+}
+.topbar__lang-short::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  height: 16px;
+  margin-top: -8px;
+  border-left: 1px solid var(--k-line);
+}
+/* кольцо фокуса внутри поля ссылки, иначе верх уходит за экран */
+.topbar__lang-short:focus-visible { outline-offset: -2px; }
+/* уже 360 px «почта · телефон · UA» не влезает в строку (на 320 — 324 px
+   при 288 доступных): плотнее зазоры и без значков — строка та же */
+@media (max-width: 359px) {
+  .topbar__contacts { gap: var(--space-3); }
+  .topbar__item svg { display: none; }
+  .topbar__lang-short { padding-left: 9px; }
+}
+/* /es/ (v3, итог §3.8): на телефоне справа оба языка — «RU» и «UA». Чтобы
+   «почта · телефон · RU · UA» встали в строку от 360 px, у почты и телефона
+   на /es/ нет значков (как у всех страниц уже 360 px); «UA» стоит за «RU»
+   без черты, через 12 px: отрицательное поле гасит зазор строки. */
+.topbar__lang-short + .topbar__lang-short {
+  margin-left: calc(-1 * var(--space-4));
+  padding-left: var(--space-3);
+}
+.topbar__lang-short + .topbar__lang-short::before { content: none; }
+@media (max-width: 359px) {
+  .topbar__lang-short + .topbar__lang-short { margin-left: calc(-1 * var(--space-3)); }
+}
+/* уже 340 px второй язык не помещается — остаётся «RU», как было до v3 */
+@media (max-width: 339px) {
+  .topbar__lang-short + .topbar__lang-short { display: none; }
+}
+@media (max-width: 899px) {
+  html[lang="es"] .topbar__item svg { display: none; }
+}
+.topbar__socials { display: none; }
+@media (min-width: 900px) {
+  .topbar__inner { height: 40px; gap: var(--space-5); }
+  .topbar__contacts { gap: var(--space-5); }
+  .topbar__item { min-height: 40px; }
+  .topbar__lang-short { display: none; }
+  .topbar__socials { display: flex; align-items: center; gap: var(--space-5); margin-left: auto; }
+  .topbar__lang {
+    padding: 2px 0;
+    border-bottom: 1px solid var(--k-line-strong);
+    font-size: var(--k-fs-ui);
+    font-weight: var(--k-w-regular);
+    line-height: 1.3;
+    color: var(--k-text);
+    text-decoration: none;
+  }
+  /* значки мессенджеров 14 px; цель нажатия 30×30 — поле и отрицательное
+     поле той же величины (Д16, 28.10: промах между значками был мёртвым кликом) */
+  .topbar__social {
+    display: inline-flex;
+    margin: -8px;
+    padding: 8px;
+    color: var(--k-muted);
+  }
+  .topbar__social svg { width: 14px; height: 14px; }
+}
+@media (hover: hover) {
+  .topbar__lang:hover { color: var(--k-heading); border-bottom-color: var(--k-heading); }
+  .topbar__social:hover { color: var(--k-heading); }
 }
 
-/* ── Brand ── */
+/* ── Шапка: телефон 65 px, компьютер 72 px, линия 1 px снизу, липкая.
+   Непрозрачная, цвета страницы (итог v3 §4.5). Прячется сдвигом вверх —
+   transform не двигает страницу под ней. ── */
+.site-nav {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: var(--k-bar-bg);
+  border-bottom: 1px solid var(--k-bar-line);
+  -webkit-backdrop-filter: var(--k-bar-filter);
+  backdrop-filter: var(--k-bar-filter);
+  transition: transform .2s ease-out;
+}
+html[data-bar="down"] .site-nav { transform: translateY(-100%); }
+.site-nav__inner {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  box-sizing: border-box;
+  height: var(--nav-h);
+  margin: 0 auto;
+}
+
+/* знак «Krepko» — как сейчас: антиква --k-font-brand (решение 30.10) */
 .site-nav__brand {
   display: inline-flex;
   align-items: center;
-  gap: var(--space-2);
+  flex: none;
+  min-height: 44px;
+  margin-right: auto;
+  color: var(--k-heading);
   text-decoration: none;
-  color: var(--gold);
-  flex-shrink: 0;
 }
-.site-nav__brand-mark {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 26px;
-  height: 26px;
-  flex-shrink: 0;
-}
-.site-nav__brand-mark svg { width: 100%; height: 100%; display: block; }
 .site-nav__brand-text {
-  font-family: 'Manrope', sans-serif;
-  /* 2026-05-28: увеличен бренд в хедере — было 18px, стало 22px (desktop). */
-  font-size: 22px;
-  font-weight: 800;
-  letter-spacing: -0.5px;
+  font-family: var(--k-font-brand);
+  font-size: var(--k-fs-brand);
+  font-weight: var(--k-w-brand);
+  letter-spacing: var(--k-ls-brand);
   line-height: 1;
-  color: var(--gold);
+  color: var(--k-heading);
 }
 
-/* ── Actions row (right side) ── */
+/* пункты меню и поле — только на компьютере */
+.site-nav__links,
+.site-nav__field { display: none; }
+
 .site-nav__actions {
   display: flex;
   align-items: center;
-  gap: var(--space-2);
+  gap: var(--space-1);
 }
 
-/* WhatsApp CTA — pill */
-.site-nav__cta {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--space-2);
-  padding: var(--space-2) var(--space-3);
-  border-radius: var(--r-3);
-  font-family: 'Manrope', sans-serif;
-  font-size: var(--ts-body-sm);
-  font-weight: 700;
-  text-decoration: none;
-  background: rgba(78, 216, 138, 0.14);
-  border: 1px solid rgba(78, 216, 138, 0.32);
-  color: var(--wa);
-  transition: background var(--t-2), border-color var(--t-1), transform var(--t-2);
-}
-@media (hover: hover) {
-  .site-nav__cta:hover {
-    background: rgba(78, 216, 138, 0.22);
-    border-color: rgba(78, 216, 138, 0.45);
-    transform: translateY(-1px);
-  }
-}
-.site-nav__cta svg {
-  width: 16px;
-  height: 16px;
-}
-
-/* Menu button */
+/* лупа и меню — значки 22 px в квадрате 44×44 */
+.site-nav__search-btn,
 .site-nav__menu-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--space-2);
-  padding: var(--space-2) var(--space-3);
-  min-height: 44px; /* WCAG 2.5.5 AAA — minimum target size for touch */
-  border-radius: var(--r-3);
-  font-family: 'Manrope', sans-serif;
-  font-size: var(--ts-body-sm);
-  font-weight: 700;
-  letter-spacing: -0.1px;
-  background: transparent;
-  border: 0;   /* без обводки — решение Daniil 2026-08-04 */
-  color: var(--text);
+  display: inline-grid;
+  place-items: center;
+  box-sizing: border-box;
+  width: 44px;
+  height: 44px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: var(--k-r-btn);
+  background: none;
+  color: var(--k-heading);
   cursor: pointer;
-  transition: background var(--t-1), color var(--t-1);
 }
-/* Visual audit 2026-05-28: hover только для устройств с реальным hover (мышь).
-   На iOS Safari после тапа без этого ограничения hover «прилипает» — кнопка
-   «Меню» оставалась жёлтой пока пользователь не тапнет где-то ещё. */
-@media (hover: hover) {
-  .site-nav__menu-btn:hover {
-    background: var(--surface-2);
-    color: var(--gold);
-  }
+.site-nav__search-btn svg,
+.site-nav__menu-btn svg { width: 22px; height: 22px; }
+.site-nav__menu-text {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
 }
-.site-nav__menu-btn svg {
-  width: 18px;
-  height: 18px;
-}
-.site-nav__menu-btn:focus-visible {
-  outline: 2px solid var(--gold);
-  outline-offset: 2px;
-}
+.site-nav__menu-btn:focus-visible { outline: 2px solid var(--k-focus); outline-offset: 2px; }
 /* 28.10.2026 (Daniil: «обводку бургера при нажатии убери»): меню закрыли
    пальцем — фокус всё равно возвращается на кнопку (нужно экранным
    читалкам), но iOS Safari рисует на ней кольцо. Класс вешает site-nav.js
    и снимает на blur; закрыли с клавиатуры (Esc) — кольцо остаётся. */
-.site-nav__menu-btn.is-quiet-focus:focus-visible { outline: none; box-shadow: none; }
+.site-nav .site-nav__menu-btn.is-quiet-focus:focus-visible { outline: none; box-shadow: none; }
 
-/* ── Mobile (<540px) — скрыть WhatsApp text, показать только icon ── */
-@media (max-width: 540px) {
-  .site-nav__inner {
-    padding: var(--space-3);
+/* Кнопка «Написать в WhatsApp» шапки — один вид на всех страницах, включая
+   блог и главную: заливка --k-action, углы --k-r-btn, высота 44, мелкий
+   полужирный (14 px на телефоне — только так шапка помещается в 390 px,
+   решение 28.10), без тени и подъёма. На экранах уже 381 px — «WhatsApp»
+   (решение 25.10). */
+.site-nav__consult,
+.site-nav__bar-wa {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.32em;   /* слово «Написать в» — отдельный <span>, пробел во флексе схлопывается */
+  flex: none;
+  box-sizing: border-box;
+  height: var(--k-btn-h-bar);
+  padding: 0 var(--nav-btn-pad);
+  border: 0;
+  border-radius: var(--k-r-btn);
+  background: var(--k-action);
+  color: var(--k-on-action);
+  font-family: var(--k-font-text);
+  font-size: var(--k-fs-ui);
+  font-weight: var(--k-w-strong);
+  line-height: 1.2;
+  white-space: nowrap;
+  text-decoration: none;
+}
+@media (hover: hover) {
+  .site-nav__consult:hover,
+  .site-nav__bar-wa:hover { background: var(--k-action-hover); color: var(--k-on-action); }
+}
+.site-nav__consult:focus-visible,
+.site-nav__bar-wa:focus-visible { outline: 2px solid var(--k-focus); outline-offset: 3px; }
+@media (max-width: 380px) {
+  .site-nav__consult-free { display: none; }
+}
+
+/* ── Компьютер (от 900 px): Krepko · 48 · Каталог услуг · Блог · О Krepko
+   (шаг 32) · поле 360×44 · 16 · кнопка. Текущий раздел — полужирный,
+   с чертой 2 px снизу (её ставит site-nav.js: aria-current / is-current). ── */
+@media (min-width: 900px) {
+  .site-nav__brand { margin-right: var(--space-7); }
+  .site-nav__links {
+    display: flex;
+    align-items: center;
+    gap: var(--space-6);
+    margin-right: auto;
   }
-  .site-nav__brand-text {
-    /* 2026-05-28: на mobile тоже крупнее — было 16px, стало 20px. */
-    font-size: 20px;
+  .site-nav__link {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    font-family: var(--k-font-text);
+    font-size: var(--k-fs-ui);
+    font-weight: var(--k-w-regular);
+    line-height: 1.2;
+    color: var(--k-text);
+    text-decoration: none;
+    white-space: nowrap;
   }
-  .site-nav__cta-text {
-    display: none;
+  .site-nav__link.is-current { font-weight: var(--k-w-strong); color: var(--k-heading); }
+  .site-nav__link.is-current::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 2px;
+    background: var(--k-heading);
   }
-  .site-nav__cta {
-    padding: var(--space-2);
+  .site-nav__actions { flex: 0 1 auto; min-width: 0; gap: var(--space-4); margin-left: var(--space-6); }
+  .site-nav__search-btn,
+  .site-nav__menu-btn { display: none; }
+  /* 360 px, на узком окне сжимается (подсказка обрезается многоточием) */
+  .site-nav__field { display: flex; flex: 0 1 auto; width: 360px; }
+  /* каталог и разделы — на странице своё большое поле (итог v3 §3.5) */
+  body[data-quiet="catalog"] .site-nav__inner .site-nav__field { display: none; }
+}
+@media (hover: hover) {
+  .site-nav__link:hover { color: var(--k-heading); }
+}
+/* узкий компьютер: поле сжимается, пункты не переносятся */
+@media (min-width: 900px) and (max-width: 1179px) {
+  .site-nav__brand { margin-right: var(--space-5); }
+  .site-nav__links { gap: var(--space-5); }
+  .site-nav__actions { gap: var(--space-3); margin-left: var(--space-5); }
+}
+
+/* ── Поле поиска «Что нужно оформить?» — шапка, полоса, меню. Выглядит как
+   поле (рамка 2 px, подсказка внутри), ведёт себя как кнопка: открывает
+   поиск панелью прямо под собой (site-search.js); без скрипта — каталог. ── */
+.site-nav__field,
+.site-menu__field {
+  align-items: center;
+  gap: 10px;
+  box-sizing: border-box;
+  height: 44px;
+  min-width: 0;
+  padding: 0 var(--space-4) 0 var(--space-3);
+  border: var(--k-field-border) solid var(--k-line-strong);
+  border-radius: var(--k-r-field);
+  background: var(--k-field-bg);
+  color: var(--k-muted);
+  font-family: var(--k-font-text);
+  font-size: var(--k-fs-ui);
+  font-weight: var(--k-w-regular);
+  line-height: 1.2;
+  text-decoration: none;
+  cursor: text;
+}
+.site-nav__field svg,
+.site-menu__field svg { flex: none; width: 20px; height: 20px; color: var(--k-muted); }
+.site-nav__field span,
+.site-menu__field span {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+@media (hover: hover) {
+  .site-nav__field:hover,
+  .site-menu__field:hover { border-color: var(--k-heading); color: var(--k-text); }
+}
+.site-nav__field:focus-visible,
+.site-menu__field:focus-visible { outline: 2px solid var(--k-focus); outline-offset: 2px; }
+
+/* ── Полоса поиска (компьютер): Krepko · поле до 560×44 · «Каталог услуг» ·
+   кнопка WhatsApp; 64 px и линия. Стоит сразу под шапкой и скрыта; когда
+   шапка уезжает (html[data-bar="down"]), полоса оказывается ровно на её
+   месте у верхнего края — без «мёртвой зоны», как у Thumbtack, только
+   лучше: шапка не уезжает вместе со страницей. ── */
+.site-nav__bar { display: none; }
+@media (min-width: 900px) {
+  .site-nav__bar {
+    display: block;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: calc(100% + 1px);
+    background: var(--k-bar-bg);
+    border-bottom: 1px solid var(--k-bar-line);
+    -webkit-backdrop-filter: var(--k-bar-filter);
+    backdrop-filter: var(--k-bar-filter);
+    visibility: hidden;
   }
-  .site-nav__cta svg {
-    width: 18px;
-    height: 18px;
+  html[data-bar="down"] .site-nav__bar { visibility: visible; }
+  .site-nav__bar-inner {
+    display: flex;
+    align-items: center;
+    gap: var(--space-5);
+    box-sizing: border-box;
+    height: var(--nav-bar-h);
+    max-width: var(--frame-max);
+    margin: 0 auto;
+    padding: 0 var(--frame-pad);
+  }
+  .site-nav__bar .site-nav__brand { margin-right: var(--space-4); }
+  .site-nav__field--wide { flex: 0 1 560px; }
+  .site-nav__bar-cat {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    margin-left: auto;
+    font-family: var(--k-font-text);
+    font-size: var(--k-fs-ui);
+    font-weight: var(--k-w-strong);
+    color: var(--k-heading);
+    text-decoration: none;
+    white-space: nowrap;
+  }
+}
+@media (hover: hover) {
+  .site-nav__bar-cat:hover { text-decoration: underline; text-underline-offset: 4px; }
+}
+
+/* ── Одна кнопка WhatsApp на экране (компьютер; раскладка услуги 30.10):
+   пока на экране кнопка в тексте (под заголовком, карточка, врезка,
+   отзывы, финал) или в окне поиска, кнопка шапки и полосы прячется НА
+   СВОЁМ МЕСТЕ — поле и пункты не сдвигаются. html[data-wa-in] ставит
+   site-nav.js, html[data-search-wa] — site-search.js; выключатель —
+   data/site.yaml → bars.desktop_one_wa (слово one-wa в data-bars). ── */
+@media (min-width: 900px) {
+  html[data-wa-in] .site-nav[data-bars~="one-wa"] :is(.site-nav__consult, .site-nav__bar-wa),
+  html[data-search-wa] .site-nav[data-bars~="one-wa"] :is(.site-nav__consult, .site-nav__bar-wa) {
+    visibility: hidden;
+  }
+}
+/* Телефон: шапка вернулась при прокрутке вверх (data-bar="up"), а на экране
+   кнопка в тексте (финал, отзывы, врезка, кнопка статьи) — кнопка шапки
+   прячется на своём месте, как на компьютере. Первый экран (data-bar="top":
+   шапка и кнопка под заголовком) и главная (шапка не прячется) — как были.
+   Проверка 31.10: при прокрутке вверх на услугах, в каталоге и в статьях было
+   32 положения с двумя кнопками на экране. Действует вместе с bars.phone_hide:
+   без него состояния up на телефоне нет. */
+@media (max-width: 899px) {
+  html[data-bar="up"][data-wa-in] .site-nav[data-bars~="hide-phone"] .site-nav__consult {
+    visibility: hidden;
   }
 }
 
-/* ============================================================
-   Site Menu Overlay — <dialog id="site-menu-dialog">
-   Открывается через .site-nav__menu-btn click.
-   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  .site-nav { transition: none; }
+}
 
 /* Страховка на все диалоги сайта: закрытый <dialog> не показывается ни при
    каких обстоятельствах. Браузер прячет его сам, но любое правило вида
@@ -201,12 +502,10 @@ main {
    меню и поиск оказались раскрытыми поверх страницы на всех экранах. */
 dialog:not([open]) { display: none !important; }
 
-/* ── Мобильное меню: полноэкранная светлая панель (2026-08-06) ──
-   Раньше это была плавающая тёмная карточка 480px по центру — на светлом
-   сайте выглядела чужеродно, а с ростом каталога переставала вмещать
-   навигацию. Теперь полноэкранная шторка в терракотовой шкале:
-   поиск сверху, крупные пункты, направления сеткой (данные из
-   services_catalog.yaml — растут сами), контакты прижаты к низу. */
+/* ── Меню телефона (v3): один уровень, около 500 px — помещается в первый
+   заход Safari (664 px), внутри ничего не листается. Сверху вниз: знак и
+   «закрыть», поле, «Каталог услуг», «Блог», «О Krepko», «Главная», кнопка
+   WhatsApp, другой язык. На широком экране — лист справа. ── */
 .site-menu {
   border: none;
   padding: 0;
@@ -219,17 +518,12 @@ dialog:not([open]) { display: none !important; }
   inset: 0;
   overflow: hidden;
 }
-/* Затемнения под шторкой на телефоне нет намеренно.
-   iOS Safari красит статус-бар цветом theme-color и подмешивает в него
-   затемнение открытого <dialog>: над меню висела серая полоса, будто
-   шторка не доехала до верха экрана. Заодно скрипт в site_nav.html на
-   время открытия подменяет theme-color на цвет шторки — он следит за
-   атрибутом open, потому что закрыть меню можно крестиком, кликом по фону,
-   Esc и кнопкой «назад». */
-.site-menu::backdrop { background: #FFFBF7; }
+/* Затемнения под листом на телефоне нет намеренно: iOS Safari подмешивает его
+   в цвет статус-бара (theme-color) — над меню висела серая полоса. Скрипт
+   site-nav.js на время открытия ставит theme-color цвета листа. */
+.site-menu::backdrop { background: var(--k-bg); }
 @media (min-width: 720px) {
-  /* на широком экране шторка занимает часть экрана — затемнение возвращается */
-  .site-menu::backdrop { background: rgba(26, 43, 60, 0.4); }
+  .site-menu::backdrop { background: var(--k-scrim); }
 }
 .site-menu[open] { animation: site-menu-fade 200ms ease-out; }
 @keyframes site-menu-fade { from { opacity: 0; } to { opacity: 1; } }
@@ -237,30 +531,32 @@ dialog:not([open]) { display: none !important; }
 .site-menu__sheet {
   display: flex;
   flex-direction: column;
+  box-sizing: border-box;
   height: 100%;
-  background: #FFFBF7;
-  color: #2D2D2D;
+  overflow-y: auto;
+  background: var(--k-bg);
+  color: var(--k-text);
+  font-family: var(--k-font-text);
   animation: site-menu-slide 240ms ease-out;
   /* отступы под вырез и home-индикатор iOS */
-  padding-top: env(safe-area-inset-top, 0);
-  padding-bottom: env(safe-area-inset-bottom, 0);
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
 }
 @keyframes site-menu-slide {
   from { transform: translateY(24px); opacity: 0; }
   to { transform: translateY(0); opacity: 1; }
 }
-@media (prefers-reduced-motion: reduce) {
-  .site-menu[open], .site-menu__sheet { animation: none; }
-}
-/* десктоп (меню доступно и там): панель справа, не весь экран.
-   ⚠️ Только [open]: без этого правило перебивает браузерное display:none
-   у закрытого <dialog>, и шторка висит поверх страницы всегда. */
+/* лист получает фокус программно — кольцо на нём не нужно */
+.site-menu__sheet:focus,
+.site-menu__sheet:focus-visible { outline: none; box-shadow: none; }
 @media (min-width: 720px) {
+  /* ⚠️ Только [open]: без этого правило перебивает браузерное display:none
+     у закрытого <dialog>, и лист висит поверх страницы всегда. */
   .site-menu[open] { display: flex; justify-content: flex-end; }
   .site-menu__sheet {
     width: min(420px, 92vw);
-    border-left: 1px solid #E8DFD1;
-    box-shadow: -24px 0 80px rgba(26, 43, 60, 0.2);
+    border-left: 1px solid var(--k-line);
+    box-shadow: var(--k-overlay-shadow);
     animation-name: site-menu-slide-x;
   }
   @keyframes site-menu-slide-x {
@@ -268,552 +564,138 @@ dialog:not([open]) { display: none !important; }
     to { transform: translateX(0); opacity: 1; }
   }
 }
+@media (prefers-reduced-motion: reduce) {
+  .site-menu[open], .site-menu__sheet { animation: none; }
+}
 
+/* верх листа — как шапка: знак слева, «закрыть» 44×44 справа, 65 px и линия */
 .site-menu__head {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 14px clamp(20px, 5vw, 28px);
-  border-bottom: 1px solid #E8DFD1;
+  flex: none;
+  box-sizing: border-box;
+  height: 65px;
+  padding: 0 var(--space-4);
+  border-bottom: 1px solid var(--k-line);
 }
 .site-menu__brand { text-decoration: none; }
 .site-menu__brand-text {
-  font-family: 'Playfair Display', Georgia, serif;
-  font-size: 26px;
-  font-weight: 600;
-  color: #1A2B3C;
+  font-family: var(--k-font-brand);
+  font-size: var(--k-fs-brand);
+  font-weight: var(--k-w-brand);
+  letter-spacing: var(--k-ls-brand);
+  line-height: 1;
+  color: var(--k-heading);
 }
 /* Крестик без рамки: обведённая кнопка спорила по весу с логотипом
    и добавляла меню ещё одну «кнопку», которой там не нужно быть. */
 .site-menu__close {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
+  display: inline-grid;
+  place-items: center;
   width: 44px;
   height: 44px;
+  margin-right: calc(-1 * var(--space-3));
+  padding: 0;
   border: 0;
-  border-radius: 50%;
   background: none;
-  color: #6B6B6B;
+  color: var(--k-heading);
   cursor: pointer;
 }
-.site-menu__close svg { width: 16px; height: 16px; }
+.site-menu__close svg { width: 22px; height: 22px; }
 
-.site-menu__scroll {
-  flex: 1;
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
-  padding: 18px clamp(20px, 5vw, 28px) 20px;
-}
-
-.site-menu__search {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  width: 100%;
-  padding: 13px 16px;
-  border: 1px solid #E8DFD1;
-  border-radius: 10px;
-  background: #F5F0EB;
-  color: #6B6B6B;
-  font-family: 'Manrope', sans-serif;
-  font-size: 15px;
-  text-align: left;
-  cursor: pointer;
-}
-.site-menu__search svg { flex: 0 0 auto; width: 17px; height: 17px; color: #C75B39; }
-
-@media (max-width: 719px) {
-  .site-menu__search {
-    padding: 4px 2px 14px;
-    border: 0;
-    border-bottom: 1px solid #E8DFD1;
-    border-radius: 0;
-    background: none;
-    /* текст темнее плейсхолдерного: строка читается как приглашение искать,
-       а не как незаполненное поле */
-    color: #4A4A4A;
-    font-size: 16px;
-  }
-  .site-menu__search svg { width: 19px; height: 19px; }
-  .site-menu__nav { margin-top: 4px; }
-}
-
-.site-menu__nav {
+.site-menu__body {
   display: flex;
   flex-direction: column;
-  margin-top: 10px;
+  padding: var(--space-4) var(--space-4) var(--space-5);
 }
+.site-menu__field { display: flex; height: 52px; margin-bottom: var(--space-3); }
+
+.site-menu__nav { display: flex; flex-direction: column; }
 .site-menu__link {
-  display: block;
-  padding: 13px 2px;
-  border-bottom: 1px solid #EFE7DA;
-  color: #1A2B3C;
-  font-family: 'Playfair Display', Georgia, serif;
-  /* было 24px: четыре пункта такого кегля плюс девять плиток под ними
-     превращали меню в стену. Теперь разница с направлениями есть, но
-     не кричит */
-  font-size: 21px;
-  font-weight: 500;
+  display: flex;
+  align-items: center;
+  min-height: var(--k-row-h);
+  box-sizing: border-box;
+  padding: var(--space-2) 0;
+  border-bottom: 1px solid var(--k-line);
+  font-size: var(--k-fs-body);
+  font-weight: var(--k-w-strong);
+  line-height: 1.3;
+  color: var(--k-heading);
   text-decoration: none;
 }
-.site-menu__link.active { color: #C75B39; }
-
-/* ── Два уровня меню (Daniil 24.08) ──
-   «Каталог услуг» проваливается на экран с категориями-аккордеонами;
-   секция «Направления» снята. Класс is-sub стоит на .site-menu__scroll:
-   кнопка возврата живёт над поиском, вне контейнера уровней.
-   Переключение display, а не transform-стек: грид-стек панелей
-   растягивал скролл верхнего уровня до высоты каталога. Слайд-ощущение
-   даёт короткая keyframes-анимация. */
-.site-menu__level--catalog { display: none; }
-.site-menu__scroll.is-sub .site-menu__level--root { display: none; }
-.site-menu__scroll.is-sub .site-menu__level--catalog {
-  display: block;
-  animation: siteMenuDrill .22s ease both;
-}
-.site-menu__scroll.is-drillback .site-menu__level--root {
-  animation: siteMenuDrillBack .22s ease both;
-}
-@keyframes siteMenuDrill { from { opacity: 0; transform: translateX(28px); } to { opacity: 1; transform: none; } }
-@keyframes siteMenuDrillBack { from { opacity: 0; transform: translateX(-28px); } to { opacity: 1; transform: none; } }
-@media (prefers-reduced-motion: reduce) {
-  .site-menu__scroll.is-sub .site-menu__level--catalog,
-  .site-menu__scroll.is-drillback .site-menu__level--root { animation: none; }
-}
-
-/* пункт-провал: та же строка, что соседние, плюс шеврон вправо */
-.site-menu__link--drill {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-}
-.site-menu__drill-chev { flex: none; color: #6B6B6B; }
-
-/* возврат на верхний уровень — над поиском, виден только в каталоге */
-.site-menu__back {
-  display: none;
-  align-items: center;
-  gap: 6px;
-  margin: 0 0 10px;
-  padding: 8px 2px;
-  border: 0;
-  background: none;
-  color: #6B6B6B;
-  font-family: 'Manrope', sans-serif;
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: .12em;
-  text-transform: uppercase;
-  cursor: pointer;
-}
-.site-menu__scroll.is-sub .site-menu__back { display: flex; }
-.site-menu__back svg { flex: none; }
-
-.site-menu__catalog { display: flex; flex-direction: column; }
-.site-menu__all-link {
-  display: flex;
-  align-items: center;
-  min-height: 46px;
-  padding: 11px 2px;
-  border-bottom: 1px solid #EFE7DA;
-  color: #C75B39;
-  font-size: 15.5px;
-  font-weight: 600;
-  text-decoration: none;
-}
-
-/* категория-аккордеон: раскрытие одной закрывает остальные (name=) */
-.site-menu__cat { border-bottom: 1px solid #EFE7DA; }
-.site-menu__cat-head {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  min-height: 46px;
-  padding: 11px 2px;
-  color: #1A2B3C;
-  font-size: 15.5px;
-  font-weight: 600;
-  line-height: 1.35;
-  cursor: pointer;
-  list-style: none;              /* убираем встроенный треугольник */
-}
-.site-menu__cat-head::-webkit-details-marker { display: none; }
-.site-menu__cat-chev {
-  flex: none;
-  color: #6B6B6B;
-  transition: transform .2s ease;
-}
-.site-menu__cat[open] > .site-menu__cat-head { color: #C75B39; }
-.site-menu__cat[open] > .site-menu__cat-head .site-menu__cat-chev {
-  transform: rotate(180deg);
-  color: #C75B39;
-}
-.site-menu__cat-body {
-  display: flex;
-  flex-direction: column;
-  padding: 0 0 10px 14px;
-}
-.site-menu__cat-link,
-.site-menu__cat-more {
-  display: flex;
-  align-items: center;
-  min-height: 44px;              /* минимум под палец, стандарт iOS/Android */
-  padding: 8px 2px;
-  color: #4A4A4A;
-  font-size: 14.5px;
-  font-weight: 400;
-  line-height: 1.35;
-  text-decoration: none;
-}
-.site-menu__cat-more {
-  color: #C75B39;
-  font-weight: 600;
-  font-size: 13.5px;
-}
-
-/* компактные направления — одна-две страницы, раскрывать нечего */
-.site-menu__cat-rest { display: flex; flex-direction: column; }
-.site-menu__cat-plain {
-  display: flex;
-  align-items: center;
-  min-height: 46px;
-  padding: 11px 2px;
-  border-bottom: 1px solid #EFE7DA;
-  color: #2D2D2D;
-  font-size: 15.5px;
-  font-weight: 500;
-  line-height: 1.35;
-  text-decoration: none;
-}
-.site-menu__cat-rest > .site-menu__cat-plain:last-child { border-bottom: 0; }
-
+/* текущий раздел — черта слева, как у пунктов шапки снизу */
+.site-menu__link.active { border-left: 2px solid var(--k-heading); padding-left: var(--space-3); }
 @media (hover: hover) {
-  .site-menu__catalog a:hover { color: #C75B39; }
-  .site-menu__back:hover { color: #C75B39; }
-  .site-menu__link:hover { color: #C75B39; }
-  .site-menu__close:hover { color: #C75B39; }
-  .site-menu__search:hover { border-color: #C75B39; }
+  .site-menu__link:hover { color: var(--k-heading); text-decoration: underline; text-underline-offset: 4px; }
+  .site-menu__close:hover { color: var(--k-muted); }
 }
 
-.site-menu__contacts {
-  padding: 14px clamp(20px, 5vw, 28px) 18px;
-  border-top: 1px solid #E8DFD1;
-  background: #FFFBF7;
-}
+/* Кнопка в меню — тот же вид, что в тексте: во всю ширину, без значка,
+   прямые углы, высота 48 */
 .site-menu__cta {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
+  box-sizing: border-box;
   width: 100%;
-  padding: 15px;
-  background: #C75B39;
-  border-radius: 10px;
-  color: #FFFBF7;
-  font-family: 'Manrope', sans-serif;
-  font-size: 15px;
-  font-weight: 700;
+  min-height: var(--k-btn-h);
+  margin-top: var(--space-5);
+  padding: 0 var(--space-4);
+  background: var(--k-action);
+  border-radius: var(--k-r-btn);
+  color: var(--k-on-action);
+  font-family: var(--k-font-text);
+  font-size: var(--k-fs-ui);
+  font-weight: var(--k-w-strong);
+  line-height: 1.2;
   text-decoration: none;
 }
-.site-menu__cta svg { width: 18px; height: 18px; }
+.site-menu__cta svg { display: none; }
 @media (hover: hover) {
-  .site-menu__cta:hover { background: #B04E2F; }
+  .site-menu__cta:hover { background: var(--k-action-hover); color: var(--k-on-action); }
+}
+.site-menu__cta:focus-visible { outline: 2px solid var(--k-focus); outline-offset: 3px; }
+
+/* другой язык — как «UA» в строке контактов: полужирный, без черты */
+.site-menu__langs {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-5);
+  margin-top: var(--space-3);
+}
+.site-menu__lang {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  font-size: var(--k-fs-ui);
+  font-weight: var(--k-w-strong);
+  color: var(--k-heading);
+  text-decoration: none;
+}
+@media (hover: hover) {
+  .site-menu__lang:hover { text-decoration: underline; text-underline-offset: 4px; }
 }
 
-/* ═══ Terracotta-редизайн шапки (2026-08-03) ═══
-   Топбар с контактами, горизонтальное меню, мегаменю каталога и кнопка
-   консультации. Здесь, а не в home-redesign.css, потому что шапка
-   общая для всех страниц. */
+/* Индикатор прочитанного снят с кожей v3 (30.10.2026): цветом залита только
+   кнопка WhatsApp. В рукописном блоге и на юридических страницах разметка
+   полосы ещё стоит — здесь она прячется. */
+.scroll-progress { display: none; }
 
+/* ═══ Общие правила сайта, которые исторически живут в этом файле ═══
+   Не обвязка: кнопки, подписи и цвета блоков главной, городов и каталога
+   (terracotta-редизайн 03.08, раунды 7 и 21). Перенесены из прежнего
+   раздела шапки без изменений — с обвязкой v3 (30.10.2026) из них сняты
+   только селекторы шапки и мегаменю (его разметки нет с 25.10). */
 
-  /* Desktop header nav — burger stays mobile-only, links exposed on wide screens */
-  .site-nav__links { display: none; }
-
-  /* ============ Topbar (LegalFlow-style contact strip) ============ */
-  .topbar {
-    background: var(--bg);
-    border-bottom: 1px solid var(--border-faint);
-    font-family: 'Manrope', sans-serif;
-  }
-  .topbar__inner {
-    max-width: 1180px;
-    margin: 0 auto;
-    padding: 10px 24px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 16px;
-    flex-wrap: wrap;
-  }
-  .topbar__contacts { display: flex; align-items: center; gap: 24px; flex-wrap: wrap; }
-  .topbar__item {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    text-decoration: none;
-    color: var(--text-sub);
-    font-size: 13px;
-    letter-spacing: 0.03em;
-    text-transform: uppercase;
-    transition: color .15s ease;
-  }
-  .topbar__item:hover { color: var(--gold); }
-  .topbar__item svg { color: var(--gold); flex-shrink: 0; }
-  .topbar__socials { display: flex; align-items: center; gap: 14px; }
-  /* Д16 (Ф2a, 28.10.2026): цель нажатия 17×17 → 33×33 — поле вокруг значка
-     и отрицательное поле той же величины, на глаз ничего не сдвигается.
-     Промах в зазор между значками был мёртвым кликом (Pulse, /madrid/). */
-  .topbar__social {
-    display: inline-flex;
-    padding: 8px;
-    margin: -8px;
-    color: var(--text-muted);
-    transition: color .15s ease, transform .15s ease;
-  }
-  .topbar__social:hover { color: var(--gold); transform: translateY(-1px); }
-
-  /* Topbar — taller, wider */
-  .topbar__inner { max-width: 1500px; padding: 14px 40px; }
-  .topbar__item { font-size: 14px; }
-  .topbar__socials { gap: 18px; }
-
-  /* Header — taller, wider, bigger type */
-  .site-nav__inner { max-width: 1500px !important; padding: 20px 40px !important; }
-
-  /* Free-consultation CTA (LegalFlow-style solid block) */
-  .site-nav__consult {
-    display: none;
-    align-items: center;
-    justify-content: center;
-    /* Слово «Бесплатная» вынесено в отдельный <span> (на узких экранах оно
-       прячется), а во flex-контейнере пробел между элементами схлопывается —
-       надпись слипалась в «БЕСПЛАТНАЯКОНСУЛЬТАЦИЯ». Отступ задаём здесь. */
-    gap: 0.32em;
-    background: var(--gold);
-    color: #FFFBF7;
-    font-family: 'Manrope', sans-serif;
-    font-weight: 600;
-    font-size: 14px;
-    letter-spacing: 0;
-    text-transform: none;
-    text-decoration: none;
-    padding: 20px 32px;
-    transition: filter .18s ease, transform .18s ease;
-    white-space: nowrap;
-  }
-  .site-nav__consult:hover { filter: brightness(1.06); transform: translateY(-1px); }
-
-  /* consultation CTA visible on mobile too (header no longer has WhatsApp pill) */
-  .site-nav__consult { display: inline-flex; padding: 12px 16px; font-size: 12px; }
-  .topbar__inner { padding-top: 18px !important; padding-bottom: 18px !important; }
-
-  /* Sticky header: subtle shadow once the page is scrolled */
-  .site-nav {
-    transition: box-shadow .25s ease, border-color .25s ease;
-    box-shadow: 0 0 0 rgba(26, 43, 60, 0);
-  }
-  .site-nav.is-stuck {
-    box-shadow: 0 6px 20px rgba(26, 43, 60, 0.10);
-    border-bottom-color: transparent;
-  }
-
-  /* ============ Round 7: единая геометрия — прямоугольные кнопки ============
-     Решение: radius 0 для ВСЕХ интерактивных кнопок (совпадает с референсом
-     LegalFlow и с serif-премиум тоном). Карточки — 4px вместо 12px, чтобы
-     не было разнобоя «мягкие карточки / жёсткие кнопки». */
-
-  /* — кнопки: строго прямоугольные — */
+  /* — кнопки: строго прямоугольные (раунды 7 и 21) — */
   .btn,
-  .site-nav__consult,
   .hero--home .hero__link-secondary,
   .cookie-consent__btn,
-  .site-nav__cta,
-  .site-menu__channel,
   .home-reviews__all,
-  .home-guides__all {
-    border-radius: 0 !important;
-  }
-
-  /* ============ Round 20: мега-меню «Каталог услуг» ============ */
-  .site-nav__link--mega {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    background: none;
-    border: 0;
-    padding: 0;
-    cursor: pointer;
-    font-family: 'Manrope', sans-serif;
-  }
-  .site-nav__chev { transition: transform .2s ease; }
-  .site-nav__link--mega[aria-expanded="true"] { color: var(--gold); }
-  .site-nav__link--mega[aria-expanded="true"] .site-nav__chev { transform: rotate(180deg); }
-
-  /* Подложка под мегаменю: гасит страницу, чтобы каталог не читался
-     поверх шумного контента. z-index 40 — ниже шапки (50), выше страницы. */
-  .mega-overlay {
-    position: fixed;
-    inset: 0;
-    z-index: 40;
-    background: rgba(26, 43, 60, .34);
-    backdrop-filter: blur(5px);
-    -webkit-backdrop-filter: blur(5px);
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity .24s ease;
-  }
-  .mega-overlay.is-on { opacity: 1; pointer-events: auto; }
-  /* топбар не был позиционирован и уходил под подложку — верхняя полоса
-     затемнялась, а шапка под ней оставалась светлой */
-  .topbar { position: relative; z-index: 45; }
-
-  /* Панель переехала внутрь <header>: снаружи absolute считался от документа,
-     и при прокрутке меню открывалось у самого верха страницы, за экраном.
-     Шапка sticky — она и служит containing block, панель липнет к её низу. */
-  .mega {
-    position: absolute;
-    top: 100%;
-    left: 0; right: 0;
-    z-index: 60;
-    background: var(--bg);
-    border-bottom: 1px solid var(--border);
-    box-shadow: 0 18px 40px rgba(26, 43, 60, 0.10);
-    /* шторка: панель раскрывается сверху вниз и так же сворачивается.
-       clip-path вместо scaleY — содержимое не сплющивается, а «выезжает»
-       из-под шапки. Класс снимает JS, он же прячет панель после перехода. */
-    clip-path: inset(0 0 100% 0);
-    opacity: 0;
-    transition: clip-path .36s cubic-bezier(.22, 1, .36, 1),
-                opacity .22s ease;
-  }
-  .mega.is-open { clip-path: inset(0 0 0 0); opacity: 1; }
-  .mega[hidden] { display: none; }
-  .mega__inner {
-    max-width: 1760px;
-    margin: 0 auto;
-    padding: 40px clamp(24px, 4.5vw, 88px) 28px;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 40px;
-  }
-
-  .mega__col { display: flex; flex-direction: column; }
-  /* Заголовки прижаты к низу зоны в две строки: «Административные процедуры»
-     не влезают в колонку 298px и переносятся, остальные названия короче. Без
-     резерва высоты подпись и список под длинным заголовком уезжали вниз, и
-     ряд колонок ломался. Прижатие к низу держит их на одной линии независимо
-     от длины названия. */
-  .mega__head {
-    display: flex;
-    align-items: flex-end;
-    min-height: 2.3em;
-    font-family: 'Playfair Display', serif;
-    font-size: 21px;
-    line-height: 1.15;
-    font-weight: 500;
-    color: #1A2B3C;
-    text-decoration: none;
-    margin-bottom: 4px;
-  }
-  .mega__head:hover { color: var(--gold); }
-  .mega__count {
-    font-family: 'Manrope', sans-serif;
-    font-size: 11px;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--text-muted);
-    margin-bottom: 14px;
-    padding-bottom: 12px;
-    border-bottom: 1px solid var(--border-faint);
-  }
-  /* Пункт списка. Вертикальный шаг задаётся padding'ом, а не margin'ом:
-     кликабельная зона тогда смыкается с соседней и мышь не проваливается в
-     щель между строками. 8px сверху и снизу дают 16px воздуха между текстами
-     при кегле 14 — на 6px строки читались сплошной простынёй. */
-  .mega__doc {
-    font-family: 'Manrope', sans-serif;
-    font-size: 14px;
-    line-height: 1.5;
-    color: var(--text-sub);
-    text-decoration: none;
-    padding: 8px 0;
-    transition: color .15s ease, transform .15s ease;
-  }
-  /* Сдвиг вправо — transform, а не padding-left: padding пересчитывает
-     раскладку колонки на каждом наведении, и соседние строки подрагивают. */
-  .mega__doc:hover { color: var(--gold); transform: translateX(5px); }
-  /* margin-top:auto прижимает ссылку к низу колонки. Списки разной длины —
-     у нотариуса шесть пунктов, у процедур четыре, — и без этого «Все …→»
-     вставали на разной высоте, отчего низ панели выглядел рваным. */
-  .mega__more {
-    margin-top: auto;
-    padding-top: 14px;
-    font-family: 'Manrope', sans-serif;
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--gold);
-    text-decoration: none;
-  }
-  .mega__more:hover { text-decoration: none; }
-
-  /* ── Подвал панели ──
-     Слева компактные направления (одна-две страницы за каждым), справа вход в
-     полный каталог. До 2026-08-09 здесь была одна ссылка на всю ширину, а
-     «Легализация» и «Присяжный перевод» в меню не показывались вовсе. */
-  .mega__footer {
-    border-top: 1px solid var(--border-faint);
-    background: var(--surface);
-  }
-  .mega__footer-inner {
-    max-width: 1760px;
-    margin: 0 auto;
-    padding: 16px clamp(24px, 4.5vw, 88px);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 24px 40px;
-    flex-wrap: wrap;
-  }
-  .mega__rest {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 8px 28px;
-  }
-  .mega__rest-link {
-    font-family: 'Manrope', sans-serif;
-    font-size: 14px;
-    color: var(--text-sub);
-    text-decoration: none;
-    transition: color .15s ease;
-  }
-  .mega__rest-link:hover { color: var(--gold); }
-  .mega__all {
-    flex: none;
-    font-family: 'Manrope', sans-serif;
-    font-size: 13px;
-    font-weight: 600;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    color: var(--gold);
-    text-decoration: none;
-    white-space: nowrap;
-  }
-  .mega__all:hover { text-decoration: none; }
-
-  /* ============ Round 21: единая система форм ============
-     Три правила, без исключений:
-       1) действия (кнопки/CTA)        → 0px, острые
-       2) поверхности (карточки/панели) → 4px
-       3) контейнеры иконок и аватары   → 50%, круг
-     До этого на странице уживались 4px / 6px / 8px / 12px вперемешку. */
-
-  /* — 1. действия — */
-  .btn, .site-nav__consult, .cookie-consent__btn,
-  .srow__action, button.site-nav__link--mega {
+  .home-guides__all,
+  .srow__action {
     border-radius: 0 !important;
   }
 
@@ -831,81 +713,70 @@ dialog:not([open]) { display: none !important; }
 
      Выключенное правило:
        a:hover, a:focus, a:hover *, a:focus *, .srows__all:hover,
-       .mega__more:hover, .mega__all:hover, .loc__link:hover,
-       summary:hover, summary:hover * { text-decoration: none !important; }
+       .loc__link:hover, summary:hover, summary:hover * {
+         text-decoration: none !important; }
   */
 
   /* Контраст. Терракота --gold (#C75B39) на кремовом фоне даёт 4.09:1 — ниже
      нормы 4.5:1 для текста мельче 18px, а ею набраны все ссылки-действия.
-     Для мелкого кегля берём --gold-2 (#B04E2F, 5.13:1): на глаз почти тот же
-     цвет, но читаемость проходит порог. Крупные акценты (номера, цифры,
-     кавычки) остаются на --gold — для них норма 3:1 и она выполняется. */
-  .hero__free,
-  .mega__more,
-  .mega__all,
+     Для мелкого кегля берём --gold-2 (#B04E2F, 5.13:1). */
+  /* Кожа v3 (30.10.2026): ссылки-действия — цвет заголовка (на страницах
+     генератора --gold-2 связан с ним в light-scale.css), а «Первая
+     консультация бесплатно» — тёмная терракота --k-accent-text */
   .home-guides .gcard__more,
   .city__link,
   .srows__foot .btn,
   .gcards__foot .btn {
     color: var(--gold-2) !important;
   }
+  .hero__free { color: var(--k-accent-text) !important; }
   /* но на залитом терракотой hover текст обязан белеть, иначе сливается
      с фоном (Daniil 29.09) — исключение позже и специфичнее a11y-правила */
-  .home-guides .gcard:hover .gcard__more { color: #FFFBF7 !important; }
+  .home-guides .gcard:hover .gcard__more { color: var(--k-heading) !important; }
 
-  /* Микро-лейблы капсом шли с шестью разными трекингами (0.06–0.16em).
-     Кнопки и действия сюда не входят — у них свой шаг 0.5px. */
+  /* Микро-лейблы капсом шли с шестью разными трекингами (0.06–0.16em). */
   .stat__label,
   .portrait__label,
   .portrait__role,
-  .mega__count,
-  .mega__all,
   .loc__label,
   .ticker__item,
   .hero__free,
   .intro__metrics .hero__meta-item small,
   #sec-services .srow__cat,
   #sec-services .srow__term-sub {
-    letter-spacing: 0.14em !important;
-  }
-  .site-nav__link { font-weight: 500 !important; }
-  /* --nav-cta-*: значения кнопки шапки на шаблонах (body.tpl, Ф2b-1,
-     module-cta.css); без них — прежние, главная и блог не меняются */
-  .site-nav__consult { font-weight: var(--nav-cta-fw, 500) !important; }
-  /* «UA» переключателя языка (Ф2b-9) — полужирный, см. .topbar__lang-short */
-  .topbar__item:not(.topbar__lang-short) { font-weight: 400 !important; }
-
-
-  /* Полосы над страницей были массивными по высоте: шапка около 100px,
-     тикер 50px, топбар 54px — почти 200px занято ещё до первого экрана.
-     Сжимаем вертикальные поля, кегли не трогаем. */
-  .topbar__inner {
-    padding-top: clamp(7px, 0.55vw, 11px) !important;
-    padding-bottom: clamp(7px, 0.55vw, 11px) !important;
-  }
-  .site-nav__inner {
-    padding-top: clamp(10px, 0.8vw, 16px) !important;
-    padding-bottom: clamp(10px, 0.8vw, 16px) !important;
+    letter-spacing: 0 !important;
   }
 
-  /* — 6. микро-лейблы капсом: единый кегль, вес и интерлиньяж — */
+  /* — микро-лейблы: единый кегль, вес и интерлиньяж — */
   .stat__label,
   #sec-services .srow__term-sub,
   #sec-services .srow__cat,
   .portrait__role,
   .ticker__item,
-  .hero__free,
-  .mega__count,
   .loc__label {
     font-size: var(--fs-micro) !important;
     font-weight: 600 !important;
     line-height: var(--lh-micro) !important;
   }
+  /* подпись у кнопки — мелкий текст кожи, обычное начертание (кожа v3) */
+  .hero__free {
+    font-size: var(--k-fs-ui) !important;
+    font-weight: var(--k-w-regular) !important;
+    line-height: 1.3 !important;
+  }
 
-  /* — 7. кнопки — */
-  .btn, .site-nav__consult, .srows__foot .btn, .gcards__foot .btn {
+  /* — кнопки — */
+  .btn, .srows__foot .btn, .gcards__foot .btn {
     font-size: var(--fs-btn) !important;
   }
+
+/* знак в подвале на компьютере — прежний размер (подвал — свой поток, s4);
+   знак шапки с v3 — --k-fs-brand */
+@media (min-width: 1000px) {
+  .site-footer .site-footer__brand-text {
+    font-size: clamp(19px, calc(0.57vw + 17.1px), 28.5px) !important;
+  }
+}
 
 /* ═══ Палитра редизайна для шапки и крошек (2026-08-03) ═══
    Переменные терракотовой темы объявлены в home-redesign.css, а он подключён
@@ -913,23 +784,30 @@ dialog:not([open]) { display: none !important; }
    фон #161B26, золотая кнопка, голубоватые пункты меню. Переопределяем их
    локально — на самих блоках, — чтобы шапка везде выглядела одинаково,
    а контент страниц остался нетронутым. */
-.topbar, .site-nav, .mega, .site-menu, .breadcrumb {
-  --bg: #FFFBF7;
-  --surface: #F5F0EB;
-  --surface-2: #F0E8DD;
-  --surface-sunk: #EFE7DA;
-  --surface-card: #F5F0EB;
-  --border-faint: #E8DFD1;
-  --border: #DCCFB9;
-  --text: #2D2D2D;
-  --text-sub: #4A4A4A;
-  --text-muted: #6B6B6B;
-  --text-label: #6B6B6B;
-  --text-nav: #6B6B6B;
-  --gold: #C75B39;
-  --gold-2: #B04E2F;
-  --gold-tint: rgba(199, 91, 57, 0.14);
-  --gold-on: #FFFBF7;
+/* Кожа v3 (30.10.2026): старые имена внутри обвязки связаны с ролями --k-*
+   прямо здесь — шапка, меню и крошки выглядят одинаково на сайте и в блоге
+   (в блоге body[data-skin] нет). Терракота текстом → цвет заголовка. Сама
+   обвязка v3 пишет роли --k-* напрямую; связка нужна правилам других
+   файлов, которые попадают внутрь (кольца фокуса, крошки). */
+.topbar, .site-nav, .site-menu, .site-search, .breadcrumb {
+  --bg: var(--k-bg);
+  --surface: var(--k-surface);
+  --surface-2: var(--k-surface);
+  --surface-sunk: var(--k-surface);
+  --surface-card: var(--k-surface);
+  --border-faint: var(--k-line);
+  --border: var(--k-line);
+  --text: var(--k-text);
+  --text-sub: var(--k-text);
+  --text-muted: var(--k-muted);
+  --text-label: var(--k-muted);
+  --text-nav: var(--k-text);
+  --gold: var(--k-heading);
+  --gold-2: var(--k-heading);
+  --gold-tint: var(--k-surface);
+  --gold-on: var(--k-on-action);
+  --navy: var(--k-heading);
+  --rule-link: var(--k-line-strong);
 }
 
 /* ═══ Хлебные крошки (2026-08-03) ═══
@@ -944,199 +822,45 @@ dialog:not([open]) { display: none !important; }
    (--fs-label, --ls-label, light-scale.css), а на телефоне поля сверху и снизу
    8/4 вместо 20/14 (--crumb-pt, --crumb-pb, pillar-split.css). Без переменных —
    прежние значения: блог и юридические страницы не меняются. */
+/* 29.10.2026 (одна рамка, tokens.css): крошки над страницей — прямой потомок
+   body (/about/, /partners/) — стоят в рамке содержимого: --crumb-max и
+   --crumb-px ниже. Крошки внутри main получают их от своих страниц
+   (page-legal.css, page-review.css, --crumb-m — поля блока); у блога
+   прежние значения. */
 body:has(> nav) > nav.breadcrumb:first-of-type,
 nav.breadcrumb {
-  max-width: 1760px !important;
+  max-width: var(--crumb-max, 1760px) !important;
   width: auto !important;
-  margin: 0 auto !important;
-  padding: var(--crumb-pt, clamp(20px, 2vw, 32px)) clamp(24px, 4.5vw, 88px) var(--crumb-pb, clamp(14px, 1.4vw, 22px)) !important;
-  font-family: 'Manrope', sans-serif;
-  font-size: var(--fs-label, var(--fs-micro, 11px));
-  font-weight: 600;
-  letter-spacing: var(--ls-label, .14em);
-  text-transform: uppercase;
-  color: var(--text-muted);
+  margin: var(--crumb-m, 0 auto) !important;
+  padding: var(--crumb-pt, clamp(20px, 2vw, 32px)) var(--crumb-px, clamp(24px, 4.5vw, 88px)) var(--crumb-pb, clamp(14px, 1.4vw, 22px)) !important;
+  font-family: var(--k-font-text);
+  font-size: var(--k-fs-ui);
+  font-weight: var(--k-w-regular);
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--k-muted);
 }
 .breadcrumb a {
-  color: var(--text-muted);
+  color: var(--k-muted);
   text-decoration: none;
   border-bottom: 1px solid transparent;
   transition: color .2s ease, border-color .2s ease;
 }
 .breadcrumb a:hover,
 .breadcrumb a:focus-visible {
-  color: var(--gold-2);
+  color: var(--k-heading);
   text-decoration: none; /* QA 25.10: подчёркивание снято — достаточно цвета */
 }
 /* текущая страница — тем же кеглем, но темнее: это не ссылка */
-.breadcrumb > span:last-child { color: var(--text); }
-
-
-/* ═══ Адаптив шапки из редизайна (2026-08-03) ═══
-   Эти медиазапросы жили в home-redesign.css, который подключён только
-   к главной. На остальных страницах горизонтальное меню оставалось
-   скрытым, а бургер — видимым. */
-@media (min-width: 1000px) {
-    .site-nav__links {
-      display: flex;
-      align-items: center;
-      gap: 28px;
-    }
-    .site-nav__link {
-      font-family: 'Manrope', sans-serif;
-      font-size: 14px;
-      font-weight: 600;
-      color: var(--text-sub);
-      text-decoration: none;
-      transition: color .15s ease;
-      white-space: nowrap;
-    }
-    .site-nav__link:hover { color: var(--gold); }
-    .site-nav__menu-btn { display: none; }}
-@media (max-width: 899px) {
-    .topbar__inner { padding: 8px 16px; justify-content: center; }
-    .topbar__contacts { gap: 14px; justify-content: center; width: 100%; }
-    .topbar__item { font-size: 11px; }
-    .topbar__socials { display: none; }}
-
-/* ═══ Переключатель языка (Ф2b-9, решение Daniil 28.10) ═══
-   Десктоп (≥ 900 px) — текстовая ссылка «Українською» / «По-русски» справа,
-   перед мессенджерами. Телефон (вариант Б) — короткое «UA» / «RU» в той же
-   строке, что почта и телефон, за тонким разделителем. Флагов нет: язык ≠
-   страна, и цветной флаг рядом с кнопкой — лишний шум первого экрана.
-   Обе ссылки стоят в разметке всегда; видна одна — по ширине экрана. */
-.topbar__lang-short {
-  position: relative;
-  /* цель нажатия ≥ 24 px (как у значков, Д16): поле 8 px и отрицательное
-     поле той же величины — строка не сдвигается; слева 14 px до текста
-     плюс 1 px разделителя */
-  padding: 8px 8px 8px 15px;
-  margin: -8px -8px -8px 0;
-  font-weight: 700;
-  color: var(--navy, var(--text));
+.breadcrumb > span:last-child { color: var(--k-text); }
+/* крошки над страницей — в рамке (на телефоне поле 24 px, как у содержимого);
+   шеврон «‹» — точно по левому краю рамки: поле тап-зоны слева снято, его
+   компенсировал отрицательный отступ, и строка стояла на 1–2 px правее */
+body > nav.breadcrumb {
+  --crumb-max: var(--frame-max);
+  --crumb-px: var(--frame-pad);
 }
-.topbar__lang-short::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 8px;
-  bottom: 8px;
-  border-left: 1px solid var(--border);
-}
-@media (min-width: 900px) { .topbar__lang-short { display: none; } }
-/* проверка R7: кольцо фокуса внутри поля ссылки, иначе верх уходит за экран,
-   а низ — под липкую шапку */
-.topbar__lang-short:focus-visible { outline-offset: -2px; }
-/* Уже 360 px строка «почта · телефон · UA» (305 px) не влезает в 288 px и
-   переносилась на вторую строку (замер 320 px: 33 → 65 px высоты). Там —
-   плотнее зазоры; 360 px и шире не затрагиваются. */
-@media (max-width: 359px) {
-  .topbar__contacts { gap: 8px; }
-  .topbar__lang-short { padding-left: 9px; }
-}
-/* Полная подпись живёт в .topbar__socials — до 899 px блок скрыт целиком */
-.topbar__lang {
-  /* поле 2 px отделяет черту от букв; отрицательное поле той же величины —
-     строка не становится выше (на 900–999 px ссылка выше соседей) */
-  margin: -2px 22px -2px 0;
-  padding: 2px 0;
-  border-bottom: 1px solid var(--rule-link, var(--border));
-  font-size: 14px;
-  font-weight: 500;
-  line-height: 1.3;
-  color: var(--text);
-  text-decoration: none;
-  transition: color .15s ease, border-color .15s ease;
-}
-@media (hover: hover) {
-  .topbar__lang:hover { color: var(--gold-2); border-bottom-color: var(--gold-2); }
-}
-@media (min-width: 1000px) {
-    .site-nav__brand-text { font-size: 28px !important; }
-    .site-nav__links { gap: 36px; }
-    .site-nav__link { font-size: 15px; }
-    .site-nav__actions { gap: 16px; }}
-@media (min-width: 1000px) { .site-nav__consult { display: inline-flex; }}
-@media (min-width: 1000px) { .site-nav__consult { padding: 20px 32px; font-size: 14px; }}
-@media (min-width: 1000px) {
-    .site-nav__inner { padding-top: 24px !important; padding-bottom: 24px !important; }}
-@media (min-width: 1000px) {
-    .site-nav__brand-text { font-size: 36px !important; }
-    .site-nav__links { gap: 44px; }
-    .site-nav__link { font-size: 18px; letter-spacing: 0.02em; }
-    .site-nav__consult { font-size: 15px; padding: 22px 38px; }
-    .topbar__item { font-size: 15px; }}
-@media (prefers-reduced-motion: reduce) { .site-nav { transition: none; }}
-@media (max-width: 560px) {
-    .site-nav__inner { gap: 8px !important; padding-left: 16px !important; padding-right: 16px !important; }
-    /* Размер кнопки задаётся типографской шкалой (--fs-btn) через !important,
-       поэтому мобильное значение тоже должно быть !important — иначе кнопка
-       остаётся 14px, занимает 234px из 390 и выталкивает шапку за экран. */
-    .site-nav__consult { padding: var(--nav-cta-pad, 10px 12px) !important; font-size: var(--nav-cta-fs, 12px) !important; letter-spacing: 0 !important; }
-    .site-nav__menu-text { display: none; }
-    .site-nav__menu-btn { padding: 10px; }
-    .site-nav__brand-text { font-size: 22px !important; }}
-/* Экраны 320–380px (iPhone SE, старые Android): даже на 11px полная надпись
-   занимает 188px из ~206px, что остаются от логотипа, поиска и бургера, —
-   шапка уезжает за правый край. Прячем только слово «Бесплатная»: кнопка
-   читается «Консультация» и укладывается в ~110px. На 390px и шире надпись
-   остаётся полной. */
-@media (max-width: 380px) {
-    .site-nav__consult-free { display: none; }}
-/* Ф2b-1 (проверка R7): на шаблонах кнопка шапки шире (14 px / 700), на 381–388 px
-   полная надпись упиралась в меню — «Написать в» прячем до 388 px */
-@media (max-width: 388px) { body.tpl .site-nav__consult-free { display: none; } }
-@media (prefers-reduced-motion: reduce) { .mega-overlay { transition: none; }}
-@media (prefers-reduced-motion: reduce) {
-    .mega { transition: none; }}
-@media (max-width: 1100px) { .mega__inner { grid-template-columns: repeat(2, 1fr); gap: 32px; }}
-@media (max-width: 999px) { .mega { display: none !important; }}
-@media (min-width: 1000px) {
-    .site-nav__brand-text,
-    .site-footer .site-footer__brand-text {
-      font-size: clamp(19px, calc(0.57vw + 17.1px), 28.5px) !important;
-    }
-    .site-nav__link {
-      font-size: clamp(12.5px, calc(0.19vw + 11.4px), 15.2px) !important;
-    }
-    .site-nav__consult {
-      font-size: var(--nav-cta-fs, clamp(10.5px, calc(0.14vw + 10.5px), 13.3px)) !important;
-      padding: var(--nav-cta-pad, clamp(14px, 1.1vw, 22px) clamp(22px, 1.9vw, 38px)) !important;
-    }}
-@media (min-width: 1000px) {
-    /* кнопка задаёт высоту шапки — её поля тоже ужимаем */
-    .site-nav__consult {
-      padding: var(--nav-cta-pad, clamp(10px, 0.75vw, 14px) clamp(18px, 1.6vw, 32px)) !important;
-    }}
-
-
-/* ═══ Индикатор прочитанного (2026-08-07) ═══
-   Тонкая полоса поверх липкой шапки: показывает, сколько страницы позади.
-   z-index выше .site-nav (50) и мегаменю (60) — полоса не ныряет под них.
-   Растёт через scaleX, а не width: трансформация не вызывает пересчёт
-   раскладки на каждом кадре прокрутки. */
-.scroll-progress {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 3px;
-  z-index: 200;
-  pointer-events: none;
-  background: transparent;
-}
-.scroll-progress__bar {
-  display: block;
-  height: 100%;
-  width: 100%;
-  background: var(--brand);
-  transform: scaleX(0);
-  transform-origin: left center;
-}
-
-/* лист меню получает фокус программно — кольцо на нём не нужно */
-.site-menu__sheet:focus,
-.site-menu__sheet:focus-visible { outline: none; box-shadow: none; }
+body > nav.breadcrumb > .breadcrumb__parent { margin-left: 0; padding-left: 0; }
 
 
 /* ═══ Крошки со стрелкой возврата (2026-08-07) ═══
@@ -1161,13 +885,13 @@ nav.breadcrumb {
   /* --crumb-link = #B04E2F на страницах услуг, хабов и городов (body.tpl):
      #C75B39 мелким капсом давал 4,09:1 — ниже AA (Ф2a, 28.10.2026) */
   color: var(--crumb-link, var(--brand)) !important;
-  font-weight: 700;
+  font-weight: var(--k-w-regular);
   transition: background-color .2s ease;
 }
 .breadcrumb__parent svg { flex: 0 0 auto; }
 @media (hover: hover) {
   /* без плашки: розовая подложка + курсор давали двойной отклик (25.10) */
-  .breadcrumb__parent:hover { color: var(--gold-2, #B04E2F) !important; }
+  .breadcrumb__parent:hover { color: var(--k-heading) !important; }
 }
 .breadcrumb__sep { opacity: .45; }
 .breadcrumb__current { opacity: .7; }
@@ -1212,28 +936,54 @@ nav.breadcrumb {
   /* в рукописных статьях «/» — голый текст: гасим кегль строки, ссылке-назад
      возвращаем свой */
   nav.breadcrumb--back { font-size: 0; }
-  nav.breadcrumb--back > .breadcrumb__parent { font-size: var(--fs-label, var(--fs-micro, 11px)); }
+  nav.breadcrumb--back > .breadcrumb__parent { font-size: var(--k-fs-ui); }
 }
 
-/* /es/ (28.10.2026, Р1 Daniil): мелкая пометка «(en ruso)» у пунктов шапки и
-   меню, которые ведут на русские страницы; ставит generator/es_chrome.py */
+/* /es/ (28.10.2026, Р1 Daniil): мелкая пометка «(en ruso)» у пунктов шапки,
+   полосы поиска и меню, которые ведут на русские страницы; ставит
+   generator/es_chrome.py */
 .es-ru {
   margin-left: var(--space-1);
-  font-size: .72em;
-  font-weight: 500;
-  color: var(--text-sub);   /* --text-muted давал 4,34:1 — ниже AA */
+  font-size: var(--k-fs-ui);
+  font-weight: var(--k-w-regular);
+  color: var(--k-muted);
   white-space: nowrap;
 }
-/* /es/: на десктопе пометка «(en ruso)» — второй строкой под пунктом; в строку
-   пункты с пометкой выталкивали кнопку WhatsApp за край на 1000–1199 px
-   (проверка /es/ 28.10: вылезание вбок до 168 px) */
-@media (min-width: 1000px) {
-  html[lang="es"] .site-nav__link { position: relative; }
-  /* пометка под словом, вне потока — все пять пунктов на одной линии с логотипом */
-  .site-nav__link .es-ru { display: block; position: absolute; left: 0; top: 100%; margin-left: 0; line-height: 1.1; }
+/* /es/: на компьютере пометка — второй строкой под пунктом, вне потока: в
+   строку пункты с пометкой выталкивали кнопку WhatsApp за край рамки
+   (проверка /es/ 28.10) */
+@media (min-width: 900px) {
+  /* пометка шире короткого «Blog» — шаг пунктов больше, чтобы пометки
+     соседних пунктов не слипались */
+  html[lang="es"] .site-nav__links { gap: var(--space-7); }
+  html[lang="es"] :is(.site-nav__link, .site-nav__bar-cat) { position: relative; }
+  :is(.site-nav__link, .site-nav__bar-cat) .es-ru {
+    display: block;
+    position: absolute;
+    left: 0;
+    top: calc(100% - 8px);
+    margin-left: 0;
+    line-height: 1.1;
+  }
 }
-/* бургер: пункт «Servicios» — flex с space-between, пометка уезжала в середину */
-.site-menu__link--drill .es-ru { margin: 0 auto 0 calc(-1 * var(--space-1)); }
-@media (min-width: 1000px) and (max-width: 1199px) {
-  html[lang="es"] .site-nav__links { gap: var(--space-6); }
+
+/* /uk/ (v3, 30.10.2026, слова С16 ★): пометка «(російською)» у ссылок на
+   страницы без украинской версии — «Блог», «Партнерам», «Залишити відгук»,
+   статья в тексте услуги; ставит generator/uk_slot.py (mark_ru_links). В
+   строку после подписи, мелко и серым. На /uk/ пометка в шапке одна — под
+   пунктом, как у /es/, она залезала бы под соседний «Про Krepko»; поэтому
+   в строку, а при окне 900–1179 px — короткая «(рос.)»: полная сжимала поле
+   поиска до значка. */
+.ru-note {
+  font-size: var(--k-fs-ui);
+  font-weight: var(--k-w-regular);
+  color: var(--k-muted);
+  white-space: nowrap;
+}
+/* пункты шапки и меню — flex: пробел перед пометкой там схлопывается */
+:is(.site-nav__link, .site-menu__link) .ru-note { margin-left: var(--space-1); }
+.ru-note__short { display: none; }
+@media (min-width: 900px) and (max-width: 1179px) {
+  .site-nav__link .ru-note__full { display: none; }
+  .site-nav__link .ru-note__short { display: inline; }
 }

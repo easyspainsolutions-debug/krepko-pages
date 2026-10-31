@@ -115,11 +115,11 @@
     position: relative;
     display: block;
     padding: 26px 46px 26px 0 !important;   /* маркер справа */
-    font-family: 'Playfair Display', serif !important;
-    font-weight: 500 !important;
+    font-family: var(--k-font-text) !important;
+    font-weight: 600 !important;
     font-size: clamp(20px, 1.9vw, 27px) !important;
     line-height: 1.35;
-    color: #1A2B3C;
+    color: var(--k-heading);
     background: none !important;
     border: 0 !important;
     border-radius: 0 !important;
@@ -201,9 +201,9 @@
      спорит с основным действием, но остаётся кликабельной. */
   .home-faq .faq__more {
     margin-top: 14px;
-    font-family: 'Manrope', sans-serif;
+    font-family: var(--k-font-text);
     font-size: 15px;
-    font-weight: 500;
+    font-weight: 400;
     color: var(--text-sub);
     opacity: .55;
     border-bottom: none;
@@ -254,12 +254,12 @@
   .final-cta h2,
   .intro__how h2,
   .values__h {
-    font-family: 'Playfair Display', Georgia, serif !important;
+    font-family: var(--k-font-text) !important;
     font-size: clamp(30px, 4vw, 48px) !important;
-    font-weight: 500 !important;
+    font-weight: 600 !important;
     line-height: 1.15 !important;
-    color: #1A2B3C !important;
-    letter-spacing: -0.01em;
+    color: var(--k-heading) !important;
+    letter-spacing: 0;
   }
 /* Подзаголовки секций тоже разъехались: 14 / 15 / 18px при одинаковой роли. */
   .sec-dek,
@@ -304,7 +304,7 @@
   .portrait__name {
     font-size: var(--fs-subtitle) !important;
     line-height: var(--lh-subtitle) !important;
-    font-weight: 500 !important;
+    font-weight: 600 !important;
   }
 /* — 3. подводки и крупные абзацы — */
   .hero--home .hero__dek, .hero__dek,
@@ -360,16 +360,16 @@
       padding: 20px 40px;
       border: 1px solid var(--text);
       color: var(--text);
-      font-family: 'Manrope', sans-serif;
+      font-family: var(--k-font-text);
       font-weight: 600;
       font-size: 15px;
-      letter-spacing: 0.5px;
-      text-transform: uppercase;
+      letter-spacing: 0;
+      text-transform: none;
       text-decoration: none;
       transition: background .18s ease, color .18s ease, transform .18s ease;
     }
     .hero--home .hero__link-secondary:hover {
-      background: #1A2B3C; color: #FFFBF7; transform: translateY(-2px);
+      background: var(--k-heading); color: var(--k-on-action); transform: translateY(-2px);
     }
     .hero--home .btn--gold { padding: 20px 44px; font-size: 15px; }
 

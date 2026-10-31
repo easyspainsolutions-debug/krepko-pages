@@ -13,7 +13,7 @@
 
 .process-steps h2 {
   font-size: var(--ts-h3);
-  font-weight: 800;
+  font-weight: 600;
   margin: 0 0 var(--space-4);
   color: var(--text);
 }
@@ -45,16 +45,16 @@
   top: 32px;
   bottom: 0;
   width: 2px;
-  background: rgba(196, 149, 42, 0.3);
+  background: var(--border); /* кожа v3 (30.10.2026): линия, без золота */
 }
 
 /* Д7 (Ф2a, 28.10.2026): контурный круг, как .pillar-steps на новых шаблонах.
    Залитые терракотой круги читались рядом «кнопок» цвета кнопки WhatsApp,
    а цифра была набрана моноширинным — его на шаблонах нет. */
 .process-step__n {
-  font-family: 'Playfair Display', Georgia, serif;
-  font-size: 15px;
-  font-weight: 500;
+  font-family: var(--font-display);
+  font-size: var(--k-fs-ui);   /* кожа v3: мелкий текст (было 15 px) */
+  font-weight: 600;
   color: var(--gold-text);
   background: var(--surface);
   border: 1px solid var(--border);
@@ -77,9 +77,9 @@
 
 .process-step__title {
   color: var(--text);
-  font-family: 'Manrope', sans-serif;
+  font-family: var(--font-text);
   font-size: var(--ts-body-sm);
-  font-weight: 700;
+  font-weight: 600;
   margin: 0;
   padding: 0;
   line-height: 1.4;
@@ -87,7 +87,7 @@
 
 .process-step__text {
   color: var(--text-sub);
-  font-family: 'Manrope', sans-serif;
+  font-family: var(--font-text);
   font-size: var(--ts-body-xs);
   margin: 0;
   padding: 0;
@@ -110,7 +110,7 @@
 
 .faq h2 {
   font-size: var(--ts-h3);
-  font-weight: 800;
+  font-weight: 600;
   margin: 0 0 var(--space-4);
   color: var(--text);
 }
@@ -144,7 +144,7 @@
   border-radius: 0;
   margin: 0;
   color: var(--text);
-  font-family: 'Manrope', sans-serif;
+  font-family: var(--font-text);
   font-size: clamp(15px, 1.5vw, 17px);
   font-weight: 600;
   line-height: 1.45;
@@ -206,7 +206,7 @@
 
 .final-cta h2 {
   font-size: var(--ts-h3);
-  font-weight: 800;
+  font-weight: 600;
   margin: 0 0 var(--space-2);
   color: var(--text);
 }
@@ -250,8 +250,8 @@
     gap: var(--space-4);
     max-width: 460px;
     margin: var(--space-5) auto 0;
-    font-family: 'Manrope', sans-serif;
-    font-size: 14px;
+    font-family: var(--font-text);
+    font-size: var(--k-fs-ui);
     line-height: 1.5;
     color: var(--text-sub);
     text-align: left;

@@ -9,7 +9,9 @@
    переменная --gold из tokens.css всё ещё старое золото, и курсор
    выпадал бы из палитры редизайна.
    ═══════════════════════════════════════════════════════════════════════ */
-:root { --cursor-ink: #C75B39; }
+/* Кожа v3 (30.10.2026): цветом залита только кнопка WhatsApp — точка цвета
+   текста (vnedrenie.md §3.2: «цвет текста или снять совсем») */
+:root { --cursor-ink: var(--k-heading); }
 
 .krepko-cursor {
   position: fixed;
@@ -36,7 +38,7 @@
 .krepko-cursor.is-over { opacity: 0; }
 
 /* на тёмных поверхностях умножение съедает точку — там осветляем */
-.krepko-cursor.is-dark { mix-blend-mode: screen; background: rgba(199, 91, 57, .55); }
+.krepko-cursor.is-dark { mix-blend-mode: screen; background: var(--k-bg); }
 .krepko-cursor.is-dark.is-over { opacity: 0; }
 
 /* Тач и «уменьшить движение» — точки нет вовсе: она осмысленна только

@@ -18,7 +18,7 @@
   margin: calc(var(--space-4) + 2px) 0 var(--space-5);
   padding: 0;
   list-style: none;
-  font-family: 'Manrope', -apple-system, sans-serif;
+  font-family: var(--font-text);
 }
 .krepko-chip {
   display: flex;
@@ -31,7 +31,7 @@
   font-size: 14.5px;
   font-weight: 600;
   color: var(--text);
-  letter-spacing: -0.2px;
+  letter-spacing: 0;
   line-height: 1.3;
   white-space: normal;
 }

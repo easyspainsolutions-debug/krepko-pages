@@ -2,33 +2,43 @@
    справа текст в блоговой типографике. Шкала --pb-* (SCALE_FILE_NAMES).
    Форма временная — придёт референс от Daniil. */
 
+/* Кожа v3 (30.10.2026): шкала --pb-* — роли кожи. Терракотовых линий,
+   маркеров и ссылок в коже нет — --pb-terra* цвета заголовка; кнопки
+   WhatsApp здесь общие (.btn--gold, module-cta.css). */
 .pb {
-  --pb-terra: #C75B39;
-  --pb-terra-deep: #B04E2F;
-  --pb-cream: #FFFBF7;
-  --pb-sand: #F5F0EB;
-  --pb-border: #E8DFD1;
-  --pb-ink: #2D2D2D;
-  --pb-sub: #4A4A4A;
-  --pb-muted: #6B6B6B;
-  --pb-navy: #1A2B3C;
-  --focus-ring: rgba(199, 91, 57, 0.5);
+  --pb-terra: var(--k-heading);
+  --pb-terra-deep: var(--k-heading);
+  --pb-cream: var(--k-bg);
+  --pb-sand: var(--k-surface);
+  --pb-border: var(--k-line);
+  --pb-ink: var(--k-text);
+  --pb-sub: var(--k-text);
+  --pb-muted: var(--k-muted);
+  --pb-navy: var(--k-heading);
+  --focus-ring: var(--k-focus);
   background: var(--pb-cream);
   color: var(--pb-ink);
-  font-family: 'Manrope', sans-serif;
+  font-family: var(--k-font-text);
   padding: clamp(28px, 4vw, 56px) 0 clamp(64px, 8vw, 104px);
 }
-.pb ::selection { background: rgba(199, 91, 57, 0.18); color: var(--pb-navy); }
+.pb ::selection { background: var(--k-surface-press); color: var(--pb-navy); }
 .pb input { caret-color: var(--pb-terra); accent-color: var(--pb-terra); }
 
+/* 29.10.2026 (одна рамка, tokens.css): раскладка стоит в рамке сайта — колонка
+   тем у левого края рамки (там же, где логотип шапки), текст справа от неё;
+   на телефоне поле 24 px, как у остальных страниц. main здесь во всю ширину:
+   ширину и поля задаёт .pb-layout, а не 960 px из desktop.css и 24 px из
+   krepko-base.css (с ними поле выходило двойным). */
+body:has(.pb) main { max-width: none; padding-left: 0; padding-right: 0; }
 .pb-layout {
-  max-width: 1120px;
+  box-sizing: border-box;
+  max-width: var(--frame-max);
   margin: 0 auto;
-  padding: 0 clamp(20px, 4vw, 48px);
+  padding: 0 var(--frame-pad);
   display: grid;
   grid-template-columns: 250px minmax(0, 720px);
   gap: clamp(36px, 5vw, 72px);
-  justify-content: center;
+  justify-content: start;
   align-items: start;
 }
 
@@ -44,14 +54,14 @@
 }
 .pb-nav__label {
   margin: 0 0 12px;
-  font-size: 11px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase;
+  font-size: var(--k-fs-ui); font-weight: 600; letter-spacing: 0; text-transform: none;
   color: var(--pb-muted);
 }
 .pb-nav__list { display: flex; flex-direction: column; }
 .pb-nav__list a {
   position: relative;
   padding: 9px 0 9px 16px;
-  font-size: 14.5px; font-weight: 600; line-height: 1.4;
+  font-size: var(--k-fs-ui); font-weight: 600; line-height: 1.4;
   color: var(--pb-sub);
   text-decoration: none;
   border-left: 1.8px solid var(--pb-border);
@@ -70,9 +80,9 @@
 .tpl .pb-body section { scroll-margin-top: var(--space-2); }
 .pb h1 {
   margin: 0 0 18px;
-  font-family: 'Playfair Display', Georgia, serif;
-  font-weight: 500;
-  font-size: clamp(30px, 4vw, 44px);
+  font-family: var(--k-font-text);
+  font-weight: 600;
+  font-size: var(--k-fs-h1);
   line-height: 1.12;
   color: var(--pb-navy);
   text-wrap: balance;
@@ -81,36 +91,39 @@
 .pb-intro {
   margin: 0 0 clamp(22px, 3vw, 32px);
   padding: 18px 22px;
+  /* кожа v3 (30.10.2026): плашка на подложке с линией, без цветной черты слева */
   background: var(--pb-sand);
-  border-left: 1.8px solid var(--pb-terra);
-  border-radius: 0 10px 10px 0;
-  font-size: clamp(15.5px, 1.4vw, 17px);
+  border: 1px solid var(--pb-border);
+  border-radius: var(--k-r-card);
+  font-size: var(--k-fs-body);
   line-height: 1.65;
   color: var(--pb-ink);
 }
 .pb h2 {
   margin: clamp(36px, 4.6vw, 56px) 0 14px;
-  font-family: 'Playfair Display', Georgia, serif;
-  font-weight: 500;
-  font-size: clamp(22px, 2.4vw, 28px);
+  font-family: var(--k-font-text);
+  font-weight: 600;
+  font-size: var(--k-fs-h2);
   line-height: 1.2;
   color: var(--pb-navy);
 }
-.pb p { margin: 0 0 14px; font-size: clamp(15px, 1.35vw, 16.5px); line-height: 1.75; color: var(--pb-sub); }
+.pb p { margin: 0 0 14px; font-size: var(--k-fs-body); line-height: var(--k-lh-body); color: var(--pb-sub); }
 .pb p strong { color: var(--pb-navy); }
 .pb-list { margin: 0 0 14px; padding: 0 0 0 2px; list-style: none; }
 .pb-list li {
   position: relative;
   padding: 5px 0 5px 22px;
-  font-size: clamp(15px, 1.35vw, 16.5px);
+  font-size: var(--k-fs-body);
   line-height: 1.6;
   color: var(--pb-sub);
 }
 .pb-list li::before {
+  /* кожа v3: один маркер списка — серая точка 6 px */
   content: '';
-  position: absolute; left: 0; top: calc(5px + .8em);
-  width: 12px; height: 1.8px;
-  background: var(--pb-terra);
+  position: absolute; left: 4px; top: calc(5px + .8em);
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--k-muted);
   transform: translateY(-50%);
 }
 
@@ -123,12 +136,12 @@
   border-radius: 12px;
   display: flex; flex-direction: column; gap: 16px;
 }
-.pb-form label { display: block; font-size: 13px; font-weight: 700; letter-spacing: .02em; color: var(--pb-navy); }
-.pb-opt { display: inline; font-weight: 400; color: var(--pb-muted); font-size: 12px; white-space: nowrap; }
+.pb-form label { display: block; font-size: var(--k-fs-ui); font-weight: 600; letter-spacing: 0; color: var(--pb-navy); }
+.pb-opt { display: inline; font-weight: 400; color: var(--pb-muted); font-size: var(--k-fs-ui); white-space: nowrap; }
 .pb-form input {
   display: block; width: 100%; margin-top: 2px;
   padding: 8px 2px;
-  font: inherit; font-weight: 400; font-size: 16px; /* iOS не зумит */
+  font: inherit; font-weight: 400; font-size: var(--k-fs-body); /* iOS не зумит: 17–18 px */
   color: var(--pb-ink);
   background: transparent;
   border: 0;
@@ -140,7 +153,7 @@
 .pb-form input:focus { border-bottom-color: var(--pb-terra); outline: none; box-shadow: none; }
 .pb-hp { position: absolute !important; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
 .pb-form .btn { align-self: flex-start; margin-top: 4px; }
-.pb p.pb-alt { font-size: 14.5px; }
+.pb p.pb-alt { font-size: var(--k-fs-ui); }
 .pb-alt a { color: var(--pb-terra-deep); font-weight: 600; text-decoration: none; }
 /* /es/: «По-русски» не рвётся по дефису на 390 px (проверка 28.10) */
 .pb-alt a[lang] { white-space: nowrap; }

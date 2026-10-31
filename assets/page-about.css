@@ -18,7 +18,7 @@
   object-fit: cover;
   object-position: center 35%;
   border: 2px solid rgba(196, 149, 42, 0.55);
-  box-shadow: 0 0 18px rgba(196, 149, 42, 0.22);
+  box-shadow: none;
   flex-shrink: 0;
   background: var(--surface);
 }
@@ -32,18 +32,18 @@
 
 .about-founder__name {
   font-size: var(--ts-h2);
-  font-weight: 800;
+  font-weight: 600;
   color: var(--text);
   margin: 0;
   line-height: 1.15;
-  letter-spacing: -0.6px;
+  letter-spacing: 0;
 }
 
 .about-founder__role {
-  font-family: 'IBM Plex Mono', monospace;
+  font-family: var(--k-font-text);
   font-size: var(--ts-meta);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  letter-spacing: 0;
+  text-transform: none;
   color: var(--gold);
   margin: 0;
 }
@@ -75,20 +75,20 @@
 }
 
 .about-milestone__metric {
-  font-family: 'IBM Plex Mono', monospace;
+  font-family: var(--k-font-text);
   font-size: var(--ts-h2);
-  font-weight: 700;
+  font-weight: 600;
   color: var(--gold);
-  letter-spacing: -0.8px;
+  letter-spacing: 0;
   line-height: 1;
 }
 
 .about-milestone__label {
-  font-family: 'Manrope', sans-serif;
+  font-family: var(--k-font-text);
   font-size: var(--ts-body-sm);
-  font-weight: 700;
+  font-weight: 600;
   color: var(--text);
-  letter-spacing: -0.1px;
+  letter-spacing: 0;
 }
 
 .about-milestone__desc {
@@ -164,7 +164,7 @@
    h2 этого блока: меньше, мягче, с воздухом сверху. */
 .home-services-grid__h2-sub {
   font-size: var(--ts-h4);
-  font-weight: 700;
+  font-weight: 600;
   color: var(--text-sub);
   margin: var(--rh-3) 0 var(--space-4);
 }
@@ -180,9 +180,9 @@
 .home-guides__all {
   display: inline-block;
   margin-top: var(--space-5);
-  font-family: 'Manrope', sans-serif;
+  font-family: var(--k-font-text);
   font-size: var(--ts-body-sm);
-  font-weight: 500;
+  font-weight: 400;
   color: var(--gold);
   text-decoration: none;
   border-bottom: 1px solid rgba(196, 149, 42, 0.42);
@@ -290,7 +290,7 @@
   object-fit: cover;
   object-position: center 35%;
   border: 2px solid rgba(196, 149, 42, 0.55);
-  box-shadow: 0 0 14px rgba(196, 149, 42, 0.18);
+  box-shadow: none;
   flex-shrink: 0;
   background: var(--surface);
 }
@@ -304,22 +304,22 @@
 
 .home-founder__name {
   font-size: var(--ts-body);
-  font-weight: 800;
+  font-weight: 600;
   color: var(--text);
   margin: 0;
   line-height: 1.2;
-  letter-spacing: -0.2px;
+  letter-spacing: 0;
   display: flex;
   flex-direction: column;
   gap: 2px;
 }
 
 .home-founder__role {
-  font-family: 'IBM Plex Mono', monospace;
+  font-family: var(--k-font-text);
   font-size: 0.66rem; /* меньше --ts-meta (12px) per Daniil 2026-06-02 — тихая подпись */
   font-weight: 400;
-  letter-spacing: 0.07em;
-  text-transform: uppercase;
+  letter-spacing: 0;
+  text-transform: none;
   color: var(--gold);
 }
 
@@ -331,9 +331,9 @@
 }
 
 .home-founder__link {
-  font-family: 'Manrope', sans-serif;
+  font-family: var(--k-font-text);
   font-size: var(--ts-body-sm);
-  font-weight: 500;
+  font-weight: 400;
   color: var(--gold);
   text-decoration: none;
   border-bottom: 1px solid rgba(196, 149, 42, 0.42);
@@ -440,9 +440,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: 'Manrope', sans-serif;
+  font-family: var(--k-font-text);
   font-size: var(--ts-body-sm);
-  font-weight: 800;
+  font-weight: 600;
   color: var(--gold);
   background: var(--gold-tint);
   border: 1px solid rgba(196, 149, 42, 0.4);
@@ -455,7 +455,7 @@
 }
 .review-card__name {
   font-size: var(--ts-body-sm);
-  font-weight: 700;
+  font-weight: 600;
   color: var(--text);
   line-height: 1.25;
 }
@@ -487,8 +487,8 @@
   color: var(--text-sub);
 }
 .home-reviews__all {
-  font-family: 'Manrope', sans-serif;
-  font-weight: 500;
+  font-family: var(--k-font-text);
+  font-weight: 400;
   color: var(--gold);
   text-decoration: none;
   border-bottom: 1px solid rgba(196, 149, 42, 0.42);

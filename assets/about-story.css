@@ -20,13 +20,17 @@
 body:has(.tw) { overflow-x: visible; }
 
 .tw {
-  --ink: #1A2B3C;
+  --ink: var(--k-heading);
   /* Одна высота для узла оси и перемычки: середина первой строки заголовка.
      До этого они считались по-разному и расходились на 10–15px. */
   --row-pad: clamp(40px, 6vh, 96px);
   --node-y: calc(var(--row-pad) + 14px);
-  --hair: rgba(26, 43, 60, .13);
-  --pad: clamp(24px, 4.5vw, 88px);
+  --hair: var(--k-line);
+  /* 29.10.2026 (одна рамка, tokens.css): поля страницы задаёт main — рамка
+     сайта (--home-pad из home-redesign.css от 768 px, 24 px на телефоне), у
+     секций своих боковых полей больше нет. --pad — поле рамки: внутреннее
+     поле полосы-цитаты и поле ленты годов на телефоне */
+  --pad: var(--frame-pad);
   --air: var(--sec-pad);
 }
 
@@ -42,21 +46,27 @@ body:has(.tw) { overflow-x: visible; }
    Одна фраза во весь разворот: подводку сняли, держать композицию должен
    сам заголовок, поэтому кегль крупнее шкалы и много воздуха под ним. */
 .tw-open {
-  padding: clamp(48px, 6vw, 116px) var(--pad) clamp(40px, 5vw, 96px);
-  text-align: center;
+  /* 29.10.2026: заголовок — от левого края рамки, как на остальных страницах
+     (был по центру окна) */
+  padding: clamp(48px, 6vw, 116px) 0 clamp(40px, 5vw, 96px);
+  text-align: left;
 }
+/* кнопка WhatsApp на первом экране (кожа v3, 30.10.2026) — общий компонент
+   кнопки (module-cta.css), по левому краю под заголовком */
+.tw-open__cta { margin-top: var(--space-6); }
 .tw-open__h1 {
-  margin: 0 auto; max-width: 16ch;
-  font-family: 'Playfair Display', Georgia, serif; font-weight: 500;
-  font-size: clamp(38px, calc(3.4vw + 22px), 96px); line-height: 1.02;
-  letter-spacing: -.02em; color: var(--ink);
+  margin: 0; max-width: 16ch;
+  font-family: var(--k-font-text); font-weight: 600;
+  /* кожа v3 (30.10.2026): H1 кожи — 28 px на телефоне, 48 px с 900 px */
+  font-size: var(--k-fs-h1); line-height: var(--k-lh-h1);
+  letter-spacing: var(--k-ls-h1); color: var(--ink);
 }
 
 /* ═══ Хроники ═══ */
 .tw-chron {
   display: grid; grid-template-columns: 1fr;
   gap: clamp(28px, 3vw, 72px);
-  padding: 0 var(--pad) var(--air);
+  padding: 0 0 var(--air);
 }
 @media (min-width: 1040px) {
   .tw-chron { grid-template-columns: minmax(150px, .42fr) minmax(0, 3fr); }
@@ -69,8 +79,8 @@ body:has(.tw) { overflow-x: visible; }
 @media (min-width: 1040px) { .tw-years { position: sticky; top: clamp(112px, 15vh, 168px); } }
 .tw-years__k {
   margin: 0 0 clamp(16px, 1.6vw, 26px);
-  font-family: 'Manrope', sans-serif; font-size: var(--fs-micro); font-weight: 600;
-  letter-spacing: .26em; text-transform: uppercase; color: var(--text-muted);
+  font-family: var(--k-font-text); font-size: var(--fs-micro); font-weight: 600;
+  letter-spacing: 0; text-transform: none; color: var(--text-muted);
 }
 .tw-years ul { list-style: none; margin: 0; padding: 0; }
 .tw-years li { margin: 0; }
@@ -88,7 +98,8 @@ body:has(.tw) { overflow-x: visible; }
    годами читается как движение, а не как мгновенная перекраска. */
 .tw-years button::before {
   content: ''; position: absolute; inset: 0;
-  background: linear-gradient(90deg, rgba(199, 91, 57, .10), transparent 82%);
+  /* кожа v3 (30.10.2026): плоская подложка вместо терракотового градиента */
+  background: var(--k-surface);
   transform: scaleX(0); transform-origin: left center; opacity: 0;
   transition: transform .55s cubic-bezier(.16, 1, .3, 1), opacity .4s ease;
   pointer-events: none;
@@ -96,24 +107,24 @@ body:has(.tw) { overflow-x: visible; }
 .tw-years button.is-live::before { transform: scaleX(1); opacity: 1; }
 .tw-years button span {
   display: block; position: relative;
-  font-family: 'Playfair Display', Georgia, serif; font-weight: 500;
-  font-size: clamp(22px, 1.8vw, 32px); line-height: 1.1; color: var(--text-muted);
+  font-family: var(--k-font-text); font-weight: 600;
+  font-size: var(--k-fs-h2); line-height: 1.1; color: var(--text-muted);
   /* активный год вырастает — увеличиваем сам кегль, а не масштаб:
      масштабирование замылило бы засечки антиквы */
   transition: color .35s ease, font-size .45s cubic-bezier(.16, 1, .3, 1), letter-spacing .45s ease;
 }
 .tw-years button em {
   display: block; margin-top: 3px; font-style: normal;
-  font-family: 'Manrope', sans-serif; font-size: var(--fs-micro); font-weight: 600;
-  letter-spacing: .12em; text-transform: uppercase; color: var(--text-muted);
+  font-family: var(--k-font-text); font-size: var(--fs-micro); font-weight: 600;
+  letter-spacing: 0; text-transform: none; color: var(--text-muted);
   opacity: .75; transition: opacity .3s ease, color .3s ease;
 }
 .tw-years button:hover span { color: var(--gold-2); }
 .tw-years button.is-live { border-left-color: var(--gold); }
 .tw-years button.is-live span {
   color: var(--ink);
-  font-size: clamp(30px, 2.6vw, 46px);   /* на ступень крупнее остальных */
-  letter-spacing: -.015em;
+  font-size: var(--k-fs-h2);   /* кожа v3: тот же H2, активный — темнее */
+  letter-spacing: 0;
 }
 .tw-years button.is-live em { color: var(--gold-2); opacity: 1; }
 /* точка у активного года — тот же знак, что и на оси хроники */
@@ -135,13 +146,16 @@ body:has(.tw) { overflow-x: visible; }
   gap: clamp(16px, 1.8vw, 28px);
   padding: var(--row-pad) 0;
   border-top: 1px solid var(--hair);
-  opacity: .34; transition: opacity .7s ease;
 }
-.tw-row.is-live { opacity: 1; }
+/* Кожа v3 (30.10.2026): глава вне фокуса приглушена цветом, а не
+   прозрачностью — при opacity .34 текст падал до 2:1, а это текст для
+   чтения (итог v3 §4.6 п. 5: не ниже 4,5:1). Серый второго плана — 7,4:1. */
+.tw-row :is(h2, p) { transition: color .7s ease; }
+.tw-row:not(.is-live) :is(h2, p) { color: var(--k-muted); }
 @media (min-width: 940px) {
   .tw-row { grid-template-columns: 1fr auto 1fr; gap: clamp(20px, 2.6vw, 56px); align-items: start; }
 }
-.tw-me h2, .tw-co h2 { margin: 0 0 12px; font-family: 'Playfair Display', Georgia, serif; font-weight: 500; font-size: var(--fs-subtitle); line-height: 1.24; color: var(--ink); }
+.tw-me h2, .tw-co h2 { margin: 0 0 12px; font-family: var(--k-font-text); font-weight: 600; font-size: var(--fs-subtitle); line-height: 1.24; color: var(--ink); }
 .tw-me p, .tw-co p { margin: 0; font-size: var(--fs-body); line-height: var(--lh-body); color: var(--text-sub); }
 @media (min-width: 940px) { .tw-me { text-align: right; } .tw-me h2 { margin-left: auto; } }
 
@@ -168,8 +182,8 @@ body:has(.tw) { overflow-x: visible; }
 
 .tw-nums { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(14px, 1.6vw, 28px); margin: clamp(20px, 2vw, 32px) 0 0; }
 .tw-nums div { border-top: 1px solid var(--gold); padding-top: clamp(10px, 1vw, 16px); }
-.tw-nums dt { font-family: 'Manrope', sans-serif; font-size: var(--fs-micro); font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: var(--text-muted); }
-.tw-nums dd { margin: 6px 0 0; font-family: 'Playfair Display', Georgia, serif; font-weight: 500; font-size: clamp(24px, 2.2vw, 38px); line-height: 1; color: var(--ink); font-variant-numeric: tabular-nums; }
+.tw-nums dt { font-family: var(--k-font-text); font-size: var(--fs-micro); font-weight: 600; letter-spacing: 0; text-transform: none; color: var(--text-muted); }
+.tw-nums dd { margin: 6px 0 0; font-family: var(--k-font-text); font-weight: 600; font-size: var(--k-fs-h2); line-height: 1; color: var(--ink); font-variant-numeric: tabular-nums; }
 
 /* ═══ Прямая речь ═══
    Единственный блок страницы на заливке: после длинной хроники нужен
@@ -189,23 +203,11 @@ body:has(.tw) { overflow-x: visible; }
   .tw-voice__in { grid-template-columns: minmax(0, .62fr) minmax(0, 1.38fr); align-items: center; }
 }
 
-/* Кавычка стоит над первой строкой и левым краем совпадает с текстом:
-   это знак прямой речи, поэтому она держит начало реплики, а не висит
-   поверх неё. */
-.tw-voice__mark {
-  position: absolute; left: -.04em; top: -.66em; z-index: 0;
-  font-family: 'Playfair Display', Georgia, serif; font-weight: 500;
-  font-size: clamp(70px, 9vw, 168px); line-height: 1;
-  color: var(--gold); opacity: .2; pointer-events: none; user-select: none;
-}
-
+/* Кожа v3 (30.10.2026): крупная кавычка над цитатой (пятый размер текста)
+   и смещённая рамка-контур у портрета сняты — у кожи B украшений нет, прямую
+   речь держит сама цитата, фото — как карточка основателя на главной. */
+.tw-voice__mark { display: none; }
 .tw-voice__media { position: relative; z-index: 1; margin: 0; }
-/* смещённая рамка: кадр «лежит» на терракотовом контуре, а не висит в пустоте */
-.tw-voice__media::before {
-  content: ''; position: absolute; inset: 0;
-  transform: translate(clamp(10px, 1.1vw, 20px), clamp(10px, 1.1vw, 20px));
-  border: 1px solid var(--gold); opacity: .5; pointer-events: none;
-}
 .tw-voice__frame { position: relative; display: block; overflow: hidden; aspect-ratio: 4/5; background: var(--surface); }
 .tw-voice__frame img {
   display: block; width: 100%; height: 112%; object-fit: cover; object-position: center 16%;
@@ -216,19 +218,21 @@ body:has(.tw) { overflow-x: visible; }
   margin-top: clamp(18px, 1.6vw, 28px); padding-top: clamp(12px, 1.2vw, 18px);
   border-top: 1px solid var(--gold);
 }
-.tw-voice__media .k { font-family: 'Playfair Display', Georgia, serif; font-size: var(--fs-subtitle); line-height: 1.2; color: var(--ink); }
-.tw-voice__media .v { font-family: 'Manrope', sans-serif; font-size: var(--fs-micro); font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: var(--text-muted); }
+.tw-voice__media .k { font-family: var(--k-font-text); font-size: var(--fs-subtitle); line-height: 1.2; color: var(--ink); }
+.tw-voice__media .v { font-family: var(--k-font-text); font-size: var(--fs-micro); font-weight: 600; letter-spacing: 0; text-transform: none; color: var(--text-muted); }
 
 .tw-voice__quote { position: relative; z-index: 1; margin: 0; }
 .tw-voice__quote p {
   position: relative; z-index: 1;
   margin: 0; max-width: 25ch;
-  font-family: 'Playfair Display', Georgia, serif; font-weight: 500;
-  font-size: clamp(26px, calc(1.5vw + 18px), 52px); line-height: 1.22;
-  letter-spacing: -.01em; color: var(--ink);
+  font-family: var(--k-font-text); font-weight: 600;
+  font-size: var(--k-fs-h2); line-height: var(--k-lh-h2);   /* цитата в тексте — H2 кожи */
+  letter-spacing: 0; color: var(--ink);
 }
-/* слово гаснет до бледного и загорается, когда до него доходит прокрутка */
-.tw-voice__quote .w { color: rgba(26, 43, 60, .2); transition: color .5s ease; }
+/* слово серое и темнеет, когда до него доходит прокрутка. Кожа v3
+   (30.10.2026): серый — цвет рамки поля (4,6:1), а не 20 % (1,4:1): цитата
+   читается и до прокрутки (итог v3 §4.6 п. 5) */
+.tw-voice__quote .w { color: var(--k-line-strong); transition: color .5s ease; }
 .tw-voice__quote .w.on { color: var(--ink); }
 .tw-voice__quote .hi { font-style: normal; color: inherit; transition: color .5s ease; }
 .tw-voice__quote .w.on .hi { color: var(--gold-2); }
@@ -238,7 +242,7 @@ body:has(.tw) { overflow-x: visible; }
    строками во всю ширину — так их читают как перечень обещаний. */
 .tw-keep {
   display: grid; grid-template-columns: 1fr; gap: clamp(32px, 3.4vw, 72px);
-  padding: var(--air) var(--pad); border-top: 1px solid var(--hair);
+  padding: var(--air) 0; border-top: 1px solid var(--hair);
 }
 @media (min-width: 1040px) {
   .tw-keep { grid-template-columns: minmax(0, .66fr) minmax(0, 1.34fr); gap: clamp(40px, 5vw, 110px); }
@@ -246,8 +250,8 @@ body:has(.tw) { overflow-x: visible; }
 }
 .tw-keep__h {
   margin: 0; max-width: 13ch;
-  font-family: 'Playfair Display', Georgia, serif; font-weight: 500;
-  font-size: var(--fs-title); line-height: 1.08; letter-spacing: -.01em; color: var(--ink);
+  font-family: var(--k-font-text); font-weight: 600;
+  font-size: var(--fs-title); line-height: 1.08; letter-spacing: 0; color: var(--ink);
 }
 .tw-keep__sub {
   margin: clamp(18px, 1.8vw, 30px) 0 0; max-width: 34ch;
@@ -269,7 +273,7 @@ body:has(.tw) { overflow-x: visible; }
   content: none; /* QA 25.10 «наслоения»: заливка выезжала за волосяные линии — снята, как на /services/ */
   position: absolute;
   left: calc(var(--pad) * -.32); right: calc(var(--pad) * -.32); top: 0; bottom: 0;
-  background: linear-gradient(90deg, rgba(199, 91, 57, .07), transparent 78%);
+  background: var(--k-surface);
   opacity: 0; transform: translateX(-14px);
   transition: opacity .45s ease, transform .55s cubic-bezier(.16, 1, .3, 1);
   pointer-events: none;
@@ -281,23 +285,23 @@ body:has(.tw) { overflow-x: visible; }
 }
 .tw-keep__n {
   position: relative;
-  font-family: 'Playfair Display', Georgia, serif; font-weight: 500;
-  font-size: clamp(30px, 2.8vw, 52px); line-height: .95;
+  font-family: var(--k-font-text); font-weight: 600;
+  font-size: var(--k-fs-h2); line-height: .95;
   color: rgba(26, 43, 60, .26); font-variant-numeric: tabular-nums;
   transition: color .4s ease;
 }
 .tw-keep__b { position: relative; transition: transform .55s cubic-bezier(.16, 1, .3, 1); }
 .tw-keep__i h3 {
   margin: 0 0 clamp(8px, .9vw, 14px);
-  font-family: 'Playfair Display', Georgia, serif; font-weight: 500;
+  font-family: var(--k-font-text); font-weight: 600;
   font-size: var(--fs-subtitle); line-height: 1.2; color: var(--ink);
 }
 .tw-keep__i p { margin: 0; max-width: 52ch; font-size: var(--fs-body); line-height: var(--lh-body); color: var(--text-sub); }
 
 /* ═══ География и финал ═══ */
-.tw-geo { padding: var(--air) var(--pad); border-top: 1px solid var(--hair); }
+.tw-geo { padding: var(--air) 0; border-top: 1px solid var(--hair); }
 .tw-geo__head { max-width: 46ch; margin-bottom: var(--gap-head-content); }
-.tw-geo__head h2 { margin: 0 0 var(--gap-title-dek); font-family: 'Playfair Display', Georgia, serif; font-weight: 500; font-size: var(--fs-title); line-height: 1.15; color: var(--ink); }
+.tw-geo__head h2 { margin: 0 0 var(--gap-title-dek); font-family: var(--k-font-text); font-weight: 600; font-size: var(--fs-title); line-height: 1.15; color: var(--ink); }
 .tw-geo__head p { margin: 0; font-size: var(--fs-lead); line-height: var(--lh-lead); color: var(--text-sub); }
 .tw-geo__map { overflow-x: clip; }        /* карта шире окна на мобильных */
 .tw-geo__map .map-head { display: none; }
@@ -380,11 +384,11 @@ body:has(.tw) { overflow-x: visible; }
     width: 11px; height: 11px; margin: 0; border-radius: 50%;
     background: var(--gold); z-index: 3;
     transform: translate(-50%, -50%) translateY(calc(var(--dot, 0) * 1px));
-    box-shadow: 0 0 0 5px rgba(199, 91, 57, .12);
+    box-shadow: none;
   }
   .tw-axis b::after {
     content: ''; position: absolute; inset: -3px; border-radius: 50%;
-    background: radial-gradient(circle, rgba(199, 91, 57, .28), transparent 70%);
+    background: none;
   }
 }
 
@@ -395,7 +399,7 @@ body:has(.tw) { overflow-x: visible; }
   /* зона нажатия не меньше 44px по высоте — палец и мышь не должны
      промахиваться по строке в 20px */
   margin-top: clamp(8px, 1vw, 16px); padding: 12px 0;
-  font-family: 'Manrope', sans-serif; font-size: var(--fs-small); font-weight: 600;
+  font-family: var(--k-font-text); font-size: var(--fs-small); font-weight: 600;
   color: var(--gold-2); text-align: left;
   transition: color .25s ease;
 }
@@ -475,7 +479,7 @@ body:has(.tw) { overflow-x: visible; }
 }
 .tw-ua__h {
   margin: 0 0 clamp(14px, 1.4vw, 22px);
-  font-family: 'Playfair Display', Georgia, serif; font-weight: 500;
+  font-family: var(--k-font-text); font-weight: 600;
   font-size: var(--fs-title); line-height: 1.08; color: var(--ink);
 }
 .tw-ua__t { margin: 0; max-width: 42ch; font-size: var(--fs-body); line-height: var(--lh-body); color: var(--text-sub); }
@@ -489,10 +493,10 @@ body:has(.tw) { overflow-x: visible; }
 .tw-ua__steps li:first-child { border-top: 0; padding-top: 0; }
 .tw-ua__steps .n {
   grid-row: 1 / 3; align-self: start;
-  font-family: 'IBM Plex Mono', monospace; font-size: var(--fs-micro);
-  letter-spacing: .1em; color: var(--gold); padding-top: .35em;
+  font-family: var(--k-font-text); font-size: var(--fs-micro);
+  letter-spacing: 0; color: var(--gold); padding-top: .35em;
 }
-.tw-ua__steps b { font-family: 'Manrope', sans-serif; font-size: var(--fs-body); font-weight: 600; color: var(--ink); }
+.tw-ua__steps b { font-family: var(--k-font-text); font-size: var(--fs-body); font-weight: 600; color: var(--ink); }
 .tw-ua__steps i { font-style: normal; margin-top: 5px; font-size: var(--fs-small); line-height: 1.7; color: var(--text-sub); }
 
 
@@ -505,7 +509,7 @@ body:has(.tw) { overflow-x: visible; }
 @media (max-width: 939px) {
   /* Титул: на 375px кегль из общей шкалы ломал «Сначала это была»
      вторым переносом внутри маски — строки рвались посреди фразы */
-  .tw-open__h1 { font-size: clamp(30px, 9vw, 44px); max-width: none; }
+  .tw-open__h1 { font-size: var(--k-fs-h1); max-width: none; }
 
   /* Хронология-навигация занимала целый экран перед контентом.
      На мобилке это горизонтальная лента чипов — тот же приём, что
@@ -558,11 +562,11 @@ body:has(.tw) { overflow-x: visible; }
     display: inline-flex; align-items: baseline; gap: 7px;
   }
   .tw-years button::before { border-radius: 999px; }
-  .tw-years button span { font-size: 19px; }
+  .tw-years button span { font-size: var(--k-fs-body); }
   .tw-years button.is-live { border-color: var(--gold); }
-  .tw-years button.is-live span { font-size: 19px; letter-spacing: 0; }
+  .tw-years button.is-live span { font-size: var(--k-fs-body); letter-spacing: 0; }
   .tw-years button.is-live::after { display: none; }
-  .tw-years button em { margin-top: 0; font-size: 10px; letter-spacing: .08em; }
+  .tw-years button em { margin-top: 0; font-size: var(--k-fs-ui); letter-spacing: 0; }
   /* Правый обрез ленты обрывал чип без намёка, что дальше есть ещё годы —
      растушёвка поверх набегающих чипов подсказывает: тут можно листать.
      Сидит на самой .tw-years (не на ul), поэтому не едет вместе со скроллом. */
@@ -575,13 +579,10 @@ body:has(.tw) { overflow-x: visible; }
   /* Строки хроники: приглушение .34 на десктопе работает, потому что
      рядом всегда есть активная строка. На мобилке в кадре одна строка —
      бледный текст читался как «неработающая» страница. */
-  .tw-row { opacity: .55; }
-  .tw-row.is-live { opacity: 1; }
+  /* приглушение главы — цветом, правило выше (кожа v3) */
   /* и вертикальный ритм короче — пустоты между годами были в полэкрана */
   .tw { --row-pad: clamp(28px, 4.5vh, 48px); }
 
-  /* Цитата: кавычка над текстом упиралась в портрет */
-  .tw-voice__mark { left: -.05em; top: -.5em; opacity: .14; }
 }
 
 /* Телефон: под липкой лентой годов своя нижняя линия, и первая глава с
@@ -589,3 +590,15 @@ body:has(.tw) { overflow-x: visible; }
 @media (max-width: 939px) {
   .tw-rows .tw-row:first-of-type { border-top: 0; }
 }
+
+/* 29.10.2026 (одна рамка, проверка): на 721–767 px main оставался колонкой
+   720 px по центру (krepko-base.css) — текст стоял в 34–48 px от края вместо
+   24 px, как на остальных страницах телефона. Колонку снимаем: поле даёт
+   сам main (24 px). Главная этим правилом не задета — у неё нет .tw. */
+@media (max-width: 767px) {
+  body:has(.tw) main { max-width: none; }
+}
+
+/* Отзывы (кожа v3, 30.10.2026) — общий модуль reviews-block.css: полоса во
+   всю ширину окна, её поля — рамка сайта (--home-pad), как у текста страницы */
+.tw #sec-reviews { padding-left: var(--home-pad); padding-right: var(--home-pad); }

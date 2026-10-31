@@ -12,24 +12,38 @@
    Палитра совпадает с pillar-split.css: песочные поверхности,
    терракотовый акцент, тёмно-синий текст. ═══ */
 
+/* Кожа v3 (30.10.2026): шкала --st-* — роли кожи; терракотовых акцентов
+   в хвосте нет (--st-brand — цвет заголовка) */
 .service-tail {
-  --st-bg: #FFFBF7;
-  --st-surface: #F5F0EB;
-  --st-border: #E8DFD1;
-  --st-text: #2D2D2D;
-  --st-navy: #1A2B3C;
-  --st-muted: #6B6B6B;
-  --st-brand: #C75B39;
-  --st-pad: clamp(24px, 3vw, 56px);
+  --st-bg: var(--k-bg);
+  --st-surface: var(--k-surface);
+  --st-border: var(--k-line);
+  --st-text: var(--k-text);
+  --st-navy: var(--k-heading);
+  --st-muted: var(--k-muted);
+  --st-brand: var(--k-heading);
 }
 
-/* Общая колонка: те же поля, что у контента страницы услуги */
+/* Общая колонка: рамка сайта (tokens.css, 29.10.2026) — та же, что у шапки
+   и колонки текста: вопросы и карта занимают её целиком */
 .service-tail > section {
-  max-width: 1280px;
+  max-width: var(--frame-max);
   margin: 0 auto;
-  padding-left: var(--st-pad);
-  padding-right: var(--st-pad);
+  padding-left: var(--frame-pad);
+  padding-right: var(--frame-pad);
 }
+/* Отзывы — полоса во всю ширину окна. .service-tail сам во всю ширину, поэтому
+   полосе не нужны 100vw и calc(50% - 50vw) из reviews-block.css (с обычной
+   полосой прокрутки они сдвигали содержимое на половину её ширины): поле
+   --frame-gutter ставит содержимое в рамку, лента со стрелками — во всю рамку. */
+.service-tail > #sec-reviews {
+  width: auto;
+  margin-left: 0;
+  margin-right: 0;
+  padding-left: var(--frame-gutter);
+  padding-right: var(--frame-gutter);
+}
+.service-tail > #sec-reviews .rv-wrap { max-width: none; }
 
 /* ── вопросы ───────────────────────────────────────────────────────── */
 .service-tail .service-faq {
@@ -40,10 +54,10 @@
 .service-tail .faq h2 {
   margin: 0 0 clamp(18px, 2vw, 26px);
   color: var(--st-navy);
-  font-family: 'Playfair Display', Georgia, serif;
-  font-weight: 500;
-  font-size: clamp(24px, 2.6vw, 32px);
-  letter-spacing: -0.01em;
+  font-family: var(--k-font-text);
+  font-weight: 600;
+  font-size: var(--k-fs-h2);
+  letter-spacing: 0;
 }
 .service-tail .faq__list {
   display: flex;
@@ -76,7 +90,7 @@
   border: 0;
   border-radius: 0;
   color: var(--st-navy);
-  font-family: 'Manrope', sans-serif;
+  font-family: var(--k-font-text);
   font-size: clamp(15px, 1.5vw, 17px);
   font-weight: 600;
   line-height: 1.45;
@@ -132,16 +146,16 @@
 .service-tail .cmap__head h2 {
   margin: 0 0 10px;
   color: var(--st-navy);
-  font-family: 'Playfair Display', Georgia, serif;
-  font-weight: 500;
-  font-size: clamp(24px, 2.6vw, 32px);
+  font-family: var(--k-font-text);
+  font-weight: 600;
+  font-size: var(--k-fs-h2);
 }
 .service-tail .cmap__dek {
   max-width: 62ch;
   margin: 0 auto clamp(20px, 3vw, 32px);
   color: var(--st-muted);
-  font-size: clamp(14.5px, 1.4vw, 16px);
-  line-height: 1.6;
+  font-size: var(--k-fs-body);
+  line-height: var(--k-lh-body);
 }
 .service-tail .cmap__svg {
   display: block;
@@ -152,12 +166,12 @@
 }
 .service-tail .map__land {
   fill: var(--st-surface);
-  stroke: #D9CEBC;
+  stroke: var(--k-line);
   stroke-width: 2.5;
 }
 .service-tail .map__isle {
   fill: var(--st-surface);
-  stroke: #D9CEBC;
+  stroke: var(--k-line);
   stroke-width: 2;
 }
 .service-tail .cmap__dot {
@@ -166,7 +180,7 @@
 }
 .service-tail .cmap__label {
   fill: var(--st-navy);
-  font-family: 'Manrope', sans-serif;
+  font-family: var(--k-font-text);
   font-size: 26px;
   font-weight: 600;
 }
@@ -189,8 +203,9 @@
 .service-tail #sec-services > h2,
 .service-tail .cmap h2,
 .service-tail .faq > h2 {
-  font-size: clamp(24px, 2.4vw, 32px) !important;
-  line-height: 1.15;
+  /* кожа v3 (30.10.2026): H2 кожи — 22 px на телефоне, 28 px с 900 px */
+  font-size: var(--k-fs-h2) !important;
+  line-height: var(--k-lh-h2);
 }
 
 /* ═══════════════════════════════════════════════════════════════════════
@@ -227,7 +242,8 @@
       короткий терракотовый штрих отделяет заголовок от подводки. У «Работаем
       в шести городах» её не было, и заголовок с подводкой слипались. */
 .service-tail .cmap h2::after {
-  content: '';
+  /* кожа v3 (30.10.2026): без штрихов под заголовками */
+  content: none;
   display: block;
   width: 56px;
   height: 2px;
@@ -272,10 +288,10 @@
 /* приглашение к отзыву не конкурирует с кнопкой (Daniil 29.09):
    каскад красил ссылку в терракоту — глушим с запасом веса */
 .service-tail .reviews-cta__own {
-  color: var(--text-muted, #6B6B6B) !important;
-  font-size: 13px;
+  color: var(--text-muted, var(--k-muted)) !important;
+  font-size: var(--k-fs-ui);
 }
-.service-tail .reviews-cta__own:hover { color: var(--gold, #C75B39) !important; }
+.service-tail .reviews-cta__own:hover { color: var(--gold, var(--k-heading)) !important; }
 
 /* Хабы без FAQ: отзывы шли первым ребёнком хвоста и склеивались с текстом —
    home-redesign глушит их ритм-отступ (!important) под главную (Daniil 30.09) */

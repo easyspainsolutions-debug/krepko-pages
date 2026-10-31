@@ -1,30 +1,41 @@
-/* Глобальный поиск по сайту (2026-08-06, v3 — поиск по смыслу).
+/* Поиск по сайту (2026-08-06; v3 — 30.10.2026).
  *
- * Лупа в шапке и строка в мобильном меню открывают оверлей. Данные —
- * /search-index.json, который генератор собирает из тех же источников, что и
- * страницы, поэтому новые услуги и статьи попадают в поиск автоматически.
+ * v3 (итог v3 §3.6, directions.md §3.4, слова С1, С2, С11–С14 — рекомендованные):
+ *   • телефон — окно на весь экран, поле сверху; компьютер (от 900 px) — панель
+ *     прямо под полем, из которого открыли (шапка или полоса поиска): поле
+ *     окна встаёт ровно на место поля шапки, список — под ним, не выше экрана,
+ *     внутри не листается (лишние строки снимаются снизу);
+ *   • пока поле пустое — «Своими словами: …» и те же 6 «Чаще всего
+ *     обращаются», что в каталоге (разметка — modules/site_nav.html);
+ *   • результаты — до 7 строк: услуги, ниже группа «Статьи» (до 2, если
+ *     услуг много); последняя строка — «Все найденные услуги ›» — каталог с
+ *     этим запросом (/services/?q=…, каталог берёт запрос из адреса);
+ *   • ничего не нашлось — как в каталоге: «Ничего не нашлось по запросу «…»»
+ *     и WhatsApp, в сообщение уже вписан запрос; на компьютере кнопка шапки
+ *     в это время прячется (html[data-search-wa]) — кнопка на экране одна;
+ *   • переключателя «Услуги / Блог» больше нет.
+ * Подписи «Статьи» и «Все найденные услуги» — в <template> разметки: слова
+ * переводит сборка (/uk/), скрипт их только расставляет.
  *
- * ГЛАВНОЕ ОТЛИЧИЕ ОТ v2. Раньше искалось подстрокой по названию услуги, и это
- * работало только для тех, кто уже знает термин. Реальный клиент приходит со
- * словами «продать квартиру», «умер отец», «машина» — и не находил ничего.
- * Теперь у каждой записи есть слой ключевых слов (описание страницы, рубрика
- * статьи и словарь data/search_synonyms.yaml), а запрос разбирается по словам:
+ * Лупа, поля «Что нужно оформить?» в шапке, полосе и меню, «Поиск» в нижней
+ * полосе ([data-open-search]) открывают поиск; на каталоге и разделах их
+ * раньше перехватывает catalog.js и ставит курсор в поле страницы.
  *
+ * ПОИСК ПО СМЫСЛУ (v3 от 2026-08-06). У каждой записи индекса есть слой
+ * ключевых слов (описание страницы, рубрика статьи и словарь
+ * data/search_synonyms.yaml), а запрос разбирается по словам:
  *   1. отбрасываются предлоги и союзы;
  *   2. с каждого слова снимается русское окончание — «квартиру» и «квартира»
- *      сходятся к одной основе, иначе поиск ловил бы только точную форму;
+ *      сходятся к одной основе;
  *   3. КАЖДОЕ слово запроса обязано найтись хоть где-то в записи, иначе она
- *      отсеивается. Это и даёт точность: словарь широкий, и без такого «и»
- *      частые слова вроде «документ» вытаскивали бы половину каталога;
+ *      отсеивается (строгий проход); пусто — мягкий проход по части слов;
  *   4. счёт зависит от того, ГДЕ нашлось: название весит больше категории,
- *      категория больше ключевых слов. Поэтому прямое попадание в название
- *      всегда наверху, а смысловые совпадения идут следом.
+ *      категория больше ключевых слов.
+ * Опечатки прощаются на словах от пяти букв. Индекс грузится лениво при
+ * первом открытии. Без JS поля и лупа — ссылки на /services/.
  *
- * Опечатки прощаются на словах от пяти букв — одна лишняя, пропущенная или
- * перепутанная буква ещё находит услугу, но с низким весом.
- *
- * Индекс грузится лениво при первом открытии. Без JS лупа — просто ссылка
- * на /services/.
+ * Разбор открыт тестам: window.krepkoSearch.find(index, запрос) →
+ * {toks, services, blog} (test_uk_search.py запускает этот файл в node).
  *
  * УКРАИНСКАЯ ВЕРСИЯ (28.10.2026). На страницах с <html lang="uk"> индекс
  * свой — /search-index.uk.json: украинские названия и категории, украинский
@@ -32,64 +43,15 @@
  * её нет — на русскую). Разбор запроса тот же, плюс украинские служебные
  * слова и окончания; буквы і ї є ґ — часть слова, апостроф не разрывает
  * слово («сім'я» = «сімʼя» = «сімя»).
+ * /es/ (28.10.2026): индекс русский, ищем только услуги, над списком —
+ * «Resultados en ruso».
  */
 (function () {
-  var dlg = document.getElementById('site-search-dialog');
-  if (!dlg || !window.fetch || typeof dlg.showModal !== 'function') return;
-
-  var panel = dlg.querySelector('.site-search__panel');
-  var drop = dlg.querySelector('.site-search__drop');
-  var input = dlg.querySelector('.site-search__input');
-  var list = dlg.querySelector('.site-search__results');
-  var empty = dlg.querySelector('.site-search__empty');
-  var suggest = dlg.querySelector('.site-search__suggest');
-  var toggle = dlg.querySelector('.site-search__toggle');
-  /* мобильный тумблер: дорожка + две подписи по бокам */
-  var switchTrack = dlg.querySelector('.site-search__switch-track');
-  var switchSides = [].slice.call(dlg.querySelectorAll('.site-search__switch-side'));
-  var chips = [].slice.call(dlg.querySelectorAll('.site-search__chips button'));
-  var index = null;
-  var mode = 'services';
-  var cursor = -1;          /* индекс выделенной строки; -1 — ничего не выбрано */
-
-  /* Украинская версия /uk/ (28.10.2026): подписи по <html lang> */
-  var UK = (document.documentElement.getAttribute('lang') || '').slice(0, 2) === 'uk';
-  /* /es/ (28.10.2026, Р1 Daniil): испанские подписи; ищем по русскому индексу */
-  var ES = (document.documentElement.getAttribute('lang') || '').slice(0, 2) === 'es';
-  var MODES = ES ? {
-    services: {
-      placeholder: '¿Qué trámite necesita?',
-      tip: 'Cambiar al blog',
-      aria: 'Buscamos en los servicios. Cambiar al blog'
-    },
-    blog: {
-      placeholder: '¿Sobre qué quiere leer?',
-      tip: 'Cambiar a los servicios',
-      aria: 'Buscamos en el blog. Cambiar a los servicios'
-    }
-  } : UK ? {
-    services: {
-      placeholder: 'Що потрібно оформити?',
-      tip: 'Перемкнути на блог',
-      aria: 'Шукаємо в послугах. Перемкнути на блог'
-    },
-    blog: {
-      placeholder: 'Про що почитати?',
-      tip: 'Перемкнути на послуги',
-      aria: 'Шукаємо в блозі. Перемкнути на послуги'
-    }
-  } : {
-    services: {
-      placeholder: 'Что нужно оформить?',
-      tip: 'Переключить на блог',
-      aria: 'Ищем в услугах. Переключить на блог'
-    },
-    blog: {
-      placeholder: 'О чём почитать?',
-      tip: 'Переключить на услуги',
-      aria: 'Ищем в блоге. Переключить на услуги'
-    }
-  };
+  'use strict';
+  var root = document.documentElement;
+  var LANG = ((root && root.getAttribute('lang')) || '').slice(0, 2);
+  var UK = LANG === 'uk';
+  var ES = LANG === 'es';
 
   /* ── разбор языка ───────────────────────────────────────────────────── */
 
@@ -312,8 +274,6 @@
     return collect(pool, toks, 1);
   }
 
-  /* ── отрисовка ──────────────────────────────────────────────────────── */
-
   /* Подсветка слов запроса. Сравнение идёт по основам, а не по подстроке:
      «квартиру» должно подсветить «квартира», иначе на половине запросов
      подсветка молчит, хотя результат найден верно.
@@ -366,86 +326,206 @@
     return frag;
   }
 
-  /* Высота раскрытой части = фактическая высота содержимого. Пересчитывается
-     на каждой букве, поэтому панель плавно перетекает между двумя и восемью
-     результатами. Фиксированное значение в CSS дало бы рывок: анимация
-     доезжала бы до конца уже после того, как контент упёрся в свою высоту.
-     На мобильном переменная не используется — там панель не схлопывается. */
-  function syncHeight() {
-    panel.style.setProperty('--drop-h', drop.scrollHeight + 'px');
+  /* Запрос → найденные услуги и статьи. Запрос из одних предлогов («как»,
+     «что») ищем как есть, иначе поиск молча ничего не покажет на непустой
+     строке. /es/: только услуги. */
+  function find(index, query) {
+    var q = String(query || '').trim();
+    var toks = tokenize(q);
+    if (!toks.length && norm(q).length >= 2) toks = [norm(q)];
+    if (!index || q.length < 2) return { toks: toks, services: [], blog: [] };
+    return {
+      toks: toks,
+      services: search(index.services || [], q, toks),
+      blog: ES ? [] : search(index.blog || [], q, toks)
+    };
+  }
+  window.krepkoSearch = { find: find, tokenize: tokenize, stem: stem };
+
+  /* ── окно поиска ────────────────────────────────────────────────────── */
+
+  var dlg = document.getElementById('site-search-dialog');
+  if (!dlg || !window.fetch || typeof dlg.showModal !== 'function') return;
+
+  var panel = dlg.querySelector('.site-search__panel');
+  var bar = dlg.querySelector('.site-search__bar');
+  var drop = dlg.querySelector('.site-search__drop');
+  var input = dlg.querySelector('.site-search__input');
+  var start = dlg.querySelector('.site-search__start');
+  var list = dlg.querySelector('.site-search__results');
+  var none = dlg.querySelector('.site-search__none');
+  var noneH = none && none.querySelector('.site-search__none-h');
+  var noneWa = none && none.querySelector('.site-search__wa');
+  var empty = dlg.querySelector('.site-search__empty');      // /es/: прежний текст
+  var ruNote = dlg.querySelector('.site-search__ru-note');
+  var tpl = dlg.querySelector('template.site-search__tpl');
+  var groupTpl = tpl && tpl.content ? tpl.content.querySelector('.site-search__group') : null;
+  var allTpl = tpl && tpl.content ? tpl.content.querySelector('.site-search__all') : null;
+  var WA_Q = dlg.getAttribute('data-wa-q') || '';
+  var NONE = dlg.getAttribute('data-none') || '';
+  var desk = window.matchMedia ? window.matchMedia('(min-width: 900px)') : { matches: false };
+  var MAX_ROWS = 7;       // строк результатов; восьмая — «Все найденные услуги»
+  var MAX_ARTICLES = 2;   // статей, когда услуг хватает на весь список
+  var index = null;
+  var cursor = -1;
+  var trigger = null;     // поле или кнопка, из которых открыли поиск
+
+  var SVG = 'http://www.w3.org/2000/svg';
+  function chevron() {
+    var s = document.createElementNS(SVG, 'svg');
+    s.setAttribute('viewBox', '0 0 24 24');
+    s.setAttribute('fill', 'none');
+    s.setAttribute('stroke', 'currentColor');
+    s.setAttribute('stroke-width', '1.8');
+    s.setAttribute('stroke-linecap', 'round');
+    s.setAttribute('stroke-linejoin', 'round');
+    s.setAttribute('aria-hidden', 'true');
+    var p = document.createElementNS(SVG, 'path');
+    p.setAttribute('d', 'M9 6l6 6-6 6');
+    s.appendChild(p);
+    return s;
+  }
+
+  /* строка результата: название (с подсветкой набранного) и серым — раздел */
+  function row(h, toks, withCat) {
+    var li = document.createElement('li');
+    var a = document.createElement('a');
+    a.href = h.u;
+    var t = document.createElement('span');
+    t.appendChild(highlight(h.t, toks));
+    if (withCat && h.c && h.c !== 'Направление' && h.c !== 'Напрям') {
+      var c = document.createElement('small');
+      c.textContent = h.c;
+      t.appendChild(c);
+    }
+    a.appendChild(t);
+    a.appendChild(chevron());
+    li.appendChild(a);
+    return li;
+  }
+
+  /* /es/: прежний пустой ответ; ru и uk — как в каталоге, с запросом в
+     сообщении WhatsApp «Добрый день, ищу услугу: «…». Я с krepko.es/…/».
+     Исходную ссылку берём при первом ответе — к тому времени analytics.js
+     уже дописал «Источник: …» (метку рекламы); её сохраняем. */
+  var MARKER = /\. (Я [сз]|Vengo de) [Kk]repko\.es.*$/;
+  function waHref(q) {
+    if (!noneWa) return '';
+    if (noneWa._def == null) noneWa._def = noneWa.getAttribute('href') || '';
+    var def = noneWa._def;
+    var m = /([?&]text=)([^&#]*)/.exec(def);
+    if (!WA_Q || !m) return def;
+    var text;
+    try { text = decodeURIComponent(m[2]); } catch (e) { return def; }
+    var cut = text.indexOf('\n\n');
+    var src = (text.indexOf('Источник:') === 0 && cut > 0) ? text.slice(0, cut + 2) : '';
+    var tail = MARKER.exec(text);
+    var next = src + WA_Q.replace('{q}', q) + (tail ? tail[0] : '');
+    return def.slice(0, m.index) + m[1] + encodeURIComponent(next) + def.slice(m.index + m[0].length);
+  }
+
+  function setSearchWa(on) {
+    if (on) root.setAttribute('data-search-wa', '');
+    else root.removeAttribute('data-search-wa');
   }
 
   function render() {
-    var query = input.value.trim();
-    var toks = tokenize(query);
-    /* Запрос из одних предлогов («как», «что») — ищем как есть, иначе поиск
-       молча ничего не покажет на непустой строке. */
-    if (!toks.length && norm(query).length >= 2) toks = [norm(query)];
-
-    list.innerHTML = '';
+    var q = input.value.trim();
+    var res = find(index, q);
+    var typing = q.length >= 2;
+    list.textContent = '';
     cursor = -1;
+    if (start) start.hidden = typing;
 
-    var hits = (index && query.length >= 2) ? search(index[mode] || [], query, toks) : [];
+    var nBlog = Math.min(res.blog.length, groupTpl ? MAX_ARTICLES : 0);
+    var nSvc = Math.min(res.services.length, MAX_ROWS - nBlog);
+    if (groupTpl) nBlog = Math.min(res.blog.length, MAX_ROWS - nSvc);
+    res.services.slice(0, nSvc).forEach(function (h) { list.appendChild(row(h, res.toks, true)); });
+    if (nBlog) {
+      list.appendChild(groupTpl.cloneNode(true));
+      res.blog.slice(0, nBlog).forEach(function (h) { list.appendChild(row(h, res.toks, false)); });
+    }
+    if (nSvc && allTpl) {
+      var all = allTpl.cloneNode(true);
+      var link = all.querySelector('a');
+      var base = (link.getAttribute('href') || '/services/').split('?')[0];
+      link.setAttribute('href', base + '?q=' + encodeURIComponent(q));
+      list.appendChild(all);
+    }
+    list.hidden = !list.children.length;
 
-    hits.forEach(function (h, i) {
-      var li = document.createElement('li');
-      li.style.setProperty('--i', i);          /* каскад появления, см. CSS */
-      var a = document.createElement('a');
-      a.href = h.u;
-      var b = document.createElement('b');
-      b.appendChild(highlight(h.t, toks));
-      a.appendChild(b);
-      if (h.c && h.c !== 'Направление' && h.c !== 'Напрям') {
-        var s = document.createElement('span');
-        s.textContent = h.c;
-        a.appendChild(s);
+    var nothing = typing && !!index && !nSvc && !nBlog;
+    if (none) {
+      none.hidden = !nothing;
+      if (nothing) {
+        if (noneH) noneH.textContent = NONE.replace('{q}', q);
+        if (noneWa) noneWa.setAttribute('href', waHref(q));
       }
-      li.appendChild(a);
-      list.appendChild(li);
-    });
-
-    var nothing = query.length >= 2 && !!index && !hits.length;
-    empty.hidden = !nothing;
-    /* /es/: над результатами — «Resultados en ruso» (индекс поиска русский) */
-    var ruNote = dlg.querySelector('.site-search__ru-note');
+    }
+    if (empty) empty.hidden = !nothing;
     if (ruNote) ruNote.hidden = nothing || !list.children.length;
-    /* Частые запросы: на мобильном встречают при пустой строке, на десктопе
-       работают как запасной выход, когда ничего не нашлось. */
-    if (suggest) suggest.hidden = !(query.length < 2 || nothing);
-
-    /* Панель раскрывается, только когда внутри действительно что-то есть —
-       пока грузится индекс, овал остаётся собранным и не мигает пустотой. */
-    panel.classList.toggle('is-open', hits.length > 0 || nothing);
-    syncHeight();
+    setSearchWa(nothing && !!none && dlg.open);
+    fit();
   }
 
-  /* ── режимы ─────────────────────────────────────────────────────────── */
-
-  function setMode(next) {
-    mode = next;
-    var m = MODES[next];
-    input.placeholder = m.placeholder;
-    /* Тумблер: включённое положение (aria-checked) означает «блог» —
-       дорожка гаснет до серого, кружок уезжает вправо. Подписи по бокам
-       подсвечиваются, чтобы состояние читалось и без цвета дорожки. */
-    if (switchTrack) {
-      switchTrack.setAttribute('aria-checked', next === 'blog' ? 'true' : 'false');
-      switchTrack.setAttribute('aria-label', ES
-        ? (next === 'blog' ? 'Ámbito de búsqueda: blog. Cambiar a los servicios'
-                           : 'Ámbito de búsqueda: servicios. Cambiar al blog')
-        : UK
-        ? (next === 'blog' ? 'Область пошуку: блог. Перемкнути на послуги'
-                           : 'Область пошуку: послуги. Перемкнути на блог')
-        : (next === 'blog' ? 'Область поиска: блог. Переключить на услуги'
-                           : 'Область поиска: услуги. Переключить на блог'));
+  /* ── место панели на компьютере ──
+     Поле окна встаёт ровно на место поля, из которого открыли (шапка, полоса
+     поиска, большое поле главной — home.html, «как у Дії»), той же высоты;
+     список под ним шире поля (от 480 px) и не выходит за края окна. */
+  var ANCHOR = /\b(site-nav__field|hm-find__field)\b/;
+  function fieldRect(el) {
+    if (!el || !el.getBoundingClientRect) return null;
+    var r = el.getBoundingClientRect();
+    if (!r.width || !r.height || r.bottom <= 0 || r.top >= window.innerHeight) return null;
+    var cs = window.getComputedStyle(el);
+    if (cs.visibility === 'hidden') return null;
+    return r;
+  }
+  function visibleField() {
+    var fields = document.querySelectorAll('.site-nav__field');
+    for (var i = 0; i < fields.length; i++) {
+      var r = fieldRect(fields[i]);
+      if (r) return r;
     }
-    switchSides.forEach(function (s) {
-      s.classList.toggle('is-on', s.dataset.side === next);
-    });
-    if (toggle) {
-      toggle.classList.toggle('is-blog', next === 'blog');
-      toggle.setAttribute('data-tip', m.tip);
-      toggle.setAttribute('aria-label', m.aria);
+    return null;
+  }
+  function place() {
+    if (!desk.matches) return;
+    var f = (trigger && ANCHOR.test(trigger.className) && fieldRect(trigger)) || visibleField();
+    var vw = document.documentElement.clientWidth || window.innerWidth;
+    var fw = f ? f.width : Math.min(560, vw - 32);
+    var w = Math.min(Math.max(fw, 480), vw - 32);
+    var fx = f ? f.left : (vw - w) / 2;
+    var left = Math.max(16, Math.min(fx, vw - 16 - w));
+    var top = f ? f.top : 80;
+    panel.style.setProperty('--ss-top', Math.round(top) + 'px');
+    panel.style.setProperty('--ss-left', Math.round(left) + 'px');
+    panel.style.setProperty('--ss-w', Math.round(w) + 'px');
+    panel.style.setProperty('--ss-field-x', Math.round(fx - left) + 'px');
+    panel.style.setProperty('--ss-field-w', Math.round(Math.min(fw, w)) + 'px');
+    panel.style.setProperty('--ss-field-h', Math.round(f ? f.height : 44) + 'px');
+  }
+  /* не выше экрана, без прокрутки внутри: лишние строки — снизу (сначала
+     статьи, потом услуги); «Все найденные услуги» остаётся последней */
+  function fit() {
+    if (!desk.matches || !dlg.open || list.hidden) return;
+    var limit = window.innerHeight - 16;
+    /* лишнее и тогда, когда список упёрся в свой max-height (overflow: hidden):
+       панель ниже по экрану — с большого поля главной — режет последнюю строку
+       раньше, чем низ панели дойдёт до края окна (слияние потоков 30.10) */
+    function over() {
+      return drop.getBoundingClientRect().bottom > limit || drop.scrollHeight > drop.clientHeight + 1;
+    }
+    for (var guard = 0; guard < 20 && over(); guard++) {
+      var rows = list.querySelectorAll('li:not(.site-search__all):not(.site-search__group)');
+      if (rows.length <= 1) break;
+      var lastRow = rows[rows.length - 1];
+      var prev = lastRow.previousElementSibling;
+      lastRow.parentNode.removeChild(lastRow);
+      if (prev && prev.classList.contains('site-search__group')) {
+        var next = prev.nextElementSibling;
+        if (!next || next.classList.contains('site-search__all')) prev.parentNode.removeChild(prev);
+      }
     }
   }
 
@@ -456,77 +536,48 @@
       .then(function (data) { index = data; return data; });
   }
 
-  function open() {
-    setMode('services');
+  function open(from) {
+    trigger = from || null;
     input.value = '';
-    panel.classList.remove('is-open');
     dlg.classList.remove('is-shown');
+    place();
     render();
     dlg.showModal();
-    /* Появление — переход из стартового состояния в is-shown (см. CSS).
-       Чтение offsetWidth между showModal() и классом обязательно: оно
-       заставляет браузер посчитать стартовый кадр, иначе оба состояния
-       схлопнутся в одно и перехода не будет — окно возникнет рывком. */
-    void dlg.offsetWidth;
+    void dlg.offsetWidth;   // стартовый кадр перехода, иначе окно возникнет рывком
     dlg.classList.add('is-shown');
     load().then(render);
-    /* фокус после отрисовки — иначе iOS не поднимает клавиатуру */
+    try { input.focus({ preventScroll: true }); } catch (e) { input.focus(); }
+    /* после отрисовки ещё раз — иначе iOS не поднимает клавиатуру */
     setTimeout(function () { input.focus(); }, 50);
   }
 
   dlg.addEventListener('close', function () {
     dlg.classList.remove('is-shown');
-    panel.classList.remove('is-open');
+    setSearchWa(false);
   });
 
-  /* ── навигация клавишами ────────────────────────────────────────────── */
-
+  /* ── клавиши: ↓ ↑ по строкам, Enter — выбранная или первая ── */
+  function links() {
+    return [].filter.call(drop.querySelectorAll('a'), function (a) {
+      return a.offsetParent !== null && !a.classList.contains('site-search__wa');
+    });
+  }
   function setCursor(next) {
-    var items = list.children;
+    var items = links();
     if (!items.length) { cursor = -1; return; }
     if (next < 0) next = items.length - 1;
     if (next >= items.length) next = 0;
-    for (var i = 0; i < items.length; i++) {
-      items[i].classList.toggle('is-active', i === next);
-    }
+    items.forEach(function (a, i) { a.classList.toggle('is-active', i === next); });
     cursor = next;
-    var a = items[next].querySelector('a');
-    if (a && a.scrollIntoView) a.scrollIntoView({ block: 'nearest' });
   }
-
-  /* ── события ────────────────────────────────────────────────────────── */
-
-  if (toggle) {
-    toggle.addEventListener('click', function () {
-      setMode(mode === 'services' ? 'blog' : 'services');
-      load().then(render);
-      input.focus();
-    });
-  }
-
-  if (switchTrack) {
-    switchTrack.addEventListener('click', function () {
-      setMode(mode === 'services' ? 'blog' : 'services');
-      load().then(render);
-      input.focus();
-    });
-  }
-
-  /* тап по самой подписи тоже переключает — целиться в дорожку не нужно */
-  switchSides.forEach(function (side) {
-    side.addEventListener('click', function () {
-      if (side.dataset.side === mode) return;
-      setMode(side.dataset.side);
-      load().then(render);
-      input.focus();
-    });
-  });
-
-  chips.forEach(function (chip) {
-    chip.addEventListener('click', function () {
-      input.value = chip.dataset.q;
-      load().then(function () { render(); input.focus(); });
-    });
+  dlg.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowDown') { e.preventDefault(); setCursor(cursor + 1); }
+    else if (e.key === 'ArrowUp') { e.preventDefault(); setCursor(cursor - 1); }
+    else if (e.key === 'Enter' && e.target === input) {
+      var items = links();
+      var a = items[cursor] || (input.value.trim().length >= 2 ? items[0] : null);
+      if (a) { e.preventDefault(); window.location.href = a.getAttribute('href'); }
+    }
   });
 
   input.addEventListener('input', function () {
@@ -534,31 +585,20 @@
     render();
   });
 
-  dlg.addEventListener('keydown', function (e) {
-    if (e.key === 'ArrowDown') { e.preventDefault(); setCursor(cursor + 1); }
-    else if (e.key === 'ArrowUp') { e.preventDefault(); setCursor(cursor - 1); }
-    else if (e.key === 'Enter') {
-      var active = list.children[cursor] || list.children[0];
-      var a = active && active.querySelector('a');
-      if (a) { e.preventDefault(); window.location.href = a.getAttribute('href'); }
-    }
-  });
-
+  /* клик мимо панели закрывает (на компьютере подложка прозрачная) */
   dlg.addEventListener('click', function (e) {
-    /* клик по подложке закрывает; внутри панели — нет */
     if (e.target === dlg) dlg.close();
   });
-  dlg.querySelector('.site-search__close').addEventListener('click', function () {
-    dlg.close();
-  });
+  var closeBtn = dlg.querySelector('.site-search__close');
+  if (closeBtn) closeBtn.addEventListener('click', function () { dlg.close(); });
 
-  /* Кнопки-лупы: в шапке и в мобильном меню */
+  /* поля и лупы: шапка, полоса поиска, меню, нижняя полоса */
   [].forEach.call(document.querySelectorAll('[data-open-search]'), function (btn) {
     btn.addEventListener('click', function (e) {
       e.preventDefault();
       var menu = document.getElementById('site-menu-dialog');
       if (menu && menu.open) menu.close();
-      open();
+      open(btn);
     });
   });
 
@@ -567,16 +607,15 @@
     if (dlg.open) return;
     var tag = (document.activeElement && document.activeElement.tagName) || '';
     if (tag === 'INPUT' || tag === 'TEXTAREA') return;
-    if (e.key === '/' || ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k')) {
+    if (e.key === '/' || ((e.metaKey || e.ctrlKey) && (e.key || '').toLowerCase() === 'k')) {
       e.preventDefault();
-      open();
+      open(null);
     }
   });
 
-  /* Пересчёт высоты при смене размера окна: на узком экране в строку
-     результата помещается меньше текста, и раскрытая панель обязана
-     подрасти — иначе последние результаты обрежутся. */
-  window.addEventListener('resize', function () {
-    if (dlg.open && panel.classList.contains('is-open')) syncHeight();
-  });
+  /* окно поменяло размер или страница сдвинулась под открытой панелью —
+     панель снова встаёт к полю */
+  function realign() { if (dlg.open) { place(); render(); } }
+  window.addEventListener('resize', realign);
+  window.addEventListener('scroll', function () { if (dlg.open && desk.matches) place(); }, { passive: true });
 })();

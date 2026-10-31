@@ -15,6 +15,11 @@
    • без терракоты (линия сверху, ссылка) и без чёрной тени: терракота на
      сайте — только у действия «написать нам», тени — тёплые (DESIGN.md).
    Текст баннера не менялся: он же вморожен в 56 рукописных страниц.
+
+   Кожа v3 (30.10.2026): баннер — обвязка, роли --k-* на всех страницах.
+   Обе кнопки — одинаковые рамки цвета текста (AEPD — отказ не слабее
+   согласия; итог v3 §4.6 п. 10 — тёмные залитые кнопки баннера перетягивали
+   взгляд с WhatsApp, 11,8:1 против 5,1:1). Тень — «поверх страницы».
    ============================================================ */
 
 .cookie-consent {
@@ -26,18 +31,18 @@
   z-index: 60;
   max-width: 720px;
   margin: 0 auto;
-  background: var(--surface-sunk);
-  border: 1px solid var(--border);
-  border-radius: var(--r-5);
+  background: var(--k-bg);
+  border: 1px solid var(--k-line);
+  border-radius: var(--k-r-card);
   padding: var(--space-4) var(--space-5);
-  box-shadow: 0 12px 32px rgba(26, 43, 60, 0.16);
-  font-family: 'Manrope', -apple-system, sans-serif;
+  box-shadow: var(--k-overlay-shadow);
+  font-family: var(--k-font-text);
   animation: cookie-consent-slide-up 280ms cubic-bezier(0.4, 0, 0.2, 1);
 
-  /* navy — цвет обеих кнопок и ссылки */
-  --cc-btn: rgb(26, 43, 60);
-  --cc-btn-hover: rgb(36, 56, 77);
-  --cc-btn-on: rgb(255, 255, 255);
+  /* цвет рамки обеих кнопок и ссылки — цвет текста кожи */
+  --cc-btn: var(--k-heading);
+  --cc-btn-hover: var(--k-surface-press);
+  --cc-btn-on: var(--k-heading);
 }
 
 @keyframes cookie-consent-slide-up {
@@ -61,17 +66,17 @@
 }
 
 .cookie-consent__title {
-  font-size: var(--ts-body-sm);
-  font-weight: 700;
-  color: var(--text);
+  font-size: var(--k-fs-ui);
+  font-weight: var(--k-w-strong);
+  color: var(--k-heading);
   margin: 0 0 var(--space-1);
-  letter-spacing: -0.2px;
+  letter-spacing: 0;
   line-height: 1.3;
 }
 
 .cookie-consent__desc {
-  font-size: var(--ts-meta);
-  color: var(--text-sub);
+  font-size: var(--k-fs-ui);
+  color: var(--k-text);
   line-height: 1.5;
   margin: 0;
 }
@@ -100,20 +105,20 @@
   justify-content: center;
   min-height: 44px;
   padding: var(--space-2) var(--space-4);
-  border-radius: var(--r-3);
-  font-family: 'Manrope', sans-serif;
-  font-size: var(--ts-body-sm);
-  font-weight: 700;
+  border-radius: var(--k-r-btn);
+  font-family: var(--k-font-text);
+  font-size: var(--k-fs-ui);
+  font-weight: var(--k-w-strong);
   cursor: pointer;
   white-space: nowrap;
   transition: background var(--t-2), border-color var(--t-1), color var(--t-1);
 }
 
-/* Обе кнопки — один вид: «Только необходимые» больше не прозрачная
-   с рамкой 1,08:1, а та же navy-кнопка, что «Принять все». */
+/* Обе кнопки — один вид: рамка цвета текста на фоне баннера, равная ширина
+   (кожа v3, 30.10.2026). Рамка 1 px #0F1B2D к белому — 17,3:1. */
 .cookie-consent__btn--essential,
 .cookie-consent__btn--accept {
-  background: var(--cc-btn);
+  background: var(--k-bg);
   border: 1px solid var(--cc-btn);
   color: var(--cc-btn-on);
   box-shadow: none;
@@ -121,7 +126,6 @@
 .cookie-consent__btn--essential:hover,
 .cookie-consent__btn--accept:hover {
   background: var(--cc-btn-hover);
-  border-color: var(--cc-btn-hover);
 }
 
 .cookie-consent__btn:focus-visible {
@@ -139,18 +143,18 @@
     border-width: 1px 0 0;
     border-radius: 0;
     padding: var(--space-2) var(--space-4) max(var(--space-2), env(safe-area-inset-bottom));
-    box-shadow: 0 -6px 24px rgba(26, 43, 60, 0.12);
+    box-shadow: var(--k-overlay-shadow);
   }
   .cookie-consent__inner { gap: var(--space-2); }
   .cookie-consent__text {
     min-width: 0;
-    font-size: var(--ts-meta);
+    font-size: var(--k-fs-ui);
     line-height: 1.4;
   }
   .cookie-consent__title,
   .cookie-consent__desc {
     display: inline;
-    font-size: var(--ts-meta);
+    font-size: var(--k-fs-ui);
     line-height: 1.4;
   }
   .cookie-consent__title::after { content: '. '; }

@@ -1,335 +1,322 @@
 /* ============================================================
-   Витрина блога — сетка карточек (2026-08-13)
+   Витрина блога и карточки статей (2026-08-13, кожа v3 30.10.2026)
 
-   Геометрия снята с enigma.com/resources/blog по просьбе Daniil:
-   три колонки по 384px, зазор 24px, карточка без заливки с рамкой в
-   1px и скруглением 16px, теги пилюлями 12px со скруглением 48px,
-   заголовок 20px весом 500.
+   Геометрия — с enigma.com/resources/blog (просьба Daniil 13.08): карточка
+   без заливки с рамкой, сетка по 3 в ряд, фильтр тем боковой колонкой.
+   Те же карточки стоят под статьёй в «Читайте также» (blog-article.css).
 
-   Одно расхождение с референсом, осознанное. Там верх карточки —
-   изображение на 224px. У наших 34 статей изображений нет, и рисовать
-   их — отдельная работа. Место картинки отдано типографике: категория
-   крупно на подложке. Карточка держит тот же ритм, а страница не ждёт
-   иллюстраций, которых пока нет.
-
-   Цвета и шрифты — наши: Playfair на заголовках, Manrope в тексте,
-   терракота как единственный акцент.
+   Кожа v3 (решение Daniil 30.10, §7 п. 2 «а») — роли --k-*:
+     • заголовки — шрифт кожи 600 (были Playfair 500); подписи без капса;
+     • цветом залита только кнопка WhatsApp: цветная полоса темы над
+       карточкой и терракотовые подчёркивания фильтра сняты;
+     • метки статьи — мелким серым через точку, без плашек: внутри карточки
+       они не нажимаются (directions.md §1.1 п. 3);
+     • «Показать ещё» — кнопка-рамка кожи, как «Читать больше» на главной.
+   Страница стоит в рамке сайта (--frame-max, --frame-pad), как все.
    ============================================================ */
 
-/* Заголовочный тёмно-синий: в шкалах блога его нет, объявляем локально —
-   тем же приёмом, что service-tail.css со своими --st-*. */
-.blog-head, .blog-grid, .blog-filter { --blog-ink: #1A2B3C; }
+.blog-page { background: var(--k-bg); }
 
-.blog-page {
-  background: var(--bg);
-}
-
+/* ── Заголовок витрины ── */
 .blog-head {
-  max-width: 1240px;
+  box-sizing: border-box;
+  max-width: var(--frame-max);
   margin: 0 auto;
-  padding: clamp(28px, 4vw, 56px) clamp(20px, 4vw, 40px) clamp(20px, 2.5vw, 32px);
+  /* под «‹ Главная» заголовок — сразу, как на страницах сайта */
+  padding: var(--space-2) var(--frame-pad) var(--k-gap-block);
 }
 .blog-head__h1 {
-  font-family: 'Playfair Display', Georgia, serif;
-  font-size: clamp(28px, 3.4vw, 44px);
-  font-weight: 500;
-  line-height: 1.12;
-  color: var(--blog-ink);
-  margin: 0 0 14px;
+  margin: 0 0 var(--space-3);
+  font-family: var(--k-font-display);
+  font-size: var(--k-fs-h1);
+  font-weight: var(--k-w-display);
+  line-height: var(--k-lh-h1);
+  letter-spacing: var(--k-ls-h1);
+  color: var(--k-heading);
+  text-wrap: balance;
 }
 .blog-head__dek {
-  font-family: 'Manrope', sans-serif;
-  font-size: clamp(15px, 1.2vw, 17px);
-  line-height: 1.55;
-  color: var(--text-sub);
-  max-width: 640px;
+  max-width: var(--k-measure);
   margin: 0;
+  font-family: var(--k-font-text);
+  font-size: var(--k-fs-body);
+  line-height: var(--k-lh-body);
+  color: var(--k-text);
 }
 
-/* ── Фильтр по темам ──
-   Боковой колонкой, как на хабах услуг (/notario/, /ukraina/, /migracion/):
-   человек, побродивший по каталогу, встречает здесь знакомый приём. Липкая,
-   как pillar-nav, — иначе при прокрутке 34 карточек фильтр уезжает вверх и
-   становится бесполезен.
-
-   На мобильном схлопывается в горизонтальные табы: боковая колонка на 390px
-   невозможна, а пилюли в три ряда съедали пол-экрана до первой карточки. */
+/* ── Фильтр тем и сетка ──
+   Компьютер: фильтр — липкая колонка слева, как разделы каталога.
+   Телефон (до 860 px): строка вкладок над сеткой, листается вбок. */
 .blog-layout {
-  max-width: 1240px;
+  box-sizing: border-box;
+  max-width: var(--frame-max);
   margin: 0 auto;
-  padding: 0 clamp(20px, 4vw, 40px) clamp(48px, 6vw, 88px);
+  padding: 0 var(--frame-pad);
   display: grid;
-  grid-template-columns: minmax(190px, 210px) minmax(0, 1fr);
-  gap: clamp(28px, 3vw, 44px);
+  /* колонка тем — 220 px, зазор — 48: по ним же «Показать ещё» встаёт
+     под сеткой карточек (кнопка в разметке лежит после .blog-layout) */
+  grid-template-columns: 220px minmax(0, 1fr);
+  gap: var(--k-gap-block) var(--space-7);
   align-items: start;
 }
 .blog-layout > * { min-width: 0; }
 
 .blog-filter {
   position: sticky;
-  /* Шапка липкая и занимает 133px (топбар 42 + навбар 91). Без этого отступа
-     список тем уезжал под неё, и «Темы» с «Все темы» скрывались за меню. */
-  top: 161px;
+  top: 96px;
   display: flex;
   flex-direction: column;
-  gap: 2px;
 }
 .blog-filter__label {
-  font-family: 'Manrope', sans-serif;
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: .14em;
-  text-transform: uppercase;
-  color: var(--text-muted);
-  padding: 0 12px 10px;
+  /* по тексту тем: у них слева линия 2 px и поле */
+  padding: 0 var(--space-3) var(--space-2) calc(var(--space-3) + 2px);
+  font-family: var(--k-font-text);
+  font-size: var(--k-fs-ui);
+  font-weight: var(--k-w-regular);
+  line-height: var(--k-lh-ui);
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--k-muted);
 }
 .blog-filter__pill {
   appearance: none;
-  border: 0;
+  min-height: 40px;
+  padding: var(--space-1) var(--space-3);
   background: transparent;
-  border-radius: 8px;
-  padding: 9px 12px;
+  border: 0;
+  border-left: 2px solid transparent;
+  border-radius: 0;
   text-align: left;
-  font-family: 'Manrope', sans-serif;
-  font-size: 14.5px;
-  font-weight: 500;
-  color: var(--text-sub);
+  font-family: var(--k-font-text);
+  font-size: var(--k-fs-ui);
+  font-weight: var(--k-w-regular);
+  line-height: var(--k-lh-ui);
+  color: var(--k-text);
   cursor: pointer;
-  transition: background .15s ease, color .15s ease;
 }
-.blog-filter__pill:hover { color: var(--gold); }
+@media (hover: hover) {
+  .blog-filter__pill:hover { background: var(--k-surface); color: var(--k-heading); }
+}
 .blog-filter__pill.is-on {
-  background: var(--surface);
-  color: var(--blog-ink);
-  font-weight: 600;
+  background: var(--k-surface);
+  border-left-color: var(--k-heading);
+  font-weight: var(--k-w-strong);
+  color: var(--k-heading);
 }
 
-/* ── Сетка ── */
 .blog-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
-  gap: 24px;
+  gap: var(--space-5);
 }
 
-/* ── Карточка ──
-   Заливки нет, держит форму рамка — как в референсе. Ссылка целиком
-   кликабельна, поэтому внутри только span'ы: вложенные ссылки в HTML
-   недопустимы. */
+/* ── Карточка статьи ──
+   Ссылка целиком: внутри только span'ы (вложенные ссылки недопустимы). */
 .blog-card {
   display: flex;
   flex-direction: column;
-  border: 1px solid rgba(26, 43, 60, 0.12);
-  border-radius: 16px;
   overflow: hidden;
+  background: var(--k-bg);
+  border: 1px solid var(--k-line);
+  border-radius: var(--k-r-card);
   text-decoration: none;
-  background: transparent;
-  transition: border-color .18s ease, transform .18s ease;
+  transition: border-color .15s ease;
 }
 @media (hover: hover) {
-  .blog-card:hover {
-    border-color: rgba(199, 91, 57, 0.45);
-    transform: translateY(-2px);
-  }
+  .blog-card:hover { border-color: var(--k-line-strong); }
 }
-
-/* Верх карточки — полоса темы.
-   Раньше здесь стоял блок в 224px с названием темы крупными буквами. Daniil
-   его забраковал, и по делу: на витрине уже три места говорят, о чём статья —
-   надпись «Блог · тема», пилюли тегов и сам заголовок. Четвёртый повтор той
-   же мысли крупным кеглем был шумом.
-
-   Четыре пикселя цвета делают то же самое, ничего не повторяя: тема
-   читается краем глаза, ряд получает ритм, место остаётся тексту. Цвета
-   держим приглушёнными — терракота на витрине остаётся одна, у ссылок. */
-.blog-card__top {
-  height: 4px;
-  flex: none;
-}
+/* Цветная полоса темы над карточкой снята: цветом на странице залита только
+   кнопка WhatsApp. Тема читается в строке «Блог · …». */
+.blog-card__top,
 .blog-card__cat { display: none; }
-
-.blog-card[data-cat="docs"]    .blog-card__top { background: var(--gold); }
-.blog-card[data-cat="vnzh"]    .blog-card__top { background: #8A6A4F; }
-.blog-card[data-cat="finance"] .blog-card__top { background: #7C8B72; }
-.blog-card[data-cat="life"]    .blog-card__top { background: #A8845C; }
-.blog-card[data-cat="work"]    .blog-card__top { background: #6E7F8C; }
-.blog-card[data-cat="social"]  .blog-card__top { background: #9C7B86; }
 
 .blog-card__body {
   display: flex;
   flex-direction: column;
   flex: 1;
-  padding: 20px 22px 22px;
+  padding: var(--space-5);
 }
 .blog-card__kicker {
-  font-family: 'Manrope', sans-serif;
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: .14em;
-  text-transform: uppercase;
-  color: var(--text-muted);
-  margin-bottom: 10px;
+  margin-bottom: var(--space-1);
+  font-family: var(--k-font-text);
+  font-size: var(--k-fs-ui);
+  font-weight: var(--k-w-regular);
+  line-height: var(--k-lh-ui);
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--k-muted);
 }
 .blog-card__tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-  margin-bottom: 12px;
+  display: block;
+  margin-bottom: var(--space-3);
+  font-size: var(--k-fs-ui);
+  line-height: var(--k-lh-ui);
+  color: var(--k-muted);
 }
 .blog-card__tag {
-  background: var(--surface);
-  border-radius: 48px;
-  padding: 4px 11px;
-  font-family: 'Manrope', sans-serif;
-  font-size: 12px;
-  color: var(--text-sub);
-  white-space: nowrap;
+  padding: 0;
+  background: none;
+  border-radius: 0;
+  font-family: var(--k-font-text);
+  font-size: inherit;
+  white-space: normal;
+  color: inherit;
 }
-/* Заголовок карточки — h2 ради структуры страницы: витрина из 34 статей
-   иначе выглядит как один заголовок и плоский список. Отступы гасим:
-   общий стиль h2 добавляет 32px сверху и разрывает карточку. */
+.blog-card__tag + .blog-card__tag::before { content: " · "; }
+/* Заголовок карточки — h2 ради структуры страницы; размер — основной
+   полужирный, как у строк «Читайте также» на сайте */
 h2.blog-card__title,
 .blog-card__title {
-  margin: 0 0 10px;
-  font-family: 'Playfair Display', Georgia, serif;
-  font-size: 20px;
-  font-weight: 500;
-  line-height: 1.25;
-  color: var(--blog-ink);
-  margin-bottom: 10px;
+  margin: 0 0 var(--space-2);
+  font-family: var(--k-font-text);
+  font-size: var(--k-fs-body);
+  font-weight: var(--k-w-strong);
+  line-height: 1.35;
+  letter-spacing: 0;
+  color: var(--k-heading);
 }
 .blog-card__desc {
-  font-family: 'Manrope', sans-serif;
-  font-size: 14px;
-  line-height: 1.5;
-  color: var(--text-sub);
-  margin-bottom: 18px;
+  margin-bottom: var(--space-4);
+  font-family: var(--k-font-text);
+  font-size: var(--k-fs-ui);
+  line-height: var(--k-lh-ui);
+  color: var(--k-text);
   /* три строки: карточки в ряду держат одинаковую высоту тела */
   display: -webkit-box;
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
-/* Дата прижата к низу: в референсе она стоит на одной линии у всех
-   карточек ряда независимо от длины заголовка. */
+/* Дата прижата к низу: у всех карточек ряда на одной линии */
 .blog-card__date {
   margin-top: auto;
-  font-family: 'Manrope', sans-serif;
-  font-size: 13px;
-  color: var(--text-muted);
+  font-family: var(--k-font-text);
+  font-size: var(--k-fs-ui);
+  line-height: var(--k-lh-ui);
+  color: var(--k-muted);
 }
+/* Две карточки ведут на посадочные страницы — даты у них нет */
+.blog-card__date:empty { display: none; }
 
-/* ── Мобильные ──
-   Одна колонка и более низкая шапка карточки: на 390px картинка в
-   224px съедала бы пол-экрана на каждую запись. */
+/* ── Телефон ── */
 @media (max-width: 860px) {
-  /* Боковая колонка → табы над сеткой. Прокрутка вбок, чтобы семь тем не
-     занимали три ряда: на телефоне до первой карточки должно быть близко. */
-  .blog-layout { grid-template-columns: 1fr; gap: 18px; }
+  .blog-layout { grid-template-columns: 1fr; gap: var(--space-4); }
+  /* Колонка тем → вкладки над сеткой, листаются вбок от края до края:
+     до первой карточки должно быть близко. Затухание справа — признак,
+     что темы продолжаются за краем (как вкладки каталога). */
   .blog-filter {
     position: static;
     flex-direction: row;
-    gap: 22px;
+    gap: var(--space-5);
     overflow-x: auto;
     scrollbar-width: none;
-    border-bottom: 1px solid rgba(26, 43, 60, .12);
-    /* вертикальный жест отдаём странице: иначе прокрутка пальцем над
-       полосой уводила темы вбок вместо листания страницы */
+    border-bottom: 1px solid var(--k-line);
     touch-action: pan-x;
     overscroll-behavior-x: contain;
-    /* от края до края экрана независимо от полей родителя: строка
-       обрывалась посреди экрана, будто её обрезали. 50vw считает от
-       вьюпорта, поэтому подгонять под padding контейнера не нужно. */
     width: 100vw;
     margin-left: calc(50% - 50vw);
     margin-right: calc(50% - 50vw);
-    padding-left: max(20px, calc(50vw - 50%));
-    padding-right: max(20px, calc(50vw - 50%));
+    padding-left: max(var(--frame-pad), calc(50vw - 50%));
+    padding-right: max(var(--frame-pad), calc(50vw - 50%));
     box-sizing: border-box;
-    /* затухание справа — признак, что темы продолжаются за краем */
-    -webkit-mask-image: linear-gradient(to right, #000 calc(100% - 44px), transparent 100%);
-    mask-image: linear-gradient(to right, #000 calc(100% - 44px), transparent 100%);
+    -webkit-mask-image: linear-gradient(to right, black calc(100% - 44px), transparent 100%);
+    mask-image: linear-gradient(to right, black calc(100% - 44px), transparent 100%);
   }
-  /* у прокрученной до конца строки маска не нужна — иначе последняя тема
-     остаётся полупрозрачной */
-  .blog-filter.is-end {
-    -webkit-mask-image: none;
-    mask-image: none;
-  }
+  .blog-filter.is-end { -webkit-mask-image: none; mask-image: none; }
   .blog-filter::-webkit-scrollbar { display: none; }
   .blog-filter__label { display: none; }
   .blog-filter__pill {
     flex: none;
-    padding: 0 0 12px;
-    border-radius: 0;
+    min-height: 48px;
+    padding: 0;
+    border-left: 0;
     border-bottom: 2px solid transparent;
     margin-bottom: -1px;
-    font-size: 15px;
+    white-space: nowrap;
   }
   .blog-filter__pill.is-on {
     background: transparent;
-    border-bottom-color: var(--gold);
+    border-bottom-color: var(--k-heading);
+  }
+  .blog-grid { grid-template-columns: 1fr; gap: var(--space-4); }
+  .blog-card__body { padding: var(--space-4); }
+}
+
+/* ── Витрина шире колонки статьи ──
+   <main> ограничен шириной чтения (krepko-base.css, desktop.css); рамку
+   витрине задают .blog-head и .blog-layout. */
+body:has(.blog-grid) main {
+  max-width: none;
+  width: 100%;
+  margin: 0;
+  padding: 0 0 var(--k-gap-section);
+}
+/* «‹ Главная» над заголовком — в рамке сайта, строчными, со стрелкой */
+body:has(.blog-grid) main > nav.breadcrumb {
+  --crumb-max: var(--frame-max);
+  --crumb-m: 0 auto;
+  --crumb-px: var(--frame-pad);
+  --crumb-pt: var(--space-2);
+  --crumb-pb: 0px;
+  --crumb-link: var(--k-text);
+  box-sizing: border-box;
+  column-gap: 0;
+  font-size: 0;
+}
+body:has(.blog-grid) main > nav.breadcrumb > :not(.breadcrumb__parent) { display: none; }
+body:has(.blog-grid) main > nav.breadcrumb > .breadcrumb__parent {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  min-height: 44px;
+  margin: 0;
+  padding: 0;
+  border-radius: 0;
+  font-size: var(--k-fs-ui);
+  font-weight: var(--k-w-regular);
+  line-height: var(--k-lh-ui);
+}
+body:has(.blog-grid) main > nav.breadcrumb > .breadcrumb__parent svg { display: block; flex: none; }
+
+/* ── «Показать ещё» (17.08) — кнопка-рамка кожи ──
+   Витрина отдаёт первые 12 карточек: 39 подряд давали 16,6 экрана на
+   телефоне. Кнопка досыпает следующие и показывает, сколько осталось. */
+.blog-more {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  min-height: var(--k-btn-h);
+  margin: var(--space-5) auto 0;
+  padding: 0 var(--space-6);
+  background: var(--k-bg);
+  border: var(--k-field-border) solid var(--k-line-strong);
+  border-radius: var(--k-r-btn);
+  font-family: var(--k-font-text);
+  font-size: var(--k-fs-ui);
+  font-weight: var(--k-w-strong);
+  line-height: 1.2;
+  color: var(--k-heading);
+  cursor: pointer;
+}
+.blog-more[hidden] { display: none; }
+.blog-more span { font-weight: var(--k-w-regular); color: var(--k-muted); }
+@media (hover: hover) {
+  .blog-more:hover { background: var(--k-surface-press); }
+}
+/* компьютер — по левому краю сетки карточек; телефон — во всю рамку */
+@media (min-width: 861px) {
+  .blog-more {
+    width: fit-content;
+    margin-left: calc(var(--frame-gutter) + 220px + var(--space-7));
   }
 }
-
-@media (max-width: 720px) {
-  .blog-grid { grid-template-columns: 1fr; gap: 16px; }
-  .blog-card__body { padding: 16px 18px 18px; }
-  .blog-filter { gap: 6px; }
-  .blog-filter__pill { font-size: 13px; padding: 6px 13px; }
+@media (max-width: 860px) {
+  /* <button> не растягивается сам — ширина рамки задаётся явно */
+  .blog-more {
+    width: calc(100% - 2 * var(--frame-pad));
+    margin-left: var(--frame-pad);
+    margin-right: var(--frame-pad);
+  }
 }
-
-
-/* Витрина шире колонки статьи.
-   <main> на страницах блога ограничен 960px — это ширина под чтение текста,
-   и для одной статьи она верная. Но сетка карточек в неё укладывается лишь
-   в две колонки вместо трёх из референса. Снимаем ограничение только на
-   витрине, страницы статей не трогаем. */
-body:has(.blog-grid) main {
-  max-width: 1280px !important;
-}
-
-/* Пустая дата не должна оставлять зазор: две карточки ведут не на статьи
-   блога, а на посадочные страницы, и даты у них нет. */
-.blog-card__date:empty { display: none; }
-
-
-/* ── Витрина внутри рукописной страницы ──
-   blog/index.html достался от первой версии сайта: body там центрирует
-   содержимое через flex и держит поля по 20px. Из-за полей шапка и подвал
-   не доходили до краёв окна — на витрине это особенно заметно, потому что
-   сетка широкая. Правило снимает поля только здесь; сами статьи блога
-   (у них та же вёрстка body) не трогаем — им центрирование по-прежнему
-   нужно для колонки текста. */
-body:has(.blog-grid) {
-  padding-left: 0 !important;
-  padding-right: 0 !important;
-  align-items: stretch !important;
-}
-body:has(.blog-grid) main { width: 100%; }
-
-
-/* ── «Показать ещё» (17.08) ──
-   Витрина отдаёт первые 12 карточек: 39 подряд давали 16,6 экрана
-   прокрутки на телефоне. Кнопка досыпает следующие и показывает,
-   сколько осталось в выбранной теме. */
-.blog-more {
-  display: block;
-  margin: 8px auto clamp(28px, 4vw, 48px);
-  padding: 13px 30px;
-  background: transparent;
-  border: 1px solid rgba(26, 43, 60, .18);
-  border-radius: 10px;
-  font-family: 'Manrope', sans-serif;
-  font-size: 15px;
-  font-weight: 600;
-  color: var(--blog-ink, #1A2B3C);
-  cursor: pointer;
-  transition: border-color .2s ease, color .2s ease;
-}
-.blog-more span { color: var(--text-muted, #6B6B6B); font-weight: 500; }
-@media (hover: hover) {
-  .blog-more:hover { border-color: var(--gold); color: var(--gold); }
-  .blog-more:hover span { color: inherit; }
-}
-@media (prefers-reduced-motion: reduce) { .blog-more { transition: none; } }
-@media (max-width: 700px) { .blog-more { width: calc(100% - 40px); } }
+@media (prefers-reduced-motion: reduce) { .blog-card { transition: none; } }

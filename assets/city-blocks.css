@@ -17,13 +17,15 @@
    переопределил --bg/--surface/--gold на светлые. Здесь только те
    переменные типографики, которых в общих токенах нет. ═══ */
 
+/* Кожа v3 (30.10.2026): ступени текста городов — роли --k-* (четыре размера:
+   H1, H2, основной, мелкий), а не своя шкала */
 .city-blocks {
-  --fs-lead: clamp(15.5px, calc(0.1875vw + 15.25px), 19px);
-  --fs-subtitle: clamp(18px, calc(0.44vw + 15.25px), 24px);
-  --fs-title: clamp(24px, calc(0.875vw + 22.5px), 40px);
-  --lh-lead: 1.6;
-  --lh-subtitle: 1.28;
-  --lh-title: 1.15;
+  --fs-lead: var(--k-fs-body);
+  --fs-subtitle: var(--k-fs-h2);
+  --fs-title: var(--k-fs-h2);
+  --lh-lead: var(--k-lh-body);
+  --lh-subtitle: var(--k-lh-h2);
+  --lh-title: var(--k-lh-h2);
   --g: clamp(28px, 3.5vw, 56px);
   --gap-head-content: clamp(26px, 2.2vw, 44px);
   --gap-title-dek: clamp(8px, 0.7vw, 14px);
@@ -59,7 +61,7 @@
 
 #sec-services .card--service:hover {
     transform: translateY(-8px);
-    box-shadow: 0 24px 48px rgba(26, 43, 60, 0.16);
+    box-shadow: none;
   }
 
 #sec-services .card--service:hover::after { height: 100%; }
@@ -128,19 +130,19 @@
 
 .srow__title {
     grid-area: title;
-    font-family: 'Playfair Display', serif;
-    font-weight: 500;
+    font-family: var(--k-font-text);
+    font-weight: 600;
     font-size: clamp(20px, 2.2vw, 26px);
     line-height: 1.25;
-    color: #1A2B3C;
+    color: var(--k-heading);
   }
 
 .srow__meta {
     grid-area: meta;
-    font-family: 'Manrope', sans-serif;
+    font-family: var(--k-font-text);
     font-size: 13px;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
+    letter-spacing: 0;
+    text-transform: none;
     color: var(--text-muted);
     margin-top: 4px;
   }
@@ -150,11 +152,11 @@
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    font-family: 'Manrope', sans-serif;
+    font-family: var(--k-font-text);
     font-size: 13px;
     font-weight: 600;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
+    letter-spacing: 0;
+    text-transform: none;
     color: var(--text-muted);
     white-space: nowrap;
     transition: color .18s ease;
@@ -165,7 +167,7 @@
 .srows__footer { margin-top: 28px; }
 
 .srows__all {
-    font-family: 'Manrope', sans-serif;
+    font-family: var(--k-font-text);
     font-size: 15px;
     font-weight: 600;
     color: var(--gold);
@@ -224,9 +226,9 @@
 
 /* 22 px — ещё не «крупный» текст (норма 3:1 с 24 px): цифра #B04E2F (Ф2a, 28.10.2026) */
 .step__num {
-    font-family: 'Playfair Display', serif;
-    font-size: 22px;
-    font-weight: 500;
+    font-family: var(--k-font-text);
+    font-size: var(--k-fs-h2);   /* кожа v3: 22 / 28 px */
+    font-weight: 600;
     color: var(--gold-text);
     line-height: 1;
   }
@@ -264,11 +266,13 @@
   /* Ф2a (28.10.2026): кроме колонки текста на /notario/{город}/ — оттуда
      полоса на 100vw уезжала за правый край окна (scrollWidth 1672 при 1440).
      :where() держит вес селектора прежним (0,1,0). */
+  /* 29.10.2026 (одна рамка): полоса — сама секция .city-process (во всю
+     ширину, поля — рамка сайта), фон у шагов прозрачный; вырываться из неё
+     на 100vw больше не нужно — шаги занимают рамку целиком */
   :where(:not(.pillar-doc) > .city-process) > .intro__how {
     max-width: none !important;
-    width: 100vw;
-    margin: 0 calc(50% - 50vw) !important;
-    padding: clamp(48px, 6vw, 88px) clamp(20px, 5vw, 88px);
+    margin: 0 !important;
+    padding: clamp(48px, 6vw, 88px) 0;
   }
 
 /* заголовок снят — верхний отступ дорожки теперь лишний */
@@ -325,7 +329,7 @@
     animation: stepPop .55s cubic-bezier(.34, 1.56, .64, 1);
   }
 
-.step.is-on .step__num { color: #fff; }
+.step.is-on .step__num { color: var(--k-on-action); }
 
 @media (prefers-reduced-motion: reduce) {
   .step__dot, .step__num, .intro__how .step::after { transition: none; }
@@ -341,7 +345,8 @@
   .home-faq h2::after,
   .intro__how > h2::after,
   .final-cta > h2::after {
-    content: '';
+    /* кожа v3 (30.10.2026): без штрихов под заголовками — content: none */
+    content: none;
     display: block;
     width: 56px;
     height: 2px;
@@ -435,8 +440,7 @@
       padding-left: 26px;                 /* гасим прежний сдвиг влево */
       transform: translateY(-4px) scale(1.015);
       background: var(--bg);
-      box-shadow: 0 22px 44px -20px rgba(45, 45, 45, .30),
-                  0 3px 10px rgba(45, 45, 45, .06);
+      box-shadow: none;
       border-bottom-color: transparent;   /* линия резала бы поднятую строку */
       z-index: 3;
     }
@@ -464,11 +468,11 @@
 
 .intro__how .step__text {
     margin: 0;
-    font-family: 'Playfair Display', serif;
-    font-weight: 500;
+    font-family: var(--k-font-text);
+    font-weight: 600;
     font-size: clamp(18px, 1.5vw, 21px);
     line-height: 1.25;
-    color: #1A2B3C;
+    color: var(--k-heading);
     max-width: 260px;
   }
 
@@ -576,11 +580,11 @@
     border: 1px solid var(--text-sub) !important;
     border-radius: 0 !important;
     box-shadow: none !important;
-    font-family: 'Manrope', sans-serif;
+    font-family: var(--k-font-text);
     font-size: 12px !important;
     font-weight: 600;
-    letter-spacing: .1em;
-    text-transform: uppercase;
+    letter-spacing: 0;
+    text-transform: none;
     color: var(--text) !important;
     transition: border-color .25s ease, color .25s ease;
   }
@@ -590,8 +594,8 @@
     .gcards__foot .btn:hover {
       background: none !important;
       background-image: none !important;
-      border-color: #1A2B3C !important;
-      color: #1A2B3C !important;
+      border-color: var(--k-heading) !important;
+      color: var(--k-heading) !important;
     }
 }
 
@@ -634,7 +638,7 @@
 #sec-services .srow:first-child { border-top: 1px solid var(--border-faint) !important; }
 
 #sec-services .srow__num {
-    font-family: 'Playfair Display', serif;
+    font-family: var(--k-font-text);
     font-size: clamp(28px, 2.6vw, 38px);
     line-height: 1;
     color: var(--gold);
@@ -645,18 +649,18 @@
 #sec-services .srow__body { display: flex; flex-direction: column; gap: 7px; min-width: 0; }
 
 #sec-services .srow__title {
-    font-family: 'Playfair Display', serif;
-    font-weight: 500;
+    font-family: var(--k-font-text);
+    font-weight: 600;
     font-size: clamp(21px, 2vw, 28px);
     line-height: 1.22;
-    color: #1A2B3C;
+    color: var(--k-heading);
   }
 
 #sec-services .srow__cat {
-    font-family: 'Manrope', sans-serif;
+    font-family: var(--k-font-text);
     font-size: 12px;
-    letter-spacing: .12em;
-    text-transform: uppercase;
+    letter-spacing: 0;
+    text-transform: none;
     color: var(--text-muted);
   }
 
@@ -664,18 +668,18 @@
   #sec-services .srow__term { display: flex; flex-direction: column; align-items: flex-end; gap: 4px; }
 
 #sec-services .srow__term-val {
-    font-family: 'Playfair Display', serif;
+    font-family: var(--k-font-text);
     font-size: clamp(18px, 1.5vw, 22px);
     line-height: 1;
-    color: #1A2B3C;
+    color: var(--k-heading);
     white-space: nowrap;
   }
 
 #sec-services .srow__term-sub {
-    font-family: 'Manrope', sans-serif;
+    font-family: var(--k-font-text);
     font-size: 11px;
-    letter-spacing: .1em;
-    text-transform: uppercase;
+    letter-spacing: 0;
+    text-transform: none;
     color: var(--text-muted);
   }
 
@@ -698,7 +702,7 @@
 @media (max-width: 720px) {
   #sec-services .srow { grid-template-columns: 46px minmax(0, 1fr) auto; column-gap: 14px; }
   #sec-services .srow__go { display: none; }
-  #sec-services .srow__num { font-size: 24px; }
+  #sec-services .srow__num { font-size: var(--k-fs-h2); }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -732,12 +736,12 @@
   .final-cta h2,
   .intro__how h2,
   .values__h {
-    font-family: 'Playfair Display', Georgia, serif !important;
+    font-family: var(--k-font-text) !important;
     font-size: clamp(30px, 4vw, 48px) !important;
-    font-weight: 500 !important;
+    font-weight: 600 !important;
     line-height: 1.15 !important;
-    color: #1A2B3C !important;
-    letter-spacing: -0.01em;
+    color: var(--k-heading) !important;
+    letter-spacing: 0;
   }
 
 /* Подзаголовки секций тоже разъехались: 14 / 15 / 18px при одинаковой роли. */
@@ -787,7 +791,7 @@
   .portrait__name {
     font-size: var(--fs-subtitle) !important;
     line-height: var(--lh-subtitle) !important;
-    font-weight: 500 !important;
+    font-weight: 600 !important;
   }
 
 /* — 3. подводки и крупные абзацы — */
@@ -873,16 +877,9 @@
    полосы во всю ширину чередовались с узким текстом, а призыв в конце
    выглядел зажатым.
 
-   Берём ту же сетку, что у главной (home-redesign.css): 1440px и поля 64px.
-   Правило действует только там, где подключён этот файл, — на шести
-   городских страницах. */
-@media (min-width: 900px) {
-  main {
-    max-width: 1440px;
-    padding-left: 64px;
-    padding-right: 64px;
-  }
-}
+   29.10.2026: правило «main до 1440 px с полями 64 px» снято — main городской
+   страницы во всю ширину (pillar-split.css), поля задаёт рамка сайта
+   (--frame-*, tokens.css) у каждой полосы и колонки. */
 
 /* ═══ «Как устроено в городе» (2026-08-08) ═══
    Четыре пункта городской конкретики. Намеренно не карточки с рамками:
@@ -900,8 +897,8 @@
 .city-local__item { padding-top: 20px; border-top: 1px solid var(--border-faint); }
 
 .city-local__title {
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(18px, 1.4vw, 22px);
+  font-family: var(--k-font-text);
+  font-size: var(--k-fs-body);   /* основной полужирный (кожа v3) */
   line-height: 1.25;
   margin: 0 0 10px;
   color: var(--text);
@@ -910,8 +907,8 @@
 .city-local__text {
   margin: 0;
   color: var(--text-muted);
-  font-size: clamp(15px, 1.05vw, 16.5px);
-  line-height: 1.65;
+  font-size: var(--k-fs-body);
+  line-height: var(--k-lh-body);
   max-width: 62ch;
 }
 
@@ -943,8 +940,8 @@
 
 .city-facts dt {
   font-size: 12px;
-  letter-spacing: .08em;
-  text-transform: uppercase;
+  letter-spacing: 0;
+  text-transform: none;
   color: var(--text-muted);
   margin: 0;
 }
@@ -995,16 +992,19 @@
    ограничитель + зебра.
    ═══════════════════════════════════════════════════════════════════════ */
 
-/* 1. Все секции — во всю ширину окна */
+/* 1. Все секции — во всю ширину окна.
+   29.10.2026 (одна рамка): .city-blocks и main сами во всю ширину, поэтому
+   100vw и calc(50% - 50vw) не нужны; поля — --frame-gutter (tokens.css):
+   фон во всю ширину, содержимое — в рамке шапки */
 .city-blocks > section,
 .city-blocks ~ .final-cta,
 .city-blocks + .final-cta {
-  width: 100vw;
+  width: auto;
   max-width: none;
-  margin-left: calc(50% - 50vw);
-  margin-right: calc(50% - 50vw);
-  padding-left: clamp(24px, 4.5vw, 88px);
-  padding-right: clamp(24px, 4.5vw, 88px);
+  margin-left: 0;
+  margin-right: 0;
+  padding-left: var(--frame-gutter);
+  padding-right: var(--frame-gutter);
   padding-top: var(--sec-pad);
   padding-bottom: var(--sec-pad);
 }
@@ -1096,7 +1096,8 @@
 .city-blocks .intro__how > h2,
 .city-blocks .faq h2,
 .city-blocks + .final-cta > h2 {
-  font-size: clamp(28px, 3.4vw, 48px) !important;
+  /* кожа v3 (30.10.2026): H2 кожи — 22 / 28 px */
+  font-size: var(--k-fs-h2) !important;
   line-height: 1.15;
   margin-bottom: 20px;
 }
@@ -1104,12 +1105,12 @@
 /* Подзаголовки секций — тоже одним кеглем */
 .city-blocks .sec-dek,
 .city-blocks + .final-cta > p {
-  font-size: clamp(15px, 1.25vw, 18px);
+  font-size: var(--k-fs-body);
   line-height: 1.55;
 }
 
-/* Заголовки внутри блока «Как устроено» — уровнем ниже секционных */
-.city-local__title { font-size: clamp(17px, 1.35vw, 21px); }
+/* Заголовки внутри блока «Как устроено» — уровнем ниже секционных:
+   основной полужирный кожи (правило выше) */
 
 /* ═══ Вопросы ═══
    2026-08-19: собственная копия раскладки `.city-faq .faq*` удалена. Она
@@ -1174,7 +1175,7 @@
 }
 .srows__hubs a { color: var(--gold-text); text-decoration: none; }
 .srows__hubs span { margin: 0 8px; color: var(--border); }
-@media (hover: hover) { .srows__hubs a:hover { color: #9E4529; } }
+@media (hover: hover) { .srows__hubs a:hover { color: var(--k-heading); } }
 
 /* ═══ Процесс: двойные поля и двойной фон (2026-08-19, скриншот Daniil) ═══
    На главной .intro__how сам является полосой — несёт --sec-pad сверху и снизу
@@ -1206,3 +1207,73 @@
 /* QA 25.10: полосы разделяет фон — линия на кромке была второй границей */
 .city-blocks > .rh-section-break { border-top: 0 !important; }
 .city-blocks > #sec-services + .city-process { border-top: 1px solid var(--border-faint) !important; }
+
+/* ═══ Кожа v3 (30.10.2026): услуги города — строками, как в каталоге ═══
+   «Что делаем в {городе}» на /{город}/ и «Доступные документы» на
+   /notario/{город}/: вместо плиток в две колонки — строки с «›» (итог v3
+   §4.6 п. 7: то, что ведёт на другую страницу, — строка с «›» или чип).
+   Название — основной текст, испанское название — мелким серым под ним.
+   Разметка модулей прежняя (card-grid / card--document). */
+.city-services .card-grid,
+.pillar-city-docs .card-grid {
+  display: block;
+  margin: var(--space-2) 0 0;
+}
+.city-services .card,
+.pillar-city-docs .card {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  column-gap: var(--space-3);
+  row-gap: 0;
+  align-content: center;
+  align-items: center;
+  min-height: var(--k-row-h);
+  padding: var(--space-2) 0;
+  background: none;
+  border: 0;
+  border-bottom: 1px solid var(--k-line);
+  /* строка, а не плитка: без скругления. !important — потому что углы
+     карточек кожи задаёт site-footer.css правилом с !important */
+  border-radius: 0 !important;
+  box-shadow: none;
+}
+.city-services .card::after,
+.pillar-city-docs .card::after {
+  content: '\203A';
+  content: '\203A' / '';
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  font-size: 20px;
+  line-height: 1;
+  color: var(--k-muted);
+}
+.city-services .card .card__title-ru,
+.pillar-city-docs .card .card__title-ru {
+  grid-column: 1;
+  margin: 0;
+  font-family: var(--k-font-text);
+  font-size: var(--k-fs-body);
+  font-weight: var(--k-w-regular);
+  line-height: 1.4;
+  color: var(--k-heading);
+}
+.city-services .card .card__title-es,
+.pillar-city-docs .card .card__title-es {
+  grid-column: 1;
+  margin: 2px 0 0;
+  font-family: var(--k-font-text);
+  font-size: var(--k-fs-ui);
+  font-weight: var(--k-w-regular);
+  line-height: var(--k-lh-ui);
+  color: var(--k-muted);
+}
+@media (hover: hover) {
+  .city-services .card:hover,
+  .pillar-city-docs .card:hover { background: none; border-color: var(--k-line); transform: none; }
+  .city-services .card:hover .card__title-ru,
+  .pillar-city-docs .card:hover .card__title-ru { text-decoration: underline; text-underline-offset: 3px; }
+}
+/* списки услуг стоят сразу под первым экраном, «Особенности в {городе}» —
+   после списка документов: отступ раздела кожи */
+.city-lead + .city-services,
+.pillar-city-docs + .city-context { margin-top: var(--k-gap-section); }

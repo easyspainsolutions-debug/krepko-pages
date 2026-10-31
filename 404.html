@@ -9,7 +9,7 @@
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
   <link rel="manifest" href="/site.webmanifest">
-  <meta name="theme-color" content="#EFE7DA">
+  <meta name="theme-color" content="#FFFFFF">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>404 — Страница не найдена | Krepko</title>
   <meta name="robots" content="noindex, follow">
@@ -27,57 +27,102 @@
        на разделы — те подписи, что в меню сайта (раньше текст звал «в основные
        разделы», а ссылки была одна — на главную); кнопка WhatsApp — та же
        заготовка, что на главной. -->
+  <!-- 29.10.2026: одна горизонтальная рамка сайта (tokens.css, --frame-*):
+       логотип и текст стоят у левого края рамки — там же, где логотип шапки
+       на остальных страницах; на телефоне поле 24 px. -->
+  <!-- 30.10.2026: кожа v3 «B с терракотой» — цвета, шрифт и размеры берутся
+       из файла значений (--k-*); строки шрифтов, файла значений и цвета панели
+       ставит tools/sync_blog_chrome.py из собранной /services/ (data/site.yaml →
+       theme). Слова и раскладка прежние; поле поиска и разделы — вторая волна. -->
+  <!-- 30.10.2026 (кожа v3, план §3.6): поле поиска «Что нужно оформить?»
+       со строкой-подсказкой (С1, С2 v3-slova) — уходит в каталог /services/?q=
+       (там поиск по мере ввода); разделы — те же десять, что в каталоге, теми
+       же именами; «404» — мелкой серой строкой, а не цифрами 132 px (у кожи
+       четыре размера текста). Слова страницы прежние. -->
+  <link rel="stylesheet" href="/assets/tokens.css?v=5e7380691c">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
-      background: #FFFBF7;
-      color: #1A2B3C;
-      font-family: 'Manrope', -apple-system, sans-serif;
+      background: var(--k-bg);
+      color: var(--k-text);
+      font-family: var(--k-font-text);
+      font-size: var(--k-fs-body);
+      line-height: var(--k-lh-body);
       min-height: 100vh;
       display: flex;
       flex-direction: column;
-      align-items: center;
+      align-items: flex-start;
       justify-content: center;
-      padding: 32px 20px 48px;
+      padding: 32px var(--frame-gutter) 48px;
     }
-    .card { width: 100%; max-width: 520px; text-align: center; }
+    .card { width: 100%; max-width: var(--k-measure); text-align: left; }
     .brand {
       display: inline-block; margin-bottom: 40px;
-      font-family: 'Playfair Display', Georgia, serif; font-size: 28px; font-weight: 600;
-      color: #1A2B3C; text-decoration: none;
+      font-family: var(--k-font-brand); font-size: var(--k-fs-brand); font-weight: var(--k-w-brand);
+      color: var(--k-heading); text-decoration: none;
     }
     .code-404 {
-      font-family: 'Playfair Display', Georgia, serif;
-      font-size: clamp(88px, 22vw, 132px); line-height: 1; font-weight: 500;
-      color: #C75B39; letter-spacing: -0.02em;
+      font-size: var(--k-fs-ui); line-height: var(--k-lh-ui);
+      font-weight: var(--k-w-regular); color: var(--k-muted);
     }
     .name {
-      margin: 16px 0 12px;
-      font-family: 'Playfair Display', Georgia, serif; font-size: clamp(26px, 6vw, 32px); font-weight: 500;
+      margin: 8px 0 12px;
+      font-family: var(--k-font-display); font-size: var(--k-fs-h1); line-height: var(--k-lh-h1);
+      font-weight: var(--k-w-display); letter-spacing: var(--k-ls-h1); color: var(--k-heading);
     }
-    .lead { font-size: 16px; line-height: 1.6; color: #4A4A4A; }
-    .links { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px 20px; margin: 24px 0 32px; }
+    .lead { font-size: var(--k-fs-body); line-height: var(--k-lh-body); color: var(--k-text); }
+    /* поле поиска: рамка 2 px (4,6:1), углы 8 px, лупа слева — как в каталоге */
+    .find { margin: 24px 0 0; }
+    .find__field {
+      display: flex; align-items: center; gap: 12px;
+      min-height: 56px; padding: 0 16px;
+      border: var(--k-field-border) solid var(--k-line-strong); border-radius: var(--k-r-field);
+      background: var(--k-field-bg); color: var(--k-muted);
+    }
+    .find__field:focus-within { border-color: var(--k-heading); }
+    .find__field svg { flex: none; color: var(--k-heading); }
+    .find__input {
+      flex: 1 1 auto; min-width: 0; height: 48px; padding: 0; border: 0; background: none;
+      font: var(--k-w-regular) var(--k-fs-body)/1.3 var(--k-font-text); color: var(--k-text);
+      outline: none; -webkit-appearance: none; appearance: none;
+    }
+    .find__input::placeholder { color: var(--k-muted); opacity: 1; }
+    .find__hint { margin: 8px 0 0; font-size: var(--k-fs-ui); line-height: var(--k-lh-ui); color: var(--k-muted); }
+    /* разделы — строки с «›», как в каталоге; на компьютере в две колонки */
+    .links { list-style: none; margin: 24px 0 32px; padding: 0; }
     .links a {
-      font-size: 15px; font-weight: 600; color: #B04E2F; text-decoration: none;
-      border-bottom: 1px solid rgba(176, 78, 47, .35); padding-bottom: 2px;
+      display: flex; align-items: center; justify-content: space-between; gap: 12px;
+      min-height: var(--k-row-h); padding: 8px 0;
+      border-bottom: 1px solid var(--k-line);
+      font-size: var(--k-fs-body); line-height: 1.4; font-weight: var(--k-w-regular);
+      color: var(--k-heading); text-decoration: none;
     }
-    .links a:hover { color: #C75B39; border-bottom-color: #C75B39; }
+    .links a::after { content: '\203A'; flex: none; font-size: 20px; line-height: 1; color: var(--k-muted); }
+    .links a:hover { text-decoration: underline; text-underline-offset: 3px; }
+    @media (min-width: 900px) {
+      .links { display: grid; grid-auto-flow: column; grid-template-rows: repeat(6, auto); grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 32px; }
+    }
     .btn {
-      display: inline-block; padding: 16px 28px; background: #C75B39; color: #FFFBF7;
-      font-size: 16px; font-weight: 700; text-decoration: none;
-      box-shadow: 0 10px 24px rgba(199, 91, 57, .22);
+      display: inline-flex; align-items: center; justify-content: center;
+      min-height: var(--k-btn-h); padding: 0 20px; border-radius: var(--k-r-btn);
+      background: var(--k-action); color: var(--k-on-action);
+      font-size: var(--k-fs-ui); font-weight: var(--k-w-strong); text-decoration: none;
     }
-    .btn:hover { background: #B04E2F; }
-    .home { display: block; margin-top: 20px; font-size: 15px; color: #4A4A4A; text-decoration: none; }
-    .home:hover { color: #1A2B3C; }
-    a:focus-visible { outline: 2px solid #1A2B3C; outline-offset: 3px; }
+    .btn:hover { background: var(--k-action-hover); }
+    .home { display: flex; align-items: center; width: fit-content; min-height: 44px; margin-top: 12px; font-size: var(--k-fs-ui); color: var(--k-muted); text-decoration: none; }
+    .home:hover { color: var(--k-heading); }
+    a:focus-visible { outline: 2px solid var(--k-focus); outline-offset: 3px; }
   </style>
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet"><meta name="krepko-pulse" content="/api/p"><script src="/assets/pulse.js?v=5d390527da" defer></script><meta name="krepko-clarity" content="z3npvw3og1"></head>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;600&amp;display=swap" rel="stylesheet" data-theme-fonts>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&amp;text=Krepko&amp;display=swap" rel="stylesheet" data-theme-fonts>
+<link rel="stylesheet" href="/assets/theme-b.css?v=ea8bd0fb74" data-theme-skin>
+<meta name="krepko-pulse" content="/api/p"><script src="/assets/pulse.js?v=5d390527da" defer></script><meta name="krepko-clarity" content="z3npvw3og1"></head>
 <body>
   <main class="card">
     <a class="brand" href="/">Krepko</a>
 
-    <div class="code-404" aria-hidden="true">404</div>
+    <p class="code-404" aria-hidden="true">404</p>
 
     <!-- h1, а не div: страница была единственной живой без заголовка
          первого уровня (ночная ревизия 2026-08-18) -->
@@ -87,11 +132,29 @@
       Возможно, страница переехала — как и вы в Испанию. Ссылка устарела или адрес ошибочный. Загляните в основные разделы — там всё, что вам нужно.
     </p>
 
-    <nav class="links" aria-label="Основные разделы">
-      <a href="/services/">Каталог услуг</a>
-      <a href="/notario/">Нотариус и документы</a>
-      <a href="/ukraina/">Документы из Украины</a>
-      <a href="/migracion/">ВНЖ и миграция</a>
+    <!-- без скрипта: обычная форма, запрос открывает каталог с ответом -->
+    <form class="find" action="/services/" method="get" role="search">
+      <label class="find__field">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        <input class="find__input" type="search" name="q" placeholder="Что нужно оформить?" aria-label="Что нужно оформить?" autocomplete="off" spellcheck="false" enterkeyhint="search">
+      </label>
+      <p class="find__hint">Своими словами: «ребёнок едет к бабушке»</p>
+    </form>
+
+    <nav aria-label="Основные разделы">
+      <ul class="links">
+        <li><a href="/services/">Каталог услуг</a></li>
+        <li><a href="/notario/">Нотариус</a></li>
+        <li><a href="/ukraina/">Из Украины</a></li>
+        <li><a href="/migracion/">ВНЖ и миграция</a></li>
+        <li><a href="/tramites/">Административные процедуры</a></li>
+        <li><a href="/legalizacion/">Апостиль и заверение</a></li>
+        <li><a href="/traduccion/">Перевод</a></li>
+        <li><a href="/fiscalidad/">Налоги</a></li>
+        <li><a href="/banca/">Банк</a></li>
+        <li><a href="/juridico/">Юридические вопросы</a></li>
+        <li><a href="/rossiya-belarus/">Документы из России и Беларуси</a></li>
+      </ul>
     </nav>
 
     <a class="btn" href="https://wa.me/34624309985?text=%D0%94%D0%BE%D0%B1%D1%80%D1%8B%D0%B9%20%D0%B4%D0%B5%D0%BD%D1%8C%2C%20%D1%85%D0%BE%D1%87%D1%83%20%D0%B1%D0%B5%D1%81%D0%BF%D0%BB%D0%B0%D1%82%D0%BD%D1%83%D1%8E%20%D0%BA%D0%BE%D0%BD%D1%81%D1%83%D0%BB%D1%8C%D1%82%D0%B0%D1%86%D0%B8%D1%8E.%20%D0%AF%20%D1%81%20krepko.es/" target="_blank" rel="noopener noreferrer">Написать в WhatsApp</a>

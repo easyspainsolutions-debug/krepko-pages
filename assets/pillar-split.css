@@ -15,8 +15,8 @@
 /* Страница целиком светлая: tokens.css всё ещё держит тёмную шкалу, а
    шапка с подвалом уже переехали на terracotta. Файл подключается только
    на страницах этого макета, поэтому правило безопасно. */
-html, body { background: #FFFBF7; }
-body { color: #2D2D2D; }
+html, body { background: var(--k-bg); }
+body { color: var(--k-text); }
 
 /* main ужат до 960px (desktop.css) — на этих страницах контент идёт во всю
    ширину окна, поля задаёт сам .pillar-split */
@@ -27,21 +27,24 @@ body:has(.pillar-split) main {
 }
 
 .pillar-split {
-  --ps-bg: #FFFBF7;
-  --ps-surface: #F5F0EB;
-  --ps-border: #E8DFD1;
-  --ps-text: #2D2D2D;
-  --ps-text-sub: #4A4A4A;
-  --ps-text-muted: #6B6B6B;
-  --ps-gold: #C75B39;
-  --ps-gold-2: #B04E2F;
-  /* Ф2a (28.10.2026): терракотовый ТЕКСТ — #B04E2F (5,13:1 на кремовом).
-     --ps-gold (#C75B39, 4,09:1) — только заливки, точки, галочки, линии. */
-  --ps-gold-text: #B04E2F;
-  --ps-gold-hover: #9E4529;
-  /* граница поля поиска: #E8DFD1 давала 1,28:1, норма для полей — 3:1 */
-  --ps-border-field: #9C8F7A;
-  --ps-navy: #1A2B3C;
+  /* Кожа v3 (30.10.2026): шкала --ps-* — роли кожи (assets/theme-<x>.css).
+     Терракотового текста, точек и линий в коже нет: --ps-gold* — цвет
+     заголовка; цветом залита только кнопка WhatsApp (--ps-cta). */
+  --ps-bg: var(--k-bg);
+  --ps-surface: var(--k-surface);
+  --ps-border: var(--k-line);
+  --ps-text: var(--k-text);
+  --ps-text-sub: var(--k-text);
+  --ps-text-muted: var(--k-muted);
+  --ps-gold: var(--k-heading);
+  --ps-gold-2: var(--k-heading);
+  --ps-gold-text: var(--k-heading);
+  --ps-gold-hover: var(--k-heading);
+  --ps-cta: var(--k-action);
+  --ps-cta-hover: var(--k-action-hover);
+  /* граница поля поиска: рамка поля кожи (4,6:1) */
+  --ps-border-field: var(--k-line-strong);
+  --ps-navy: var(--k-heading);
   /* боковые поля страницы; на них же хвост в сетке (Ф2b-8) выходит во всю ширину */
   --ps-pad: clamp(24px, 3vw, 56px);
 
@@ -50,7 +53,7 @@ body:has(.pillar-split) main {
   max-width: none;
   margin: 0;
   padding: 0 var(--ps-pad);
-  font-family: 'Manrope', sans-serif;
+  font-family: var(--k-font-text);
   color: var(--ps-text);
 }
 
@@ -58,11 +61,11 @@ body:has(.pillar-split) main {
 .pillar-split__head { padding: 34px 0 0; }
 .pillar-split__head h1 {
   margin: 0;
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: var(--k-font-text);
   font-size: clamp(28px, 3.2vw, 40px);
-  font-weight: 500;
+  font-weight: 600;
   line-height: 1.15;
-  letter-spacing: -.01em;
+  letter-spacing: 0;
   color: var(--ps-navy);
 }
 .pillar-split__head::after {
@@ -144,7 +147,7 @@ body:has(.pillar-split) main {
 }
 .pillar-nav__current {
   color: var(--ps-navy);
-  font-weight: 700;
+  font-weight: 600;
   /* Отступ тот же, что у соседних ссылок: раньше активный пункт стоял на
      4px правее и читался как случайно сдвинутая строка. Точка-маркер
      помещается в это же поле — см. правило ::before ниже. */
@@ -194,7 +197,7 @@ body:has(.pillar-split) main {
   border: 0;
   background: none;
   color: var(--ps-text);
-  font-family: 'Manrope', sans-serif;
+  font-family: var(--k-font-text);
   font-size: 15px;
   outline: none;
 }
@@ -221,9 +224,9 @@ body:has(.pillar-split) main {
 .pillar-nav__all .pillar-nav__current {
   padding: 0;
   font-size: var(--fs-label);
-  font-weight: 700;
+  font-weight: 600;
   letter-spacing: var(--ls-label);
-  text-transform: uppercase;
+  text-transform: none;
   color: var(--ps-text-muted);
 }
 .pillar-nav__all a::before,
@@ -271,10 +274,10 @@ body:has(.pillar-split) main {
   padding: 14px 0;
   background: none;
   border: 0;
-  color: var(--ps-text, #2D2D2D);
-  font-family: 'Manrope', sans-serif;
+  color: var(--ps-text, var(--k-text));
+  font-family: var(--k-font-text);
   font-size: 14.5px;
-  font-weight: 500;
+  font-weight: 600;
   line-height: 1.35;
   text-align: left;
   cursor: pointer;
@@ -344,7 +347,7 @@ body:has(.pillar-split) main {
   margin-bottom: 6px;
   color: var(--ps-navy);
   font-size: 14.5px;
-  font-weight: 700;
+  font-weight: 600;
 }
 .pillar-nav__custom span {
   display: block;
@@ -375,10 +378,10 @@ body:has(.pillar-split) main {
 .pillar-nav__cities-label {
   display: block;
   margin-bottom: 6px;
-  font-family: 'Manrope', sans-serif;
+  font-family: var(--k-font-text);
   font-size: 11px;
-  letter-spacing: .09em;
-  text-transform: uppercase;
+  letter-spacing: 0;
+  text-transform: none;
   color: var(--ps-text-muted);
 }
 /* display: inline — иначе ссылки городов наследуют блочный показ пунктов
@@ -389,7 +392,7 @@ body:has(.pillar-split) main {
 .cmap__coverage {
   margin: 18px 0 0;
   text-align: center;
-  font-family: 'Manrope', sans-serif;
+  font-family: var(--k-font-text);
   font-size: 13px;
   line-height: 1.9;
   color: var(--ps-text-muted);
@@ -411,14 +414,14 @@ body:has(.pillar-split) main {
     grid-template-columns: repeat(3, minmax(0, 1fr));
     max-width: 360px;
     margin: 12px auto 0;
-    font-family: 'Manrope', sans-serif;
+    font-family: var(--k-font-text);
   }
   .cmap__row > * {
     display: flex;
     align-items: center;
     justify-content: center;
     min-height: 44px;
-    font-size: 15px;
+    font-size: var(--k-fs-ui);   /* кожа v3: мелкий текст (было 15 px) */
     font-weight: 600;
     color: var(--gold-text);
     text-decoration: none;
@@ -448,17 +451,17 @@ body:has(.pillar-split) main {
 .pillar-doc { max-width: 900px; }
 .pillar-doc h2 {
   margin: 0 0 18px;
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: var(--k-font-text);
   font-size: clamp(24px, 2.4vw, 32px);
-  font-weight: 500;
+  font-weight: 600;
   line-height: 1.2;
   color: var(--ps-navy);
 }
 .pillar-doc h3 {
   margin: 34px 0 12px;
-  font-family: 'Manrope', sans-serif;
+  font-family: var(--k-font-text);
   font-size: 17px;
-  font-weight: 700;
+  font-weight: 600;
   line-height: 1.35;
   color: var(--ps-navy);
 }
@@ -471,7 +474,7 @@ body:has(.pillar-split) main {
 .pillar-doc p { margin: 0 0 16px; }
 .pillar-doc ul, .pillar-doc ol { margin: 0 0 18px; padding-left: 20px; }
 .pillar-doc li { margin-bottom: 8px; }
-.pillar-doc b, .pillar-doc strong { color: var(--ps-navy); font-weight: 700; }
+.pillar-doc b, .pillar-doc strong { color: var(--ps-navy); font-weight: 600; }
 .pillar-doc a { color: var(--ps-gold-text); text-decoration: none; }
 @media (hover: hover) {
   .pillar-doc a:hover { color: var(--ps-gold-hover); }
@@ -509,7 +512,7 @@ body:has(.pillar-split) main {
   border-radius: 50%;
   background: var(--ps-surface);
   color: var(--ps-gold-text);
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: var(--k-font-text);
   font-size: 15px;
 }
 /* Нить между шагами — вертикальный вариант дорожки с главной: серая линия
@@ -538,7 +541,7 @@ body:has(.pillar-split) main {
 .pillar-steps > li.is-on::before {
   background: var(--ps-gold);
   border-color: var(--ps-gold);
-  color: #FFFBF7;
+  color: var(--k-on-action);
   /* «бульк» — тот же упругий скачок, что у шагов на главной */
   /* impeccable-disable-next-line bounce-easing -- «бульк» шагов, как на главной; оставлен решением 01.10 */
   animation: pillarStepPop .55s cubic-bezier(.34, 1.56, .64, 1);
@@ -559,7 +562,7 @@ body:has(.pillar-split) main {
   margin-bottom: 5px;
   color: var(--ps-navy);
   font-size: 16px;
-  font-weight: 700;
+  font-weight: 600;
 }
 .pillar-step__text {
   display: block;
@@ -576,9 +579,9 @@ body:has(.pillar-split) main {
 }
 .pillar-quote p {
   margin: 0;
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: var(--k-font-text);
   font-size: clamp(19px, 1.6vw, 23px);
-  font-weight: 500;
+  font-weight: 600;
   line-height: 1.4;
   color: var(--ps-navy);
 }
@@ -613,14 +616,14 @@ body:has(.pillar-split) main {
 .pillar-facts span {
   display: block;
   font-size: 10.5px;
-  letter-spacing: .16em;
-  text-transform: uppercase;
+  letter-spacing: 0;
+  text-transform: none;
   color: var(--ps-text-muted);
 }
 .pillar-facts b {
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: var(--k-font-text);
   font-size: 22px;
-  font-weight: 500;
+  font-weight: 600;
   color: var(--ps-gold-text);
 }
 
@@ -710,9 +713,9 @@ body:has(.pillar-split) main {
   .pillar-split--doc .pillar-nav__mobile-title {
     display: block;
     margin: 0 0 16px;
-    font-family: 'Playfair Display', Georgia, serif;
+    font-family: var(--k-font-text);
     font-size: 21px;
-    font-weight: 500;
+    font-weight: 600;
     line-height: 1.2;
     color: var(--ps-navy);
   }
@@ -755,9 +758,9 @@ body:has(.pillar-split) main {
     cursor: default;
     pointer-events: none;
     font-size: var(--fs-label);
-    font-weight: 700;
+    font-weight: 600;
     letter-spacing: var(--ls-label);
-    text-transform: uppercase;
+    text-transform: none;
     color: var(--ps-text-muted);
   }
   .pillar-split--doc:not(.pillar-split--city) .pillar-cat__head svg { display: none; }
@@ -872,7 +875,7 @@ body:has(.pillar-split) main {
     min-height: 44px;
     color: var(--ps-gold-text);
     font-size: 14.5px;
-    font-weight: 700;
+    font-weight: 600;
     letter-spacing: 0;
     text-transform: none;
   }
@@ -887,25 +890,27 @@ body:has(.pillar-split) main {
    он повторяет вид CTA на главной. */
 .pillar-split ~ .final-cta,
 body:has(.pillar-split) .final-cta {
-  background: #F5F0EB !important;
+  background: var(--k-surface) !important;
   border: 0 !important;
   border-radius: 0 !important;
-  padding: clamp(52px, 6vw, 88px) clamp(24px, 4.5vw, 88px) !important;
+  /* поля по бокам — рамка сайта (--frame-gutter, tokens.css, 29.10.2026):
+     полоса во всю ширину, текст по центру рамки */
+  padding: clamp(52px, 6vw, 88px) var(--frame-gutter) !important;
   text-align: center;
 }
 body:has(.pillar-split) .final-cta h2 {
   margin: 0 0 12px;
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: var(--k-font-text);
   font-size: clamp(24px, 2.6vw, 34px);
-  font-weight: 500;
-  color: #1A2B3C;
+  font-weight: 600;
+  color: var(--k-heading);
 }
 body:has(.pillar-split) .final-cta p {
   margin: 0 auto 26px;
   max-width: 640px;
   font-size: 16.5px;
   line-height: 1.7;
-  color: #4A4A4A;
+  color: var(--k-text);
 }
 /* Кнопка финала — общий компонент кнопки WhatsApp (module-cta.css, body.tpl):
    капс с разрядкой и поля 17/34 сняты (Ф2b-1, 28.10.2026). */
@@ -939,7 +944,7 @@ body:has(.pillar-split) .final-cta p {
    хвост наследовал его от body. */
 .pillar-split__cols > .service-tail {
   margin: 0 calc(-1 * var(--ps-pad));
-  font-family: 'Manrope', -apple-system, sans-serif;
+  font-family: var(--k-font-text);
 }
 @media (min-width: 900px) {
   .pillar-split__cols > .service-tail,
@@ -982,7 +987,7 @@ body:has(.pillar-split) .final-cta p {
   left: 0;
   top: 0;
   color: var(--ps-gold);
-  font-weight: 700;
+  font-weight: 600;
 }
 
 /* ── FAQ-аккордеон ──
@@ -1058,14 +1063,14 @@ body:has(.pillar-split) .final-cta p {
 }
 
 .pillar-guide__tag {
-  font-family: 'Manrope', sans-serif;
+  font-family: var(--k-font-text);
   font-size: var(--fs-label);
   letter-spacing: var(--ls-label);
-  text-transform: uppercase;
+  text-transform: none;
   color: var(--ps-text-muted);
 }
 .pillar-guide__title {
-  font-family: 'Manrope', sans-serif;
+  font-family: var(--k-font-text);
   font-size: 15.5px;
   font-weight: 600;
   line-height: 1.35;
@@ -1073,7 +1078,7 @@ body:has(.pillar-split) .final-cta p {
   transition: color .2s ease;
 }
 .pillar-guide__time {
-  font-family: 'Manrope', sans-serif;
+  font-family: var(--k-font-text);
   font-size: 12.5px;
   color: var(--ps-text-muted, var(--ps-text-sub));
 }
@@ -1086,13 +1091,13 @@ body:has(.pillar-split) .final-cta p {
    коробок, а редакционный список. Коробки сняты, строки с разделителями. */
 .pillar-cards-block > h2 {
   margin: 0 0 6px;
-  font-family: 'Manrope', sans-serif;
+  font-family: var(--k-font-text);
   font-size: var(--fs-label);
   /* 1.2 раньше приходил из «.pillar-doc h2»; с Ф2b-8 блок стоит вне .pillar-doc */
   line-height: 1.2;
-  font-weight: 700;
+  font-weight: 600;
   letter-spacing: var(--ls-label);
-  text-transform: uppercase;
+  text-transform: none;
   color: var(--ps-text-muted);
 }
 .pillar-cards { display: flex; flex-direction: column; }
@@ -1186,7 +1191,7 @@ body:has(.pillar-split) .final-cta p {
 }
 .deadline__label {
   font-size: 15.5px;
-  font-weight: 700;
+  font-weight: 600;
   line-height: 1.4;
   color: var(--ps-navy);
 }
@@ -1196,7 +1201,7 @@ body:has(.pillar-split) .final-cta p {
 .deadline__count {
   color: var(--ps-navy);
   font-size: 14.5px;
-  font-weight: 700;
+  font-weight: 600;
   white-space: nowrap;
 }
 .deadline__note {
@@ -1229,11 +1234,11 @@ body:has(.pillar-split) .final-cta p {
   height: 28px;
   border-radius: 50%;
   background: var(--ps-navy);
-  color: #FFFBF7;
+  color: var(--k-on-action);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: var(--k-font-text);
   font-size: 12px;
 }
 .rfinder__bubble {
@@ -1255,9 +1260,9 @@ body:has(.pillar-split) .final-cta p {
   /* impeccable-disable-next-line design-system-radius -- форма «пузыря» чата */
   border-radius: 16px 16px 5px 16px;
   background: var(--ps-navy);
-  color: #FFFBF7;
+  color: var(--k-on-action);
   font-size: 15px;
-  font-weight: 500;
+  font-weight: 400;
   line-height: 1.45;
 }
 
@@ -1280,12 +1285,12 @@ body:has(.pillar-split) .final-cta p {
      («2–3 года») висели у края с пустым полем в половину кнопки */
   justify-content: center;
   padding: 11px 16px;
-  background: #FFFBF7;
+  background: var(--k-bg);
   border: 1px solid var(--ps-border);
   /* impeccable-disable-next-line design-system-radius -- форма «пузыря» чата */
   border-radius: 14px;
   color: var(--ps-text-sub);
-  font-family: 'Manrope', sans-serif;
+  font-family: var(--k-font-text);
   font-size: 14.5px;
   line-height: 1.35;
   text-align: center;
@@ -1341,7 +1346,7 @@ body:has(.pillar-split) .final-cta p {
   max-width: 88%;
   padding: 20px 22px;
   /* impeccable-disable-next-line design-system-color -- карточка результата светлее кремового фона */
-  background: #FFFFFF;
+  background: var(--k-bg);
   border: 1px solid var(--ps-border);
   /* impeccable-disable-next-line design-system-radius -- форма «пузыря» чата */
   border-radius: 16px 16px 16px 5px;
@@ -1351,16 +1356,16 @@ body:has(.pillar-split) .final-cta p {
   margin-bottom: 7px;
   /* метка капсом — не мельче 12 px (Ф2b-3, 28.10.2026; light-scale.css) */
   font-size: var(--fs-label, 12px);
-  font-weight: 700;
-  letter-spacing: .1em;
-  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 0;
+  text-transform: none;
   color: var(--ps-gold-text);
 }
 .rfinder__route {
   margin: 0 0 10px !important;
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: var(--k-font-text);
   font-size: clamp(20px, 2vw, 23px) !important;
-  font-weight: 500;
+  font-weight: 600;
   line-height: 1.25;
   color: var(--ps-navy);
 }
@@ -1399,24 +1404,25 @@ body:has(.pillar-split) .final-cta p {
   display: inline-flex;
   align-items: center;
   gap: 9px;
-  padding: 13px 24px;
-  background: var(--ps-gold);
-  border-radius: 999px;
-  color: #FFFBF7;
-  font-size: 14.5px;
-  font-weight: 700;
+  min-height: var(--k-btn-h);
+  padding: 0 var(--cta-pad-x);
+  background: var(--ps-cta);
+  border-radius: var(--k-r-btn);
+  color: var(--k-on-action);
+  font-size: var(--k-fs-ui);
+  font-weight: var(--k-w-strong);
   text-decoration: none;
 }
 @media (hover: hover) {
   .pillar-doc .rfinder__cta:hover,
-  .rfinder__cta:hover { background: var(--ps-gold-2); }
+  .rfinder__cta:hover { background: var(--ps-cta-hover); }
 }
 .rfinder__restart {
   padding: 0;
   background: none;
   border: 0;
   color: var(--ps-text-muted);
-  font-family: 'Manrope', sans-serif;
+  font-family: var(--k-font-text);
   font-size: 13.5px;
   text-decoration: underline;
   text-underline-offset: 3px;
@@ -1469,12 +1475,12 @@ body:has(.pillar-split) .final-cta p {
 .pillar-table th {
   padding: 10px 12px;
   text-align: left;
-  font-family: 'Manrope', sans-serif;
+  font-family: var(--k-font-text);
   /* метка капсом — не мельче 12 px (Ф2b-3, 28.10.2026; light-scale.css) */
   font-size: var(--fs-label);
-  font-weight: 700;
-  letter-spacing: .08em;
-  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 0;
+  text-transform: none;
   color: var(--ps-text-muted);
   background: var(--ps-surface);
   border-bottom: 1px solid var(--ps-border);
@@ -1503,15 +1509,15 @@ body:has(.pillar-split) .final-cta p {
 }
 .doc-cta__t {
   margin: 0 0 6px;
-  font-family: 'Manrope', sans-serif;
+  font-family: var(--k-font-text);
   font-size: 16px;
-  font-weight: 700;
+  font-weight: 600;
   line-height: 1.35;
   color: var(--ps-navy);
 }
 .doc-cta__d {
   margin: 0 0 16px;
-  font-family: 'Manrope', sans-serif;
+  font-family: var(--k-font-text);
   font-size: 14.5px;
   line-height: 1.6;
   color: var(--ps-text-sub);

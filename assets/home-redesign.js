@@ -849,43 +849,44 @@
 })();
 
 
-/* ═══ Hero-ротатор услуг (референс rockfi.fr) ═══
+/* ═══ Hero-ротатор направлений (референс rockfi.fr) ═══
    Единственный источник истины — JS: позиция ленты анимируется покадрово
    (rAF), подсветка назначается ТОЛЬКО когда лента фактически доехала.
    CSS-транзиция не используется — она на iOS иногда глоталась, и лента
-   расходилась с подсветкой (активная «уползала вниз»). */
+   расходилась с подсветкой (активная «уползала вниз»).
+   Кожа v3 (30.10.2026, решение 14): строки — ссылки на свои разделы (в
+   разметке сервера); касание, наведение и фокус останавливают ленту —
+   нажимаешь ту строку, которую видишь; после 5 с без касаний лента идёт
+   дальше. Копии строк для бесконечной ленты — без Tab и скрыты от
+   скринридера: читаются только 9 строк разметки. Только до 899 px —
+   на компьютере вместо ротатора список разделов (home.html). */
 (function () {
   var box = document.getElementById('hero-roll');
   if (!box) return;
-  var mq = window.matchMedia('(max-width: 719px)');
-  /* 28.10.2026 (Ф2b-10): тот же ротатор на десктопе главной (≥ 900 px) —
-     три строки, шаг задаёт CSS (0,942 кегля H1), его и читаем.
-     Телефон — как был: пять строк по LINE, активная третья. */
-  var mqD = window.matchMedia('(min-width: 900px)');
+  var mq = window.matchMedia('(max-width: 899px)');
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var ul = box.querySelector('ul');
-  var LINE = 28, PAUSE_MS = 1900, RIDE_MS = 640;
+  var L = 28, OFF = 2, PAUSE_MS = 1900, RIDE_MS = 640, IDLE_MS = 5000;
   var base = Array.prototype.slice.call(ul.children);
   var n = base.length;
-  base.slice().reverse().forEach(function (li) { ul.insertBefore(li.cloneNode(true), ul.firstChild); });
-  base.forEach(function (li) { ul.appendChild(li.cloneNode(true)); });
-  var items = ul.children;
-
-  var L = LINE, OFF = 2;          /* шаг ленты и строк над активной */
-  function geom() {
-    if (mqD.matches) { L = items[0].getBoundingClientRect().height || LINE; OFF = 1; }
-    else { L = LINE; OFF = 2; }
+  function copy(li) {
+    var c = li.cloneNode(true);
+    c.setAttribute('aria-hidden', 'true');
+    var a = c.querySelector('a');
+    if (a) a.setAttribute('tabindex', '-1');
+    return c;
   }
-  geom();
+  base.slice().reverse().forEach(function (li) { ul.insertBefore(copy(li), ul.firstChild); });
+  base.forEach(function (li) { ul.appendChild(copy(li)); });
+  var items = ul.children;
 
   var idx = n;                    /* строка в центре окна */
   var y = (idx - OFF) * L;        /* фактическая позиция ленты (px) */
 
   function setY(v) { y = v; ul.style.transform = 'translateY(' + (-v) + 'px)'; }
-  function paint(clearOnly) {
+  function paint() {
     for (var k2 = 0; k2 < items.length; k2++) {
       items[k2].classList.remove('is-c', 'is-n');
-      if (clearOnly) continue;
       var d = k2 - idx;
       if (d === 0) items[k2].classList.add('is-c');
       else if (d === -1 || d === 1) items[k2].classList.add('is-n');
@@ -893,65 +894,70 @@
   }
   function snap() {               /* мгновенно привести всё в согласованный кадр */
     while (idx >= 2 * n) idx -= n;
+    while (idx < n) idx += n;
     setY((idx - OFF) * L);
-    paint(false);
-    /* 28.10.2026: до этого кадр «до скрипта» рисует CSS (.hero__roll:not(.is-live)),
-       с тем же активным пунктом на том же месте — на первом заходе нет бледного
-       барабана без точки, пока грузится скрипт */
+    paint();
+    /* до этого кадр «до скрипта» рисует CSS (.hero__roll:not(.is-live)) */
     box.classList.add('is-live');
   }
 
-  var animating = false, stale = false;
-  /* десктоп: шаг зависит от размера окна — пересчитать и встать в кадр
-     (во время езды — сразу после неё). На телефоне не срабатывает. */
-  function refit() {
-    if (animating) { stale = true; return; }
-    geom(); snap();
+  var animating = false, raf = 0, held = false, idleT = 0;
+  /* касание, мышь, фокус — лента стоит; через IDLE_MS без них идёт дальше */
+  function hold() {
+    held = true;
+    clearTimeout(idleT);
+    if (animating) { cancelAnimationFrame(raf); animating = false; }
   }
-  window.addEventListener('resize', function () { if (mqD.matches) refit(); }, { passive: true });
-  if (mqD.addEventListener) mqD.addEventListener('change', refit);
-  else if (mqD.addListener) mqD.addListener(refit);
-  /* 28.10.2026: Safari выполняет скрипт раньше, чем применит стили главной, —
-     первая высота строки 18 px вместо 47, лента крутилась с неверным шагом и
-     подсвеченная строка уезжала за окно барабана (все строки бледные). Шаг
-     перемеряем, как только строка меняет высоту, и после полной загрузки. */
-  if (window.ResizeObserver) {
-    new ResizeObserver(function () { if (mqD.matches) refit(); }).observe(items[0]);
+  function release() {
+    clearTimeout(idleT);
+    idleT = setTimeout(function () {
+      held = false;
+      /* лента могла встать посреди такта — доводим до своей строки */
+      if (Math.abs(y - (idx - OFF) * L) > 0.5) snap();
+    }, IDLE_MS);
   }
-  window.addEventListener('load', function () { if (mqD.matches) refit(); });
+  box.addEventListener('pointerdown', hold, { passive: true });
+  box.addEventListener('touchstart', hold, { passive: true });
+  box.addEventListener('mouseenter', hold);
+  box.addEventListener('pointerup', release, { passive: true });
+  box.addEventListener('touchend', release, { passive: true });
+  box.addEventListener('mouseleave', release);
+  /* фокус с клавиатуры: строку с фокусом ставим в центр окна */
+  box.addEventListener('focusin', function (e) {
+    hold();
+    var li = e.target.closest ? e.target.closest('li') : null;
+    var k = Array.prototype.indexOf.call(items, li);
+    if (k >= 0) { idx = k; snap(); }
+  });
+  box.addEventListener('focusout', release);
 
   if (reduce) { snap(); return; }
 
   function stepOnce() {
-    if (!(mq.matches || mqD.matches) || document.hidden || animating) return;
-    /* шаг ленты сверяем перед каждым тактом: если стили догрузились позже
-       скрипта, сначала встаём в верный кадр */
-    if (mqD.matches) {
-      var was = L; geom();
-      if (L !== was) snap();
-    }
+    if (!mq.matches || document.hidden || animating || held) return;
     animating = true;
     if (idx >= 2 * n) { idx -= n; setY((idx - OFF) * L); }
-    /* всё параллельно с первого кадра: старая теряет подсветку и уезжает
-       влево, новая уже наливается и выезжает вправо, лента крутится —
-       CSS-транзиции строк растягивают преображение на время езды */
+    /* всё параллельно с первого кадра: старая теряет подсветку, новая
+       наливается, лента крутится — транзиции строк растягивают преображение
+       на время езды */
     idx++;
-    paint(false);
+    paint();
     var from = y, to = (idx - OFF) * L, t0 = null;
     function frame(ts) {
+      if (!animating) return;
       if (t0 === null) t0 = ts;
       var p = Math.min((ts - t0) / RIDE_MS, 1);
       /* easeInOutCubic: лента трогается и тормозит мягко */
       var e = p < 0.5 ? 4 * p * p * p : 1 - Math.pow(-2 * p + 2, 3) / 2;
       setY(from + (to - from) * e);
-      if (p < 1) { requestAnimationFrame(frame); }
-      else { animating = false; if (stale) { stale = false; geom(); snap(); } }
+      if (p < 1) { raf = requestAnimationFrame(frame); }
+      else { animating = false; }
     }
-    requestAnimationFrame(frame);
+    raf = requestAnimationFrame(frame);
   }
   setInterval(stepOnce, PAUSE_MS + RIDE_MS);
   document.addEventListener('visibilitychange', function () {
-    if (!document.hidden) { animating = false; stale = false; geom(); snap(); }
+    if (!document.hidden) { animating = false; snap(); }
   });
   snap();
 })();
@@ -1047,7 +1053,8 @@
   if (!stage) return;
   var src = stage.querySelectorAll('.hero-chat__src li');
   if (!src.length) return;
-  var mqD = window.matchMedia('(min-width: 900px)');
+  /* кожа v3 (30.10.2026): колонка «фантомов» — от 1180 px (home-v3.css) */
+  var mqD = window.matchMedia('(min-width: 1180px)');
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var PAIRS = Array.prototype.map.call(src, function (li) {
     return { q: li.getAttribute('data-q'), a: li.textContent.trim(), card: li.getAttribute('data-card') };
@@ -1072,7 +1079,7 @@
   }
   function answer(p) {
     var card = p.card === 'maps'
-      ? '<span class="hero-chat__maps"><b>Krepko</b><span class="hero-chat__stars">★★★★★</span><small>5,0 · Google Maps</small></span>'
+      ? '<span class="hero-chat__maps"><b>Krepko</b><small>Google Maps</small></span>'
       : '';
     return '<span class="hero-chat__b hero-chat__b--a"><span class="hero-chat__who">Krepko</span>' + esc(p.a) + card + '</span>';
   }

@@ -58,6 +58,93 @@
   /* Подчёркивание текстовой ссылки на кремовом — заметнее --border
      (переключатель языка в верхней строке, Ф2b-9, 28.10.2026) */
   --rule-link: #C9BBA5;
+  /* Линия поля ввода: 3,08:1 на кремовом (WCAG 1.4.11 — граница поля ≥ 3:1).
+     Тот же цвет, что --ps-border-field колонки (Ф2a); на :root — для поля
+     поиска каталога услуг (catalog.css, 29.10.2026). */
+  --field-line: #9C8F7A;
+}
+
+/* ═══ v3: старые имена → роли --k-* (кожа v3, 30.10.2026) ═══
+   «Одна ручка»: числа живут только в файле значений assets/theme-<x>.css
+   (какой включён — data/site.yaml → theme). Правила сайта по-прежнему пишут
+   старые имена — --bg, --text, --gold, --navy, --ts-*, --fs-*, — а здесь эти
+   имена связываются с ролями кожи. Объявлено на body[data-skin] (атрибут
+   ставит base.html): связь бьёт значения :root из tokens.css, этого файла и
+   home-redesign.css для всего, что внутри body, и не трогает блог и
+   юридические страницы — у них атрибута нет, их вид меняется отдельным
+   шагом. Значения :root выше остаются для них.
+   Терракота --gold / --gold-2 / --gold-text в коже v3 — нейтральный цвет
+   заголовка: цветом залита только кнопка WhatsApp (итог v3 §4.6 п. 1), а
+   кнопки берут --k-action прямо (module-cta.css, sticky-cta.css,
+   site-nav.css). Подложки и линии — роли --k-surface и --k-line. */
+body[data-skin] {
+  /* цвет */
+  --bg: var(--k-bg);
+  --surface: var(--k-surface);
+  --surface-2: var(--k-surface);
+  --surface-sunk: var(--k-surface);
+  --surface-card: var(--k-surface);
+  --border-faint: var(--k-line);
+  --border: var(--k-line);
+  --text: var(--k-text);
+  --text-sub: var(--k-text);
+  --text-muted: var(--k-muted);
+  --text-label: var(--k-muted);
+  --text-dim: var(--k-muted);
+  --text-nav: var(--k-text);
+  --navy: var(--k-heading);
+  --gold: var(--k-heading);
+  --gold-2: var(--k-heading);
+  --gold-text: var(--k-heading);
+  --gold-tint: var(--k-surface);
+  --gold-on: var(--k-on-action);
+  --gold-hover: var(--k-action-hover);
+  --glow-gold: none;
+  --wa: var(--k-action);
+  --rule-link: var(--k-line-strong);
+  --field-line: var(--k-line-strong);
+  --link: var(--k-link-color);
+  --crumb-link: var(--k-text);
+  --focus-ring: var(--k-focus);
+  /* шрифт: общие модули (их видит и блог) пишут --font-*, tokens.css */
+  --font-text: var(--k-font-text);
+  --font-display: var(--k-font-display);
+  --font-mono: var(--k-font-text);
+  /* четыре размера текста: H1, H2, основной, мелкий (итог v3 §4.3) */
+  --ts-display: var(--k-fs-h1);
+  --ts-h1: var(--k-fs-h1);
+  --ts-h2: var(--k-fs-h2);
+  --ts-h3: var(--k-fs-body);
+  --ts-h4: var(--k-fs-body);
+  --ts-lead: var(--k-fs-body);
+  --ts-body: var(--k-fs-body);
+  --ts-body-sm: var(--k-fs-ui);
+  --ts-body-xs: var(--k-fs-ui);
+  --ts-meta: var(--k-fs-ui);
+  --ts-label: var(--k-fs-ui);
+  --ts-mono: var(--k-fs-ui);
+  --fs-display: var(--k-fs-h1);
+  --fs-title: var(--k-fs-h2);
+  --fs-subtitle: var(--k-fs-h2);
+  --fs-lead: var(--k-fs-body);
+  --fs-body: var(--k-fs-body);
+  --fs-small: var(--k-fs-ui);
+  --fs-micro: var(--k-fs-ui);
+  --fs-btn: var(--k-fs-ui);
+  --fs-cta: var(--k-fs-ui);
+  --fs-fact: var(--k-fs-body);
+  --fs-label: var(--k-fs-ui);
+  --ls-label: 0;
+  --lh-title: var(--k-lh-h2);
+  --lh-subtitle: var(--k-lh-h2);
+  --lh-body: var(--k-lh-body);
+  --lh-micro: var(--k-lh-ui);
+  /* кнопка WhatsApp: высота 48, в шапке 44 (итог v3 §4.3) */
+  --cta-h: var(--k-btn-h);
+  --cta-h-nav: var(--k-btn-h-bar);
+  /* колонка текста — 640 px от левого края рамки (directions.md §1.2) */
+  --w-read: var(--k-measure);
+  --measure: var(--k-measure);
 }
 
 /* ═══ Кнопка «Написать в WhatsApp» — один компонент (Ф2b-1, 2; 28.10.2026) ═══
@@ -136,6 +223,12 @@ html:has(> body.tpl) {
 .tpl .city-local__title {
   font-weight: 500;
 }
+/* Кожа v3 (30.10.2026): заголовки — шрифт кожи, полужирный 600 (две
+   ступени начертания: 400 и 600) */
+body[data-skin].tpl main :is(h1, h2):not(.pillar-cards-block > h2, .sell-trust__t),
+body[data-skin].tpl .city-local__title {
+  font-weight: var(--k-w-display);
+}
 
 /* ═══ Типографская шкала (2026-08-08) ═══
    Те же ступени, что на главной (home-redesign.css). Без них правила вида
@@ -177,6 +270,13 @@ h2 {
   font-size: clamp(24px, 2.4vw, 32px);
   line-height: 1.18;
 }
+/* Кожа v3 (30.10.2026): на страницах генератора та же самая слабая ступень —
+   H2 кожи. :where() держит вес голого h2 (0,0,1): любое правило с классом
+   по-прежнему сильнее. */
+:where(body[data-skin]) h2 {
+  font-size: var(--k-fs-h2);
+  line-height: var(--k-lh-h2);
+}
 
 /* Заголовки вопросов и призыва набраны своими правилами с классом
    (.faq h2 в module-process.css, .final-cta h2 там же) — голый h2 их не
@@ -197,6 +297,13 @@ body .final-cta > h2 {
      замыслу. */
   font-size: clamp(24px, 2.4vw, 32px) !important;
   line-height: 1.18;
+}
+/* Кожа v3 (30.10.2026): H2 кожи. Правила главной (через id) и городов
+   по-прежнему сильнее — там свой размер призыва. */
+body[data-skin] .faq > h2,
+body[data-skin] .final-cta > h2 {
+  font-size: var(--k-fs-h2) !important;
+  line-height: var(--k-lh-h2);
 }
 
 /* ═══ Кнопка «Написать» — в палитре сайта (2026-08-08) ═══

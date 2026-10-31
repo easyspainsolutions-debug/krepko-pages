@@ -1,97 +1,240 @@
 /* ═══════════════════════════════════════════════════════════════════════
-   Поведение шапки сайта: липкое состояние и мега-меню «Каталог услуг».
-   Файл глобальный — подключается в base.html на всех страницах. Раньше
-   этот код жил в home-redesign.js, который грузится только на главной
-   и /about/, поэтому на остальных 118 страницах кнопка каталога не
-   реагировала на клик, а .is-stuck у шапки не появлялся.
+   Обвязка сайта v3 (30.10.2026): шапка и полосы при прокрутке, нижняя
+   полоса телефона, одна кнопка WhatsApp на экране, текущий раздел, меню.
+   Файл глобальный — подключается в base.html на всех страницах, в блог и
+   на юридические страницы его ставит tools/sync_blog_chrome.py.
+
+   Итог v3 §3.5 и решения Daniil 30.10 (п. 5, 6), раскладка услуги 30.10:
+   • <html data-bar="top|down|up">
+       top  — первый экран (прокрутка меньше высоты окна): шапка на месте;
+       down — ниже первого экрана листают вниз: шапка уезжает; на компьютере
+              на её месте полоса поиска, на телефоне снизу — «Поиск + WhatsApp»;
+       up   — листают вверх (от 6 px): шапка вернулась, полосы ушли.
+     Пока открыты меню или поиск — <html data-bar-lock>, ничего не двигается.
+     При фокусе с клавиатуры в шапке она возвращается (WCAG 2.4.11).
+   • Выключатели — атрибут шапки data-bars (data/site.yaml → bars):
+       hide-phone  — телефон прячет шапку (на главной — никогда; на странице
+                     без нижней полосы — тоже: WhatsApp всегда на виду);
+                     без него — как до v3: шапка всегда сверху, нижняя
+                     полоса после первого экрана;
+       search-desk — компьютер: полоса поиска вместо шапки;
+       one-wa      — компьютер: кнопка шапки и полосы прячется на своём
+                     месте, пока на экране кнопка WhatsApp в тексте.
+   • Одна кнопка WhatsApp на экране: <html data-wa-in>, пока в поле зрения
+     кнопка WhatsApp вне обвязки (залитая ссылка wa.me: под заголовком,
+     карточка, врезка, отзывы, финал, статья). Телефон: нижняя полоса в это
+     время спрятана, а вернувшаяся при прокрутке вверх шапка прячет свою
+     кнопку; компьютер: кнопка шапки и полосы прячется (CSS).
+   Метки Pulse и GA4 — data-cta на ссылках (header, bar, sticky, menu …).
    ═══════════════════════════════════════════════════════════════════════ */
-(function(){
+(function () {
+  'use strict';
+  var root = document.documentElement;
   var nav = document.querySelector('.site-nav');
   if (!nav) return;
-  var stuck = null;
-  function update(){
-    var next = window.scrollY > 8;
-    if (next !== stuck) { stuck = next; nav.classList.toggle('is-stuck', next); }
+
+  var flags = ' ' + (nav.getAttribute('data-bars') || '') + ' ';
+  var HIDE_PHONE = flags.indexOf(' hide-phone ') >= 0;
+  var SEARCH_DESK = flags.indexOf(' search-desk ') >= 0;
+  var path = location.pathname.replace(/^\/uk(?=\/|$)/, '') || '/';
+  var HOME = path === '/' || path === '/index.html';
+  var bbar = document.getElementById('sticky-cta');
+  var desk = window.matchMedia ? window.matchMedia('(min-width: 900px)') : { matches: true };
+  var dialogs = [].slice.call(document.querySelectorAll('dialog'));
+
+  if (bbar) bbar.removeAttribute('hidden');
+
+  /* ── текущий раздел: черта под пунктом шапки, отметка в меню ──
+     «Каталог услуг» — на каталоге, разделах, услугах и городах (итог v3
+     §3.5: «на всех страницах каталога, включая услуги»). */
+  var section = HOME ? 'home'
+    : /^\/blog(\/|$)/.test(path) ? 'blog'
+    : /^\/about(\/|$)/.test(path) ? 'about'
+    : /^\/(partners|es|aviso-legal|cookies|privacidad|terminos|review|hello)(\/|$)/.test(path) ? ''
+    : 'services';
+  if (section && section !== 'home') {
+    [].forEach.call(nav.querySelectorAll('.site-nav__link'), function (a) {
+      var href = (a.getAttribute('href') || '').replace(/^\/uk(?=\/)/, '');
+      if (href !== '/' + section + '/') return;
+      a.classList.add('is-current');
+      if (href === path) a.setAttribute('aria-current', 'page');
+    });
   }
-  window.addEventListener('scroll', update, {passive: true});
-  update();
-})();
+  if (section) {
+    var item = document.querySelector('.site-menu__link[data-page="' + section + '"]');
+    if (item) item.classList.add('active');
+  }
 
-(function(){
-  var trigger = document.getElementById('mega-trigger');
-  var panel = document.getElementById('mega-menu');
-  var overlay = document.getElementById('mega-overlay');
-  if (!trigger || !panel) return;
-  var open = false;
+  /* ── состояния полос ── */
+  var state = '';
+  var last = window.scrollY || 0;
+  var acc = 0;
+  var waIn = false;     // кнопка WhatsApp вне обвязки — на экране
+  var footIn = false;   // подвал на экране: нижняя полоса уходит, на телефоне
+                        // возвращается шапка — кнопка WhatsApp остаётся на виду
 
-  var hideTimer = null;
-  var REVEAL = 360;   /* синхронно с transition у .mega */
+  function phone() { return !desk.matches; }
+  function hides() {
+    if (phone()) return HIDE_PHONE && !HOME && !!bbar;
+    return SEARCH_DESK;
+  }
+  function locked() { return root.hasAttribute('data-bar-lock'); }
 
-  function setOpen(v){
-    open = v;
-    trigger.setAttribute('aria-expanded', v ? 'true' : 'false');
-    if (overlay) overlay.classList.toggle('is-on', v);
+  function paint() {
+    if (waIn) root.setAttribute('data-wa-in', '');
+    else root.removeAttribute('data-wa-in');
+    if (!bbar || locked()) return;
+    var on;
+    if (!phone() || HOME) on = false;
+    else if (HIDE_PHONE) on = state === 'down';
+    else on = (window.scrollY || 0) > window.innerHeight * 0.8;   // как до v3
+    bbar.classList.toggle('is-on', on && !waIn && !footIn);
+  }
+  function set(s) {
+    if (s === state) return;
+    state = s;
+    root.setAttribute('data-bar', s);
+    paint();
+    schedule();   // верхняя кромка «видимости» кнопок зависит от состояния
+  }
+  /* у подвала на телефоне шапка стоит на месте — пока на экране нет кнопки
+     WhatsApp в тексте (финал ещё виден — его кнопки достаточно) */
+  function pinned() { return footIn && phone() && !waIn; }
+  function settle() {
+    if (!locked() && state === 'down' && pinned()) set('up');
+  }
+  function onScroll() {
+    var y = window.scrollY || 0;
+    var d = y - last;
+    last = y;
+    if (locked()) return;
+    if (!hides() || y < window.innerHeight) {
+      acc = 0;
+      set('top');
+    } else if (d) {
+      acc = (d > 0) === (acc > 0) ? acc + d : d;
+      if (acc > 6) set(pinned() ? 'up' : 'down');
+      else if (acc < -6) set('up');
+    }
+    settle();
+    paint();
+  }
+  set(hides() && (window.scrollY || 0) >= window.innerHeight ? 'down' : 'top');
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll, { passive: true });
 
-    if (hideTimer) { clearTimeout(hideTimer); hideTimer = null; }
+  /* фокус с клавиатуры в уехавшей шапке — шапка возвращается */
+  var inner = nav.querySelector('.site-nav__inner');
+  nav.addEventListener('focusin', function (e) {
+    if (state === 'down' && inner && inner.contains(e.target)) set('up');
+  });
 
-    if (v) {
-      panel.hidden = false;
-      /* принудительный reflow: без него браузер объединит снятие hidden
-         и добавление класса в один кадр, и шторка не «поедет» */
-      void panel.offsetWidth;
-      panel.classList.add('is-open');
-    } else {
-      panel.classList.remove('is-open');
-      /* прячем только после того, как шторка свернулась */
-      hideTimer = setTimeout(function(){
-        if (!open) panel.hidden = true;
-        hideTimer = null;
-      }, REVEAL);
+  /* меню или поиск открыты — полосы стоят; закрыли — считаем заново */
+  function syncLock() {
+    var open = dialogs.some(function (d) { return d.open; });
+    if (open) {
+      root.setAttribute('data-bar-lock', '');
+    } else if (locked()) {
+      root.removeAttribute('data-bar-lock');
+      last = window.scrollY || 0;
+      acc = 0;
+      paint();
     }
   }
-  trigger.addEventListener('click', function(e){ e.stopPropagation(); setOpen(!open); });
-
-  // закрытие: клик вне панели, Esc, уход мышью
-  document.addEventListener('click', function(e){
-    if (open && !panel.contains(e.target) && e.target !== trigger) setOpen(false);
-  });
-  document.addEventListener('keydown', function(e){
-    if (e.key === 'Escape' && open) { setOpen(false); trigger.focus({ preventScroll: true }); }
-  });
-  panel.addEventListener('mouseleave', function(){ if (open) setOpen(false); });
-})();
-
-
-/* Индикатор прочитанного. Считает долю прокрутки и растягивает полосу
-   поверх шапки. Обновление привязано к кадру: на длинных страницах
-   событие scroll приходит чаще, чем браузер успевает рисовать. */
-(function () {
-  var bar = document.getElementById('scroll-progress-bar');
-  if (!bar) return;
-
-  var queued = false;
-
-  function update() {
-    queued = false;
-    var doc = document.documentElement;
-    var max = doc.scrollHeight - window.innerHeight;
-    /* страница короче экрана — прокручивать нечего, полосу не показываем */
-    var pct = max > 8 ? window.scrollY / max : 0;
-    if (pct < 0) pct = 0;
-    if (pct > 1) pct = 1;
-    bar.style.transform = 'scaleX(' + pct.toFixed(4) + ')';
+  if (dialogs.length && window.MutationObserver) {
+    var mo = new MutationObserver(syncLock);
+    dialogs.forEach(function (d) { mo.observe(d, { attributes: true, attributeFilter: ['open'] }); });
   }
 
+  /* ── одна кнопка WhatsApp на экране ──
+     Кнопка — залитая ссылка WhatsApp вне обвязки высотой от 32 px: под
+     заголовком, карточка, врезка, отзывы, финал, кнопки статьи. Текстовые
+     ссылки «в WhatsApp» (строки каталога, подвал) кнопками не считаются.
+     Кнопка «на экране», когда видна хотя бы наполовину: краешек у края окна
+     ещё не считается — иначе на миг не видно ни одной кнопки (приёмка
+     раскладки услуги 30.10: 0 мест с двумя кнопками и 0 мест без кнопки).
+     Верхняя кромка — низ того, что сейчас стоит сверху: шапки (её итоговое
+     место, а не кадр анимации) или полосы поиска; кнопка под ними не видна. */
+  var CHROME = '.topbar, .site-nav, .sticky-cta, dialog, .cookie-consent';
+  function isButton(a) {
+    if (a.closest(CHROME) || a.offsetHeight < 32) return false;
+    var bg = window.getComputedStyle(a).backgroundColor || '';
+    return !!bg && bg !== 'transparent' && !/^rgba\(.*,\s*0\)$/.test(bg);
+  }
+  /* Баннер cookies (первый заход, до выбора) закрывает часть низа окна:
+     кнопка под ним не видна. На компьютере баннер не во всю ширину — кнопка
+     рядом с ним видна, поэтому сверяем по горизонтали. */
+  var consent = document.getElementById('cookie-consent');
+  function floor(r) {
+    if (!consent || consent.hidden) return window.innerHeight;
+    var c = consent.getBoundingClientRect();
+    if (!c.height || c.right <= r.left || c.left >= r.right) return window.innerHeight;
+    return Math.min(window.innerHeight, c.top);
+  }
+  var topbar = document.querySelector('.topbar');
+  var searchBar = nav.querySelector('.site-nav__bar');
+  function chromeBottom() {
+    // шапка уехала: на компьютере сверху полоса поиска (64 + 1), на телефоне — ничего
+    if (state === 'down') return desk.matches && searchBar ? searchBar.offsetHeight : 0;
+    var tb = topbar ? topbar.getBoundingClientRect().bottom : 0;
+    return Math.max(0, tb) + nav.offsetHeight;
+  }
+  function inView(el, top) {
+    var r = el.getBoundingClientRect();
+    if (!r.height) return false;
+    return Math.min(r.bottom, floor(r)) - Math.max(r.top, top) >= r.height / 2;
+  }
+  /* кнопок на странице 2–6 — их места проверяются на каждый кадр прокрутки */
+  var btns = [];
+  var queued = false;
+  function check() {
+    queued = false;
+    var top = chromeBottom();
+    var on = btns.some(function (b) { return inView(b, top); });
+    if (on !== waIn) { waIn = on; settle(); paint(); }
+  }
   function schedule() {
     if (queued) return;
     queued = true;
-    if (window.requestAnimationFrame) window.requestAnimationFrame(update);
-    else setTimeout(update, 16);
+    (window.requestAnimationFrame || setTimeout)(check);
   }
-
+  function watchButtons() {
+    btns = [].filter.call(
+      document.querySelectorAll('a[href*="wa.me/"], a[href*="api.whatsapp.com"]'), isButton);
+    check();   // сразу, без мигания кнопки в шапке
+  }
   window.addEventListener('scroll', schedule, { passive: true });
   window.addEventListener('resize', schedule, { passive: true });
-  update();
+  /* подвал: нижняя полоса уходит, чтобы не закрывать юридические ссылки, а на
+     телефоне возвращается шапка — с её кнопкой WhatsApp (у подвала своей
+     кнопки нет, а финал уже уехал вверх). У финала и плашки статьи своя
+     кнопка — там полосу прячет правило «одна кнопка» выше. */
+  if (bbar && 'IntersectionObserver' in window) {
+    var stops = document.querySelectorAll('.site-footer');
+    var hits = [];
+    var sio = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        var i = hits.indexOf(e.target);
+        if (e.isIntersecting && i < 0) hits.push(e.target);
+        if (!e.isIntersecting && i >= 0) hits.splice(i, 1);
+      });
+      footIn = hits.length > 0;
+      settle();
+      paint();
+    }, { rootMargin: '0px 0px -10% 0px' });
+    [].forEach.call(stops, function (s) { sio.observe(s); });
+  }
+  function onMedia() { watchButtons(); onScroll(); }
+  if (desk.addEventListener) desk.addEventListener('change', onMedia);
+  else if (desk.addListener) desk.addListener(onMedia);
+  watchButtons();
+  if (consent && window.MutationObserver) {
+    /* баннер выезжает 0,28 с — проверяем и после его анимации */
+    new MutationObserver(function () { schedule(); setTimeout(schedule, 350); })
+      .observe(consent, { attributes: true, attributeFilter: ['hidden'] });
+  }
+  /* шрифт кожи меняет высоты — пересчёт, когда он загрузился */
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(watchButtons);
 })();
 
 
@@ -123,23 +266,11 @@
 })();
 
 
-/* Мобильное меню-диалог: активный пункт, закрытие и цвет статус-бара.
-   Раньше этот код лежал инлайном внутри каждого из 225 HTML — одно и то же
-   тело скачивалось заново на каждом переходе. */
+/* Меню телефона: закрытие и цвет статус-бара. Раньше этот код лежал инлайном
+   внутри каждого из 225 HTML — одно и то же тело скачивалось заново на
+   каждом переходе. Меню в один уровень (v3, 30.10.2026): второй уровень
+   каталога и флаг data-nav="flat" сняты. */
 (function(){
-  var p = location.pathname;
-  var k = (p === '/' || p === '/index.html') ? 'home'
-        : p.indexOf('/blog') === 0 ? 'blog'
-        : p.indexOf('/partners') === 0 ? 'partners'
-        : (p.indexOf('/services') === 0 || p.indexOf('/notario') === 0 ||
-           p.indexOf('/ukraina') === 0 || p.indexOf('/banca') === 0 ||
-           p.indexOf('/traduccion') === 0 || p.indexOf('/legalizacion') === 0) ? 'services'
-        : p.indexOf('/about') === 0 ? 'about' : '';
-  if (k) {
-    var link = document.querySelector('.site-menu__link[data-page="' + k + '"]');
-    if (link) link.classList.add('active');
-  }
-
   var d = document.getElementById('site-menu-dialog');
   var trigger = document.querySelector('.site-nav__menu-btn');
   if (!d) return;
@@ -151,7 +282,9 @@
   var themeIdle = themeMeta ? themeMeta.getAttribute('content') : null;
   if (themeMeta && themeIdle && window.MutationObserver) {
     new MutationObserver(function(){
-      themeMeta.setAttribute('content', d.hasAttribute('open') ? '#FFFBF7' : themeIdle);
+      /* цвет листа — фон кожи (--k-bg, assets/theme-<x>.css; 30.10.2026) */
+      var sheet = (getComputedStyle(document.documentElement).getPropertyValue('--k-bg') || '').trim();
+      themeMeta.setAttribute('content', d.hasAttribute('open') ? (sheet || themeIdle) : themeIdle);
     }).observe(d, {attributes: true, attributeFilter: ['open']});
   }
 
@@ -178,41 +311,4 @@
        прыжок вверх на 70–78 px после закрытия меню (разбор /es/ 28.10) */
     try { trigger.focus({ preventScroll: true }); } catch (_) {}
   });
-})();
-
-/* Drill-down каталога в мобильном меню (2026-08-24): «Каталог услуг»
-   проваливается на уровень с категориями и услугами мегаменю. Без JS
-   пункт остаётся ссылкой на /services/ — здесь перехватываем клик. */
-(function(){
-  var scroll = document.querySelector('.site-menu__scroll');
-  if (!scroll) return;
-  var open = scroll.querySelector('[data-drill-open]');
-  var back = scroll.querySelector('[data-drill-back]');
-  var dlg = document.getElementById('site-menu-dialog');
-  if (!open || !back) return;
-  open.addEventListener('click', function (e) {
-    e.preventDefault();
-    scroll.classList.remove('is-drillback');
-    scroll.classList.add('is-sub');
-    open.setAttribute('aria-expanded', 'true');
-    scroll.scrollTop = 0;
-    try { back.focus({ preventScroll: true }); } catch (_) {}
-  });
-  back.addEventListener('click', function () {
-    scroll.classList.remove('is-sub');
-    scroll.classList.add('is-drillback');
-    open.setAttribute('aria-expanded', 'false');
-    scroll.scrollTop = 0;
-    try { open.focus({ preventScroll: true }); } catch (_) {}
-  });
-  /* закрытое меню возвращается на верхний уровень — при повторном
-     открытии человек видит меню, а не каталог, где остановился */
-  if (dlg && window.MutationObserver) {
-    new MutationObserver(function(){
-      if (!dlg.open) {
-        scroll.classList.remove('is-sub', 'is-drillback');
-        open.setAttribute('aria-expanded', 'false');
-      }
-    }).observe(dlg, { attributes: true, attributeFilter: ['open'] });
-  }
 })();

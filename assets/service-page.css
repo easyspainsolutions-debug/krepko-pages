@@ -1,0 +1,300 @@
+/* ═══════════════════════════════════════════════════════════════════════
+   Страница услуги v3 «B с терракотой» (30.10.2026)
+
+   Решения Daniil 30.10 («в 3 внедряем полностью») для страниц услуг и
+   «услуга × город» — templates/pages/service_page_split.html и
+   service_page_city.html (атрибут data-svc-layout на .pillar-split):
+     9  — «Почему с нами спокойно» светлой плашкой на своём месте, слова те же;
+     11 — шум снят в шаблонах и pillar-split.js; здесь — только зона касания
+          городов на карте вместо второго списка;
+     12 — «Не то, что нужно?» под вводными абзацами (modules/not_what.html);
+     низ — «Похожие услуги», лестница назад, «Читайте также» строками;
+     раскладка компьютера «rail» (scratchpad v3/svc-layout-decision.md):
+          от 1280 px колонка текста 640 px у левого края рамки и справа
+          липкая карточка 448 px — факты, кнопка, «Первая консультация
+          бесплатно». 640 + 64 + 448 = 1152 — ровно рамка (144–1296 на 1440,
+          64–1216 на 1280): оба края совпадают с краями шапки. Карточка
+          448 px: самый длинный факт «перекладаємо кожен пункт на
+          підписанні» — 370 px при 18 px, с точкой 386 из 398 доступных,
+          ни один факт не переносится ни на одном языке. Уже 1280 px
+          колонка сжалась бы ниже 640 — страница одной колонкой, как раньше.
+   Значения — только роли кожи --k-* (theme-b.css) и шкала --space-*;
+   свои числа — локальные --svc-* ниже. Без !important.
+   ═══════════════════════════════════════════════════════════════════════ */
+
+.pillar-split[data-svc-layout] {
+  --svc-card: 448px;          /* карточка действия (rail) */
+  --svc-gap: var(--space-8);  /* 64 — промежуток «текст | карточка» */
+  /* липкая карточка: 24 под тем, что сейчас сверху, — под шапкой (72 + линия 1)
+     или под полосой поиска, когда шапка уехала (--chrome-top, site-nav.css) */
+  --svc-top: calc(var(--chrome-top) + var(--space-5));
+  --svc-pad: var(--space-5);  /* поля карточки и плашки */
+  --svc-chev: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M9 6l6 6-6 6'/%3E%3C/svg%3E");
+}
+
+/* ── Строки-переходы: «Не то, что нужно?», «Похожие услуги», лестница ──
+   Всё, что ведёт на другую страницу, выглядит одинаково (набор B): линия,
+   основной текст, «›» справа, строка от 48 px — на телефоне и компьютере
+   (catalog.css на компьютере снимает шевроны у списков каталога — здесь
+   они нужны: строк мало, и это выходы со страницы). */
+body[data-quiet] .pillar-split[data-svc-layout] :is(.not-what__list, .similar .cp__list) {
+  max-width: none;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--k-line);
+}
+body[data-quiet] .pillar-split[data-svc-layout] :is(.not-what__list, .similar .cp__list) > li { margin: 0; padding: 0; }
+body[data-quiet] .pillar-split[data-svc-layout] :is(.not-what__list, .similar .cp__list) a {
+  position: relative;
+  box-sizing: border-box;
+  min-height: var(--k-row-h);
+  padding: var(--space-2) var(--space-6) var(--space-2) 0;
+  border-bottom: 1px solid var(--k-line);
+  font-size: var(--k-fs-body);
+  font-weight: var(--k-w-regular);
+  line-height: var(--k-lh-ui);
+  color: var(--k-text);
+}
+body[data-quiet] .pillar-split[data-svc-layout] :is(.not-what__list, .similar .cp__list) a > span { flex: 1 1 0; }
+body[data-quiet] .pillar-split[data-svc-layout] :is(.not-what__list, .similar .cp__list) a:not([data-wa]):not([data-open-search])::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: calc(50% - 8px);
+  width: 16px;
+  height: 16px;
+  background: var(--k-muted);
+  -webkit-mask: var(--svc-chev) center / contain no-repeat;
+  mask: var(--svc-chev) center / contain no-repeat;
+}
+body[data-quiet] .pillar-split[data-svc-layout] :is(.not-what__list, .similar .cp__list) small {
+  margin: 2px 0 0;
+  font-size: var(--k-fs-ui);
+  line-height: var(--k-lh-ui);
+  color: var(--k-muted);
+}
+@media (hover: hover) {
+  body[data-quiet] .pillar-split[data-svc-layout] :is(.not-what__list, .similar .cp__list) a:hover { color: var(--k-heading); }
+  body[data-quiet] .pillar-split[data-svc-layout] :is(.not-what__list, .similar .cp__list) a:hover > span {
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+  }
+}
+
+/* ── «Не то, что нужно?» — сразу после вводного текста ── */
+body[data-quiet] .pillar-split[data-svc-layout] .not-what { margin: var(--k-gap-block) 0 0; }
+body[data-quiet] .pillar-split[data-svc-layout] .not-what__t {
+  margin: 0 0 var(--space-2);
+  font-size: var(--k-fs-body);
+  font-weight: var(--k-w-strong);
+  line-height: var(--k-lh-ui);
+  color: var(--k-heading);
+}
+/* «Найти другую услугу» — лупа вместо шеврона (и вместо «›» каталога на телефоне) */
+body[data-quiet] .pillar-split[data-svc-layout] .not-what__find a::after { content: none; }
+body[data-quiet] .pillar-split[data-svc-layout] .not-what__ico {
+  position: absolute;
+  right: 0;
+  top: calc(50% - 8px);
+  color: var(--k-muted);
+}
+/* под блоком — подпись «Что вы получаете:» или заголовок: поле как между разделами */
+body[data-quiet] .pillar-split[data-svc-layout] .not-what + :is(.q-label, h2, .sell-trust) { margin-top: var(--k-gap-section); }
+
+/* ── «Почему с нами спокойно» — светлая плашка на своём месте (решение 9) ──
+   Плашка одна на странице (--k-plaque): главный довод для того, кто боится
+   переплатить. Слова те же; последняя строка «Отзывы клиентов» ведёт вниз,
+   к отзывам этой страницы. */
+body[data-quiet] .pillar-split[data-svc-layout] .sell-trust {
+  margin: var(--k-gap-block) 0;
+  padding: var(--svc-pad);
+  background: var(--k-plaque);
+  border: 0;
+  border-radius: var(--k-r-card);
+}
+body[data-quiet] .pillar-split[data-svc-layout] .sell-trust .sell-trust__t { margin: 0 0 var(--space-3); }
+body[data-quiet] .pillar-split[data-svc-layout] .sell-trust__list { margin: 0; }
+body[data-quiet] .pillar-split[data-svc-layout] .sell-trust__list li { color: var(--k-text); }
+body[data-quiet] .pillar-split[data-svc-layout] .sell-trust__list li::before { background: var(--k-muted); }
+body[data-quiet] .pillar-split[data-svc-layout] .sell-trust__rv {
+  color: var(--k-link-color);
+  font-weight: var(--k-link-weight);
+  text-decoration: var(--k-link-decoration);
+}
+@media (hover: hover) {
+  body[data-quiet] .pillar-split[data-svc-layout] .sell-trust__rv:hover {
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+  }
+}
+
+/* ── Куда дальше: «Похожие услуги», лестница назад, «Читайте также» ── */
+/* лестница: «Все услуги раздела» и под ней название раздела, «Каталог услуг»,
+   «Главная» — основной полужирный (С8, С9) */
+body[data-quiet] .pillar-split[data-svc-layout] .similar .cp__list.similar__ladder { margin-top: var(--k-gap-block); }
+body[data-quiet] .pillar-split[data-svc-layout] .similar__ladder a > span {
+  font-weight: var(--k-w-strong);
+  color: var(--k-heading);
+}
+body[data-quiet] .pillar-split[data-svc-layout] .similar__ladder .similar__sec {
+  flex-basis: 100%;
+  order: 3;
+  font-weight: var(--k-w-regular);
+}
+/* «Читайте также»: строкой — заголовок статьи полужирным, под ним серым
+   «тема · время чтения», «›» справа */
+body[data-quiet] .pillar-split[data-svc-layout] .pillar-guides { margin: 0; }
+body[data-quiet] .pillar-split[data-svc-layout] .pillar-guides .p-label {
+  margin: var(--k-gap-section) 0 var(--space-4);
+  font-size: var(--k-fs-h2);
+  letter-spacing: 0;
+}
+body[data-quiet] .pillar-split[data-svc-layout] .pillar-guides__list { border-top: 1px solid var(--k-line); }
+body[data-quiet] .pillar-split[data-svc-layout] .pillar-guide {
+  position: relative;
+  flex-flow: row wrap;
+  align-items: baseline;
+  gap: 0;
+  box-sizing: border-box;
+  min-height: var(--k-row-h);
+  padding: var(--space-2) var(--space-6) var(--space-2) 0;
+  border-bottom: 1px solid var(--k-line);
+}
+body[data-quiet] .pillar-split[data-svc-layout] .pillar-guide:last-child { border-bottom: 1px solid var(--k-line); }
+body[data-quiet] .pillar-split[data-svc-layout] .pillar-guide::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: calc(50% - 8px);
+  width: 16px;
+  height: 16px;
+  background: var(--k-muted);
+  -webkit-mask: var(--svc-chev) center / contain no-repeat;
+  mask: var(--svc-chev) center / contain no-repeat;
+}
+body[data-quiet] .pillar-split[data-svc-layout] .pillar-guide .pillar-guide__title {
+  flex: 1 0 100%;
+  font-size: var(--k-fs-body);
+  font-weight: var(--k-w-strong);
+  line-height: var(--k-lh-ui);
+  color: var(--k-heading);
+}
+body[data-quiet] .pillar-split[data-svc-layout] .pillar-guide :is(.pillar-guide__tag, .pillar-guide__time) {
+  margin-top: 2px;
+  font-size: var(--k-fs-ui);
+  line-height: var(--k-lh-ui);
+  letter-spacing: 0;
+  color: var(--k-muted);
+}
+body[data-quiet] .pillar-split[data-svc-layout] .pillar-guide .pillar-guide__tag + .pillar-guide__time::before {
+  content: "\00a0·\00a0";
+  content: "\00a0·\00a0" / "";
+}
+@media (hover: hover) {
+  body[data-quiet] .pillar-split[data-svc-layout] .pillar-guide:hover .pillar-guide__title {
+    color: var(--k-heading);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+  }
+}
+
+/* ── Карта: второго списка городов нет (решение 11) — шире зона касания
+   у точки и подписи города: прозрачная обводка ловит палец, не рисуется ── */
+body[data-quiet] .pillar-split[data-svc-layout] ~ .service-tail .cmap__city .cmap__dot {
+  stroke: transparent;
+  stroke-width: 30px;
+}
+body[data-quiet] .pillar-split[data-svc-layout] ~ .service-tail .cmap__city .cmap__label {
+  stroke: transparent;
+  stroke-width: 20px;
+}
+
+/* ── Текст под H1: на телефоне и до 1280 px обёртка прозрачна ──
+   .svc-text нужна только сетке «текст | карточка»; без неё блоки текста —
+   прямые дети колонки, как до v3 (поля, схлопывание отступов — те же). */
+body[data-quiet] .pillar-split[data-svc-layout] .svc-text { display: contents; }
+
+/* ═══ Раскладка «rail» на компьютере — от 1280 px ═══
+   Колонка .pillar-doc — во всю рамку и сетка: слева H1 и текст (640),
+   справа карточка (448), промежуток 64. Ячейка карточки — обе строки
+   сетки, поэтому липкая карточка кончается вместе с текстом услуги и до
+   вопросов, отзывов, карты и финала не доходит. Порядок в разметке
+   прежний (H1 → факты и кнопка → текст): чтение и Tab не меняются. */
+@media (min-width: 1280px) {
+  body[data-quiet] .pillar-split--one[data-svc-layout="rail"] .pillar-doc {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) var(--svc-card);
+    grid-template-rows: auto 1fr;
+    column-gap: var(--svc-gap);
+    align-items: start;
+    max-width: none;
+  }
+  body[data-quiet] .pillar-split[data-svc-layout="rail"] .pillar-doc > .pillar-split__head { grid-column: 1; grid-row: 1; }
+  body[data-quiet] .pillar-split[data-svc-layout="rail"] .pillar-doc > .svc-text {
+    display: block;
+    grid-column: 1;
+    grid-row: 2;
+    min-width: 0;
+  }
+  /* первый блок текста — без своего верхнего поля: расстояние до H1 даёт шапка */
+  body[data-quiet] .pillar-split[data-svc-layout="rail"] .svc-text > :first-child,
+  body[data-quiet] .pillar-split[data-svc-layout="rail"] .svc-text > .pillar-body:first-child > :first-child { margin-top: 0; }
+  body[data-quiet] .pillar-split[data-svc-layout="rail"] .pillar-doc > .pillar-split__head--doc { margin-bottom: var(--k-gap-block); }
+
+  /* карточка: рамка 1 px, углы 12, без тени и заливки, липкая под шапкой */
+  body[data-quiet] .pillar-split[data-svc-layout="rail"] .pillar-doc > .sell-head {
+    grid-column: 2;
+    grid-row: 1 / span 2;
+    align-self: start;
+    position: sticky;
+    top: var(--svc-top);
+    transition: top .2s ease-out;   /* вместе с шапкой и полосой поиска */
+    box-sizing: border-box;
+    width: var(--svc-card);
+    margin: 0;
+    padding: var(--svc-pad);
+    background: var(--k-bg);
+    border: 1px solid var(--k-line);
+    border-radius: var(--k-r-card);
+  }
+  /* факты столбиком, каждый в одну строку; кнопка и подпись в три строки справа */
+  body[data-quiet] .pillar-split[data-svc-layout="rail"] .sell-head .sell-facts { margin: 0; }
+  body[data-quiet] .pillar-split[data-svc-layout="rail"] .sell-head .sell-facts li { white-space: nowrap; }
+  body[data-quiet] .pillar-split[data-svc-layout="rail"] .sell-head .sell-cta { margin: var(--space-5) 0 0; }
+
+  /* одна правая кромка у абзацев, списков и плашек — ширина колонки */
+  body[data-quiet] .pillar-split[data-svc-layout="rail"] .svc-text :is(
+      .pillar-body > p, .pillar-body > ul, .pillar-body > ol, .pillar-body > blockquote,
+      .pillar-body > .sell-trust, .pillar-body > .doc-cta, .city-context > p, .doc-sell-trust) {
+    max-width: none;
+  }
+  /* «Похожие услуги» и «Читайте также» — той же ширины и от того же края */
+  body[data-quiet] .pillar-split--one[data-svc-layout="rail"] :is(.similar, .pillar-split__cols > .pillar-more) {
+    max-width: calc(100% - 2 * var(--frame-gutter) - var(--svc-card) - var(--svc-gap));
+  }
+
+  /* Одна кнопка WhatsApp на экране: рядом с липкой карточкой кнопка врезки
+     «Не уверены…» и «Описать мою ситуацию» была бы второй — текст врезки
+     остаётся, кнопка — в карточке */
+  body[data-quiet] .pillar-split[data-svc-layout="rail"] .svc-text .doc-cta .doc-cta__b,
+  body[data-quiet] .pillar-split[data-svc-layout="rail"] .svc-text .body-cta { display: none; }
+  body[data-quiet] .pillar-split[data-svc-layout="rail"] .svc-text .doc-cta .doc-cta__d { margin-bottom: 0; }
+}
+
+/* ═══ Одна кнопка WhatsApp на экране — компьютер от 900 px ═══
+   Кнопку шапки и полосы поиска прячет на месте общее правило site-nav.css
+   по <html data-wa-in> (его ставит site-nav.js, выключатель data/site.yaml →
+   bars.desktop_one_wa) — кнопку карточки оно тоже учитывает. Здесь — только
+   первый кадр услуги: пока site-nav.js не отработал (у <html> ещё нет
+   data-bar), кнопка страницы на виду, у шапки её нет — без мигания кнопки
+   шапки при загрузке (слияние потоков 30.10: свой детектор услуги снят). */
+@media (min-width: 900px) {
+  :root:not([data-bar]) body:has(.pillar-split[data-svc-layout]) .site-nav[data-bars~="one-wa"] :is(.site-nav__consult, .site-nav__bar-wa) { visibility: hidden; }
+}
+@media (prefers-reduced-motion: reduce) {
+  body[data-quiet] .pillar-split[data-svc-layout="rail"] .pillar-doc > .sell-head { transition: none; }
+}

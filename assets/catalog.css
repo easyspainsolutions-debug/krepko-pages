@@ -1,0 +1,513 @@
+/* ═══════════════════════════════════════════════════════════════════════
+   Каталог услуг страницей (v2 «один каталог», 29.10.2026; кожа v3 30.10.2026)
+
+   Daniil про v1: «нахуя нам всплывающий каталог плюс страница каталога…
+   Страницу самого каталога услуг сделать в таком виде, как всплывающая
+   менюшка». Вид листа v1 стал обычной страницей: /services/ (все разделы) и
+   хабы разделов (свой раздел целиком, «Другие разделы»); строки того же вида —
+   «Похожие услуги» на страницах услуг. Разметка — modules/catalog.html,
+   modules/similar_services.html; поведение — catalog.js.
+
+   v3 «B с терракотой» («00 Система v3 — итог» §3.3, directions.md §4,
+   vnedrenie §3.4). Первый экран /services/: «‹ Главная», «Что вам нужно
+   сделать?», поле 56 px (компьютер 64) с рамкой 2 px, серая строка «Своими
+   словами: …», «Чаще всего обращаются» мелким серым и 6 чипов — столбиком на
+   телефоне, 2 × 3 и 3 × 2 на широком экране. Дальше вкладки разделов
+   (телефон — прилипают под шапкой, а когда шапка уехала, <html
+   data-bar="down">, — к самому верху) или колонка разделов 264 px слева
+   (компьютер). Над разделами черты нет (решение 30.10): разделы разделяет
+   воздух, строки — тонкие линии. Строка списка — основной текст 48 px, линия
+   снизу, «›» справа; подпись «в разделе «…»» — мелким серым второй строкой;
+   без страницы — значок и «в WhatsApp». Подчёркиваний нет (правило 03.08):
+   при наведении строка ложится на подложку.
+   Значения — только роли --k-* (assets/theme-<x>.css) и шаг --space-*.
+   ═══════════════════════════════════════════════════════════════════════ */
+
+/* main ужат до 960 px (desktop.css): каталог задаёт ширину сам; H1 — сразу
+   под ссылкой назад (quiet.css даёт main ещё 8 px сверху) */
+body:has(.cp) main { max-width: none; padding-left: 0; padding-right: 0; }
+body[data-quiet]:has(.cp) main { padding-top: 0; }
+
+.cp {
+  --cp-pad: var(--frame-pad);
+  /* высота липкой шапки сайта — пишет catalog.js; запас на первый кадр */
+  --cp-stick-top: var(--cp-stick, 64px);
+  box-sizing: border-box;
+  /* рамка сайта (tokens.css, 29.10.2026): H1, поиск и списки — по краям той
+     же рамки, что логотип и кнопка WhatsApp в шапке */
+  max-width: var(--frame-max);
+  margin: 0 auto;
+  padding: 0 var(--cp-pad) var(--k-gap-section);
+  font-family: var(--k-font-text);
+  color: var(--k-text);
+}
+.cp *, .cp *::before, .cp *::after { box-sizing: border-box; }
+
+/* ── Шапка каталога: H1, большое поле, строка под полем, частые услуги ── */
+.cp__head { padding-top: 0; }
+.cp .cp__head h1 {
+  margin: var(--space-1) 0 var(--space-4);
+  font-family: var(--k-font-display);
+  font-size: var(--k-fs-h1);
+  font-weight: var(--k-w-display);
+  line-height: var(--k-lh-h1);
+  letter-spacing: var(--k-ls-h1);
+  color: var(--k-heading);
+}
+.cp__search {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  height: 56px;
+  padding: 0 var(--space-4);
+  /* поле с видимой рамкой: --k-line-strong — 4,6:1 к фону */
+  border: var(--k-field-border) solid var(--k-line-strong);
+  border-radius: var(--k-r-field);
+  background: var(--k-field-bg);
+  color: var(--k-muted);
+}
+/* кольцо фокуса — у всего поля, а не у голого input внутри */
+.cp__search:focus-within {
+  outline: 2px solid var(--k-focus);
+  outline-offset: 2px;
+}
+.cp__search svg { flex: none; width: 22px; height: 22px; }
+.cp__input {
+  flex: 1 1 auto;
+  min-width: 0;
+  height: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--k-text);
+  /* 17 px: мельче 16 px Safari на iPhone увеличивает страницу при фокусе */
+  font: var(--k-w-regular) var(--k-fs-body)/1.3 var(--k-font-text);
+  outline: none;
+  -webkit-appearance: none;
+  appearance: none;
+}
+.cp__input::placeholder { color: var(--k-muted); opacity: 1; }
+/* крестик «очистить» — родной, как у поля каталога на main (проверка v2:
+   без него запрос на телефоне стирали по букве) */
+.tpl .cp .cp__input:focus-visible { outline: none; box-shadow: none; }
+/* число найденного — справа в строке поля: «12 услуг · 4 раздела» */
+.cp__status {
+  flex: none;
+  margin: 0;
+  font-size: var(--k-fs-ui);
+  line-height: var(--k-lh-ui);
+  color: var(--k-muted);
+  white-space: nowrap;
+}
+.cp__status:empty { display: none; }
+/* пустой ответ крупно написан ниже — в строке поля он только для диктора */
+.cp__status.is-sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+/* С2: серая строка под полем — не нажимается и видна, пока поле пустое;
+   когда человек печатает, число найденного и так видно справа в поле */
+.cp__hint {
+  margin: var(--space-2) 0 0;
+  font-size: var(--k-fs-ui);
+  line-height: var(--k-lh-ui);
+  color: var(--k-muted);
+}
+.cp.is-filtering .cp__hint,
+.cp__head:has(.cp__input:not(:placeholder-shown)) .cp__hint { display: none; }
+
+/* «Чаще всего обращаются» — мелким серым, под ним 6 чипов по 48 px; столбиком:
+   в половину ширины телефона два названия из шести рвутся на 3 строки */
+.cp__top[hidden] { display: none; }
+/* вес: правило кожи для H1 и H2 в main (light-scale.css) весит 0,3,4 */
+.cp .cp__head .cp__top .cp__h2 {
+  margin: var(--k-gap-block) 0 var(--space-2);
+  font-size: var(--k-fs-ui);
+  font-weight: var(--k-w-regular);
+  line-height: var(--k-lh-ui);
+  letter-spacing: 0;
+  color: var(--k-muted);
+}
+.cp__chips {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.cp__chips li { margin: 0; padding: 0; }
+.cp__chips li::before, .cp__chips li::marker { content: none; }
+.cp__chips a {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  min-height: var(--k-chip-h);
+  padding: var(--space-2) var(--space-4);
+  border: 1px solid var(--k-chip-line);
+  border-radius: var(--k-r-chip);
+  background: var(--k-surface);
+  color: var(--k-heading);
+  font-size: var(--k-fs-ui);
+  font-weight: var(--k-w-regular);
+  line-height: var(--k-lh-ui);
+  text-decoration: none;
+}
+.cp__chips a:active { background: var(--k-surface-press); }
+@media (hover: hover) {
+  .cp__chips a:hover { background: var(--k-surface-press); }
+}
+/* пустой ответ (catalog.js): страховка «Ничего не нашлось…» встаёт под поле,
+   «Чаще всего обращаются» — под ней, за линией */
+.cp__head > .cp-ask { margin-top: var(--k-gap-block); }
+.cp.is-empty .cp__head .cp__top { margin-top: var(--k-gap-block); border-top: 1px solid var(--k-line); }
+
+/* ── Оглавление разделов (/services/) ──
+   Телефон: одна строка вкладок 48 px во всю ширину, липнет под шапкой сайта,
+   а когда шапка уехала (<html data-bar="down">) — к самому верху. Строку
+   листают вбок: последняя вкладка обрезана краем экрана, без затухания.
+   Текущий раздел — полужирный, с чертой 2 px; место под полужирное начертание
+   держит невидимая копия названия, поэтому вкладки не прыгают. */
+.cp__toc {
+  position: sticky;
+  top: var(--cp-stick-top);
+  z-index: 40;
+  margin: var(--k-gap-block) calc(-1 * var(--cp-pad)) 0;
+  background: var(--k-bg);
+  border-bottom: 1px solid var(--k-line);
+  transition: top .2s ease-out;
+}
+:root[data-bar="down"] .cp__toc { top: 0; }
+.cp__toc ul {
+  display: flex;
+  gap: var(--space-5);
+  margin: 0;
+  padding: 0 var(--cp-pad);
+  list-style: none;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scrollbar-width: none;
+}
+.cp__toc ul::-webkit-scrollbar { display: none; }
+.cp__toc li { flex: none; margin: 0; }
+.cp__toc li::before, .cp__toc li::marker { content: none; }
+.cp__toc li[hidden] { display: none; }
+.cp__toc a {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: var(--k-row-h);
+  border-bottom: 2px solid transparent;
+  color: var(--k-text);
+  font-size: var(--k-fs-ui);
+  font-weight: var(--k-w-regular);
+  line-height: 1.25;
+  white-space: nowrap;
+  text-decoration: none;
+}
+.cp__toc a > span { display: inline-grid; }
+.cp__toc a > span::after {
+  content: attr(data-t);
+  height: 0;
+  overflow: hidden;
+  visibility: hidden;
+  font-weight: var(--k-w-strong);
+  pointer-events: none;
+  user-select: none;
+}
+.cp__toc a small { display: none; }
+.cp__toc a.is-on {
+  font-weight: var(--k-w-strong);
+  color: var(--k-heading);
+  border-bottom-color: var(--k-heading);
+}
+
+/* ── Тело каталога ── */
+.cp__body { display: flex; flex-direction: column; }
+.cp__dir[hidden], .cp__group[hidden], .cp__list li[hidden] { display: none; }
+/* разделы — воздух вместо черты; переход по вкладке оставляет заголовок
+   раздела ниже шапки и вкладок (html scroll-padding-top — light-scale.css) */
+.cp__dir {
+  margin-top: var(--k-gap-section);
+  scroll-margin-top: calc(var(--k-row-h) + var(--space-3));
+}
+/* первый раздел — под вкладками; при поиске первым стоит лучший из найденных */
+.cp__body > .cp__dir:first-child { margin-top: var(--k-gap-block); }
+/* хаб: раздел — сама страница, группы идут сразу под полем */
+.cp--hub .cp__body > .cp__dir:first-child { margin-top: 0; }
+
+/* H2 каталога: раздел, «Другие разделы», «В других разделах», страховка */
+.cp .cp__h2,
+.cp .cp__dir-h,
+.cp .cp-ask__h,
+.similar > h2 {
+  margin: 0 0 var(--space-3);
+  font-family: var(--k-font-display);
+  font-size: var(--k-fs-h2);
+  font-weight: var(--k-w-display);
+  line-height: var(--k-lh-h2);
+  letter-spacing: var(--k-ls-h2);
+  color: var(--k-heading);
+}
+/* раздел: название — ссылка на его страницу, рядом «60 услуг» мелким серым */
+.cp .cp__dir-h {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  column-gap: var(--space-3);
+  margin: 0;
+}
+.cp__dir-h a { color: inherit; text-decoration: none; }
+.cp .cp__dir-h small {
+  font-family: var(--k-font-text);
+  font-size: var(--k-fs-ui);
+  font-weight: var(--k-w-regular);
+  line-height: var(--k-lh-ui);
+  letter-spacing: 0;
+  color: var(--k-muted);
+  white-space: nowrap;
+}
+
+/* группа — основной полужирный над строками (и на хабе, где она — H2 страницы) */
+.cp .cp__group-h {
+  margin: var(--k-gap-block) 0 var(--space-2);
+  font-family: var(--k-font-text);
+  font-size: var(--k-fs-body);
+  font-weight: var(--k-w-strong);
+  line-height: 1.35;
+  letter-spacing: 0;
+  color: var(--k-heading);
+  scroll-margin-top: var(--space-4);
+}
+
+/* ── Строки: основной текст, 48 px, линия снизу, «›» справа ── */
+.cp__list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--k-line);
+}
+.cp__list li { margin: 0; padding: 0; }
+.cp__list li::before, .cp__list li::marker { content: none; }
+.cp__list a {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  column-gap: var(--space-3);
+  min-height: var(--k-row-h);
+  padding: var(--space-2) calc(var(--space-5) + var(--space-1)) var(--space-2) 0;
+  border-bottom: 1px solid var(--k-line);
+  color: var(--k-text);
+  font-size: var(--k-fs-body);
+  font-weight: var(--k-w-regular);
+  line-height: 1.35;
+  text-decoration: none;
+}
+.cp__list a > span { flex: 1 1 0; min-width: 0; }
+/* «›» — переход на страницу; у строк «в WhatsApp» вместо него значок */
+.cp__list a:not([data-wa])::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 50%;
+  width: 16px;
+  height: 16px;
+  transform: translateY(-50%);
+  background: var(--k-muted);
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M9 6l6 6-6 6'/%3E%3C/svg%3E") center / contain no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M9 6l6 6-6 6'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+/* наведение — подложка под строкой чуть шире текста (без подчёркивания) */
+.cp__list a::before,
+.cp__toc a::before {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  inset: 0 calc(-1 * var(--space-2));
+  border-radius: var(--k-r-chip);
+  background: transparent;
+}
+@media (hover: hover) {
+  .cp__list a:hover::before { background: var(--k-surface); }
+  .cp__list a:hover::after { background: var(--k-heading); }
+}
+.cp__list small {
+  flex: none;
+  font-size: var(--k-fs-ui);
+  font-weight: var(--k-w-regular);
+  line-height: var(--k-lh-ui);
+  color: var(--k-muted);
+}
+/* страница другого раздела: подпись второй строкой */
+.cp__list small.cp-x { flex-basis: 100%; order: 3; margin-top: 2px; }
+/* без страницы — открывается WhatsApp: значок и слова, без шеврона */
+.cp-w {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  white-space: nowrap;
+}
+.cp-w::before {
+  content: '';
+  flex: none;
+  width: 14px;
+  height: 14px;
+  background: currentColor;
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9 8.5 8.5 0 0 1 8.5 8.5z'/%3E%3C/svg%3E") center / contain no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9 8.5 8.5 0 0 1 8.5 8.5z'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+/* набранное в поле — на подложке нажатия, как в лупе */
+.cp__list mark {
+  background: var(--k-surface-press);
+  color: inherit;
+  border-radius: 2px;
+}
+
+/* ── Хаб: совпадения в других разделах и «Другие разделы» ── */
+.cp__more, .cp__others { margin-top: var(--k-gap-section); }
+.cp__more[hidden], .cp__others[hidden] { display: none; }
+.cp.is-filtering .cp__more { margin-top: var(--k-gap-block); }
+/* «Из Украины … 19 услуг ›»: число — перед шевроном, шевроны — одной колонкой */
+.cp__others small { order: 2; }
+
+/* ── Страховка: «Не нашли свою задачу?» — в конце и на месте пустого ответа ── */
+.cp-ask { margin-top: var(--k-gap-section); }
+.cp-ask > * { max-width: 560px; }
+.cp .cp-ask__h { margin-bottom: var(--space-2); }
+.cp-ask__t {
+  margin: 0 0 var(--space-4);
+  font-size: var(--k-fs-body);
+  line-height: var(--k-lh-body);
+  color: var(--k-text);
+}
+.cp-ask__q {
+  margin: var(--space-2) 0 0;
+  font-size: var(--k-fs-ui);
+  line-height: var(--k-lh-ui);
+  color: var(--k-muted);
+}
+.cp-ask .btn::before { content: none; }
+/* хаб, пустой ответ: страховка первой, под ней «Другие разделы» */
+.cp.is-empty .cp__body > .cp-ask { order: -1; margin-top: var(--k-gap-block); }
+
+/* ── Текст раздела под каталогом (хабы) — та же рамка, что каталог ── */
+.pillar-split.cp-text {
+  box-sizing: border-box;
+  max-width: var(--frame-max);
+  margin: 0 auto;
+  padding: var(--space-7) var(--q-pad, var(--space-4)) var(--space-4);
+}
+.cp-text .pillar-doc { max-width: var(--w-read); }
+
+/* ── «Похожие услуги» внизу страницы услуги ── */
+.similar {
+  margin-top: var(--space-6);
+  padding-top: var(--space-6);
+  border-top: 1px solid var(--border-faint);
+}
+.similar__all { margin: var(--space-3) 0 0; }
+.similar__all a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  color: var(--navy);
+  font-size: var(--q-body);
+  text-decoration: none;
+}
+
+/* ── Фокус: кольцо 2 px цветом текста с отступом (кожа v3) ── */
+.cp a:focus-visible,
+.similar a:focus-visible {
+  outline: 2px solid var(--k-focus);
+  outline-offset: 2px;
+  box-shadow: none;
+}
+
+/* ── Широкий телефон и планшет (≥ 600 px): чипы в две колонки — в половину
+   ширины все шесть названий уже в одну строку ── */
+@media (min-width: 600px) {
+  .cp__chips { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+/* ── Компьютер (≥ 900 px): поле 64 px; оглавление — липкая колонка слева
+   264 px с числами, на 96 px от верха; группы раздела — в две колонки с
+   1100 px; строки те же, с «›» (кликабельное выглядит кликабельным) ── */
+@media (min-width: 900px) {
+  .cp .cp__head h1 { margin-bottom: var(--space-5); }
+  .cp__search { height: 64px; padding: 0 var(--space-5); gap: var(--space-4); }
+  .cp__chips { gap: var(--space-3); }
+
+  .cp__main {
+    display: grid;
+    grid-template-columns: 264px minmax(0, 1fr);
+    column-gap: var(--space-7);
+    align-items: start;
+    margin-top: var(--k-gap-section);
+  }
+  .cp__toc,
+  :root[data-bar="down"] .cp__toc {
+    top: calc(var(--cp-stick-top) + var(--space-5));
+    z-index: 1;
+    margin: 0;
+    background: none;
+    border-bottom: 0;
+    transition: none;
+  }
+  .cp__toc ul {
+    display: block;
+    padding: 0;
+    overflow: visible;
+  }
+  .cp__toc a {
+    justify-content: space-between;
+    gap: var(--space-3);
+    min-height: 44px;
+    padding: var(--space-1) 0;
+    border-bottom: 0;
+    white-space: normal;
+  }
+  .cp__toc a small {
+    display: inline;
+    flex: none;
+    font-size: var(--k-fs-ui);
+    line-height: var(--k-lh-ui);
+    color: var(--k-muted);
+  }
+  .cp__toc a.is-on { border-bottom-color: transparent; }
+  @media (hover: hover) {
+    .cp__toc a:hover::before { background: var(--k-surface); }
+  }
+
+  .cp__dir { scroll-margin-top: var(--space-3); }
+  .cp__body > .cp__dir:first-child { margin-top: 0; }
+
+  .cp--hub .cp__groups,
+  .cp__others .cp__list,
+  .cp__more .cp__list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: var(--space-7);
+    align-items: start;
+  }
+}
+@media (min-width: 1100px) {
+  .cp__chips { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .cp:not(.cp--hub) .cp__groups {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: var(--space-7);
+    align-items: start;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cp__toc { transition: none; }
+}

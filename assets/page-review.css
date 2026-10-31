@@ -1,189 +1,205 @@
 /* ============================================================
-   Страница «Спасибо за выбор» (2026-08-14)
+   Страница «Спасибо за выбор» (2026-08-14, кожа v3 30.10.2026)
 
    Ссылку на неё отправляют клиенту после закрытой задачи, поэтому она
    должна выглядеть продолжением сайта, а не отдельной посадочной.
 
-   Было: тёмно-синий остров между светлой шапкой и подвалом, золотая
-   монограмма «K» из палитры первой версии сайта и кнопка того же золота —
-   всё это осталось от тёмной темы. Стили лежали инлайном на 5 КБ.
+   Кожа v3 (решение Daniil 30.10 «в 3 внедряем полностью») — роли --k-*:
+   карточка на подложке с линией, заголовок шрифтом кожи, кнопки сайта:
+     • «Написать в WhatsApp» — единственная заливка цветом (--k-action),
+       прямые углы, 48 px;
+     • «Всё хорошо — оставить отзыв» и «Были вопросы к работе» — кнопки-
+       рамки кожи (рамка поля 2 px), как «Читать больше» на главной.
+       Кнопка Google сохраняет фирменный логотип — так её узнают;
+     • звёзды — цветом заголовка: цветных значков в коже нет.
    ============================================================ */
 
+/* 29.10.2026 (одна рамка, tokens.css): main во всю ширину; крошки и карточка
+   начинаются у левого края рамки сайта (были по центру окна) */
+main:has(> .review) {
+  max-width: none;
+  padding-left: 0;
+  padding-right: 0;
+  padding-top: 0;
+}
+/* «‹ Главная» — одна ссылка на ступеньку выше, строчными, со стрелкой */
+main:has(> .review) > nav.breadcrumb {
+  --crumb-max: var(--frame-max);
+  --crumb-px: var(--frame-pad);
+  --crumb-pt: var(--space-2);
+  --crumb-pb: 0px;
+  --crumb-link: var(--k-text);
+  box-sizing: border-box;
+  column-gap: 0;
+  font-size: 0;
+}
+main:has(> .review) > nav.breadcrumb > :not(.breadcrumb__parent) { display: none; }
+main:has(> .review) > nav.breadcrumb > .breadcrumb__parent {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  min-height: 44px;
+  margin: 0;
+  padding: 0;
+  border-radius: 0;
+  font-size: var(--k-fs-ui);
+  font-weight: var(--k-w-regular);
+  line-height: var(--k-lh-ui);
+}
+main:has(> .review) > nav.breadcrumb > .breadcrumb__parent svg { display: block; flex: none; }
+
 .review {
-  --rv-ink: #1A2B3C;
   max-width: 620px;
-  margin: 0 auto;
-  padding: clamp(28px, 5vw, 56px) clamp(20px, 4vw, 32px) clamp(56px, 7vw, 88px);
+  margin: 0 var(--frame-gutter);
+  padding: var(--k-gap-block) 0 var(--k-gap-section);
   text-align: center;
+  font-family: var(--k-font-text);
 }
 
-/* Карточка — тот же контур, что у карточек витрины блога: рамка и радиус,
-   без заливки. Заливка здесь спорила бы с песочной шапкой. */
 .review__card {
-  padding: clamp(28px, 5vw, 44px) clamp(20px, 4vw, 36px);
-  background: var(--surface, #F5F0EB);
-  border: 1px solid rgba(26, 43, 60, .1);
-  border-radius: 18px;
+  padding: var(--k-gap-section) var(--space-6);
+  background: var(--k-surface);
+  border: 1px solid var(--k-line);
+  border-radius: var(--k-r-card);
 }
 
 .review__stars {
   display: flex;
   justify-content: center;
   gap: 6px;
-  margin-bottom: 20px;
+  margin-bottom: var(--space-5);
 }
 .review__stars svg {
   width: 22px;
   height: 22px;
-  fill: var(--gold, #C75B39);
+  fill: var(--k-heading);
 }
 
 .review__h1 {
-  font-family: 'Playfair Display', Georgia, serif;
-  font-size: clamp(26px, 3.4vw, 34px);
-  font-weight: 500;
-  line-height: 1.2;
-  color: var(--rv-ink);
-  margin: 0 0 14px;
+  margin: 0 0 var(--space-3);
+  font-family: var(--k-font-display);
+  font-size: var(--k-fs-h1);
+  font-weight: var(--k-w-display);
+  line-height: var(--k-lh-h1);
+  letter-spacing: var(--k-ls-h1);
+  color: var(--k-heading);
+  text-wrap: balance;
 }
 
 .review__lead {
-  font-family: 'Manrope', sans-serif;
-  font-size: 15.5px;
-  line-height: 1.6;
-  color: var(--text-sub, #4A4A4A);
-  max-width: 420px;
-  margin: 0 auto 26px;
+  max-width: 440px;
+  margin: 0 auto var(--space-5);
+  font-size: var(--k-fs-body);
+  line-height: var(--k-lh-body);
+  color: var(--k-text);
 }
 
-/* Кнопка Google остаётся белой с фирменным логотипом — так её узнают, —
-   но контур берёт терракоту, чтобы она читалась как наша. */
-.review__google {
+/* Кнопка-рамка: рамка поля 2 px, мелкий полужирный, 48 px */
+.review__google,
+.review__wa {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 10px;
   width: 100%;
-  max-width: 340px;
-  padding: 15px 20px;
-  background: #FFFFFF;
-  border: 1px solid rgba(199, 91, 57, .45);
-  border-radius: 12px;
-  font-family: 'Manrope', sans-serif;
-  font-size: 15.5px;
-  font-weight: 700;
-  color: var(--rv-ink);
+  max-width: 360px;
+  min-height: var(--k-btn-h);
+  padding: 0 var(--space-5);
+  background: var(--k-bg);
+  border: var(--k-field-border) solid var(--k-line-strong);
+  border-radius: var(--k-r-btn);
+  font-family: var(--k-font-text);
+  font-size: var(--k-fs-ui);
+  font-weight: var(--k-w-strong);
+  line-height: 1.2;
+  color: var(--k-heading);
   text-decoration: none;
-  transition: border-color .18s ease, transform .18s ease;
+  transition: background-color .15s ease;
 }
 @media (hover: hover) {
-  .review__google:hover {
-    border-color: var(--gold, #C75B39);
-    transform: translateY(-1px);
-  }
+  .review__google:hover,
+  .review__wa:hover { background: var(--k-surface-press); }
 }
 .review__google svg { width: 20px; height: 20px; flex: none; }
+.review__wa svg { width: 18px; height: 18px; flex: none; color: var(--k-heading); }
 
-.review__note {
-  font-family: 'Manrope', sans-serif;
-  font-size: 13px;
-  color: var(--text-muted, #6B6B6B);
-  margin: 12px 0 0;
+/* «Написать в WhatsApp» на втором экране — кнопка WhatsApp сайта */
+.review__wa--primary {
+  background: var(--k-action);
+  border-color: var(--k-action);
+  color: var(--k-on-action);
+}
+.review__wa--primary svg { color: var(--k-on-action); }
+@media (hover: hover) {
+  .review__wa--primary:hover {
+    background: var(--k-action-hover);
+    border-color: var(--k-action-hover);
+    color: var(--k-on-action);
+  }
 }
 
-/* Разделитель «или» — линия с подписью посередине. */
+.review__note {
+  margin: var(--space-3) 0 0;
+  font-size: var(--k-fs-ui);
+  line-height: var(--k-lh-ui);
+  color: var(--k-muted);
+}
+.review__note a {
+  color: var(--k-text);
+  font-weight: var(--k-w-strong);
+  text-decoration: none;
+}
+@media (hover: hover) {
+  .review__note a:hover {
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+  }
+}
+
+/* Разделитель «или» — линия с подписью посередине, строчными */
 .review__or {
   display: flex;
   align-items: center;
-  gap: 14px;
-  margin: 26px 0 20px;
-  font-family: 'Manrope', sans-serif;
-  font-size: 12px;
-  letter-spacing: .1em;
-  text-transform: uppercase;
-  color: var(--text-muted, #6B6B6B);
+  gap: var(--space-3);
+  margin: var(--space-5) 0;
+  font-size: var(--k-fs-ui);
+  line-height: var(--k-lh-ui);
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--k-muted);
 }
 .review__or::before,
 .review__or::after {
   content: '';
   flex: 1;
   height: 1px;
-  background: rgba(26, 43, 60, .12);
+  background: var(--k-line);
 }
 
 .review__alt-text {
-  font-family: 'Manrope', sans-serif;
-  font-size: 14.5px;
-  line-height: 1.55;
-  color: var(--text-sub, #4A4A4A);
-  margin: 0 0 14px;
+  margin: 0 0 var(--space-4);
+  font-size: var(--k-fs-body);
+  line-height: var(--k-lh-body);
+  color: var(--k-text);
 }
-
-.review__wa {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 9px;
-  padding: 12px 22px;
-  border: 1px solid rgba(26, 43, 60, .14);
-  border-radius: 12px;
-  font-family: 'Manrope', sans-serif;
-  font-size: 14.5px;
-  font-weight: 600;
-  color: var(--rv-ink);
-  text-decoration: none;
-  transition: border-color .18s ease;
-}
-@media (hover: hover) {
-  .review__wa:hover { border-color: var(--gold, #C75B39); }
-}
-.review__wa svg { width: 17px; height: 17px; flex: none; color: var(--gold, #C75B39); }
 
 @media (max-width: 560px) {
-  /* Поля на телефоне уже даёт main (24px). Свои 20px сжимали карточку до
-     287px при экране в 375, и надпись на кнопке ломалась на две строки. */
+  /* Поля на телефоне уже даёт рамка (24 px) — своих не добавляем */
   .review { padding-left: 0; padding-right: 0; }
-  .review__card { padding-left: 18px; padding-right: 18px; }
-  .review__google {
-    max-width: none;
-    padding-left: 14px;
-    padding-right: 14px;
-    font-size: 15px;
-  }
+  .review__card { padding: var(--k-gap-block) var(--space-4); }
+  .review__google,
+  .review__wa { max-width: none; }
   .review__stars svg { width: 20px; height: 20px; }
 }
 
 /* ── Развилка «как всё прошло» (2026-08-14) ──
-   Второй экран открывается якорем :target — без скриптов, поэтому работает
-   везде и не мигает при загрузке.
-
-   Важно про сам приём: дорога в Google открыта с обоих экранов. Механика,
-   где недовольных к форме отзыва не пускают, называется review gating и
-   запрещена правилами Google Business Profile — за неё снимают отзывы с
-   профиля. Здесь развилка помогает человеку выбрать, а не фильтрует его. */
+   Второй экран открывается якорем :target — без скриптов. Дорога в Google
+   открыта с обоих экранов: механика, где недовольных к форме отзыва не
+   пускают (review gating), запрещена правилами Google Business Profile.
+   Здесь развилка помогает человеку выбрать, а не фильтрует его. */
 .review__step--issue { display: none; }
 .review__step--issue:target { display: block; }
 /* Когда открыт второй экран, первый прячется — иначе на странице окажутся
    две пары кнопок подряд. */
 .review__card:has(.review__step--issue:target) #review-start { display: none; }
-
-.review__wa--primary {
-  width: 100%;
-  max-width: 340px;
-  padding: 15px 20px;
-  border-color: rgba(199, 91, 57, .45);
-  font-size: 15.5px;
-  font-weight: 700;
-}
-@media (hover: hover) {
-  .review__wa--primary:hover { border-color: var(--gold, #C75B39); }
-}
-
-.review__note a {
-  color: var(--text-muted, #6B6B6B);
-  text-decoration: underline;
-  text-underline-offset: 2px;
-}
-@media (hover: hover) {
-  .review__note a:hover { color: var(--gold, #C75B39); }
-}

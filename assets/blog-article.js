@@ -19,10 +19,12 @@
   /* ── Оглавление ── */
   function toc() {
     /* На узком экране оглавление свёрнуто, на широком раскрыто всегда:
-       атрибут open один на оба случая, поэтому решает медиазапрос. */
+       атрибут open один на оба случая, поэтому решает медиазапрос.
+       Кожа v3 (30.10.2026): колонкой справа от текста оглавление стоит с
+       1100 px (blog-article.css), уже — рамкой с «+» над заголовком. */
     var box = document.querySelector('details.article-toc');
     if (box) {
-      var mq = window.matchMedia('(max-width: 900px)');
+      var mq = window.matchMedia('(max-width: 1099px)');
       var sync = function () { box.open = !mq.matches; };
       sync();
       if (mq.addEventListener) mq.addEventListener('change', sync);

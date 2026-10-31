@@ -10,17 +10,19 @@
    читалось как белая полоса. Градиент 50/50 красит верх страницы в цвет
    шапки, низ — в цвет футера, поэтому оттяжка в обе стороны выглядит
    продолжением соответствующего блока. */
+/* Кожа v3 (30.10.2026): сверху — цвет шапки, снизу — светлый подвал
+   (--k-*, оба цвета обвязки одинаковы на сайте и в блоге). */
 html {
   background: linear-gradient(to bottom,
-    var(--surface-sunk, #EFE7DA) 0%, var(--surface-sunk, #EFE7DA) 50%,
-    #1A2B3C 50%, #1A2B3C 100%);
+    var(--k-bar-bg) 0%, var(--k-bar-bg) 50%,
+    var(--k-footer-bg) 50%, var(--k-footer-bg) 100%);
 }
 
 body {
   margin: 0;
   background: var(--bg);
   color: var(--text);
-  font-family: 'Manrope', -apple-system, sans-serif;
+  font-family: var(--font-text);
   font-size: var(--ts-body);
   font-weight: 400;
   line-height: 1.65;
@@ -39,7 +41,7 @@ main {
 
 h1, h2, h3, h4 {
   color: var(--text);
-  font-family: 'Manrope', sans-serif;
+  font-family: var(--font-text);
   font-weight: 800;
 }
 
@@ -77,6 +79,21 @@ p {
 }
 
 strong { color: var(--text); font-weight: 700; }
+
+/* Кожа v3 (30.10.2026): на страницах генератора — два начертания (400/600)
+   и без разрядки, H1 — разрядка кожи. :where() держит вес голых селекторов
+   выше: любое правило с классом по-прежнему сильнее. Блог и юридические
+   страницы (без body[data-skin]) — прежние правила, пока их вид не
+   перекрашен отдельным шагом. */
+:where(body[data-skin]) :is(h1, h2, h3, h4) { font-weight: var(--k-w-display); letter-spacing: 0; }
+:where(body[data-skin]) h1 { letter-spacing: var(--k-ls-h1); }
+:where(body[data-skin]) strong { font-weight: var(--k-w-strong); }
+/* ссылка внутри абзаца — полужирная, без подчёркивания (правило сайта 03.08;
+   кожа v3 — роли --k-link-*). Вес (0,0,2): правила с классом сильнее. */
+:where(body[data-skin]) p a {
+  font-weight: var(--k-link-weight);
+  text-decoration: var(--k-link-decoration);
+}
 
 /* --link задают шаблоны страниц услуг, хабов и городов (body.tpl, light-scale.css):
    там ссылки #B04E2F (AA). Без него — прежний --gold. */

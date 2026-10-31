@@ -10,7 +10,7 @@
 
 .pricing-block__title {
   font-size: var(--ts-h3);
-  font-weight: 800;
+  font-weight: 600;
   margin: 0 0 var(--space-4);
   color: var(--text);
 }
@@ -43,7 +43,7 @@
   left: var(--space-2);
   top: var(--space-2);
   color: var(--gold);
-  font-weight: 700;
+  font-weight: 600;
 }
 
 .pricing-block__list strong {
@@ -68,12 +68,12 @@
 }
 
 .pricing-block__amount {
-  font-family: 'Manrope', sans-serif;
+  font-family: var(--k-font-text);
   font-variant-numeric: tabular-nums;
   font-size: var(--ts-h1);
-  font-weight: 800;
+  font-weight: 600;
   color: var(--gold);
-  letter-spacing: -0.5px;
+  letter-spacing: 0;
   line-height: 1;
 }
 
@@ -100,9 +100,9 @@
   color: var(--gold-on);
   border: 0;
   border-radius: var(--r-3);
-  font-family: 'Manrope', sans-serif;
+  font-family: var(--k-font-text);
   font-size: var(--ts-body);
-  font-weight: 800;
+  font-weight: 600;
   cursor: pointer;
   min-height: 44px;
   transition: transform var(--t-1);

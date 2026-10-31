@@ -1,248 +1,47 @@
 /* ═══════════════════════════════════════════════════════════════════════
-   Блог: светлая терракотовая шкала поверх тёмных токенов (2026-08-06).
+   Блог: основа страницы в коже v3 (30.10.2026).
 
-   Статьи блога — рукописные HTML на тёмной системе (tokens.css + module-*).
-   Их собственные <style> перекрашены миграцией (tools/migrate_blog_light.py),
-   а этот файл закрывает второй слой: значения var(--token) из tokens.css
-   и модульные классы, которые берут из них фон и цвет.
+   Решение Daniil 30.10 (§7 п. 2 «а»): вид блога перекрашивается общим
+   файлом значений, тексты статей не трогаем. Как это устроено:
+     • у статей, витрины и юридических страниц на <body> стоит data-skin
+       (ставит tools/sync_blog_chrome.py — тот же атрибут, что у страниц
+       генератора). На нём light-scale.css связывает старые имена токенов
+       (--bg, --text, --gold, --font-text…) с ролями --k-* из файла значений
+       assets/theme-<x>.css — какой включён, решает data/site.yaml;
+     • файлы вида блога (этот, blog-legacy.css, blog-article.css,
+       blog-grid.css) пишут роли --k-* напрямую: цвет, шрифт, 4 размера,
+       углы. Чисел здесь нет — сменить кожу блога = сменить строку в site.yaml.
 
-   Подключается ПОСЛЕДНИМ в head только на страницах блога — поэтому
-   переопределение :root безопасно. ═══ */
+   До 30.10 здесь лежала своя кремово-терракотовая палитра блога и правила
+   старой витрины (.filter-bar, .card, .blog-heading, .article-card) — её
+   разметки в блоге больше нет.
+
+   Подключается в <head> статей и витрины после их встроенного <style> —
+   поэтому правила для body здесь сильнее него при том же весе. ═══ */
 
 /* Мобильная ширина статьи (2026-08-07).
-
-   В <style> каждой статьи прописано `body { display: flex; align-items: center }`
-   — так вёрстка работала, пока контент лежал в `.wrap` с `width: 100%`.
-   После обёртки в <main id="main"> (skip-link для доступности) главным
-   flex-элементом стал сам <main>, а у него ширины нет: он растягивался до
-   своей max-width 720px и на экране 390px уезжал за правый край вместе со
-   всем текстом. Возвращаем ему ширину контейнера; min-width снимает
-   стандартный для flex-элемента запрет сжиматься уже свёрстанного контента. */
+   В <style> статей когда-то стояло `body { display: flex; align-items: center }`
+   — тогда <main> без ширины растягивался до своей max-width и на телефоне
+   уезжал за правый край. Ширина контейнера и min-width — страховка. */
 main {
   width: 100%;
   min-width: 0;
 }
 
-:root {
-  --bg: #FFFBF7;
-  --surface: #F5F0EB;
-  --surface-2: #F5F0EB;
-  --surface-sunk: #EFE7DA;
-  --surface-card: #F5F0EB;
-
-  --border-faint: #E8DFD1;
-  --border: #E8DFD1;
-
-  --text: #2D2D2D;
-  --text-sub: #4A4A4A;
-  --text-muted: #6B6B6B;
-  --text-label: #6B6B6B;
-  --text-dim: #6B6B6B;
-  --text-nav: #4A4A4A;
-
-  --gold: #C75B39;
-  --gold-2: #B04E2F;
-  --gold-tint: rgba(199, 91, 57, 0.12);
-  --gold-on: #FFFBF7;
-
-  --danger: #B91C1C;
-
-  --glow-gold: 0 4px 14px rgba(199, 91, 57, 0.25);
+/* Фон, текст и шрифт страницы — кожи. Витрина блога несёт встроенный
+   <style> первой версии сайта (body: кремовый фон, Inter, flex-колонка по
+   центру) — здесь он перекрыт: страница в обычном потоке, шапка и подвал во
+   всю ширину, поля даёт рамка сайта (--frame-pad) у самих блоков. */
+body {
+  display: block;
+  min-height: 0;
+  padding: 0;
+  overflow-x: clip;
+  background: var(--k-bg);
+  color: var(--k-text);
+  font-family: var(--k-font-text);
+  font-weight: var(--k-w-regular);
 }
 
-/* Карточки и кнопки модульной системы, попадающие в разметку блога */
-.card {
-  background: #F5F0EB;
-  border-color: #E8DFD1;
-}
-
-/* ═══ Фильтр тем: вкладки вместо пилюль (2026-08-07, Daniil) ═══
-   Было восемь овалов с рамками, активный — залитый терракотой; вместе с
-   карточками статей ниже экран рябил. Теперь строка вкладок: текст без
-   рамок, активная тема подчёркнута терракотовой линией, счётчик — мелким
-   верхним индексом. Правила стоят здесь, потому что blog-light.css
-   подключён ПОСЛЕ инлайнового <style> страницы и перебивает его без
-   !important. */
-.filter-bar {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0 clamp(16px, 3vw, 26px);
-  border-bottom: 1px solid #EFE7DC;
-}
-.filter-btn {
-  position: relative;
-  padding: 0 0 11px;
-  border: 0;
-  border-radius: 0;
-  background: none;
-  color: #6B6B6B;
-  font-family: 'Manrope', sans-serif;
-  font-size: 15px;
-  font-weight: 600;
-  transition: color .18s ease;
-}
-.filter-btn:hover { color: #C75B39; border-color: transparent; }
-.filter-btn.active {
-  background: none;
-  border-color: transparent;
-  color: #1A2B3C;
-}
-/* линия под активной темой — на 1px ниже, чтобы лечь поверх границы бара */
-.filter-btn.active::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: -1px;
-  height: 2px;
-  background: #C75B39;
-}
-.filter-btn .cnt {
-  margin-left: 3px;
-  font-size: 11px;
-  vertical-align: super;
-  opacity: .45;
-}
-
-/* Контейнер индекса блога — не карточка (2026-08-07, Daniil: «весь блог
-   выбирается как карточка»). Класс .card здесь достался от старой вёрстки
-   и означал просто «колонка контента», но вместе с ним приезжали фон,
-   рамка и скругление — весь список статей оказывался обведён рамкой,
-   внутри которой лежали ещё карточки статей. На десктопе это уже
-   снималось внутри @media 900, теперь снято на всех ширинах.
-   Опознаём контейнер по панели фильтров внутри — она есть только на
-   индексе, у статей своя разметка. */
-.card:has(> .filter-bar) {
-  background: none;
-  border: 0;
-  border-radius: 0;
-}
-.btn--gold { color: #FFFBF7; }
-
-/* Фон страницы: html тоже, иначе при overscroll и на коротких страницах
-   из-под body проглядывает дефолтный фон браузера */
-html, body { background: #FFFBF7; }
-
-/* ═══ Десктопная раскладка блога (2026-08-06) ═══
-   Блог свёрстан mobile-first: body — флекс-колонка с center-выравниванием,
-   контент ужат до 480px (индекс) и 720px (статья). На широком экране это
-   давало узкую колонку по центру, и вместе с ней сжималась шапка — она
-   тоже флекс-элемент body и тянулась по своему контенту.
-
-   Почему старый десктопный слой перестал работать: в desktop.css секция
-   «BLOG INDEX» написана на `body:has(> .card > .filter-bar) > .card`, то
-   есть требует, чтобы лента была ПРЯМЫМ ребёнком body. Когда индекс
-   обернули в <main id="main"> (skip-link для доступности), селекторы
-   перестали совпадать — и десктопная раскладка молча отвалилась.
-   Здесь она восстановлена без привязки к прямому родству; секция
-   «BLOG ARTICLES» того же файла по-прежнему работает (у статей .wrap —
-   прямой ребёнок body), поэтому кегли статей не дублируются.
-
-   Схема та же, что у /services/ и /notario/: body — обычный поток
-   (шапка и подвал во всю ширину), контент центрируется своими полями,
-   лента статей раскладывается в сетку. */
-
-@media (min-width: 900px) {
-  /* поток вместо флекса: шапка/подвал перестают сжиматься по контенту */
-  body:has(.blog-heading),
-  body:has(.article-intro) {
-    display: block;
-    padding: 0;
-  }
-
-  /* Шапка и подвал — во всю ширину окна */
-  body:has(.blog-heading) > .site-nav,
-  body:has(.article-intro) > .site-nav,
-  body:has(.blog-heading) > .site-footer,
-  body:has(.article-intro) > .site-footer { width: 100%; }
-
-  /* main ужат до 960px в desktop.css — ленте блога нужна полная ширина,
-     свои поля она задаёт сама (как на /services/ и /notario/) */
-  body:has(.blog-heading) main,
-  body:has(.article-intro) main {
-    max-width: none;
-    padding-left: 0;
-    padding-right: 0;
-  }
-
-  /* Хлебные крошки — по левому краю контентной колонки */
-  body:has(.blog-heading) > .breadcrumb,
-  body:has(.article-intro) > .breadcrumb,
-  body:has(.blog-heading) main > .breadcrumb,
-  body:has(.article-intro) main > .breadcrumb {
-    max-width: 1280px;
-    margin-left: auto;
-    margin-right: auto;
-    padding-left: clamp(24px, 3vw, 56px);
-    padding-right: clamp(24px, 3vw, 56px);
-  }
-
-  /* ── индекс блога: контентная колонка во всю ширину ── */
-  .card {
-    max-width: 1280px;
-    margin: 0 auto;
-    padding: 0 clamp(24px, 3vw, 56px) 64px;
-    align-items: flex-start;
-    background: none;
-    border: 0;
-  }
-
-  /* заголовок — акцидентная антиква, как на остальных страницах */
-  .blog-heading {
-    font-family: 'Playfair Display', Georgia, serif;
-    font-weight: 500;
-    font-size: clamp(30px, 3.2vw, 40px);
-    letter-spacing: -0.01em;
-    line-height: 1.15;
-    max-width: 900px;
-  }
-  .blog-sub { font-size: 16.5px; line-height: 1.7; max-width: 680px; }
-  .blog-eyebrow { font-size: 11px; }
-
-  /* фильтры — крупнее, с воздухом под лентой */
-  .filter-bar { margin-bottom: 22px; }
-
-  /* ── лента статей в сетку ──
-     .card — флекс-колонка, поэтому раскладку даёт не он, а обёртка ленты.
-     Карточки статей идут прямыми детьми .card, между ними — служебные
-     элементы (заголовки, фильтры), поэтому сетку строим на самих карточках
-     через display:grid у контейнера и span для «широких» блоков. */
-  .card {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
-    gap: 16px;
-    align-content: start;
-  }
-  .card > .blog-eyebrow,
-  .card > .blog-heading,
-  .card > .blog-sub,
-  .card > .filter-bar,
-  .card > .sep,
-  .card > .cta-block,
-  .card > .divider,
-  .card > h2,
-  .card > p { grid-column: 1 / -1; }
-
-  .article-card {
-    padding: 20px 22px;
-    border-radius: 10px;
-    gap: 8px;
-  }
-  .article-card--featured { grid-column: 1 / -1; }
-  .article-title { font-size: 17px; line-height: 1.3; }
-  .article-desc { font-size: 14px; line-height: 1.55; }
-  .article-tag { font-size: 10.5px; }
-  /* На широком экране карточка едет вправо — сдвиг соседей в сетке заметен */
-  .article-card:hover { transform: none; }
-
-  /* ── страница статьи ──
-     Кегли и ширину колонки задаёт desktop.css (секция «BLOG ARTICLES»):
-     там `.wrap` — прямой ребёнок body, селекторы совпадают и работают.
-     Здесь только центрирование: body переведён в обычный поток, и без
-     margin: auto колонка прижалась бы к левому краю. */
-  .wrap { margin-left: auto; margin-right: auto; }
-}
-
-@media (min-width: 900px) and (prefers-reduced-motion: reduce) {
-  .article-card { transition: none; }
-}
+/* Выделение текста — подложка кожи вместо розовой терракоты */
+::selection { background: var(--k-surface-press); color: var(--k-text); }

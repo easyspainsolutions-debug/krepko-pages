@@ -17,26 +17,28 @@
 /* Светлая шкала блока: правила ниже ссылаются на общие токены (--surface,
    --text, --gold), а вне главной они остаются тёмными из tokens.css —
    блок уезжал в тёмно-синий и мелкий кегль. */
+/* Кожа v3 (30.10.2026): палитра блока — роли кожи; размер подзаголовка —
+   H2 кожи */
 .home-reviews {
-  --bg: #FFFBF7;
-  --surface: #F5F0EB;
-  --surface-sunk: #EFE7DA;
-  --border: #DCCFB9;
-  --border-faint: #E8DFD1;
-  --text: #2D2D2D;
-  --text-muted: #6B6B6B;
-  --gold: #C75B39;
-  --gold-2: #B04E2F;
-  --gold-on: #FFFBF7;
-  --glow-gold: 0 4px 14px rgba(199, 91, 57, .25);
-  --fs-subtitle: clamp(18px, calc(0.44vw + 15.25px), 24px);
+  --bg: var(--k-bg);
+  --surface: var(--k-surface);
+  --surface-sunk: var(--k-surface);
+  --border: var(--k-line);
+  --border-faint: var(--k-line);
+  --text: var(--k-text);
+  --text-muted: var(--k-muted);
+  --gold: var(--k-heading);
+  --gold-2: var(--k-heading);
+  --gold-on: var(--k-on-action);
+  --glow-gold: none;
+  --fs-subtitle: var(--k-fs-h2);
 }
 
 /* Кнопка блока: типографика с главной (капс, разрядка, мелкий кегль) —
    в home-redesign.css это правило .btn, которого на странице услуги нет. */
 .home-reviews .reviews-cta .btn {
-  font-family: 'Manrope', sans-serif;
-  font-weight: 700;
+  font-family: var(--k-font-text);
+  font-weight: 600;
   letter-spacing: 0;
   text-transform: none;
 }
@@ -121,26 +123,26 @@
     border-radius: 50%;
     background: var(--surface-sunk);
     border: 1px solid var(--border);
-    font-family: 'Playfair Display', serif;
+    font-family: var(--k-font-text);
     font-size: 18px;
-    color: #1A2B3C;
+    color: var(--k-heading);
     flex-shrink: 0;
   }
 
 .rv__meta { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
 
 .rv__name {
-    font-family: 'Manrope', sans-serif;
-    font-weight: 700;
+    font-family: var(--k-font-text);
+    font-weight: 600;
     font-size: 15px;
-    color: #1A2B3C;
+    color: var(--k-heading);
   }
 
 .rv__src {
     display: inline-flex;
     align-items: center;
     gap: 5px;
-    font-size: 12px;
+    font-size: var(--k-fs-ui);
     color: var(--text-muted);
   }
 
@@ -158,17 +160,18 @@
 /* Приглашение оставить свой отзыв — тише основной кнопки: человек пришёл
    за услугой, а не за формой обратной связи. Но стоит там, где он читает
    чужие отзывы, и потому попадается на глаза. */
+/* кожа v3 (30.10.2026): мелкий текст шкалы (было 13,5 px — пятый размер) */
 .reviews-cta__own {
-  font-family: 'Manrope', sans-serif;
-  font-size: 13.5px;
-  color: var(--text-muted, #6B6B6B);
+  font-family: var(--k-font-text);
+  font-size: var(--k-fs-ui);
+  color: var(--text-muted, var(--k-muted));
   text-decoration: none;
   border-bottom: 1px solid transparent;
   transition: color .18s ease, border-color .18s ease;
 }
 @media (hover: hover) {
   .reviews-cta__own:hover {
-    color: var(--gold, #C75B39);
+    color: var(--gold, var(--k-heading));
     border-bottom-color: currentColor;
   }
 }
@@ -187,7 +190,8 @@
   .home-faq h2::after,
   .intro__how > h2::after,
   .final-cta > h2::after {
-    content: '';
+    /* кожа v3 (30.10.2026): без штрихов под заголовками — content: none */
+    content: none;
     display: block;
     width: 56px;
     height: 2px;
@@ -344,21 +348,22 @@
     border-radius: 50%;
     background: var(--surface) !important;
     color: var(--gold);
-    font-family: 'Playfair Display', serif;
-    font-weight: 500;
-    font-size: 26px;
-    letter-spacing: .02em;
+    font-family: var(--k-font-text);
+    font-weight: 600;
+    /* кожа v3 (30.10.2026): H2 шкалы (было 26 px — вне четырёх размеров) */
+    font-size: var(--k-fs-h2);
+    letter-spacing: 0;
     line-height: 1;
   }
 
 #sec-reviews .rv__text {
     margin: 0;
     max-width: 900px;
-    font-family: 'Playfair Display', serif;
-    font-weight: 500;
+    font-family: var(--k-font-text);
+    font-weight: 600;
     font-size: clamp(20px, 2.1vw, 30px);
     line-height: 1.42;
-    color: #1A2B3C;
+    color: var(--k-heading);
   }
 
 #sec-reviews .rv__author {
@@ -374,7 +379,7 @@
 /* инициал уже сверху */
   #sec-reviews .rv__meta { align-items: center; text-align: center; }
 
-#sec-reviews .rv__name { font-size: 17px; font-weight: 600; color: #1A2B3C; }
+#sec-reviews .rv__name { font-size: 17px; font-weight: 600; color: var(--k-heading); }
 
 #sec-reviews .rv__src { justify-content: center; }
 
@@ -391,7 +396,7 @@
     border: 1px solid var(--border-faint);
     border-radius: 50% !important;
     background: var(--surface);
-    color: #1A2B3C;
+    color: var(--k-heading);
     cursor: pointer;
     box-shadow: none;
     transition: opacity .25s ease, background-color .25s ease, color .25s ease;
@@ -407,7 +412,7 @@
   #sec-reviews .rv-nav:not(:disabled):hover {
       background: var(--gold);
       border-color: var(--gold);
-      color: #FFFBF7;
+      color: var(--k-on-action);
     }
 }
 
@@ -482,12 +487,12 @@
   .final-cta h2,
   .intro__how h2,
   .values__h {
-    font-family: 'Playfair Display', Georgia, serif !important;
+    font-family: var(--k-font-text) !important;
     font-size: clamp(30px, 4vw, 48px) !important;
-    font-weight: 500 !important;
+    font-weight: 600 !important;
     line-height: 1.15 !important;
-    color: #1A2B3C !important;
-    letter-spacing: -0.01em;
+    color: var(--k-heading) !important;
+    letter-spacing: 0;
   }
 
 /* Те же правки для шкал, заданных вне медиазапроса: максимум набирался

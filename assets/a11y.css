@@ -31,7 +31,9 @@ details:focus-visible {
    2 px с отступом 3 px. Терракотовое кольцо вплотную терялось на
    терракотовой кнопке (WCAG 2.4.7, замер focus.mjs). Отступ даёт outline:
    box-shadow рисует кольцо вплотную. :focus-visible после тапа не
-   срабатывает, поэтому «пунктира» Safari из комментария выше здесь нет. */
+   срабатывает, поэтому «пунктира» Safari из комментария выше здесь нет.
+   Кожа v3 (30.10.2026): так на всех страницах генератора (body[data-skin]),
+   цвет — --k-focus (--focus-ring связан с ним в light-scale.css). */
 .tpl a:focus-visible,
 .tpl button:focus-visible,
 .tpl summary:focus-visible,
@@ -39,7 +41,8 @@ details:focus-visible {
 .tpl input:focus-visible,
 .tpl textarea:focus-visible,
 .tpl select:focus-visible,
-.tpl details:focus-visible {
+.tpl details:focus-visible,
+body[data-skin] :is(a, button, summary, [role="button"], input, textarea, select, details):focus-visible {
   outline: 2px solid var(--focus-ring);
   outline-offset: 3px;
   box-shadow: none;

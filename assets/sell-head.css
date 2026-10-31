@@ -51,19 +51,23 @@
    справа от кнопки, в три строки (home-redesign.css, .hero__free-m).
    nowrap: подпись не уезжает под кнопку ни на одной ширине. */
 .sell-cta { display: flex; flex-wrap: nowrap; align-items: center; gap: var(--space-4); }
-.sell-cta .btn { flex: 0 0 auto; }
+.sell-cta .btn { flex: 0 1 auto; }   /* на 320–359 px надпись кнопки в две строки (кожа v3) */
+/* «Первая консультация бесплатно» — кожа v3 (30.10.2026, итог §7 п. 4):
+   тёмная терракота --k-accent-text, мелкий текст кожи, обычное начертание,
+   без капса; три строки справа от кнопки, ширина 7em — как на главной */
 .sell-cta__free {
-  flex: 0 1 150px;
+  flex: 0 0 7em;
+  width: 7em;
   min-width: 0;
-  max-width: 150px;
+  max-width: 7em;
   margin: 0;
-  font-family: 'Manrope', sans-serif;
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: .18em;
-  line-height: 1.5;
-  text-transform: uppercase;
-  color: var(--gold-2);
+  font-family: var(--k-font-text);
+  font-size: var(--k-fs-ui);
+  font-weight: var(--k-w-regular);
+  letter-spacing: 0;
+  line-height: 1.3;
+  text-transform: none;
+  color: var(--k-accent-text);
 }
 .sell-trust {
   margin: var(--space-6) 0;
@@ -77,14 +81,18 @@
    старых шаблонов (krepko-base.css). */
 .sell-trust .sell-trust__t {
   margin: 0 0 var(--space-3);
-  font-family: 'Manrope', sans-serif;
+  font-family: var(--k-font-text);
   font-size: 18px;
-  font-weight: 700;
+  font-weight: 600;
   line-height: 1.35;
   letter-spacing: 0;
   color: var(--navy);
 }
 .sell-trust__list { list-style: none; margin: 0; padding: 0; }
+/* «Отзывы клиентов» — к отзывам этой же страницы, стрелка вниз значком через
+   зазор (v3, решение 11 и С7, 30.10.2026; renderer.reviews_link_html) */
+.sell-trust__rv { display: inline-flex; align-items: center; gap: var(--space-1); }
+.sell-trust__ico { flex: none; }
 .sell-trust__list li {
   position: relative;
   padding: var(--space-2) 0 var(--space-2) var(--space-6);
@@ -131,9 +139,9 @@
 .city-context ~ .pricing-block .pricing-block__title,
 .city-context ~ .city-faq h2 {
   margin: 0 0 var(--space-4);
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: var(--k-font-text);
   font-size: clamp(24px, 2.4vw, 32px);
-  font-weight: 500;
+  font-weight: 600;
   line-height: 1.2;
   color: var(--text);
 }
@@ -175,9 +183,9 @@
 .city-context ~ section .what-we-do-specific li::marker { color: var(--gold); }
 .city-context ~ section .what-we-do-specific h3 {
   margin: var(--space-6) 0 var(--space-3);
-  font-family: 'Manrope', sans-serif;
+  font-family: var(--k-font-text);
   font-size: 17px;
-  font-weight: 700;
+  font-weight: 600;
   line-height: 1.35;
   color: var(--text);
 }
@@ -197,7 +205,7 @@
   border: 1px solid var(--border);
   background: var(--surface);
   color: var(--gold-text);
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: var(--k-font-text);
   font-size: 15px;
   font-weight: 400;
 }
@@ -234,7 +242,7 @@
 /* Карта на городской странице: текущий город — подсвеченная точка без ссылки */
 .service-tail .cmap__city.is-current { cursor: default; }
 .service-tail .cmap__city.is-current .cmap__dot { r: 11; stroke: var(--bg); stroke-width: 4; }
-.service-tail .cmap__city.is-current .cmap__label { fill: var(--gold-text); font-weight: 800; }
+.service-tail .cmap__city.is-current .cmap__label { fill: var(--gold-text); font-weight: 600; }
 
 /* Хабы направлений: на телефоне каталог стоит над текстом и заканчивается
    своей кнопкой WhatsApp — вторая кнопка с фактами шла бы сразу под ней.

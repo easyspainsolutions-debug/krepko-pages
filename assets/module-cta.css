@@ -12,7 +12,7 @@
   gap: var(--space-2);
   padding: var(--space-3) var(--space-5);
   border-radius: var(--r-3);
-  font-family: 'Manrope', sans-serif;
+  font-family: var(--font-text);
   font-weight: 700;
   font-size: var(--ts-body-sm);
   text-decoration: none;
@@ -23,29 +23,34 @@
 }
 .btn:hover { text-decoration: none; }
 @media (hover: hover) { .btn:hover { transform: translateY(-1px); } }
+/* Кожа v3 (30.10.2026): на страницах генератора — полужирный кожи и без
+   подъёма при наведении (блог — прежние правила выше) */
+:where(body[data-skin]) .btn { font-weight: var(--k-w-strong); }
+@media (hover: hover) { :where(body[data-skin]) .btn:hover { transform: none; } }
 
-/* === Primary: Gold === */
-.btn--gold {
-  background: linear-gradient(135deg, var(--gold) 0%, var(--gold-2) 100%);
-  border-color: var(--gold);
-  color: var(--gold-on);
-  box-shadow: var(--glow-gold);
-}
-.btn--gold:hover {
-  box-shadow: 0 6px 18px rgba(199, 91, 57, .32); /* было горчичное свечение старой тёмной темы */
-}
-
-/* === Primary: WhatsApp — с 25.10.2026 тот же вид, что gold (решение Daniil:
-   одна кнопка «Написать в WhatsApp» на всём сайте; бледная рамка читалась
-   как выключенная кнопка). Класс оставлен ради старых шаблонов и тестов. === */
+/* === Primary: Gold и WhatsApp — одна кнопка «Написать в WhatsApp» ===
+   С 25.10.2026 .btn--wa того же вида, что gold (решение Daniil: одна кнопка
+   на всём сайте; класс оставлен ради старых шаблонов и тестов).
+   Кожа v3 (30.10.2026): сплошная заливка --k-action — единственная цветная
+   заливка на странице, без градиента, свечения и подъёма; наведение темнее.
+   Классы стоят только на страницах генератора — блог их не несёт. */
+.btn--gold,
 .btn--wa {
-  background: linear-gradient(135deg, var(--gold) 0%, var(--gold-2) 100%);
-  border-color: var(--gold);
-  color: var(--gold-on);
-  box-shadow: var(--glow-gold);
+  background: var(--k-action);
+  border-color: var(--k-action);
+  border-radius: var(--k-r-btn);
+  color: var(--k-on-action);
+  box-shadow: none;
 }
-.btn--wa:hover {
-  box-shadow: 0 6px 18px rgba(199, 91, 57, .32); /* было горчичное свечение старой тёмной темы */
+@media (hover: hover) {
+  .btn--gold:hover,
+  .btn--wa:hover {
+    background: var(--k-action-hover);
+    border-color: var(--k-action-hover);
+    color: var(--k-on-action);
+    box-shadow: none;
+    transform: none;
+  }
 }
 
 /* === Secondary: outline === */
@@ -71,11 +76,11 @@
 
 /* === Inline link === */
 .link--inline {
-  color: var(--gold);
+  color: var(--link, var(--gold));
   text-decoration: none;
   border-bottom: 1px solid rgba(196, 149, 42, 0.42);
   padding-bottom: 1px;
-  font-weight: 500;
+  font-weight: 400;
   transition: border-color var(--t-1), color var(--t-1);
 }
 .link--inline:hover {
@@ -90,9 +95,9 @@
   display: inline-flex;
   align-items: center;
   min-height: 44px;
-  font-family: 'Manrope', sans-serif;
+  font-family: var(--font-text);
   font-size: var(--ts-body-sm);
-  font-weight: 700;
+  font-weight: 600;
   color: var(--gold-text);
   text-decoration: none;
 }
@@ -123,7 +128,7 @@
   }
 }
 
-/* ═══ Кнопка «Написать в WhatsApp» на страницах услуг, хабов и городов ═══
+/* ═══ Кнопка «Написать в WhatsApp» на страницах генератора ═══
    Ф2b-1 (28.10.2026, «да» Daniil). На одной странице услуги было семь видов
    одной кнопки: шапка 12 px, под H1 12 px, врезка 15 px со скруглением 10,
    каталог, под отзывами, финал капсом, меню со скруглением и значком.
@@ -135,51 +140,45 @@
    выше «.final-cta .btn» из module-process.css, который грузится позже.
    Кегль .btn и кнопки шапки держит site-nav.css через !important — на
    шаблонах он приходит токеном --fs-btn (= --fs-cta, light-scale.css).
-   Кольцо фокуса — a11y.css (.tpl, navy). Липкая полоса — sticky-cta.css. */
+   Кольцо фокуса — a11y.css (.tpl, navy). Липкая полоса — sticky-cta.css.
+   Кожа v3 (30.10.2026): тот же вид на всех страницах генератора
+   (body[data-skin] — и главная, и «О Krepko»), значения — роли --k-*:
+   заливка --k-action, углы --k-r-btn, высота 48, мелкий полужирный. */
 body.tpl .btn--gold,
 body.tpl .doc-cta__b,
-body.tpl .site-nav__consult,
-body.tpl .site-menu__cta {
+body[data-skin] .btn--gold,
+body[data-skin] .btn--wa,
+body[data-skin] .doc-cta__b {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   box-sizing: border-box;
-  min-height: var(--cta-h);
+  min-height: var(--k-btn-h);
   padding: 0 var(--cta-pad-x);
-  background: var(--gold-2);
+  background: var(--k-action);
   border: 0;
-  border-radius: 0;
-  color: var(--gold-on);
-  font-family: 'Manrope', sans-serif;
-  font-size: var(--fs-cta);
-  font-weight: 700;
+  border-radius: var(--k-r-btn);
+  color: var(--k-on-action);
+  font-family: var(--k-font-text);
+  font-size: var(--k-fs-ui);
+  font-weight: var(--k-w-strong);
   line-height: 1.2;
   letter-spacing: 0;
   text-transform: none;
   text-decoration: none;
-  box-shadow: var(--glow-gold);
-}
-/* Шапка: высота 44, без тени покоя (тень — только у кнопок в тексте).
-   Поля, кегль и вес шапки задают правила site-nav.css с !important —
-   на шаблонах они берут значения из этих переменных. */
-body.tpl .site-nav__consult {
-  --nav-cta-fs: var(--fs-cta);
-  --nav-cta-pad: 0 var(--cta-pad-x-nav);
-  --nav-cta-fw: 700;
-  min-height: var(--cta-h-nav);
-  padding: var(--nav-cta-pad);
   box-shadow: none;
 }
-/* Меню телефона: во всю ширину и без значка — тот же вид, что в тексте */
-body.tpl .site-menu__cta { display: flex; width: 100%; }
-body.tpl .site-menu__cta svg { display: none; }
+/* Кнопки обвязки — шапка, меню, нижняя полоса — с кожи v3 (30.10.2026)
+   оформлены в своих файлах (site-nav.css, sticky-cta.css) ролями --k-*:
+   они одинаковы на всех страницах, включая блог. */
 @media (hover: hover) {
   body.tpl .btn--gold:hover,
   body.tpl .doc-cta__b:hover,
-  body.tpl .site-nav__consult:hover,
-  body.tpl .site-menu__cta:hover {
-    background: var(--gold-hover);
-    color: var(--gold-on);
+  body[data-skin] .btn--gold:hover,
+  body[data-skin] .btn--wa:hover,
+  body[data-skin] .doc-cta__b:hover {
+    background: var(--k-action-hover);
+    color: var(--k-on-action);
     transform: none;
     filter: none;
     opacity: 1;

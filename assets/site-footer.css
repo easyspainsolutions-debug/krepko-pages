@@ -22,7 +22,7 @@ body:has(> footer.site-footer) {
   background: var(--surface-sunk);
   border-top: 1px solid var(--border);
   color: var(--text-sub);
-  font-family: 'Manrope', -apple-system, sans-serif;
+  font-family: var(--k-font-text);
   font-size: var(--ts-body-sm);
   line-height: 1.5;
 }
@@ -68,7 +68,7 @@ body:has(> footer.site-footer) {
 .site-footer__usp-icon svg { width: 100%; height: 100%; }
 .site-footer__usp-title {
   font-size: var(--ts-body-sm);
-  font-weight: 700;
+  font-weight: 600;
   color: var(--text);
   margin: 0 0 var(--space-1);
 }
@@ -113,11 +113,11 @@ body:has(> footer.site-footer) {
 }
 .site-footer__brand-mark svg { width: 100%; height: 100%; display: block; }
 .site-footer__brand-text {
-  font-family: 'Manrope', sans-serif;
+  font-family: var(--k-font-brand);
   /* 2026-05-28 v4: уменьшен с 20px до 18px — конкурировал с brand в шапке.
      Footer brand — служебная роль, не первый акцент. */
   font-size: 18px;
-  font-weight: 700;
+  font-weight: 600;
   letter-spacing: -0.3px;
   line-height: 1;
   color: var(--gold);
@@ -134,7 +134,7 @@ body:has(> footer.site-footer) {
   color: var(--gold);
   text-decoration: none;
   font-size: var(--ts-body-sm);
-  font-weight: 500;
+  font-weight: 600;
   /* 2026-05-28 v4: убран жёсткий underline — выглядел как «only-click» CTA,
      слишком агрессивный для тихого footer. */
   transition: color var(--t-1);
@@ -164,11 +164,11 @@ body:has(> footer.site-footer) {
    белый+gold вместе с цветными иконками + большим Krepko + underlined ссылкой
    создавали ощущение пёстрости. Footer должен быть тихим. */
 .site-footer__col-title {
-  font-family: 'Manrope', sans-serif;
+  font-family: var(--k-font-text);
   font-size: var(--ts-label);
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 0;
+  text-transform: none;
   color: var(--text-label);
   margin: 0;
   padding: var(--space-2) 0;
@@ -183,7 +183,7 @@ body:has(> footer.site-footer) {
 .site-footer__col-title::-webkit-details-marker { display: none; }
 .site-footer__col-title::after {
   content: '+';
-  font-family: 'IBM Plex Mono', monospace;
+  font-family: var(--k-font-text);
   color: var(--gold);
   font-size: var(--ts-h4);
   font-weight: 400;
@@ -228,11 +228,11 @@ body:has(> footer.site-footer) {
   flex-wrap: wrap;
 }
 .site-footer__social-label {
-  font-family: 'Manrope', sans-serif;
+  font-family: var(--k-font-text);
   font-size: var(--ts-label);
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 0;
+  text-transform: none;
   color: var(--text-label);
 }
 .site-footer__socials {
@@ -319,7 +319,7 @@ body:has(> footer.site-footer) {
    ради 13 знаков. Кегль и цвет — общие с ссылками (правила ниже). Шрифт
    IBM Plex Mono из загрузки не убран: он ещё живёт на главной и в /about/. */
 .site-footer__meta {
-  font-family: 'Manrope', sans-serif;
+  font-family: var(--k-font-text);
   color: var(--text-label);
   font-size: var(--ts-meta);
   letter-spacing: 0;
@@ -406,18 +406,24 @@ body:has(> footer.site-footer) {
 }
 
 
-/* Палитра редизайна для футера — по той же причине, что у шапки:
-   переменные темы живут в home-redesign.css, который есть только на главной. */
+/* Палитра подвала — роли кожи v3 (30.10.2026). Подвал общий для всех
+   страниц, включая блог, поэтому старые имена связаны с --k-* прямо здесь,
+   а не только на body[data-skin]: в блоге он выглядит так же, как на сайте.
+   Подвал светлый (решение 13): подложка --k-footer-bg, линия сверху. */
 .site-footer {
-  --bg: #FFFBF7;
-  --surface: #F5F0EB;
-  --surface-sunk: #EFE7DA;
-  --border-faint: #E8DFD1;
-  --text: #2D2D2D;
-  --text-sub: #4A4A4A;
-  --text-muted: #6B6B6B;
-  --gold: #C75B39;
-  --gold-2: #B04E2F;
+  --bg: var(--k-footer-bg);
+  --surface: var(--k-bg);
+  --surface-2: var(--k-bg);
+  --surface-sunk: var(--k-footer-bg);
+  --border: var(--k-line);
+  --border-faint: var(--k-line);
+  --text: var(--k-text);
+  --text-sub: var(--k-text);
+  --text-muted: var(--k-muted);
+  --text-label: var(--k-muted);
+  --gold: var(--k-heading);
+  --gold-2: var(--k-heading);
+  --focus-ring: var(--k-focus);
 }
 
 /* ═══ Terracotta-редизайн футера (2026-08-03) ═══
@@ -426,24 +432,34 @@ body:has(> footer.site-footer) {
    home-redesign.css, потому что футер общий для всех страниц. */
 
 
-  /* метка «…под конкретную задачу» и заголовок блока доверия — Manrope:
+  /* Шрифт и цвет заголовков. Кожа v3 (30.10.2026): правило пишет имена, а
+     не числа — на страницах генератора (body[data-skin]) --font-display и
+     --navy связаны с --k-* (Golos, почти чёрный, light-scale.css), в блоге и
+     на юридических страницах — прежние Playfair и navy (tokens.css,
+     light-scale.css), пока их вид не перекрашен.
+     Метка «…под конкретную задачу» и заголовок блока доверия — Manrope:
      Playfair мельче 22 px рассыпается (Ф2a, 28.10.2026). :where() держит
      вес «h2» прежним (0,0,1): иначе цвет navy перебивал правила вида
      «.legal h2» в блоге и на юридических страницах. */
   h1, h2:where(:not(.pillar-cards-block > h2, .sell-trust__t)),
   .hero__h1,
   .final-cta h2,
-  .home-founder__name,
+  .home-founder__name {
+    font-family: var(--font-display) !important;
+    color: var(--navy);
+  }
+  /* Знак «Krepko» — как сейчас: антиква Playfair 600 (решение 30.10),
+     одинаково на всех страницах и в любой коже — --k-font-brand */
   .site-nav__brand-text,
   .site-footer__brand-text {
-    font-family: 'Playfair Display', Georgia, serif !important;
-    color: #1A2B3C;
+    font-family: var(--k-font-brand);
+    color: var(--k-heading);
   }
 
   .site-footer, footer.site-footer {
-    background: #1A2B3C !important;
+    background: var(--k-footer-bg) !important;
+    border-top: 1px solid var(--k-line);
   }
-  .site-footer .site-footer__brand-text { color: #FFFBF7; }
 
   /* ============ Карта сайта в футере (по образцу Attio) ============
      Логотип узкой колонкой слева, ссылки прижаты вправо и разложены на четыре
@@ -462,17 +478,18 @@ body:has(> footer.site-footer) {
   }
   /* Alpha .45 давала контраст 4.07 к фону #1A2B3C — ниже нормы 4.5 для
      мелкого текста. .58 даёт 5.4 и подписи остаются тише ссылок. */
+  /* подписи групп и реквизиты — мелкий серый текст кожи (7,4:1 к подвалу) */
   .footer-map__title {
-    font-family: 'Manrope', sans-serif;
+    font-family: var(--k-font-text);
     font-size: 14px;
-    font-weight: 500;
-    color: rgba(255, 251, 247, .58);
+    font-weight: var(--k-w-regular);
+    color: var(--k-muted);
     margin: 0 0 12px;
   }
   .footer-map__link {
     display: block;
     width: fit-content;
-    color: rgba(255, 251, 247, .82);
+    color: var(--k-text);
     text-decoration: none;
     font-size: 14px;
     font-weight: 400;
@@ -480,7 +497,7 @@ body:has(> footer.site-footer) {
     transition: color .15s ease;
   }
   /* в референсе ссылка подчёркивается, а не меняет цвет целиком */
-  .footer-map__link:hover { color: #FFFBF7; }
+  .footer-map__link:hover { color: var(--k-heading); text-decoration: underline; text-underline-offset: 3px; }
 
   /* нижняя полоса: мессенджеры слева, копирайт с правовым — справа */
   .site-footer .site-footer__bottom {
@@ -490,12 +507,12 @@ body:has(> footer.site-footer) {
     justify-content: space-between;
     gap: 20px 32px;
     padding-top: 28px;
-    border-top: 1px solid rgba(255, 251, 247, .12);
+    border-top: 1px solid var(--k-line);
   }
   /* Логотип в футере — тем же кеглем, что в шапке: базово 22px, на десктопе 36px */
   .site-footer .site-footer__brand-text {
     font-size: 22px !important;
-    font-weight: 800;
+    font-weight: 600;
     letter-spacing: -0.5px;
     line-height: 1;
   }
@@ -507,10 +524,10 @@ body:has(> footer.site-footer) {
     justify-content: center;
     flex: 0 0 auto;
     width: 32px; height: 32px;
-    color: rgba(255, 251, 247, .55);
+    color: var(--k-muted);
     transition: color .15s ease;
   }
-  .footer-chat__link:hover { color: #FFFBF7; }
+  .footer-chat__link:hover { color: var(--k-heading); }
   /* stroke: none — общий стиль svg рассчитан для контурных иконок, и атрибут
      fill на разметке им проигрывает — эти иконки заливные, ставим явно */
   .footer-chat__link svg { fill: currentColor; stroke: none; display: block; }
@@ -528,21 +545,25 @@ body:has(> footer.site-footer) {
   .site-footer .site-footer__legal a,
   .site-footer .site-footer__meta {
     font-size: 14px;
-    color: rgba(255, 251, 247, .58);
+    color: var(--k-muted);
     text-decoration: none;
   }
-  .site-footer .site-footer__legal a:hover { color: #FFFBF7; }
+  .site-footer .site-footer__legal a:hover { color: var(--k-heading); }
 
   /* Footer — taller, wider */
   .site-footer__inner { max-width: 1500px !important; padding-left: 40px !important; padding-right: 40px !important; }
 
-  /* ============ Round 6: full-bleed top chrome (LegalFlow container width) ============ */
+  /* ============ Round 6: full-bleed top chrome (LegalFlow container width) ============
+     29.10.2026: ширина и поля — токены --chrome-* (tokens.css). До 767 px
+     прежние 1760 px и clamp(24px, 4.5vw, 88px); от 768 px — одна рамка с
+     содержимым страниц (--frame-*): логотип и кнопка WhatsApp стоят по
+     краям той же рамки, что заголовки и блоки. */
   .topbar__inner,
   .site-nav__inner,
   .site-footer__inner {
-    max-width: 1760px !important;
-    padding-left: clamp(24px, 4.5vw, 88px) !important;
-    padding-right: clamp(24px, 4.5vw, 88px) !important;
+    max-width: var(--chrome-max) !important;
+    padding-left: var(--chrome-pad) !important;
+    padding-right: var(--chrome-pad) !important;
   }
 
   /* На узких экранах нижняя граница clamp'а (24px) съедает 16px, которых
@@ -559,22 +580,23 @@ body:has(> footer.site-footer) {
     }
   }
 
-  /* — карточки и поверхности: почти прямые углы — */
-  .card,
-  .review-card,
-  .faq__item,
-  .home-founder__card,
-  .site-footer__usp-cell,
-  .cookie-consent__inner,
-  .site-menu__card,
-  .card--city-visual {
-    border-radius: 4px !important;
+  /* — карточки и поверхности —
+     Кожа v3 (30.10.2026): на страницах генератора углы карточек и фото —
+     роль --k-r-card; строки вопросов и финальный призыв — без рамки, углы 0.
+     Блог и юридические страницы (без data-skin) — прежние 4 px, пока их вид
+     не перекрашен; баннер cookies — обвязка, у него свои углы
+     (cookie-consent.css). */
+  /* :where() держит прежний вес правила (0,1,0): более точные правила
+     страниц, как и раньше, сильнее */
+  :where(body[data-skin]) :is(.card, .review-card, .home-founder__card, .site-footer__usp-cell,
+    .site-menu__card, .card--city-visual, .stat, .rv, .srows, .srow--all,
+    .portrait__frame) {
+    border-radius: var(--k-r-card) !important;
   }
-
-  /* — 2. поверхности — */
-  .stat, .rv, .srows, .srow--all, .faq__item,
-  .home-founder__card, .site-footer__usp-cell, .site-menu__card,
-  .cookie-consent__inner, .final-cta, .portrait__frame, .card {
+  :where(body[data-skin]) :is(.faq__item, .final-cta) { border-radius: 0 !important; }
+  :where(body:not([data-skin])) :is(.card, .review-card, .faq__item, .home-founder__card,
+    .site-footer__usp-cell, .site-menu__card, .card--city-visual, .stat, .rv,
+    .srows, .srow--all, .final-cta, .portrait__frame) {
     border-radius: 4px !important;
   }
 
@@ -596,7 +618,6 @@ body:has(> footer.site-footer) {
   .home-faq .faq__a,
   .value__text,
   .home-guides .gcard__dek,
-  .footer-map__link,
   .step__text {
     font-size: var(--fs-body) !important;
     line-height: var(--lh-body) !important;
@@ -607,12 +628,19 @@ body:has(> footer.site-footer) {
   .final-cta__bonus,
   .home-faq .faq__more,
   .city__link,
-  .site-footer .site-footer__meta,
-  .site-footer .site-footer__legal a,
-  .footer-map__title,
   .rv__name {
     font-size: var(--fs-small) !important;
   }
+
+  /* Подвал — обвязка: мелкий текст кожи (--k-fs-ui) на всех страницах,
+     включая блог (кожа v3, 30.10.2026) */
+  .footer-map__link,
+  .footer-map__title,
+  .site-footer .site-footer__meta,
+  .site-footer .site-footer__legal a {
+    font-size: var(--k-fs-ui) !important;
+  }
+  .footer-map__link { line-height: 2.1 !important; }
 
   /* интерлиньяж вторичного текста: было 1.5 / 1.6 / 1.65 в одной роли */
   .step__note, .final-cta__bonus, .home-faq .faq__more, .city__link,
@@ -669,3 +697,9 @@ body:has(> footer.site-footer) {
 /* /es/ (28.10.2026): длинные испанские подписи переносятся — межстрочный шаг
    внутри ссылки меньше, чем между ссылками, чтобы хвост не читался отдельной ссылкой */
 html[lang="es"] .footer-map__link { line-height: 1.35 !important; padding: .175em 0; }
+
+/* /uk/ (v3, 30.10.2026): у ссылок с пометкой «(російською)» (uk_slot) на
+   телефоне пометка уходит второй строкой. Как у /es/: межстрочный шаг внутри
+   ссылки меньше, чем между ссылками, — хвост не читается отдельной ссылкой;
+   поле добирает однострочной ссылке прежнюю высоту 2.1 строки. */
+.footer-map__link:has(.ru-note) { line-height: 1.35 !important; padding: .375em 0; }

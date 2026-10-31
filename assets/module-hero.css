@@ -16,15 +16,15 @@
 .hero__h1 {
   font-size: var(--ts-h1);
   line-height: 1.08;
-  font-weight: 800;
-  letter-spacing: -1.2px;
+  font-weight: 600;
+  letter-spacing: 0;
   color: var(--text);
   margin: 0 0 var(--space-4);
 }
 
 @media (max-width: 720px) {
   .hero__h1 {
-    letter-spacing: -0.7px;
+    letter-spacing: 0;
     line-height: 1.12;
   }
 }
@@ -35,7 +35,7 @@
 @media (max-width: 380px) {
   .hero__h1 {
     font-size: 24px;
-    letter-spacing: -0.4px;
+    letter-spacing: 0;
     line-height: 1.15;
   }
 }
@@ -62,9 +62,9 @@
   display: inline-flex;
   align-items: center;
   gap: var(--space-2);
-  font-family: 'Manrope', sans-serif;
+  font-family: var(--font-text);
   font-size: var(--ts-body-sm);
-  font-weight: 500;
+  font-weight: 400;
   color: var(--text-sub);
   text-decoration: none;
   padding: var(--space-2) 0;
@@ -128,17 +128,17 @@
 /* Manrope вместо IBM Plex Mono: моно на шаблонах нет (Ф2a, 28.10.2026) */
 .hero__meta-item small {
   display: block;
-  font-family: 'Manrope', sans-serif;
+  font-family: var(--font-text);
   font-size: var(--ts-meta);
   color: var(--text-label);
-  letter-spacing: 0.06em;
+  letter-spacing: 0;
   margin-bottom: 2px;
 }
 .hero__meta-item b {
-  font-family: 'Manrope', sans-serif;
+  font-family: var(--font-text);
   font-size: var(--ts-body-sm);
   color: var(--text);
-  font-weight: 700;
+  font-weight: 600;
 }
 
 /* === DocumentHero === */
@@ -151,12 +151,12 @@
 }
 .hero--document .hero__price {
   /* Visual audit 2026-05-27 L7: унифицировано на Manrope с tabular-nums. */
-  font-family: 'Manrope', sans-serif;
+  font-family: var(--font-text);
   font-variant-numeric: tabular-nums;
   font-size: var(--ts-h3);
   color: var(--gold);
-  font-weight: 800;
-  letter-spacing: -0.4px;
+  font-weight: 600;
+  letter-spacing: 0;
   margin: 0 0 var(--space-4);
 }
 /* === CityHero === */
@@ -169,7 +169,7 @@
   display: flex;
   gap: var(--space-3);
   align-items: center;
-  font-family: 'Manrope', sans-serif;
+  font-family: var(--font-text);
   font-size: var(--ts-mono);
   color: var(--text-label);
   flex-wrap: wrap;
@@ -180,7 +180,7 @@
   height: 7px;
   border-radius: 50%;
   background: var(--wa);
-  box-shadow: 0 0 8px rgba(78, 216, 138, 0.5);
+  box-shadow: none;
   margin-right: var(--space-2);
 }
 
