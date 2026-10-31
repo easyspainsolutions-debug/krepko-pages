@@ -240,7 +240,7 @@
     #sec-coverage .home-coverage__grid {
       display: flex;
       overflow-x: auto;
-  touch-action: pan-x;
+  touch-action: manipulation;
   overscroll-behavior-x: contain;
       scroll-snap-type: x mandatory;
       gap: 16px;
@@ -713,7 +713,7 @@
   @media (prefers-reduced-motion: reduce) {
     .ticker__track { animation: none; }
     .ticker { overflow-x: auto;
-  touch-action: pan-x;
+  touch-action: manipulation;
   overscroll-behavior-x: contain; }
   }
 
@@ -1900,7 +1900,7 @@
     display: flex;
     gap: 28px;
     overflow-x: auto;
-  touch-action: pan-x;
+  touch-action: manipulation;
   overscroll-behavior-x: contain;
     scroll-snap-type: x mandatory;
     scroll-behavior: smooth;
@@ -2600,7 +2600,7 @@
     display: flex;
     gap: 0;
     overflow-x: auto;
-  touch-action: pan-x;
+  touch-action: manipulation;
   overscroll-behavior-x: contain;
     scroll-snap-type: x mandatory;
     scroll-behavior: smooth;
@@ -2943,7 +2943,7 @@
   .city__track {
     display: flex;
     overflow-x: auto;
-  touch-action: pan-x;
+  touch-action: manipulation;
   overscroll-behavior-x: contain;
     scroll-snap-type: x mandatory;
     scroll-behavior: smooth;

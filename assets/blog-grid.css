@@ -211,7 +211,7 @@ h2.blog-card__title,
     overflow-x: auto;
     scrollbar-width: none;
     border-bottom: 1px solid var(--k-line);
-    touch-action: pan-x;
+    touch-action: manipulation;
     overscroll-behavior-x: contain;
     width: 100vw;
     margin-left: calc(50% - 50vw);

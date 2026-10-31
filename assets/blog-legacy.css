@@ -228,7 +228,7 @@
 .table-wrap,
 .cost-table-wrap {
   overflow-x: auto;
-  touch-action: pan-x;
+  touch-action: manipulation;
   overscroll-behavior-x: contain;
   margin: var(--space-4) 0 var(--k-gap-block);
   -webkit-overflow-scrolling: touch;

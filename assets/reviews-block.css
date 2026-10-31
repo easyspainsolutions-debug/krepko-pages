@@ -308,8 +308,10 @@
     display: flex;
     gap: 0;
     overflow-x: auto;
-    /* см. пояснение у полосы тем: вертикальный жест — странице */
-    touch-action: pan-x;
+    /* Свайп вбок листает ленту, вверх-вниз — страницу, щипок увеличивает.
+       Было pan-x: оно запрещает вертикаль, и палец на отзывах не прокручивал
+       страницу на телефоне (Daniil 31.10.2026). То же у всех лент сайта. */
+    touch-action: manipulation;
     overscroll-behavior-x: contain;
     scroll-snap-type: x mandatory;
     scroll-behavior: smooth;

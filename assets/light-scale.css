@@ -357,7 +357,7 @@ body[data-skin] .final-cta > h2 {
 .home-reviews .rv__track,
 .home-reviews [class*="track"] {
   overflow-x: auto;
-  touch-action: pan-x;
+  touch-action: manipulation;
   overscroll-behavior-x: contain;
   scroll-snap-type: x mandatory;
   -webkit-overflow-scrolling: touch;
