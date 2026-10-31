@@ -17,22 +17,17 @@
   <link rel="stylesheet" href="/assets/module-cta.css?v=4d71d7d971">
   <link rel="stylesheet" href="/assets/module-card.css?v=ad605dacca">
   <link rel="stylesheet" href="/assets/module-hero.css?v=1c4f9ba7a5">
-  <link rel="stylesheet" href="/assets/module-trust.css?v=02171b65ad">
   <link rel="stylesheet" href="/assets/module-process.css?v=196c0e75e4">
-  <link rel="stylesheet" href="/assets/site-nav.css?v=3cfa85ad5a">
-<script src="/assets/site-nav.js?v=0dc7d6164b" defer></script>
+<script src="/assets/site-nav.js?v=242f60d039" defer></script>
   <script src="/assets/cursor.js?v=bf0d6e8b67" defer></script>
-  <link rel="stylesheet" href="/assets/krepko-chips.css?v=11343c11df">
-  <link rel="stylesheet" href="/assets/site-footer.css?v=704459eff3">
-  <link rel="stylesheet" href="/assets/a11y.css?v=02e8ecca79">
   <link rel="stylesheet" href="/assets/krepko-base.css?v=4f15a801f8">
   <link rel="stylesheet" href="/assets/cookie-consent.css?v=a24813b238">
   <script src="/assets/cookie-consent.js?v=d252d71488" defer></script>
 
-  <link rel="stylesheet" href="/assets/site-nav.css?v=3cfa85ad5a">
-  <link rel="stylesheet" href="/assets/site-footer.css?v=704459eff3">
+  <link rel="stylesheet" href="/assets/site-nav.css?v=520ab0fd38">
+  <link rel="stylesheet" href="/assets/site-footer.css?v=fe4711060f">
   <link rel="stylesheet" href="/assets/a11y.css?v=02e8ecca79">
-  <link rel="stylesheet" href="/assets/desktop.css?v=8b8743c64a">
+  <link rel="stylesheet" href="/assets/desktop.css?v=8b8743c64a" media="(min-width: 900px)">
   <link rel="stylesheet" href="/assets/blog-legacy.css?v=ff39ea7bf6">
   <link rel="stylesheet" href="/assets/blog-grid.css?v=ab6a733ac8">
   <link rel="stylesheet" href="/assets/blog-article.css?v=fec1cde4d9">
@@ -102,7 +97,7 @@
     }
   ]
 }</script>
-  <script src="/assets/analytics.js?v=8da4f6cf51" defer></script>
+  <script src="/assets/analytics.js?v=8348b3bed8" defer></script>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
   <script type="application/ld+json">
   {
@@ -121,9 +116,9 @@
   <meta name="twitter:image" content="https://krepko.es/og-image.png">
 <link rel="stylesheet" href="/assets/no-underline.css?v=50bdbea6f9">
 <link rel="stylesheet" href="/assets/blog-light.css?v=a8e13a9992">
-<link rel="stylesheet" href="/assets/site-search.css?v=cf5e61a272">
+<link rel="stylesheet" href="/assets/site-search.css?v=19bc096a88">
   <link rel="stylesheet" href="/assets/cursor.css?v=ab607cd5b4">
-<script src="/assets/site-search.js?v=8790dfb19c" defer></script>
+<script src="/assets/site-search.js?v=6ccdf4fc5c" defer></script>
   <link rel="stylesheet" href="/assets/sticky-cta.css?v=97f8674046">
 <link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;600&amp;display=swap" rel="stylesheet" data-theme-fonts>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&amp;text=Krepko&amp;display=swap" rel="stylesheet" data-theme-fonts>
@@ -279,23 +274,6 @@
   </div>
 </dialog>
 
-<script>(function(){
-  // Active page marker
-  var p=location.pathname;
-  var k=(p==='/'||p==='/index.html')?'home':p.indexOf('/services')===0||p.indexOf('/notario')===0||p.indexOf('/ukraina')===0?'services':p.indexOf('/about')===0?'about':'';
-  if(k){var l=document.querySelector('.site-menu__link[data-page="'+k+'"]');if(l)l.classList.add('active');}
-  // Dialog a11y wiring (Sprint 5):
-  // - backdrop click closes
-  // - Esc closes (explicit, not just native)
-  // - focus returns to trigger on close
-  var d=document.getElementById('site-menu-dialog');
-  var trigger=document.querySelector('.site-nav__menu-btn');
-  if(d){
-    d.addEventListener('click',function(e){if(e.target===d)d.close();});
-    d.addEventListener('keydown',function(e){if(e.key==='Escape'){e.preventDefault();d.close();}});
-    d.addEventListener('close',function(){if(trigger){try{trigger.focus();}catch(_){}}});
-  }
-})();</script>
 
 <div class="wrap wrap--article">
 <main id="main">
@@ -308,6 +286,7 @@
         <summary class="article-toc__label">В статье</summary>
         <div class="article-toc__list"><a href="#kogda-mozhno-razvestis-cherez-notariusa">Когда можно развестись через нотариуса</a><a href="#notarius-vs-sud-sravnenie">Нотариус vs суд — сравнение</a><a href="#kak-prohodit-poshagovo">Как проходит — пошагово</a><a href="#chto-vhodit-v-convenio-regulador">Что входит в convenio regulador</a><a href="#dokumenty">Документы</a><a href="#priznanie-razvoda-v-ukraine-rossii-i-drugih-stra">Признание развода в Украине, России и других странах</a><a href="#tipichnye-oshibki">Типичные ошибки</a><a href="#chastye-voprosy">Частые вопросы</a></div>
       </details>
+      <script>if(matchMedia('(max-width:1099px)').matches)document.currentScript.previousElementSibling.open=false</script>
 
       <div class="article-body">
 <div class="article-tags"><span>Документы</span><span>Нотариус</span><span>Семья</span></div>
@@ -568,7 +547,7 @@
     </div>
 
     <div class="site-footer__bottom">
-      <div class="footer-chat" aria-label="Мессенджеры">
+      <div class="footer-chat" role="group" aria-label="Мессенджеры">
         <a class="footer-chat__link" href="https://wa.me/34624309985?text=%D0%94%D0%BE%D0%B1%D1%80%D1%8B%D0%B9%20%D0%B4%D0%B5%D0%BD%D1%8C%2C%20%D1%83%20%D0%BC%D0%B5%D0%BD%D1%8F%20%D0%B2%D0%BE%D0%BF%D1%80%D0%BE%D1%81%20%D0%BF%D0%BE%20%D1%81%D1%82%D0%B0%D1%82%D1%8C%D0%B5%20%C2%AB%D0%A0%D0%B0%D0%B7%D0%B2%D0%BE%D0%B4%20%D0%B2%20%D0%98%D1%81%D0%BF%D0%B0%D0%BD%D0%B8%D0%B8%20%D1%87%D0%B5%D1%80%D0%B5%D0%B7%20%D0%BD%D0%BE%D1%82%D0%B0%D1%80%D0%B8%D1%83%D1%81%D0%B0%3A%20%D0%B1%D1%8B%D1%81%D1%82%D1%80%D0%B5%D0%B5%20%D0%B8%20%D0%B4%D0%B5%D1%88%D0%B5%D0%B2%D0%BB%D0%B5%2C%20%D1%87%D0%B5%D0%BC%20%D1%81%D1%83%D0%B4%C2%BB.%20%D0%AF%20%D1%81%20krepko.es/blog/razvod-ispaniya-notarius/" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" data-cta="footer-icon">
           <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M12.04 2c-5.46 0-9.9 4.44-9.9 9.9 0 1.75.46 3.45 1.32 4.95L2 22l5.3-1.39a9.9 9.9 0 0 0 4.74 1.2h.01c5.46 0 9.9-4.44 9.9-9.9S17.5 2 12.04 2Zm0 18.06h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.11.82.83-3.04-.2-.31a8.19 8.19 0 0 1-1.26-4.4c0-4.53 3.69-8.22 8.24-8.22a8.22 8.22 0 0 1 0 16.44Zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.24-.64.8-.78.97-.15.16-.29.18-.53.06-.25-.13-1.05-.39-1.99-1.23-.74-.65-1.23-1.46-1.38-1.71-.14-.24-.01-.37.11-.5.11-.11.25-.29.37-.44.13-.15.17-.25.25-.41.09-.17.04-.31-.02-.44-.06-.12-.56-1.34-.76-1.84-.2-.48-.4-.42-.56-.42l-.47-.01c-.16 0-.43.06-.65.3-.23.25-.86.85-.86 2.06 0 1.21.88 2.39 1 2.55.13.17 1.74 2.66 4.22 3.73.59.25 1.05.4 1.4.52.59.19 1.13.16 1.55.1.48-.07 1.47-.6 1.67-1.18.21-.58.21-1.07.15-1.18-.06-.1-.22-.16-.47-.28Z"/></svg>
         </a>

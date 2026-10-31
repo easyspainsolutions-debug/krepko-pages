@@ -1,324 +1,226 @@
-/* Левая колонка страницы направления: аккордеоны категорий, живой поиск по
-   каталогу и сворачивание всей панели на узком экране.
-
-   Без скрипта каталог остаётся раскрытым (см. <noscript> в шаблоне) —
-   ссылки на услуги доступны всегда, поиск просто прячется. */
 (function () {
-  var nav = document.querySelector('.pillar-nav');
-  if (!nav) return;
-
-  /* ── панель целиком: кнопка с названием текущей страницы (мобильный) ── */
-  var toggle = nav.querySelector('.pillar-nav__toggle');
-  if (toggle) {
-    toggle.addEventListener('click', function () {
-      var open = nav.classList.toggle('is-open');
-      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
-    });
-  }
-
-  /* ── категории ── */
-  var cats = [].slice.call(nav.querySelectorAll('.pillar-cat'));
-
-  function closeOtherCats(keep) {
-    cats.forEach(function (c) {
-      if (c === keep || !c.classList.contains('is-open')) return;
-      c.classList.remove('is-open');
-      var h = c.querySelector('.pillar-cat__head');
-      if (h) h.setAttribute('aria-expanded', 'false');
-    });
-  }
-  /* ── мобильная doc-раскладка: заголовок категории — подпись, не кнопка ──
-     CSS даёт head pointer-events:none, но Enter с клавиатуры всё равно
-     диспатчит click: категория схлопывалась, и правило
-     .pillar-cat:not(.is-open){display:none} стирало весь блок «Похожие
-     услуги» без пути назад (критика 2026-08-23, P2). Поэтому на doc-страницах
-     при узкой раскладке head уходит из tab-order и теряет aria-expanded,
-     а click-обработчик игнорируется. */
-  var docMq = window.matchMedia ? window.matchMedia('(max-width: 899px)') : null;
-  /* /notario/{город}/ (--city): категории — аккордеон, как на витрине (Д1, 28.10) */
-  var isDocPage = !!document.querySelector('.pillar-split--doc:not(.pillar-split--city)');
-  function headIsLabel() { return isDocPage && docMq && docMq.matches; }
-  function applyHeadMode() {
-    cats.forEach(function (cat) {
-      var head = cat.querySelector('.pillar-cat__head');
-      if (!head) return;
-      if (headIsLabel()) {
-        head.setAttribute('tabindex', '-1');
-        head.removeAttribute('aria-expanded');
-      } else {
-        head.removeAttribute('tabindex');
-        head.setAttribute('aria-expanded', cat.classList.contains('is-open') ? 'true' : 'false');
-      }
-    });
-  }
-  applyHeadMode();
-  if (docMq && docMq.addEventListener) docMq.addEventListener('change', applyHeadMode);
-
-  /* «Ещё N в разделе» (Daniil 01.10): показать все услуги открытого раздела */
-  [].forEach.call(nav.querySelectorAll('.pillar-cat__more'), function (btn) {
-    btn.addEventListener('click', function () {
-      var cat = btn.closest('.pillar-cat');
-      if (cat) cat.classList.remove('is-compact');
-    });
-  });
-
-  cats.forEach(function (cat) {
-    var head = cat.querySelector('.pillar-cat__head');
-    if (!head) return;
-    head.addEventListener('click', function () {
-      if (headIsLabel()) return;
-      var open = !cat.classList.contains('is-open');
-      /* Открытая категория закрывает остальные: восемь раскрытых списков
-         по 11 услуг превращают колонку в простыню, в которой не найти,
-         где ты находишься (решение Daniil, 2026-08-07 — по всему сайту). */
-      if (open) closeOtherCats(cat);
-      cat.classList.toggle('is-open', open);
-      head.setAttribute('aria-expanded', open ? 'true' : 'false');
-    });
-  });
-
-  /* ── deep-link на категорию ──
-     Мегаменю ведёт на /notario/#{slug категории}: раскрываем её, на узком
-     экране открываем и саму панель каталога, скроллим и зажигаем
-     терракотовую вспышку — сразу видно, куда смотреть и что нажимать.
-     На загрузке выполняется до инициализации поиска, чтобы его снимок
-     раскрытых категорий (opened) включал и эту; hashchange покрывает клик
-     по мегаменю, когда посетитель уже стоит на странице направления. */
-  function goToCat(slug) {
-    if (!/^[a-z-]+$/.test(slug)) return;
-    var cat = nav.querySelector('.pillar-cat[data-cat="' + slug + '"]');
-    if (!cat) return;
-    closeOtherCats(cat);
-    cat.classList.add('is-open');
-    var head = cat.querySelector('.pillar-cat__head');
-    if (head) head.setAttribute('aria-expanded', 'true');
-    nav.classList.add('is-open');
-    if (toggle) toggle.setAttribute('aria-expanded', 'true');
-    var noAnim = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    /* после раскрытия высота панели уже посчитана — скроллим, по прибытии
-       вспыхиваем. Снятие класса по таймеру, не по animationend: при
-       reduce-motion анимации нет, а подсветка гаснуть всё равно должна. */
-    setTimeout(function () {
-      cat.scrollIntoView({ block: 'start', behavior: noAnim ? 'auto' : 'smooth' });
-      setTimeout(function () {
-        cat.classList.remove('is-hilite');
-        void cat.offsetWidth;   /* перезапуск анимации при повторном переходе */
-        cat.classList.add('is-hilite');
-        setTimeout(function () { cat.classList.remove('is-hilite'); }, 2100);
-      }, noAnim ? 60 : 480);
-    }, 80);
-  }
-  goToCat((location.hash || '').slice(1));
-  window.addEventListener('hashchange', function () {
-    goToCat((location.hash || '').slice(1));
-  });
-
-  /* ── вспышка на самой странице услуги ──
-     Мегаменю ведёт в раздел двумя способами. У нотариуса пункты указывают на
-     хаб с якорем категории (/notario/#doverennosti) — там срабатывает goToCat
-     выше, категория раскрывается и вспыхивает. А у остальных направлений
-     пункты ведут прямо на страницу услуги (/ukraina/spravka-o-nesudimosti/),
-     где якоря нет, и подсветки не было вовсе: человек попадал на страницу без
-     подсказки, в каком месте каталога он оказался (замечание владельца
-     2026-08-09).
-
-     Ведёт на услугу — правильнее, чем на хаб: меньше кликов. Поэтому не
-     меняем ссылки, а зажигаем ту же вспышку у категории с активным пунктом.
-     Скролл здесь не нужен — категория и так раскрыта сервером и видна.
-
-     Только при заходе извне: если человек ходит по каталогу внутри раздела,
-     мигать на каждой странице незачем — он и так знает, где находится. */
-  (function flashCurrentCat() {
-    if (location.hash) return;                    /* якорь уже отработал выше */
-    var cur = nav.querySelector('.pillar-nav__current');
-    if (!cur) return;                             /* мы на хабе, активного нет */
-    var cat = cur.closest('.pillar-cat');
-    if (!cat) return;
-    var from = document.referrer;
-    if (from) {
-      try {
-        var sameSection = new URL(from).pathname.indexOf(
-          location.pathname.split('/').slice(0, 2).join('/') + '/'
-        ) === 0;
-        if (sameSection) return;                  /* переход внутри раздела */
-      } catch (e) { /* нечитаемый referrer — считаем переходом извне */ }
-    }
-    setTimeout(function () {
-      cat.classList.add('is-hilite');
-      setTimeout(function () { cat.classList.remove('is-hilite'); }, 2100);
-    }, 260);
-  })();
-
-  /* ── поиск ──
-     Шестьдесят с лишним услуг листать неудобно: набор двух букв прячет всё
-     несовпадающее и раскрывает категории, где что-то нашлось. Пустой запрос
-     возвращает исходное состояние — раскрытой остаётся только категория
-     текущей страницы. */
-  var input = document.getElementById('pillar-search');
-  var empty = document.getElementById('pillar-search-empty');
-  if (!input) return;
-
-  var opened = cats.filter(function (c) { return c.classList.contains('is-open'); });
-
-  /* Тот же вид, что norm() в site-search.js: регистр, ё→е, без апострофов —
-     на /uk/ в названиях ’, а с клавиатуры обычно набирают ' («сім'я») — и без
-     испанских ударений («autonomo» находит «Autónomo»). */
-  var LATIN = { 'á': 'a', 'à': 'a', 'â': 'a', 'ä': 'a', 'é': 'e', 'è': 'e', 'ê': 'e', 'ë': 'e',
-    'í': 'i', 'ì': 'i', 'î': 'i', 'ï': 'i', 'ó': 'o', 'ò': 'o', 'ô': 'o', 'ö': 'o',
-    'ú': 'u', 'ù': 'u', 'û': 'u', 'ü': 'u', 'ñ': 'n', 'ç': 'c' };
-  function norm(s) {
-    return (s || '').toLowerCase().replace(/ё/g, 'е').replace(/['’ʼ`]/g, '')
-      .replace(/[áàâäéèêëíìîïóòôöúùûüñç]/g, function (c) { return LATIN[c]; });
-  }
-  /* Окончание последнего слова запроса не требуем: «сім'я» находит «сім’ї»
-     и «сім’ю», «прописка» — «прописки». Основа не короче трёх букв и ищется
-     только с начала слова: иначе «права» находит «сПРАВка», «дети» — «свиДЕТельство». */
-  function loose(q) {
-    var t = q.replace(/[аяоеєуюіїиыьй]$/, '');
-    return t.length >= 3 ? t : q;
-  }
-
-  function reset() {
-    cats.forEach(function (cat) {
-      cat.hidden = false;
-      cat.classList.toggle('is-open', opened.indexOf(cat) !== -1);
-      var head = cat.querySelector('.pillar-cat__head');
-      if (head) head.setAttribute('aria-expanded', cat.classList.contains('is-open') ? 'true' : 'false');
-      [].forEach.call(cat.querySelectorAll('li'), function (li) { li.hidden = false; });
-    });
-    if (empty) empty.hidden = true;
-  }
-
-  input.addEventListener('input', function () {
-    /* поиск ищет по всем пунктам — свёрнутый до текущей услуги раздел разворачиваем */
-    [].forEach.call(nav.querySelectorAll('.pillar-cat.is-compact'), function (c) { c.classList.remove('is-compact'); });
-    var q = norm(input.value.trim());
-    if (q.length < 2) { reset(); return; }
-    var stem = loose(q);
-
-    var found = 0;
-    cats.forEach(function (cat) {
-      var hits = 0;
-      [].forEach.call(cat.querySelectorAll('li'), function (li) {
-        var text = norm(li.textContent);
-        var match = text.indexOf(q) !== -1 ||
-          (stem !== q && (' ' + text.replace(/[^0-9a-zа-яіїєґ]+/g, ' ')).indexOf(' ' + stem) !== -1);
-        li.hidden = !match;
-        if (match) hits++;
-      });
-      cat.hidden = hits === 0;
-      cat.classList.toggle('is-open', hits > 0);
-      var head = cat.querySelector('.pillar-cat__head');
-      if (head) head.setAttribute('aria-expanded', hits > 0 ? 'true' : 'false');
-      found += hits;
-    });
-    if (empty) empty.hidden = found > 0;
-  });
+var nav = document.querySelector('.pillar-nav');
+if (!nav) return;
+var toggle = nav.querySelector('.pillar-nav__toggle');
+if (toggle) {
+toggle.addEventListener('click', function () {
+var open = nav.classList.toggle('is-open');
+toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+});
+}
+var cats = [].slice.call(nav.querySelectorAll('.pillar-cat'));
+function closeOtherCats(keep) {
+cats.forEach(function (c) {
+if (c === keep || !c.classList.contains('is-open')) return;
+c.classList.remove('is-open');
+var h = c.querySelector('.pillar-cat__head');
+if (h) h.setAttribute('aria-expanded', 'false');
+});
+}
+var docMq = window.matchMedia ? window.matchMedia('(max-width: 899px)') : null;
+var isDocPage = !!document.querySelector('.pillar-split--doc:not(.pillar-split--city)');
+function headIsLabel() { return isDocPage && docMq && docMq.matches; }
+function applyHeadMode() {
+cats.forEach(function (cat) {
+var head = cat.querySelector('.pillar-cat__head');
+if (!head) return;
+if (headIsLabel()) {
+head.setAttribute('tabindex', '-1');
+head.removeAttribute('aria-expanded');
+} else {
+head.removeAttribute('tabindex');
+head.setAttribute('aria-expanded', cat.classList.contains('is-open') ? 'true' : 'false');
+}
+});
+}
+applyHeadMode();
+if (docMq && docMq.addEventListener) docMq.addEventListener('change', applyHeadMode);
+[].forEach.call(nav.querySelectorAll('.pillar-cat__more'), function (btn) {
+btn.addEventListener('click', function () {
+var cat = btn.closest('.pillar-cat');
+if (cat) cat.classList.remove('is-compact');
+});
+});
+cats.forEach(function (cat) {
+var head = cat.querySelector('.pillar-cat__head');
+if (!head) return;
+head.addEventListener('click', function () {
+if (headIsLabel()) return;
+var open = !cat.classList.contains('is-open');
+if (open) closeOtherCats(cat);
+cat.classList.toggle('is-open', open);
+head.setAttribute('aria-expanded', open ? 'true' : 'false');
+});
+});
+function goToCat(slug) {
+if (!/^[a-z-]+$/.test(slug)) return;
+var cat = nav.querySelector('.pillar-cat[data-cat="' + slug + '"]');
+if (!cat) return;
+closeOtherCats(cat);
+cat.classList.add('is-open');
+var head = cat.querySelector('.pillar-cat__head');
+if (head) head.setAttribute('aria-expanded', 'true');
+nav.classList.add('is-open');
+if (toggle) toggle.setAttribute('aria-expanded', 'true');
+var noAnim = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+setTimeout(function () {
+cat.scrollIntoView({ block: 'start', behavior: noAnim ? 'auto' : 'smooth' });
+setTimeout(function () {
+cat.classList.remove('is-hilite');
+void cat.offsetWidth;
+cat.classList.add('is-hilite');
+setTimeout(function () { cat.classList.remove('is-hilite'); }, 2100);
+}, noAnim ? 60 : 480);
+}, 80);
+}
+goToCat((location.hash || '').slice(1));
+window.addEventListener('hashchange', function () {
+goToCat((location.hash || '').slice(1));
+});
+(function flashCurrentCat() {
+if (location.hash) return;
+var cur = nav.querySelector('.pillar-nav__current');
+if (!cur) return;
+var cat = cur.closest('.pillar-cat');
+if (!cat) return;
+var from = document.referrer;
+if (from) {
+try {
+var sameSection = new URL(from).pathname.indexOf(
+location.pathname.split('/').slice(0, 2).join('/') + '/'
+) === 0;
+if (sameSection) return;
+} catch (e) { }
+}
+setTimeout(function () {
+cat.classList.add('is-hilite');
+setTimeout(function () { cat.classList.remove('is-hilite'); }, 2100);
+}, 260);
 })();
-
-/* ── дорожка шагов ── (29.10.2026: своим блоком — колонки .pillar-nav на
-   страницах больше нет, а шаги в тексте те же; на тихих страницах (v2)
-   quiet.css гасит терракотовую заливку дорожки)
-  
-   Вертикальный вариант анимации с главной («Как мы работаем»): линия между
-   кружками заливается терракотой по мере прокрутки, кружок загорается,
-   когда заливка до него дошла. */
-(function () {
-  var steps = document.querySelector('.pillar-steps');
-  if (!steps) return;
-  var items = [].slice.call(steps.querySelectorAll('li'));
-  if (!items.length) return;
-
-  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (reduce) {
-    items.forEach(function (li) {
-      li.style.setProperty('--seg', 1);
-      li.classList.add('is-on');
-    });
-    return;
-  }
-
-  var segs = Math.max(items.length - 1, 1);
-  var queued = false;
-
-  function update() {
-    queued = false;
-    var r = steps.getBoundingClientRect();
-    var vh = window.innerHeight || document.documentElement.clientHeight;
-    if (!vh) return;
-    var start = vh * 0.86;          /* блок вошёл снизу — прогресс 0 */
-    var end = vh * 0.32;            /* дошёл до верхней трети — прогресс 1 */
-    var p = (start - r.top) / (start - end);
-    p = p < 0 ? 0 : (p > 1 ? 1 : p);
-
-    items.forEach(function (li, i) {
-      if (i < segs) {
-        var s = p * segs - i;
-        s = s < 0 ? 0 : (s > 1 ? 1 : s);
-        li.style.setProperty('--seg', s.toFixed(3));
-      }
-      /* первый кружок загорается сразу, остальные — когда линия дошла */
-      var on = i === 0 ? p > 0.01 : p >= i / segs;
-      li.classList[on ? 'add' : 'remove']('is-on');
-    });
-  }
-
-  function schedule() {
-    if (queued) return;
-    queued = true;
-    if (window.requestAnimationFrame) window.requestAnimationFrame(update);
-    else setTimeout(update, 16);
-  }
-
-  window.addEventListener('scroll', schedule, { passive: true });
-  window.addEventListener('resize', schedule, { passive: true });
-  update();
+var input = document.getElementById('pillar-search');
+var empty = document.getElementById('pillar-search-empty');
+if (!input) return;
+var opened = cats.filter(function (c) { return c.classList.contains('is-open'); });
+var LATIN = { 'á': 'a', 'à': 'a', 'â': 'a', 'ä': 'a', 'é': 'e', 'è': 'e', 'ê': 'e', 'ë': 'e',
+'í': 'i', 'ì': 'i', 'î': 'i', 'ï': 'i', 'ó': 'o', 'ò': 'o', 'ô': 'o', 'ö': 'o',
+'ú': 'u', 'ù': 'u', 'û': 'u', 'ü': 'u', 'ñ': 'n', 'ç': 'c' };
+function norm(s) {
+return (s || '').toLowerCase().replace(/ё/g, 'е').replace(/['’ʼ`]/g, '')
+.replace(/[áàâäéèêëíìîïóòôöúùûüñç]/g, function (c) { return LATIN[c]; });
+}
+function loose(q) {
+var t = q.replace(/[аяоеєуюіїиыьй]$/, '');
+return t.length >= 3 ? t : q;
+}
+function reset() {
+cats.forEach(function (cat) {
+cat.hidden = false;
+cat.classList.toggle('is-open', opened.indexOf(cat) !== -1);
+var head = cat.querySelector('.pillar-cat__head');
+if (head) head.setAttribute('aria-expanded', cat.classList.contains('is-open') ? 'true' : 'false');
+[].forEach.call(cat.querySelectorAll('li'), function (li) { li.hidden = false; });
+});
+if (empty) empty.hidden = true;
+}
+input.addEventListener('input', function () {
+[].forEach.call(nav.querySelectorAll('.pillar-cat.is-compact'), function (c) { c.classList.remove('is-compact'); });
+var q = norm(input.value.trim());
+if (q.length < 2) { reset(); return; }
+var stem = loose(q);
+var found = 0;
+cats.forEach(function (cat) {
+var hits = 0;
+[].forEach.call(cat.querySelectorAll('li'), function (li) {
+var text = norm(li.textContent);
+var match = text.indexOf(q) !== -1 ||
+(stem !== q && (' ' + text.replace(/[^0-9a-zа-яіїєґ]+/g, ' ')).indexOf(' ' + stem) !== -1);
+li.hidden = !match;
+if (match) hits++;
+});
+cat.hidden = hits === 0;
+cat.classList.toggle('is-open', hits > 0);
+var head = cat.querySelector('.pillar-cat__head');
+if (head) head.setAttribute('aria-expanded', hits > 0 ? 'true' : 'false');
+found += hits;
+});
+if (empty) empty.hidden = found > 0;
+});
 })();
-
-/* Прилипание колонки без второго скролла (Daniil 25.10): sticky только если
-   колонка целиком помещается под шапкой; иначе — обычный блок в потоке.
-   Пересчёт при раскрытии категорий, поиске и смене размера окна. */
 (function () {
-  var nav = document.querySelector('.pillar-nav');
-  if (!nav) return;
-  var mq = window.matchMedia ? window.matchMedia('(min-width: 900px)') : null;
-  var TOP = 112, GAP = 24;
-  function fit() {
-    var ok = (!mq || mq.matches) && nav.offsetHeight <= window.innerHeight - TOP - GAP;
-    nav.classList.toggle('is-sticky', ok);
-  }
-  fit();
-  window.addEventListener('resize', fit, { passive: true });
-  if ('ResizeObserver' in window) { new ResizeObserver(fit).observe(nav); }
-  else { nav.addEventListener('click', function () { setTimeout(fit, 350); }); }
+var steps = document.querySelector('.pillar-steps');
+if (!steps) return;
+if (document.body.hasAttribute('data-quiet')) return;
+var items = [].slice.call(steps.querySelectorAll('li'));
+if (!items.length) return;
+var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+if (reduce) {
+items.forEach(function (li) {
+li.style.setProperty('--seg', 1);
+li.classList.add('is-on');
+});
+return;
+}
+var segs = Math.max(items.length - 1, 1);
+var queued = false;
+function update() {
+queued = false;
+var r = steps.getBoundingClientRect();
+var vh = window.innerHeight || document.documentElement.clientHeight;
+if (!vh) return;
+var start = vh * 0.86;
+var end = vh * 0.32;
+var p = (start - r.top) / (start - end);
+p = p < 0 ? 0 : (p > 1 ? 1 : p);
+items.forEach(function (li, i) {
+if (i < segs) {
+var s = p * segs - i;
+s = s < 0 ? 0 : (s > 1 ? 1 : s);
+li.style.setProperty('--seg', s.toFixed(3));
+}
+var on = i === 0 ? p > 0.01 : p >= i / segs;
+li.classList[on ? 'add' : 'remove']('is-on');
+});
+}
+function schedule() {
+if (queued) return;
+queued = true;
+if (window.requestAnimationFrame) window.requestAnimationFrame(update);
+else setTimeout(update, 16);
+}
+window.addEventListener('scroll', schedule, { passive: true });
+window.addEventListener('resize', schedule, { passive: true });
+update();
 })();
-
-/* Д8 (Ф2a, 28.10.2026): строка городов под картой. На телефоне подписи
-   городов на карте — цели 32–48×18 px, Аликанте и Мурсия в 21 px друг от
-   друга: промах уходил в фон карты, мёртвый тап. Под картой — те же шесть
-   ссылок крупными строками (CSS показывает строку только до 560 px).
-   Строку собирает скрипт из ссылок самой карты: те же адреса и названия,
-   а 139 страниц не тяжелеют на полкилобайта разметки (бюджет веса). */
 (function () {
-  var svg = document.querySelector('.cmap .cmap__svg');
-  if (!svg || svg.parentNode.querySelector('.cmap__row')) return;
-  /* v3 (решение 11 Daniil 30.10.2026, «шум на услугах»): на странице услуги и
-     «услуге × город» второй список тех же шести городов под картой снят.
-     Мимо подписи карты на телефоне не промахнуться: зону касания у точки и
-     подписи расширяет service-page.css. Разделы и города — как было. */
-  if (document.querySelector('.pillar-split[data-svc-layout]')) return;
-  var row = document.createElement('p');
-  row.className = 'cmap__row';
-  [].forEach.call(svg.querySelectorAll('.cmap__city'), function (city) {
-    var label = city.querySelector('.cmap__label');
-    var name = label ? label.textContent.trim() : '';
-    if (!name) return;
-    var href = city.getAttribute('href');
-    var el = document.createElement(href ? 'a' : 'span');
-    if (href) el.setAttribute('href', href);
-    else el.setAttribute('aria-current', 'page');
-    el.textContent = name;
-    row.appendChild(el);
-  });
-  if (row.children.length) svg.parentNode.insertBefore(row, svg.nextSibling);
+var nav = document.querySelector('.pillar-nav');
+if (!nav) return;
+var mq = window.matchMedia ? window.matchMedia('(min-width: 900px)') : null;
+var TOP = 112, GAP = 24;
+function fit() {
+var ok = (!mq || mq.matches) && nav.offsetHeight <= window.innerHeight - TOP - GAP;
+nav.classList.toggle('is-sticky', ok);
+}
+fit();
+window.addEventListener('resize', fit, { passive: true });
+if ('ResizeObserver' in window) { new ResizeObserver(fit).observe(nav); }
+else { nav.addEventListener('click', function () { setTimeout(fit, 350); }); }
+})();
+(function () {
+var svg = document.querySelector('.cmap .cmap__svg');
+if (!svg || svg.parentNode.querySelector('.cmap__row')) return;
+if (document.querySelector('.pillar-split[data-svc-layout]')) return;
+var row = document.createElement('p');
+row.className = 'cmap__row';
+[].forEach.call(svg.querySelectorAll('.cmap__city'), function (city) {
+var label = city.querySelector('.cmap__label');
+var name = label ? label.textContent.trim() : '';
+if (!name) return;
+var href = city.getAttribute('href');
+var el = document.createElement(href ? 'a' : 'span');
+if (href) el.setAttribute('href', href);
+else el.setAttribute('aria-current', 'page');
+el.textContent = name;
+row.appendChild(el);
+});
+if (row.children.length) svg.parentNode.insertBefore(row, svg.nextSibling);
 })();

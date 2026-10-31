@@ -39,18 +39,15 @@
   <link rel="stylesheet" href="/assets/sticky-cta.css?v=97f8674046">
   <link rel="stylesheet" href="/assets/module-card.css?v=ad605dacca">
   <link rel="stylesheet" href="/assets/module-hero.css?v=1c4f9ba7a5">
-  <link rel="stylesheet" href="/assets/module-trust.css?v=02171b65ad">
   <link rel="stylesheet" href="/assets/module-process.css?v=196c0e75e4">
-  <link rel="stylesheet" href="/assets/module-pricing.css?v=67820ea2a9">
-  <link rel="stylesheet" href="/assets/site-nav.css?v=3cfa85ad5a">
-  <script src="/assets/site-nav.js?v=0dc7d6164b" defer></script>
-  <link rel="stylesheet" href="/assets/site-search.css?v=cf5e61a272">
-  <script src="/assets/site-search.js?v=8790dfb19c" defer></script>
-  <link rel="stylesheet" href="/assets/krepko-chips.css?v=11343c11df">
-  <link rel="stylesheet" href="/assets/site-footer.css?v=704459eff3">
+  <link rel="stylesheet" href="/assets/site-nav.css?v=520ab0fd38">
+  <script src="/assets/site-nav.js?v=242f60d039" defer></script>
+  <link rel="stylesheet" href="/assets/site-search.css?v=19bc096a88">
+  <script src="/assets/site-search.js?v=6ccdf4fc5c" defer></script>
+  <link rel="stylesheet" href="/assets/site-footer.css?v=fe4711060f">
   <link rel="stylesheet" href="/assets/a11y.css?v=02e8ecca79">
   <link rel="stylesheet" href="/assets/krepko-base.css?v=4f15a801f8">
-  <link rel="stylesheet" href="/assets/desktop.css?v=8b8743c64a">
+  <link rel="stylesheet" href="/assets/desktop.css?v=8b8743c64a" media="(min-width: 900px)">
   <link rel="stylesheet" href="/assets/page-about.css?v=604e3c1a0d">
   <link rel="stylesheet" href="/assets/cookie-consent.css?v=a24813b238">
   <link rel="stylesheet" href="/assets/cursor.css?v=ab607cd5b4">
@@ -60,10 +57,10 @@
   <!-- Consent-safe event layer (no-op until window.gtag exists, i.e. after "Accept all"):
        WhatsApp UTM-attribution + custom events cta_click_*, pricing_view, blog_finish_read.
        Documented Phase-1 requirement (Аналитика-стратегия §IV/§VII/§XII). -->
-  <script src="/assets/analytics.js?v=8da4f6cf51" defer></script>
-  <script src="/assets/reviews-carousel.js?v=156ac54049" defer></script>
+  <script src="/assets/analytics.js?v=8348b3bed8" defer></script>
+  <script src="/assets/reviews-carousel.js?v=c43e424125" defer></script>
 <link rel="stylesheet" href="/assets/pillar-split.css?v=ec7e5af930">
-<script src="/assets/pillar-split.js?v=a2dc689959" defer></script>
+<script src="/assets/pillar-split.js?v=83c557de6b" defer></script>
   <link rel="stylesheet" href="/assets/light-scale.css?v=ae87c8d5cc">
   <link rel="stylesheet" href="/assets/service-tail.css?v=139fb766af">
   <link rel="stylesheet" href="/assets/reviews-block.css?v=27d5e55136">
@@ -403,8 +400,8 @@
         </figcaption>
       </figure>
       </div>
-    <button class="rv-nav rv-nav--prev" type="button" id="rv-prev" aria-label="Попередній відгук"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="11 18 5 12 11 6"/></svg></button>
-    <button class="rv-nav rv-nav--next" type="button" id="rv-next" aria-label="Наступний відгук"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="13 6 19 12 13 18"/></svg></button>
+    <button class="rv-nav rv-nav--prev" type="button" id="rv-prev" aria-label="Попередній відгук"><svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="11 18 5 12 11 6"/></svg></button>
+    <button class="rv-nav rv-nav--next" type="button" id="rv-next" aria-label="Наступний відгук"><svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="13 6 19 12 13 18"/></svg></button>
   </div>
 
   <div class="reviews-cta">
@@ -533,7 +530,7 @@
     </div>
 
     <div class="site-footer__bottom">
-      <div class="footer-chat" aria-label="Месенджери">
+      <div class="footer-chat" role="group" aria-label="Месенджери">
         <a class="footer-chat__link" href="https://wa.me/34624309985?text=%D0%94%D0%BE%D0%B1%D1%80%D0%B8%D0%B9%20%D0%B4%D0%B5%D0%BD%D1%8C%2C%20%D0%BC%D0%B5%D0%BD%D1%96%20%D0%BF%D0%BE%D1%82%D1%80%D1%96%D0%B1%D0%BD%D0%B0%20%D0%BF%D0%BE%D1%81%D0%BB%D1%83%D0%B3%D0%B0%20%C2%AB%D0%9E%D0%BC%D0%BE%D0%BB%D0%BE%D0%B3%D0%B0%D1%86%D1%96%D1%8F%20%D0%B0%D1%82%D0%B5%D1%81%D1%82%D0%B0%D1%82%D0%B0%20%28bachillerato%29%C2%BB.%20%D0%AF%20%D0%B7%20krepko.es/uk/tramites/homologacion-bachillerato/madrid/" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" data-cta="footer-icon">
           <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M12.04 2c-5.46 0-9.9 4.44-9.9 9.9 0 1.75.46 3.45 1.32 4.95L2 22l5.3-1.39a9.9 9.9 0 0 0 4.74 1.2h.01c5.46 0 9.9-4.44 9.9-9.9S17.5 2 12.04 2Zm0 18.06h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.11.82.83-3.04-.2-.31a8.19 8.19 0 0 1-1.26-4.4c0-4.53 3.69-8.22 8.24-8.22a8.22 8.22 0 0 1 0 16.44Zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.24-.64.8-.78.97-.15.16-.29.18-.53.06-.25-.13-1.05-.39-1.99-1.23-.74-.65-1.23-1.46-1.38-1.71-.14-.24-.01-.37.11-.5.11-.11.25-.29.37-.44.13-.15.17-.25.25-.41.09-.17.04-.31-.02-.44-.06-.12-.56-1.34-.76-1.84-.2-.48-.4-.42-.56-.42l-.47-.01c-.16 0-.43.06-.65.3-.23.25-.86.85-.86 2.06 0 1.21.88 2.39 1 2.55.13.17 1.74 2.66 4.22 3.73.59.25 1.05.4 1.4.52.59.19 1.13.16 1.55.1.48-.07 1.47-.6 1.67-1.18.21-.58.21-1.07.15-1.18-.06-.1-.22-.16-.47-.28Z"/></svg>
         </a>
