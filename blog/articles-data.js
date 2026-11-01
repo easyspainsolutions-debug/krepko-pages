@@ -1,5 +1,19 @@
 /* Krepko Blog — centralized articles registry */
 var ARTICLES = [
+  // Статьи-мосты к услугам 01.11.2026 — первыми, чтобы «Читайте также» брал их
+  { slug: 'modifikaciya-vremennoy-zashity', title: 'Модификация временной защиты в Испании: кому ВНЖ на 4 года, а кому на год', tag: 'ВНЖ · Временная защита', cat: 'vnzh', time: 9 },
+  { slug: 's-vremennoy-zashity-na-vizu-kochevnika', title: 'С временной защиты на ВНЖ цифрового кочевника: подача в UGE из Испании', tag: 'ВНЖ · Временная защита', cat: 'vnzh', time: 9 },
+  { slug: 'semya-tsifrovogo-kochevnika', title: 'Виза цифрового кочевника с семьёй: кто может ехать и что доказать каждому', tag: 'ВНЖ · Семья', cat: 'vnzh', time: 9 },
+  { slug: 'soglasie-supruga-na-prodazhu-v-ukraine', title: 'Согласие супруга на продажу квартиры в Украине: как оформить в Испании', tag: 'Документы · Украина', cat: 'docs', time: 7 },
+  { slug: 'doverennost-iz-ispanii-v-rossiyu', title: 'Как сделать доверенность в Испании для России в 2026 году', tag: 'Документы · Россия', cat: 'docs', time: 8 },
+  { slug: 'grazhdanstvo-rebenku-rodivshemusya-v-ispanii', title: 'Гражданство ребёнку, родившемуся в Испании: когда подавать и с чего начать', tag: 'Дети · Гражданство', cat: 'social', time: 9 },
+  { slug: 'otkaz-ot-vremennoy-zashity', title: 'Отказ от временной защиты: как подать и что сделать до него', tag: 'ВНЖ · Временная защита', cat: 'vnzh', time: 8 },
+  { slug: 'nasledstvo-v-ukraine-iz-ispanii', title: 'Как принять наследство в Украине, живя в Испании', tag: 'Наследство · Украина', cat: 'docs', time: 9 },
+  { slug: 'grazhdanstvo-po-braku-ispaniya', title: 'Гражданство Испании по браку: ВНЖ супругу на 5 лет и подача через год', tag: 'ВНЖ · Семья', cat: 'vnzh', time: 9 },
+  { slug: 'prosrochennyy-pasport-notarius-ispaniya', title: 'Просроченный паспорт Украины: что можно подписать у нотариуса в Испании', tag: 'Документы · Украина', cat: 'docs', time: 7 },
+  { slug: 'prodlenie-vnzh-kochevnika', title: 'Продление ВНЖ цифрового кочевника: когда подавать и что проверит UGE', tag: 'ВНЖ · Удалённая работа', cat: 'vnzh', time: 9 },
+  { slug: 'otvet-na-requerimiento-uge-viza-kochevnika', title: 'Запрос UGE по визе кочевника: как ответить за 10 дней', tag: 'ВНЖ · Удалённая работа', cat: 'vnzh', time: 9 },
+  { slug: 'grazhdanstvo-ispanii-cherez-10-let', title: 'Гражданство Испании через 10 лет: как считать срок и какие документы готовить заранее', tag: 'ВНЖ · Гражданство', cat: 'vnzh', time: 9 },
   // Доверенность из Испании для Украины 02.10.2026
   { slug: 'doverennost-iz-ispanii-v-ukrainu', title: 'Доверенность из Испании для Украины: как оформить в 2026 году', tag: 'Документы · Украина', cat: 'docs', time: 8 },
   // Серия «справка ДПСУ / нет штампа» 01.10.2026

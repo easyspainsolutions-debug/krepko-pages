@@ -69,7 +69,11 @@ return '<a class="blog-card" data-cat="' + a.cat + '" href="/blog/' + a.slug + '
 }).join('');
 box.insertAdjacentHTML('beforebegin', '<h2 class="article-more__h">Читайте также</h2>');
 }
-function init() { toc(); more(); }
+function init() {
+toc();
+more();
+document.addEventListener('touchstart', function () {}, { passive: true });
+}
 if (document.readyState === 'loading') {
 document.addEventListener('DOMContentLoaded', init);
 } else {

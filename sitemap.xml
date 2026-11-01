@@ -108,7 +108,7 @@
   </url>
   <url>
     <loc>https://krepko.es/blog/</loc>
-    <lastmod>2026-10-24</lastmod>
+    <lastmod>2026-11-01</lastmod>
     <priority>0.7</priority>
     <changefreq>weekly</changefreq>
   </url>
@@ -1276,6 +1276,12 @@
     <changefreq>yearly</changefreq>
   </url>
   <url>
+    <loc>https://krepko.es/blog/doverennost-iz-ispanii-v-rossiyu/</loc>
+    <lastmod>2026-11-01</lastmod>
+    <priority>0.6</priority>
+    <changefreq>yearly</changefreq>
+  </url>
+  <url>
     <loc>https://krepko.es/blog/padron-municipal/</loc>
     <lastmod>2026-08-13</lastmod>
     <priority>0.6</priority>
@@ -1296,6 +1302,12 @@
   <url>
     <loc>https://krepko.es/blog/neobanki-ispaniya/</loc>
     <lastmod>2026-08-13</lastmod>
+    <priority>0.6</priority>
+    <changefreq>yearly</changefreq>
+  </url>
+  <url>
+    <loc>https://krepko.es/blog/prodlenie-vnzh-kochevnika/</loc>
+    <lastmod>2026-11-01</lastmod>
     <priority>0.6</priority>
     <changefreq>yearly</changefreq>
   </url>
@@ -1378,6 +1390,12 @@
     <changefreq>yearly</changefreq>
   </url>
   <url>
+    <loc>https://krepko.es/blog/otvet-na-requerimiento-uge-viza-kochevnika/</loc>
+    <lastmod>2026-11-01</lastmod>
+    <priority>0.6</priority>
+    <changefreq>yearly</changefreq>
+  </url>
+  <url>
     <loc>https://krepko.es/blog/identifikaciya-pensionerov-ispaniya/</loc>
     <lastmod>2026-09-29</lastmod>
     <priority>0.6</priority>
@@ -1420,6 +1438,24 @@
     <changefreq>yearly</changefreq>
   </url>
   <url>
+    <loc>https://krepko.es/blog/semya-tsifrovogo-kochevnika/</loc>
+    <lastmod>2026-11-01</lastmod>
+    <priority>0.6</priority>
+    <changefreq>yearly</changefreq>
+  </url>
+  <url>
+    <loc>https://krepko.es/blog/s-vremennoy-zashity-na-vizu-kochevnika/</loc>
+    <lastmod>2026-11-01</lastmod>
+    <priority>0.6</priority>
+    <changefreq>yearly</changefreq>
+  </url>
+  <url>
+    <loc>https://krepko.es/blog/soglasie-supruga-na-prodazhu-v-ukraine/</loc>
+    <lastmod>2026-11-01</lastmod>
+    <priority>0.6</priority>
+    <changefreq>yearly</changefreq>
+  </url>
+  <url>
     <loc>https://krepko.es/blog/otkryt-sl-biznes-ispaniya/</loc>
     <lastmod>2026-08-13</lastmod>
     <priority>0.6</priority>
@@ -1440,6 +1476,12 @@
   <url>
     <loc>https://krepko.es/blog/carta-de-invitacion-ispaniya/</loc>
     <lastmod>2026-08-13</lastmod>
+    <priority>0.6</priority>
+    <changefreq>yearly</changefreq>
+  </url>
+  <url>
+    <loc>https://krepko.es/blog/grazhdanstvo-ispanii-cherez-10-let/</loc>
+    <lastmod>2026-11-01</lastmod>
     <priority>0.6</priority>
     <changefreq>yearly</changefreq>
   </url>
@@ -1480,6 +1522,12 @@
     <changefreq>yearly</changefreq>
   </url>
   <url>
+    <loc>https://krepko.es/blog/grazhdanstvo-rebenku-rodivshemusya-v-ispanii/</loc>
+    <lastmod>2026-11-01</lastmod>
+    <priority>0.6</priority>
+    <changefreq>yearly</changefreq>
+  </url>
+  <url>
     <loc>https://krepko.es/blog/rebenok-rodilsya-v-ispanii/</loc>
     <lastmod>2026-08-15</lastmod>
     <priority>0.6</priority>
@@ -1494,6 +1542,12 @@
   <url>
     <loc>https://krepko.es/blog/ukrainskie-prava-v-ispanii/</loc>
     <lastmod>2026-10-01</lastmod>
+    <priority>0.6</priority>
+    <changefreq>yearly</changefreq>
+  </url>
+  <url>
+    <loc>https://krepko.es/blog/prosrochennyy-pasport-notarius-ispaniya/</loc>
+    <lastmod>2026-11-01</lastmod>
     <priority>0.6</priority>
     <changefreq>yearly</changefreq>
   </url>
@@ -1528,6 +1582,12 @@
     <changefreq>yearly</changefreq>
   </url>
   <url>
+    <loc>https://krepko.es/blog/otkaz-ot-vremennoy-zashity/</loc>
+    <lastmod>2026-11-01</lastmod>
+    <priority>0.6</priority>
+    <changefreq>yearly</changefreq>
+  </url>
+  <url>
     <loc>https://krepko.es/blog/posobiya-imv-ispaniya/</loc>
     <lastmod>2026-10-01</lastmod>
     <priority>0.6</priority>
@@ -1546,8 +1606,26 @@
     <changefreq>yearly</changefreq>
   </url>
   <url>
+    <loc>https://krepko.es/blog/modifikaciya-vremennoy-zashity/</loc>
+    <lastmod>2026-11-01</lastmod>
+    <priority>0.6</priority>
+    <changefreq>yearly</changefreq>
+  </url>
+  <url>
+    <loc>https://krepko.es/blog/grazhdanstvo-po-braku-ispaniya/</loc>
+    <lastmod>2026-11-01</lastmod>
+    <priority>0.6</priority>
+    <changefreq>yearly</changefreq>
+  </url>
+  <url>
     <loc>https://krepko.es/blog/vremennaya-zashita-bez-shtampa/</loc>
     <lastmod>2026-10-01</lastmod>
+    <priority>0.6</priority>
+    <changefreq>yearly</changefreq>
+  </url>
+  <url>
+    <loc>https://krepko.es/blog/nasledstvo-v-ukraine-iz-ispanii/</loc>
+    <lastmod>2026-11-01</lastmod>
     <priority>0.6</priority>
     <changefreq>yearly</changefreq>
   </url>
