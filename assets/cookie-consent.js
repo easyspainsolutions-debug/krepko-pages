@@ -2,6 +2,7 @@
 'use strict';
 var STORAGE_KEY = 'krepko_consent_v1';
 var GA_ID = 'G-8F3TB9QMLY';
+var IS_PROD = window.location.hostname === 'krepko.es';
 function getConsent() {
 try { return window.localStorage.getItem(STORAGE_KEY); }
 catch (_) { return null; }
@@ -11,7 +12,7 @@ try { window.localStorage.setItem(STORAGE_KEY, value); }
 catch (_) { }
 }
 function loadGA() {
-if (window.__krepkoGaLoaded) return;
+if (!IS_PROD || window.__krepkoGaLoaded) return;
 window.__krepkoGaLoaded = true;
 var s = document.createElement('script');
 s.async = true;
@@ -25,7 +26,7 @@ window.gtag('config', GA_ID, { anonymize_ip: true });
 function loadClarity() {
 var m = document.querySelector('meta[name="krepko-clarity"]');
 var id = m && (m.getAttribute('content') || '').trim();
-if (!id || window.__krepkoClarityLoaded) return;
+if (!IS_PROD || !id || window.__krepkoClarityLoaded) return;
 window.__krepkoClarityLoaded = true;
 window.clarity = window.clarity || function () { (window.clarity.q = window.clarity.q || []).push(arguments); };
 var s = document.createElement('script');
