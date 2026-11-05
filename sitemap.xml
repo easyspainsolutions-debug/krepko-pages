@@ -108,7 +108,7 @@
   </url>
   <url>
     <loc>https://krepko.es/blog/</loc>
-    <lastmod>2026-11-01</lastmod>
+    <lastmod>2026-11-05</lastmod>
     <priority>0.7</priority>
     <changefreq>weekly</changefreq>
   </url>
@@ -1432,6 +1432,12 @@
     <changefreq>yearly</changefreq>
   </url>
   <url>
+    <loc>https://krepko.es/blog/modelo-720-kvartira-v-ukraine-ili-rossii/</loc>
+    <lastmod>2026-11-05</lastmod>
+    <priority>0.6</priority>
+    <changefreq>yearly</changefreq>
+  </url>
+  <url>
     <loc>https://krepko.es/blog/dohod-dlya-vizy-nomada/</loc>
     <lastmod>2026-10-01</lastmod>
     <priority>0.6</priority>
@@ -1446,6 +1452,18 @@
   <url>
     <loc>https://krepko.es/blog/s-vremennoy-zashity-na-vizu-kochevnika/</loc>
     <lastmod>2026-11-01</lastmod>
+    <priority>0.6</priority>
+    <changefreq>yearly</changefreq>
+  </url>
+  <url>
+    <loc>https://krepko.es/blog/generalnaya-doverennost-ispaniya/</loc>
+    <lastmod>2026-11-05</lastmod>
+    <priority>0.6</priority>
+    <changefreq>yearly</changefreq>
+  </url>
+  <url>
+    <loc>https://krepko.es/blog/prodat-kvartiru-v-ispanii-po-doverennosti/</loc>
+    <lastmod>2026-11-05</lastmod>
     <priority>0.6</priority>
     <changefreq>yearly</changefreq>
   </url>
@@ -1482,6 +1500,12 @@
   <url>
     <loc>https://krepko.es/blog/grazhdanstvo-ispanii-cherez-10-let/</loc>
     <lastmod>2026-11-01</lastmod>
+    <priority>0.6</priority>
+    <changefreq>yearly</changefreq>
+  </url>
+  <url>
+    <loc>https://krepko.es/blog/svidetelstvo-o-brake-ukraina-ispaniya/</loc>
+    <lastmod>2026-11-05</lastmod>
     <priority>0.6</priority>
     <changefreq>yearly</changefreq>
   </url>

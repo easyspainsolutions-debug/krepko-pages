@@ -1,5 +1,10 @@
 /* Krepko Blog — centralized articles registry */
 var ARTICLES = [
+  // Статьи-мосты к услугам 05.11.2026 — первыми, чтобы «Читайте также» брал их
+  { slug: 'generalnaya-doverennost-ispaniya', title: 'Генеральная доверенность в Испании: что по ней можно сделать, а что нет', tag: 'Документы · Нотариус', cat: 'docs', time: 7 },
+  { slug: 'prodat-kvartiru-v-ispanii-po-doverennosti', title: 'Как продать квартиру в Испании, если вы уезжаете: доверенность и налог продавца-нерезидента', tag: 'Недвижимость · Нотариус', cat: 'docs', time: 9 },
+  { slug: 'svidetelstvo-o-brake-ukraina-ispaniya', title: 'Свидетельство о браке из Украины, не выезжая из Испании: дубликат, витяг, апостиль', tag: 'Документы · Украина', cat: 'docs', time: 8 },
+  { slug: 'modelo-720-kvartira-v-ukraine-ili-rossii', title: 'Modelo 720 до 31 марта 2027: квартира и счета в Украине или России', tag: 'Налоги · Modelo 720', cat: 'finance', time: 8 },
   // Статьи-мосты к услугам 01.11.2026 — первыми, чтобы «Читайте также» брал их
   { slug: 'modifikaciya-vremennoy-zashity', title: 'Модификация временной защиты в Испании: кому ВНЖ на 4 года, а кому на год', tag: 'ВНЖ · Временная защита', cat: 'vnzh', time: 9 },
   { slug: 's-vremennoy-zashity-na-vizu-kochevnika', title: 'С временной защиты на ВНЖ цифрового кочевника: подача в UGE из Испании', tag: 'ВНЖ · Временная защита', cat: 'vnzh', time: 9 },
