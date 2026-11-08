@@ -81,7 +81,7 @@
   </url>
   <url>
     <loc>https://krepko.es/rossiya-belarus/</loc>
-    <lastmod>2026-10-29</lastmod>
+    <lastmod>2026-11-05</lastmod>
     <priority>0.9</priority>
     <changefreq>monthly</changefreq>
     <xhtml:link rel="alternate" hreflang="ru" href="https://krepko.es/rossiya-belarus/"/>
@@ -230,7 +230,7 @@
   </url>
   <url>
     <loc>https://krepko.es/services/</loc>
-    <lastmod>2026-10-28</lastmod>
+    <lastmod>2026-11-05</lastmod>
     <priority>0.8</priority>
     <changefreq>monthly</changefreq>
     <xhtml:link rel="alternate" hreflang="ru" href="https://krepko.es/services/"/>
@@ -275,7 +275,7 @@
   </url>
   <url>
     <loc>https://krepko.es/notario/doverennost-na-rodnom-yazyke/</loc>
-    <lastmod>2026-10-28</lastmod>
+    <lastmod>2026-11-05</lastmod>
     <priority>0.7</priority>
     <changefreq>monthly</changefreq>
     <xhtml:link rel="alternate" hreflang="ru" href="https://krepko.es/notario/doverennost-na-rodnom-yazyke/"/>
@@ -1246,6 +1246,51 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://krepko.es/legalizacion/apostil-ispania/"/>
   </url>
   <url>
+    <loc>https://krepko.es/rossiya-belarus/svidetelstvo-o-brake-iz-rossii/</loc>
+    <lastmod>2026-11-05</lastmod>
+    <priority>0.7</priority>
+    <changefreq>monthly</changefreq>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://krepko.es/rossiya-belarus/svidetelstvo-o-brake-iz-rossii/"/>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://krepko.es/uk/rossiya-belarus/svidetelstvo-o-brake-iz-rossii/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://krepko.es/rossiya-belarus/svidetelstvo-o-brake-iz-rossii/"/>
+  </url>
+  <url>
+    <loc>https://krepko.es/rossiya-belarus/spravka-o-semeynom-polozhenii-iz-rossii/</loc>
+    <lastmod>2026-11-05</lastmod>
+    <priority>0.7</priority>
+    <changefreq>monthly</changefreq>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://krepko.es/rossiya-belarus/spravka-o-semeynom-polozhenii-iz-rossii/"/>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://krepko.es/uk/rossiya-belarus/spravka-o-semeynom-polozhenii-iz-rossii/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://krepko.es/rossiya-belarus/spravka-o-semeynom-polozhenii-iz-rossii/"/>
+  </url>
+  <url>
+    <loc>https://krepko.es/rossiya-belarus/svidetelstvo-o-rozhdenii-iz-rossii/</loc>
+    <lastmod>2026-11-05</lastmod>
+    <priority>0.7</priority>
+    <changefreq>monthly</changefreq>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://krepko.es/rossiya-belarus/svidetelstvo-o-rozhdenii-iz-rossii/"/>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://krepko.es/uk/rossiya-belarus/svidetelstvo-o-rozhdenii-iz-rossii/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://krepko.es/rossiya-belarus/svidetelstvo-o-rozhdenii-iz-rossii/"/>
+  </url>
+  <url>
+    <loc>https://krepko.es/rossiya-belarus/svidetelstvo-o-razvode-iz-rossii/</loc>
+    <lastmod>2026-11-05</lastmod>
+    <priority>0.7</priority>
+    <changefreq>monthly</changefreq>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://krepko.es/rossiya-belarus/svidetelstvo-o-razvode-iz-rossii/"/>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://krepko.es/uk/rossiya-belarus/svidetelstvo-o-razvode-iz-rossii/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://krepko.es/rossiya-belarus/svidetelstvo-o-razvode-iz-rossii/"/>
+  </url>
+  <url>
+    <loc>https://krepko.es/rossiya-belarus/spravka-o-nesudimosti-iz-rossii/</loc>
+    <lastmod>2026-11-05</lastmod>
+    <priority>0.7</priority>
+    <changefreq>monthly</changefreq>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://krepko.es/rossiya-belarus/spravka-o-nesudimosti-iz-rossii/"/>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://krepko.es/uk/rossiya-belarus/spravka-o-nesudimosti-iz-rossii/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://krepko.es/rossiya-belarus/spravka-o-nesudimosti-iz-rossii/"/>
+  </url>
+  <url>
     <loc>https://krepko.es/blog/modelo-030/</loc>
     <lastmod>2026-08-13</lastmod>
     <priority>0.6</priority>
@@ -1277,7 +1322,7 @@
   </url>
   <url>
     <loc>https://krepko.es/blog/doverennost-iz-ispanii-v-rossiyu/</loc>
-    <lastmod>2026-11-01</lastmod>
+    <lastmod>2026-11-05</lastmod>
     <priority>0.6</priority>
     <changefreq>yearly</changefreq>
   </url>
@@ -2111,7 +2156,7 @@
   </url>
   <url>
     <loc>https://krepko.es/uk/rossiya-belarus/</loc>
-    <lastmod>2026-10-29</lastmod>
+    <lastmod>2026-11-05</lastmod>
     <priority>0.9</priority>
     <changefreq>monthly</changefreq>
     <xhtml:link rel="alternate" hreflang="ru" href="https://krepko.es/rossiya-belarus/"/>
@@ -2210,7 +2255,7 @@
   </url>
   <url>
     <loc>https://krepko.es/uk/services/</loc>
-    <lastmod>2026-10-28</lastmod>
+    <lastmod>2026-11-05</lastmod>
     <priority>0.8</priority>
     <changefreq>monthly</changefreq>
     <xhtml:link rel="alternate" hreflang="ru" href="https://krepko.es/services/"/>
@@ -2255,7 +2300,7 @@
   </url>
   <url>
     <loc>https://krepko.es/uk/notario/doverennost-na-rodnom-yazyke/</loc>
-    <lastmod>2026-10-28</lastmod>
+    <lastmod>2026-11-05</lastmod>
     <priority>0.7</priority>
     <changefreq>monthly</changefreq>
     <xhtml:link rel="alternate" hreflang="ru" href="https://krepko.es/notario/doverennost-na-rodnom-yazyke/"/>
@@ -3224,6 +3269,51 @@
     <xhtml:link rel="alternate" hreflang="ru" href="https://krepko.es/legalizacion/apostil-ispania/"/>
     <xhtml:link rel="alternate" hreflang="uk" href="https://krepko.es/uk/legalizacion/apostil-ispania/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://krepko.es/legalizacion/apostil-ispania/"/>
+  </url>
+  <url>
+    <loc>https://krepko.es/uk/rossiya-belarus/svidetelstvo-o-brake-iz-rossii/</loc>
+    <lastmod>2026-11-05</lastmod>
+    <priority>0.7</priority>
+    <changefreq>monthly</changefreq>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://krepko.es/rossiya-belarus/svidetelstvo-o-brake-iz-rossii/"/>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://krepko.es/uk/rossiya-belarus/svidetelstvo-o-brake-iz-rossii/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://krepko.es/rossiya-belarus/svidetelstvo-o-brake-iz-rossii/"/>
+  </url>
+  <url>
+    <loc>https://krepko.es/uk/rossiya-belarus/spravka-o-semeynom-polozhenii-iz-rossii/</loc>
+    <lastmod>2026-11-05</lastmod>
+    <priority>0.7</priority>
+    <changefreq>monthly</changefreq>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://krepko.es/rossiya-belarus/spravka-o-semeynom-polozhenii-iz-rossii/"/>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://krepko.es/uk/rossiya-belarus/spravka-o-semeynom-polozhenii-iz-rossii/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://krepko.es/rossiya-belarus/spravka-o-semeynom-polozhenii-iz-rossii/"/>
+  </url>
+  <url>
+    <loc>https://krepko.es/uk/rossiya-belarus/svidetelstvo-o-rozhdenii-iz-rossii/</loc>
+    <lastmod>2026-11-05</lastmod>
+    <priority>0.7</priority>
+    <changefreq>monthly</changefreq>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://krepko.es/rossiya-belarus/svidetelstvo-o-rozhdenii-iz-rossii/"/>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://krepko.es/uk/rossiya-belarus/svidetelstvo-o-rozhdenii-iz-rossii/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://krepko.es/rossiya-belarus/svidetelstvo-o-rozhdenii-iz-rossii/"/>
+  </url>
+  <url>
+    <loc>https://krepko.es/uk/rossiya-belarus/svidetelstvo-o-razvode-iz-rossii/</loc>
+    <lastmod>2026-11-05</lastmod>
+    <priority>0.7</priority>
+    <changefreq>monthly</changefreq>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://krepko.es/rossiya-belarus/svidetelstvo-o-razvode-iz-rossii/"/>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://krepko.es/uk/rossiya-belarus/svidetelstvo-o-razvode-iz-rossii/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://krepko.es/rossiya-belarus/svidetelstvo-o-razvode-iz-rossii/"/>
+  </url>
+  <url>
+    <loc>https://krepko.es/uk/rossiya-belarus/spravka-o-nesudimosti-iz-rossii/</loc>
+    <lastmod>2026-11-05</lastmod>
+    <priority>0.7</priority>
+    <changefreq>monthly</changefreq>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://krepko.es/rossiya-belarus/spravka-o-nesudimosti-iz-rossii/"/>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://krepko.es/uk/rossiya-belarus/spravka-o-nesudimosti-iz-rossii/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://krepko.es/rossiya-belarus/spravka-o-nesudimosti-iz-rossii/"/>
   </url>
   <url>
     <loc>https://krepko.es/uk/migracion/vnzh-rodstvennikam-ispancev/</loc>
