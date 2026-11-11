@@ -48,7 +48,7 @@
   <meta property="og:site_name" content="Krepko">
 
   <script type="application/ld+json">
-  {"@context":"https://schema.org","@type":"Article","headline":"Certificado digital: электронная подпись в Испании 2026","description":"Certificado digital — FNMT и Cl@ve: как получить электронную подпись для Hacienda, Seguridad Social, Extranjería. Установка, использование, безопасность.","url":"https://krepko.es/blog/certificado-digital/","datePublished":"2026-04-26","dateModified":"2026-11-16","author":{"@type":"Person","name":"Daniil Pavlovskyi","url":"https://krepko.es/about/","jobTitle":"Специалист по нотариальным и банковским услугам в Испании","worksFor":{"@type":"Organization","@id":"https://krepko.es/#organization","name":"Krepko","url":"https://krepko.es/"}},"publisher":{"@type":"Organization","@id":"https://krepko.es/#organization","name":"Krepko","url":"https://krepko.es/","logo":{"@type":"ImageObject","url":"https://krepko.es/og-image.png"}},"inLanguage":"ru","keywords":"certificado digital, электронная подпись, FNMT, Cl@ve, Hacienda Испания","image":{"@type":"ImageObject","url":"https://krepko.es/og-image.png","width":1200,"height":630},"mainEntityOfPage":{"@type":"WebPage","@id":"https://krepko.es/blog/certificado-digital/"}}
+  {"@context":"https://schema.org","@type":"Article","headline":"Certificado digital: электронная подпись в Испании 2026","description":"Certificado digital — FNMT и Cl@ve: как получить электронную подпись для Hacienda, Seguridad Social, Extranjería. Установка, использование, безопасность.","url":"https://krepko.es/blog/certificado-digital/","datePublished":"2026-04-26","dateModified":"2026-11-11","author":{"@type":"Person","name":"Daniil Pavlovskyi","url":"https://krepko.es/about/","jobTitle":"Специалист по нотариальным и банковским услугам в Испании","worksFor":{"@type":"Organization","@id":"https://krepko.es/#organization","name":"Krepko","url":"https://krepko.es/"}},"publisher":{"@type":"Organization","@id":"https://krepko.es/#organization","name":"Krepko","url":"https://krepko.es/","logo":{"@type":"ImageObject","url":"https://krepko.es/og-image.png"}},"inLanguage":"ru","keywords":"certificado digital, электронная подпись, FNMT, Cl@ve, Hacienda Испания","image":{"@type":"ImageObject","url":"https://krepko.es/og-image.png","width":1200,"height":630},"mainEntityOfPage":{"@type":"WebPage","@id":"https://krepko.es/blog/certificado-digital/"}}
   </script>
   <script src="/assets/analytics.js?v=97c5c2774c" defer></script>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
@@ -316,7 +316,7 @@
 
     <h1>Certificado digital: электронная подпись в Испании 2026</h1>
 
-    <div class="article-meta"><a href="/about/">Krepko</a> · обновлено <time datetime="2026-11-16">16 ноября 2026</time> · ~7 мин чтения</div>
+    <div class="article-meta"><a href="/about/">Krepko</a> · обновлено <time datetime="2026-11-11">11 ноября 2026</time> · ~7 мин чтения</div>
     <div class="info-box article-summary"><strong>Если коротко.</strong> Электронная подпись FNMT выдаётся бесплатно владельцу NIE или DNI и действует до 4 лет. Путь — три шага: онлайн-запрос на сайте FNMT, личная явка в офис аккредитации с кодом из письма, NIE и паспортом, скачивание сертификата в браузер в тот же день. Проверено 24.10.2026 по sede.fnmt.gob.es. Источник: <a href="https://www.sede.fnmt.gob.es/preguntas-frecuentes/certificado-de-persona-fisica/-/asset_publisher/eIal9z2VE0Kb/content/1038-son-gratuitos-todos-estos-tramites-?p_r_p_assetEntryId=10527800" rel="noopener noreferrer" target="_blank">FNMT-RCM, Sede electrónica — FAQ 1038 «¿Es gratuita la obtención del certificado de persona física?»; документы и офисы — /certificados/persona-fisica/obtener-certificado-software/acreditar-identidad; видеоидентификация — /certificados/persona-fisica/obtener-certificado-video-identificacion</a>.</div>
     <div class="article-services article-services--card">
       <div class="svc-card svc-card--head">
@@ -399,8 +399,8 @@
     <ol>
       <li>Вернитесь на сайт sede.fnmt.gob.es → «Descargar certificado»</li>
       <li>Введите свой код запроса и данные</li>
-      <li>Скачайте файл .p12 или .pfx (сертификат с приватным ключом)</li>
-      <li>Установите сертификат в браузер (Chrome, Firefox, Safari) — браузер покажет окно установки</li>
+      <li>Скачайте сертификат: программа FNMT (Configurador FNMT-RCM) попросит пароль, заданный при запросе, и сама установит сертификат в хранилище сертификатов</li>
+      <li>Сделайте резервную копию — файл .p12 или .pfx (сертификат с приватным ключом)</li>
       <li>Введите пароль для защиты сертификата</li>
     </ol>
 
@@ -418,7 +418,7 @@
     <h3>Chrome (Windows и macOS)</h3>
     <ul>
       <li>Меню → Настройки → Конфиденциальность и безопасность → Управление сертификатами (или Security)</li>
-      <li>Вкладка «Ваши сертификаты» → Импорт</li>
+      <li>Windows: сертификаты, импортированные из Windows → вкладка «Личные» → Импорт, дальше ведёт мастер импорта Windows; macOS: Chrome берёт сертификат из связки ключей, импорт — как для Safari ниже</li>
       <li>Выберите файл .p12 или .pfx → введите пароль</li>
       <li>После импорта браузер сам предложит сертификат при входе на портал Hacienda или Seguridad Social</li>
     </ul>
@@ -466,7 +466,7 @@
     <h2 id="bezopasnost-i-hranenie-sertifikata">Безопасность и хранение сертификата</h2>
 
     <h3>Защита паролем</h3>
-    <p>При импорте сертификата вы задаёте пароль для приватного ключа. <strong>Запишите этот пароль</strong> — его спросят при каждой подписи, а восстановить его невозможно: забыли пароль — выпускаете сертификат заново, со всей записью и явкой в офис.</p>
+    <p>При запросе сертификата вы задаёте пароль для приватного ключа. <strong>Запишите этот пароль</strong> — его спросят при скачивании сертификата, а восстановить его невозможно: забыли пароль — выпускаете сертификат заново, со всей записью и явкой в офис.</p>
 
     <h3>Экспорт и бэкап</h3>
     <p>Сразу после установки сделайте резервную копию — иначе переустановка системы обернётся повторной поездкой в офис:</p>
@@ -493,7 +493,7 @@
     <p>За несколько месяцев до конца срока FNMT пришлёт напоминание на email. Не тяните: истёкшей подписью нельзя подать ничего, а очередь на cita previa живёт своей жизнью. Если срок подходит, а свободных окон не видно — напишите нам в WhatsApp, возьмём запись и сопровождение на себя.</p>
 
     <div class="info-box">
-      <strong>Не ждите последнего дня:</strong> новый сертификат заказывают в любой момент, даже пока действует старый. Потеряли пароль, повредился файл, сменили компьютер — запрашивайте выпуск заново, ограничений нет.
+      <strong>Не ждите последнего дня:</strong> новый сертификат заказывают в любой момент, даже пока действует старый. Потеряли пароль, повредился файл, сменили компьютер, а резервной копии нет и сделать её нельзя — запрашивайте выпуск заново, но при выдаче нового прежний сертификат отзывают автоматически.
     </div>
 
     <p>Свежее по теме: «<a href="/blog/prodlenie-certificado-digital/">Как продлить certificado digital FNMT онлайн и что делать, если уже нельзя</a>»</p>
