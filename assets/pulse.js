@@ -143,7 +143,7 @@ try { u = new URL(href, location.href); } catch (err) { u = null; }
 if (u && u.host === location.host) {
 if (u.pathname === location.pathname && u.hash) { push('anchor', label, u.hash, a); return; }
 exitKind = 'internal';
-push('link', label, u.pathname, a);
+push('link', label, a.getAttribute('data-cta') || u.pathname, a);
 } else if (u) {
 exitKind = 'external';
 push('out', label, u.host + u.pathname, a);

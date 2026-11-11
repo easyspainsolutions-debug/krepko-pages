@@ -109,7 +109,9 @@ var consent = document.getElementById('cookie-consent');
 function floor(r) {
 if (!consent || consent.hidden) return window.innerHeight;
 var c = consent.getBoundingClientRect();
-if (!c.height || c.right <= r.left || c.left >= r.right) return window.innerHeight;
+if (!c.height) return window.innerHeight;
+var overlap = Math.min(c.right, r.right) - Math.max(c.left, r.left);
+if (overlap <= r.width / 2) return window.innerHeight;
 return Math.min(window.innerHeight, c.top);
 }
 var topbar = document.querySelector('.topbar');

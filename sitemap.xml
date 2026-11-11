@@ -99,7 +99,7 @@
   </url>
   <url>
     <loc>https://krepko.es/blog/</loc>
-    <lastmod>2026-11-08</lastmod>
+    <lastmod>2026-11-16</lastmod>
     <priority>0.7</priority>
     <changefreq>weekly</changefreq>
   </url>
@@ -1246,6 +1246,18 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://krepko.es/legalizacion/apostil-ispania/"/>
   </url>
   <url>
+    <loc>https://krepko.es/blog/srok-deystviya-spravok-ispaniya/</loc>
+    <lastmod>2026-11-16</lastmod>
+    <priority>0.6</priority>
+    <changefreq>yearly</changefreq>
+  </url>
+  <url>
+    <loc>https://krepko.es/blog/gde-podtverdit-lichnost-fnmt/</loc>
+    <lastmod>2026-11-16</lastmod>
+    <priority>0.6</priority>
+    <changefreq>yearly</changefreq>
+  </url>
+  <url>
     <loc>https://krepko.es/blog/modelo-030/</loc>
     <lastmod>2026-08-13</lastmod>
     <priority>0.6</priority>
@@ -1264,8 +1276,26 @@
     <changefreq>yearly</changefreq>
   </url>
   <url>
+    <loc>https://krepko.es/blog/perenos-certificado-digital/</loc>
+    <lastmod>2026-11-16</lastmod>
+    <priority>0.6</priority>
+    <changefreq>yearly</changefreq>
+  </url>
+  <url>
+    <loc>https://krepko.es/blog/numero-de-referencia-renta/</loc>
+    <lastmod>2026-11-16</lastmod>
+    <priority>0.6</priority>
+    <changefreq>yearly</changefreq>
+  </url>
+  <url>
     <loc>https://krepko.es/blog/autonomo-ispaniya/</loc>
     <lastmod>2026-08-13</lastmod>
+    <priority>0.6</priority>
+    <changefreq>yearly</changefreq>
+  </url>
+  <url>
+    <loc>https://krepko.es/blog/prodlenie-certificado-digital/</loc>
+    <lastmod>2026-11-16</lastmod>
     <priority>0.6</priority>
     <changefreq>yearly</changefreq>
   </url>
@@ -1325,7 +1355,7 @@
   </url>
   <url>
     <loc>https://krepko.es/blog/zamena-prav-ispaniya/</loc>
-    <lastmod>2026-08-13</lastmod>
+    <lastmod>2026-11-16</lastmod>
     <priority>0.6</priority>
     <changefreq>yearly</changefreq>
   </url>
@@ -1343,7 +1373,7 @@
   </url>
   <url>
     <loc>https://krepko.es/blog/vnzh-ispaniya/</loc>
-    <lastmod>2026-08-13</lastmod>
+    <lastmod>2026-11-16</lastmod>
     <priority>0.6</priority>
     <changefreq>yearly</changefreq>
   </url>
@@ -1362,6 +1392,12 @@
   <url>
     <loc>https://krepko.es/blog/doverennost-na-russkom/</loc>
     <lastmod>2026-11-05</lastmod>
+    <priority>0.6</priority>
+    <changefreq>yearly</changefreq>
+  </url>
+  <url>
+    <loc>https://krepko.es/blog/ne-skachivaetsya-certificado-fnmt/</loc>
+    <lastmod>2026-11-16</lastmod>
     <priority>0.6</priority>
     <changefreq>yearly</changefreq>
   </url>
@@ -1480,6 +1516,18 @@
     <changefreq>yearly</changefreq>
   </url>
   <url>
+    <loc>https://krepko.es/blog/clave-registraciya-nie/</loc>
+    <lastmod>2026-11-16</lastmod>
+    <priority>0.6</priority>
+    <changefreq>yearly</changefreq>
+  </url>
+  <url>
+    <loc>https://krepko.es/blog/mezhdunarodnoe-voditelskoe-udostoverenie/</loc>
+    <lastmod>2026-11-16</lastmod>
+    <priority>0.6</priority>
+    <changefreq>yearly</changefreq>
+  </url>
+  <url>
     <loc>https://krepko.es/blog/larga-duracion-ispaniya/</loc>
     <lastmod>2026-10-01</lastmod>
     <priority>0.6</priority>
@@ -1487,19 +1535,25 @@
   </url>
   <url>
     <loc>https://krepko.es/blog/irpf-nalogi-ispaniya/</loc>
-    <lastmod>2026-08-13</lastmod>
+    <lastmod>2026-11-16</lastmod>
     <priority>0.6</priority>
     <changefreq>yearly</changefreq>
   </url>
   <url>
     <loc>https://krepko.es/blog/carta-de-invitacion-ispaniya/</loc>
-    <lastmod>2026-08-13</lastmod>
+    <lastmod>2026-11-16</lastmod>
     <priority>0.6</priority>
     <changefreq>yearly</changefreq>
   </url>
   <url>
     <loc>https://krepko.es/blog/grazhdanstvo-ispanii-cherez-10-let/</loc>
     <lastmod>2026-11-08</lastmod>
+    <priority>0.6</priority>
+    <changefreq>yearly</changefreq>
+  </url>
+  <url>
+    <loc>https://krepko.es/blog/obyazatelnaya-deklaraciya-irpf/</loc>
+    <lastmod>2026-11-16</lastmod>
     <priority>0.6</priority>
     <changefreq>yearly</changefreq>
   </url>
@@ -1523,7 +1577,7 @@
   </url>
   <url>
     <loc>https://krepko.es/blog/certificado-empadronamiento/</loc>
-    <lastmod>2026-11-05</lastmod>
+    <lastmod>2026-11-16</lastmod>
     <priority>0.6</priority>
     <changefreq>yearly</changefreq>
   </url>
@@ -1535,7 +1589,13 @@
   </url>
   <url>
     <loc>https://krepko.es/blog/certificado-digital/</loc>
-    <lastmod>2026-08-13</lastmod>
+    <lastmod>2026-11-16</lastmod>
+    <priority>0.6</priority>
+    <changefreq>yearly</changefreq>
+  </url>
+  <url>
+    <loc>https://krepko.es/blog/opozdanie-s-deklaraciey-irpf/</loc>
+    <lastmod>2026-11-16</lastmod>
     <priority>0.6</priority>
     <changefreq>yearly</changefreq>
   </url>
@@ -1656,6 +1716,12 @@
   <url>
     <loc>https://krepko.es/blog/meditsinskaya-strahovka-ispaniya/</loc>
     <lastmod>2026-08-13</lastmod>
+    <priority>0.6</priority>
+    <changefreq>yearly</changefreq>
+  </url>
+  <url>
+    <loc>https://krepko.es/blog/erte-ispaniya/</loc>
+    <lastmod>2026-11-16</lastmod>
     <priority>0.6</priority>
     <changefreq>yearly</changefreq>
   </url>

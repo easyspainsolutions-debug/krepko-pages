@@ -14,13 +14,15 @@ if (mq.addEventListener) mq.addEventListener('change', sync);
 var links = document.querySelectorAll('.article-toc a');
 if (!links.length || !('IntersectionObserver' in window)) return;
 var map = {};
-links.forEach(function (a) { map[a.getAttribute('href').slice(1)] = a; });
+links.forEach(function (a) {
+var id = a.getAttribute('href').slice(1);
+(map[id] = map[id] || []).push(a);
+});
 var io = new IntersectionObserver(function (entries) {
 entries.forEach(function (e) {
 if (!e.isIntersecting) return;
 links.forEach(function (a) { a.classList.remove('is-on'); });
-var cur = map[e.target.id];
-if (cur) cur.classList.add('is-on');
+(map[e.target.id] || []).forEach(function (a) { a.classList.add('is-on'); });
 });
 }, { rootMargin: '-170px 0px -70% 0px' });
 document.querySelectorAll('.article-body h2[id]').forEach(function (h) {

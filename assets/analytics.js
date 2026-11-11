@@ -72,6 +72,7 @@ a.setAttribute('href', origHref + sep + 'text=' + newText);
 function locationOf(el) {
 var section = el.closest('[data-track-section]');
 return el.getAttribute('data-track-location')
+|| el.getAttribute('data-cta')
 || (section && section.getAttribute('data-track-section'))
 || (el.closest('header') ? 'header' : '')
 || (el.closest('footer') ? 'footer' : '')

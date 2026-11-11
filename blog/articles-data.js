@@ -1,5 +1,17 @@
 /* Krepko Blog — centralized articles registry */
 var ARTICLES = [
+  // Ноябрь 2026 — цифровая подпись и Cl@ve, IRPF, права, справки, ERTE (статьи 11.11.2026, выкладка 16.11) — первыми, чтобы «Читайте также» брал их; первые три «Документа» — разные темы
+  { slug: 'prodlenie-certificado-digital', title: 'Как продлить certificado digital FNMT онлайн и что делать, если уже нельзя', tag: 'Документы · Электронная подпись', cat: 'docs', time: 7 },
+  { slug: 'mezhdunarodnoe-voditelskoe-udostoverenie', title: 'Международное водительское удостоверение в Испании: кому его выдают и где оно нужно', tag: 'Документы · Транспорт', cat: 'docs', time: 8 },
+  { slug: 'srok-deystviya-spravok-ispaniya', title: 'Справка «не старше 3 месяцев»: кто в Испании ставит этот срок', tag: 'Документы · Регистрация', cat: 'docs', time: 8 },
+  { slug: 'obyazatelnaya-deklaraciya-irpf', title: 'Нужна ли декларация IRPF, если доход меньше 22 000 €', tag: 'Налоги · IRPF', cat: 'finance', time: 8 },
+  { slug: 'opozdanie-s-deklaraciey-irpf', title: 'Опоздали с декларацией IRPF: сколько доплатить и когда бывает штраф', tag: 'Налоги · IRPF', cat: 'finance', time: 8 },
+  { slug: 'numero-de-referencia-renta', title: 'Номер референции (número de referencia): как подать Renta по NIE', tag: 'Налоги · IRPF', cat: 'finance', time: 8 },
+  { slug: 'erte-ispaniya', title: 'ERTE в Испании: что это значит для работника и как получить пособие', tag: 'Работа · Налоги', cat: 'work', time: 8 },
+  { slug: 'ne-skachivaetsya-certificado-fnmt', title: 'Не скачивается сертификат FNMT после визита в офис: что проверить', tag: 'Документы · Электронная подпись', cat: 'docs', time: 9 },
+  { slug: 'gde-podtverdit-lichnost-fnmt', title: 'Где подтвердить личность для certificado digital, если у вас NIE', tag: 'Документы · Электронная подпись', cat: 'docs', time: 8 },
+  { slug: 'perenos-certificado-digital', title: 'Как перенести certificado digital на другой компьютер или телефон', tag: 'Документы · Электронная подпись', cat: 'docs', time: 8 },
+  { slug: 'clave-registraciya-nie', title: 'Cl@ve для иностранцев с NIE: как зарегистрироваться', tag: 'Документы · Электронная подпись', cat: 'docs', time: 8 },
   // Статьи-мосты к услугам 05.11.2026 — первыми, чтобы «Читайте также» брал их
   { slug: 'generalnaya-doverennost-ispaniya', title: 'Генеральная доверенность в Испании: что по ней можно сделать, а что нет', tag: 'Документы · Нотариус', cat: 'docs', time: 7 },
   { slug: 'prodat-kvartiru-v-ispanii-po-doverennosti', title: 'Как продать квартиру в Испании, если вы уезжаете: доверенность и налог продавца-нерезидента', tag: 'Недвижимость · Нотариус', cat: 'docs', time: 9 },
