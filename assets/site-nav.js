@@ -12,6 +12,11 @@ var bbar = document.getElementById('sticky-cta');
 var desk = window.matchMedia ? window.matchMedia('(min-width: 900px)') : { matches: true };
 var dialogs = [].slice.call(document.querySelectorAll('dialog'));
 if (bbar) bbar.removeAttribute('hidden');
+var consent = document.getElementById('cookie-consent');
+function bannerOpen() {
+if (!consent || consent.hidden) return false;
+return consent.getBoundingClientRect().height > 0;
+}
 var section = HOME ? 'home'
 : /^\/blog(\/|$)/.test(path) ? 'blog'
 : /^\/about(\/|$)/.test(path) ? 'about'
@@ -57,7 +62,7 @@ root.setAttribute('data-bar', s);
 paint();
 schedule();
 }
-function pinned() { return footIn && phone() && !waIn; }
+function pinned() { return phone() && (bannerOpen() || (footIn && !waIn)); }
 function settle() {
 if (!locked() && state === 'down' && pinned()) set('up');
 }
@@ -105,7 +110,6 @@ if (a.closest(CHROME) || a.offsetHeight < 32) return false;
 var bg = window.getComputedStyle(a).backgroundColor || '';
 return !!bg && bg !== 'transparent' && !/^rgba\(.*,\s*0\)$/.test(bg);
 }
-var consent = document.getElementById('cookie-consent');
 function floor(r) {
 if (!consent || consent.hidden) return window.innerHeight;
 var c = consent.getBoundingClientRect();
@@ -166,7 +170,7 @@ if (desk.addEventListener) desk.addEventListener('change', onMedia);
 else if (desk.addListener) desk.addListener(onMedia);
 watchButtons();
 if (consent && window.MutationObserver) {
-new MutationObserver(function () { schedule(); setTimeout(schedule, 350); })
+new MutationObserver(function () { settle(); paint(); schedule(); setTimeout(schedule, 350); })
 .observe(consent, { attributes: true, attributeFilter: ['hidden'] });
 }
 if (document.fonts && document.fonts.ready) document.fonts.ready.then(watchButtons);

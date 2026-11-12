@@ -107,6 +107,10 @@ s: el && !el.closest('.sticky-cta,.site-nav,header,dialog') ? sectionOf(el) : cu
 ms: Date.now() - T0
 });
 }
+function selecting() {
+var sel = window.getSelection && window.getSelection();
+return !!sel && !sel.isCollapsed && String(sel).trim().length > 0;
+}
 function elKey(el) {
 var cls = (el.className && typeof el.className === 'string') ? '.' + el.className.trim().split(/\s+/)[0] : '';
 return (el.tagName || '').toLowerCase() + cls;
@@ -117,7 +121,7 @@ if (!t || !t.closest || e.isTrusted === false) return;
 var now = Date.now();
 lastClicks.push([now, e.clientX, e.clientY]);
 lastClicks = lastClicks.filter(function (c) { return now - c[0] < 1000; });
-if (lastClicks.length >= 3) {
+if (lastClicks.length >= 3 && !(selecting() && window.getComputedStyle(t).cursor !== 'pointer')) {
 var a0 = lastClicks[0];
 if (Math.abs(a0[1] - e.clientX) < 40 && Math.abs(a0[2] - e.clientY) < 40) {
 push('rage', (t.textContent || '').slice(0, 40), elKey(t), t);
@@ -160,6 +164,12 @@ var b = t.closest('button,[role="button"]');
 if (b) { push('btn', b.getAttribute('aria-label') || b.textContent, elKey(b), b); return; }
 if (t.closest(INTERACTIVE)) return;
 if (t === document.documentElement || t === document.body || t.tagName === 'MAIN') return;
+if (e.detail > 1) {
+var p0 = ev[ev.length - 1];
+if (selecting() && p0 && p0.k === 'dead' && ev.length > sentEv && Date.now() - T0 - p0.ms < 800) ev.pop();
+return;
+}
+if (selecting()) return;
 var cs = window.getComputedStyle(t);
 if (cs && cs.cursor === 'pointer') return;
 var txt = (t.textContent || '').trim();
