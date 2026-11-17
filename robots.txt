@@ -57,6 +57,25 @@ User-agent: Perplexity-User
 Allow: /
 Disallow: /_preview/
 
+# Meta AI: индекс, из которого ассистент берёт ссылки на источники, и
+# открытие страницы по запросу пользователя (документация Meta, 18.11.2026)
+User-agent: Meta-WebIndexer
+Allow: /
+Disallow: /_preview/
+
+User-agent: meta-externalfetcher
+Allow: /
+Disallow: /_preview/
+
+# Яндекс: ответы Алисы AI строятся на этих роботах (справка Вебмастера)
+User-agent: YandexAdditional
+Allow: /
+Disallow: /_preview/
+
+User-agent: YandexAdditionalBot
+Allow: /
+Disallow: /_preview/
+
 # ── AI-краулеры: сбор данных для обучения ──────────────────────────────
 # Отдельная история от поиска: эти боты собирают тексты в обучающие наборы
 # и ссылку взамен не приводят. Оставлены открытыми осознанно — упоминание
