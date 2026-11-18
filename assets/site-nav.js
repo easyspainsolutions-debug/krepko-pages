@@ -20,7 +20,7 @@ return consent.getBoundingClientRect().height > 0;
 var section = HOME ? 'home'
 : /^\/blog(\/|$)/.test(path) ? 'blog'
 : /^\/about(\/|$)/.test(path) ? 'about'
-: /^\/(partners|es|aviso-legal|cookies|privacidad|terminos|review|hello)(\/|$)/.test(path) ? ''
+: /^\/(partners|es|en|aviso-legal|cookies|privacidad|terminos|review|hello)(\/|$)/.test(path) ? ''
 : 'services';
 if (section && section !== 'home') {
 [].forEach.call(nav.querySelectorAll('.site-nav__link'), function (a) {
