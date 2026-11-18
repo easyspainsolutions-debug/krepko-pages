@@ -1,5 +1,9 @@
 /* Krepko Blog — centralized articles registry */
 var ARTICLES = [
+  // 18.11.2026 — выборы и временная защита, экзамены CCSE и DELE 2027, наследство в Испании для наследника за границей — первыми, чтобы «Читайте также» брал их
+  { slug: 'vybory-29-noyabrya-vremennaya-zashita', title: 'Выборы 29 ноября и временная защита: какие правила меняет только ЕС, а какие — Испания', tag: 'ВНЖ · Временная защита', cat: 'vnzh', time: 8 },
+  { slug: 'ccse-dele-2027-ekzameny-na-grazhdanstvo', title: 'Экзамены на гражданство Испании в 2027 году: даты CCSE и DELE A2 и как записаться', tag: 'Гражданство · Экзамены', cat: 'vnzh', time: 8 },
+  { slug: 'nasledstvo-v-ispanii-naslednik-za-granitsey', title: 'Наследство в Испании, если наследник живёт за границей: что оформить и в какие сроки', tag: 'Наследство · Нотариус', cat: 'docs', time: 8 },
   // Ноябрь 2026 — цифровая подпись и Cl@ve, IRPF, права, справки, ERTE (статьи 11.11.2026, выкладка 16.11) — первыми, чтобы «Читайте также» брал их; первые три «Документа» — разные темы
   { slug: 'prodlenie-certificado-digital', title: 'Как продлить certificado digital FNMT онлайн и что делать, если уже нельзя', tag: 'Документы · Электронная подпись', cat: 'docs', time: 7 },
   { slug: 'mezhdunarodnoe-voditelskoe-udostoverenie', title: 'Международное водительское удостоверение в Испании: кому его выдают и где оно нужно', tag: 'Документы · Транспорт', cat: 'docs', time: 8 },

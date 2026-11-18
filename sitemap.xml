@@ -1330,6 +1330,12 @@
     <changefreq>yearly</changefreq>
   </url>
   <url>
+    <loc>https://krepko.es/blog/vybory-29-noyabrya-vremennaya-zashita/</loc>
+    <lastmod>2026-11-18</lastmod>
+    <priority>0.6</priority>
+    <changefreq>yearly</changefreq>
+  </url>
+  <url>
     <loc>https://krepko.es/blog/neobanki-ispaniya/</loc>
     <lastmod>2026-11-13</lastmod>
     <priority>0.6</priority>
@@ -1374,6 +1380,12 @@
   <url>
     <loc>https://krepko.es/blog/vnzh-ispaniya/</loc>
     <lastmod>2026-11-13</lastmod>
+    <priority>0.6</priority>
+    <changefreq>yearly</changefreq>
+  </url>
+  <url>
+    <loc>https://krepko.es/blog/nasledstvo-v-ispanii-naslednik-za-granitsey/</loc>
+    <lastmod>2026-11-18</lastmod>
     <priority>0.6</priority>
     <changefreq>yearly</changefreq>
   </url>
@@ -1554,6 +1566,12 @@
   <url>
     <loc>https://krepko.es/blog/obyazatelnaya-deklaraciya-irpf/</loc>
     <lastmod>2026-11-11</lastmod>
+    <priority>0.6</priority>
+    <changefreq>yearly</changefreq>
+  </url>
+  <url>
+    <loc>https://krepko.es/blog/ccse-dele-2027-ekzameny-na-grazhdanstvo/</loc>
+    <lastmod>2026-11-18</lastmod>
     <priority>0.6</priority>
     <changefreq>yearly</changefreq>
   </url>
