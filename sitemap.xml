@@ -102,6 +102,9 @@
     <lastmod>2026-11-18</lastmod>
     <priority>0.7</priority>
     <changefreq>weekly</changefreq>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://krepko.es/blog/"/>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://krepko.es/uk/blog/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://krepko.es/blog/"/>
   </url>
   <url>
     <loc>https://krepko.es/migracion/</loc>
@@ -1304,6 +1307,9 @@
     <lastmod>2026-11-12</lastmod>
     <priority>0.6</priority>
     <changefreq>yearly</changefreq>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://krepko.es/blog/net-shtampa-v-pasporte-ukraina/"/>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://krepko.es/uk/blog/net-shtampa-v-pasporte-ukraina/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://krepko.es/blog/net-shtampa-v-pasporte-ukraina/"/>
   </url>
   <url>
     <loc>https://krepko.es/blog/doverennost-iz-ispanii-v-rossiyu/</loc>
@@ -1448,6 +1454,9 @@
     <lastmod>2026-11-18</lastmod>
     <priority>0.6</priority>
     <changefreq>yearly</changefreq>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://krepko.es/blog/identifikaciya-pensionerov-ispaniya/"/>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://krepko.es/uk/blog/identifikaciya-pensionerov-ispaniya/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://krepko.es/blog/identifikaciya-pensionerov-ispaniya/"/>
   </url>
   <url>
     <loc>https://krepko.es/blog/konsulskie-uslugi-muzhchinam/</loc>
@@ -1520,6 +1529,9 @@
     <lastmod>2026-11-01</lastmod>
     <priority>0.6</priority>
     <changefreq>yearly</changefreq>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://krepko.es/blog/soglasie-supruga-na-prodazhu-v-ukraine/"/>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://krepko.es/uk/blog/soglasie-supruga-na-prodazhu-v-ukraine/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://krepko.es/blog/soglasie-supruga-na-prodazhu-v-ukraine/"/>
   </url>
   <url>
     <loc>https://krepko.es/blog/otkryt-sl-biznes-ispaniya/</loc>
@@ -1664,6 +1676,9 @@
     <lastmod>2026-11-12</lastmod>
     <priority>0.6</priority>
     <changefreq>yearly</changefreq>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://krepko.es/blog/soglasie-na-vyezd-rebenka-ispaniya/"/>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://krepko.es/uk/blog/soglasie-na-vyezd-rebenka-ispaniya/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://krepko.es/blog/soglasie-na-vyezd-rebenka-ispaniya/"/>
   </url>
   <url>
     <loc>https://krepko.es/blog/socialnye-posobiya-ispaniya/</loc>
@@ -1706,6 +1721,9 @@
     <lastmod>2026-11-13</lastmod>
     <priority>0.6</priority>
     <changefreq>yearly</changefreq>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://krepko.es/blog/kak-poluchit-spravku-o-peresechenii-granicy/"/>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://krepko.es/uk/blog/kak-poluchit-spravku-o-peresechenii-granicy/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://krepko.es/blog/kak-poluchit-spravku-o-peresechenii-granicy/"/>
   </url>
   <url>
     <loc>https://krepko.es/blog/modifikaciya-vremennoy-zashity/</loc>
@@ -1730,6 +1748,9 @@
     <lastmod>2026-11-13</lastmod>
     <priority>0.6</priority>
     <changefreq>yearly</changefreq>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://krepko.es/blog/nasledstvo-v-ukraine-iz-ispanii/"/>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://krepko.es/uk/blog/nasledstvo-v-ukraine-iz-ispanii/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://krepko.es/blog/nasledstvo-v-ukraine-iz-ispanii/"/>
   </url>
   <url>
     <loc>https://krepko.es/blog/meditsinskaya-strahovka-ispaniya/</loc>
@@ -2210,6 +2231,15 @@
     <xhtml:link rel="alternate" hreflang="ru" href="https://krepko.es/madrid/"/>
     <xhtml:link rel="alternate" hreflang="uk" href="https://krepko.es/uk/madrid/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://krepko.es/madrid/"/>
+  </url>
+  <url>
+    <loc>https://krepko.es/uk/blog/</loc>
+    <lastmod>2026-11-18</lastmod>
+    <priority>0.7</priority>
+    <changefreq>weekly</changefreq>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://krepko.es/blog/"/>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://krepko.es/uk/blog/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://krepko.es/blog/"/>
   </url>
   <url>
     <loc>https://krepko.es/uk/migracion/</loc>
@@ -3308,6 +3338,60 @@
     <xhtml:link rel="alternate" hreflang="ru" href="https://krepko.es/legalizacion/apostil-ispania/"/>
     <xhtml:link rel="alternate" hreflang="uk" href="https://krepko.es/uk/legalizacion/apostil-ispania/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://krepko.es/legalizacion/apostil-ispania/"/>
+  </url>
+  <url>
+    <loc>https://krepko.es/uk/blog/net-shtampa-v-pasporte-ukraina/</loc>
+    <lastmod>2026-11-18</lastmod>
+    <priority>0.6</priority>
+    <changefreq>yearly</changefreq>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://krepko.es/blog/net-shtampa-v-pasporte-ukraina/"/>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://krepko.es/uk/blog/net-shtampa-v-pasporte-ukraina/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://krepko.es/blog/net-shtampa-v-pasporte-ukraina/"/>
+  </url>
+  <url>
+    <loc>https://krepko.es/uk/blog/identifikaciya-pensionerov-ispaniya/</loc>
+    <lastmod>2026-11-18</lastmod>
+    <priority>0.6</priority>
+    <changefreq>yearly</changefreq>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://krepko.es/blog/identifikaciya-pensionerov-ispaniya/"/>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://krepko.es/uk/blog/identifikaciya-pensionerov-ispaniya/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://krepko.es/blog/identifikaciya-pensionerov-ispaniya/"/>
+  </url>
+  <url>
+    <loc>https://krepko.es/uk/blog/soglasie-supruga-na-prodazhu-v-ukraine/</loc>
+    <lastmod>2026-11-18</lastmod>
+    <priority>0.6</priority>
+    <changefreq>yearly</changefreq>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://krepko.es/blog/soglasie-supruga-na-prodazhu-v-ukraine/"/>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://krepko.es/uk/blog/soglasie-supruga-na-prodazhu-v-ukraine/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://krepko.es/blog/soglasie-supruga-na-prodazhu-v-ukraine/"/>
+  </url>
+  <url>
+    <loc>https://krepko.es/uk/blog/soglasie-na-vyezd-rebenka-ispaniya/</loc>
+    <lastmod>2026-11-18</lastmod>
+    <priority>0.6</priority>
+    <changefreq>yearly</changefreq>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://krepko.es/blog/soglasie-na-vyezd-rebenka-ispaniya/"/>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://krepko.es/uk/blog/soglasie-na-vyezd-rebenka-ispaniya/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://krepko.es/blog/soglasie-na-vyezd-rebenka-ispaniya/"/>
+  </url>
+  <url>
+    <loc>https://krepko.es/uk/blog/kak-poluchit-spravku-o-peresechenii-granicy/</loc>
+    <lastmod>2026-11-18</lastmod>
+    <priority>0.6</priority>
+    <changefreq>yearly</changefreq>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://krepko.es/blog/kak-poluchit-spravku-o-peresechenii-granicy/"/>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://krepko.es/uk/blog/kak-poluchit-spravku-o-peresechenii-granicy/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://krepko.es/blog/kak-poluchit-spravku-o-peresechenii-granicy/"/>
+  </url>
+  <url>
+    <loc>https://krepko.es/uk/blog/nasledstvo-v-ukraine-iz-ispanii/</loc>
+    <lastmod>2026-11-18</lastmod>
+    <priority>0.6</priority>
+    <changefreq>yearly</changefreq>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://krepko.es/blog/nasledstvo-v-ukraine-iz-ispanii/"/>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://krepko.es/uk/blog/nasledstvo-v-ukraine-iz-ispanii/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://krepko.es/blog/nasledstvo-v-ukraine-iz-ispanii/"/>
   </url>
   <url>
     <loc>https://krepko.es/uk/migracion/vnzh-rodstvennikam-ispancev/</loc>
