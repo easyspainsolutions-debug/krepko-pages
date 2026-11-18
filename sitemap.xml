@@ -8,6 +8,7 @@
     <xhtml:link rel="alternate" hreflang="ru" href="https://krepko.es/"/>
     <xhtml:link rel="alternate" hreflang="uk" href="https://krepko.es/uk/"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://krepko.es/es/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://krepko.es/en/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://krepko.es/"/>
   </url>
   <url>
@@ -59,6 +60,7 @@
     <changefreq>monthly</changefreq>
     <xhtml:link rel="alternate" hreflang="ru" href="https://krepko.es/notario/"/>
     <xhtml:link rel="alternate" hreflang="uk" href="https://krepko.es/uk/notario/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://krepko.es/es/notario/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://krepko.es/notario/"/>
   </url>
   <url>
@@ -132,6 +134,7 @@
     <xhtml:link rel="alternate" hreflang="ru" href="https://krepko.es/"/>
     <xhtml:link rel="alternate" hreflang="uk" href="https://krepko.es/uk/"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://krepko.es/es/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://krepko.es/en/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://krepko.es/"/>
   </url>
   <url>
@@ -156,6 +159,7 @@
     <changefreq>monthly</changefreq>
     <xhtml:link rel="alternate" hreflang="ru" href="https://krepko.es/ukraina/"/>
     <xhtml:link rel="alternate" hreflang="uk" href="https://krepko.es/uk/ukraina/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://krepko.es/es/ukraina/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://krepko.es/ukraina/"/>
   </url>
   <url>
@@ -190,12 +194,13 @@
   </url>
   <url>
     <loc>https://krepko.es/es/</loc>
-    <lastmod>2026-11-08</lastmod>
+    <lastmod>2026-11-18</lastmod>
     <priority>1.0</priority>
     <changefreq>weekly</changefreq>
     <xhtml:link rel="alternate" hreflang="ru" href="https://krepko.es/"/>
     <xhtml:link rel="alternate" hreflang="uk" href="https://krepko.es/uk/"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://krepko.es/es/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://krepko.es/en/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://krepko.es/"/>
   </url>
   <url>
@@ -206,6 +211,17 @@
     <xhtml:link rel="alternate" hreflang="ru" href="https://krepko.es/murcia/"/>
     <xhtml:link rel="alternate" hreflang="uk" href="https://krepko.es/uk/murcia/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://krepko.es/murcia/"/>
+  </url>
+  <url>
+    <loc>https://krepko.es/en/</loc>
+    <lastmod>2026-11-18</lastmod>
+    <priority>1.0</priority>
+    <changefreq>weekly</changefreq>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://krepko.es/"/>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://krepko.es/uk/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://krepko.es/es/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://krepko.es/en/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://krepko.es/"/>
   </url>
   <url>
     <loc>https://krepko.es/malaga/</loc>
@@ -283,6 +299,7 @@
     <changefreq>monthly</changefreq>
     <xhtml:link rel="alternate" hreflang="ru" href="https://krepko.es/notario/doverennost-na-rodnom-yazyke/"/>
     <xhtml:link rel="alternate" hreflang="uk" href="https://krepko.es/uk/notario/doverennost-na-rodnom-yazyke/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://krepko.es/es/notario/doverennost-na-rodnom-yazyke/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://krepko.es/notario/doverennost-na-rodnom-yazyke/"/>
   </url>
   <url>
@@ -1906,6 +1923,7 @@
     <changefreq>monthly</changefreq>
     <xhtml:link rel="alternate" hreflang="ru" href="https://krepko.es/tramites/canje-permiso/"/>
     <xhtml:link rel="alternate" hreflang="uk" href="https://krepko.es/uk/tramites/canje-permiso/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://krepko.es/es/tramites/canje-permiso/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://krepko.es/tramites/canje-permiso/"/>
   </url>
   <url>
@@ -2194,6 +2212,7 @@
     <changefreq>monthly</changefreq>
     <xhtml:link rel="alternate" hreflang="ru" href="https://krepko.es/notario/"/>
     <xhtml:link rel="alternate" hreflang="uk" href="https://krepko.es/uk/notario/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://krepko.es/es/notario/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://krepko.es/notario/"/>
   </url>
   <url>
@@ -2275,6 +2294,7 @@
     <changefreq>monthly</changefreq>
     <xhtml:link rel="alternate" hreflang="ru" href="https://krepko.es/ukraina/"/>
     <xhtml:link rel="alternate" hreflang="uk" href="https://krepko.es/uk/ukraina/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://krepko.es/es/ukraina/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://krepko.es/ukraina/"/>
   </url>
   <url>
@@ -2374,6 +2394,7 @@
     <changefreq>monthly</changefreq>
     <xhtml:link rel="alternate" hreflang="ru" href="https://krepko.es/notario/doverennost-na-rodnom-yazyke/"/>
     <xhtml:link rel="alternate" hreflang="uk" href="https://krepko.es/uk/notario/doverennost-na-rodnom-yazyke/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://krepko.es/es/notario/doverennost-na-rodnom-yazyke/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://krepko.es/notario/doverennost-na-rodnom-yazyke/"/>
   </url>
   <url>
@@ -3535,6 +3556,7 @@
     <changefreq>monthly</changefreq>
     <xhtml:link rel="alternate" hreflang="ru" href="https://krepko.es/tramites/canje-permiso/"/>
     <xhtml:link rel="alternate" hreflang="uk" href="https://krepko.es/uk/tramites/canje-permiso/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://krepko.es/es/tramites/canje-permiso/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://krepko.es/tramites/canje-permiso/"/>
   </url>
   <url>
@@ -3805,6 +3827,7 @@
     <changefreq>monthly</changefreq>
     <xhtml:link rel="alternate" hreflang="ru" href="https://krepko.es/ukraina/spravka-o-nesudimosti/"/>
     <xhtml:link rel="alternate" hreflang="uk" href="https://krepko.es/uk/ukraina/spravka-o-nesudimosti/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://krepko.es/es/ukraina/spravka-o-nesudimosti/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://krepko.es/ukraina/spravka-o-nesudimosti/"/>
   </url>
   <url>
@@ -4012,6 +4035,7 @@
     <changefreq>monthly</changefreq>
     <xhtml:link rel="alternate" hreflang="ru" href="https://krepko.es/ukraina/spravka-o-nesudimosti/"/>
     <xhtml:link rel="alternate" hreflang="uk" href="https://krepko.es/uk/ukraina/spravka-o-nesudimosti/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://krepko.es/es/ukraina/spravka-o-nesudimosti/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://krepko.es/ukraina/spravka-o-nesudimosti/"/>
   </url>
   <url>
@@ -4148,6 +4172,56 @@
     <xhtml:link rel="alternate" hreflang="ru" href="https://krepko.es/rossiya/spravka-o-nesudimosti-iz-rossii/"/>
     <xhtml:link rel="alternate" hreflang="uk" href="https://krepko.es/uk/rossiya/spravka-o-nesudimosti-iz-rossii/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://krepko.es/rossiya/spravka-o-nesudimosti-iz-rossii/"/>
+  </url>
+  <url>
+    <loc>https://krepko.es/es/notario/</loc>
+    <lastmod>2026-11-18</lastmod>
+    <priority>0.9</priority>
+    <changefreq>monthly</changefreq>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://krepko.es/notario/"/>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://krepko.es/uk/notario/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://krepko.es/es/notario/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://krepko.es/notario/"/>
+  </url>
+  <url>
+    <loc>https://krepko.es/es/ukraina/</loc>
+    <lastmod>2026-11-18</lastmod>
+    <priority>0.9</priority>
+    <changefreq>monthly</changefreq>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://krepko.es/ukraina/"/>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://krepko.es/uk/ukraina/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://krepko.es/es/ukraina/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://krepko.es/ukraina/"/>
+  </url>
+  <url>
+    <loc>https://krepko.es/es/notario/doverennost-na-rodnom-yazyke/</loc>
+    <lastmod>2026-11-18</lastmod>
+    <priority>0.7</priority>
+    <changefreq>monthly</changefreq>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://krepko.es/notario/doverennost-na-rodnom-yazyke/"/>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://krepko.es/uk/notario/doverennost-na-rodnom-yazyke/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://krepko.es/es/notario/doverennost-na-rodnom-yazyke/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://krepko.es/notario/doverennost-na-rodnom-yazyke/"/>
+  </url>
+  <url>
+    <loc>https://krepko.es/es/tramites/canje-permiso/</loc>
+    <lastmod>2026-11-18</lastmod>
+    <priority>0.7</priority>
+    <changefreq>monthly</changefreq>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://krepko.es/tramites/canje-permiso/"/>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://krepko.es/uk/tramites/canje-permiso/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://krepko.es/es/tramites/canje-permiso/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://krepko.es/tramites/canje-permiso/"/>
+  </url>
+  <url>
+    <loc>https://krepko.es/es/ukraina/spravka-o-nesudimosti/</loc>
+    <lastmod>2026-11-18</lastmod>
+    <priority>0.7</priority>
+    <changefreq>monthly</changefreq>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://krepko.es/ukraina/spravka-o-nesudimosti/"/>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://krepko.es/uk/ukraina/spravka-o-nesudimosti/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://krepko.es/es/ukraina/spravka-o-nesudimosti/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://krepko.es/ukraina/spravka-o-nesudimosti/"/>
   </url>
   <url>
     <loc>https://krepko.es/fiscalidad/autonomo/</loc>

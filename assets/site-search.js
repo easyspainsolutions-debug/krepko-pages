@@ -3,7 +3,7 @@
 var root = document.documentElement;
 var LANG = ((root && root.getAttribute('lang')) || '').slice(0, 2);
 var UK = LANG === 'uk';
-var ES = LANG === 'es';
+var ES = LANG === 'es' || LANG === 'en';
 var STOP = {};
 ('на для при про под над без из от до за по как что где или и а но это ' +
 'мне мой моя мои все еще уже там тут его ее их не да ' +
@@ -259,7 +259,7 @@ a.appendChild(chevron());
 li.appendChild(a);
 return li;
 }
-var MARKER = /\. (Я [сз]|Vengo de) [Kk]repko\.es.*$/;
+var MARKER = /\. (Я [сз]|Vengo de|I'm writing from) [Kk]repko\.es.*$/;
 function waHref(q) {
 if (!noneWa) return '';
 if (noneWa._def == null) noneWa._def = noneWa.getAttribute('href') || '';

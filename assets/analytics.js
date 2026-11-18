@@ -52,7 +52,8 @@ return lines.join('\n');
 }
 function patchWhatsAppLinks() {
 var root = document.documentElement;
-if (root && (root.getAttribute('lang') || '').slice(0, 2) === 'es') return;
+var pl = root ? (root.getAttribute('lang') || '').slice(0, 2) : '';
+if (pl === 'es' || pl === 'en') return;
 var links = document.querySelectorAll('a[href*="wa.me/34624309985"], a[href*="api.whatsapp.com"]');
 links.forEach(function (a) {
 var origHref = a.getAttribute('href');
