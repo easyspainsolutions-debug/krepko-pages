@@ -1389,6 +1389,12 @@
     <changefreq>yearly</changefreq>
   </url>
   <url>
+    <loc>https://krepko.es/blog/notarialnyy-perevod-ispaniya/</loc>
+    <lastmod>2026-11-20</lastmod>
+    <priority>0.6</priority>
+    <changefreq>yearly</changefreq>
+  </url>
+  <url>
     <loc>https://krepko.es/blog/apostil-perevod/</loc>
     <lastmod>2026-11-13</lastmod>
     <priority>0.6</priority>
