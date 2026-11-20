@@ -101,7 +101,7 @@
   </url>
   <url>
     <loc>https://krepko.es/blog/</loc>
-    <lastmod>2026-11-18</lastmod>
+    <lastmod>2026-11-20</lastmod>
     <priority>0.7</priority>
     <changefreq>weekly</changefreq>
     <xhtml:link rel="alternate" hreflang="ru" href="https://krepko.es/blog/"/>
@@ -1266,6 +1266,12 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://krepko.es/legalizacion/apostil-ispania/"/>
   </url>
   <url>
+    <loc>https://krepko.es/blog/doverennost-na-bankovskiy-schet-ispaniya/</loc>
+    <lastmod>2026-11-20</lastmod>
+    <priority>0.6</priority>
+    <changefreq>yearly</changefreq>
+  </url>
+  <url>
     <loc>https://krepko.es/blog/srok-deystviya-spravok-ispaniya/</loc>
     <lastmod>2026-11-11</lastmod>
     <priority>0.6</priority>
@@ -1316,6 +1322,12 @@
   <url>
     <loc>https://krepko.es/blog/prodlenie-certificado-digital/</loc>
     <lastmod>2026-11-11</lastmod>
+    <priority>0.6</priority>
+    <changefreq>yearly</changefreq>
+  </url>
+  <url>
+    <loc>https://krepko.es/blog/konsulstvo-ili-notarius-dokumenty-dlya-ukrainy/</loc>
+    <lastmod>2026-11-20</lastmod>
     <priority>0.6</priority>
     <changefreq>yearly</changefreq>
   </url>
