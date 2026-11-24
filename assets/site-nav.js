@@ -6,7 +6,7 @@ if (!nav) return;
 var flags = ' ' + (nav.getAttribute('data-bars') || '') + ' ';
 var HIDE_PHONE = flags.indexOf(' hide-phone ') >= 0;
 var SEARCH_DESK = flags.indexOf(' search-desk ') >= 0;
-var path = location.pathname.replace(/^\/uk(?=\/|$)/, '') || '/';
+var path = location.pathname.replace(/^\/(uk|es|en)(?=\/|$)/, '') || '/';
 var HOME = path === '/' || path === '/index.html';
 var bbar = document.getElementById('sticky-cta');
 var desk = window.matchMedia ? window.matchMedia('(min-width: 900px)') : { matches: true };
@@ -24,7 +24,7 @@ var section = HOME ? 'home'
 : 'services';
 if (section && section !== 'home') {
 [].forEach.call(nav.querySelectorAll('.site-nav__link'), function (a) {
-var href = (a.getAttribute('href') || '').replace(/^\/uk(?=\/)/, '');
+var href = (a.getAttribute('href') || '').replace(/^\/(uk|es|en)(?=\/)/, '');
 if (href !== '/' + section + '/') return;
 a.classList.add('is-current');
 if (href === path) a.setAttribute('aria-current', 'page');

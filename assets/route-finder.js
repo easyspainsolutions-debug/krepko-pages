@@ -1,6 +1,8 @@
 (function () {
 var WA = 'https://wa.me/34624309985';
-var UK = (document.documentElement.getAttribute('lang') || '').slice(0, 2) === 'uk';
+var LANG = (document.documentElement.getAttribute('lang') || '').slice(0, 2);
+var UK = LANG === 'uk';
+var ES = LANG === 'es', EN = LANG === 'en';
 (function () {
 var box = document.querySelector('[data-deadline]');
 if (!box) return;
@@ -10,6 +12,12 @@ var out = box.querySelector('[data-deadline-count]');
 if (!out) return;
 var days = Math.ceil((target - new Date()) / 86400000);
 if (days <= 0) return;
+if (ES || EN) {
+out.textContent = ES ? (days === 1 ? 'queda 1 día' : 'quedan ' + days + ' días')
+: (days === 1 ? '1 day left' : days + ' days left');
+out.hidden = false;
+return;
+}
 var n = days % 100, n10 = days % 10, word = UK ? 'днів' : 'дней', one = false;
 if (n < 11 || n > 14) {
 if (n10 === 1) { word = 'день'; one = true; }
@@ -151,7 +159,136 @@ work: { gt1y: 'офіційна робота понад рік', lt1y: 'офіц
 family: { eu: 'чоловік або дружина — громадянин Іспанії чи ЄС', relatives: 'близькі родичі з посвідкою на проживання', kids: 'діти живуть зі мною', no: 'без сім’ї в Іспанії' },
 };
 }
-var TXT = UK ? {
+if (ES) {
+QUESTIONS = [
+{ key: 'years', ask: 'Vamos a verlo en tres preguntas. ¿Cuánto tiempo lleva viviendo en España?',
+opts: [{ v: 'lt2', t: 'Menos de 2 años' }, { v: '2to3', t: '2–3 años' },
+{ v: '3to5', t: '3–5 años' }, { v: 'gt5', t: '5 años o más' }] },
+{ key: 'work', ask: 'Entendido. ¿Trabaja legalmente, con contrato o como autónomo?',
+opts: [{ v: 'gt1y', t: 'Sí, más de un año' }, { v: 'lt1y', t: 'Sí, menos de un año' }, { v: 'no', t: 'No' }] },
+{ key: 'family', ask: 'Última pregunta: ¿tiene familia en España?',
+opts: [{ v: 'eu', t: 'Cónyuge con nacionalidad española o de la UE' },
+{ v: 'relatives', t: 'Familiares cercanos con autorización de residencia' },
+{ v: 'kids', t: 'Mis hijos viven conmigo' }, { v: 'no', t: 'No' }] },
+];
+ROUTES = {
+eu: {
+name: 'Residencia de familiar de ciudadano español o de la UE',
+why: 'Si su cónyuge tiene la nacionalidad española o de otro país de la UE, usted tiene acceso a un régimen propio: tarjeta por cinco años, derecho a trabajar desde el primer momento y requisitos más flexibles.',
+alt: ['Comprobaremos si le conviene más tramitar en paralelo la larga duración, si ya lleva mucho tiempo en España'],
+},
+larga: {
+name: 'Larga duración: residencia de larga duración',
+why: 'Cinco años de residencia dan acceso al estatus de larga duración, y el tiempo con protección temporal cuenta íntegramente. Con la protección, los cinco años no se cumplen antes de marzo de 2027: se cuentan desde la fecha de la resolución de protección. Es el estatus más estable de los disponibles: la autorización es indefinida, la tarjeta se expide por cinco años y se vive y trabaja en las mismas condiciones que los ciudadanos españoles.',
+alt: ['Si trabaja legalmente, la modificación a una autorización de cuatro años está a su alcance ya, sin esperar a los cinco años', 'Si algo no cuadra con el tiempo de residencia, la vía de reserva es el arraigo', 'Tras la larga duración empieza a contar el plazo para la nacionalidad'],
+},
+mod191: {
+name: 'Modificación a residencia y trabajo (art. 191)',
+why: 'Si lleva más de un año en España con una autorización que permite trabajar (la protección temporal la da) y trabaja legalmente (normalmente se piden al menos tres meses de trabajo al año y un contrato en vigor), es un cambio ventajoso: la autorización se concede directamente por cuatro años, mientras que por arraigo sociolaboral, social y socioformativo es por un año. Si aún no ha cumplido el año, la autorización será por un año y los requisitos son más estrictos: a veces conviene esperar a cumplirlo. No hace falta esperar a que termine la protección temporal.',
+alt: ['Arraigo sociolaboral, si para la modificación falta algún requisito y lleva al menos dos años en España', 'Con cinco años de residencia conviene compararla con la larga duración'],
+},
+social: {
+name: 'Arraigo social',
+why: 'Dos años en España y vínculos familiares con residentes abren una vía que no exige contrato en vigor. La segunda opción dentro de esta vía es el informe de integración de la comunidad autónoma.',
+alt: ['Arraigo socioformativo, a través de la formación', 'Tres meses de trabajo legal le abrirán la modificación a una autorización de cuatro años'],
+},
+socioformativo: {
+name: 'Arraigo socioformativo',
+why: 'Es la vía para quien no tiene trabajo legal: la matrícula en una formación profesional da derecho a solicitar la autorización de residencia. Con ella se puede trabajar una vez concedida, hasta 30 horas a la semana.',
+alt: ['Arraigo social, si tiene familiares con autorización de residencia o consigue el informe de integración', 'Los hijos en España abren vías familiares propias'],
+},
+kids: {
+name: 'Vía familiar a través de los hijos',
+why: 'Los hijos en España abren sus propias vías: el menor tiene su propio camino a la residencia y, si ha nacido en España, puede obtener la autorización directamente por cinco años. A menudo resulta más rápido que la vía del padre o la madre.',
+alt: ['Arraigo social o socioformativo, en paralelo para los adultos'],
+},
+wait: {
+name: 'Preparación del arraigo y prórroga de la protección',
+why: 'Las vías principales se abren a partir de dos años de residencia. Mientras se acumula ese tiempo, la tarea es otra: mantener el empadronamiento sin interrupciones y pedir con antelación los certificados de Ucrania, que son los que más tardan y los que más a menudo hacen perder plazos.',
+alt: ['Un año en España y tres meses de trabajo legal le abrirán la modificación de estatus, sin esperar a los dos años', 'Comprobaremos las vías familiares, que no dependen del tiempo de residencia'],
+},
+};
+LABELS = {
+years: { lt2: 'menos de 2 años en España', '2to3': '2–3 años en España', '3to5': '3–5 años en España', gt5: '5 años o más en España' },
+work: { gt1y: 'trabajo legal desde hace más de un año', lt1y: 'trabajo legal desde hace menos de un año', no: 'sin trabajo legal' },
+family: { eu: 'cónyuge con nacionalidad española o de la UE', relatives: 'familiares cercanos con autorización de residencia', kids: 'mis hijos viven conmigo', no: 'sin familia en España' },
+};
+} else if (EN) {
+QUESTIONS = [
+{ key: 'years', ask: 'Let’s work it out in three questions. How long have you lived in Spain?',
+opts: [{ v: 'lt2', t: 'Less than 2 years' }, { v: '2to3', t: '2–3 years' },
+{ v: '3to5', t: '3–5 years' }, { v: 'gt5', t: '5 years or more' }] },
+{ key: 'work', ask: 'Got it. Do you work legally, on a contract or as an autónomo?',
+opts: [{ v: 'gt1y', t: 'Yes, for more than a year' }, { v: 'lt1y', t: 'Yes, for less than a year' }, { v: 'no', t: 'No' }] },
+{ key: 'family', ask: 'Last question: do you have family in Spain?',
+opts: [{ v: 'eu', t: 'Spouse who is a Spanish or EU citizen' },
+{ v: 'relatives', t: 'Close relatives with a residence permit' },
+{ v: 'kids', t: 'My children live with me' }, { v: 'no', t: 'No' }] },
+];
+ROUTES = {
+eu: {
+name: 'Residence as a family member of a Spanish or EU citizen',
+why: 'A spouse with Spanish or other EU citizenship gives you access to a separate scheme: a five-year card, the right to work straight away and lighter requirements.',
+alt: ['We will check whether larga duración in parallel would suit you better, if you have already lived here a long time'],
+},
+larga: {
+name: 'Larga duración — long-term residence',
+why: 'Five years of residence open up long-term status, and time under temporary protection counts in full. Through protection, five years will not be reached before March 2027: we count from the date of the protection decision. It is the most stable status available: the permit has no end date, the card is issued for five years, and you live and work on the same terms as Spanish citizens.',
+alt: ['If you work legally, the change of status to a four-year permit is available now, without waiting for five years', 'If something does not add up on your residence time, arraigo is the fallback route', 'After larga duración, the time towards citizenship starts counting'],
+},
+mod191: {
+name: 'Change to residence and work (art. 191)',
+why: 'If you have been in Spain for more than a year on a permit that allows you to work — temporary protection does — and you work legally (usually at least three months of work a year and a current contract are needed), this is a worthwhile switch: the permit is issued straight away for four years, whereas arraigo sociolaboral, social and socioformativo give one year. If you have not reached the year yet, the permit will be for one year and the requirements are stricter — sometimes it is better to wait until you do. There is no need to wait for temporary protection to end.',
+alt: ['Arraigo sociolaboral — if something is missing for the change of status and you have been in Spain for at least two years', 'With five years of residence, it is worth comparing it with larga duración'],
+},
+social: {
+name: 'Arraigo social',
+why: 'Two years in Spain plus family ties with residents give you a route that does not require a current contract. The second path within it is an integration report from the autonomous community.',
+alt: ['Arraigo socioformativo — through training', 'Three months of legal work will open up the change of status to a four-year permit'],
+},
+socioformativo: {
+name: 'Arraigo socioformativo',
+why: 'A route for those without legal employment: enrolling in vocational training gives grounds for a residence permit. Once the permit is granted, you can work under it up to 30 hours a week.',
+alt: ['Arraigo social — if you have relatives with a residence permit or obtain an integration report', 'Children in Spain open up separate family routes'],
+},
+kids: {
+name: 'Family route through your children',
+why: 'Children in Spain open up their own grounds: a child has their own path to residence, and a child born in Spain can get a permit straight away for five years. This often turns out faster than the parent’s own route.',
+alt: ['Arraigo social or socioformativo — in parallel for the adults'],
+},
+wait: {
+name: 'Preparing for arraigo and extending protection',
+why: 'The main routes open after two years of residence. While you build up that time, the task is different: keep your municipal registration (empadronamiento) continuous and get your Ukrainian certificates in advance — they take the longest and most often cause missed deadlines.',
+alt: ['A year in Spain and three months of legal work will open up the change of status — without waiting two years', 'We will check family grounds — they do not depend on how long you have lived here'],
+},
+};
+LABELS = {
+years: { lt2: 'less than 2 years in Spain', '2to3': '2–3 years in Spain', '3to5': '3–5 years in Spain', gt5: '5 years or more in Spain' },
+work: { gt1y: 'legally employed for more than a year', lt1y: 'legally employed for less than a year', no: 'not legally employed' },
+family: { eu: 'spouse is a Spanish or EU citizen', relatives: 'close relatives with a residence permit', kids: 'my children live with me', no: 'no family in Spain' },
+};
+}
+var TXT = ES ? {
+hello: 'Hola. Quiero pasar de la protección temporal a una autorización de residencia.\n',
+situation: 'Mi situación: ',
+found: 'En la web me ha salido esta vía: ',
+ask: '. ¿Me podrían decir si es la adecuada para mí?',
+marker: ' Vengo de krepko.es',
+label: 'Lo más probable es que le convenga',
+cta: 'Continuar en WhatsApp',
+restart: 'Responder de nuevo',
+disclaimer: 'La selección es orientativa: no tiene en cuenta los detalles de su historia, como el empadronamiento, las interrupciones del estatus o los documentos. Le indicamos la vía exacta después de estudiar su caso; el estudio es gratuito.',
+} : EN ? {
+hello: 'Hello. I want to switch from temporary protection to a residence permit.\n',
+situation: 'My situation: ',
+found: 'The website suggested this route: ',
+ask: '. Could you tell me whether it suits me?',
+marker: " I'm writing from krepko.es",
+label: 'Most likely to suit you',
+cta: 'Continue on WhatsApp',
+restart: 'Start again',
+disclaimer: 'This is a rough match: it does not take into account the details of your history — municipal registration, gaps in your status, documents. We name the exact route after reviewing your case, and the review is free.',
+} : UK ? {
 hello: 'Добрий день! Хочу перейти з тимчасового захисту на посвідку на проживання.\n',
 situation: 'Моя ситуація: ',
 found: 'На сайті підібрався маршрут: ',

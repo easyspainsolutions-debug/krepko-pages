@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" type="image/png" sizes="48x48" href="/icon-48.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/icon-96.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/icon-32.png">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico" sizes="48x48 32x32 16x16">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <meta name="theme-color" content="#FFFFFF">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/assets/tokens.css?v=5e7380691c">
+  <link rel="stylesheet" href="/assets/light-scale.css?v=ae87c8d5cc">
+  <link rel="stylesheet" href="/assets/module-section.css?v=fbfdad5aaf">
+  <link rel="stylesheet" href="/assets/module-cta.css?v=4d71d7d971">
+  <link rel="stylesheet" href="/assets/module-card.css?v=ad605dacca">
+  <link rel="stylesheet" href="/assets/module-hero.css?v=1c4f9ba7a5">
+  <link rel="stylesheet" href="/assets/module-process.css?v=196c0e75e4">
+<script src="/assets/site-nav.js?v=2dbbdf5a60" defer></script>
+  <script src="/assets/cursor.js?v=bf0d6e8b67" defer></script>
+  <link rel="stylesheet" href="/assets/krepko-base.css?v=4f15a801f8">
+  <link rel="stylesheet" href="/assets/cookie-consent.css?v=a24813b238">
+  <script src="/assets/cookie-consent.js?v=8b99c2e09e" defer></script>
+
+  <link rel="stylesheet" href="/assets/site-nav.css?v=6f6a3e4aa2">
+  <link rel="stylesheet" href="/assets/site-footer.css?v=b516e7d9d1">
+  <link rel="stylesheet" href="/assets/a11y.css?v=02e8ecca79">
+  <link rel="stylesheet" href="/assets/desktop.css?v=8b8743c64a" media="(min-width: 900px)">
+  <link rel="stylesheet" href="/assets/blog-legacy.css?v=4a893ccfd4">
+  <link rel="stylesheet" href="/assets/blog-grid.css?v=ab6a733ac8">
+  <link rel="stylesheet" href="/assets/blog-article.css?v=2eb6acccd3">
+  <meta name="yandex-verification" content="b4ef32829d6a1b94">
+  <title>Cómo trasladar el certificado FNMT a otro ordenador | Krepko</title>
+  <meta name="description" content="Cómo trasladar el certificado FNMT a otro ordenador o móvil: copia .pfx o .p12 con contraseña, exportar e importar según la FNMT y por qué no hace falta otro.">
+  <meta name="keywords" content="trasladar certificado FNMT a otro ordenador, certificado digital en otro ordenador, certificado FNMT en dos ordenadores, copia certificado FNMT, copia de seguridad certificado FNMT, exportar certificado p12, archivo pfx certificado, certificado digital en el móvil, certificado FNMT en Android y iPhone">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <meta name="language" content="Spanish">
+  <link rel="canonical" href="https://krepko.es/es/blog/perenos-certificado-digital/">
+  <link rel="alternate" hreflang="ru" href="https://krepko.es/blog/perenos-certificado-digital/">
+  <link rel="alternate" hreflang="uk" href="https://krepko.es/uk/blog/perenos-certificado-digital/">
+  <link rel="alternate" hreflang="es" href="https://krepko.es/es/blog/perenos-certificado-digital/">
+  <link rel="alternate" hreflang="en" href="https://krepko.es/en/blog/perenos-certificado-digital/">
+  <link rel="alternate" hreflang="x-default" href="https://krepko.es/blog/perenos-certificado-digital/">
+
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://krepko.es/es/blog/perenos-certificado-digital/">
+  <meta property="og:title" content="Cómo trasladar el certificado digital a otro ordenador o al móvil">
+  <meta property="og:description" content="Cómo trasladar el certificado FNMT a otro ordenador o móvil: copia .pfx o .p12 con contraseña, exportar e importar según la FNMT y por qué no hace falta otro.">
+  <meta property="og:locale" content="es_ES">
+  <meta property="og:image" content="https://krepko.es/og-image-es.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="Krepko — trámites en España, en ruso y ucraniano">
+  <meta property="og:site_name" content="Krepko">
+
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Cómo trasladar el certificado digital a otro ordenador o al móvil","description":"Cómo trasladar el certificado FNMT a otro ordenador o móvil: copia .pfx o .p12 con contraseña, exportar e importar según la FNMT y por qué no hace falta otro.","url":"https://krepko.es/es/blog/perenos-certificado-digital/","datePublished":"2026-11-11","dateModified":"2026-11-11","author":{"@type":"Person","@id":"https://krepko.es/about/#daniil","name":"Daniil Pavlovskyi","url":"https://krepko.es/about/","jobTitle":"Fundador de Krepko","worksFor":{"@type":"Organization","@id":"https://krepko.es/#organization","name":"Krepko","url":"https://krepko.es/"}},"publisher":{"@type":"Organization","@id":"https://krepko.es/#organization","name":"Krepko","url":"https://krepko.es/","logo":{"@type":"ImageObject","url":"https://krepko.es/og-image.png"}},"inLanguage":"es","keywords":"trasladar certificado FNMT a otro ordenador, certificado digital en otro ordenador, certificado FNMT en dos ordenadores, copia certificado FNMT, copia de seguridad certificado FNMT, exportar certificado p12, archivo pfx certificado, certificado digital en el móvil, certificado FNMT en Android y iPhone","image":{"@type":"ImageObject","url":"https://krepko.es/og-image-es.png","width":1200,"height":630},"mainEntityOfPage":{"@type":"WebPage","@id":"https://krepko.es/es/blog/perenos-certificado-digital/"}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Inicio","item":"https://krepko.es/es/"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://krepko.es/es/blog/"},{"@type":"ListItem","position":3,"name":"Traslado del certificado de la FNMT","item":"https://krepko.es/es/blog/perenos-certificado-digital/"}]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"He comprado un ordenador nuevo. ¿Puedo volver a descargar en él el certificado de la FNMT?","acceptedAnswer":{"@type":"Answer","text":"No: el certificado se descarga en el mismo ordenador y con el mismo usuario desde los que se hizo la solicitud. La clave privada se genera al hacer la solicitud y se guarda en ese dispositivo, y sin ella el certificado no se instala. En el ordenador nuevo se instala la copia hecha en el antiguo: un archivo .pfx o .p12 con la clave privada, protegido con contraseña."}},{"@type":"Question","name":"Si solicito un certificado nuevo, ¿dejará de funcionar el antiguo?","acceptedAnswer":{"@type":"Answer","text":"Sí, en cuanto la FNMT emita el nuevo. Por regla general, una persona solo puede tener un certificado de persona física de la FNMT vigente: cuando se emite un segundo con el mismo nombre, apellidos y número de documento, el primero se revoca automáticamente (FNMT, pregunta 1053 y apartado 132 de las normas de emisión de certificados), y un certificado revocado no se vuelve a activar (pregunta 1682). En la renovación es distinto: el certificado anterior sigue vigente hasta su fecha de caducidad. Para un segundo ordenador o para el móvil no hace falta un certificado nuevo, sino una copia del vigente."}},{"@type":"Question","name":"He hecho una copia, pero en el ordenador nuevo el certificado no funciona. ¿Qué pasa?","acceptedAnswer":{"@type":"Answer","text":"Una de las causas que indica la FNMT es que la copia se guardó sin la clave privada, como archivo .cer. En Windows, ese archivo tiene el icono de un diploma; la copia correcta .pfx o .p12, un sobre con una llave. El archivo sin clave se instala en la pestaña «Otras personas» y no puede firmar (pregunta 1320). Vuelva a hacer la copia en el ordenador antiguo eligiendo exportar la clave privada; si el certificado antiguo ya no está, queda pedir uno nuevo."}},{"@type":"Question","name":"¿Cómo se instala el certificado digital en el móvil?","acceptedAnswer":{"@type":"Answer","text":"Desde la misma copia .pfx o .p12 que en el ordenador. En Android, el archivo se copia en la memoria del teléfono y se instala en los ajustes de seguridad, en el almacenamiento de credenciales, con la contraseña de la copia. En el iPhone, la FNMT propone enviarse el archivo por correo a la app «Mail» o guardarlo en iCloud y abrirlo en el dispositivo. Para ello no hace falta solicitar un segundo certificado a través de la aplicación de la FNMT: el nuevo revocaría el certificado del ordenador."}},{"@type":"Question","name":"¿Puedo enviarme por correo el archivo del certificado?","acceptedAnswer":{"@type":"Answer","text":"A usted mismo, sí: para el iPhone, la propia FNMT propone enviar la copia por correo a su buzón en la app «Mail» o guardarla en iCloud. Después de la instalación, conviene borrar el correo con el archivo. A otras personas, no: la FNMT pide no entregar a nadie la copia de la clave privada, y el responsable del certificado es su titular. Si el archivo y la contraseña han podido llegar a otra persona, el certificado se revoca."}},{"@type":"Question","name":"He olvidado la contraseña del archivo de la copia del certificado. ¿Qué hago?","acceptedAnswer":{"@type":"Answer","text":"Sin la contraseña, la copia no se instala: la FNMT advierte de que se pide al instalarla en otro ordenador o en otro navegador. Si el certificado sigue instalado y funcionando en el dispositivo antiguo, haga desde él una copia nueva: la contraseña de la copia se fija de nuevo al exportar (pregunta 1501). Si allí ya no está, queda tramitar un certificado nuevo, y el anterior se revocará automáticamente. Gestionamos el trámite del certificado nuevo de principio a fin y, al instalarlo, hacemos en el momento una copia con contraseña."}}]}</script>
+  <script src="/assets/analytics.js?v=5ec9830b17" defer></script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
+<meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Cómo trasladar el certificado FNMT a otro ordenador | Krepko">
+  <meta name="twitter:description" content="Cómo trasladar el certificado FNMT a otro ordenador o móvil: copia .pfx o .p12 con contraseña, exportar e importar según la FNMT y por qué no hace falta otro.">
+  <meta name="twitter:image" content="https://krepko.es/og-image-es.png">
+<link rel="stylesheet" href="/assets/no-underline.css?v=50bdbea6f9">
+<link rel="stylesheet" href="/assets/blog-light.css?v=a8e13a9992">
+<link rel="stylesheet" href="/assets/site-search.css?v=19bc096a88">
+  <link rel="stylesheet" href="/assets/cursor.css?v=ab607cd5b4">
+<script src="/assets/site-search.js?v=3813f19492" defer></script>
+  <link rel="stylesheet" href="/assets/sticky-cta.css?v=ee7492d50e">
+<link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;600&amp;display=swap" rel="stylesheet" data-theme-fonts>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&amp;text=Krepko&amp;display=swap" rel="stylesheet" data-theme-fonts>
+<link rel="stylesheet" href="/assets/theme-b.css?v=ea8bd0fb74" data-theme-skin>
+<meta name="krepko-pulse" content="/api/p"><script src="/assets/pulse.js?v=e00678f73e" defer></script><meta name="krepko-clarity" content="z3npvw3og1"></head>
+<body data-skin="b">
+  <div class="scroll-progress" aria-hidden="true"><span class="scroll-progress__bar" id="scroll-progress-bar"></span></div>
+<div class="topbar">
+  <div class="topbar__inner">
+    <div class="topbar__contacts">
+      <a class="topbar__item" href="mailto:hello@krepko.es">
+        <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
+        hello@krepko.es
+      </a>
+      <a class="topbar__item" href="tel:+34624309985">
+        <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.2a2 2 0 0 1 2.1-.5c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>
+        +34 624 309 985
+      </a>
+<a class="topbar__item topbar__lang-short" href="/blog/perenos-certificado-digital/" hreflang="ru" lang="ru" aria-label="RU — По-русски">RU</a>
+<a class="topbar__item topbar__lang-short" href="/uk/blog/perenos-certificado-digital/" hreflang="uk" lang="uk" aria-label="UA — Українською">UA</a>
+    </div>
+    <div class="topbar__socials">
+<a class="topbar__lang" href="/blog/perenos-certificado-digital/" hreflang="ru" lang="ru">По-русски</a>
+<a class="topbar__lang" href="/uk/blog/perenos-certificado-digital/" hreflang="uk" lang="uk">Українською</a>
+<a class="topbar__lang" href="/en/blog/perenos-certificado-digital/" hreflang="en" lang="en">English</a>
+      <a class="topbar__social" href="https://wa.me/34624309985?text=Hola%2C%20tengo%20una%20consulta.%20Vengo%20de%20krepko.es/es/blog/perenos-certificado-digital/" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" data-cta="topbar">
+        <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9 8.5 8.5 0 0 1 8.5 8.5z"/></svg>
+      </a>
+      <a class="topbar__social" href="https://t.me/+34624309985?text=Hola%2C%20tengo%20una%20consulta.%20Vengo%20de%20krepko.es/es/blog/perenos-certificado-digital/" target="_blank" rel="noopener noreferrer" aria-label="Telegram">
+        <svg viewBox="0 0 24 24" width="17" height="17" fill="currentColor" aria-hidden="true"><path d="M21.9 4.3 18.9 19c-.2 1-.8 1.3-1.7.8l-4.6-3.4-2.2 2.1c-.3.3-.5.5-1 .5l.3-4.8 8.7-7.9c.4-.3-.1-.5-.6-.2L6.9 12.8 2.4 11.4c-1-.3-1-1 .2-1.4l18-7c.8-.3 1.5.2 1.3 1.3z"/></svg>
+      </a>
+    </div>
+  </div>
+</div>
+<header class="site-nav" role="banner" data-bars="hide-phone search-desk one-wa">
+  <div class="site-nav__inner">
+    <a class="site-nav__brand" href="/es/" aria-label="Krepko — página de inicio">
+      <span class="site-nav__brand-text">Krepko</span>
+    </a>
+
+    <nav class="site-nav__links" aria-label="Menú principal">
+      <a class="site-nav__link" href="/es/services/">Servicios</a>
+      <a class="site-nav__link" href="/es/blog/">Blog</a>
+      <a class="site-nav__link" href="/es/about/">Sobre Krepko</a>
+    </nav>
+
+    <div class="site-nav__actions">
+      <a class="site-nav__field" href="/es/services/" data-open-search aria-haspopup="dialog" aria-controls="site-search-dialog">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        <span>¿Qué trámite necesita?</span>
+      </a>
+      <a class="site-nav__search-btn" href="/es/services/" data-open-search aria-label="Buscar en el sitio" aria-haspopup="dialog" aria-controls="site-search-dialog">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      </a>
+      <a class="site-nav__consult" href="https://wa.me/34624309985?text=Hola%2C%20tengo%20una%20consulta.%20Vengo%20de%20krepko.es/es/blog/perenos-certificado-digital/" target="_blank" rel="noopener noreferrer" data-cta="header"><span class="site-nav__consult-free">Escribir por</span> WhatsApp</a>
+      <button class="site-nav__menu-btn" type="button" aria-label="Abrir el menú" aria-haspopup="dialog" aria-controls="site-menu-dialog" onclick="document.getElementById('site-menu-dialog').showModal()">
+        <span class="site-nav__menu-text">Menú</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <div class="site-nav__bar">
+    <div class="site-nav__bar-inner">
+      <a class="site-nav__brand" href="/es/" aria-label="Krepko — página de inicio">
+        <span class="site-nav__brand-text">Krepko</span>
+      </a>
+      <a class="site-nav__field site-nav__field--wide" href="/es/services/" data-open-search aria-haspopup="dialog" aria-controls="site-search-dialog">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        <span>¿Qué trámite necesita?</span>
+      </a>
+      <a class="site-nav__bar-cat" href="/es/services/">Servicios</a>
+      <a class="site-nav__bar-wa" href="https://wa.me/34624309985?text=Hola%2C%20tengo%20una%20consulta.%20Vengo%20de%20krepko.es/es/blog/perenos-certificado-digital/" target="_blank" rel="noopener noreferrer" data-cta="bar">Escribir por WhatsApp</a>
+    </div>
+  </div>
+</header>
+
+
+<dialog id="site-menu-dialog" class="site-menu" aria-label="Menú del sitio" aria-modal="true">
+  <div class="site-menu__sheet" tabindex="-1" autofocus>
+
+    <header class="site-menu__head">
+      <a class="site-menu__brand" href="/es/" aria-label="Krepko — página de inicio">
+        <span class="site-menu__brand-text">Krepko</span>
+      </a>
+      <button class="site-menu__close" type="button" aria-label="Cerrar el menú" onclick="this.closest('dialog').close()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg>
+      </button>
+    </header>
+
+    <div class="site-menu__body">
+      <a class="site-menu__field" href="/es/services/" data-open-search aria-haspopup="dialog" aria-controls="site-search-dialog">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        <span>¿Qué trámite necesita?</span>
+      </a>
+
+      <nav class="site-menu__nav" aria-label="Menú principal">
+        <a href="/es/services/" data-page="services" class="site-menu__link">Servicios</a>
+        <a href="/es/blog/" data-page="blog" class="site-menu__link">Blog</a>
+        <a href="/es/about/" data-page="about" class="site-menu__link">Sobre Krepko</a>
+        <a href="/es/" data-page="home" class="site-menu__link">Inicio</a>
+      </nav>
+
+      <a class="site-menu__cta" href="https://wa.me/34624309985?text=Hola%2C%20tengo%20una%20consulta.%20Vengo%20de%20krepko.es/es/blog/perenos-certificado-digital/" rel="noopener noreferrer" target="_blank" data-cta="menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9 8.5 8.5 0 0 1 8.5 8.5z"/></svg>
+Escribir por WhatsApp      </a>
+
+      <div class="site-menu__langs">
+<a class="site-menu__lang" href="/blog/perenos-certificado-digital/" hreflang="ru" lang="ru">По-русски</a>
+<a class="site-menu__lang" href="/uk/blog/perenos-certificado-digital/" hreflang="uk" lang="uk">Українською</a>
+<a class="site-menu__lang" href="/en/blog/perenos-certificado-digital/" hreflang="en" lang="en">English</a>      </div>
+    </div>
+
+  </div>
+</dialog>
+
+<dialog id="site-search-dialog" class="site-search" aria-label="Buscar en el sitio" data-wa-q="Hola, busco un servicio: «{q}»" data-none="No hemos encontrado nada para «{q}»" data-search-index="/search-index.es.json" data-dir-c="Área">
+  <div class="site-search__panel" role="search">
+
+    <div class="site-search__bar">
+      <label class="site-search__field">
+        <svg class="site-search__glass" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        <input class="site-search__input" type="search" placeholder="¿Qué trámite necesita?" aria-label="Buscar servicios y artículos" autocomplete="off" spellcheck="false" enterkeyhint="search">
+      </label>
+      <button class="site-search__close" type="button" aria-label="Cerrar la búsqueda">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg>
+      </button>
+    </div>
+
+    <div class="site-search__drop">
+      <div class="site-search__start">
+<p class="site-search__hint">Con sus palabras: «mi hijo va a casa de su abuela»</p>
+<p class="site-search__label">Lo más solicitado</p>
+        <ul class="site-search__rows">
+<li><a href="/es/notario/doverennost-na-rodnom-yazyke/"><span>Poder notarial en su idioma</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></a></li>
+<li><a href="/es/ukraina/spravka-o-nesudimosti/"><span>Antecedentes penales de Ucrania</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></a></li>
+<li><a href="/es/notario/soglasie-na-vyezd-rebenka/"><span>Autorización de viaje para menores</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></a></li>
+<li><a href="/es/notario/soglasie-vtorogo-roditelya-vnzh/"><span>Consentimiento del otro progenitor para la residencia</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></a></li>
+<li><a href="/es/migracion/vyhod-iz-tps/"><span>Salir de la protección temporal</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></a></li>
+<li><a href="/es/tramites/canje-permiso/"><span>Canje del permiso de conducir ucraniano</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></a></li>
+        </ul>      </div>
+
+      <ul class="site-search__rows site-search__results" aria-label="Resultados de búsqueda"></ul>
+<template class="site-search__tpl">
+        <li class="site-search__group">Artículos</li>
+        <li class="site-search__all"><a href="/es/services/"><span>Todos los servicios encontrados</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></a></li>
+      </template>
+
+      <div class="site-search__none" hidden>
+        <p class="site-search__none-h"></p>
+        <p class="site-search__none-t">Escríbanos qué necesita hacer y le diremos cómo lo resolveríamos.</p>
+        <a class="site-search__wa" href="https://wa.me/34624309985?text=Hola%2C%20tengo%20una%20consulta.%20Vengo%20de%20krepko.es/es/blog/perenos-certificado-digital/" rel="noopener noreferrer" target="_blank" data-cta="search">Escribir por WhatsApp</a>
+        <p class="site-search__none-q">Su consulta ya irá en el mensaje.</p>
+      </div>
+    </div>
+
+  </div>
+</dialog>
+
+
+<div class="wrap wrap--article">
+<main id="main">
+<nav class="breadcrumb breadcrumb--back" aria-label="Ruta de navegación">
+  <a href="/es/">Inicio</a> / <a class="breadcrumb__parent" href="/es/blog/" aria-label="Volver: Blog"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg><span>Blog</span></a> / <span>Traslado del certificado de la FNMT</span>
+</nav>
+
+    <div class="blog-article blog-article--v4">
+      <details class="article-toc" open>
+        <summary class="article-toc__label">En este artículo</summary>
+        <div class="article-toc__list"><a href="#pochemu-kopiya">Por qué no se puede volver a descargar el certificado en el ordenador nuevo</a><a href="#kakoy-fayl">Qué archivo hace falta: .pfx o .p12, no .cer</a><a href="#eksport">Paso 1. Hacer la copia en el ordenador antiguo</a><a href="#import">Paso 2. Instalar la copia en el ordenador nuevo</a><a href="#telefon">El certificado en el móvil: Android y iPhone</a><a href="#novyy-sertifikat">Cuándo no queda más remedio que pedir un certificado nuevo</a><a href="#hranenie">Cómo guardar la copia y la contraseña</a><a href="#istochniki">Fuentes (contrastadas el 11 de noviembre de 2026)</a><a href="#chastye-voprosy">Preguntas frecuentes</a></div>
+      </details>
+      <script>if(matchMedia('(max-width:1099px)').matches)document.currentScript.previousElementSibling.open=false</script>
+
+      <div class="article-body">
+<div class="article-tags" data-cat="docs"><span>Documentos</span><span>Certificado digital</span></div>
+
+    <h1>Cómo trasladar el certificado digital a otro ordenador o al móvil</h1>
+
+    <div class="article-meta"><a href="/es/about/">Krepko</a> · <time datetime="2026-11-11">11 de noviembre de 2026</time> · ~8 min de lectura</div>
+    <div class="callout article-summary">
+  <strong>En resumen.</strong> El certificado de la FNMT solo se descarga en el ordenador
+  y con el usuario desde los que se hizo la solicitud; a otro ordenador o al móvil
+  se traslada mediante una copia con la clave privada, un archivo .pfx
+  o .p12 protegido con contraseña: se exporta en el dispositivo antiguo y se importa en el nuevo. Un mismo
+  certificado se puede tener en varios dispositivos a la vez, y no hace falta
+  solicitar un segundo: por regla general, una persona tiene un único certificado
+  de persona física de la FNMT vigente, y al emitirse uno nuevo se revoca automáticamente
+  el anterior (la excepción es la renovación: en ella, el anterior sigue vigente
+  hasta su fecha). Si no hay copia
+  y el ordenador antiguo no funciona, se tramita un certificado nuevo, y si el dispositivo
+  con el certificado se ha perdido o se lo han robado, la FNMT pide revocarlo. Contrastado en sede.fnmt.gob.es
+  el 11 de noviembre de 2026.
+</div>
+    <div class="article-services article-services--card">
+      <div class="svc-card svc-card--head">
+        <p class="svc-card__label">Este trámite lo gestionamos nosotros</p>
+        <a class="svc-card__name" href="/es/tramites/firma-digital/" data-cta="blog-head-svc"><span>Certificado digital</span><svg class="svc-chev" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></a>
+        <a class="svc-card__btn" href="https://wa.me/34624309985?text=Hola%2C%20tengo%20una%20consulta.%20Vengo%20de%20krepko.es/es/blog/perenos-certificado-digital/" rel="noopener noreferrer" target="_blank" data-cta="blog-head"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9 8.5 8.5 0 0 1 8.5 8.5z"/></svg><span>Escribir por WhatsApp</span></a>
+        <p class="svc-card__note">Un especialista le responde en 15 minutos</p>
+      </div>
+      <ul class="article-services__list">
+        <li><a class="article-services__all" href="/es/services/">Servicios</a></li>
+      </ul>
+    </div>
+
+
+    <div class="article-intro">
+Ha comprado un portátil nuevo o quiere firmar desde el móvil, pero el certificado de la FNMT
+solo está instalado en el ordenador antiguo. No se puede volver a descargar en otro ordenador:
+la clave privada se genera al hacer la solicitud en un ordenador concreto, y el certificado
+solo funciona junto con ella. Por eso, a otros dispositivos se traslada una copia.
+<br><br>
+A continuación vemos qué archivo hace falta, dónde hacer la copia en Windows, en Mac
+y en Linux, cómo instalarla en Android y en iPhone y qué hacer si el ordenador antiguo
+ya no existe. Cómo obtener el certificado desde cero lo explicamos en el artículo
+<a href="/es/blog/certificado-digital/">sobre el certificado digital</a>.
+    </div>
+
+
+
+    <details class="article-toc article-toc--copy">
+        <summary class="article-toc__label">En este artículo</summary>
+        <div class="article-toc__list"><a href="#pochemu-kopiya">Por qué no se puede volver a descargar el certificado en el ordenador nuevo</a><a href="#kakoy-fayl">Qué archivo hace falta: .pfx o .p12, no .cer</a><a href="#eksport">Paso 1. Hacer la copia en el ordenador antiguo</a><a href="#import">Paso 2. Instalar la copia en el ordenador nuevo</a><a href="#telefon">El certificado en el móvil: Android y iPhone</a><a href="#novyy-sertifikat">Cuándo no queda más remedio que pedir un certificado nuevo</a><a href="#hranenie">Cómo guardar la copia y la contraseña</a><a href="#istochniki">Fuentes (contrastadas el 11 de noviembre de 2026)</a><a href="#chastye-voprosy">Preguntas frecuentes</a></div>
+      </details>
+
+<h2 id="pochemu-kopiya">Por qué no se puede volver a descargar el certificado en el ordenador nuevo</h2>
+
+<p>Al solicitar el certificado, el programa de la FNMT, Configurador FNMT-RCM, genera
+un par de claves en su ordenador. La clave pública se envía a la FNMT junto
+con la solicitud; la privada se queda en el almacén del programa en ese dispositivo.
+Al descargar, el programa une el certificado emitido a la clave privada,
+y sin ella el certificado no se instala (FNMT, pregunta 1681). De ahí los requisitos
+de la FNMT: descargar en el mismo ordenador y con el mismo usuario que en
+la solicitud, y no formatear el ordenador entre la solicitud y la descarga.</p>
+
+<p>En el ordenador nuevo no está la clave privada, por eso allí se instala una copia:
+el certificado junto con la clave privada en un solo archivo protegido con contraseña. La FNMT
+propone hacerla nada más descargar el certificado y califica este paso
+de recomendable. Cuando gestionamos <a href="/es/tramites/firma-digital/">la tramitación
+del certificado digital</a>, hacemos la copia al instalarlo, en su dispositivo,
+y le enseñamos a usarla. Si el certificado no se descarga ni siquiera
+en «su» ordenador, las causas se explican en el artículo
+<a href="/es/blog/ne-skachivaetsya-certificado-fnmt/">sobre por qué
+no se descarga el certificado de la FNMT</a>.</p>
+
+
+<h2 id="kakoy-fayl">Qué archivo hace falta: .pfx o .p12, no .cer</h2>
+
+<p>En otro dispositivo solo funciona la copia con la clave privada. Tiene dos
+extensiones: .pfx, que es como guarda la copia el asistente de exportación de Windows, y .p12,
+que es como la guardan Firefox y el llavero del Mac (FNMT, preguntas 1553 y 1379). Para el traslado
+no hay diferencia: Mac, Android y iPhone aceptan ambos archivos.</p>
+
+<p>Los archivos .cer y .crt solo contienen la parte pública del certificado. Con ellos
+no se puede firmar: ese archivo se entrega a quienes quieren comunicarse con usted
+de forma segura (pregunta 1063). En Windows se distinguen por el icono: la copia con clave tiene
+un sobre con una llave; el .cer, un diploma. Si al exportar no se elige la opción
+con la clave privada, se obtiene precisamente un .cer: en Windows, ese archivo se instala
+en la pestaña «Otras personas» y no funcionará
+(pregunta 1320).</p>
+
+<h2 id="eksport">Paso 1. Hacer la copia en el ordenador antiguo</h2>
+
+<p>La copia se hace donde el certificado está instalado y funciona. Las rutas de abajo siguen
+las instrucciones de la FNMT; los nombres de los menús dependen de la versión y del idioma del sistema.</p>
+
+<div class="table-wrap table-wrap--stack"><table class="cost-table">
+  <tr class="table-head">
+    <th>Dónde está el certificado</th>
+    <th>Dónde hacer la copia</th>
+    <th>Archivo</th>
+  </tr>
+  <tr>
+    <td>Windows: Chrome o Edge</td>
+    <td data-label="Dónde hacer la copia">Configuración → gestión de certificados (en Chrome, certificados importados de Windows) → pestaña «Personal» → «Exportar». En el asistente de Windows, elegir «Exportar la clave privada», dejar el formato predeterminado, fijar la contraseña y la carpeta</td>
+    <td data-label="Archivo">.pfx</td>
+  </tr>
+  <tr>
+    <td>Firefox</td>
+    <td data-label="Dónde hacer la copia">Ajustes → Privacidad y seguridad → Certificados → ver certificados → «Sus certificados» → elegir el certificado → hacer copia de seguridad → contraseña. En Mac, la extensión .p12 se añade a mano en el nombre del archivo</td>
+    <td data-label="Archivo">.p12</td>
+  </tr>
+  <tr>
+    <td>Mac, llavero</td>
+    <td data-label="Dónde hacer la copia">Llavero → «Mis certificados» → elegir el certificado → Archivo → «Exportar ítems» → contraseña</td>
+    <td data-label="Archivo">.p12</td>
+  </tr>
+  <tr>
+    <td>Linux: Chrome</td>
+    <td data-label="Dónde hacer la copia">Configuración → Privacidad y seguridad → Seguridad → gestionar certificados → «Sus certificados» → «Exportar»</td>
+    <td data-label="Archivo">el nombre y la carpeta los elige usted</td>
+  </tr>
+</table></div>
+
+<p>La contraseña de la copia la elige usted. La FNMT advierte de que se la pedirán al
+instalarla en otro navegador o en otro ordenador, por lo que debe
+recordarla (pregunta 1501). No la deje vacía: Firefox solo importa
+copias con contraseña (pregunta 1398). Si ya no se puede volver a exportar el certificado
+con la clave privada, la FNMT indica una única salida: un certificado nuevo
+(pregunta 1320).</p>
+
+<h2 id="import">Paso 2. Instalar la copia en el ordenador nuevo</h2>
+
+<p>El archivo se pasa al ordenador nuevo y se importa allí donde se vaya a trabajar
+con el certificado. La importación paso a paso en Chrome, Firefox y Safari se muestra en el artículo
+básico, en el apartado <a href="/es/blog/certificado-digital/#ustanovka-certificado-digital-v-brauzer">sobre la instalación
+del certificado en el navegador</a>. Según las instrucciones de la FNMT, al importar es importante lo siguiente:</p>
+
+<ul>
+  <li><strong>Windows:</strong> en el asistente de importación, marque «Marcar la clave
+  privada como exportable»: así, según la instrucción
+  de la FNMT, desde el ordenador nuevo también se podrá hacer una copia
+  con la clave privada (pregunta 1500). Para Edge, la FNMT propone marcar además
+  la protección segura de la clave privada y, si quiere que el certificado tenga
+  contraseña, elegir el nivel de seguridad alto y fijar una contraseña
+  (pregunta 1552);</li>
+  <li><strong>Firefox:</strong> si en este navegador todavía no había
+  certificados, le pedirá crear una contraseña propia para trabajar con el certificado,
+  distinta de la contraseña de la copia (pregunta 1398);</li>
+  <li><strong>Mac:</strong> en el llavero, elija «Inicio de sesión» y «Mis
+  certificados», después Archivo → «Importar ítems», el archivo de la copia y su contraseña
+  (pregunta 1380).</li>
+</ul>
+
+<p>En el dispositivo antiguo, el certificado sigue funcionando: un mismo
+certificado se instala en varios navegadores, y también en el ordenador y en el móvil
+(pregunta 1052 y página de la FNMT sobre el certificado en el móvil). La copia tiene la misma vigencia
+que figura en el certificado: los que se emiten ahora, hasta el 31 de diciembre de 2028. Tras
+la renovación, la FNMT vuelve a recomendar hacer una copia, y a otros dispositivos
+se traslada ya esa nueva copia; cómo renovar se explica en el artículo
+<a href="/es/blog/prodlenie-certificado-digital/">sobre la renovación del certificado digital</a>.</p>
+
+<h2 id="telefon">El certificado en el móvil: Android y iPhone</h2>
+
+<p>En el móvil se instala la misma copia .pfx o .p12 que en el ordenador.</p>
+
+<p><strong>Android.</strong> Copie el archivo en la memoria del teléfono y después vaya a
+Ajustes → Seguridad → Almacenamiento de credenciales → Instalar desde la memoria
+del teléfono. Elija el archivo, introduzca la contraseña de la copia, dé al certificado un nombre sin
+espacios y elija «VPN y aplicaciones» (pregunta 1615). Los menús dependen
+de la versión de Android (pregunta 1653), y en versiones anteriores a la 8 la FNMT pide instalar también
+su certificado raíz. Según la FNMT, el certificado del almacén del sistema
+funciona en el navegador estándar de Android y en Chrome, mientras que Firefox para Android
+y Opera no sirven para ello (pregunta 1610).</p>
+
+<p><strong>iPhone y iPad.</strong> La FNMT propone enviar el archivo de la copia
+por correo a su propio buzón, configurado en la app «Mail», o guardarlo
+en una carpeta de iCloud. En el dispositivo, pulse el archivo y siga el asistente de instalación
+(pregunta 1707).</p>
+
+<div class="warning-box">
+  <strong>Para el móvil no hace falta un segundo certificado.</strong> La aplicación
+  de la FNMT para el móvil emite un certificado nuevo, no una copia del antiguo. Si
+  ya tiene un certificado, el nuevo, solicitado a través de la aplicación,
+  revoca automáticamente el anterior: una persona solo puede tener un
+  certificado de persona física. Después, el certificado del ordenador dejará
+  de funcionar, por eso la FNMT propone instalar en el móvil el mismo certificado
+  a partir de la copia.
+</div>
+
+    <aside class="inline-cta svc-card svc-card--inline" data-article="perenos-certificado-digital" data-service="tramites">
+  <p class="inline-cta__header">¿El certificado se quedó en el ordenador antiguo sin copia?</p>
+  <p class="inline-cta__offer">Escríbanos qué ha pasado con el certificado y en qué dispositivos lo necesita. Le diremos si basta con una copia o hace falta uno nuevo. Gestionamos <a href="/es/tramites/firma-digital/">la tramitación del certificado digital</a> de principio a fin: solicitud, acompañamiento con traducción en la visita, instalación en su ordenador o móvil y copia de seguridad con contraseña.</p>
+  <a class="inline-cta__btn svc-card__btn" href="https://wa.me/34624309985?text=Hola%2C%20tengo%20una%20consulta.%20Vengo%20de%20krepko.es/es/blog/perenos-certificado-digital/" rel="noopener noreferrer" target="_blank" data-cta="blog-inline"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9 8.5 8.5 0 0 1 8.5 8.5z"/></svg><span>Escribir por WhatsApp</span></a>
+  <a class="svc-card__row" href="/es/tramites/firma-digital/" data-cta="blog-inline-svc"><span class="svc-card__row-t"><span class="svc-card__row-label">Este trámite lo gestionamos nosotros</span> <span class="svc-card__row-name">Certificado digital</span></span><svg class="svc-chev" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></a>
+</aside>
+
+<h2 id="novyy-sertifikat">Cuándo no queda más remedio que pedir un certificado nuevo</h2>
+
+<p>Es una regla general de la FNMT, no solo para la aplicación: cuando se emite un segundo
+certificado con el mismo nombre, apellidos y número de documento, el primero se revoca
+automáticamente y queda vigente el nuevo (pregunta 1053 y apartado 132 de las normas de emisión
+de certificados de la FNMT). Un certificado revocado no se vuelve a activar (pregunta 1682).
+La excepción es la renovación: en ella, el certificado anterior sigue vigente hasta su fecha;
+más detalles en el artículo <a href="/es/blog/prodlenie-certificado-digital/">sobre la renovación</a>.
+Hace falta un certificado nuevo cuando no hay forma de trasladar el antiguo:</p>
+
+<ul>
+  <li>el certificado no está en ningún dispositivo que funcione y no hay copia,
+  por ejemplo, porque el ordenador se ha estropeado o se ha reinstalado;</li>
+  <li>la copia no se instala porque se ha olvidado su contraseña o no contiene
+  la clave privada, y ya no se puede hacer una nueva en el dispositivo original.</li>
+</ul>
+
+<p>Si el dispositivo con el certificado se ha perdido o se lo han robado, la FNMT pide
+revocar el certificado, y conviene hacerlo enseguida, sin esperar al nuevo. En línea
+se revoca si tiene el certificado, por ejemplo en otro dispositivo:
+para ello hace falta tener instalado el programa AutoFirma. Si no tiene el certificado
+a mano, se revoca compareciendo en persona en una oficina de acreditación
+de identidad o por el teléfono de la FNMT, que atiende día y noche, si conoce el código de solicitud
+(página «Anular» de la FNMT y pregunta 1170). Para un certificado nuevo se recorre todo el camino de nuevo:
+solicitud, comparecencia en la oficina, descarga (pregunta 1320). Dónde acreditar la identidad se explica
+en el artículo <a href="/es/blog/gde-podtverdit-lichnost-fnmt/">sobre dónde acreditar la identidad
+para el certificado digital</a>.</p>
+
+<h2 id="hranenie">Cómo guardar la copia y la contraseña</h2>
+
+<p>La copia con la clave privada y su contraseña son su firma completa: con ellas
+se firma en su nombre en cualquier dispositivo. La FNMT indica que el certificado
+con la clave privada solo se exporta para uso propio o
+como copia de seguridad, pide guardar el archivo en un lugar seguro y no entregar a nadie la copia de la clave
+privada: el responsable del certificado es su titular (preguntas 1063 y 1501).</p>
+
+<ul>
+  <li>guarde la copia separada del ordenador, en su propio soporte o en su propio
+  almacenamiento en la nube, y no guarde la contraseña junto al archivo;</li>
+  <li>el correo con la copia para el iPhone envíelo solo a su propio buzón y, después
+  de la instalación, bórrelo;</li>
+  <li>si otra persona ha podido usar la copia o la contraseña, revoque
+  el certificado: la FNMT cita expresamente este caso como motivo de revocación;</li>
+  <li>antes de dar o vender el dispositivo antiguo, compruebe que la copia
+  funciona en el nuevo y borre del antiguo tanto el certificado como el archivo de la copia, si
+  está guardado allí (cómo borrar el certificado lo muestra la FNMT en las preguntas 1550,
+  1400 y 1653).</li>
+</ul>
+
+<h2 id="istochniki">Fuentes (contrastadas el 11 de noviembre de 2026)</h2>
+
+<ul>
+  <li><a href="https://www.sede.fnmt.gob.es/certificados/persona-fisica/obtener-certificado-software/descargar-certificado" rel="noopener noreferrer" target="_blank">FNMT — Descargar certificado</a>, <a href="https://www.sede.fnmt.gob.es/certificados/persona-fisica/obtener-certificado-software/configuracion-previa" rel="noopener noreferrer" target="_blank">Configuración previa</a> y <a href="https://www.sede.fnmt.gob.es/certificados/persona-fisica/obtener-certificado-software" rel="noopener noreferrer" target="_blank">Certificado con acreditación presencial</a>: el mismo ordenador y usuario, copia al descargar;</li>
+  <li>FNMT, preguntas <a href="https://www.sede.fnmt.gob.es/preguntas-frecuentes/problemas-y-dudas/-/asset_publisher/fVZppcBHj0oa/content/1681-cual-es-el-proceso-tecnico-que-implica-la-obtencion-de-un-certificado-" rel="noopener noreferrer" target="_blank">1681</a> (clave privada), <a href="https://www.sede.fnmt.gob.es/preguntas-frecuentes/problemas-y-dudas/-/asset_publisher/fVZppcBHj0oa/content/1053-se-puede-tener-mas-de-un-certificado-por-titular-emitido-por-la-fnmt-" rel="noopener noreferrer" target="_blank">1053</a> (un certificado por persona), <a href="https://www.sede.fnmt.gob.es/preguntas-frecuentes/problemas-y-dudas/-/asset_publisher/fVZppcBHj0oa/content/1682-se-puede-reactivar-un-certificado-revocado-" rel="noopener noreferrer" target="_blank">1682</a>, <a href="https://www.sede.fnmt.gob.es/preguntas-frecuentes/problemas-y-dudas/-/asset_publisher/fVZppcBHj0oa/content/1052-se-puede-tener-el-mismo-certificado-en-varios-navegadores-" rel="noopener noreferrer" target="_blank">1052</a>, <a href="https://www.sede.fnmt.gob.es/preguntas-frecuentes/problemas-y-dudas/-/asset_publisher/fVZppcBHj0oa/content/1146-que-periodo-de-validez-tiene-un-certificado-fnmt-de-persona-fisica-" rel="noopener noreferrer" target="_blank">1146</a> (vigencia);</li>
+  <li>FNMT, formatos y exportación: preguntas <a href="https://www.sede.fnmt.gob.es/preguntas-frecuentes/problemas-y-dudas/-/asset_publisher/fVZppcBHj0oa/content/1553-diferencias-entre-pfx-p12-cer-y-crt-" rel="noopener noreferrer" target="_blank">1553</a>, <a href="https://www.sede.fnmt.gob.es/preguntas-frecuentes/exp-imp-y-elim-de-certificados/-/asset_publisher/EwGOMAWPq4DV/content/1063-cual-es-la-diferencia-de-exportar-el-certificado-con-clave-privada-o-sin-ella-" rel="noopener noreferrer" target="_blank">1063</a>, <a href="https://www.sede.fnmt.gob.es/preguntas-frecuentes/exp-imp-y-elim-de-certificados/-/asset_publisher/EwGOMAWPq4DV/content/1320-por-que-al-importar-una-copia-de-seguridad-de-mi-certificado-en-internet-explorer-se-instala-en-la-pestana-de-otras-personas-y-no-en-personal-" rel="noopener noreferrer" target="_blank">1320</a>, <a href="https://www.sede.fnmt.gob.es/preguntas-frecuentes/exp-imp-y-elim-de-certificados/-/asset_publisher/EwGOMAWPq4DV/content/1501-como-puedo-exportar-un-certificado-digital-con-google-chrome-en-windows-" rel="noopener noreferrer" target="_blank">1501</a>, <a href="https://www.sede.fnmt.gob.es/preguntas-frecuentes/exp-imp-y-elim-de-certificados/-/asset_publisher/EwGOMAWPq4DV/content/1551-como-puedo-exportar-un-certificado-en-internet-explorer-" rel="noopener noreferrer" target="_blank">1551</a>, <a href="https://www.sede.fnmt.gob.es/preguntas-frecuentes/exp-imp-y-elim-de-certificados/-/asset_publisher/EwGOMAWPq4DV/content/1399-como-puedo-exportar-mi-certificado-con-mozilla-firefox-" rel="noopener noreferrer" target="_blank">1399</a>, <a href="https://www.sede.fnmt.gob.es/preguntas-frecuentes/exp-imp-y-elim-de-certificados/-/asset_publisher/EwGOMAWPq4DV/content/1379-como-puedo-exportar-mi-certificado-desde-el-llavero-de-mac-" rel="noopener noreferrer" target="_blank">1379</a>, <a href="https://www.sede.fnmt.gob.es/preguntas-frecuentes/exp-imp-y-elim-de-certificados/-/asset_publisher/EwGOMAWPq4DV/content/1381-como-exportar-un-certificado-con-google-chrome-en-linux-" rel="noopener noreferrer" target="_blank">1381</a>;</li>
+  <li>FNMT, importación y borrado: preguntas <a href="https://www.sede.fnmt.gob.es/preguntas-frecuentes/exp-imp-y-elim-de-certificados/-/asset_publisher/EwGOMAWPq4DV/content/1500-como-puedo-importar-un-certificado-digital-con-google-chrome-en-windows-" rel="noopener noreferrer" target="_blank">1500</a>, <a href="https://www.sede.fnmt.gob.es/preguntas-frecuentes/exp-imp-y-elim-de-certificados/-/asset_publisher/EwGOMAWPq4DV/content/1552-como-puedo-importar-un-certificado-en-internet-explorer-" rel="noopener noreferrer" target="_blank">1552</a>, <a href="https://www.sede.fnmt.gob.es/preguntas-frecuentes/exp-imp-y-elim-de-certificados/-/asset_publisher/EwGOMAWPq4DV/content/1398-como-puedo-importar-mi-certificado-con-mozilla-firefox-" rel="noopener noreferrer" target="_blank">1398</a>, <a href="https://www.sede.fnmt.gob.es/preguntas-frecuentes/exp-imp-y-elim-de-certificados/-/asset_publisher/EwGOMAWPq4DV/content/1380-como-puedo-importar-mi-certificado-desde-el-llavero-de-mac-" rel="noopener noreferrer" target="_blank">1380</a>, <a href="https://www.sede.fnmt.gob.es/preguntas-frecuentes/exp-imp-y-elim-de-certificados/-/asset_publisher/EwGOMAWPq4DV/content/1550-como-puedo-eliminar-un-certificado-en-internet-explorer-" rel="noopener noreferrer" target="_blank">1550</a>, <a href="https://www.sede.fnmt.gob.es/preguntas-frecuentes/exp-imp-y-elim-de-certificados/-/asset_publisher/EwGOMAWPq4DV/content/1400-como-puedo-eliminar-mi-certificado-con-mozilla-firefox-" rel="noopener noreferrer" target="_blank">1400</a>;</li>
+  <li>FNMT, móvil: <a href="https://www.sede.fnmt.gob.es/certificados/persona-fisica/certificado-con-dispositivo-movil" rel="noopener noreferrer" target="_blank">App Móvil</a> (revocación automática del certificado anterior), preguntas <a href="https://www.sede.fnmt.gob.es/preguntas-frecuentes/android-mac/-/asset_publisher/1RphW9IeUoAH/content/1615-como-se-importa-un-certificado-personal-a-un-dispositivo-android-" rel="noopener noreferrer" target="_blank">1615</a>, <a href="https://www.sede.fnmt.gob.es/preguntas-frecuentes/android-mac/-/asset_publisher/1RphW9IeUoAH/content/1653-como-puedo-borrar-certificados-en-android-" rel="noopener noreferrer" target="_blank">1653</a>, <a href="https://www.sede.fnmt.gob.es/preguntas-frecuentes/android-mac/-/asset_publisher/1RphW9IeUoAH/content/1610-android-y-los-certificados-de-usuario" rel="noopener noreferrer" target="_blank">1610</a>, <a href="https://www.sede.fnmt.gob.es/preguntas-frecuentes/android-mac/-/asset_publisher/1RphW9IeUoAH/content/1707-como-se-importa-un-certificado-personal-a-un-dispositivo-ios-" rel="noopener noreferrer" target="_blank">1707</a>;</li>
+  <li><a href="https://www.sede.fnmt.gob.es/certificados/persona-fisica/anular" rel="noopener noreferrer" target="_blank">FNMT — Anular</a> y <a href="https://www.sede.fnmt.gob.es/preguntas-frecuentes/certificado-de-persona-fisica/-/asset_publisher/eIal9z2VE0Kb/content/1170-que-pasos-he-de-seguir-para-revocar-un-certificado-de-persona-fisica-" rel="noopener noreferrer" target="_blank">pregunta 1170</a>: revocación del certificado;</li>
+  <li><a href="https://www.sede.fnmt.gob.es/certificados/persona-fisica/renovar" rel="noopener noreferrer" target="_blank">FNMT — Renovar</a>: copia tras la renovación;</li>
+  <li><a href="https://www.sede.fnmt.gob.es/documents/10445900/10536309/dpc_personasfisicas.pdf" rel="noopener noreferrer" target="_blank">FNMT — Políticas y Prácticas de Certificación Particulares de los certificados para Ciudadanos, versión 2.0</a>: apartados 112 y 132 (el certificado anterior en la renovación y al emitirse uno nuevo).</li>
+</ul>
+
+    <h2 id="chastye-voprosy">Preguntas frecuentes</h2>
+    <div class="faq__list">
+      <details class="faq__item">
+        <summary class="faq__q">He comprado un ordenador nuevo. ¿Puedo volver a descargar en él el certificado de la FNMT?</summary>
+        <div class="faq__a">No: el certificado se descarga en el mismo ordenador y con el mismo usuario desde los que se hizo la solicitud. La clave privada se genera al hacer la solicitud y se guarda en ese dispositivo, y sin ella el certificado no se instala. En el ordenador nuevo se instala la copia hecha en el antiguo: un archivo .pfx o .p12 con la clave privada, protegido con contraseña.</div>
+      </details>
+      <details class="faq__item">
+        <summary class="faq__q">Si solicito un certificado nuevo, ¿dejará de funcionar el antiguo?</summary>
+        <div class="faq__a">Sí, en cuanto la FNMT emita el nuevo. Por regla general, una persona solo puede tener un certificado de persona física de la FNMT vigente: cuando se emite un segundo con el mismo nombre, apellidos y número de documento, el primero se revoca automáticamente (FNMT, pregunta 1053 y apartado 132 de las normas de emisión de certificados), y un certificado revocado no se vuelve a activar (pregunta 1682). En la renovación es distinto: el certificado anterior sigue vigente hasta su fecha de caducidad. Para un segundo ordenador o para el móvil no hace falta un certificado nuevo, sino una copia del vigente.</div>
+      </details>
+      <details class="faq__item">
+        <summary class="faq__q">He hecho una copia, pero en el ordenador nuevo el certificado no funciona. ¿Qué pasa?</summary>
+        <div class="faq__a">Una de las causas que indica la FNMT es que la copia se guardó sin la clave privada, como archivo .cer. En Windows, ese archivo tiene el icono de un diploma; la copia correcta .pfx o .p12, un sobre con una llave. El archivo sin clave se instala en la pestaña «Otras personas» y no puede firmar (pregunta 1320). Vuelva a hacer la copia en el ordenador antiguo eligiendo exportar la clave privada; si el certificado antiguo ya no está, queda pedir uno nuevo.</div>
+      </details>
+      <details class="faq__item">
+        <summary class="faq__q">¿Cómo se instala el certificado digital en el móvil?</summary>
+        <div class="faq__a">Desde la misma copia .pfx o .p12 que en el ordenador. En Android, el archivo se copia en la memoria del teléfono y se instala en los ajustes de seguridad, en el almacenamiento de credenciales, con la contraseña de la copia. En el iPhone, la FNMT propone enviarse el archivo por correo a la app «Mail» o guardarlo en iCloud y abrirlo en el dispositivo. Para ello no hace falta solicitar un segundo certificado a través de la aplicación de la FNMT: el nuevo revocaría el certificado del ordenador.</div>
+      </details>
+      <details class="faq__item">
+        <summary class="faq__q">¿Puedo enviarme por correo el archivo del certificado?</summary>
+        <div class="faq__a">A usted mismo, sí: para el iPhone, la propia FNMT propone enviar la copia por correo a su buzón en la app «Mail» o guardarla en iCloud. Después de la instalación, conviene borrar el correo con el archivo. A otras personas, no: la FNMT pide no entregar a nadie la copia de la clave privada, y el responsable del certificado es su titular. Si el archivo y la contraseña han podido llegar a otra persona, el certificado se revoca.</div>
+      </details>
+      <details class="faq__item">
+        <summary class="faq__q">He olvidado la contraseña del archivo de la copia del certificado. ¿Qué hago?</summary>
+        <div class="faq__a">Sin la contraseña, la copia no se instala: la FNMT advierte de que se pide al instalarla en otro ordenador o en otro navegador. Si el certificado sigue instalado y funcionando en el dispositivo antiguo, haga desde él una copia nueva: la contraseña de la copia se fija de nuevo al exportar (pregunta 1501). Si allí ya no está, queda tramitar un certificado nuevo, y el anterior se revocará automáticamente. Gestionamos el trámite del certificado nuevo de principio a fin y, al instalarlo, hacemos en el momento una copia con contraseña.</div>
+      </details>
+    </div>
+
+
+    <div class="cta-block svc-card svc-card--final">
+      <div class="cta-title">Tramitamos su certificado y hacemos la copia en el momento</div>
+      <div class="cta-sub">Escríbanos dónde está ahora su certificado y en qué dispositivos lo necesita. Le diremos si basta con una copia o hace falta uno nuevo, y le indicaremos plazos y coste antes de empezar.</div>
+      <div class="svc-card__act">
+        <a class="svc-card__btn" href="https://wa.me/34624309985?text=Hola%2C%20tengo%20una%20consulta.%20Vengo%20de%20krepko.es/es/blog/perenos-certificado-digital/" rel="noopener noreferrer" target="_blank" data-cta="blog-final"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9 8.5 8.5 0 0 1 8.5 8.5z"/></svg><span>Escribir por WhatsApp</span></a>
+        <p class="svc-card__note">Un especialista le responde en 15 minutos</p>
+      </div>
+      <a class="svc-card__row" href="/es/tramites/firma-digital/" data-cta="blog-final-svc"><span class="svc-card__row-t"><span class="svc-card__row-label">Este trámite lo gestionamos nosotros</span> <span class="svc-card__row-name">Certificado digital</span></span><svg class="svc-chev" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></a>
+    </div>
+
+      </div>
+    </div>
+    <div class="article-more">
+    <h2 class="article-more__h">Lea también</h2><div class="article-more__grid" id="related-articles"><a class="blog-card" data-cat="docs" href="/es/blog/notarialnyy-perevod-ispaniya/"><span class="blog-card__top"></span><span class="blog-card__body"><span class="blog-card__kicker">Blog&nbsp;· Documentos</span><span class="blog-card__tags"><span class="blog-card__tag">Documentos</span><span class="blog-card__tag">Ucrania</span></span><span class="blog-card__title">Traducción con certificación notarial al español: dónde la aceptan en España y qué presentar en su lugar</span><span class="blog-card__date">~9 min de lectura</span></span></a><a class="blog-card" data-cat="docs" href="/es/blog/konsulstvo-ili-notarius-dokumenty-dlya-ukrainy/"><span class="blog-card__top"></span><span class="blog-card__body"><span class="blog-card__kicker">Blog&nbsp;· Documentos</span><span class="blog-card__tags"><span class="blog-card__tag">Documentos</span><span class="blog-card__tag">Ucrania</span></span><span class="blog-card__title">Consulado o notario español: dónde otorgar un documento para Ucrania si está en España</span><span class="blog-card__date">~7 min de lectura</span></span></a><a class="blog-card" data-cat="docs" href="/es/blog/doverennost-na-bankovskiy-schet-ispaniya/"><span class="blog-card__top"></span><span class="blog-card__body"><span class="blog-card__kicker">Blog&nbsp;· Documentos</span><span class="blog-card__tags"><span class="blog-card__tag">Finanzas</span><span class="blog-card__tag">Notario</span></span><span class="blog-card__title">Cómo revisa un banco español un poder sobre la cuenta y qué incluir en él</span><span class="blog-card__date">~7 min de lectura</span></span></a></div>
+    </div>
+
+</div>
+
+  <script src="/assets/blog-article.js?v=5cba4fe50a" defer></script>
+</main>
+<footer id="sec-footer" class="site-footer">
+  <div class="site-footer__inner">
+
+    <!-- Карта сайта по образцу Attio: логотип слева, дальше тематические
+         колонки. Раньше под «Направлениями» лежали вперемешку услуги, города
+         и каталог, а юридические ссылки дублировались в «Полезном» и внизу. -->
+    <div class="footer-map">
+      <div class="footer-map__brand">
+        <a class="site-footer__brand" href="/es/" aria-label="Krepko — página de inicio">
+          <span class="site-footer__brand-text">Krepko</span>
+        </a>
+        <p class="footer-map__title">WEONERENT, S.L.<br>CIF&nbsp;B22809552<br>Avinguda de la Costa Blanca&nbsp;93<br>03540&nbsp;Alicante<br>Todos los días, de 9:00 a 20:00</p>
+      </div>
+
+      <div class="footer-map__cols">
+      <div class="footer-map__col">
+        <p class="footer-map__title">Servicios</p>
+        <a class="footer-map__link" href="/es/notario/">Trámites ante notario</a>
+        <a class="footer-map__link" href="/es/ukraina/">Documentos de Ucrania</a>
+        <a class="footer-map__link" href="/es/rossiya/">Documentos de Rusia</a>
+        <a class="footer-map__link" href="/es/migracion/">Extranjería</a>
+        <a class="footer-map__link" href="/es/tramites/">Trámites administrativos</a>
+        <a class="footer-map__link" href="/es/legalizacion/">Apostilla y legitimación</a>
+        <a class="footer-map__link" href="/es/traduccion/">Traducción</a>
+        <a class="footer-map__link" href="/es/fiscalidad/">Impuestos</a>
+        <a class="footer-map__link" href="/es/banca/">Banco</a>
+        <a class="footer-map__link" href="/es/juridico/">Cuestiones jurídicas</a>
+      </div>
+
+      <div class="footer-map__col">
+        <p class="footer-map__title">Lo más solicitado</p>
+        <a class="footer-map__link" href="/es/notario/doverennost-na-rodnom-yazyke/">Poder notarial en su idioma</a>
+        <a class="footer-map__link" href="/es/ukraina/spravka-o-nesudimosti/">Antecedentes penales de Ucrania</a>
+        <a class="footer-map__link" href="/es/notario/soglasie-na-vyezd-rebenka/">Autorización de viaje para menores</a>
+        <a class="footer-map__link" href="/es/notario/soglasie-vtorogo-roditelya-vnzh/">Consentimiento del otro progenitor para la residencia</a>
+        <a class="footer-map__link" href="/es/migracion/vyhod-iz-tps/">Salir de la protección temporal</a>
+        <a class="footer-map__link" href="/es/tramites/canje-permiso/">Canje del permiso de conducir ucraniano</a>
+      </div>
+
+      <div class="footer-map__col">
+        <p class="footer-map__title">Ciudades</p>
+        <a class="footer-map__link" href="/es/alicante/">Alicante</a>
+        <a class="footer-map__link" href="/es/valencia/">Valencia</a>
+        <a class="footer-map__link" href="/es/murcia/">Murcia</a>
+        <a class="footer-map__link" href="/es/madrid/">Madrid</a>
+        <a class="footer-map__link" href="/es/barcelona/">Barcelona</a>
+        <a class="footer-map__link" href="/es/malaga/">Málaga</a>
+      </div>
+
+      <div class="footer-map__col">
+        <p class="footer-map__title">Krepko</p>
+        <a class="footer-map__link" href="/es/about/">Sobre Krepko</a>
+        <a class="footer-map__link" href="/es/services/">Servicios</a>
+        <a class="footer-map__link" href="/es/blog/">Blog</a>
+        <a class="footer-map__link" href="/es/partners/">Para profesionales</a>
+        <a class="footer-map__link" href="/es/review/">Dejar una opinión</a>
+      </div>
+
+      <div class="footer-map__col">
+        <p class="footer-map__title">Contacto</p>
+        <a class="footer-map__link" href="tel:+34624309985">+34 624 309 985</a>
+        <a class="footer-map__link" href="mailto:hello@krepko.es">hello@krepko.es</a>
+        <a class="footer-map__link" href="https://wa.me/34624309985?text=Hola%2C%20tengo%20una%20consulta.%20Vengo%20de%20krepko.es/es/blog/perenos-certificado-digital/" target="_blank" rel="noopener noreferrer" data-cta="footer">Escribir por WhatsApp</a>
+      </div>
+      </div>
+    </div>
+
+    <div class="site-footer__bottom">
+      <div class="footer-chat" role="group" aria-label="Mensajería">
+        <a class="footer-chat__link" href="https://wa.me/34624309985?text=Hola%2C%20tengo%20una%20consulta.%20Vengo%20de%20krepko.es/es/blog/perenos-certificado-digital/" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" data-cta="footer-icon">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M12.04 2c-5.46 0-9.9 4.44-9.9 9.9 0 1.75.46 3.45 1.32 4.95L2 22l5.3-1.39a9.9 9.9 0 0 0 4.74 1.2h.01c5.46 0 9.9-4.44 9.9-9.9S17.5 2 12.04 2Zm0 18.06h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.11.82.83-3.04-.2-.31a8.19 8.19 0 0 1-1.26-4.4c0-4.53 3.69-8.22 8.24-8.22a8.22 8.22 0 0 1 0 16.44Zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.24-.64.8-.78.97-.15.16-.29.18-.53.06-.25-.13-1.05-.39-1.99-1.23-.74-.65-1.23-1.46-1.38-1.71-.14-.24-.01-.37.11-.5.11-.11.25-.29.37-.44.13-.15.17-.25.25-.41.09-.17.04-.31-.02-.44-.06-.12-.56-1.34-.76-1.84-.2-.48-.4-.42-.56-.42l-.47-.01c-.16 0-.43.06-.65.3-.23.25-.86.85-.86 2.06 0 1.21.88 2.39 1 2.55.13.17 1.74 2.66 4.22 3.73.59.25 1.05.4 1.4.52.59.19 1.13.16 1.55.1.48-.07 1.47-.6 1.67-1.18.21-.58.21-1.07.15-1.18-.06-.1-.22-.16-.47-.28Z"/></svg>
+        </a>
+        <a class="footer-chat__link" href="https://t.me/+34624309985?text=Hola%2C%20tengo%20una%20consulta.%20Vengo%20de%20krepko.es/es/blog/perenos-certificado-digital/" target="_blank" rel="noopener noreferrer" aria-label="Telegram">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M21.94 4.3 18.9 19.1c-.23 1.02-.84 1.27-1.7.79l-4.7-3.46-2.27 2.18c-.25.25-.46.46-.94.46l.33-4.78 8.7-7.86c.38-.34-.08-.53-.59-.19L6.98 13.02l-4.63-1.45c-1.01-.31-1.03-1 .21-1.48l18.12-6.98c.84-.31 1.57.19 1.26 1.19Z"/></svg>
+        </a>
+      </div>
+      <div class="site-footer__legalmeta">
+        <div class="site-footer__meta">© 2026 Krepko</div>
+        <nav class="site-footer__legal" aria-label="Información legal">
+          <a href="/es/aviso-legal/">Aviso legal</a>
+          <a href="/es/privacidad/">Privacidad</a>
+          <a href="/es/terminos/">Términos</a>
+          <a href="/es/cookies/">Cookies</a>
+<a href="/blog/perenos-certificado-digital/" hreflang="ru" lang="ru">По-русски</a>
+<a href="/uk/blog/perenos-certificado-digital/" hreflang="uk" lang="uk">Українською</a>
+<a href="/en/blog/perenos-certificado-digital/" hreflang="en" lang="en">English</a>          <a href="https://krepko.eu/" rel="noopener">krepko.eu</a>
+        </nav>
+      </div>
+    </div>
+
+  </div>
+</footer>
+
+
+<div class="sticky-cta" id="sticky-cta" data-svc-fit="long" hidden>
+  <a class="sticky-cta__svc" href="/es/tramites/firma-digital/" data-cta="sticky-svc"><span>Certificado digital</span><svg class="svc-chev" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></a>
+  <a class="sticky-cta__btn" href="https://wa.me/34624309985?text=Hola%2C%20tengo%20una%20consulta.%20Vengo%20de%20krepko.es/es/blog/perenos-certificado-digital/" target="_blank" rel="noopener noreferrer" data-cta="sticky">Escribir por WhatsApp</a>
+</div>
+<div class="cookie-consent" id="cookie-consent" hidden role="region" aria-label="Aviso sobre cookies" aria-live="polite" aria-atomic="true">
+  <div class="cookie-consent__inner">
+    <div class="cookie-consent__text">
+      <p class="cookie-consent__title">Este sitio usa cookies</p>
+      <p class="cookie-consent__desc">Usamos Google Analytics y Microsoft Clarity para saber qué se lee y qué partes del sitio resultan incómodas. Sin publicidad. Más información en la <a href="/es/cookies/">política de cookies</a>.</p>
+    </div>
+    <div class="cookie-consent__actions">
+      <button class="cookie-consent__btn cookie-consent__btn--essential" type="button" data-consent="essential">Solo las necesarias</button>
+      <button class="cookie-consent__btn cookie-consent__btn--accept" type="button" data-consent="all">Aceptar todas</button>
+    </div>
+  </div>
+</div>
+</body>
+</html>

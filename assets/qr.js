@@ -241,9 +241,10 @@ function qrUrl() {
 var u;
 try { u = new URL(btn.getAttribute('href'), location.href); } catch (e) { return null; }
 var text = u.searchParams.get('text') || '';
-var at = text.search(/\. Я [сз] krepko\.es\//);
+var at = text.search(/\. (?:Я [сз]|Vengo de|I'm writing from) krepko\.es\//);
 if (at < 0) return null;
-var msg = (box.getAttribute('data-hi') || '') + text.slice(at);
+var msg = /^\. (?:Vengo de|I'm writing from) /.test(text.slice(at)) ? text
+: (box.getAttribute('data-hi') || '') + text.slice(at);
 return 'https://wa.me' + u.pathname + '?text=' + encodeURIComponent(msg).replace(/%2F/g, '/');
 }
 function svg(m) {

@@ -55,8 +55,9 @@ dots.className = 'rv-dots';
 Array.prototype.forEach.call(cards, function (c, i) {
 var b = document.createElement('button');
 b.type = 'button';
-var uk = (document.documentElement.getAttribute('lang') || '').slice(0, 2) === 'uk';
-b.setAttribute('aria-label', (uk ? 'Відгук ' : 'Отзыв ') + (i + 1) + (uk ? ' з ' : ' из ') + cards.length);
+var lang = (document.documentElement.getAttribute('lang') || '').slice(0, 2);
+var DOT = { uk: ['Відгук ', ' з '], es: ['Opinión ', ' de '], en: ['Review ', ' of '] }[lang] || ['Отзыв ', ' из '];
+b.setAttribute('aria-label', DOT[0] + (i + 1) + DOT[1] + cards.length);
 b.addEventListener('click', function () { go(i); });
 dots.appendChild(b); dotBtns.push(b);
 });

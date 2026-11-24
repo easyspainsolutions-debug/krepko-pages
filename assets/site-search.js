@@ -3,7 +3,12 @@
 var root = document.documentElement;
 var LANG = ((root && root.getAttribute('lang')) || '').slice(0, 2);
 var UK = LANG === 'uk';
+var DLG0 = document.getElementById ? document.getElementById('site-search-dialog') : null;
+var OWN_INDEX = (DLG0 && DLG0.getAttribute && DLG0.getAttribute('data-search-index')) || '';
 var ES = LANG === 'es' || LANG === 'en';
+var INDEX_URL = OWN_INDEX || (ES ? '/search-index.' + LANG + '.json'
+: (UK ? '/search-index.uk.json' : '/search-index.json'));
+var RU_INDEX = !UK && !ES;
 var STOP = {};
 ('на для при про под над без из от до за по как что где или и а но это ' +
 'мне мой моя мои все еще уже там тут его ее их не да ' +
@@ -21,7 +26,14 @@ if (UK) {
 }
 if (ES) {
 ('de del la las el los lo un una unos unas y e o u a al en con por para ante ' +
-'su sus mi mis que como sobre necesito quiero españa')
+'su sus mi mis que como sobre necesito quiero españa ' +
+'espana es se le les me yo tu donde cual puedo hay tengo necesita quisiera')
+.split(' ').forEach(function (w) { STOP[w] = 1; });
+}
+if (LANG === 'en') {
+('the an of for to in on at by with from and or my me we our you your is are ' +
+'be do does can how what where need want get have has it this that about ' +
+'please help spain i')
 .split(' ').forEach(function (w) { STOP[w] = 1; });
 }
 var SUFFIXES = ['иями', 'ями', 'ами', 'ого', 'его', 'ому', 'ему', 'ыми', 'ими',
@@ -43,6 +55,7 @@ return (s || '').toLowerCase().replace(/ё/g, 'е').replace(/['’ʼ`]/g, '')
 .replace(/[áàâäéèêëíìîïóòôöúùûüñç]/g, function (c) { return LATIN[c]; });
 }
 function stem(w) {
+if (ES && /[a-z]s$/.test(w) && !/ss$/.test(w) && w.length - 1 >= 4) return w.slice(0, -1);
 for (var i = 0; i < SUFFIXES.length; i++) {
 var s = SUFFIXES[i];
 if (w.length - s.length >= 4 && w.slice(-s.length) === s) {
@@ -200,7 +213,7 @@ if (!index || q.length < 2) return { toks: toks, services: [], blog: [] };
 return {
 toks: toks,
 services: search(index.services || [], q, toks),
-blog: ES ? [] : search(index.blog || [], q, toks)
+blog: (ES && RU_INDEX) ? [] : search(index.blog || [], q, toks)
 };
 }
 window.krepkoSearch = { find: find, tokenize: tokenize, stem: stem };
@@ -222,6 +235,7 @@ var groupTpl = tpl && tpl.content ? tpl.content.querySelector('.site-search__gro
 var allTpl = tpl && tpl.content ? tpl.content.querySelector('.site-search__all') : null;
 var WA_Q = dlg.getAttribute('data-wa-q') || '';
 var NONE = dlg.getAttribute('data-none') || '';
+var DIR_C = dlg.getAttribute('data-dir-c') || '';
 var desk = window.matchMedia ? window.matchMedia('(min-width: 900px)') : { matches: false };
 var MAX_ROWS = 7;
 var MAX_ARTICLES = 2;
@@ -249,7 +263,7 @@ var a = document.createElement('a');
 a.href = h.u;
 var t = document.createElement('span');
 t.appendChild(highlight(h.t, toks));
-if (withCat && h.c && h.c !== 'Направление' && h.c !== 'Напрям') {
+if (withCat && h.c && h.c !== 'Направление' && h.c !== 'Напрям' && h.c !== DIR_C) {
 var c = document.createElement('small');
 c.textContent = h.c;
 t.appendChild(c);
@@ -369,7 +383,14 @@ var loading = null;
 function load() {
 if (index) return Promise.resolve(index);
 if (!loading) {
-loading = fetch(UK ? '/search-index.uk.json' : '/search-index.json')
+loading = fetch(INDEX_URL)
+.then(function (r) {
+if (!r.ok && ES && !RU_INDEX) {
+RU_INDEX = true;
+return fetch('/search-index.json');
+}
+return r;
+})
 .then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
 .then(function (data) { index = data; return data; })
 .catch(function () { loading = null; return index; });

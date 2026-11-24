@@ -1,7 +1,9 @@
 (function () {
 'use strict';
 var root = document.documentElement;
-var UK = (root.getAttribute('lang') || '').slice(0, 2) === 'uk';
+var LANG = (root.getAttribute('lang') || '').slice(0, 2);
+var UK = LANG === 'uk';
+var ES = LANG === 'es' || LANG === 'en';
 var STOP = {};
 ('на для при про под над без из от до за по как что где или и а но это ' +
 'мне мой моя мои все еще уже там тут его ее их не да ' +
@@ -14,6 +16,17 @@ if (UK) {
 'хочу хоче хочемо треба потрібно потрібен потрібна потрібні необхідно ' +
 'підкажіть допоможіть скажіть питання ситуація випадок ' +
 'іспанія іспанії іспанію іспанією').split(' ').forEach(function (w) { STOP[w] = 1; });
+}
+if (ES) {
+('de del la las el los lo un una unos unas y e o u a al en con por para ante ' +
+'su sus mi mis que como sobre necesito quiero españa ' +
+'espana es se le les me yo tu donde cual puedo hay tengo necesita quisiera')
+.split(' ').forEach(function (w) { STOP[w] = 1; });
+}
+if (LANG === 'en') {
+('the an of for to in on at by with from and or my me we our you your is are ' +
+'be do does can how what where need want get have has it this that about ' +
+'please help spain i').split(' ').forEach(function (w) { STOP[w] = 1; });
 }
 var SUFFIXES = UK ? ['иями', 'ього', 'ьому',
 'ями', 'ами', 'ого', 'его', 'ому', 'ему', 'ыми', 'ими', 'іми', 'ові', 'еві', 'єві',
@@ -32,6 +45,7 @@ return (s || '').toLowerCase().replace(/ё/g, 'е').replace(/['’ʼ`]/g, '')
 .replace(/[áàâäéèêëíìîïóòôöúùûüñç]/g, function (c) { return LATIN[c]; });
 }
 function stem(w) {
+if (ES && /[a-z]s$/.test(w) && !/ss$/.test(w) && w.length - 1 >= 4) return w.slice(0, -1);
 for (var i = 0; i < SUFFIXES.length; i++) {
 var s = SUFFIXES[i];
 if (w.length - s.length >= 4 && w.slice(-s.length) === s) { w = w.slice(0, w.length - s.length); break; }
@@ -196,6 +210,7 @@ var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: re
 function forms(attr) { return (cp.getAttribute(attr) || '').split('|'); }
 var N_FORMS = forms('data-n'), S_FORMS = forms('data-s');
 function plural(n, f) {
+if (ES) return n === 1 ? f[0] : (f[2] || f[1] || f[0]);
 var a = n % 10, b = n % 100;
 if (a === 1 && b !== 11) return f[0];
 if (a >= 2 && a <= 4 && (b < 12 || b > 14)) return f[1];
@@ -267,7 +282,9 @@ function loadIndex() {
 if (index) return Promise.resolve(index);
 if (loading) return loading;
 if (!window.fetch) { index = indexOf(null); return Promise.resolve(index); }
-loading = fetch(UK ? '/search-index.uk.json' : '/search-index.json')
+var own = document.querySelector('[data-search-index]');
+loading = fetch((own && own.getAttribute('data-search-index')) || (ES ? '/search-index.' + LANG + '.json'
+: (UK ? '/search-index.uk.json' : '/search-index.json')))
 .then(function (r) { return r.ok ? r.json() : null; })
 .then(function (data) { index = indexOf(data); return index; })
 .catch(function () { index = indexOf(null); return index; });
@@ -467,7 +484,7 @@ try { document.dispatchEvent(new Event('krepko:wa-buttons')); } catch (e) {}
 var SKIP = {};
 (cp.getAttribute('data-skip') || '').split('|').forEach(function (c) { if (c) SKIP[c] = 1; });
 function segOf(u) {
-var p = (u || '').replace(/^\/uk(?=\/)/, '').split('/').filter(Boolean);
+var p = (u || '').replace(/^\/(uk|es|en)(?=\/)/, '').split('/').filter(Boolean);
 return p.length >= 2 ? p[0] : '';
 }
 function otherHits(toks, own) {
