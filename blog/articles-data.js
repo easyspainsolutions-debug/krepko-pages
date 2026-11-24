@@ -1,5 +1,26 @@
 /* Krepko Blog — centralized articles registry */
 var ARTICLES = [
+  // 24.11.2026 — +20 статей (налоги нерезидента, апостиль, развод и документы из Украины, воссоединение семьи, SL и SA, Бекхэм) — первыми, чтобы «Читайте также» брал их
+  { slug: 'modelo-210-pustaya-kvartira-nerezident', title: 'Квартира в Испании пустует, а вы не резидент: Modelo 210 до 31 декабря', tag: 'Налоги · Недвижимость', cat: 'finance', time: 8 },
+  { slug: 'apostil-na-ukrainskiy-dokument-iz-ispanii', title: 'Апостиль на украинский документ, если вы в Испании: какое ведомство его ставит', tag: 'Документы · Украина', cat: 'docs', time: 7 },
+  { slug: 'apostil-na-ispanskiy-dokument-dlya-ukrainy', title: 'Апостиль на испанский документ для Украины: кто ставит и где подать', tag: 'Документы · Украина', cat: 'docs', time: 8 },
+  { slug: 'mashina-na-ukrainskih-nomerah-v-ispanii', title: 'Машина на украинских номерах в Испании: сколько ездить и когда ставить на учёт', tag: 'Транспорт · Украина', cat: 'life', time: 8 },
+  { slug: 'vnzh-rodstvenniku-grazhdanina-ispanii', title: 'ВНЖ родителям, детям и партнёру гражданина Испании в 2026 году', tag: 'ВНЖ · Семья', cat: 'vnzh', time: 9 },
+  { slug: 'dohod-dlya-vossoedineniya-semi-2026', title: 'Сколько денег нужно для воссоединения семьи в Испании в 2026 году', tag: 'ВНЖ · Семья', cat: 'vnzh', time: 8 },
+  { slug: 'sa-ili-sl-ispaniya', title: 'SA или SL в Испании: капитал, ответственность и что выбрать иностранцу', tag: 'Бизнес · Нотариус', cat: 'work', time: 8 },
+  { slug: 'prodlenie-padrona-kazhdye-2-goda', title: 'Продление прописки каждые 2 года: кого касается и что будет, если пропустить', tag: 'Документы · Прописка', cat: 'docs', time: 8 },
+  { slug: 'kak-otozvat-doverennost', title: 'Как отозвать доверенность, если вы живёте в Испании: испанскую и украинскую', tag: 'Документы · Нотариус · Украина', cat: 'docs', time: 8 },
+  { slug: 'razvod-v-ukraine-zhivya-v-ispanii', title: 'Как развестись в Украине, живя в Испании: ДРАЦС, суд и доверенность', tag: 'Документы · Украина · Семья', cat: 'docs', time: 7 },
+  { slug: 'svidetelstvo-o-razvode-ukraina-ispaniya', title: 'Свидетельство о разводе из Украины, не выезжая из Испании: какой документ заказать и что примет Registro Civil', tag: 'Документы · Украина', cat: 'docs', time: 8 },
+  { slug: 'propiska-rebenka-soglasie-vtorogo-roditelya', title: 'Прописка ребёнка, когда второй родитель в Украине: какое согласие нужно', tag: 'Документы · Дети · Украина', cat: 'docs', time: 8 },
+  { slug: 'spravka-o-dohodah-ukraina-dlya-ispanii', title: 'Справка о доходах из Украины для Испании: какую заказать и куда', tag: 'Документы · Украина', cat: 'docs', time: 7 },
+  { slug: 'diplom-iz-ukrainy-dlya-ispanii', title: 'Украинский диплом в Испании: апостиль, перевод, омологация или эквиваленция', tag: 'Документы · Украина · Образование', cat: 'docs', time: 8 },
+  { slug: 'omologaciya-attestata-ukraina-ispaniya', title: 'Омологация украинского аттестата в Испании: как подать и что даёт volante', tag: 'Образование · Украина', cat: 'social', time: 8 },
+  { slug: 'arraigo-socioformativo', title: 'Arraigo socioformativo: ВНЖ через учёбу и какие курсы подходят', tag: 'ВНЖ · Arraigo · Учёба', cat: 'vnzh', time: 8 },
+  { slug: 'poteryal-tie-chto-delat', title: 'Потеряли или украли TIE: дубликат и можно ли выехать из Испании без карты', tag: 'ВНЖ · Документы', cat: 'vnzh', time: 8 },
+  { slug: 'vossoedinenie-s-roditelyami-ispaniya', title: 'Как перевезти родителей в Испанию: воссоединение с ascendientes', tag: 'ВНЖ · Семья', cat: 'vnzh', time: 9 },
+  { slug: 'rezhim-bekhema-dlya-kochevnika', title: 'Режим Бекхэма для цифрового кочевника: 24 % и 6 месяцев на Modelo 149', tag: 'Налоги · Удалённая работа', cat: 'finance', time: 9 },
+  { slug: 'kupit-gotovuyu-sl-ispaniya', title: 'Готовая SL (sociedad preconstituida): что проверить до подписи у нотариуса', tag: 'Бизнес · Нотариус', cat: 'work', time: 9 },
   // 20.11.2026 — нотариальный перевод на испанский (вечерняя выкладка), консульство или испанский нотариус для документов в Украину, доверенность на банковский счёт в Испании — первыми, чтобы «Читайте также» брал их
   { slug: 'notarialnyy-perevod-ispaniya', title: 'Нотариальный перевод на испанский: где его примут в Испании и что подать вместо него', tag: 'Документы · Украина', cat: 'docs', time: 9 },
   { slug: 'konsulstvo-ili-notarius-dokumenty-dlya-ukrainy', title: 'Консульство или испанский нотариус: где оформить документ для Украины, если вы в Испании', tag: 'Документы · Украина', cat: 'docs', time: 7 },
